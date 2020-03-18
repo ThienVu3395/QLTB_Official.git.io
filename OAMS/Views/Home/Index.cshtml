@@ -1,0 +1,2052 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+@*<link rel="stylesheet" href="~/Content/assetsmes/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/Content/assetsmes/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="~/Content/assetsmes/css/jquery-ui.custom.min.css" />
+
+<!-- text fonts -->
+<link rel="stylesheet" href="~/Content/assetsmes/css/fonts.googleapis.com.css" />
+
+<!-- ace styles -->
+<link rel="stylesheet" href="~/Content/assetsmes/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />*@
+
+<!--[if lte IE 9]>
+    <link rel="stylesheet" href="~/Content/assetsmes/css/ace-part2.min.css" class="ace-main-stylesheet" />
+<![endif]-->
+@*<link rel="stylesheet" href="~/Content/assetsmes/css/ace-skins.min.css" />
+<link rel="stylesheet" href="~/Content/assetsmes/css/ace-rtl.min.css" />*@
+
+<!--[if lte IE 9]>
+  <link rel="stylesheet" href="~/Content/assetsmes/css/ace-ie.min.css" />
+<![endif]-->
+<!-- inline styles related to this page -->
+<!-- ace settings handler -->
+@*<script src="~/Content/assetsmes/js/ace-extra.min.js"></script>*@
+
+
+<div>
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">FSM</a>
+            </li>
+            <li class="active">Trang chủ</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="ace-icon fa fa-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div><!-- /.nav-search -->
+    </div>
+    <div id="mescontent" class="page-content">
+        <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
+
+
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="" id="main-widget-container">
+                    <div class="row">
+                      
+
+                        <div class="col-xs-12 col-sm-6 widget-container-col ui-sortable" id="widget-container-col-1">
+
+                            @*<div class="widget-box widget-color-blue ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">
+                                        <i class="ace-icon fa fa-bars"></i>
+                                        Công Văn
+                                    </h5>
+                                    <div class="widget-toolbar widget-toolbar-light no-border">
+                                        <select id="simple-colorpicker-1" class="hide">
+                                            <option selected="" data-class="blue" value="#307ECC">#307ECC</option>
+                                            <option data-class="blue2" value="#5090C1">#5090C1</option>
+                                            <option data-class="blue3" value="#6379AA">#6379AA</option>
+                                            <option data-class="green" value="#82AF6F">#82AF6F</option>
+                                            <option data-class="green2" value="#2E8965">#2E8965</option>
+                                            <option data-class="green3" value="#5FBC47">#5FBC47</option>
+                                            <option data-class="red" value="#E2755F">#E2755F</option>
+                                            <option data-class="red2" value="#E04141">#E04141</option>
+                                            <option data-class="red3" value="#D15B47">#D15B47</option>
+                                            <option data-class="orange" value="#FFC657">#FFC657</option>
+                                            <option data-class="purple" value="#7E6EB0">#7E6EB0</option>
+                                            <option data-class="pink" value="#CE6F9E">#CE6F9E</option>
+                                            <option data-class="dark" value="#404040">#404040</option>
+                                            <option data-class="grey" value="#848484">#848484</option>
+                                            <option data-class="default" value="#EEE">#EEE</option>
+                                        </select><div class="dropdown dropdown-colorpicker">		<a data-toggle="dropdown" class="dropdown-toggle" data-position="auto"><span class="btn-colorpicker" style="background-color:#307ECC"></span></a><ul class="dropdown-menu dropdown-caret dropdown-menu-right"><li><a class="colorpick-btn selected" style="background-color:#307ECC;" data-color="#307ECC"></a></li><li><a class="colorpick-btn" style="background-color:#5090C1;" data-color="#5090C1"></a></li><li><a class="colorpick-btn" style="background-color:#6379AA;" data-color="#6379AA"></a></li><li><a class="colorpick-btn" style="background-color:#82AF6F;" data-color="#82AF6F"></a></li><li><a class="colorpick-btn" style="background-color:#2E8965;" data-color="#2E8965"></a></li><li><a class="colorpick-btn" style="background-color:#5FBC47;" data-color="#5FBC47"></a></li><li><a class="colorpick-btn" style="background-color:#E2755F;" data-color="#E2755F"></a></li><li><a class="colorpick-btn" style="background-color:#E04141;" data-color="#E04141"></a></li><li><a class="colorpick-btn" style="background-color:#D15B47;" data-color="#D15B47"></a></li><li><a class="colorpick-btn" style="background-color:#FFC657;" data-color="#FFC657"></a></li><li><a class="colorpick-btn" style="background-color:#7E6EB0;" data-color="#7E6EB0"></a></li><li><a class="colorpick-btn" style="background-color:#CE6F9E;" data-color="#CE6F9E"></a></li><li><a class="colorpick-btn" style="background-color:#404040;" data-color="#404040"></a></li><li><a class="colorpick-btn" style="background-color:#848484;" data-color="#848484"></a></li><li><a class="colorpick-btn" style="background-color:#EEE;" data-color="#EEE"></a></li></ul></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main no-padding">
+                                        <div>
+                                            <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                                <div class="row"><div class="col-xs-6"><div class="dataTables_length" id="dynamic-table_length"><label>Hiển thị <select name="dynamic-table_length" aria-controls="dynamic-table" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> Văn bản</label></div></div><div class="col-xs-6"><div id="dynamic-table_filter" class="dataTables_filter"><label>Tìm theo số CV:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dynamic-table"></label></div></div></div><table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="center sorting_disabled" rowspan="1" colspan="1" aria-label="">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                   
+                                                                </label>
+                                                            </th>
+                                                            <th class="sorting_desc" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" aria-sort="descending">Thời Gian</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">Trích Yếu</th>
+                                                           
+                                                            <th class="hidden-480 sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">Loại Văn Bản</th>
+                                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="">Tải Về</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+                                                            
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+                                                                   
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                   fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="even">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Chương trình công tác năm 2020 của Ban Tổng Giám Đốc Tổng Công ty Cấp nước Sài Gòn.</td>
+                                                           
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-success">Văn bản đi</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+                                                                    
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    <div class="inline pos-rel">
+                                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                                            <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                                                        </button>
+
+                                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                                                                                    <span class="blue">
+                                                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                                                    <span class="green">
+                                                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                                                    <span class="red">
+                                                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">up.com</a>
+                                                            </td>
+                                                            <td>Về việc đề xuất mức phí dịch vụ.</td>
+                                                          
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-danger">Văn bản đảng bộ</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+                                                                   
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    <div class="inline pos-rel">
+                                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                                            <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                                                        </button>
+
+                                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                                                                                    <span class="blue">
+                                                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                                                    <span class="green">
+                                                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                                                    <span class="red">
+                                                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                     
+                                                    </tbody>
+                                                </table><div class="row"><div class="col-xs-6"><div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">Show  1 to 10 trong tổng số 155 văn bản</div></div><div class="col-xs-6"><div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate"><ul class="pagination"><li class="paginate_button previous disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="#">Trước</a></li><li class="paginate_button active" aria-controls="dynamic-table" tabindex="0"><a href="#">1</a></li><li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">2</a></li><li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">3</a></li><li class="paginate_button next" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="#">Sau</a></li></ul></div></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                            <div class="widget-box widget-color-blue ui-sortable-handle" id="widget-box-1" style="opacity: 2;">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">
+                                        <i class="ace-icon fa fa-bars"></i>
+                                        Công Văn
+                                    </h5>
+                                    <div class="widget-toolbar widget-toolbar-light no-border">
+                                        <select id="simple-colorpicker-1" class="hide">
+                                            <option selected="" data-class="blue" value="#307ECC">#307ECC</option>
+                                            <option data-class="blue2" value="#5090C1">#5090C1</option>
+                                            <option data-class="blue3" value="#6379AA">#6379AA</option>
+                                            <option data-class="green" value="#82AF6F">#82AF6F</option>
+                                            <option data-class="green2" value="#2E8965">#2E8965</option>
+                                            <option data-class="green3" value="#5FBC47">#5FBC47</option>
+                                            <option data-class="red" value="#E2755F">#E2755F</option>
+                                            <option data-class="red2" value="#E04141">#E04141</option>
+                                            <option data-class="red3" value="#D15B47">#D15B47</option>
+                                            <option data-class="orange" value="#FFC657">#FFC657</option>
+                                            <option data-class="purple" value="#7E6EB0">#7E6EB0</option>
+                                            <option data-class="pink" value="#CE6F9E">#CE6F9E</option>
+                                            <option data-class="dark" value="#404040">#404040</option>
+                                            <option data-class="grey" value="#848484">#848484</option>
+                                            <option data-class="default" value="#EEE">#EEE</option>
+                                        </select><div class="dropdown dropdown-colorpicker">		<a data-toggle="dropdown" class="dropdown-toggle" data-position="auto"><span class="btn-colorpicker" style="background-color:#307ECC"></span></a><ul class="dropdown-menu dropdown-caret dropdown-menu-right"><li><a class="colorpick-btn selected" style="background-color:#307ECC;" data-color="#307ECC"></a></li><li><a class="colorpick-btn" style="background-color:#5090C1;" data-color="#5090C1"></a></li><li><a class="colorpick-btn" style="background-color:#6379AA;" data-color="#6379AA"></a></li><li><a class="colorpick-btn" style="background-color:#82AF6F;" data-color="#82AF6F"></a></li><li><a class="colorpick-btn" style="background-color:#2E8965;" data-color="#2E8965"></a></li><li><a class="colorpick-btn" style="background-color:#5FBC47;" data-color="#5FBC47"></a></li><li><a class="colorpick-btn" style="background-color:#E2755F;" data-color="#E2755F"></a></li><li><a class="colorpick-btn" style="background-color:#E04141;" data-color="#E04141"></a></li><li><a class="colorpick-btn" style="background-color:#D15B47;" data-color="#D15B47"></a></li><li><a class="colorpick-btn" style="background-color:#FFC657;" data-color="#FFC657"></a></li><li><a class="colorpick-btn" style="background-color:#7E6EB0;" data-color="#7E6EB0"></a></li><li><a class="colorpick-btn" style="background-color:#CE6F9E;" data-color="#CE6F9E"></a></li><li><a class="colorpick-btn" style="background-color:#404040;" data-color="#404040"></a></li><li><a class="colorpick-btn" style="background-color:#848484;" data-color="#848484"></a></li><li><a class="colorpick-btn" style="background-color:#EEE;" data-color="#EEE"></a></li></ul></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main no-padding">
+                                        <div>
+                                            <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                                <div class="row"><div class="col-xs-6"><div class="dataTables_length" id="dynamic-table_length"><label>Hiển thị <select name="dynamic-table_length" aria-controls="dynamic-table" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> Văn bản</label></div></div><div class="col-xs-6"><div id="dynamic-table_filter" class="dataTables_filter"><label>Tìm theo số CV:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dynamic-table"></label></div></div></div><table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="dynamic-table_info">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="center sorting_disabled" rowspan="1" colspan="1" aria-label="">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+
+                                                                </label>
+                                                            </th>
+                                                            <th class="sorting_desc" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending" aria-sort="descending">Thời Gian</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">Trích Yếu</th>
+
+                                                            <th class="hidden-480 sorting" tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">Loại Văn Bản</th>
+                                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="">Tải Về</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="even">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Chương trình công tác năm 2020 của Ban Tổng Giám Đốc Tổng Công ty Cấp nước Sài Gòn.</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-success">Văn bản đi</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    <div class="inline pos-rel">
+                                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                                            <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                                                        </button>
+
+                                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                                                                                    <span class="blue">
+                                                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                                                    <span class="green">
+                                                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                                                    <span class="red">
+                                                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">up.com</a>
+                                                            </td>
+                                                            <td>Về việc đề xuất mức phí dịch vụ.</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-danger">Văn bản đảng bộ</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    <div class="inline pos-rel">
+                                                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                                            <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                                                        </button>
+
+                                                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="" data-original-title="View">
+                                                                                    <span class="blue">
+                                                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                                                    <span class="green">
+                                                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                                                    <span class="red">
+                                                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <i class="ace-icon fa fa-envelope bigger-110 hidden-480"></i>
+                                                                </label>
+                                                            </td>
+
+                                                            <td class="sorting_1">
+                                                                <a href="#">06/03/2020 10:34</a>
+                                                            </td>
+                                                            <td>Về việc góp ý báo cáo BPR 12 của Hợp đồng GD5-Công nghệ truyền thông thông tin (lần 4).</td>
+
+
+                                                            <td class="hidden-480">
+                                                                <span class="label label-sm label-warning">Văn bản đến</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                                    <a class="blue" href="#">
+                                                                        <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                                                    </a>
+
+
+                                                                </div>
+
+                                                                <div class="hidden-md hidden-lg">
+                                                                    fdg
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table><div class="row"><div class="col-xs-6"><div class="dataTables_info" id="dynamic-table_info" role="status" aria-live="polite">Show  1 to 10 trong tổng số 155 văn bản</div></div><div class="col-xs-6"><div class="dataTables_paginate paging_simple_numbers" id="dynamic-table_paginate"><ul class="pagination"><li class="paginate_button previous disabled" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_previous"><a href="#">Trước</a></li><li class="paginate_button active" aria-controls="dynamic-table" tabindex="0"><a href="#">1</a></li><li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">2</a></li><li class="paginate_button " aria-controls="dynamic-table" tabindex="0"><a href="#">3</a></li><li class="paginate_button next" aria-controls="dynamic-table" tabindex="0" id="dynamic-table_next"><a href="#">Sau</a></li></ul></div></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget-box widget-color-blue ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">
+                                        <i class="ace-icon fa fa-table"></i>
+                                        Tin Tức - Sự Kiện
+                                    </h5>
+                                    <div class="widget-toolbar widget-toolbar-light no-border">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main no-padding">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead class="thin-border-bottom">
+                                                <tr>
+                                                    <th>
+                                                        <i class="ace-icon fa fa-times"></i>
+                                                        Thời Gian
+                                                    </th>
+
+                                                    <th>
+                                                        <i class="ace-icon fa fa-user"></i>
+                                                        Thành Phần Tham Dự
+                                                    </th>
+
+                                                    <th class="hidden-480">
+                                                        <i class="ace-icon fa fa-arrow-right"></i>
+                                                        Nội Dung
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td class="hidden-480">9:00</td>
+
+                                                    <td class="hidden-480">
+                                                        <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                                    </td>
+
+                                                    <td class="hidden-480">
+                                                        <span class="label label-info arrowed-in arrowed-in-right">CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hidden-480">9:00</td>
+
+                                                    <td class="hidden-480">
+                                                        <a href="#">Chủ tịch HĐQT, Phòng CNTT, Tổ giúp việc HĐQT, Anh Sinh - Trưởng Phòng Kỹ thuật, MC: Cẩm Giang.</a>
+                                                    </td>
+
+                                                    <td class="hidden-480">
+                                                        <span class="label label-info arrowed-in arrowed-in-right" style="width:150px">Phòng CNTT chạy thử phần mềm kiểm phiếu và</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hidden-480">14:00</td>
+
+                                                    <td class="hidden-480">
+                                                        <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                                    </td>
+
+                                                    <td class="hidden-480">
+                                                        <span class="label label-info arrowed-in arrowed-in-right">CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hidden-480">9:00</td>
+
+                                                    <td class="hidden-480">
+                                                        <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                                    </td>
+
+                                                    <td class="hidden-480">
+                                                        <span class="label label-info arrowed-in arrowed-in-right">CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                           
+                        </div>
+
+                        <!-- /.span -->
+
+                        <div class="col-xs-12 col-sm-6 widget-container-col ui-sortable" id="widget-container-col-1">
+                            <div class="widget-box ui-sortable-handle widget-color-pink" id="widget-box-1">
+                                <div class="widget-header">
+                                    <h5 class="widget-title">Tin Nhắn Nội Bộ</h5>
+
+                                    <div class="widget-toolbar">
+                                        <div class="widget-menu">
+                                            <a href="#" data-action="settings" data-toggle="dropdown">
+                                                <i class="ace-icon fa fa-bars"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-caret dropdown-closer">
+                                                <li>
+                                                    <a data-toggle="tab" href="#dropdown1">Option#1</a>
+                                                </li>
+
+                                                <li>
+                                                    <a data-toggle="tab" href="#dropdown2">Option#2</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <a href="#" data-action="fullscreen" class="orange2">
+                                            <i class="ace-icon fa fa-expand"></i>
+                                        </a>
+
+                                        <a href="#" data-action="reload">
+                                            <i class="ace-icon fa fa-refresh"></i>
+                                        </a>
+
+                                        <a href="#" data-action="collapse">
+                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                        </a>
+
+                                        <a href="#" data-action="close">
+                                            <i class="ace-icon fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <p class="alert alert-info">
+                                            Bạn có 21 tin nhắn mới <i class="ace-icon fa fa-bell icon-animated-bell" style="color:crimson"></i>
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="widget-box widget-color-blue ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">
+                                        <i class="ace-icon fa fa-table"></i>
+                                        Tin Tức - Sự Kiện
+                                    </h5>
+                                    <div class="widget-toolbar widget-toolbar-light no-border">
+                                      
+                                    </div>
+
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main no-padding" style="margin-left:10px">
+                                        <ul class="list-unstyled spaced">
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG TIN VỀ TÌNH HÌNH 5 CBCNV CÔNG TY CÓ TIẾP XÚC VỚI CÁ NHÂN THUỘC DIỆN F2 NHIỄM COVID-19 - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC ỦY QUYỀN CỦA GIÁM ĐỐC CÔNG TY - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC TIẾP TỤC TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19 (LẦN 3) - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC TIẾP TỤC TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19 (LẦN 3) - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC TIẾP TỤC TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19 (LẦN 3) - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC TIẾP TỤC TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19 (LẦN 3) - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                Kế hoạch phát động phong trào thi đua năm 2020 - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC TIẾP TỤC TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19 (LẦN 3) - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC TIẾP TỤC TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19 (LẦN 3) - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                            <li style="font-weight:bold">
+                                                <i class="ace-icon fa fa-bell-o bigger-110 purple"></i>
+                                                THÔNG BÁO VỀ VIỆC TIẾP TỤC TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19 (LẦN 3) - Ngày Đăng: 25/12/2019 14h2400
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="widget-box widget-color-blue ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">
+                                        <i class="ace-icon fa fa-table"></i>
+                                        Xử Lý Công Việc
+                                    </h5>
+                                    <div class="widget-toolbar widget-toolbar-light no-border">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="infobox infobox-green">
+                                        <div class="infobox-icon">
+                                            <i class="ace-icon fa fa-comments"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">32</span>
+                                            <div class="infobox-content">Công việc hoàn thành</div>
+                                        </div>
+
+                                        <div class="stat stat-success">8%</div>
+                                    </div>
+
+                                    <div class="infobox infobox-blue">
+                                        <div class="infobox-icon">
+                                            <i class="ace-icon fa fa-twitter"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">11</span>
+                                            <div class="infobox-content">Công việc đang xử lý</div>
+                                        </div>
+
+                                        <div class="badge badge-success">
+                                            +32%
+                                            <i class="ace-icon fa fa-arrow-up"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="infobox infobox-pink">
+                                        <div class="infobox-icon">
+                                            <i class="ace-icon fa fa-shopping-cart"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">8</span>
+                                            <div class="infobox-content">Công việc theo dõi</div>
+                                        </div>
+                                        <div class="stat stat-important">4%</div>
+                                    </div>
+
+                                    <div class="infobox infobox-red">
+                                        <div class="infobox-icon">
+                                            <i class="ace-icon fa fa-flask"></i>
+                                        </div>
+
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">7</span>
+                                            <div class="infobox-content">Công việc trể hạn</div>
+                                        </div>
+                                    </div>
+
+                                   
+
+                                    <div class="space-6"></div>
+                                    <h4 class="widget-title blue smaller" style="margin-left:10px">
+                                        <i class="ace-icon fa fa-rss orange"></i>
+                                        Công việc cần xử lý trong tuần
+                                    </h4>
+                                    <div class="widget-body">
+                                        <div class="widget-main padding-8">
+                                            <div id="profile-feed-1" class="profile-feed ace-scroll" style="position: relative;">
+                                                <div class="scroll-track scroll-active" style="display: block; height: 200px;"><div class="scroll-bar" style="height: 63px; top: 0px;"></div></div><div class="scroll-content" style="max-height: 200px;">
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <img class="pull-left" alt="Alex Doe's avatar" src="~/Content/assetsmes/images/avatars/avatar5.png">
+                                                            <a class="user" href="#"> Alex Doe </a>
+                                                            changed his profile photo.
+                                                            <a href="#">Take a look</a>
+
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                an hour ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <img class="pull-left" alt="Susan Smith's avatar" src="~/Content/assetsmes/images/avatars/avatar1.png">
+                                                            <a class="user" href="#"> Susan Smith </a>
+
+                                                            is now friends with Alex Doe.
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                2 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <i class="pull-left thumbicon fa fa-check btn-success no-hover"></i>
+                                                            <a class="user" href="#"> Alex Doe </a>
+                                                            joined
+                                                            <a href="#">Country Music</a>
+
+                                                            group.
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                5 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <i class="pull-left thumbicon fa fa-picture-o btn-info no-hover"></i>
+                                                            <a class="user" href="#"> Alex Doe </a>
+                                                            uploaded a new photo.
+                                                            <a href="#">Take a look</a>
+
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                5 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <img class="pull-left" alt="David Palms's avatar" src="~/Content/assetsmes/images/avatars/avatar4.png">
+                                                            <a class="user" href="#"> David Palms </a>
+
+                                                            left a comment on Alex's wall.
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                8 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <i class="pull-left thumbicon fa fa-pencil-square-o btn-pink no-hover"></i>
+                                                            <a class="user" href="#"> Alex Doe </a>
+                                                            published a new blog post.
+                                                            <a href="#">Read now</a>
+
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                11 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <img class="pull-left" alt="Alex Doe's avatar" src="~/Content/assetsmes/images/avatars/avatar5.png">
+                                                            <a class="user" href="#"> Alex Doe </a>
+
+                                                            upgraded his skills.
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                12 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <i class="pull-left thumbicon fa fa-key btn-info no-hover"></i>
+                                                            <a class="user" href="#"> Alex Doe </a>
+
+                                                            logged in.
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                12 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <i class="pull-left thumbicon fa fa-power-off btn-inverse no-hover"></i>
+                                                            <a class="user" href="#"> Alex Doe </a>
+
+                                                            logged out.
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                16 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-activity clearfix">
+                                                        <div>
+                                                            <i class="pull-left thumbicon fa fa-key btn-info no-hover"></i>
+                                                            <a class="user" href="#"> Alex Doe </a>
+
+                                                            logged in.
+                                                            <div class="time">
+                                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                                16 hours ago
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tools action-buttons">
+                                                            <a href="#" class="blue">
+                                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                                            </a>
+
+                                                            <a href="#" class="red">
+                                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div><!-- /.row -->
+
+                    <div class="space-24"></div>
+
+                    <div class="row">
+
+
+
+                        <div class="col-xs-12 col-sm-6 widget-container-col ui-sortable" id="widget-container-col-3">
+                            <div class="widget-box widget-color-orange collapsed ui-sortable-handle" id="widget-box-3">
+                                <div class="widget-header widget-header-small">
+                                    <h6 class="widget-title">
+                                        <i class="ace-icon fa fa-sort"></i>
+                                        Small Header &amp; Collapsed
+                                    </h6>
+
+                                    <div class="widget-toolbar">
+                                        <a href="#" data-action="settings">
+                                            <i class="ace-icon fa fa-cog"></i>
+                                        </a>
+
+                                        <a href="#" data-action="reload">
+                                            <i class="ace-icon fa fa-refresh"></i>
+                                        </a>
+
+                                        <a href="#" data-action="collapse">
+                                            <i class="ace-icon fa fa-plus" data-icon-show="fa-plus" data-icon-hide="fa-minus"></i>
+                                        </a>
+
+                                        <a href="#" data-action="close">
+                                            <i class="ace-icon fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <p class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 widget-container-col ui-sortable" id="widget-container-col-4">
+                            <div class="widget-box ui-sortable-handle" id="widget-box-4">
+                                <div class="widget-header widget-header-large">
+                                    <h4 class="widget-title">Big Header</h4>
+
+                                    <div class="widget-toolbar">
+                                        <a href="#" data-action="settings">
+                                            <i class="ace-icon fa fa-cog"></i>
+                                        </a>
+
+                                        <a href="#" data-action="reload">
+                                            <i class="ace-icon fa fa-refresh"></i>
+                                        </a>
+
+                                        <a href="#" data-action="collapse">
+                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                        </a>
+
+                                        <a href="#" data-action="close">
+                                            <i class="ace-icon fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <p class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-24"></div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 widget-container-col ui-sortable" id="widget-container-col-5">
+                            <div class="widget-box ui-sortable-handle" id="widget-box-5">
+                                <div class="widget-header">
+                                    <h5 class="widget-title smaller">With Label</h5>
+
+                                    <div class="widget-toolbar">
+                                        <span class="label label-success">
+                                            16%
+                                            <i class="ace-icon fa fa-arrow-up"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-6">
+                                        <div class="alert alert-info"> Hello World! </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3 widget-container-col ui-sortable" id="widget-container-col-6">
+                            <div class="widget-box widget-color-dark light-border ui-sortable-handle" id="widget-box-6">
+                                <div class="widget-header">
+                                    <h5 class="widget-title smaller">With Badge</h5>
+
+                                    <div class="widget-toolbar">
+                                        <span class="badge badge-danger">Alert</span>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-6">
+                                        <div class="alert alert-info"> Hello World! </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 widget-container-col ui-sortable" id="widget-container-col-7">
+                            <div class="widget-box widget-color-dark ui-sortable-handle" id="widget-box-7">
+                                <div class="widget-header widget-header-small">
+                                    <h6 class="widget-title smaller">With Labels &amp; Badges</h6>
+
+                                    <div class="widget-toolbar no-border">
+                                        <label>
+                                            <input type="checkbox" class="ace ace-switch ace-switch-3">
+                                            <span class="lbl middle"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="widget-toolbar">
+                                        <span class="label label-warning">
+                                            1.2%
+                                            <i class="ace-icon fa fa-arrow-down"></i>
+                                        </span>
+                                        <span class="badge badge-info">info</span>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space"></div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 widget-container-col ui-sortable" id="widget-container-col-8">
+                            <div class="widget-box widget-color-dark ui-sortable-handle" id="widget-box-8">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">With Toolbox</h5>
+
+                                    <div class="widget-toolbar">
+                                        <label>
+                                            <input type="checkbox" class="ace ace-checkbox-2" id="id-checkbox-vertical">
+                                            <span class="lbl middle padding-4"> Vertical</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="widget-toolbar">
+                                        <div class="progress progress-mini progress-striped active pos-rel" style="width:60px;" data-percent="61%">
+                                            <div class="progress-bar progress-bar-danger" style="width:61%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-toolbox" id="widget-toolbox-1">
+                                        <div class="btn-toolbar">
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-success btn-white btn-round">
+                                                    <i class="ace-icon fa fa-check bigger-110 green"></i>
+                                                    Approve
+                                                </button>
+
+                                                <button class="btn btn-sm btn-danger btn-white btn-round">
+                                                    <i class="ace-icon fa fa-times bigger-110 red2"></i>
+                                                    Reject
+                                                </button>
+                                            </div>
+
+                                            <div data-toggle="buttons" class="btn-group">
+                                                <label class="btn btn-sm btn-default btn-white btn-round">
+                                                    <i class="icon-only ace-icon fa fa-bold bigger-110"></i>
+
+                                                    <input type="checkbox" value="1">
+                                                </label>
+
+                                                <label class="btn btn-sm btn-default btn-white btn-round">
+                                                    <i class="icon-only ace-icon fa fa-italic bigger-110"></i>
+
+                                                    <input type="checkbox" value="2">
+                                                </label>
+                                            </div>
+
+                                            <div data-toggle="buttons" class="btn-group">
+                                                <label class="btn btn-sm btn-primary btn-white btn-round">
+                                                    <i class="icon-only ace-icon fa fa-align-left bigger-110"></i>
+
+                                                    <input type="radio" value="1">
+                                                </label>
+
+                                                <label class="btn btn-sm btn-primary btn-white btn-round">
+                                                    <i class="icon-only ace-icon fa fa-align-center bigger-110"></i>
+
+                                                    <input type="radio" value="2">
+                                                </label>
+
+                                                <label class="btn btn-sm btn-primary btn-white btn-round">
+                                                    <i class="icon-only ace-icon fa fa-align-right bigger-110"></i>
+
+                                                    <input type="radio" value="3">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="widget-main padding-16">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur. Nulla fringilla eleifend consectetur. Etiam justo nisl, gravida id egestas eu, eleifend vel metus. Pellentesque tellus ipsum, euismod in facilisis quis, aliquet quis sem.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 widget-container-col ui-sortable" id="widget-container-col-9">
+                            <div class="widget-box widget-color-pink ui-sortable-handle" id="widget-box-9">
+                                <div class="widget-header">
+                                    <h5 class="widget-title">Bottom Toolbox (Footer)</h5>
+
+                                    <div class="widget-toolbar">
+                                        <a href="#" data-action="collapse">
+                                            <i class="1 ace-icon fa fa-chevron-up bigger-125"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="widget-toolbar no-border">
+                                        <button class="btn btn-xs btn-light bigger">
+                                            <i class="ace-icon fa fa-arrow-left"></i>
+                                            Prev
+                                        </button>
+
+                                        <button class="btn btn-xs bigger btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                            Next
+                                            <i class="ace-icon fa fa-chevron-down icon-on-right"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            <li>
+                                                <a href="#">Action</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#">Another action</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#">Something else here</a>
+                                            </li>
+
+                                            <li class="divider"></li>
+
+                                            <li>
+                                                <a href="#">Separated link</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <p class="alert alert-info">
+                                            Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur. Nulla fringilla eleifend consectetur.
+                                        </p>
+                                        <p class="alert alert-success">
+                                            Raw denim you probably haven't heard of them jean shorts Austin.
+                                        </p>
+                                    </div>
+
+                                    <div class="widget-toolbox padding-8 clearfix">
+                                        <button class="btn btn-xs btn-danger pull-left">
+                                            <i class="ace-icon fa fa-times"></i>
+                                            <span class="bigger-110">I don't accept</span>
+                                        </button>
+
+                                        <button class="btn btn-xs btn-success pull-right">
+                                            <span class="bigger-110">I accept</span>
+
+                                            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space"></div>
+
+                    <div class="row">
+                        <div class="col-sm-6 widget-container-col ui-sortable" id="widget-container-col-10">
+                            <div class="widget-box ui-sortable-handle" id="widget-box-10">
+                                <div class="widget-header widget-header-small">
+                                    <h5 class="widget-title smaller">Tabbed</h5>
+
+                                    <div class="widget-toolbar no-border">
+                                        <ul class="nav nav-tabs" id="myTab">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#home">Home</a>
+                                            </li>
+
+                                            <li>
+                                                <a data-toggle="tab" href="#profile">Profile</a>
+                                            </li>
+
+                                            <li>
+                                                <a data-toggle="tab" href="#info">Info</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-6">
+                                        <div class="tab-content">
+                                            <div id="home" class="tab-pane in active">
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+                                            </div>
+
+                                            <div id="profile" class="tab-pane">
+                                                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                                            </div>
+
+                                            <div id="info" class="tab-pane">
+                                                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 widget-container-col ui-sortable" id="widget-container-col-11">
+                            <div class="widget-box widget-color-dark ui-sortable-handle" id="widget-box-11">
+                                <div class="widget-header">
+                                    <h6 class="widget-title">Scroll Content</h6>
+
+                                    <div class="widget-toolbar">
+                                        <a href="#" data-action="settings">
+                                            <i class="ace-icon fa fa-cog"></i>
+                                        </a>
+
+                                        <a href="#" data-action="reload">
+                                            <i class="ace-icon fa fa-refresh"></i>
+                                        </a>
+
+                                        <a href="#" data-action="collapse">
+                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                        </a>
+
+                                        <a href="#" data-action="close">
+                                            <i class="ace-icon fa fa-times"></i>
+                                        </a>
+
+                                        <a href="#" data-action="fullscreen" class="orange2">
+                                            <i class="ace-icon fa fa-expand"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-4 scrollable ace-scroll" data-size="125" style="position: relative;">
+                                        <div class="scroll-track scroll-active" style="display: block; height: 125px;"><div class="scroll-bar" style="height: 8px; top: 0px;"></div></div><div class="scroll-content" style="max-height: 125px;">
+                                            <div class="content">
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-danger">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-success">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-danger">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-success">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-danger">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-success">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-danger">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-success">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-danger">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-success">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-danger">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-success">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-success">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                                <div class="alert alert-info">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-24"></div>
+
+                    <div class="row">
+                        <div class="col-sm-6 widget-container-col ui-sortable" id="widget-container-col-12" style="min-height: 108px;">
+                            <div class="widget-box transparent ui-sortable-handle" id="widget-box-12" style="opacity: 1;">
+                                <div class="widget-header">
+                                    <h4 class="widget-title lighter">Transparent Box</h4>
+
+                                    <div class="widget-toolbar no-border">
+                                        <a href="#" data-action="settings">
+                                            <i class="ace-icon fa fa-cog"></i>
+                                        </a>
+
+                                        <a href="#" data-action="reload">
+                                            <i class="ace-icon fa fa-refresh"></i>
+                                        </a>
+
+                                        <a href="#" data-action="collapse">
+                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                        </a>
+
+                                        <a href="#" data-action="close">
+                                            <i class="ace-icon fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-6 no-padding-left no-padding-right">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 widget-container-col ui-sortable" id="widget-container-col-13">
+                            <div class="widget-box transparent ui-sortable-handle" id="widget-box-13">
+                                <div class="widget-header">
+                                    <h4 class="widget-title lighter">Tabs With Scroll</h4>
+
+                                    <div class="widget-toolbar no-border">
+                                        <ul class="nav nav-tabs" id="myTab2">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#home2">Home</a>
+                                            </li>
+
+                                            <li>
+                                                <a data-toggle="tab" href="#profile2">Profile</a>
+                                            </li>
+
+                                            <li>
+                                                <a data-toggle="tab" href="#info2">Info</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div class="widget-main padding-12 no-padding-left no-padding-right">
+                                        <div class="tab-content padding-4">
+                                            <div id="home2" class="tab-pane in active">
+                                                <div class="scrollable-horizontal ace-scroll" data-size="800" style="position: relative; padding-top: 12px;">
+                                                    <div class="scroll-track scroll-hz scroll-top scroll-active" style="display: block; width: 406px;"><div class="scroll-bar" style="width: 206px; left: 0px;"></div></div><div class="scroll-content" style="max-width: 800px;">
+                                                        <div style="width: 800px;">
+                                                            <b>Horizontal Scroll</b>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="profile2" class="tab-pane">
+                                                <div class="scrollable ace-scroll" data-size="100" data-position="left" style="position: relative;">
+                                                    <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="max-height: 100px;">
+                                                        <b>Scroll on Left</b>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="info2" class="tab-pane">
+                                                <div class="scrollable ace-scroll" data-size="100" style="position: relative;">
+                                                    <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="max-height: 100px;">
+                                                        <b>Scroll # 3</b>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis. Nullam interdum massa vel nisl fringilla sed viverra erat tincidunt. Phasellus in ipsum velit. Maecenas id erat vel sem convallis blandit. Nunc aliquam enim ut arcu aliquet adipiscing. Fusce dignissim volutpat justo non consectetur.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="text-center">
+                        <button type="reset" id="reset-widgets" class="btn btn-danger btn-white btn-bold btn-round">Reset Position/State</button>
+                    </div>
+                </div><!-- PAGE CONTENT ENDS -->
+            </div>
+
+
+
+
+        </div>
+    </div>
+    
+</div>
+
+
+@*<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='~/Content/assetsmes/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="~/Content/assetsmes/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="~/Content/assetsmes/js/jquery-ui.custom.min.js"></script>
+<script src="~/Content/assetsmes/js/jquery.ui.touch-punch.min.js"></script>
+
+<!-- ace scripts -->
+<script src="~/Content/assetsmes/js/ace-elements.min.js"></script>
+<script src="~/Content/assetsmes/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+			jQuery(function($) {
+
+				$('#simple-colorpicker-1').ace_colorpicker({pull_right:true}).on('change', function(){
+					var color_class = $(this).find('option:selected').data('class');
+					var new_class = 'widget-box';
+					if(color_class != 'default')  new_class += ' widget-color-'+color_class;
+					$(this).closest('.widget-box').attr('class', new_class);
+				});
+
+
+				// scrollables
+				$('.scrollable').each(function () {
+					var $this = $(this);
+					$(this).ace_scroll({
+						size: $this.attr('data-size') || 100,
+						//styleClass: 'scroll-left scroll-margin scroll-thin scroll-dark scroll-light no-track scroll-visible'
+					});
+				});
+				$('.scrollable-horizontal').each(function () {
+					var $this = $(this);
+					$(this).ace_scroll(
+					  {
+						horizontal: true,
+						styleClass: 'scroll-top',//show the scrollbars on top(default is bottom)
+						size: $this.attr('data-size') || 500,
+						mouseWheelLock: true
+					  }
+					).css({'padding-top': 12});
+				});
+
+				$(window).on('resize.scroll_reset', function() {
+					$('.scrollable-horizontal').ace_scroll('reset');
+				});
+
+
+				$('#id-checkbox-vertical').prop('checked', false).on('click', function() {
+					$('#widget-toolbox-1').toggleClass('toolbox-vertical')
+					.find('.btn-group').toggleClass('btn-group-vertical')
+					.filter(':first').toggleClass('hidden')
+					.parent().toggleClass('btn-toolbar')
+				});
+
+				/**
+				//or use slimScroll plugin
+				$('.slim-scrollable').each(function () {
+					var $this = $(this);
+					$this.slimScroll({
+						height: $this.data('height') || 100,
+						railVisible:true
+					});
+				});
+				*/
+
+
+				/**$('.widget-box').on('setting.ace.widget' , function(e) {
+					e.preventDefault();
+				});*/
+
+				/**
+				$('.widget-box').on('show.ace.widget', function(e) {
+					//e.preventDefault();
+					//this = the widget-box
+				});
+				$('.widget-box').on('reload.ace.widget', function(e) {
+					//this = the widget-box
+				});
+				*/
+
+				//$('#my-widget-box').widget_box('hide');
+
+
+
+				// widget boxes
+				// widget box drag & drop example
+			    $('.widget-container-col').sortable({
+			        connectWith: '.widget-container-col',
+					items:'> .widget-box',
+					handle: ace.vars['touch'] ? '.widget-title' : false,
+					cancel: '.fullscreen',
+					opacity:0.8,
+					revert:true,
+					forceHelperSize:true,
+					placeholder: 'widget-placeholder',
+					forcePlaceholderSize:true,
+					tolerance:'pointer',
+					start: function(event, ui) {
+						//when an element is moved, it's parent becomes empty with almost zero height.
+						//we set a min-height for it to be large enough so that later we can easily drop elements back onto it
+						ui.item.parent().css({'min-height':ui.item.height()})
+						//ui.sender.css({'min-height':ui.item.height() , 'background-color' : '#F5F5F5'})
+					},
+					update: function(event, ui) {
+						ui.item.parent({'min-height':''})
+						//p.style.removeProperty('background-color');
+
+
+						//save widget positions
+						var widget_order = {}
+						$('.widget-container-col').each(function() {
+							var container_id = $(this).attr('id');
+							widget_order[container_id] = []
+
+
+							$(this).find('> .widget-box').each(function() {
+								var widget_id = $(this).attr('id');
+								widget_order[container_id].push(widget_id);
+								//now we know each container contains which widgets
+							});
+						});
+
+						ace.data.set('demo', 'widget-order', widget_order, null, true);
+					}
+			    });
+
+
+				///////////////////////
+
+				//when a widget is shown/hidden/closed, we save its state for later retrieval
+				$(document).on('shown.ace.widget hidden.ace.widget closed.ace.widget', '.widget-box', function(event) {
+					var widgets = ace.data.get('demo', 'widget-state', true);
+					if(widgets == null) widgets = {}
+
+					var id = $(this).attr('id');
+					widgets[id] = event.type;
+					ace.data.set('demo', 'widget-state', widgets, null, true);
+				});
+
+
+				(function() {
+					//restore widget order
+					var container_list = ace.data.get('demo', 'widget-order', true);
+					if(container_list) {
+						for(var container_id in container_list) if(container_list.hasOwnProperty(container_id)) {
+
+							var widgets_inside_container = container_list[container_id];
+							if(widgets_inside_container.length == 0) continue;
+
+							for(var i = 0; i < widgets_inside_container.length; i++) {
+								var widget = widgets_inside_container[i];
+								$('#'+widget).appendTo('#'+container_id);
+							}
+
+						}
+					}
+
+
+					//restore widget state
+					var widgets = ace.data.get('demo', 'widget-state', true);
+					if(widgets != null) {
+						for(var id in widgets) if(widgets.hasOwnProperty(id)) {
+							var state = widgets[id];
+							var widget = $('#'+id);
+							if
+							(
+								(state == 'shown' && widget.hasClass('collapsed'))
+								||
+								(state == 'hidden' && !widget.hasClass('collapsed'))
+							)
+							{
+								widget.widget_box('toggleFast');
+							}
+							else if(state == 'closed') {
+								widget.widget_box('closeFast');
+							}
+						}
+					}
+
+
+					$('#main-widget-container').removeClass('invisible');
+
+
+					//reset saved positions and states
+					$('#reset-widgets').on('click', function() {
+						ace.data.remove('demo', 'widget-state');
+						ace.data.remove('demo', 'widget-order');
+						document.location.reload();
+					});
+
+				})();
+
+			});
+</script>*@

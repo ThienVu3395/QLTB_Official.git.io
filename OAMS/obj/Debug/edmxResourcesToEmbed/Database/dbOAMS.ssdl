@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbOAMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbChucnang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="NHOMID" Type="int" />
+    <Property Name="TENCHUCNANG" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="LINKS" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="THUTU" Type="int" />
+  </EntityType>
+  <EntityType Name="tbDanhmuc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LOAIDM" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CODE" Type="nvarchar" MaxLength="50" />
+    <Property Name="VALUENAME" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="tbLoaiDM">
+    <Key>
+      <PropertyRef Name="LOAIDM" />
+    </Key>
+    <Property Name="LOAIDM" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TENDM" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DMHETHONG" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbModule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ModuleName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="250" />
+    <Property Name="Description" Type="nvarchar" MaxLength="490" />
+    <Property Name="NumOrder" Type="int" />
+    <Property Name="Links" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="tbNhomchucnang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="MODULAID" Type="int" Nullable="false" />
+    <Property Name="TENNHOM" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ICON" Type="nvarchar" MaxLength="50" />
+    <Property Name="THUTU" Type="int" />
+  </EntityType>
+  <EntityType Name="tbVitriluutru">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="TENLUUTRU" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DUONGDAN" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ISFTP" Type="bit" />
+    <Property Name="USERNAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="PASSWRD" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbFilecongvan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LOAI" Type="int" Nullable="false" />
+    <Property Name="VANBANID" Type="int" Nullable="false" />
+    <Property Name="TENFILE" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="MOTA" Type="nvarchar" MaxLength="1000" />
+    <Property Name="NGAYTAO" Type="datetime" />
+    <Property Name="TRANGTHAI" Type="bit" />
+    <Property Name="LOAIFILE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SIZEFILE" Type="int" />
+    <Property Name="VITRIID" Type="int" />
+  </EntityType>
+  <EntityType Name="tbFiledinhkem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LOAI" Type="int" Nullable="false" />
+    <Property Name="VANBANID" Type="int" Nullable="false" />
+    <Property Name="TENFILE" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="MOTA" Type="nvarchar" MaxLength="1000" />
+    <Property Name="NGAYTAO" Type="datetime" />
+    <Property Name="TRANGTHAI" Type="bit" />
+    <Property Name="LOAIFILE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SIZEFILE" Type="int" />
+    <Property Name="VITRIID" Type="int" />
+  </EntityType>
+  <EntityType Name="tbFilexuly">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="YKIENID" Type="int" Nullable="false" />
+    <Property Name="TENFILE" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="MOTA" Type="nvarchar" MaxLength="1000" />
+    <Property Name="NGAYTAO" Type="datetime" />
+    <Property Name="TRANGTHAI" Type="bit" />
+    <Property Name="LOAIFILE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SIZEFILE" Type="int" />
+    <Property Name="VITRIID" Type="int" />
+    <Property Name="PHATHANH" Type="int" />
+  </EntityType>
+  <EntityType Name="tbFlownode">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkflowID" Type="int" Nullable="false" />
+    <Property Name="VAITRO" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="CANBO" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="YEUCAURIENG" Type="nvarchar" MaxLength="250" />
+    <Property Name="LOAIXL" Type="smallint" Nullable="false" />
+    <Property Name="CANBOUQ" Type="nvarchar" MaxLength="250" />
+    <Property Name="NGAYUQ" Type="datetime" />
+    <Property Name="HANUQ" Type="datetime" />
+    <Property Name="CHANXL" Type="int" />
+  </EntityType>
+  <EntityType Name="tbLinhvuc">
+    <Key>
+      <PropertyRef Name="MALV" />
+    </Key>
+    <Property Name="MALV" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TENLV" Type="nvarchar" MaxLength="100" />
+    <Property Name="KYHIEU" Type="nvarchar" MaxLength="10" />
+    <Property Name="GHICHU" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tbLoaivanban">
+    <Key>
+      <PropertyRef Name="MALOAI" />
+    </Key>
+    <Property Name="MALOAI" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TENLOAI" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="GHICHU" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbSovanban">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TENSO" Type="nvarchar" MaxLength="200" />
+    <Property Name="KYHIEU" Type="nvarchar" MaxLength="200" />
+    <Property Name="DONVIID" Type="nvarchar" MaxLength="10" />
+    <Property Name="LOAIVB" Type="nvarchar" MaxLength="50" />
+    <Property Name="GHICHU" Type="nvarchar" MaxLength="500" />
+    <Property Name="LOAI" Type="int" />
+    <Property Name="VITRILUU" Type="int" />
+  </EntityType>
+  <EntityType Name="tbVanbanden">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DOCCODE" Type="nvarchar" MaxLength="25" />
+    <Property Name="FILECODE" Type="nvarchar" MaxLength="40" />
+    <Property Name="DOCORDINAL" Type="smallint" />
+    <Property Name="TYPENAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CODENUMBER" Type="nvarchar" MaxLength="11" />
+    <Property Name="CODENOTATION" Type="nvarchar" MaxLength="30" />
+    <Property Name="ISSUEDDATE" Type="date" />
+    <Property Name="ORGANNAME" Type="nvarchar" MaxLength="200" />
+    <Property Name="SUBJECT" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="LANGUAGE" Type="nvarchar" MaxLength="30" />
+    <Property Name="PAGEMOUNT" Type="smallint" />
+    <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="500" />
+    <Property Name="ARRIVALDATE" Type="date" />
+    <Property Name="ARRIVALNUMBER" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="POSITIONSIGNER" Type="nvarchar" MaxLength="100" />
+    <Property Name="FULLNAMESIGNER" Type="nvarchar" MaxLength="50" />
+    <Property Name="PRIORITY" Type="int" />
+    <Property Name="TOPLACES" Type="nvarchar" MaxLength="1000" />
+    <Property Name="TRACEHEADER" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DUEDATE" Type="date" />
+    <Property Name="SOVANBANID" Type="int" Nullable="false" />
+    <Property Name="MOREINFO1" Type="nvarchar" MaxLength="200" />
+    <Property Name="MOREINFO2" Type="nvarchar" MaxLength="200" />
+    <Property Name="MOREINFO3" Type="nvarchar" MaxLength="200" />
+    <Property Name="MOREINFO4" Type="nvarchar" MaxLength="200" />
+    <Property Name="MOREINFO5" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tbVBdenCanbo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDVANBAN" Type="int" Nullable="false" />
+    <Property Name="CANBO" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="NGAYMO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbVBdenWorkflow">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDVANBANDI" Type="int" />
+    <Property Name="IDVANBANDEN" Type="int" />
+    <Property Name="LOAI" Type="int" Nullable="false" />
+    <Property Name="WorkflowID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbWorkflow">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MACV" Type="nvarchar" MaxLength="30" />
+    <Property Name="TENCV" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="MOTACV" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="GHICHU" Type="nvarchar" MaxLength="500" />
+    <Property Name="LOAICV" Type="smallint" Nullable="false" />
+    <Property Name="TRANGTHAI" Type="int" Nullable="false" />
+    <Property Name="NGUOITAO" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="NGAYTAO" Type="datetime" Nullable="false" />
+    <Property Name="THOIHAN" Type="datetime" />
+    <Property Name="MADONVI" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="BOPHAN" Type="nvarchar" MaxLength="11" />
+    <Property Name="VANBANID" Type="int" />
+    <Property Name="KHOAXL" Type="bit" />
+    <Property Name="KETQUAXL" Type="nvarchar" MaxLength="1000" />
+    <Property Name="NGAYHOANTHANH" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbYkienxuly">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkflowID" Type="int" Nullable="false" />
+    <Property Name="CANBO" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="NGAYXL" Type="datetime" Nullable="false" />
+    <Property Name="YKIENXL" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="TRANGTHAI" Type="smallint" Nullable="false" />
+    <Property Name="LOAIXL" Type="smallint" Nullable="false" />
+    <Property Name="CONGKHAI" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbBophan">
+    <Key>
+      <PropertyRef Name="MAPHONG" />
+    </Key>
+    <Property Name="MAPHONG" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TENPHONG" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DVQUANLY" Type="nvarchar" MaxLength="10" />
+    <Property Name="MADONVI" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tbChucvu">
+    <Key>
+      <PropertyRef Name="MACHUCVU" />
+    </Key>
+    <Property Name="MACHUCVU" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TENCHUCVU" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbCoquan">
+    <Key>
+      <PropertyRef Name="MACOQUAN" />
+    </Key>
+    <Property Name="MACOQUAN" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TENCOQUAN" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="CQQUANLY" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tbNguoidung">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="USERNAME" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="150" />
+    <Property Name="HOLOT" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="TEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NGAYTAO" Type="date" Nullable="false" />
+    <Property Name="KHOA" Type="bit" Nullable="false" />
+    <Property Name="CHUCVU" Type="nvarchar" MaxLength="50" />
+    <Property Name="BOPHAN" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="UYQUYEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="NGAYUQ" Type="date" />
+    <Property Name="KETTHUCUQ" Type="date" />
+    <Property Name="HANCHE" Type="bit" Nullable="false" />
+    <Property Name="FILEANH" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="tbNhom">
+    <Key>
+      <PropertyRef Name="MANHOM" />
+    </Key>
+    <Property Name="MANHOM" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TENNHOM" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbNhom_Chucnang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MANHOM" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CHUCNANGID" Type="int" Nullable="false" />
+    <Property Name="ALLACTION" Type="bit" Nullable="false" />
+    <Property Name="XEM" Type="bit" Nullable="false" />
+    <Property Name="THEM" Type="bit" Nullable="false" />
+    <Property Name="XOA" Type="bit" Nullable="false" />
+    <Property Name="SUA" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbNhom_Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERNAME" Type="nvarchar" MaxLength="256" />
+    <Property Name="MANHOM" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_tbChucnang_tbNhomchucnang1">
+    <End Role="tbNhomchucnang" Type="Self.tbNhomchucnang" Multiplicity="0..1" />
+    <End Role="tbChucnang" Type="Self.tbChucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbNhomchucnang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbChucnang">
+        <PropertyRef Name="NHOMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbDanhmuc_tbLoaiDM">
+    <End Role="tbLoaiDM" Type="Self.tbLoaiDM" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbDanhmuc" Type="Self.tbDanhmuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbLoaiDM">
+        <PropertyRef Name="LOAIDM" />
+      </Principal>
+      <Dependent Role="tbDanhmuc">
+        <PropertyRef Name="LOAIDM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbFilecongvan_tbWorkflow">
+    <End Role="tbWorkflow" Type="Self.tbWorkflow" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbFilecongvan" Type="Self.tbFilecongvan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbWorkflow">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbFilecongvan">
+        <PropertyRef Name="VANBANID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbFilexuly_tbYkienxuly">
+    <End Role="tbYkienxuly" Type="Self.tbYkienxuly" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbFilexuly" Type="Self.tbFilexuly" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbYkienxuly">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbFilexuly">
+        <PropertyRef Name="YKIENID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbFlownode_tbWorkflow">
+    <End Role="tbWorkflow" Type="Self.tbWorkflow" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbFlownode" Type="Self.tbFlownode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbWorkflow">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbFlownode">
+        <PropertyRef Name="WorkflowID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNguoidung_tbBophan">
+    <End Role="tbBophan" Type="Self.tbBophan" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbNguoidung" Type="Self.tbNguoidung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbBophan">
+        <PropertyRef Name="MAPHONG" />
+      </Principal>
+      <Dependent Role="tbNguoidung">
+        <PropertyRef Name="BOPHAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNguoidung_tbChucvu">
+    <End Role="tbChucvu" Type="Self.tbChucvu" Multiplicity="0..1" />
+    <End Role="tbNguoidung" Type="Self.tbNguoidung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbChucvu">
+        <PropertyRef Name="MACHUCVU" />
+      </Principal>
+      <Dependent Role="tbNguoidung">
+        <PropertyRef Name="CHUCVU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhom_Chucnang_tbChucnang">
+    <End Role="tbChucnang" Type="Self.tbChucnang" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbNhom_Chucnang" Type="Self.tbNhom_Chucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbChucnang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbNhom_Chucnang">
+        <PropertyRef Name="CHUCNANGID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhom_Chucnang_tbNhom">
+    <End Role="tbNhom" Type="Self.tbNhom" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbNhom_Chucnang" Type="Self.tbNhom_Chucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbNhom">
+        <PropertyRef Name="MANHOM" />
+      </Principal>
+      <Dependent Role="tbNhom_Chucnang">
+        <PropertyRef Name="MANHOM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhom_Users_tbNhom1">
+    <End Role="tbNhom" Type="Self.tbNhom" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbNhom_Users" Type="Self.tbNhom_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbNhom">
+        <PropertyRef Name="MANHOM" />
+      </Principal>
+      <Dependent Role="tbNhom_Users">
+        <PropertyRef Name="MANHOM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhomchucnang_tbModule">
+    <End Role="tbModule" Type="Self.tbModule" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbNhomchucnang" Type="Self.tbNhomchucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbModule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbNhomchucnang">
+        <PropertyRef Name="MODULAID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbVanbanden_tbSovanban">
+    <End Role="tbSovanban" Type="Self.tbSovanban" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbVanbanden" Type="Self.tbVanbanden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSovanban">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbVanbanden">
+        <PropertyRef Name="SOVANBANID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbVBdenCanbo_tbVanbanden">
+    <End Role="tbVanbanden" Type="Self.tbVanbanden" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbVBdenCanbo" Type="Self.tbVBdenCanbo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbVanbanden">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbVBdenCanbo">
+        <PropertyRef Name="IDVANBAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbVBdenWorkflow_tbVanbanden">
+    <End Role="tbVanbanden" Type="Self.tbVanbanden" Multiplicity="0..1" />
+    <End Role="tbVBdenWorkflow" Type="Self.tbVBdenWorkflow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbVanbanden">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbVBdenWorkflow">
+        <PropertyRef Name="IDVANBANDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbVBdenWorkflow_tbWorkflow">
+    <End Role="tbWorkflow" Type="Self.tbWorkflow" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbVBdenWorkflow" Type="Self.tbVBdenWorkflow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbWorkflow">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbVBdenWorkflow">
+        <PropertyRef Name="WorkflowID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbYkienxuly_tbWorkflow">
+    <End Role="tbWorkflow" Type="Self.tbWorkflow" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbYkienxuly" Type="Self.tbYkienxuly" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbWorkflow">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbYkienxuly">
+        <PropertyRef Name="WorkflowID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbOAMSModelStoreContainer">
+    <EntitySet Name="tbChucnang" EntityType="Self.tbChucnang" Schema="adm" store:Type="Tables" />
+    <EntitySet Name="tbDanhmuc" EntityType="Self.tbDanhmuc" Schema="adm" store:Type="Tables" />
+    <EntitySet Name="tbLoaiDM" EntityType="Self.tbLoaiDM" Schema="adm" store:Type="Tables" />
+    <EntitySet Name="tbModule" EntityType="Self.tbModule" Schema="adm" store:Type="Tables" />
+    <EntitySet Name="tbNhomchucnang" EntityType="Self.tbNhomchucnang" Schema="adm" store:Type="Tables" />
+    <EntitySet Name="tbVitriluutru" EntityType="Self.tbVitriluutru" Schema="adm" store:Type="Tables" />
+    <EntitySet Name="tbFilecongvan" EntityType="Self.tbFilecongvan" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbFiledinhkem" EntityType="Self.tbFiledinhkem" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbFilexuly" EntityType="Self.tbFilexuly" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbFlownode" EntityType="Self.tbFlownode" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbLinhvuc" EntityType="Self.tbLinhvuc" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbLoaivanban" EntityType="Self.tbLoaivanban" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbSovanban" EntityType="Self.tbSovanban" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbVanbanden" EntityType="Self.tbVanbanden" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbVBdenCanbo" EntityType="Self.tbVBdenCanbo" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbVBdenWorkflow" EntityType="Self.tbVBdenWorkflow" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbWorkflow" EntityType="Self.tbWorkflow" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbYkienxuly" EntityType="Self.tbYkienxuly" Schema="doc" store:Type="Tables" />
+    <EntitySet Name="tbBophan" EntityType="Self.tbBophan" Schema="users" store:Type="Tables" />
+    <EntitySet Name="tbChucvu" EntityType="Self.tbChucvu" Schema="users" store:Type="Tables" />
+    <EntitySet Name="tbCoquan" EntityType="Self.tbCoquan" Schema="users" store:Type="Tables" />
+    <EntitySet Name="tbNguoidung" EntityType="Self.tbNguoidung" Schema="users" store:Type="Tables" />
+    <EntitySet Name="tbNhom" EntityType="Self.tbNhom" Schema="users" store:Type="Tables" />
+    <EntitySet Name="tbNhom_Chucnang" EntityType="Self.tbNhom_Chucnang" Schema="users" store:Type="Tables" />
+    <EntitySet Name="tbNhom_Users" EntityType="Self.tbNhom_Users" Schema="users" store:Type="Tables" />
+    <AssociationSet Name="FK_tbChucnang_tbNhomchucnang1" Association="Self.FK_tbChucnang_tbNhomchucnang1">
+      <End Role="tbNhomchucnang" EntitySet="tbNhomchucnang" />
+      <End Role="tbChucnang" EntitySet="tbChucnang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbDanhmuc_tbLoaiDM" Association="Self.FK_tbDanhmuc_tbLoaiDM">
+      <End Role="tbLoaiDM" EntitySet="tbLoaiDM" />
+      <End Role="tbDanhmuc" EntitySet="tbDanhmuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbFilecongvan_tbWorkflow" Association="Self.FK_tbFilecongvan_tbWorkflow">
+      <End Role="tbWorkflow" EntitySet="tbWorkflow" />
+      <End Role="tbFilecongvan" EntitySet="tbFilecongvan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbFilexuly_tbYkienxuly" Association="Self.FK_tbFilexuly_tbYkienxuly">
+      <End Role="tbYkienxuly" EntitySet="tbYkienxuly" />
+      <End Role="tbFilexuly" EntitySet="tbFilexuly" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbFlownode_tbWorkflow" Association="Self.FK_tbFlownode_tbWorkflow">
+      <End Role="tbWorkflow" EntitySet="tbWorkflow" />
+      <End Role="tbFlownode" EntitySet="tbFlownode" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNguoidung_tbBophan" Association="Self.FK_tbNguoidung_tbBophan">
+      <End Role="tbBophan" EntitySet="tbBophan" />
+      <End Role="tbNguoidung" EntitySet="tbNguoidung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNguoidung_tbChucvu" Association="Self.FK_tbNguoidung_tbChucvu">
+      <End Role="tbChucvu" EntitySet="tbChucvu" />
+      <End Role="tbNguoidung" EntitySet="tbNguoidung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhom_Chucnang_tbChucnang" Association="Self.FK_tbNhom_Chucnang_tbChucnang">
+      <End Role="tbChucnang" EntitySet="tbChucnang" />
+      <End Role="tbNhom_Chucnang" EntitySet="tbNhom_Chucnang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhom_Chucnang_tbNhom" Association="Self.FK_tbNhom_Chucnang_tbNhom">
+      <End Role="tbNhom" EntitySet="tbNhom" />
+      <End Role="tbNhom_Chucnang" EntitySet="tbNhom_Chucnang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhom_Users_tbNhom1" Association="Self.FK_tbNhom_Users_tbNhom1">
+      <End Role="tbNhom" EntitySet="tbNhom" />
+      <End Role="tbNhom_Users" EntitySet="tbNhom_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhomchucnang_tbModule" Association="Self.FK_tbNhomchucnang_tbModule">
+      <End Role="tbModule" EntitySet="tbModule" />
+      <End Role="tbNhomchucnang" EntitySet="tbNhomchucnang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbVanbanden_tbSovanban" Association="Self.FK_tbVanbanden_tbSovanban">
+      <End Role="tbSovanban" EntitySet="tbSovanban" />
+      <End Role="tbVanbanden" EntitySet="tbVanbanden" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbVBdenCanbo_tbVanbanden" Association="Self.FK_tbVBdenCanbo_tbVanbanden">
+      <End Role="tbVanbanden" EntitySet="tbVanbanden" />
+      <End Role="tbVBdenCanbo" EntitySet="tbVBdenCanbo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbVBdenWorkflow_tbVanbanden" Association="Self.FK_tbVBdenWorkflow_tbVanbanden">
+      <End Role="tbVanbanden" EntitySet="tbVanbanden" />
+      <End Role="tbVBdenWorkflow" EntitySet="tbVBdenWorkflow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbVBdenWorkflow_tbWorkflow" Association="Self.FK_tbVBdenWorkflow_tbWorkflow">
+      <End Role="tbWorkflow" EntitySet="tbWorkflow" />
+      <End Role="tbVBdenWorkflow" EntitySet="tbVBdenWorkflow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbYkienxuly_tbWorkflow" Association="Self.FK_tbYkienxuly_tbWorkflow">
+      <End Role="tbWorkflow" EntitySet="tbWorkflow" />
+      <End Role="tbYkienxuly" EntitySet="tbYkienxuly" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

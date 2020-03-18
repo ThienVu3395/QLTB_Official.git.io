@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f9f63d9e9061482485fa02b73859a874" Name="Diagram1">
+        <EntityTypeShape EntityType="dbOAMSModel.tbChucnang" Width="1.5" PointX="5.75" PointY="1.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbDanhmuc" Width="1.5" PointX="13" PointY="8.625" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbLoaiDM" Width="1.5" PointX="10.75" PointY="8.625" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbModule" Width="1.5" PointX="1.25" PointY="3.625" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbNhomchucnang" Width="1.5" PointX="3.5" PointY="3.625" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbVitriluutru" Width="1.5" PointX="0.75" PointY="7.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbFORMFUNC" Width="1.5" PointX="10.75" PointY="11.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbFunction" Width="1.5" PointX="12.75" PointY="11.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblattachcongvan" Width="1.5" PointX="14.75" PointY="11.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblCongvanden" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblcongvandencanbo" Width="1.5" PointX="5.25" PointY="21.25" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblCongvanphathanh" Width="1.5" PointX="6" PointY="11.25" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblcongvanphathanhcanbo" Width="1.5" PointX="8.25" PointY="14.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblLinhvuc" Width="1.5" PointX="12.75" PointY="16.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbLoaivanban" Width="1.5" PointX="3" PointY="22.875" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblplvanban" Width="1.5" PointX="0.75" PointY="14.25" />
+        <EntityTypeShape EntityType="dbOAMSModel.tblsovanban" Width="1.5" PointX="3.75" PointY="7.25" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbBophan" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbChucvu" Width="1.5" PointX="10.75" PointY="4" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbCoquan" Width="1.5" PointX="14.75" PointY="15.375" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbNguoidung" Width="1.5" PointX="13" PointY="2.75" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbNhom" Width="1.5" PointX="5.75" PointY="4.625" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbNhom_Chucnang" Width="1.5" PointX="8" PointY="4" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbNhom_Users" Width="1.5" PointX="8" PointY="8.25" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbChucnang_tbNhomchucnang1" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbNhom_Chucnang_tbChucnang" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbDanhmuc_tbLoaiDM" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbNhomchucnang_tbModule" />
+        <AssociationConnector Association="dbOAMSModel.FK_tblCongvanden_tblplvanban" />
+        <AssociationConnector Association="dbOAMSModel.FK_tblCongvanden_tblsovanban" />
+        <AssociationConnector Association="dbOAMSModel.FK_tblcongvandencanbo_tblCongvanden" />
+        <AssociationConnector Association="dbOAMSModel.FK_tblCongvanphathanh_tblplvanban" />
+        <AssociationConnector Association="dbOAMSModel.FK_tblCongvanphathanh_tblsovanban" />
+        <AssociationConnector Association="dbOAMSModel.FK_tblcongvanphathanhcanbo_tblCongvanphathanh" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbLoaivanban_tblplvanban" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbNguoidung_tbBophan" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbNguoidung_tbChucvu" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbNhom_Chucnang_tbNhom" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbNhom_Users_tbNhom1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

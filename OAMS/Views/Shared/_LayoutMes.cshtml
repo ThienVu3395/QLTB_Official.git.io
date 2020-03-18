@@ -1,0 +1,879 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="oamsapp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>OAMS-Hệ thống quản trị văn phòng và điều hành</title>
+    <link rel="icon" href="~/Content/image/oams.ico">
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/assetsmes/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="~/Content/assetsmes/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="~/Content/assetsmes/css/ace-rtl.min.css" />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="~/Content/assetsmes/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="~/Content/assetsmes/js/ace-extra.min.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="~/Content/assetsmes/js/html5shiv.min.js"></script>
+    <script src="~/Content/assetsmes/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- jquery -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src="~/Content/assetsmes/js/jquery-2.1.4.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="~/Content/assetsmes/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+
+    @RenderSection("Css", false)
+
+    <!-- angular-file-upload-->
+    <script src="~/Scripts/angular-file-upload/angular-file-upload.min.js"></script>
+    <!-- abn-tree-->
+    <script src="~/Scripts/abn_tree/abn_tree_directive.js"></script>
+    <link rel="stylesheet" href="~/Content/abn-tree/abn_tree.css">
+    <!-- angular-block-->
+    <script src="~/Scripts/angular-block-ui.min.js"></script>
+    <link rel="stylesheet" href="~/Content/angular-block-ui.min.css" />
+    <!-- ui-select-->
+    <link rel="stylesheet" href="~/Content/select.css">
+    <script src="~/Scripts/select.js"></script>
+    <!-- ui-moment-->
+    <script src="~/Content/assetsmes/js/moment.min.js"></script>
+
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.3.js"></script>
+    <script src="~/Scripts/angular-signalr-hub.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <!--pdf viewed-->
+    <script src="~/Scripts/angular-pdfjs-viewer.js"></script>
+    <script src="~/Scripts/pdf.js-viewer/pdf.js"></script>
+    <!-- app angular* -->
+    @Html.IncludeVersionedJs("~/MyScript/configapp.js")
+    <script src="~/MyScript/app.js"></script>
+    <script src="~/MyScript/common.js"></script>
+    @Html.IncludeVersionedJs("~/MyScript/login/UserProfile.js")
+    @Html.IncludeVersionedJs("~/MyScript/homecontroller.js")
+</head>
+<body class="no-skin" style="height: calc(100%) !important;" block-ui="main">
+    <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-container " id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <a href="~/Home" class="navbar-brand">
+                    <small style="color: #23527c;font-weight:bold;">
+                        <img style="height:30px;" src="~/Content/image/logo.png" />
+                        @*<i class="fa fa-leaf"></i>*@
+                        OAMS
+                    </small>
+                </a>
+            </div>
+
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+
+                    <li class="grey dropdown-modal">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="ace-icon fa fa-tasks"></i>
+                            <span class="badge badge-grey">4</span>
+                        </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-check"></i>
+                                4 Tasks to complete
+                            </li>
+
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="max-height: 200px;">
+                                    <ul class="dropdown-menu dropdown-navbar">
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Software Update</span>
+                                                    <span class="pull-right">65%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini">
+                                                    <div style="width:65%" class="progress-bar"></div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Hardware Upgrade</span>
+                                                    <span class="pull-right">35%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini">
+                                                    <div style="width:35%" class="progress-bar progress-bar-danger"></div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Unit Testing</span>
+                                                    <span class="pull-right">15%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini">
+                                                    <div style="width:15%" class="progress-bar progress-bar-warning"></div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">Bug Fixes</span>
+                                                    <span class="pull-right">90%</span>
+                                                </div>
+
+                                                <div class="progress progress-mini progress-striped active">
+                                                    <div style="width:90%" class="progress-bar progress-bar-success"></div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="dropdown-footer">
+                                <a href="#">
+                                    See tasks with details
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="purple dropdown-modal">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+                            <span class="badge badge-important">8</span>
+                        </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                8 Notifications
+                            </li>
+
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="max-height: 200px;">
+                                    <ul class="dropdown-menu dropdown-navbar navbar-pink">
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">
+                                                        <i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+                                                        New Comments
+                                                    </span>
+                                                    <span class="pull-right badge badge-info">+12</span>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <i class="btn btn-xs btn-primary fa fa-user"></i>
+                                                Bob just signed up as an editor ...
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">
+                                                        <i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
+                                                        New Orders
+                                                    </span>
+                                                    <span class="pull-right badge badge-success">+8</span>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <div class="clearfix">
+                                                    <span class="pull-left">
+                                                        <i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
+                                                        Followers
+                                                    </span>
+                                                    <span class="pull-right badge badge-info">+11</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="dropdown-footer">
+                                <a href="#">
+                                    See all notifications
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="green dropdown-modal">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
+                            <span class="badge badge-success">5</span>
+                        </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-envelope-o"></i>
+                                5 Messages
+                            </li>
+
+                            <li class="dropdown-content ace-scroll" style="position: relative;">
+                                <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="max-height: 200px;">
+                                    <ul class="dropdown-menu dropdown-navbar">
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="~/Content/assetsmes/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar">
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Alex:</span>
+                                                        Ciao sociis natoque penatibus et auctor ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>a moment ago</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="~/Content/assetsmes/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar">
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Susan:</span>
+                                                        Vestibulum id ligula porta felis euismod ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>20 minutes ago</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="~/Content/assetsmes/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar">
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Bob:</span>
+                                                        Nullam quis risus eget urna mollis ornare ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>3:15 pm</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="~/Content/assetsmes/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar">
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Kate:</span>
+                                                        Ciao sociis natoque eget urna mollis ornare ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>1:33 pm</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="~/Content/assetsmes/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar">
+                                                <span class="msg-body">
+                                                    <span class="msg-title">
+                                                        <span class="blue">Fred:</span>
+                                                        Vestibulum id penatibus et auctor  ...
+                                                    </span>
+
+                                                    <span class="msg-time">
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                        <span>10:09 am</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="dropdown-footer">
+                                <a href="inbox.html">
+                                    See all messages
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="light-blue dropdown-modal" ng-controller="homecontroller">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" ng-src="{{ulrimage}}" alt="{{FulluserName}}" />
+                            <span class="user-info">
+                                <small>Chào,</small>
+                                {{FulluserName}}
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li><a href="#" ng-click="hosocanhan()"><i class="ace-icon fa fa-user"></i> Thông tin cá nhân</a></li>
+                            <li><a href="#" ng-click="changepass()"><i class="ace-icon fa fa-credit-card"></i> Đổi mật khẩu</a></li>
+                            <li><a href="~/Huongdan/AIMS_HDSD.htm"><i class="ace-icon fa fa-question-circle"></i> Trợ giúp</a></li>
+                            <li><a href="#" ng-click="logout()"><i class="ace-icon fa fa-sign-out"></i> Đăng xuất</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.navbar-container -->
+    </div>
+
+    <div class="main-container" id="main-container" style="height: calc(100%) !important;">
+        <!--<script type="text/javascript">
+            try { ace.settings.loadState('main-container') } catch (e) { }
+        </script>-->
+
+        <div id="sidebar" class="sidebar responsive sidebar-fixed menu-max" ng-controller="functionmenu">
+            @*<div id="sidebar" class="sidebar responsive sidebar-fixed menu-min" ng-controller="functionmenu">*@
+            <!--<script type="text/javascript">
+                try { ace.settings.loadState('sidebar') } catch (e) { }
+            </script>-->
+
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                    <button class="btn btn-success">
+                        <i class="ace-icon fa fa-signal"></i>
+                    </button>
+
+                    <button class="btn btn-info">
+                        <i class="ace-icon fa fa-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-warning">
+                        <i class="ace-icon fa fa-users"></i>
+                    </button>
+
+                    <button class="btn btn-danger">
+                        <i class="ace-icon fa fa-cogs"></i>
+                    </button>
+
+                </div>
+
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <span class="btn btn-success"></span>
+
+                    <span class="btn btn-info"></span>
+
+                    <span class="btn btn-warning"></span>
+
+                    <span class="btn btn-danger"></span>
+                </div>
+            </div><!-- /.sidebar-shortcuts -->
+
+            <ul class="nav nav-list">
+
+                <li class="{{activegroup[100]}}">
+                    <a href="~/Home">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Trang chủ </span>
+                    </a>
+                    <input type="hidden" id="idfunction" value="8" />
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="{{activegroup[115]}}">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-calendar"></i>
+                        <span class="menu-text">
+                            Lịch Công Ty
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li href="~/Lichcoquan/Index">
+                            <a href="" class="dropdown-toggle">
+
+                                <span class="menu-text">Lịch cơ quan</span>
+                                <b class="arrow fa fa-plus"></b>
+                            </a>
+                            <input type="hidden" id="idfunction" value="8" />
+                            <b class="arrow"></b>
+
+                            <ul class="submenu">
+                                <li ng-show="show(203)" class="{{activelink[5]}}">
+                                    <a href="~/Lichcoquan/Index"><i class="fa fa-check" aria-hidden="true"></i> Đã duyệt</a>
+                                    <b class="arrow"></b>
+                                </li>
+
+
+                                <li ng-show="show(202)" class="{{activelink[4]}}">
+                                    <a href="~/Dieuchinh/lapphieudc"><i class="fa fa-check-circle" aria-hidden="true"></i> Chờ duyệt</a>
+                                    <b class="arrow"></b>
+                                </li>
+                                <li ng-show="show(204)" class="{{activelink[6]}}">
+                                    <a href=""><i class="fa fa-align-center" aria-hidden="true"></i> Tất cả</a>
+                                    <b class="arrow"></b>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+
+
+                        <li class="activelink">
+                            <a ng-href="~/Lichcoquan/Index"><i class="menu-icon fa fa-circle"></i><span>Lịch Tổng Công Ty</span></a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="activelink">
+                            <a ng-href=""><i class="menu-icon fa fa-circle"></i><span>Lịch Phòng CNTT</span></a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="activelink">
+                            <a ng-href=""><i class="menu-icon fa fa-circle"></i><span>Lịch Phòng TCHC</span></a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{activegroup[2]}}" ng-show="showgroup(2)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-pencil-square-o"></i>
+                        <span class="menu-text"> Công Việc </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li ng-show="show(201)" class="{{activelink[3]}}">
+                            <a href="~/Congviec/Danhsachcongviec"><i class="menu-icon fa fa-circle"></i>Danh Sách Công Việc</a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li ng-show="show(202)" class="{{activelink[4]}}">
+                            <a href="~/Dieuchinh/lapphieudc"><i class="menu-icon fa fa-circle"></i>Công Việc Chưa Xử Lý</a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li ng-show="show(203)" class="{{activelink[5]}}">
+                            <a href="~/Dieuchinh/qlbiendong"><i class="menu-icon fa fa-circle"></i>Công Việc Đã Xử Lý</a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li ng-show="show(204)" class="{{activelink[6]}}">
+                            <a href="~/Dieuchinh/dsdieuchinh"><i class="menu-icon fa fa-circle"></i>Thống Kê Công Việc</a>
+                            <b class="arrow"></b>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="{{activegroup[3]}}" ng-show="showgroup(3)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-tasks"></i>
+                        <span class="menu-text"> Công Văn </span>
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li ng-show="show(301)" class="{{activelink[9]}}">
+                            <a href="~/Thongtin/quantritintuc">
+                                <i class="menu-icon fa fa-circle"></i>Văn Bản Đến
+                            </a><b class="arrow"></b>
+                        </li>
+                        <li ng-show="show(302)" class="{{activelink[10]}}">
+                            <a href="~/Thongtin/quantrihoidap">
+                                <i class="menu-icon fa fa-circle"></i>Văn Bản Đi
+                            </a><b class="arrow"></b>
+                        </li>
+                        <li ng-show="show(303)" class="{{activelink[11]}}">
+                            <a href="~/Thongtin/nganhangcauhoi">
+                                <i class="menu-icon fa fa-circle"></i>Văn Bản Nội Bộ
+                            </a><b class="arrow"></b>
+                        </li>
+                    </ul>
+
+
+
+                </li>
+
+                <li class="{{activegroup[4]}}" ng-show="showgroup(4)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-file-pdf-o"></i>
+                        <span class="menu-text"> Tài Liệu </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                </li>
+                <li class="{{activegroup[5]}}" ng-show="showgroup(5)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-comment"></i>
+                        <span class="menu-text"> Tin Tức </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="@Url.Action("Index","BangTin")">
+                                <i class="menu-icon fa fa-eye"></i>Trang Chủ
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="~/Danhmuc/tudien">
+                                <i class="menu-icon fa fa-circle"></i>Thông Báo
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="~/Danhmuc/tudien">
+                                <i class="menu-icon fa fa-circle"></i>Tin Tức Sự Kiện
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="{{activegroup[5]}}" ng-show="showgroup(5)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-envelope-o"></i>
+                        <span class="menu-text"> Tin Nhắn - SMS </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="~/Tinnhan/IndexTinnhan">
+                                <i class="menu-icon fa fa-circle"></i>Tin Nhắn
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="~/Danhmuc/tudien">
+                                <i class="menu-icon fa fa-circle"></i>SMS
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="{{activegroup[5]}}" ng-show="showgroup(5)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-eye"></i>
+                        <span class="menu-text"> Tiện ích Mỡ Rộng </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="~/Danhmuc/tudien">
+                                <i class="menu-icon fa fa-circle"></i>Nhân Sự
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="~/Danhmuc/tudien">
+                                <i class="menu-icon fa fa-circle"></i>Danh Bạ
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="~/Danhmuc/tudien">
+                                <i class="menu-icon fa fa-circle"></i>Thiết Bị
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li class="{{activegroup[6]}}" ng-show="showgroup(6)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-cogs"></i>
+                        <span class="menu-text">  Cấu hình hệ thống </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li ng-show="show(601)" class="{{activelink[19]}}">
+                            <a href="~/Admin/dsnhanvien">
+                                <i class="menu-icon fa fa-circle"></i>Danh sách nhân viên
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+                        <li ng-show="show(602)" class="{{activelink[23]}}">
+                            <a href="~/Admin/nhomquyen">
+                                <i class="menu-icon fa fa-circle"></i>Nhóm người dùng
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+                        <li ng-show="show(603)" class="{{activelink[20]}}">
+                            <a href="~/Admin/phanquyen">
+                                <i class="menu-icon fa fa-circle"></i>Phân quyền
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+                        <li ng-show="show(604)" class="{{activelink[21]}}">
+                            <a href="~/Admin/cauhinh">
+                                <i class="menu-icon fa fa-circle"></i>Cấu hình hệ thống
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+                        <li ng-show="show(605)" class="{{activelink[22]}}">
+                            <a href="~/Admin/logsystem">
+                                <i class="menu-icon fa fa-circle"></i>Lịch sử thao tác
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul><!-- /.nav-list -->
+
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+        </div>
+
+        <div class="main-content" style="height:calc(100%)">
+            <div class="main-content-inner" style="height:calc(100%)">
+                <div class="ace-settings-container" id="ace-settings-container" style="margin-top:45px;" ng-controller="Chatcontroller">
+                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn" ng-click="clickopenchat()">
+                        <i class="{{unread?'ace-icon fa fa-comments-o fa-pulse bigger-130':'ace-icon fa fa-comments-o bigger-130' }}" style="margin-right:10px;"></i>
+                    </div>
+
+                    <div class="ace-settings-box clearfix" id="ace-settings-box">
+                        <div class="row">
+                            <div class="tabbable tabs-left" style="width: 390px;">
+                                <ul class="nav nav-tabs" id="myTab3">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#home3" aria-expanded="true" style="min-width:0px !important;">
+                                            <i class="pink ace-icon fa fa-users bigger-110"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="" ng-repeat="item in Chats.windowsChats">
+                                        <a data-toggle="tab" href="#{{'chat' + item.Name}}" aria-expanded="false" style="{{item.isnew? 'min-width:0px !important; background-color:#6b88f9':'min-width:0px !important; background-color:#fff'}}">
+                                            @*<i class="ace-icon fa fa-rocket"></i>*@
+                                            <img style="width: 25px; border-radius: 100%;" alt="{{item.FullName}}" ng-src="{{item.Fileimage}}">
+                                        </a>
+                                    </li>
+
+                                    @*<li class="">
+                                            <a data-toggle="tab" href="#dropdown13" aria-expanded="false" style="min-width:0px !important;">
+                                                <i class="ace-icon fa fa-rocket"></i>
+                                            </a>
+                                        </li>*@
+                                </ul>
+
+                                <div class="tab-content" style="padding: 2px 0px; height: 360px;">
+                                    <div id="home3" class="tab-pane active">
+                                        <div class="widget-box transparent">
+                                            <div class="widget-header widget-header-small">
+                                                <h5 class="widget-title blue smaller" style="padding-left:5px;">
+                                                    <i class="ace-icon fa fa-list-alt orange"></i>
+                                                    Danh sách bạn
+                                                </h5>
+                                                <div class="widget-toolbar action-buttons" data-placement="left" data-toggle="tooltip" title="Thêm bạn">
+                                                    <a href="#" ng-click="addnewfriend(item.Name)">
+                                                        <i class="ace-icon fa fa-user-plus blue"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="widget-body">
+                                                <div class="profile-feed" style="position: relative; width: 100%; height: 300px; overflow-y: auto;">
+                                                    <div class="profile-activity clearfix" ng-repeat="item in Chats.UserList| filter:useronlineCurr()">
+                                                        <div>
+                                                            <a class="user" ng-click="newwindowChat(item.Name, true)" href="#"><img class="pull-left" style="width:25px;" alt="{{item.FullName}}" ng-src="{{item.Fileimage}}"> {{item.FullName}} </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="{{'chat' + item.Name}}" ng-repeat="item in Chats.windowsChats" class="tab-pane" style="height: 350px; width: 100%;">
+                                        <div class="widget-box transparent">
+                                            <div class="widget-header widget-header-small">
+                                                <h5 class="widget-title blue smaller" style="padding-left:5px;">
+                                                    <i class="ace-icon fa fa-comments-o orange"></i>
+                                                    {{item.FullName}}
+                                                </h5>
+                                                <div class="widget-toolbar action-buttons">
+                                                    <a href="#" ng-click="clearData(item.Name)" data-placement="left" data-toggle="tooltip" title="Xóa hết nội dung thảo luận">
+                                                        <i class="ace-icon fa fa-magic blue"></i>
+                                                    </a>
+                                                    <a href="#" ng-click="closewinChat(item.Name)" data-placement="left" data-toggle="tooltip" title="Đóng cửa sổ">
+                                                        <i class="ace-icon fa fa-remove blue"></i>
+                                                    </a> &nbsp;
+
+
+                                                </div>
+                                            </div>
+                                            <div class="widget-body">
+                                                <div ng-click="readedmes(item)" class="widget-main" id="{{'bodychat' + item.Name}}" style="width: 100%; height: 270px; overflow-y: auto;">
+                                                    <div class="itemdiv dialogdiv" ng-repeat="chat in item.Conversations">
+                                                        <div class="user">
+                                                            <img alt="Alexa's Avatar" style="width:25px;" src="~/Content/assetsmes/images/avatars/user.jpg">
+                                                        </div>
+                                                        <div class="body" style="{{ chat .Name == '_Me'?'margin-left:35px;background-color:#f4f4f4;':'margin-left:35px;'}}">
+
+                                                            <div class="name">
+                                                                <a href="#">{{chat.Name == '_Me'?FulluserName:item.FullName}}</a>
+                                                            </div>
+                                                            <div class="text">{{chat.content}}</div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%; height: 30px;">
+                                            <div class="input-group">
+                                                <input ng-model="item.contentchat" ng-keydown="keydownsearch(item)" placeholder="Type your message here ..." type="text" class="form-control" name="message">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-sm btn-info no-radius" type="button" ng-click="sendchat(item)">
+                                                        <i class="ace-icon fa fa-send"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div id="dropdown13" class="tab-pane">
+                                            <div style="width: 250px; height: 300px; overflow-y: auto;">
+
+                                            </div>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.ace-settings-box -->
+                </div>
+                @RenderBody()
+            </div>
+        </div><!-- /.main-content -->
+
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    <span class="bigger-110">
+                        <span class="blue">OAMS - </span>
+                        &copy; 2017-2018
+                    </span>
+
+                    &nbsp; &nbsp;
+                    @*<span class="action-buttons">
+                            <a href="#">
+                                <i class="ace-icon fa fa-twitter-square light-blue bigger-120"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-facebook-square text-primary bigger-120"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-rss-square orange bigger-120"></i>
+                            </a>
+                        </span>*@
+                </div>
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div><!-- /.main-container -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/assetsmes/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="~/Content/assetsmes/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="~/Content/assetsmes/js/excanvas.min.js"></script>
+    <![endif]-->
+    @RenderSection("Scripts", false)
+    <script src="~/Content/assetsmes/js/jquery-ui.custom.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.easypiechart.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.sparkline.index.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.flot.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.flot.pie.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.flot.resize.min.js"></script>
+
+    <!-- ace scripts -->
+    <script src="~/Content/assetsmes/js/ace-elements.min.js"></script>
+    <script src="~/Content/assetsmes/js/ace.min.js"></script>
+    @RenderSection("ScriptsCode", false)
+</body>
+</html>
+

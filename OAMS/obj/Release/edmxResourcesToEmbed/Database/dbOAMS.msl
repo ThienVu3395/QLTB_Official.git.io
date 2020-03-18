@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbOAMSModelStoreContainer" CdmEntityContainer="dbOAMSEntities">
+    <EntitySetMapping Name="tbChucnangs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbChucnang">
+        <MappingFragment StoreEntitySet="tbChucnang">
+          <ScalarProperty Name="THUTU" ColumnName="THUTU" />
+          <ScalarProperty Name="LINKS" ColumnName="LINKS" />
+          <ScalarProperty Name="TENCHUCNANG" ColumnName="TENCHUCNANG" />
+          <ScalarProperty Name="NHOMID" ColumnName="NHOMID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbDanhmucs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbDanhmuc">
+        <MappingFragment StoreEntitySet="tbDanhmuc">
+          <ScalarProperty Name="VALUENAME" ColumnName="VALUENAME" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="LOAIDM" ColumnName="LOAIDM" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbLoaiDMs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbLoaiDM">
+        <MappingFragment StoreEntitySet="tbLoaiDM">
+          <ScalarProperty Name="DMHETHONG" ColumnName="DMHETHONG" />
+          <ScalarProperty Name="TENDM" ColumnName="TENDM" />
+          <ScalarProperty Name="LOAIDM" ColumnName="LOAIDM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbModules">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbModule">
+        <MappingFragment StoreEntitySet="tbModule">
+          <ScalarProperty Name="Links" ColumnName="Links" />
+          <ScalarProperty Name="NumOrder" ColumnName="NumOrder" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbNhomchucnangs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbNhomchucnang">
+        <MappingFragment StoreEntitySet="tbNhomchucnang">
+          <ScalarProperty Name="THUTU" ColumnName="THUTU" />
+          <ScalarProperty Name="ICON" ColumnName="ICON" />
+          <ScalarProperty Name="TENNHOM" ColumnName="TENNHOM" />
+          <ScalarProperty Name="MODULAID" ColumnName="MODULAID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbVitriluutrus">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbVitriluutru">
+        <MappingFragment StoreEntitySet="tbVitriluutru">
+          <ScalarProperty Name="PASSWRD" ColumnName="PASSWRD" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="ISFTP" ColumnName="ISFTP" />
+          <ScalarProperty Name="DUONGDAN" ColumnName="DUONGDAN" />
+          <ScalarProperty Name="TENLUUTRU" ColumnName="TENLUUTRU" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbFORMFUNCs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbFORMFUNC">
+        <MappingFragment StoreEntitySet="tbFORMFUNC">
+          <ScalarProperty Name="MACDINH" ColumnName="MACDINH" />
+          <ScalarProperty Name="TUDIEN" ColumnName="TUDIEN" />
+          <ScalarProperty Name="BATBUOC" ColumnName="BATBUOC" />
+          <ScalarProperty Name="THUTUTIMKEM" ColumnName="THUTUTIMKEM" />
+          <ScalarProperty Name="NAMEFOR" ColumnName="NAMEFOR" />
+          <ScalarProperty Name="KEYFOR" ColumnName="KEYFOR" />
+          <ScalarProperty Name="RANGBUOC" ColumnName="RANGBUOC" />
+          <ScalarProperty Name="THUTUXEM" ColumnName="THUTUXEM" />
+          <ScalarProperty Name="VIEWGRID" ColumnName="VIEWGRID" />
+          <ScalarProperty Name="WITHDGRID" ColumnName="WITHDGRID" />
+          <ScalarProperty Name="WITHDFORM" ColumnName="WITHDFORM" />
+          <ScalarProperty Name="THUTUGRID" ColumnName="THUTUGRID" />
+          <ScalarProperty Name="THUTUNHAP" ColumnName="THUTUNHAP" />
+          <ScalarProperty Name="DODAI" ColumnName="DODAI" />
+          <ScalarProperty Name="KIEUDULIEU" ColumnName="KIEUDULIEU" />
+          <ScalarProperty Name="TENTRUONG" ColumnName="TENTRUONG" />
+          <ScalarProperty Name="HIENTHI" ColumnName="HIENTHI" />
+          <ScalarProperty Name="MATRUONG" ColumnName="MATRUONG" />
+          <ScalarProperty Name="MAFUNC" ColumnName="MAFUNC" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbFunctions">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbFunction">
+        <MappingFragment StoreEntitySet="tbFunction">
+          <ScalarProperty Name="KICHTHOAT" ColumnName="KICHTHOAT" />
+          <ScalarProperty Name="ORDERBY" ColumnName="ORDERBY" />
+          <ScalarProperty Name="WITHDLABEL" ColumnName="WITHDLABEL" />
+          <ScalarProperty Name="NUMCOL" ColumnName="NUMCOL" />
+          <ScalarProperty Name="VIEWMODE" ColumnName="VIEWMODE" />
+          <ScalarProperty Name="IDKEY" ColumnName="IDKEY" />
+          <ScalarProperty Name="KEYFOREIGN" ColumnName="KEYFOREIGN" />
+          <ScalarProperty Name="PARENTWITHD" ColumnName="PARENTWITHD" />
+          <ScalarProperty Name="PARENTKEY" ColumnName="PARENTKEY" />
+          <ScalarProperty Name="PARENTNAME" ColumnName="PARENTNAME" />
+          <ScalarProperty Name="TABLEPARENT" ColumnName="TABLEPARENT" />
+          <ScalarProperty Name="TABLENAME" ColumnName="TABLENAME" />
+          <ScalarProperty Name="TENFUNC" ColumnName="TENFUNC" />
+          <ScalarProperty Name="MAFUNC" ColumnName="MAFUNC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblattachcongvans">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblattachcongvan">
+        <MappingFragment StoreEntitySet="tblattachcongvan">
+          <ScalarProperty Name="bittrangthai" ColumnName="bittrangthai" />
+          <ScalarProperty Name="strngaycapnhat" ColumnName="strngaycapnhat" />
+          <ScalarProperty Name="strmota" ColumnName="strmota" />
+          <ScalarProperty Name="strtenfile" ColumnName="strtenfile" />
+          <ScalarProperty Name="intidcongvan" ColumnName="intidcongvan" />
+          <ScalarProperty Name="intloai" ColumnName="intloai" />
+          <ScalarProperty Name="intid" ColumnName="intid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCongvandens">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblCongvanden">
+        <MappingFragment StoreEntitySet="tblCongvanden">
+          <ScalarProperty Name="strcolunm05" ColumnName="strcolunm05" />
+          <ScalarProperty Name="strcolunm04" ColumnName="strcolunm04" />
+          <ScalarProperty Name="strcolunm03" ColumnName="strcolunm03" />
+          <ScalarProperty Name="strcolunm02" ColumnName="strcolunm02" />
+          <ScalarProperty Name="strcolunm01" ColumnName="strcolunm01" />
+          <ScalarProperty Name="bitguivbdt" ColumnName="bitguivbdt" />
+          <ScalarProperty Name="bitthongbao" ColumnName="bitthongbao" />
+          <ScalarProperty Name="intsoban" ColumnName="intsoban" />
+          <ScalarProperty Name="intsoto" ColumnName="intsoto" />
+          <ScalarProperty Name="intTrangthaixoa" ColumnName="intTrangthaixoa" />
+          <ScalarProperty Name="strlanhdaoduyet" ColumnName="strlanhdaoduyet" />
+          <ScalarProperty Name="bitquyphamphapluat" ColumnName="bitquyphamphapluat" />
+          <ScalarProperty Name="intidsovanban" ColumnName="intidsovanban" />
+          <ScalarProperty Name="intMucquantrong" ColumnName="intMucquantrong" />
+          <ScalarProperty Name="strLinhvuc" ColumnName="strLinhvuc" />
+          <ScalarProperty Name="strngaysua" ColumnName="strngaysua" />
+          <ScalarProperty Name="strnguoisua" ColumnName="strnguoisua" />
+          <ScalarProperty Name="strngaytao" ColumnName="strngaytao" />
+          <ScalarProperty Name="strnguoitao" ColumnName="strnguoitao" />
+          <ScalarProperty Name="strnoidung" ColumnName="strnoidung" />
+          <ScalarProperty Name="strdonvinhap" ColumnName="strdonvinhap" />
+          <ScalarProperty Name="bittrangthaiduyet" ColumnName="bittrangthaiduyet" />
+          <ScalarProperty Name="strphanloai" ColumnName="strphanloai" />
+          <ScalarProperty Name="strdomat" ColumnName="strdomat" />
+          <ScalarProperty Name="strdokhan" ColumnName="strdokhan" />
+          <ScalarProperty Name="strtukhoa" ColumnName="strtukhoa" />
+          <ScalarProperty Name="strnguoiky" ColumnName="strnguoiky" />
+          <ScalarProperty Name="strtomtatnoidung" ColumnName="strtomtatnoidung" />
+          <ScalarProperty Name="strnoinhan" ColumnName="strnoinhan" />
+          <ScalarProperty Name="strtrichyeu" ColumnName="strtrichyeu" />
+          <ScalarProperty Name="strnoigui" ColumnName="strnoigui" />
+          <ScalarProperty Name="strnoiphathanh" ColumnName="strnoiphathanh" />
+          <ScalarProperty Name="intkhoiphathanh" ColumnName="intkhoiphathanh" />
+          <ScalarProperty Name="strngayky" ColumnName="strngayky" />
+          <ScalarProperty Name="strngayden" ColumnName="strngayden" />
+          <ScalarProperty Name="strkyhieu" ColumnName="strkyhieu" />
+          <ScalarProperty Name="intsoden" ColumnName="intsoden" />
+          <ScalarProperty Name="intid" ColumnName="intid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblcongvandencanboes">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblcongvandencanbo">
+        <MappingFragment StoreEntitySet="tblcongvandencanbo">
+          <ScalarProperty Name="strngayxem" ColumnName="strngayxem" />
+          <ScalarProperty Name="strcanbochuyen" ColumnName="strcanbochuyen" />
+          <ScalarProperty Name="strnoidungyeucau" ColumnName="strnoidungyeucau" />
+          <ScalarProperty Name="intiddonvichuyen" ColumnName="intiddonvichuyen" />
+          <ScalarProperty Name="intHinhthuc" ColumnName="intHinhthuc" />
+          <ScalarProperty Name="intidvanban" ColumnName="intidvanban" />
+          <ScalarProperty Name="strcanbo" ColumnName="strcanbo" />
+          <ScalarProperty Name="intid" ColumnName="intid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCongvanphathanhs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblCongvanphathanh">
+        <MappingFragment StoreEntitySet="tblCongvanphathanh">
+          <ScalarProperty Name="strcolunm05" ColumnName="strcolunm05" />
+          <ScalarProperty Name="strcolunm04" ColumnName="strcolunm04" />
+          <ScalarProperty Name="strcolunm03" ColumnName="strcolunm03" />
+          <ScalarProperty Name="strcolunm02" ColumnName="strcolunm02" />
+          <ScalarProperty Name="strcolunm01" ColumnName="strcolunm01" />
+          <ScalarProperty Name="bitthongbao" ColumnName="bitthongbao" />
+          <ScalarProperty Name="intTrangthaixoa" ColumnName="intTrangthaixoa" />
+          <ScalarProperty Name="bitquyphamphapluat" ColumnName="bitquyphamphapluat" />
+          <ScalarProperty Name="intidsovanban" ColumnName="intidsovanban" />
+          <ScalarProperty Name="bitguivbdt" ColumnName="bitguivbdt" />
+          <ScalarProperty Name="intMucquantrong" ColumnName="intMucquantrong" />
+          <ScalarProperty Name="strLinhvuc" ColumnName="strLinhvuc" />
+          <ScalarProperty Name="strngaysua" ColumnName="strngaysua" />
+          <ScalarProperty Name="strnguoisua" ColumnName="strnguoisua" />
+          <ScalarProperty Name="strngaytao" ColumnName="strngaytao" />
+          <ScalarProperty Name="strnguoitao" ColumnName="strnguoitao" />
+          <ScalarProperty Name="strnoidung" ColumnName="strnoidung" />
+          <ScalarProperty Name="strdonvinhap" ColumnName="strdonvinhap" />
+          <ScalarProperty Name="bittrangthaiduyet" ColumnName="bittrangthaiduyet" />
+          <ScalarProperty Name="strphanloai" ColumnName="strphanloai" />
+          <ScalarProperty Name="strtukhoa" ColumnName="strtukhoa" />
+          <ScalarProperty Name="intsoto" ColumnName="intsoto" />
+          <ScalarProperty Name="intsoban" ColumnName="intsoban" />
+          <ScalarProperty Name="strdomat" ColumnName="strdomat" />
+          <ScalarProperty Name="strdokhan" ColumnName="strdokhan" />
+          <ScalarProperty Name="strtomtat" ColumnName="strtomtat" />
+          <ScalarProperty Name="strnguoiduyet" ColumnName="strnguoiduyet" />
+          <ScalarProperty Name="strnguoisoan" ColumnName="strnguoisoan" />
+          <ScalarProperty Name="strnguoiky" ColumnName="strnguoiky" />
+          <ScalarProperty Name="strnoinhan" ColumnName="strnoinhan" />
+          <ScalarProperty Name="strtrichyeu" ColumnName="strtrichyeu" />
+          <ScalarProperty Name="strdonvisoan" ColumnName="strdonvisoan" />
+          <ScalarProperty Name="strngayky" ColumnName="strngayky" />
+          <ScalarProperty Name="strkyhieu" ColumnName="strkyhieu" />
+          <ScalarProperty Name="strsophu" ColumnName="strsophu" />
+          <ScalarProperty Name="intso" ColumnName="intso" />
+          <ScalarProperty Name="intid" ColumnName="intid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblcongvanphathanhcanboes">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblcongvanphathanhcanbo">
+        <MappingFragment StoreEntitySet="tblcongvanphathanhcanbo">
+          <ScalarProperty Name="strngayxem" ColumnName="strngayxem" />
+          <ScalarProperty Name="intiddonvichuyen" ColumnName="intiddonvichuyen" />
+          <ScalarProperty Name="inthinhthuc" ColumnName="inthinhthuc" />
+          <ScalarProperty Name="intidcanbo" ColumnName="intidcanbo" />
+          <ScalarProperty Name="intidvanban" ColumnName="intidvanban" />
+          <ScalarProperty Name="intid" ColumnName="intid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLinhvucs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblLinhvuc">
+        <MappingFragment StoreEntitySet="tblLinhvuc">
+          <ScalarProperty Name="strGhichu" ColumnName="strGhichu" />
+          <ScalarProperty Name="strKyhieu" ColumnName="strKyhieu" />
+          <ScalarProperty Name="strTenlinhvuc" ColumnName="strTenlinhvuc" />
+          <ScalarProperty Name="strMaparent" ColumnName="strMaparent" />
+          <ScalarProperty Name="strMalinhvuc" ColumnName="strMalinhvuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbLoaivanbans">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbLoaivanban">
+        <MappingFragment StoreEntitySet="tbLoaivanban">
+          <ScalarProperty Name="MACDINH" ColumnName="MACDINH" />
+          <ScalarProperty Name="TUDIEN" ColumnName="TUDIEN" />
+          <ScalarProperty Name="BATBUOC" ColumnName="BATBUOC" />
+          <ScalarProperty Name="THUTUTIMKEM" ColumnName="THUTUTIMKEM" />
+          <ScalarProperty Name="RANGBUOC" ColumnName="RANGBUOC" />
+          <ScalarProperty Name="THUTUXEM" ColumnName="THUTUXEM" />
+          <ScalarProperty Name="VIEWGRID" ColumnName="VIEWGRID" />
+          <ScalarProperty Name="WITHDGRID" ColumnName="WITHDGRID" />
+          <ScalarProperty Name="WITHDFORM" ColumnName="WITHDFORM" />
+          <ScalarProperty Name="THUTUGRID" ColumnName="THUTUGRID" />
+          <ScalarProperty Name="THUTUNHAP" ColumnName="THUTUNHAP" />
+          <ScalarProperty Name="DODAI" ColumnName="DODAI" />
+          <ScalarProperty Name="KIEUDULIEU" ColumnName="KIEUDULIEU" />
+          <ScalarProperty Name="TENTRUONG" ColumnName="TENTRUONG" />
+          <ScalarProperty Name="HIENTHI" ColumnName="HIENTHI" />
+          <ScalarProperty Name="MATRUONG" ColumnName="MATRUONG" />
+          <ScalarProperty Name="MALOAI" ColumnName="MALOAI" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblplvanbans">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblplvanban">
+        <MappingFragment StoreEntitySet="tblplvanban">
+          <ScalarProperty Name="bitmacdinh" ColumnName="bitmacdinh" />
+          <ScalarProperty Name="strghichu" ColumnName="strghichu" />
+          <ScalarProperty Name="intloai" ColumnName="intloai" />
+          <ScalarProperty Name="strtenhinhthuc" ColumnName="strtenhinhthuc" />
+          <ScalarProperty Name="strmacongvan" ColumnName="strmacongvan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblsovanbans">
+      <EntityTypeMapping TypeName="dbOAMSModel.tblsovanban">
+        <MappingFragment StoreEntitySet="tblsovanban">
+          <ScalarProperty Name="intloai" ColumnName="intloai" />
+          <ScalarProperty Name="strghichu" ColumnName="strghichu" />
+          <ScalarProperty Name="strdonvi" ColumnName="strdonvi" />
+          <ScalarProperty Name="strkyhieu" ColumnName="strkyhieu" />
+          <ScalarProperty Name="strten" ColumnName="strten" />
+          <ScalarProperty Name="intid" ColumnName="intid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbBophans">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbBophan">
+        <MappingFragment StoreEntitySet="tbBophan">
+          <ScalarProperty Name="MADONVI" ColumnName="MADONVI" />
+          <ScalarProperty Name="DVQUANLY" ColumnName="DVQUANLY" />
+          <ScalarProperty Name="TENPHONG" ColumnName="TENPHONG" />
+          <ScalarProperty Name="MAPHONG" ColumnName="MAPHONG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbChucvus">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbChucvu">
+        <MappingFragment StoreEntitySet="tbChucvu">
+          <ScalarProperty Name="TENCHUCVU" ColumnName="TENCHUCVU" />
+          <ScalarProperty Name="MACHUCVU" ColumnName="MACHUCVU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbCoquans">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbCoquan">
+        <MappingFragment StoreEntitySet="tbCoquan">
+          <ScalarProperty Name="CQQUANLY" ColumnName="CQQUANLY" />
+          <ScalarProperty Name="TENCOQUAN" ColumnName="TENCOQUAN" />
+          <ScalarProperty Name="MACOQUAN" ColumnName="MACOQUAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbNguoidungs">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbNguoidung">
+        <MappingFragment StoreEntitySet="tbNguoidung">
+          <ScalarProperty Name="FILEANH" ColumnName="FILEANH" />
+          <ScalarProperty Name="HANCHE" ColumnName="HANCHE" />
+          <ScalarProperty Name="KETTHUCUQ" ColumnName="KETTHUCUQ" />
+          <ScalarProperty Name="NGAYUQ" ColumnName="NGAYUQ" />
+          <ScalarProperty Name="UYQUYEN" ColumnName="UYQUYEN" />
+          <ScalarProperty Name="BOPHAN" ColumnName="BOPHAN" />
+          <ScalarProperty Name="CHUCVU" ColumnName="CHUCVU" />
+          <ScalarProperty Name="KHOA" ColumnName="KHOA" />
+          <ScalarProperty Name="NGAYTAO" ColumnName="NGAYTAO" />
+          <ScalarProperty Name="TEN" ColumnName="TEN" />
+          <ScalarProperty Name="HOLOT" ColumnName="HOLOT" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbNhoms">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbNhom">
+        <MappingFragment StoreEntitySet="tbNhom">
+          <ScalarProperty Name="TENNHOM" ColumnName="TENNHOM" />
+          <ScalarProperty Name="MANHOM" ColumnName="MANHOM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbNhom_Chucnang">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbNhom_Chucnang">
+        <MappingFragment StoreEntitySet="tbNhom_Chucnang">
+          <ScalarProperty Name="SUA" ColumnName="SUA" />
+          <ScalarProperty Name="XOA" ColumnName="XOA" />
+          <ScalarProperty Name="THEM" ColumnName="THEM" />
+          <ScalarProperty Name="XEM" ColumnName="XEM" />
+          <ScalarProperty Name="ALLACTION" ColumnName="ALLACTION" />
+          <ScalarProperty Name="CHUCNANGID" ColumnName="CHUCNANGID" />
+          <ScalarProperty Name="MANHOM" ColumnName="MANHOM" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbNhom_Users">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbNhom_Users">
+        <MappingFragment StoreEntitySet="tbNhom_Users">
+          <ScalarProperty Name="MANHOM" ColumnName="MANHOM" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

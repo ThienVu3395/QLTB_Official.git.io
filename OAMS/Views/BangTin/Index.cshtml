@@ -1,0 +1,312 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+
+<div>
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">FSM</a>
+            </li>
+            <li class="active">Bảng Tin</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="ace-icon fa fa-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div><!-- /.nav-search -->
+    </div>
+    <div id="mescontent" class="page-content">
+        <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs" id="myTab">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#home">
+                                        <i class="green ace-icon fa fa-home bigger-120"></i>
+                                        Tường Công Ty
+                                        <span class="badge badge-danger">10</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="tab" href="#tintuc">
+                                        <i class="green ace-icon fa fa-list bigger-120"></i>
+                                        Tin Tức
+                                        <span class="badge badge-danger">4</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="tab" href="#thongbao">
+                                        <i class="green ace-icon fa fa-bell bigger-120"></i>
+                                        Thông Báo
+                                        <span class="badge badge-danger">4</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a data-toggle="tab" href="#sinhnhat">
+                                        <i class="green ace-icon fa fa-calendar bigger-120"></i>
+                                        Sinh Nhật Trong Tháng 3
+                                        <span class="badge badge-danger">4</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane fade in active">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <ul class="list-unstyled spaced2">
+                                                <li>
+                                                    <i class="ace-icon fa fa-circle green"></i>
+                                                    Even more space tường
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="tintuc" class="tab-pane fade">
+                                    <ul class="list-unstyled spaced2">
+                                        <li>
+                                            <i class="ace-icon fa fa-circle green"></i>
+                                            Even more space tin tức
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="thongbao" class="tab-pane fade">
+                                    <ul class="list-unstyled spaced2">
+                                        <li>
+                                            <i class="ace-icon fa fa-circle green"></i>
+                                            Even more space thông báo
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="sinhnhat" class="tab-pane fade">
+                                    <ul class="list-unstyled spaced2">
+                                        <li>
+                                            <i class="ace-icon fa fa-circle green"></i>
+                                            Even more space sinh nhật
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="row header smaller lighter blue">
+                                <span class="col-xs-6"> Accordion </span><!-- /.col -->
+                                @*<span class="col-xs-6">
+                    <span class="pull-right inline">
+                        <span class="grey smaller-80 bolder">style:</span>
+
+                        <span class="btn-toolbar inline middle no-margin">
+                            <span id="accordion-style" data-toggle="buttons" class="btn-group no-margin">
+                                <label class="btn btn-xs btn-yellow active">
+                                    <input type="radio" value="1" />
+                                    1
+                                </label>
+
+                                <label class="btn btn-xs btn-yellow">
+                                    <input type="radio" value="2" />
+                                    2
+                                </label>
+                            </span>
+                        </span>
+                    </span>
+                </span>*@
+                            </h3>
+
+                            <div id="accordion" class="accordion-style1 panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                <i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                &nbsp;Group Item #1
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                                    <div class="panel-collapse collapse in" id="collapseOne">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                &nbsp;Group Item #2
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                                    <div class="panel-collapse collapse" id="collapseTwo">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                                <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                &nbsp;Group Item #3
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                                    <div class="panel-collapse collapse" id="collapseThree">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.col -->
+                    </div><!-- /.col -->
+
+                    <div class="col-sm-7 widget-container-col" id="widget-container-col-11">
+                        <div class="widget-box widget-color-dark" id="widget-box-11">
+                            <div class="widget-header">
+                                <h6 class="widget-title">Scroll Content</h6>
+
+                                <div class="widget-toolbar">
+                                    <a href="#" data-action="settings">
+                                        <i class="ace-icon fa fa-cog"></i>
+                                    </a>
+
+                                    <a href="#" data-action="reload">
+                                        <i class="ace-icon fa fa-refresh"></i>
+                                    </a>
+
+                                    <a href="#" data-action="collapse">
+                                        <i class="ace-icon fa fa-chevron-up"></i>
+                                    </a>
+
+                                    <a href="#" data-action="close">
+                                        <i class="ace-icon fa fa-times"></i>
+                                    </a>
+
+                                    <a href="#" data-action="fullscreen" class="orange2">
+                                        <i class="ace-icon fa fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main padding-4 scrollable" data-size="125">
+                                    <div class="content">
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-danger">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-success">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-danger">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-success">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-danger">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-success">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-danger">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-success">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-danger">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-success">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-danger">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-success">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-success">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                        <div class="alert alert-info">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div>
+        </div>
+    </div>
+
+</div>

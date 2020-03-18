@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="oamsapp">
+<head >
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>OAMS-Hệ thống quản trị văn phòng và điều hành</title>
+    <link rel="icon" href="~/Content/image/oams.ico">
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/assetsmes/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="~/Content/assetsmes/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="~/Content/assetsmes/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="~/Content/assetsmes/css/ace-rtl.min.css" />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="~/Content/assetsmes/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="~/Content/assetsmes/js/ace-extra.min.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="~/Content/assetsmes/js/html5shiv.min.js"></script>
+    <script src="~/Content/assetsmes/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- jquery -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src="~/Content/assetsmes/js/jquery-2.1.4.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="~/Content/assetsmes/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+
+    <!-- angular-file-upload-->
+    <script src="~/Scripts/angular-file-upload/angular-file-upload.min.js"></script>
+    <!-- abn-tree-->
+    <script src="~/Scripts/abn_tree/abn_tree_directive.js"></script>
+    <link rel="stylesheet" href="~/Content/abn-tree/abn_tree.css">
+    <!-- angular-block-->
+    <script src="~/Scripts/angular-block-ui.min.js"></script>
+    <link rel="stylesheet" href="~/Content/angular-block-ui.min.css" />
+
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.3.js"></script>
+    <script src="~/Scripts/angular-signalr-hub.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <!-- app angular* -->
+    @Html.IncludeVersionedJs("~/MyScript/configapp.js")
+    <script src="~/MyScript/app.js"></script>
+    <script src="~/MyScript/common.js"></script>
+    @Html.IncludeVersionedJs("~/MyScript/login/UserProfile.js")
+    @Html.IncludeVersionedJs("~/MyScript/homecontroller.js")
+</head>
+<body class="no-skin" style="height: calc(100%) !important;" block-ui="main">
+    <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-container " id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <a href="~/Home" class="navbar-brand">
+                    <small style="color: #23527c;font-weight:bold;">
+                        <img style="height:30px;" src="~/Content/image/logo.png" /> 
+                        @*<i class="fa fa-leaf"></i>*@
+                        OAMS
+                    </small>
+                </a>
+            </div>
+
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                   
+
+                    <li class="light-blue dropdown-modal" ng-controller="homecontroller">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" ng-src="{{ulrimage}}" alt="{{FulluserName}}" />
+                            <span class="user-info">
+                                <small>Chào,</small>
+                                {{FulluserName}}
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li><a href="#" ng-click="hosocanhan()"><i class="ace-icon fa fa-user"></i> Thông tin cá nhân</a></li>
+                            <li><a href="#" ng-click="changepass()"><i class="ace-icon fa fa-credit-card"></i> Đổi mật khẩu</a></li>
+                            <li><a href="~/Huongdan/AIMS_HDSD.htm"><i class="ace-icon fa fa-question-circle"></i> Trợ giúp</a></li>
+                            <li><a href="#" ng-click="logout()"><i class="ace-icon fa fa-sign-out"></i> Đăng xuất</a></li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.navbar-container -->
+    </div>
+
+    <div class="main-container" id="main-container" style="height: calc(100%) !important;">
+        <!--<script type="text/javascript">
+            try { ace.settings.loadState('main-container') } catch (e) { }
+        </script>-->
+
+        <div id="sidebar" class="sidebar responsive sidebar-fixed" ng-controller="functionmenu">
+            <!--<script type="text/javascript">
+                try { ace.settings.loadState('sidebar') } catch (e) { }
+            </script>-->
+
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                    <button class="btn btn-success">
+                        <i class="ace-icon fa fa-signal"></i>
+                    </button>
+
+                    <button class="btn btn-info">
+                        <i class="ace-icon fa fa-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-warning">
+                        <i class="ace-icon fa fa-users"></i>
+                    </button>
+
+                    <button class="btn btn-danger">
+                        <i class="ace-icon fa fa-cogs"></i>
+                    </button>
+                    
+                </div>
+
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <span class="btn btn-success"></span>
+
+                    <span class="btn btn-info"></span>
+
+                    <span class="btn btn-warning"></span>
+
+                    <span class="btn btn-danger"></span>
+                </div>
+            </div><!-- /.sidebar-shortcuts -->
+
+            <ul class="nav nav-list" >
+                
+                <li class="{{activegroup[100]}}">
+                    <a href="~/Home">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Trang chủ </span>
+                    </a>
+                    <input type="hidden" id="idfunction" value="8" />
+                    <b class="arrow"></b>
+                </li>
+
+                <li ng-repeat="g in pgroupData" class="{{activegroup[g.ID]}}" ng-show="showgroup(g.ID)">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text" ng-bind="g.TENNHOM">
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu" >
+                        <li ng-repeat="f in pData|filter:{NHOMID:g.ID}" ng-show="show(f.ID)" class="{{activelink[f.ID]}}" >
+                            <a ng-href="{{f.LINKS}}" ><i class="menu-icon fa fa-circle"></i><span ng-bind="f.TENCHUCNANG"></span></a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!-- /.nav-list -->
+
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="ace-settings-container" id="ace-settings-container" style="margin-top:45px;">
+                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+                        <i class="ace-icon fa fa-cog bigger-130"></i>
+                    </div>
+
+                    <div class="ace-settings-box clearfix" id="ace-settings-box">
+                        <div class="pull-left width-50">
+
+                        </div><!-- /.pull-left -->
+
+                        <div class="pull-left width-50">
+
+                        </div><!-- /.pull-left -->
+                    </div><!-- /.ace-settings-box -->
+                </div>
+                @RenderBody()
+               
+            </div>
+        </div><!-- /.main-content -->
+
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    <span class="bigger-110">
+                        <span class="blue">OAMS - </span>
+                         &copy; 2017-2018
+                    </span>
+
+                    &nbsp; &nbsp;
+                    @*<span class="action-buttons">
+                        <a href="#">
+                            <i class="ace-icon fa fa-twitter-square light-blue bigger-120"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="ace-icon fa fa-facebook-square text-primary bigger-120"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="ace-icon fa fa-rss-square orange bigger-120"></i>
+                        </a>
+                    </span>*@
+                </div>
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div><!-- /.main-container -->
+    
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/assetsmes/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="~/Content/assetsmes/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="~/Content/assetsmes/js/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="~/Content/assetsmes/js/jquery-ui.custom.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.easypiechart.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.sparkline.index.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.flot.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.flot.pie.min.js"></script>
+    <script src="~/Content/assetsmes/js/jquery.flot.resize.min.js"></script>
+
+    <!-- ace scripts -->
+    <script src="~/Content/assetsmes/js/ace-elements.min.js"></script>
+    <script src="~/Content/assetsmes/js/ace.min.js"></script>
+</body>
+</html>

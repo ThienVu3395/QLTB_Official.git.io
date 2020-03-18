@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbOAMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="dbOAMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbChucnangs" EntityType="dbOAMSModel.tbChucnang" />
+    <EntitySet Name="tbDanhmucs" EntityType="dbOAMSModel.tbDanhmuc" />
+    <EntitySet Name="tbLoaiDMs" EntityType="dbOAMSModel.tbLoaiDM" />
+    <EntitySet Name="tbModules" EntityType="dbOAMSModel.tbModule" />
+    <EntitySet Name="tbNhomchucnangs" EntityType="dbOAMSModel.tbNhomchucnang" />
+    <EntitySet Name="tbVitriluutrus" EntityType="dbOAMSModel.tbVitriluutru" />
+    <EntitySet Name="tbFORMFUNCs" EntityType="dbOAMSModel.tbFORMFUNC" />
+    <EntitySet Name="tbFunctions" EntityType="dbOAMSModel.tbFunction" />
+    <EntitySet Name="tblattachcongvans" EntityType="dbOAMSModel.tblattachcongvan" />
+    <EntitySet Name="tblCongvandens" EntityType="dbOAMSModel.tblCongvanden" />
+    <EntitySet Name="tblcongvandencanboes" EntityType="dbOAMSModel.tblcongvandencanbo" />
+    <EntitySet Name="tblCongvanphathanhs" EntityType="dbOAMSModel.tblCongvanphathanh" />
+    <EntitySet Name="tblcongvanphathanhcanboes" EntityType="dbOAMSModel.tblcongvanphathanhcanbo" />
+    <EntitySet Name="tblLinhvucs" EntityType="dbOAMSModel.tblLinhvuc" />
+    <EntitySet Name="tbLoaivanbans" EntityType="dbOAMSModel.tbLoaivanban" />
+    <EntitySet Name="tblplvanbans" EntityType="dbOAMSModel.tblplvanban" />
+    <EntitySet Name="tblsovanbans" EntityType="dbOAMSModel.tblsovanban" />
+    <EntitySet Name="tbBophans" EntityType="dbOAMSModel.tbBophan" />
+    <EntitySet Name="tbChucvus" EntityType="dbOAMSModel.tbChucvu" />
+    <EntitySet Name="tbCoquans" EntityType="dbOAMSModel.tbCoquan" />
+    <EntitySet Name="tbNguoidungs" EntityType="dbOAMSModel.tbNguoidung" />
+    <EntitySet Name="tbNhoms" EntityType="dbOAMSModel.tbNhom" />
+    <EntitySet Name="tbNhom_Chucnang" EntityType="dbOAMSModel.tbNhom_Chucnang" />
+    <EntitySet Name="tbNhom_Users" EntityType="dbOAMSModel.tbNhom_Users" />
+    <AssociationSet Name="FK_tbChucnang_tbNhomchucnang1" Association="dbOAMSModel.FK_tbChucnang_tbNhomchucnang1">
+      <End Role="tbNhomchucnang" EntitySet="tbNhomchucnangs" />
+      <End Role="tbChucnang" EntitySet="tbChucnangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhom_Chucnang_tbChucnang" Association="dbOAMSModel.FK_tbNhom_Chucnang_tbChucnang">
+      <End Role="tbChucnang" EntitySet="tbChucnangs" />
+      <End Role="tbNhom_Chucnang" EntitySet="tbNhom_Chucnang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbDanhmuc_tbLoaiDM" Association="dbOAMSModel.FK_tbDanhmuc_tbLoaiDM">
+      <End Role="tbLoaiDM" EntitySet="tbLoaiDMs" />
+      <End Role="tbDanhmuc" EntitySet="tbDanhmucs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhomchucnang_tbModule" Association="dbOAMSModel.FK_tbNhomchucnang_tbModule">
+      <End Role="tbModule" EntitySet="tbModules" />
+      <End Role="tbNhomchucnang" EntitySet="tbNhomchucnangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCongvanden_tblplvanban" Association="dbOAMSModel.FK_tblCongvanden_tblplvanban">
+      <End Role="tblplvanban" EntitySet="tblplvanbans" />
+      <End Role="tblCongvanden" EntitySet="tblCongvandens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCongvanden_tblsovanban" Association="dbOAMSModel.FK_tblCongvanden_tblsovanban">
+      <End Role="tblsovanban" EntitySet="tblsovanbans" />
+      <End Role="tblCongvanden" EntitySet="tblCongvandens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblcongvandencanbo_tblCongvanden" Association="dbOAMSModel.FK_tblcongvandencanbo_tblCongvanden">
+      <End Role="tblCongvanden" EntitySet="tblCongvandens" />
+      <End Role="tblcongvandencanbo" EntitySet="tblcongvandencanboes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCongvanphathanh_tblplvanban" Association="dbOAMSModel.FK_tblCongvanphathanh_tblplvanban">
+      <End Role="tblplvanban" EntitySet="tblplvanbans" />
+      <End Role="tblCongvanphathanh" EntitySet="tblCongvanphathanhs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCongvanphathanh_tblsovanban" Association="dbOAMSModel.FK_tblCongvanphathanh_tblsovanban">
+      <End Role="tblsovanban" EntitySet="tblsovanbans" />
+      <End Role="tblCongvanphathanh" EntitySet="tblCongvanphathanhs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblcongvanphathanhcanbo_tblCongvanphathanh" Association="dbOAMSModel.FK_tblcongvanphathanhcanbo_tblCongvanphathanh">
+      <End Role="tblCongvanphathanh" EntitySet="tblCongvanphathanhs" />
+      <End Role="tblcongvanphathanhcanbo" EntitySet="tblcongvanphathanhcanboes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbLoaivanban_tblplvanban" Association="dbOAMSModel.FK_tbLoaivanban_tblplvanban">
+      <End Role="tblplvanban" EntitySet="tblplvanbans" />
+      <End Role="tbLoaivanban" EntitySet="tbLoaivanbans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNguoidung_tbBophan" Association="dbOAMSModel.FK_tbNguoidung_tbBophan">
+      <End Role="tbBophan" EntitySet="tbBophans" />
+      <End Role="tbNguoidung" EntitySet="tbNguoidungs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNguoidung_tbChucvu" Association="dbOAMSModel.FK_tbNguoidung_tbChucvu">
+      <End Role="tbChucvu" EntitySet="tbChucvus" />
+      <End Role="tbNguoidung" EntitySet="tbNguoidungs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhom_Chucnang_tbNhom" Association="dbOAMSModel.FK_tbNhom_Chucnang_tbNhom">
+      <End Role="tbNhom" EntitySet="tbNhoms" />
+      <End Role="tbNhom_Chucnang" EntitySet="tbNhom_Chucnang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbNhom_Users_tbNhom1" Association="dbOAMSModel.FK_tbNhom_Users_tbNhom1">
+      <End Role="tbNhom" EntitySet="tbNhoms" />
+      <End Role="tbNhom_Users" EntitySet="tbNhom_Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbChucnang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NHOMID" Type="Int32" />
+    <Property Name="TENCHUCNANG" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LINKS" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="THUTU" Type="Int32" />
+    <NavigationProperty Name="tbNhomchucnang" Relationship="dbOAMSModel.FK_tbChucnang_tbNhomchucnang1" FromRole="tbChucnang" ToRole="tbNhomchucnang" />
+    <NavigationProperty Name="tbNhom_Chucnang" Relationship="dbOAMSModel.FK_tbNhom_Chucnang_tbChucnang" FromRole="tbChucnang" ToRole="tbNhom_Chucnang" />
+  </EntityType>
+  <EntityType Name="tbDanhmuc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LOAIDM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VALUENAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbLoaiDM" Relationship="dbOAMSModel.FK_tbDanhmuc_tbLoaiDM" FromRole="tbDanhmuc" ToRole="tbLoaiDM" />
+  </EntityType>
+  <EntityType Name="tbLoaiDM">
+    <Key>
+      <PropertyRef Name="LOAIDM" />
+    </Key>
+    <Property Name="LOAIDM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TENDM" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DMHETHONG" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tbDanhmucs" Relationship="dbOAMSModel.FK_tbDanhmuc_tbLoaiDM" FromRole="tbLoaiDM" ToRole="tbDanhmuc" />
+  </EntityType>
+  <EntityType Name="tbModule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="490" FixedLength="false" Unicode="true" />
+    <Property Name="NumOrder" Type="Int32" />
+    <Property Name="Links" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbNhomchucnangs" Relationship="dbOAMSModel.FK_tbNhomchucnang_tbModule" FromRole="tbModule" ToRole="tbNhomchucnang" />
+  </EntityType>
+  <EntityType Name="tbNhomchucnang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="MODULAID" Type="Int32" Nullable="false" />
+    <Property Name="TENNHOM" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ICON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="THUTU" Type="Int32" />
+    <NavigationProperty Name="tbChucnangs" Relationship="dbOAMSModel.FK_tbChucnang_tbNhomchucnang1" FromRole="tbNhomchucnang" ToRole="tbChucnang" />
+    <NavigationProperty Name="tbModule" Relationship="dbOAMSModel.FK_tbNhomchucnang_tbModule" FromRole="tbNhomchucnang" ToRole="tbModule" />
+  </EntityType>
+  <EntityType Name="tbVitriluutru">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="TENLUUTRU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DUONGDAN" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ISFTP" Type="Boolean" />
+    <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWRD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbFORMFUNC">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MAFUNC" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MATRUONG" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HIENTHI" Type="Boolean" Nullable="false" />
+    <Property Name="TENTRUONG" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="KIEUDULIEU" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DODAI" Type="Int32" />
+    <Property Name="THUTUNHAP" Type="Int32" Nullable="false" />
+    <Property Name="THUTUGRID" Type="Int32" />
+    <Property Name="WITHDFORM" Type="Int32" />
+    <Property Name="WITHDGRID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VIEWGRID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="THUTUXEM" Type="Int32" Nullable="false" />
+    <Property Name="RANGBUOC" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="KEYFOR" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="NAMEFOR" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="THUTUTIMKEM" Type="Int32" Nullable="false" />
+    <Property Name="BATBUOC" Type="Int32" Nullable="false" />
+    <Property Name="TUDIEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MACDINH" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbFunction">
+    <Key>
+      <PropertyRef Name="MAFUNC" />
+    </Key>
+    <Property Name="MAFUNC" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TENFUNC" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TABLENAME" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TABLEPARENT" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="PARENTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PARENTKEY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PARENTWITHD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KEYFOREIGN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDKEY" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="VIEWMODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NUMCOL" Type="Int32" />
+    <Property Name="WITHDLABEL" Type="Int32" />
+    <Property Name="ORDERBY" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="KICHTHOAT" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblattachcongvan">
+    <Key>
+      <PropertyRef Name="intid" />
+    </Key>
+    <Property Name="intid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="intloai" Type="Int32" />
+    <Property Name="intidcongvan" Type="Int32" />
+    <Property Name="strtenfile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="strmota" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="strngaycapnhat" Type="DateTime" Precision="3" />
+    <Property Name="bittrangthai" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblCongvanden">
+    <Key>
+      <PropertyRef Name="intid" />
+    </Key>
+    <Property Name="intid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="intsoden" Type="Int32" />
+    <Property Name="strkyhieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="strngayden" Type="DateTime" Precision="3" />
+    <Property Name="strngayky" Type="DateTime" Precision="3" />
+    <Property Name="intkhoiphathanh" Type="Int32" />
+    <Property Name="strnoiphathanh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="strnoigui" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="strtrichyeu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="strnoinhan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="strtomtatnoidung" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="strnguoiky" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="strtukhoa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="strdokhan" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="strdomat" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="strphanloai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="bittrangthaiduyet" Type="Int32" />
+    <Property Name="strdonvinhap" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="strnoidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="strnguoitao" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="strngaytao" Type="DateTime" Precision="0" />
+    <Property Name="strnguoisua" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="strngaysua" Type="DateTime" Precision="0" />
+    <Property Name="strLinhvuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="intMucquantrong" Type="Int32" />
+    <Property Name="intidsovanban" Type="Int32" />
+    <Property Name="bitquyphamphapluat" Type="Boolean" />
+    <Property Name="strlanhdaoduyet" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="intTrangthaixoa" Type="Int32" />
+    <Property Name="intsoto" Type="Int32" />
+    <Property Name="intsoban" Type="Int32" />
+    <Property Name="bitthongbao" Type="Int32" />
+    <Property Name="bitguivbdt" Type="Boolean" />
+    <Property Name="strcolunm01" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm02" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm03" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm04" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm05" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblplvanban" Relationship="dbOAMSModel.FK_tblCongvanden_tblplvanban" FromRole="tblCongvanden" ToRole="tblplvanban" />
+    <NavigationProperty Name="tblsovanban" Relationship="dbOAMSModel.FK_tblCongvanden_tblsovanban" FromRole="tblCongvanden" ToRole="tblsovanban" />
+    <NavigationProperty Name="tblcongvandencanboes" Relationship="dbOAMSModel.FK_tblcongvandencanbo_tblCongvanden" FromRole="tblCongvanden" ToRole="tblcongvandencanbo" />
+  </EntityType>
+  <EntityType Name="tblcongvandencanbo">
+    <Key>
+      <PropertyRef Name="intid" />
+    </Key>
+    <Property Name="intid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="strcanbo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="intidvanban" Type="Int32" Nullable="false" />
+    <Property Name="intHinhthuc" Type="Int32" />
+    <Property Name="intiddonvichuyen" Type="Int32" />
+    <Property Name="strnoidungyeucau" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="strcanbochuyen" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="strngayxem" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblCongvanden" Relationship="dbOAMSModel.FK_tblcongvandencanbo_tblCongvanden" FromRole="tblcongvandencanbo" ToRole="tblCongvanden" />
+  </EntityType>
+  <EntityType Name="tblCongvanphathanh">
+    <Key>
+      <PropertyRef Name="intid" />
+    </Key>
+    <Property Name="intid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="intso" Type="Int32" />
+    <Property Name="strsophu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="strkyhieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="strngayky" Type="DateTime" Precision="3" />
+    <Property Name="strdonvisoan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="strtrichyeu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="strnoinhan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="strnguoiky" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="strnguoisoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="strnguoiduyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="strtomtat" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="strdokhan" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="strdomat" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="intsoban" Type="Int32" />
+    <Property Name="intsoto" Type="Int32" />
+    <Property Name="strtukhoa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="strphanloai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="bittrangthaiduyet" Type="Int32" />
+    <Property Name="strdonvinhap" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="strnoidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="strnguoitao" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="strngaytao" Type="DateTime" Precision="0" />
+    <Property Name="strnguoisua" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="strngaysua" Type="DateTime" Precision="0" />
+    <Property Name="strLinhvuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="intMucquantrong" Type="Int32" />
+    <Property Name="bitguivbdt" Type="Boolean" />
+    <Property Name="intidsovanban" Type="Int32" />
+    <Property Name="bitquyphamphapluat" Type="Boolean" />
+    <Property Name="intTrangthaixoa" Type="Int32" />
+    <Property Name="bitthongbao" Type="Boolean" />
+    <Property Name="strcolunm01" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm02" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm03" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm04" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="strcolunm05" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblplvanban" Relationship="dbOAMSModel.FK_tblCongvanphathanh_tblplvanban" FromRole="tblCongvanphathanh" ToRole="tblplvanban" />
+    <NavigationProperty Name="tblsovanban" Relationship="dbOAMSModel.FK_tblCongvanphathanh_tblsovanban" FromRole="tblCongvanphathanh" ToRole="tblsovanban" />
+    <NavigationProperty Name="tblcongvanphathanhcanboes" Relationship="dbOAMSModel.FK_tblcongvanphathanhcanbo_tblCongvanphathanh" FromRole="tblCongvanphathanh" ToRole="tblcongvanphathanhcanbo" />
+  </EntityType>
+  <EntityType Name="tblcongvanphathanhcanbo">
+    <Key>
+      <PropertyRef Name="intid" />
+    </Key>
+    <Property Name="intid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="intidvanban" Type="Int32" Nullable="false" />
+    <Property Name="intidcanbo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="inthinhthuc" Type="Int32" />
+    <Property Name="intiddonvichuyen" Type="Int32" />
+    <Property Name="strngayxem" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblCongvanphathanh" Relationship="dbOAMSModel.FK_tblcongvanphathanhcanbo_tblCongvanphathanh" FromRole="tblcongvanphathanhcanbo" ToRole="tblCongvanphathanh" />
+  </EntityType>
+  <EntityType Name="tblLinhvuc">
+    <Key>
+      <PropertyRef Name="strMalinhvuc" />
+    </Key>
+    <Property Name="strMalinhvuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="strMaparent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="strTenlinhvuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="strKyhieu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="strGhichu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbLoaivanban">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MALOAI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MATRUONG" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HIENTHI" Type="Boolean" Nullable="false" />
+    <Property Name="TENTRUONG" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="KIEUDULIEU" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DODAI" Type="Int32" />
+    <Property Name="THUTUNHAP" Type="Int32" Nullable="false" />
+    <Property Name="THUTUGRID" Type="Int32" />
+    <Property Name="WITHDFORM" Type="Int32" />
+    <Property Name="WITHDGRID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VIEWGRID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="THUTUXEM" Type="Int32" Nullable="false" />
+    <Property Name="RANGBUOC" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="THUTUTIMKEM" Type="Int32" Nullable="false" />
+    <Property Name="BATBUOC" Type="Int32" Nullable="false" />
+    <Property Name="TUDIEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MACDINH" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblplvanban" Relationship="dbOAMSModel.FK_tbLoaivanban_tblplvanban" FromRole="tbLoaivanban" ToRole="tblplvanban" />
+  </EntityType>
+  <EntityType Name="tblplvanban">
+    <Key>
+      <PropertyRef Name="strmacongvan" />
+    </Key>
+    <Property Name="strmacongvan" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="strtenhinhthuc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="intloai" Type="Int32" />
+    <Property Name="strghichu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="bitmacdinh" Type="Boolean" />
+    <NavigationProperty Name="tblCongvandens" Relationship="dbOAMSModel.FK_tblCongvanden_tblplvanban" FromRole="tblplvanban" ToRole="tblCongvanden" />
+    <NavigationProperty Name="tblCongvanphathanhs" Relationship="dbOAMSModel.FK_tblCongvanphathanh_tblplvanban" FromRole="tblplvanban" ToRole="tblCongvanphathanh" />
+    <NavigationProperty Name="tbLoaivanbans" Relationship="dbOAMSModel.FK_tbLoaivanban_tblplvanban" FromRole="tblplvanban" ToRole="tbLoaivanban" />
+  </EntityType>
+  <EntityType Name="tblsovanban">
+    <Key>
+      <PropertyRef Name="intid" />
+    </Key>
+    <Property Name="intid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="strten" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="strkyhieu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="strdonvi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="strghichu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="intloai" Type="Int32" />
+    <NavigationProperty Name="tblCongvandens" Relationship="dbOAMSModel.FK_tblCongvanden_tblsovanban" FromRole="tblsovanban" ToRole="tblCongvanden" />
+    <NavigationProperty Name="tblCongvanphathanhs" Relationship="dbOAMSModel.FK_tblCongvanphathanh_tblsovanban" FromRole="tblsovanban" ToRole="tblCongvanphathanh" />
+  </EntityType>
+  <EntityType Name="tbBophan">
+    <Key>
+      <PropertyRef Name="MAPHONG" />
+    </Key>
+    <Property Name="MAPHONG" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TENPHONG" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DVQUANLY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MADONVI" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbNguoidungs" Relationship="dbOAMSModel.FK_tbNguoidung_tbBophan" FromRole="tbBophan" ToRole="tbNguoidung" />
+  </EntityType>
+  <EntityType Name="tbChucvu">
+    <Key>
+      <PropertyRef Name="MACHUCVU" />
+    </Key>
+    <Property Name="MACHUCVU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TENCHUCVU" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbNguoidungs" Relationship="dbOAMSModel.FK_tbNguoidung_tbChucvu" FromRole="tbChucvu" ToRole="tbNguoidung" />
+  </EntityType>
+  <EntityType Name="tbCoquan">
+    <Key>
+      <PropertyRef Name="MACOQUAN" />
+    </Key>
+    <Property Name="MACOQUAN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TENCOQUAN" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CQQUANLY" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbNguoidung">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="HOLOT" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TEN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYTAO" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="KHOA" Type="Boolean" Nullable="false" />
+    <Property Name="CHUCVU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BOPHAN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UYQUYEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYUQ" Type="DateTime" Precision="0" />
+    <Property Name="KETTHUCUQ" Type="DateTime" Precision="0" />
+    <Property Name="HANCHE" Type="Boolean" Nullable="false" />
+    <Property Name="FILEANH" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbBophan" Relationship="dbOAMSModel.FK_tbNguoidung_tbBophan" FromRole="tbNguoidung" ToRole="tbBophan" />
+    <NavigationProperty Name="tbChucvu" Relationship="dbOAMSModel.FK_tbNguoidung_tbChucvu" FromRole="tbNguoidung" ToRole="tbChucvu" />
+  </EntityType>
+  <EntityType Name="tbNhom">
+    <Key>
+      <PropertyRef Name="MANHOM" />
+    </Key>
+    <Property Name="MANHOM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TENNHOM" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbNhom_Chucnang" Relationship="dbOAMSModel.FK_tbNhom_Chucnang_tbNhom" FromRole="tbNhom" ToRole="tbNhom_Chucnang" />
+    <NavigationProperty Name="tbNhom_Users" Relationship="dbOAMSModel.FK_tbNhom_Users_tbNhom1" FromRole="tbNhom" ToRole="tbNhom_Users" />
+  </EntityType>
+  <EntityType Name="tbNhom_Chucnang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MANHOM" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CHUCNANGID" Type="Int32" Nullable="false" />
+    <Property Name="ALLACTION" Type="Boolean" Nullable="false" />
+    <Property Name="XEM" Type="Boolean" Nullable="false" />
+    <Property Name="THEM" Type="Boolean" Nullable="false" />
+    <Property Name="XOA" Type="Boolean" Nullable="false" />
+    <Property Name="SUA" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tbChucnang" Relationship="dbOAMSModel.FK_tbNhom_Chucnang_tbChucnang" FromRole="tbNhom_Chucnang" ToRole="tbChucnang" />
+    <NavigationProperty Name="tbNhom" Relationship="dbOAMSModel.FK_tbNhom_Chucnang_tbNhom" FromRole="tbNhom_Chucnang" ToRole="tbNhom" />
+  </EntityType>
+  <EntityType Name="tbNhom_Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERNAME" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="MANHOM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbNhom" Relationship="dbOAMSModel.FK_tbNhom_Users_tbNhom1" FromRole="tbNhom_Users" ToRole="tbNhom" />
+  </EntityType>
+  <Association Name="FK_tbChucnang_tbNhomchucnang1">
+    <End Type="dbOAMSModel.tbNhomchucnang" Role="tbNhomchucnang" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.tbChucnang" Role="tbChucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbNhomchucnang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbChucnang">
+        <PropertyRef Name="NHOMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhom_Chucnang_tbChucnang">
+    <End Type="dbOAMSModel.tbChucnang" Role="tbChucnang" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbNhom_Chucnang" Role="tbNhom_Chucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbChucnang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbNhom_Chucnang">
+        <PropertyRef Name="CHUCNANGID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbDanhmuc_tbLoaiDM">
+    <End Type="dbOAMSModel.tbLoaiDM" Role="tbLoaiDM" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbDanhmuc" Role="tbDanhmuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbLoaiDM">
+        <PropertyRef Name="LOAIDM" />
+      </Principal>
+      <Dependent Role="tbDanhmuc">
+        <PropertyRef Name="LOAIDM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhomchucnang_tbModule">
+    <End Type="dbOAMSModel.tbModule" Role="tbModule" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbNhomchucnang" Role="tbNhomchucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbModule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbNhomchucnang">
+        <PropertyRef Name="MODULAID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCongvanden_tblplvanban">
+    <End Type="dbOAMSModel.tblplvanban" Role="tblplvanban" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.tblCongvanden" Role="tblCongvanden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblplvanban">
+        <PropertyRef Name="strmacongvan" />
+      </Principal>
+      <Dependent Role="tblCongvanden">
+        <PropertyRef Name="strphanloai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCongvanden_tblsovanban">
+    <End Type="dbOAMSModel.tblsovanban" Role="tblsovanban" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.tblCongvanden" Role="tblCongvanden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblsovanban">
+        <PropertyRef Name="intid" />
+      </Principal>
+      <Dependent Role="tblCongvanden">
+        <PropertyRef Name="intidsovanban" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblcongvandencanbo_tblCongvanden">
+    <End Type="dbOAMSModel.tblCongvanden" Role="tblCongvanden" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tblcongvandencanbo" Role="tblcongvandencanbo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCongvanden">
+        <PropertyRef Name="intid" />
+      </Principal>
+      <Dependent Role="tblcongvandencanbo">
+        <PropertyRef Name="intidvanban" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCongvanphathanh_tblplvanban">
+    <End Type="dbOAMSModel.tblplvanban" Role="tblplvanban" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.tblCongvanphathanh" Role="tblCongvanphathanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblplvanban">
+        <PropertyRef Name="strmacongvan" />
+      </Principal>
+      <Dependent Role="tblCongvanphathanh">
+        <PropertyRef Name="strphanloai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCongvanphathanh_tblsovanban">
+    <End Type="dbOAMSModel.tblsovanban" Role="tblsovanban" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.tblCongvanphathanh" Role="tblCongvanphathanh" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblsovanban">
+        <PropertyRef Name="intid" />
+      </Principal>
+      <Dependent Role="tblCongvanphathanh">
+        <PropertyRef Name="intidsovanban" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblcongvanphathanhcanbo_tblCongvanphathanh">
+    <End Type="dbOAMSModel.tblCongvanphathanh" Role="tblCongvanphathanh" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tblcongvanphathanhcanbo" Role="tblcongvanphathanhcanbo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCongvanphathanh">
+        <PropertyRef Name="intid" />
+      </Principal>
+      <Dependent Role="tblcongvanphathanhcanbo">
+        <PropertyRef Name="intidvanban" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbLoaivanban_tblplvanban">
+    <End Type="dbOAMSModel.tblplvanban" Role="tblplvanban" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbLoaivanban" Role="tbLoaivanban" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblplvanban">
+        <PropertyRef Name="strmacongvan" />
+      </Principal>
+      <Dependent Role="tbLoaivanban">
+        <PropertyRef Name="MALOAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNguoidung_tbBophan">
+    <End Type="dbOAMSModel.tbBophan" Role="tbBophan" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbNguoidung" Role="tbNguoidung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbBophan">
+        <PropertyRef Name="MAPHONG" />
+      </Principal>
+      <Dependent Role="tbNguoidung">
+        <PropertyRef Name="BOPHAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNguoidung_tbChucvu">
+    <End Type="dbOAMSModel.tbChucvu" Role="tbChucvu" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.tbNguoidung" Role="tbNguoidung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbChucvu">
+        <PropertyRef Name="MACHUCVU" />
+      </Principal>
+      <Dependent Role="tbNguoidung">
+        <PropertyRef Name="CHUCVU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhom_Chucnang_tbNhom">
+    <End Type="dbOAMSModel.tbNhom" Role="tbNhom" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbNhom_Chucnang" Role="tbNhom_Chucnang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbNhom">
+        <PropertyRef Name="MANHOM" />
+      </Principal>
+      <Dependent Role="tbNhom_Chucnang">
+        <PropertyRef Name="MANHOM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbNhom_Users_tbNhom1">
+    <End Type="dbOAMSModel.tbNhom" Role="tbNhom" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbNhom_Users" Role="tbNhom_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbNhom">
+        <PropertyRef Name="MANHOM" />
+      </Principal>
+      <Dependent Role="tbNhom_Users">
+        <PropertyRef Name="MANHOM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

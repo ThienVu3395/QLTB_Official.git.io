@@ -1,0 +1,560 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+<style>
+    .profile-activity:hover {
+        background-color: white !important;
+    }
+</style>
+<link rel="stylesheet" href="~/Content/assetsmes/css/fullcalendar.min.css" />
+<div style="height:calc(100%);" ng-controller="LichcoquanCtrl">
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">OAMS</a>
+            </li>
+            <li>Công việc</li>
+            <li class="active" style="font-weight:bold;">Danh sách công việc</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+
+        </div><!-- /.nav-search -->
+    </div>
+    <div id="mescontent" class="page-content" style="padding-bottom: 1px !important; height: calc(100%)">
+        <div class="row" style="height: calc(100%);">
+            <div class="col-xs-12" style="height: calc(100%);">
+                <div class="tabbable" style="height: calc(108%);">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#lichkieucu" id="#lichkieucu" aria-expanded="true">
+                                <i class="green ace-icon fa fa-home bigger-120"></i>
+                                Lịch Theo Kiểu Cũ
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#lichkieumoi" id="#lichkieumoi" aria-expanded="true">
+                                <i class="green ace-icon fa fa fa-tachometer bigger-120"></i>
+                                Lịch Theo Phong Cách Mới
+                            </a>
+                        </li>
+
+
+
+
+
+                    </ul>
+
+                    <div class="tab-content" style="overflow-y: auto; height: calc(100% - 30px); padding-top:2px;">
+                        <div id="lichkieucu" class="tab-pane fade active in">
+                            <div class="table-header">
+                                Tuần này
+                                <i class="fa fa-chevron-left"></i>
+                                <i class="fa fa-chevron-right"></i>
+                                <span>
+                                    <i class="fa fa-calendar-o fa-stack-2x" style="margin-top:7px"></i>
+                                    <strong class="fa-stack-1x calendar-text" style="margin-top:6px">01</strong>
+                                </span>
+
+                                <span ng-click="fan()">
+                                    <i class="fa fa-calendar-o fa-stack-2x" style="margin-top:7px;margin-left:50px"></i>
+                                    <strong class="fa-stack-1x calendar-text" style="margin-top:6px;margin-left:50px">07</strong>
+                                </span>
+                                <span ng-click="fhien()">
+                                    <i class="fa fa-calendar-o fa-stack-2x" style="margin-top:7px;margin-left:100px"></i>
+                                    <strong class="fa-stack-1x calendar-text" style="margin-top:6px;margin-left:100px">30</strong>
+                                </span>
+
+
+
+
+
+
+                                <div class="pull-right tableTools-container">
+                                    <div class="dt-buttons btn-overlap btn-group">
+                                        <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="">
+                                            <span><i class="fa fa-plus bigger-110 blue" data-toggle="tooltip" data-placement="bottom" title="Thêm công việc mới" ng-click="xulythemlichcoquan()"></i> <span class="hidden">Show/hide columns</span></span>
+                                        </a><a class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="">
+                                            <span><i class="fa fa-copy bigger-110 pink"></i> <span class="hidden">Copy to clipboard</span></span>
+                                        </a><a class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title=""><span><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span class="hidden">Export to CSV</span></span></a><a class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="">
+                                            <span><i class="fa fa-print bigger-110 grey"></i> <span class="hidden">Print</span></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-striped table-bordered table-hover" ng-hide="anhien" >
+                                <thead class="thin-border-bottom">
+                                    <tr>
+
+                                        <th>
+                                            <i class="ace-icon fa fa-clock-o"></i>
+                                            Thời Gian
+                                        </th>
+
+                                        <th>
+                                            <i class="ace-icon fa fa-user"></i>
+                                            Thành Phần Tham Dự
+                                        </th>
+
+                                        <th class="hidden-480">
+                                            <i class="ace-icon fa fa-arrow-right"></i>
+                                            Nội Dung
+                                        </th>
+                                        <th class="hidden-480">
+                                            <i class="ace-icon fa fa-arrow-right"></i>
+                                            Địa Điểm
+                                        </th>
+                                        <th class="hidden-480">
+                                            <i class="ace-icon fa fa-arrow-right"></i>
+                                            Chủ Trì
+                                        </th>
+                                        <th class="hidden-480">
+
+
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td class="hidden-480">Thứ 2 - 9:00 <br /> 24/02/2019</td>
+
+                                        <td class="hidden-480">
+                                            <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                        </td>
+
+                                        <td class="hidden-480">
+                                            <span>CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Phòng Hợp C</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Ông Nguyễn Văn A</span>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+
+                                                <button class="btn btn-xs btn-info">
+                                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:antiquewhite">
+                                        <td class="hidden-480">Thứ 3 - 9:00 <br /> 24/02/2019</td>
+
+                                        <td class="hidden-480">
+                                            <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                        </td>
+
+                                        <td class="hidden-480">
+                                            <span>CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Phòng Hợp C</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Ông Nguyễn Văn A</span>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+
+                                                <button class="btn btn-xs btn-info">
+                                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+
+                                            </div>
+
+                                    </tr>
+                                    <tr style="font-weight:bold">
+                                        <td class="hidden-480">Thứ 4 - 9:00 <br /> 24/02/2019</td>
+
+                                        <td class="hidden-480">
+                                            <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                        </td>
+
+                                        <td class="hidden-480">
+                                            <span>CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Phòng Hợp C</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Ông Nguyễn Văn A</span>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+
+                                                <button class="btn btn-xs btn-info">
+                                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+
+                                            </div>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td class="hidden-480">Thứ 5 - 9:00 <br /> 24/02/2019</td>
+
+                                        <td class="hidden-480">
+                                            <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                        </td>
+
+                                        <td class="hidden-480">
+                                            <span>CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Phòng Hợp C</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Ông Nguyễn Văn A</span>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+
+                                                <button class="btn btn-xs btn-info">
+                                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+
+                                            </div>
+
+                                    </tr>
+
+                                    <tr style="font-weight:bold">
+                                        <td class="hidden-480">Thứ 6 - 9:00 <br /> 24/02/2019</td>
+
+                                        <td class="hidden-480">
+                                            <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                        </td>
+
+                                        <td class="hidden-480">
+                                            <span>CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Phòng Hợp C</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Ông Nguyễn Văn A</span>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+
+                                                <button class="btn btn-xs btn-info">
+                                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+
+                                            </div>
+
+                                    </tr>
+                                    <tr style="font-weight:bold">
+                                        <td class="hidden-480">Thứ 7 - 9:00 <br /> 24/02/2019</td>
+
+                                        <td class="hidden-480">
+                                            <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                        </td>
+
+                                        <td class="hidden-480">
+                                            <span>CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Phòng Hợp C</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Ông Nguyễn Văn A</span>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+
+                                                <button class="btn btn-xs btn-info">
+                                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+
+                                            </div>
+
+                                    </tr>
+                                    <tr style="font-weight:bold">
+                                        <td class="hidden-480">Chủ nhật - 9:00 <br /> 24/02/2019</td>
+
+                                        <td class="hidden-480">
+                                            <a href="#">Chủ tịch HĐQT, Ban Giám đốc, Trưởng BKS, Kế toán trưởng, Trưởng Phòng TCHC, Tổ giúp việc HĐQT.</a>
+                                        </td>
+
+                                        <td class="hidden-480">
+                                            <span>CT.HĐQT và Ban Giám đốc họp thông qua tài liệu họp HĐQT.</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Phòng Hợp C</span>
+                                        </td>
+                                        <td class="hidden-480">
+                                            <span>Ông Nguyễn Văn A</span>
+                                        </td>
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+
+                                                <button class="btn btn-xs btn-info">
+                                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                                </button>
+
+                                                <button class="btn btn-xs btn-danger">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+
+                                            </div>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                            @*//Lịch theo 30 ngày*@
+                            <div  ng-show="anhien" id="calendar" class="fc fc-ltr fc-unthemed"><div class="fc-toolbar"><div class="fc-left"><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left"><span class="fc-icon fc-icon-left-single-arrow"></span></button><button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right"><span class="fc-icon fc-icon-right-single-arrow"></span></button></div><button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right fc-state-disabled" disabled="disabled">today</button></div><div class="fc-right"><div class="fc-button-group"><button type="button" class="fc-month-button fc-button fc-state-default fc-corner-left fc-state-active">month</button><button type="button" class="fc-agendaWeek-button fc-button fc-state-default">week</button><button type="button" class="fc-agendaDay-button fc-button fc-state-default fc-corner-right">day</button></div></div><div class="fc-center"><h2>March 2020</h2></div><div class="fc-clear"></div></div><div class="fc-view-container" style=""><div class="fc-view fc-month-view fc-basic-view" style=""><table><thead class="fc-head"><tr><td class="fc-head-container fc-widget-header"><div class="fc-row fc-widget-header"><table><thead><tr><th class="fc-day-header fc-widget-header fc-sun">Sun</th><th class="fc-day-header fc-widget-header fc-mon">Mon</th><th class="fc-day-header fc-widget-header fc-tue">Tue</th><th class="fc-day-header fc-widget-header fc-wed">Wed</th><th class="fc-day-header fc-widget-header fc-thu">Thu</th><th class="fc-day-header fc-widget-header fc-fri">Fri</th><th class="fc-day-header fc-widget-header fc-sat">Sat</th></tr></thead></table></div></td></tr></thead><tbody class="fc-body"><tr><td class="fc-widget-content"><div class="fc-day-grid-container" style=""><div class="fc-day-grid"><div class="fc-row fc-week fc-widget-content" style="height: 97px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2020-03-01"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2020-03-02"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2020-03-03"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2020-03-04"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2020-03-05"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2020-03-06"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2020-03-07"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-number fc-sun fc-past" data-date="2020-03-01">1</td><td class="fc-day-number fc-mon fc-past" data-date="2020-03-02">2</td><td class="fc-day-number fc-tue fc-past" data-date="2020-03-03">3</td><td class="fc-day-number fc-wed fc-past" data-date="2020-03-04">4</td><td class="fc-day-number fc-thu fc-past" data-date="2020-03-05">5</td><td class="fc-day-number fc-fri fc-past" data-date="2020-03-06">6</td><td class="fc-day-number fc-sat fc-past" data-date="2020-03-07">7</td></tr></thead><tbody><tr><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end label-important fc-draggable"><div class="fc-content"><span class="fc-time">12a</span> <span class="fc-title">All Day Event</span></div></a></td><td></td><td></td><td></td><td></td><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-not-end label-success fc-draggable"><div class="fc-content"> <span class="fc-title">Long Event</span></div></a></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 97px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2020-03-08"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2020-03-09"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2020-03-10"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2020-03-11"></td><td class="fc-day fc-widget-content fc-thu fc-today fc-state-highlight" data-date="2020-03-12"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2020-03-13"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2020-03-14"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-number fc-sun fc-past" data-date="2020-03-08">8</td><td class="fc-day-number fc-mon fc-past" data-date="2020-03-09">9</td><td class="fc-day-number fc-tue fc-past" data-date="2020-03-10">10</td><td class="fc-day-number fc-wed fc-past" data-date="2020-03-11">11</td><td class="fc-day-number fc-thu fc-today fc-state-highlight" data-date="2020-03-12">12</td><td class="fc-day-number fc-fri fc-future" data-date="2020-03-13">13</td><td class="fc-day-number fc-sat fc-future" data-date="2020-03-14">14</td></tr></thead><tbody><tr><td class="fc-event-container" colspan="3"><a class="fc-day-grid-event fc-h-event fc-event fc-not-start fc-end label-success fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Long Event</span></div><div class="fc-resizer fc-end-resizer"></div></a></td><td rowspan="2"></td><td rowspan="2"></td><td rowspan="2"></td><td rowspan="2"></td></tr><tr><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end label-info fc-draggable"><div class="fc-content"><span class="fc-time">4p</span> <span class="fc-title">Some Event</span></div></a></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 97px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2020-03-15"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2020-03-16"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2020-03-17"></td><td class="fc-day fc-widget-content fc-wed fc-future" data-date="2020-03-18"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2020-03-19"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2020-03-20"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2020-03-21"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-number fc-sun fc-future" data-date="2020-03-15">15</td><td class="fc-day-number fc-mon fc-future" data-date="2020-03-16">16</td><td class="fc-day-number fc-tue fc-future" data-date="2020-03-17">17</td><td class="fc-day-number fc-wed fc-future" data-date="2020-03-18">18</td><td class="fc-day-number fc-thu fc-future" data-date="2020-03-19">19</td><td class="fc-day-number fc-fri fc-future" data-date="2020-03-20">20</td><td class="fc-day-number fc-sat fc-future" data-date="2020-03-21">21</td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 97px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2020-03-22"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2020-03-23"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2020-03-24"></td><td class="fc-day fc-widget-content fc-wed fc-future" data-date="2020-03-25"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2020-03-26"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2020-03-27"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2020-03-28"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-number fc-sun fc-future" data-date="2020-03-22">22</td><td class="fc-day-number fc-mon fc-future" data-date="2020-03-23">23</td><td class="fc-day-number fc-tue fc-future" data-date="2020-03-24">24</td><td class="fc-day-number fc-wed fc-future" data-date="2020-03-25">25</td><td class="fc-day-number fc-thu fc-future" data-date="2020-03-26">26</td><td class="fc-day-number fc-fri fc-future" data-date="2020-03-27">27</td><td class="fc-day-number fc-sat fc-future" data-date="2020-03-28">28</td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 97px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2020-03-29"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2020-03-30"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2020-03-31"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2020-04-01"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2020-04-02"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2020-04-03"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2020-04-04"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-number fc-sun fc-future" data-date="2020-03-29">29</td><td class="fc-day-number fc-mon fc-future" data-date="2020-03-30">30</td><td class="fc-day-number fc-tue fc-future" data-date="2020-03-31">31</td><td class="fc-day-number fc-wed fc-other-month fc-future" data-date="2020-04-01">1</td><td class="fc-day-number fc-thu fc-other-month fc-future" data-date="2020-04-02">2</td><td class="fc-day-number fc-fri fc-other-month fc-future" data-date="2020-04-03">3</td><td class="fc-day-number fc-sat fc-other-month fc-future" data-date="2020-04-04">4</td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 98px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-future" data-date="2020-04-05"></td><td class="fc-day fc-widget-content fc-mon fc-other-month fc-future" data-date="2020-04-06"></td><td class="fc-day fc-widget-content fc-tue fc-other-month fc-future" data-date="2020-04-07"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2020-04-08"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2020-04-09"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2020-04-10"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2020-04-11"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-number fc-sun fc-other-month fc-future" data-date="2020-04-05">5</td><td class="fc-day-number fc-mon fc-other-month fc-future" data-date="2020-04-06">6</td><td class="fc-day-number fc-tue fc-other-month fc-future" data-date="2020-04-07">7</td><td class="fc-day-number fc-wed fc-other-month fc-future" data-date="2020-04-08">8</td><td class="fc-day-number fc-thu fc-other-month fc-future" data-date="2020-04-09">9</td><td class="fc-day-number fc-fri fc-other-month fc-future" data-date="2020-04-10">10</td><td class="fc-day-number fc-sat fc-other-month fc-future" data-date="2020-04-11">11</td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div></div></div></td></tr></tbody></table></div></div></div>
+
+                        </div>
+
+                        <div id="lichkieumoi" class="tab-pane fade" ng-controller="testCtrl">
+
+                            Update
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script type="text/ng-template" id="AddXulyContent.html">
+        <style>
+            .my-drop-zone {
+                border: dotted 3px lightgray;
+            }
+
+            .nv-file-over {
+                border: dotted 3px red;
+            }
+            /* Default class applied to drop zones on over */
+            .another-file-over-class {
+                border: dotted 3px green;
+            }
+        </style>
+        <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Ý kiến xử lý <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Loại xử lý:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" ng-model="$ctrl.items.CHUCVU">
+                                <option value="0">Ý kiến chung</option>
+                                <option value="1">Yêu cầu thực hiện</option>
+                                <option value="2">Trao đổi riêng</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Nội dung:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea style="height:100px;" class="form-control" ng-model="$ctrl.items.USERNAME" ng-required="true" placeholder="Ý kiến xử lý"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Gửi tới:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <ui-select multiple ng-model="ctrol.multichosse" style="height:auto;" tagging="transformFunction" theme="bootstrap" class="inputtable" title="Chọn giá trị" data-toggle="tooltip" data-placement="left">
+                                <ui-select-match allow-clear="true" placeholder="Chọn giá trị...">{{$item.values}}</ui-select-match>
+                                <ui-select-choices style="margin: 0 2px 0 0; padding-bottom:0px; padding-top:0px;" repeat="i in dirlist|filter:{'values':$viewValue, 'type': ctrol.dirtype}">
+                                    {{i.values}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Công khai:</label>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <label class="inline">
+                                <input type="checkbox" class="ace">
+                                <span class="lbl"></span>
+                            </label>
+                            @*<input type="checkbox" class="form-control" ng-model="$ctrl.items.KHOA" style="height:20px;" />*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">File đính kèm:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9" nv-file-drop="" uploader="uploader" filters="docFilter1">
+                            <div class="col-md-12">
+                                <div ng-show="uploader.isHTML5">
+                                    <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                                    <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                                        Kéo thả vào đây
+                                    </div>
+                                </div>
+                                <input type="file" nv-file-select="" uploader="uploader" />
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr ng-repeat="item in uploader.queue">
+                                            <td><strong>{{ item.file.name }}</strong></td>
+                                            <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                            <td class="text-center;" style="width:50px;">
+                                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                            </td>
+                                            <td style="width:50px;">
+                                                <button type="button" class="btn btn-xs btn-danger " ng-click="item.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> Xóa
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <div>
+                                        Tiến trình:
+                                        <div class="progress" style="">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-send" title="Ghi nhận và thêm mới"></i> Gửi</button>
+                <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+            </div>
+        </form>
+    </script>
+    <script type="text/ng-template" id="PhanhoiContent.html">
+        <style>
+            .my-drop-zone {
+                border: dotted 3px lightgray;
+            }
+
+            .nv-file-over {
+                border: dotted 3px red;
+            }
+            /* Default class applied to drop zones on over */
+            .another-file-over-class {
+                border: dotted 3px green;
+            }
+        </style>
+        <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Ý kiến phản hồi <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Nội dung:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea style="height:100px;" class="form-control" ng-model="$ctrl.items.USERNAME" ng-required="true" placeholder="Ý kiến xử lý"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">File đính kèm:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9" nv-file-drop="" uploader="uploader" filters="docFilter1">
+                            <div class="col-md-12">
+                                <div ng-show="uploader.isHTML5">
+                                    <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                                    <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                                        Kéo thả vào đây
+                                    </div>
+                                </div>
+                                <input type="file" nv-file-select="" uploader="uploader" />
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr ng-repeat="item in uploader.queue">
+                                            <td><strong>{{ item.file.name }}</strong></td>
+                                            <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                            <td class="text-center;" style="width:50px;">
+                                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                            </td>
+                                            <td style="width:50px;">
+                                                <button type="button" class="btn btn-xs btn-danger " ng-click="item.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> Xóa
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <div>
+                                        Tiến trình:
+                                        <div class="progress" style="">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-send" title="Ghi nhận và thêm mới"></i> Gửi</button>
+                <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+            </div>
+        </form>
+    </script>
+</div>
+<script src="~/MyScript/lichcoquan/LichcoquanCtrl.js"></script>
+<script type="text/ng-template" id="xulythemlichcoquan.html">
+    @Html.Partial("~/Views/Lichcoquan/Themlichcoquan.cshtml")
+</script>
+
+

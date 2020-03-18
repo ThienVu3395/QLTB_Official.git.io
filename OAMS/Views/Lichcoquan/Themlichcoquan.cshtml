@@ -1,0 +1,221 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    .my-drop-zone {
+        border: dotted 3px lightgray;
+    }
+
+    .nv-file-over {
+        border: dotted 3px red;
+    }
+    /* Default class applied to drop zones on over */
+    .another-file-over-class {
+        border: dotted 3px green;
+    }
+
+    .form-horizontal .control-label {
+        text-align: left !important;
+    }
+</style>
+<form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" style="height: calc(100%) !important; " ng-valid name="formedit">
+    <div class="modal-header">
+        <h3 style="font-size: 16px;" class="modal-title" id="modal-title">Thêm Lịch Cơ Quan <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+    </div>
+    <div class="modal-body" id="modal-body" style="height: calc(100% - 32px) !important; padding: 4px 10px;">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <h4 class="header green">Thông tin lịch cơ quan</h4>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Tiêu đề:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <input class="form-control" placeholder="..." />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Nội dung:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <textarea style="height:70px;" class="form-control" placeholder="Trích yếu"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Thời gian bắt đầu:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="ctrol.values" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+
+                    </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Thời gian kết thúc:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="ctrol.values" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Địa điểm:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <textarea style="height:40px;" class="form-control" placeholder="Địa điểm"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Thành phần: <i class="menu-icon fa fa-users"></i></label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <textarea style="height:40px;" class="form-control" placeholder="Thành phần tham dự"></textarea>
+                       
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Chủ trì:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <textarea style="height:40px;" class="form-control" placeholder="Người chủ trì"></textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Gửi duyệt:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <label class="inline">
+                            <input type="checkbox" class="ace">
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Có hiệu lực ngay:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <label class="inline">
+                            <input type="checkbox" class="ace">
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+                </div>
+
+
+
+
+             
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">File đính kèm:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-10" nv-file-drop="" uploader="uploader" filters="docFilter1">
+                        <div class="col-md-12">
+                            <input type="file" nv-file-select="" uploader="uploader" />
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table">
+                                <tbody>
+                                    <tr ng-repeat="item in uploader.queue">
+                                        <td><strong>{{ item.file.name }}</strong></td>
+                                        <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                        <td class="text-center;" style="width:50px;">
+                                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                            <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <button type="button" class="btn btn-xs btn-danger " ng-click="item.remove()">
+                                                <span class="glyphicon glyphicon-trash"></span> Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                          
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12" style="border-left: solid 1px #808080;">
+                <h4 class="header green">Gửi thông báo</h4>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-2">Gửi SMS:</label>
+                    <div class="col-md-2 col-sm-2 col-xs-9">
+                        <label class="inline">
+                            <input type="checkbox" class="ace">
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-2">Gửi Tin Nhắn:</label>
+                    <div class="col-md-2 col-sm-2 col-xs-9">
+                        <label class="inline">
+                            <input type="checkbox" class="ace">
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-2">Gửi Mail:</label>
+                    <div class="col-md-2 col-sm-2 col-xs-9">
+                        <label class="inline">
+                            <input type="checkbox" class="ace">
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+                </div>
+                <h4 class="header green">Gửi thông báo trước khi sự kiện diển ra</h4>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">SMS:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <select class="form-control" id="form-field-select-1">
+                            <option value=""></option>
+                            <option value="AL">15 Phút</option>
+                            <option value="AK">30 Phú</option>
+                            <option value="AL">45 Phút</option>
+                            <option value="AK">60 Phú</option>
+                            <option value="WI">1 Ngày</option>
+                            <option value="WY">2 Ngày</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Tin nhắn:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <select class="form-control" id="form-field-select-1">
+                            <option value=""></option>
+                            <option value="AL">15 Phút</option>
+                            <option value="AK">30 Phú</option>
+                            <option value="AL">45 Phút</option>
+                            <option value="AK">60 Phú</option>
+                            <option value="WI">1 Ngày</option>
+                            <option value="WY">2 Ngày</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Email:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <select class="form-control" id="form-field-select-1">
+                            <option value=""></option>
+                            <option value="AL">15 Phút</option>
+                            <option value="AK">30 Phú</option>
+                            <option value="AL">45 Phút</option>
+                            <option value="AK">60 Phú</option>
+                            <option value="WI">1 Ngày</option>
+                            <option value="WY">2 Ngày</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
+                        <button class="btn btn-sm btn-info" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận và thêm mới</button>
+                        <button class="btn btn-sm btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
+                        <button ng-click="$ctrl.cancel()" class="btn btn-sm btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</form>

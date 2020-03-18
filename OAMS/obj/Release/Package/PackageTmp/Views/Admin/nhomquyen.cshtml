@@ -1,0 +1,193 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+<div ng-controller="nhomquyenCtrl">
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">CSS</a>
+            </li>
+            <li>Cấu hình hệ thống</li>
+            <li class="active" style="font-weight:bold;">Nhóm quyền</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+        </div><!-- /.nav-search -->
+    </div>
+    <div id="mescontent" class="page-content">
+        <div class="row" style="height: calc(100%);">
+            <div class="col-sm-4 col-xs-4" style="height: calc(100%);min-height:350px;border-right:solid 1px #F1F1F1">
+                <h4 style="border-bottom:dotted 1px #F1F1F1; font-size:11pt;margin-top: 0px;">Nhóm quyền: </h4>
+                <div style="padding-top:2px;padding-bottom:2px !important;border-bottom:solid 1px #F1F1F1;">
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+                        <button ng-click="newdata()" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file"></i> Thêm mới nhóm</button>
+                        <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit"></i> Sửa nhóm</button>
+                    </div>
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+
+                        <button ng-click="deletedata()" ng-disabled="actionbp" class="btn btn-xs btn-danger" style="font-size:9pt;"><i class="fa fa-remove"></i> Xóa</button>
+                    </div>
+                </div>
+                <div class="row" style="overflow-y: auto; height: calc(100% - 45px); padding-right:5px">
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" style="margin-bottom:0px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 100px; text-align:center">Mã nhóm</th>
+                                <th>Tên nhóm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="irow in dataInnit" ng-click="selectrows(irow)" class="{{ irow.MANHOM === idselect.MANHOM ?'selected':''}}">
+                                <td style="text-align:left"><span ng-bind="irow.MANHOM"></span></td>
+                                <td>
+                                    <span ng-bind="irow.TENNHOM"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" style="height:25px;">
+                    <div class="col-xs-12">
+                        <ul style="margin-top:2px;margin-bottom:0px;" uib-pagination previous-text="Trước" next-text="Sau" ng-change="pageChanged()" total-items="TotalItems" ng-model="CurrentPage" items-per-page="perPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xs-8" style="height: calc(100%);min-height:350px;">
+                <h4 style="border-bottom:dotted 1px #F1F1F1; font-size:11pt;margin-top: 0px;">Danh sách người dùng trong nhóm: </h4>
+                <div style="padding-top:2px;padding-bottom:2px !important;border-bottom:solid 1px #F1F1F1;">
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+                        <button ng-click="newdatauser()" ng-disabled="actionbp" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-user-plus"></i> Thêm user</button>
+                    </div>
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+
+                        <button ng-click="deletedatauser()" ng-disabled="action" class="btn btn-xs btn-danger" style="font-size:9pt;"><i class="fa fa-user-times"></i> Loại user</button>
+                    </div>
+                </div>
+                <div class="row" style="overflow-y: auto; height: calc(100% - 45px);">
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" style="margin-bottom:0px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 150px; text-align:center">Tên đăng nhập</th>
+                                <th>Họ và tên</th>
+                                <th>Email</th>
+                                <th style="width: 100px;text-align:center">Khóa</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="irow in dataInnitu" ng-click="selectrowsu(irow)" class="{{ irow.USERNAME === idselectu.USERNAME ?'selected':''}}">
+                                <td style="text-align:left">{{irow.USERNAME}}</td>
+                                <td>
+                                    <span ng-bind="irow.HOLOT + ' ' + irow.TEN"></span>
+                                </td>
+                                <td>
+                                    {{irow.EMAIL}}
+                                </td>
+                                <td style="text-align:center">
+                                    {{irow.KHOA? 'Khóa': '-'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" style="height:25px;">
+                    <div class="col-xs-12">
+                        <ul style="margin-top:2px;margin-bottom:0px;" uib-pagination previous-text="Trước" next-text="Sau" ng-change="pageuChanged()" total-items="TotalItemsu" ng-model="CurrentPageu" items-per-page="perPageu" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/ng-template" id="nhanvienContent.html">
+            <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Thêm user và0 nhóm: <span ng-bind="$ctrl.items.TENNHOM"></span> <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+                </div>
+                <div class="modal-body" style="height: 500px;" id="modal-body">
+                    <div class="row" style="height: 500px;">
+                        <div class="col-sm-4 col-xs-4" style="height: calc(100%);min-height:350px;border-right:solid 1px #F1F1F1">
+                            <div class="row" style="overflow-y: scroll; height: calc(100% - 10px);">
+                                <div style="width:99%">
+                                    <span ng-if="doing_async">...loading...</span>
+                                    <abn-tree tree-data="$ctrl.datatree" tree-control="$ctrl.my_tree" icon-leaf="fa fa-group" icon-expand="fa fa-building" icon-collapse="fa fa-building"
+                                              on-select="$ctrl.my_tree_handler(branch)" expand-level="1" selected-id="$ctrl.nodeselectID"></abn-tree>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-8 col-xs-8" style="height: calc(100%);min-height:350px;">
+                            <div class="row" style="overflow-y: auto; height: calc(100% - 45px);">
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer" style="margin-bottom:0px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 100px; text-align:center">Username</th>
+                                            <th>Họ và tên</th>
+                                            <th style="width: 100px;text-align:center">Khóa</th>
+                                            <th style="width: 40px;text-align:center">
+                                                <input style="width:20px;height:20px;" ng-model="$ctrl.checkall" ng-change="$ctrl.checkallcheck()" type="checkbox" />
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="irow in $ctrl.dataInnit" ng-click="selectrows(irow)" class="{{ irow.USERNAME === $ctrl.idselect.USERNAME ?'selected':''}}">
+                                            <td style="text-align:left">{{irow.USERNAME}}</td>
+                                            <td>
+                                                <span ng-bind="irow.HOLOT + ' ' + irow.TEN"></span>
+                                            </td>
+                                            <td style="text-align:center">
+                                                {{irow.KHOA? 'Khóa': '-'}}
+                                            </td>
+                                            <td style="width: 40px;text-align:center">
+                                                <input style="width:20px;height:20px;" type="checkbox" ng-model="irow.CHECKED" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" style="height:25px;">
+                                <div class="col-xs-12">
+                                    <ul style="margin-top:2px;margin-bottom:0px;" uib-pagination previous-text="Trước" next-text="Sau" ng-change="$ctrl.pageChanged()" total-items="$ctrl.TotalItems" ng-model="$ctrl.CurrentPage" items-per-page="$ctrl.perPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" title="Ghi nhận thông tin"></i> Ghi nhận</button>
+                    <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+                </div>
+            </form>
+        </script>
+        <script type="text/ng-template" id="nhomContent.html">
+            <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Thông tin nhóm <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Mã nhóm:*</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-disabled="!$ctrl.reqpass" ng-model="$ctrl.items.MANHOM" ng-required="true" placeholder="Tên đăng nhập">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Tên nhóm:*</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-model="$ctrl.items.TENNHOM" ng-required="true" placeholder="Họ và tên">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" title="Ghi nhận thông tin"></i> Ghi nhận</button>
+                    <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-floppy-o" title="Ghi nhận và thêm mới"></i> Ghi nhận và thêm mới</button>
+                    <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+                </div>
+            </form>
+        </script>
+    </div>
+</div>
+@Html.IncludeVersionedJs("~/MyScript/admin/nhomquyenCtrl.js")
+

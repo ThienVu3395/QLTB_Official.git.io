@@ -1,0 +1,357 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+<style>
+    .sidebar.menu-min #panelFds > div {
+        display: none;
+    }
+
+    .sidebar.menu-min #panelFds > h4 > span {
+        display: none;
+    }
+
+    .message-item > div.summary {
+        margin-left: 1px !important;
+        /*max-width: calc(100% - 280px) !important;*/
+    }
+
+    .message-item > span.time {
+        display: inline-block;
+        width: 90px;
+        height: 35px;
+    }
+
+    .message-star {
+        margin: 2px 0px 0 0px;
+    }
+
+    .message-item > div.menurows {
+        display: none;
+    }
+    /*.message-item > div.summary > span.text {
+
+    }*/
+    .message-item:hover > div.summary {
+        /*max-width: calc(100%-330px) !important;*/
+    }
+
+    .message-item:hover > span.time {
+        display: none !important;
+    }
+
+    .message-item:hover > div.menurows {
+        display: block !important;
+    }
+
+    .form-horizontal .control-label {
+        text-align: left !important;
+    }
+    /*gallary*/
+    .arrow {
+        cursor: pointer;
+        display: block;
+        height: 40px;
+        margin-top: -35px;
+        outline: medium none;
+        position: absolute;
+        top: calc(50%) !important;
+        width: 40px;
+        z-index: 5;
+    }
+
+        .arrow.prev {
+            /*background-image: url("../images/prev.png");*/
+            left: 20px;
+            font-size: 40pt;
+            opacity: 0.2;
+            transition: all 0.2s linear 0s;
+        }
+
+        .arrow.next {
+            /*background-image: url("../images/next.png");*/
+            opacity: 0.2;
+            font-size: 40pt;
+            right: 20px;
+            transition: all 0.2s linear 0s;
+        }
+
+        .arrow.prev:hover {
+            opacity: 1;
+            color: blue;
+        }
+
+        .arrow.next:hover {
+            opacity: 1;
+            color: blue;
+        }
+
+    .navgallary {
+        bottom: -4px;
+        display: block;
+        height: 48px;
+        left: 0;
+        margin: 0 auto;
+        padding: 1em 0 0.8em;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        width: 100%;
+        z-index: 5;
+    }
+
+        .navgallary li {
+            border: 2px solid #AAAAAA;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            margin: 0 8px;
+            position: relative;
+            width: 50px;
+        }
+
+            .navgallary li.active {
+                border: 2px solid blue;
+            }
+
+            .navgallary li img {
+                width: calc(90%);
+            }
+
+    .slider {
+        border: 15px solid #FFFFFF;
+        border-radius: 5px;
+        height: 400px;
+        margin: 20px auto;
+        position: relative;
+        width: calc(95%) !important;
+        -webkit-perspective: 1000px;
+        -moz-perspective: 1000px;
+        -ms-perspective: 1000px;
+        -o-perspective: 1000px;
+        perspective: 1000px;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        -o-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(95%) !important;
+    }
+
+        .slide.ng-hide-add {
+            opacity: 1;
+            -webkit-transition: 1s linear all;
+            -moz-transition: 1s linear all;
+            -o-transition: 1s linear all;
+            transition: 1s linear all;
+            /*-webkit-transform: rotateX(50deg) rotateY(30deg);
+        -moz-transform: rotateX(50deg) rotateY(30deg);
+        -ms-transform: rotateX(50deg) rotateY(30deg);
+        -o-transform: rotateX(50deg) rotateY(30deg);
+        transform: rotateX(50deg) rotateY(30deg);*/
+            -webkit-transform-origin: right top 0;
+            -moz-transform-origin: right top 0;
+            -ms-transform-origin: right top 0;
+            -o-transform-origin: right top 0;
+            transform-origin: right top 0;
+        }
+
+            .slide.ng-hide-add.ng-hide-add-active {
+                opacity: 0;
+            }
+
+        .slide.ng-hide-remove {
+            -webkit-transition: 1s linear all;
+            -moz-transition: 1s linear all;
+            -o-transition: 1s linear all;
+            transition: 1s linear all;
+            display: block !important;
+            opacity: 0;
+        }
+
+            .slide, .slide.ng-hide-remove.ng-hide-remove-active {
+                opacity: 1;
+            }
+</style>
+<div ng-controller="CheckAnswerCtrl">
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">OAMS</a>
+            </li>
+            <li>Kiểm tra</li>
+            <li class="active" style="font-weight:bold;">Dữ liệu khảo sát</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            @*<form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>*@
+        </div><!-- /.nav-search -->
+    </div>
+    <div id="mescontent" class="page-content" style="padding-bottom: 1px !important;">
+        <div class="row" style="height: calc(100% );">
+            <div class="col-sm-12 col-xs-12" style="height: calc(100%);min-height:350px;">
+                <div class="col-sm-2 col-xs-2" style="height: calc(100%); border-right: 1px dotted #E2E2E2;">
+                    <div class="row" style="padding-left: 10px; padding-bottom: 10px;">
+                        <select class="input" style="width:calc(100% - 10px);">
+                            <option>-------Chọn tỉnh-------</option>
+                            <option ng-repeat="item in listCity">{{item.VALUENAME}}</option>
+                        </select>
+                    </div>
+                    <div class="row" style="padding-left: 10px; padding-bottom: 10px;">
+                        <span class="input-icon" style="width:calc(100% - 10px);">
+                            <input type="text" ng-model="searchText" style="width:100%;height:30px;font-size: 10pt;" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                            <i class="ace-icon fa fa-search nav-search-icon"></i>
+                        </span>
+                    </div>
+                    <div class="row" style="padding-left: 10px; overflow-y: auto; height: calc(100% - 70px)">
+                        <ul class="list-unstyled spaced">
+                            <li ng-repeat="ifil in datafilter|filter:searchText" ng-click="checkfilter(ifil)" class="{{filterkey===ifil.CODE?'text-warning blue':'purple' }}">
+                                <i class="ace-icon fa {{filterkey===ifil.CODE?'fa-check-square-o blue':'fa-square-o purple' }} bigger-110 "></i>
+                                {{ifil.VALUENAME}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-xs-10" style="height: calc(100%);">
+                    <form class="form-horizontal form-label-left" style="height: calc(100%);">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-3">Chương trình:</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-9">
+                                        <select class="form-control">
+                                            <option>Chương trình 1</option>
+                                            <option>Chương trình 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="btn-group" style="margin-top:5px;font-size:9pt;">
+                                    <button ng-click="newdata()" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
+                                    <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit"></i> Sửa nhóm</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="height: calc(100% - 40px); border-top: 1px dotted #E2E2E2; ">
+                            <div class="col-sm-6 col-xs-6" style="height: calc(100%); border-right: 1px dotted #E2E2E2; overflow-y:scroll; ">
+                                <ul class="list-unstyled spaced2" style="width:100%">
+                                    <li style="width:100%;min-height:55px;">
+                                        <i class="ace-icon fa fa-check bigger-110 green"></i>
+                                        Thời gian mở cửa nhà hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width: 100%; min-height: 55px; ">
+                                        <i class="ace-icon fa fa-times bigger-110 red"></i>
+                                        Các loại bia có trưng bày tại của hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width:100%;min-height:55px;">
+                                        <i class="ace-icon fa fa-check bigger-110 green"></i>
+                                        Thời gian mở cửa nhà hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width: 100%; min-height: 55px; ">
+                                        <i class="ace-icon fa fa-times bigger-110 red"></i>
+                                        Các loại bia có trưng bày tại của hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width:100%;min-height:55px;">
+                                        <i class="ace-icon fa fa-check bigger-110 green"></i>
+                                        Thời gian mở cửa nhà hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width: 100%; min-height: 55px; ">
+                                        <i class="ace-icon fa fa-times bigger-110 red"></i>
+                                        Các loại bia có trưng bày tại của hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width:100%;min-height:55px;">
+                                        <i class="ace-icon fa fa-check bigger-110 green"></i>
+                                        Thời gian mở cửa nhà hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width: 100%; min-height: 55px; ">
+                                        <i class="ace-icon fa fa-times bigger-110 red"></i>
+                                        Các loại bia có trưng bày tại của hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width:100%;min-height:55px;">
+                                        <i class="ace-icon fa fa-check bigger-110 green"></i>
+                                        Thời gian mở cửa nhà hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                    <li style="width: 100%; min-height: 55px; ">
+                                        <i class="ace-icon fa fa-times bigger-110 red"></i>
+                                        Các loại bia có trưng bày tại của hàng?
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <input class="form-control" placeholder="..." />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6 col-xs-6" style="height: calc(100%);">
+                                <div class="col-sm-12" style="height: calc(100%);">
+                                    <div style="height: calc(100%);">
+                                        <div class="container slider col-sm-12" style="position:absolute;">
+                                            <!-- enumerate all photos -->
+                                            <img ng-repeat="photo in photos" class="slide" ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" ng-src="{{photo.src}}" />
+                                            <!-- prev / next controls -->
+                                            <a class="arrow prev" href="#" ng-click="showPrev()"><i class="ace-icon fa fa-caret-left"></i></a>
+                                            <a class="arrow next" href="#" ng-click="showNext()"><i class="ace-icon fa fa-caret-right"></i></a>
+                                            <!-- extra navigation controls -->
+                                            <ul class="navgallary">
+                                                <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
+                                                    <img ng-src="{{photo.src}}" alt="{{photo.desc}}" title="{{photo.desc}}" ng-click="showPhoto($index);" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@Html.IncludeVersionedJs("~/MyScript/checkdata/CheckAnswerCtrl.js")
+

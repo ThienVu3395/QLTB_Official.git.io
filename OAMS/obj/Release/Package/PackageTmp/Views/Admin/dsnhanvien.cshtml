@@ -1,0 +1,218 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+<div ng-controller="dsnhanvienCtrl">
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">CSS</a>
+            </li>
+            <li>Cấu hình hệ thống</li>
+            <li class="active" style="font-weight:bold;">Danh sách nhân viên</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            @*<form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                    </span>
+                </form>*@
+        </div><!-- /.nav-search -->
+    </div>
+    <div id="mescontent" class="page-content">
+        <div class="row" style="height: calc(100%);">
+            <div class="col-sm-4 col-xs-4" style="height: calc(100%);min-height:350px;border-right:solid 1px #F1F1F1">
+                <h4 style="border-bottom:dotted 1px #F1F1F1; font-size:11pt;margin-top: 0px;">Bộ phận: </h4>
+                <div style="padding-top:2px;padding-bottom:2px !important;border-bottom:solid 1px #F1F1F1;">
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+                        <button ng-click="newdata()" ng-disabled="actionbp" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file"></i> Thêm mới bp</button>
+                        <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit"></i> Sửa bp</button>
+                    </div>
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+
+                        <button ng-click="deletedata()" ng-disabled="actionbp" class="btn btn-xs btn-danger" style="font-size:9pt;"><i class="fa fa-remove"></i> Xóa</button>
+                    </div>
+                </div>
+                <div class="row" style="overflow-y: scroll; height: calc(100% - 10px);">
+                    <div style="width:99%">
+                        <span ng-if="doing_async">...loading...</span>
+                        <abn-tree tree-data="datatree" tree-control="my_tree" icon-leaf="fa fa-group" icon-expand="fa fa-building" icon-collapse="fa fa-building"
+                                  on-select="my_tree_handler(branch)" expand-level="1" selected-id="nodeselectID"></abn-tree>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-8 col-xs-8" style="height: calc(100%);min-height:350px;">
+                <h4 style="border-bottom:dotted 1px #F1F1F1; font-size:11pt;margin-top: 0px;">Danh sách nhân viên: </h4>
+                <div style="padding-top:2px;padding-bottom:2px !important;border-bottom:solid 1px #F1F1F1;">
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+                        <button ng-click="newdatauser()" ng-disabled="actionbp" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-user-plus"></i> Thêm mới</button>
+                        <button ng-click="editdatauser()" ng-disabled="action" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-pencil-square-o"></i> Sửa nhân viên</button>
+                    </div>
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+
+                        <button ng-click="deletedatauser()" ng-disabled="action" class="btn btn-xs btn-danger" style="font-size:9pt;"><i class="fa fa-user-times"></i> Khóa</button>
+                    </div>
+                    <div class="btn-group" style="margin-top:-10px;font-size:9pt;">
+
+                        <button ng-click="changepass()" ng-disabled="action" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-pencil-square-o"></i> Đổi mật khẩu</button>
+                    </div>
+                </div>
+                <div class="row" style="overflow-y: auto; height: calc(100% - 45px);">
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" style="margin-bottom:0px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 150px; text-align:center">Tên đăng nhập</th>
+                                <th>Họ và tên</th>
+                                <th>Email</th>
+                                <th style="width: 100px;text-align:center">Khóa</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="irow in dataInnit" ng-click="selectrows(irow)" class="{{ irow.USERNAME === idselect.USERNAME ?'selected':''}}">
+                                <td style="text-align:left">{{irow.USERNAME}}</td>
+                                <td>
+                                    <span ng-bind="irow.HOLOT + ' ' + irow.TEN"></span>
+                                </td>
+                                <td>
+                                    {{irow.EMAIL}}
+                                </td>
+                                <td style="text-align:center">
+                                    {{irow.KHOA? 'Khóa': '-'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" style="height:25px;">
+                    <div class="col-xs-12">
+                        <ul style="margin-top:2px;margin-bottom:0px;" uib-pagination previous-text="Trước" next-text="Sau" ng-change="pageChanged()" total-items="TotalItems" ng-model="CurrentPage" items-per-page="perPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/ng-template" id="nhanvienContent.html">
+            <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Thông tin nhân viên <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <div class="row">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Tên đăng nhập:*</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-disabled="!$ctrl.reqpass" ng-model="$ctrl.items.USERNAME" ng-required="true" placeholder="Tên đăng nhập">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">{{$ctrl.reqpass?'Mật khẩu:*':'Mật khẩu mới:'}}</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="password" class="form-control" ng-model="$ctrl.items.MATKHAU" ng-required="$ctrl.reqpass" placeholder="Mật khẩu">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Xác nhận mật khẩu:{{$ctrl.reqpass?'*':''}}</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="password" class="form-control" ng-model="$ctrl.items.MATKHAU1" ng-required="$ctrl.reqpass" placeholder="Xác nhận">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Họ và tên lót:*</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-model="$ctrl.items.HOLOT" ng-required="true" placeholder="Họ và tên">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Tên:*</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-model="$ctrl.items.TEN" ng-required="true" placeholder="Họ và tên">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Email:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-model="$ctrl.items.EMAIL" ng-required="true" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Chức vụ:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <select class="form-control" ng-model="$ctrl.items.CHUCVU">
+                                    <option value="">-----Chọn------</option>
+                                    <option ng-repeat="cv in $ctrl.dschucvu" value="{{cv.MACHUCVU}}">{{cv.TENCHUCVU}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Bộ phận:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <select class="form-control" ng-model="$ctrl.items.BOPHAN" ng-required="true">
+                                    <option value="">-----Chọn------</option>
+                                    <option ng-repeat="cv in $ctrl.dsbophan" value="{{cv.MAPHONG}}">{{cv.DVQUANLY? '-':''}}{{cv.TENPHONG}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Khóa:</label>
+                            <div class="col-md-1 col-sm-1 col-xs-1">
+                                <input type="checkbox" class="form-control" ng-model="$ctrl.items.KHOA" style="height:20px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" title="Ghi nhận thông tin"></i> Ghi nhận</button>
+                    <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-floppy-o" title="Ghi nhận và thêm mới"></i> Ghi nhận và thêm mới</button>
+                    <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+                </div>
+            </form>
+        </script>
+        <script type="text/ng-template" id="bophanContent.html">
+            <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Thông tin phòng ban <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Cơ quan:</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <select class="form-control" ng-model="$ctrl.items.DVQUANLY">
+                                    <option value="">-----Là cơ quan------</option>
+                                    <option ng-repeat="cv in $ctrl.dsbophan" value="{{cv.MAPHONG}}">{{cv.TENPHONG}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Mã phòng:*</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-disabled="!$ctrl.reqpass" ng-model="$ctrl.items.MAPHONG" ng-required="true" placeholder="Tên đăng nhập">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-3">Tên phòng:*</label>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <input type="text" class="form-control" ng-model="$ctrl.items.TENPHONG" ng-required="true" placeholder="Họ và tên">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" title="Ghi nhận thông tin"></i> Ghi nhận</button>
+                    <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-floppy-o" title="Ghi nhận và thêm mới"></i> Ghi nhận và thêm mới</button>
+                    <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+                </div>
+            </form>
+        </script>
+    </div>
+</div>
+@Html.IncludeVersionedJs("~/MyScript/admin/dsnhanvienCtrl.js")

@@ -1,0 +1,1021 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+<style>
+    .profile-activity:hover {
+        background-color: white !important;
+    }
+</style>
+<div style="height:calc(100%);" ng-controller="CongviecCtrl">
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">OAMS</a>
+            </li>
+            <li>Công việc</li>
+            <li class="active" style="font-weight:bold;">Danh sách công việc</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+
+        </div><!-- /.nav-search -->
+    </div>
+    <div id="mescontent" class="page-content" style="padding-bottom: 1px !important; height: calc(100%)">
+        <div class="row" style="height: calc(100%);">
+            <div class="col-sm-4 col-xs-12" style="height: calc(100% ); min-height: 350px; border-right: dotted 1px #F1F1F1;">
+                <div class="row header widget-header-small" style="margin-top:0px;margin-bottom:0px;" >
+                    <h3 class="col-sm-8 smaller lighter blue" style="margin-top:0px;">
+                        <span class="">
+                            <i class="ace-icon fa fa-bars"></i>
+                            Danh sách
+                        </span><!-- /.col -->
+                    </h3>
+                    <div class="widget-toolbar">
+                        @*<a href="#" data-toggle="tooltip" title="Thêm mới">
+                            <i class="ace-icon fa fa-sticky-note bigger-125"></i>
+                        </a>*@
+                        <button ng-click="themcongviec()" class="btn btn-xs btn-info btn-white" data-toggle="tooltip" title="Thêm công việc mới">
+                            <i class="fa fa-1x fa fa-sticky-note bigger-110 icon-only"></i> Thêm mới
+                        </button>
+                    </div>
+                </div>
+                    
+                    <div class="row" style="height: calc(100% - 35px);">
+                        <div class="col-sm-12 col-xs-12" style="border-bottom: dotted 1px #F1F1F1; height: 35px;">
+                            <div class="pull-left">
+
+                                <div class="btn-group " style="margin-top: 2px; margin-bottom: 0px;">
+                                    <input type="checkbox" style="width:18px;height:18px;margin-left:8px;" />
+                                </div>
+                                <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
+                                    <button class="btn btn-sm btn-info btn-white"><i class="fa fa-1x fa-filter bigger-130 icon-only"></i></button>
+
+                                    <button data-toggle="dropdown" class="btn btn-sm btn-info btn-white dropdown-toggle" aria-expanded="false">
+                                        <span class="ace-icon fa fa-caret-down bigger-130  icon-only"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-info dropdown-menu-left">
+                                        <li>
+                                            <a href="#">Action</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">Another action</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">Something else here</a>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+                                        <li>
+                                            <a href="#">Separated link</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
+                                    
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <ul class="pagination" style="margin-top: 2px; margin-bottom: 0px; float:left; ">
+                                    <li><select style="height: 29.6px;"><option>1</option><option>2</option></select></li>
+                                </ul>
+                                <ul style="margin-top:2px;margin-bottom:0px;" uib-pagination previous-text="Trước" next-text="Sau" ng-change="pageChanged()" total-items="TotalItems" ng-model="CurrentPage" items-per-page="perPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-12 col-xs-12" style="overflow-y: scroll; height: calc(100% - 40px);">
+                            <table class="table table-striped table-hover dataTable no-footer" style="margin-bottom:0px;width:100%">
+                                <tbody>
+                                    <tr ng-click="selectrows(irow)">
+                                        <td style="width: 44px; text-align: center;padding:8px 0px 8px 4px;">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace">
+                                                <span class="lbl"></span>
+                                            </label>
+                                            <i class="message-star ace-icon fa fa-star orange2" style="margin-left: 1px; margin-right: 1px;"></i>
+                                        </td>
+                                        <td style="text-align: left; padding: 5px 0px 4px 4px;">
+                                            <div class="widget-header widget-header-small" style="background: none; padding-left:0px;border-bottom:none;">
+                                                <h5 class="widget-title smaller ">
+                                                    <span class="grey">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                                </h5>
+
+                                                <span class="widget-toolbar no-border">
+                                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                    16:22
+                                                </span>
+
+                                            </div>
+                                            <div style="font-size:9pt;">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <span class="badge">+4</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-click="selectrows(irow)">
+                                        <td style="width: 44px; text-align: center;padding:8px 0px 8px 4px;">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace">
+                                                <span class="lbl"></span>
+                                            </label>
+                                            <i class="message-star ace-icon fa fa-star-o light-grey" style="margin-left: 1px; margin-right: 1px;"></i>
+                                        </td>
+                                        <td style="text-align: left; padding: 5px 0px 4px 4px;">
+                                            <div class="widget-header widget-header-small" style="background: none; padding-left:0px;border-bottom:none;">
+                                                <h5 class="widget-title smaller ">
+                                                    <span class="grey">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                                </h5>
+
+                                                <span class="widget-toolbar no-border">
+                                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                    16:22
+                                                </span>
+
+                                            </div>
+                                            <div style="font-size:9pt;">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <span class="badge">+7</span>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr ng-click="selectrows(irow)">
+                                        <td style="width: 44px; text-align: center;padding:8px 0px 8px 4px;">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace">
+                                                <span class="lbl"></span>
+                                            </label>
+                                            <i class="message-star ace-icon fa fa-star-o light-grey" style="margin-left: 1px; margin-right: 1px;"></i>
+                                        </td>
+                                        <td style="text-align: left; padding: 5px 0px 4px 4px;">
+                                            <div class="widget-header widget-header-small" style="background: none; padding-left:0px;border-bottom:none;">
+                                                <h5 class="widget-title smaller ">
+                                                    <span class="grey">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                                </h5>
+
+                                                <span class="widget-toolbar no-border">
+                                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                    22/4/2017 16:22
+                                                </span>
+
+                                            </div>
+                                            <div style="font-size:9pt;">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr ng-click="selectrows(irow)">
+                                        <td style="width: 44px; text-align: center;padding:8px 0px 8px 4px;">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace">
+                                                <span class="lbl"></span>
+                                            </label>
+                                            <i class="message-star ace-icon fa fa-star-o light-grey" style="margin-left: 1px; margin-right: 1px;"></i>
+                                        </td>
+                                        <td style="text-align: left; padding: 5px 0px 4px 4px;">
+                                            <div class="widget-header widget-header-small" style="background: none; padding-left:0px;border-bottom:none;">
+                                                <h5 class="widget-title smaller ">
+                                                    <span class="grey">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                                </h5>
+
+                                                <span class="widget-toolbar no-border">
+                                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                    22/4/2017 16:22
+                                                </span>
+
+                                            </div>
+                                            <div style="font-size:9pt;">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr ng-click="selectrows(irow)">
+                                        <td style="width: 44px; text-align: center;padding:8px 0px 8px 4px;">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace">
+                                                <span class="lbl"></span>
+                                            </label>
+                                            <i class="message-star ace-icon fa fa-star-o light-grey" style="margin-left: 1px; margin-right: 1px;"></i>
+                                        </td>
+                                        <td style="text-align: left; padding: 5px 0px 4px 4px;">
+                                            <div class="widget-header widget-header-small" style="background: none; padding-left:0px;border-bottom:none;">
+                                                <h5 class="widget-title smaller ">
+                                                    <span class="grey">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                                </h5>
+
+                                                <span class="widget-toolbar no-border">
+                                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                    22/4/2017 16:22
+                                                </span>
+
+                                            </div>
+                                            <div style="font-size:9pt;">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr ng-click="selectrows(irow)">
+                                        <td style="width: 44px; text-align: center;padding:8px 0px 8px 4px;">
+                                            <label class="inline">
+                                                <input type="checkbox" class="ace">
+                                                <span class="lbl"></span>
+                                            </label>
+                                            <i class="message-star ace-icon fa fa-star-o light-grey" style="margin-left: 1px; margin-right: 1px;"></i>
+                                        </td>
+                                        <td style="text-align: left; padding: 5px 0px 4px 4px;">
+                                            <div class="widget-header widget-header-small" style="background: none; padding-left:0px;border-bottom:none;">
+                                                <h5 class="widget-title smaller ">
+                                                    <span class="grey">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                                </h5>
+
+                                                <span class="widget-toolbar no-border">
+                                                    <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                    22/4/2017 16:22
+                                                </span>
+
+                                            </div>
+                                            <div style="font-size:9pt;">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            <div class="col-sm-8 col-xs-12" style="height: calc(100%); min-height: 350px;">
+                <div class="row header widget-header-small" style="margin-top:0px;margin-bottom:0px; padding-right:50px">
+                    <h3 class="col-sm-8 smaller lighter blue" style="margin-top:0px;">
+                        <span class="">
+                            <i class="ace-icon fa fa-th-large"></i>
+                            Các form mẫu được khởi tạo linh hoạt...
+                        </span><!-- /.col -->
+                    </h3>
+
+                    <div class="widget-toolbar ">
+
+                        <label class="pull-right inline">
+                            <small class="muted">Khóa:</small>
+                            <input id="id-pills-stacked" type="checkbox" class="ace ace-switch ace-switch-5">
+                            <span class="lbl middle"></span>
+                        </label>
+                    </div>
+                    <div class="widget-toolbar no-border">
+                        <a href="#" data-toggle="tooltip" title="Phân công nhân sự">
+                            <i class="ace-icon fa fa-users bigger-125"></i>
+                        </a>
+                    </div>
+                    <div class="widget-toolbar no-border">
+                        <label class="pull-right inline">
+                            <small class="muted">Duyệt:</small>
+                            <input id="id-pills-stacked" type="checkbox" class="ace ace-switch ace-switch-5">
+                            <span class="lbl middle"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xs-12" style="overflow-y: auto; height: calc(100% - 45px);">
+                    <div class="widget-box transparent" id="accordion">
+                        <div class="widget-header widget-header-small">
+                            <h4 class="widget-title blue smaller">
+                                <i class="ace-icon fa fa-rss orange"></i>
+                                <a class="accordion-toggle" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    @*<i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>*@
+                                    Nội dung công việc
+                                </a>
+                            </h4>
+
+                            <div class="widget-toolbar action-buttons">
+                                <a class="accordion-toggle" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                    &nbsp;
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="widget-body panel-collapse collapse" id="collapseOne" aria-expanded="false">
+                            <div class="widget-main">
+                                <div class="profile-user-info profile-user-info-striped">
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Tên công việc </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="editable editable-click" id="username">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Yêu cầu </div>
+
+                                        <div class="profile-info-value">
+                                            <i class="fa fa-map-marker light-orange bigger-110"></i>
+                                            <span class="editable editable-click" id="country">Netherlands</span>
+                                            <span class="editable editable-click" id="city">Amsterdam</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Yêu cầu riêng </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="editable editable-click" id="login">Các form mẫu được khởi tạo linh hoạt, đơn giản cho tất cả các loại Yêu cầu - Đề xuất (Xin nghỉ, Phí Công tác, Hợp đồng, ...)</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Hạn xử lý </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="editable editable-click" id="signup">2010/06/20</span>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Trạng thái </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="editable editable-click" id="about">Editable as WYSIWYG</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Đính kèm</div>
+
+                                        <div class="profile-info-value">
+                                            <div class="btn-group " style="font-size:9pt;">
+                                                <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-pdf-o"></i> Thành viên hội đồng</a>
+                                                <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-small">
+                            <h4 class="widget-title blue smaller">
+                                <i class="ace-icon fa fa-rss orange"></i>
+                                Nội dung xử lý
+                            </h4>
+
+                            <div class="widget-toolbar action-buttons">
+                                <a href="#" class="red" ng-click="opennewXuly()">
+                                    <i class="ace-icon fa fa-commenting"></i>
+                                </a>&nbsp;
+                                <a href="#" data-action="reload">
+                                    <i class="ace-icon fa fa-refresh blue"></i>
+                                </a>
+
+
+                            </div>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main ">
+                                <div id="profile-feed-1" class="profile-feed" style="position: relative;">
+                                    <div class="profile-activity clearfix" style="padding-bottom:4px; padding-top:4px;">
+                                        <div class="pull-right action-buttons">
+                                            <a ng-click="opennewPhanhoi()" class="blue" data-placement="bottom" data-toggle="tooltip" title="Phản hồi ý kiến">
+                                                <i class="ace-icon fa fa-mail-reply bigger-125"></i>
+                                            </a>
+
+                                            <a class="red" data-placement="bottom" data-toggle="tooltip" title="Chặn ý kiến">
+                                                <i class="ace-icon fa fa-eye-slash bigger-125"></i>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <img class="pull-left" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                            <p style="margin-bottom: 2px; padding-left: 50px;text-align:justify">
+                                                <a class="user" href="#"> Susan Smith </a>
+                                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+                                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+                                            </p>
+                                            <div class="btn-group" style="font-size: 9pt; margin-left: 50px; margin-top: 0px;">
+                                                <span class="badge" style="max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    <label class="inline" data-toggle="tooltip" title="Chọn phát hành!" style="margin-bottom: 0px;font-size: 11pt;font-weight:normal;">
+                                                        <input type="checkbox" class="ace" ng-disabled="true">
+                                                        <span class="lbl"></span>
+                                                    </label>
+                                                    <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="viewfilepdf()" style="text-decoration:none;color:white; cursor:pointer;">
+                                                        <i class="fa fa-file-pdf-o"></i>
+                                                        Thành viên hội đồng
+                                                    </a>
+                                                </span>
+                                                <span class="badge" style="max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    <label class="inline" data-toggle="tooltip" title="Chọn phát hành!" style="margin-bottom: 0px;font-size: 11pt;font-weight:normal;">
+                                                        <input type="checkbox" class="ace">
+                                                        <span class="lbl"></span>
+                                                    </label>
+                                                    <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="viewfilepdf()" style="text-decoration:none;color:white; cursor:pointer;">
+                                                        <i class="fa fa-file-pdf-o"></i>
+                                                        Thành viên hội đồng
+                                                    </a>
+                                                </span>
+                                            </div>
+                                            <div class="time" style="margin-left:50px;">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                an hour ago <span>| Dành cho: </span>
+                                                <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
+                                                    <a class="btn btn-xs btn-info btn-white" style="border: none; background: none !important; padding: 1px 0px !important;">
+                                                        <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5;border-radius: 100%;max-width: 20px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                    </a>
+                                                    <a class="btn btn-xs btn-info btn-white" style="border: none; background: none !important; padding: 1px 0px !important; ">
+                                                        <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 20px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                    </a>
+                                                    <a data-toggle="dropdown" class="btn btn-xs btn-info btn-white dropdown-toggle" aria-expanded="false" style="border: none; background: none !important;">
+                                                        <span class="ace-icon fa fa-caret-down bigger-130  icon-only"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-info dropdown-menu-left">
+                                                        <li>
+                                                            <a class="btn btn-xs btn-info btn-white" style="text-align:left; border: none; background: none !important; padding: 1px 0px !important; ">
+                                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 20px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                                Nguyễn văn A
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a class="btn btn-xs btn-info btn-white" style="text-align: left; border: none; background: none !important; padding: 1px 0px !important; ">
+                                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 20px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                                Nguyễn văn A
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a class="btn btn-xs btn-info btn-white" style="text-align: left; border: none; background: none !important; padding: 1px 0px !important; ">
+                                                                <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 20px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                                Nguyễn văn A
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="timeline-item clearfix" style="margin-bottom:2px;">
+                                            <div class="timeline-info">
+                                                <a class="btn btn-xs btn-info btn-white" style="text-align:left; border: none; background: none !important; padding: 1px 0px !important; ">
+                                                    <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 30px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                </a>
+                                            </div>
+                                            <div class="widget-box transparent">
+                                                <div class="widget-body">
+                                                    <div class="widget-main" style="padding: 4px 8px;">
+                                                        <div class="pull-right">
+                                                            <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                            12:30
+                                                        </div>
+                                                        <p style="margin-bottom:0px;">
+                                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.
+                                                            <span class="badge" style="max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                                <label class="inline" data-toggle="tooltip" title="Chọn phát hành!" style="margin-bottom: 0px;font-size: 11pt;font-weight:normal;">
+                                                                    <input type="checkbox" class="ace">
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                                <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="viewfileword()" style="text-decoration:none;color:white; cursor:pointer;">
+                                                                    <i class="fa fa-file-word-o"></i>
+                                                                    Thành viên hội đồng
+                                                                </a>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="timeline-item clearfix" style="margin-bottom:2px;">
+                                            <div class="timeline-info">
+                                                <a class="btn btn-xs btn-info btn-white" style="text-align:left; border: none; background: none !important; padding: 1px 0px !important; ">
+                                                    <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 30px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                </a>
+                                            </div>
+                                            <div class="widget-box transparent">
+                                                <div class="widget-body">
+                                                    <div class="widget-main" style="padding: 4px 8px;">
+                                                        <div class="pull-right">
+                                                            <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                            12:30
+                                                        </div>
+                                                        <p style="margin-bottom:0px;">
+                                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="timeline-item clearfix" style="margin-bottom:2px;">
+                                            <div class="timeline-info">
+                                                <a class="btn btn-xs btn-info btn-white" style="text-align:left; border: none; background: none !important; padding: 1px 0px !important; ">
+                                                    <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 30px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                </a>
+                                            </div>
+                                            <div class="widget-box transparent">
+                                                <div class="widget-body">
+                                                    <div class="widget-main" style="padding: 4px 8px;">
+                                                        <div class="pull-right">
+                                                            <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                            12:30
+                                                        </div>
+                                                        <p style="margin-bottom:0px;">
+                                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.
+                                                            <span class="badge" style="max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                                <label class="inline" data-toggle="tooltip" title="Chọn phát hành!" style="margin-bottom: 0px;font-size: 11pt;font-weight:normal;">
+                                                                    <input type="checkbox" class="ace">
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                                <a data-toggle="tooltip" title="Hello Tooltip!" style="text-decoration:none;color:white; cursor:pointer;">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                    Thành viên hội đồng
+                                                                </a>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix" style="padding-bottom:4px; padding-top:4px;">
+                                        <div class="pull-right action-buttons">
+                                            <a ng-click="opennewPhanhoi()" class="blue" data-placement="bottom" data-toggle="tooltip" title="Phản hồi ý kiến">
+                                                <i class="ace-icon fa fa-mail-reply bigger-125"></i>
+                                            </a>
+
+                                            <a class="red" data-placement="bottom" data-toggle="tooltip" title="Chặn ý kiến">
+                                                <i class="ace-icon fa fa-eye-slash bigger-125"></i>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <img class="pull-left" alt="Susan Smith's avatar" src="~/Content/image/user.png">
+
+                                            <p>
+                                                <a class="user" href="#"> Susan Smith </a>
+                                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+                                            </p>
+                                            <div class="time" style="margin-left:50px;">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                2 hours ago
+                                            </div>
+                                        </div>
+
+
+                                        <div class="timeline-item clearfix" style="margin-bottom:2px;">
+                                            <div class="timeline-info">
+                                                <a class="btn btn-xs btn-info btn-white" style="text-align:left; border: none; background: none !important; padding: 1px 0px !important; ">
+                                                    <img data-toggle="tooltip" title="Hello Tooltip!" style="border: 2px solid #C9D6E5; border-radius: 100%; max-width: 30px; margin: 2px 2px !important;" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                                </a>
+                                            </div>
+                                            <div class="widget-box transparent">
+                                                <div class="widget-body">
+                                                    <div class="widget-main" style="padding: 4px 8px;">
+                                                        <div class="pull-right">
+                                                            <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                            12:30
+                                                        </div>
+                                                        <p style="margin-bottom:0px;">
+                                                            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.
+                                                            <span class="badge" style="max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                                <label class="inline" data-toggle="tooltip" title="Chọn phát hành!" style="margin-bottom: 0px;font-size: 11pt;font-weight:normal;">
+                                                                    <input type="checkbox" class="ace">
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                                <a data-toggle="tooltip" title="Hello Tooltip!" style="text-decoration:none;color:white; cursor:pointer;">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                    Thành viên hội đồng
+                                                                </a>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <i class="pull-left thumbicon fa fa-check btn-success no-hover"></i>
+                                            <a class="user" href="#"> Alex Doe </a>
+                                            joined
+                                            <a href="#">Country Music</a>
+
+                                            group.
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                5 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <i class="pull-left thumbicon fa fa-picture-o btn-info no-hover"></i>
+                                            <a class="user" href="#"> Alex Doe </a>
+                                            uploaded a new photo.
+                                            <a href="#">Take a look</a>
+
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                5 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <img class="pull-left" alt="David Palms's avatar" src="~/Content/image/user.png">
+                                            <a class="user" href="#"> David Palms </a>
+
+                                            left a comment on Alex's wall.
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                8 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <i class="pull-left thumbicon fa fa-pencil-square-o btn-pink no-hover"></i>
+                                            <a class="user" href="#"> Alex Doe </a>
+                                            published a new blog post.
+                                            <a href="#">Read now</a>
+
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                11 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <img class="pull-left" alt="Alex Doe's avatar" src="~/Content/image/user.png">
+                                            <a class="user" href="#"> Alex Doe </a>
+
+                                            upgraded his skills.
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                12 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <i class="pull-left thumbicon fa fa-key btn-info no-hover"></i>
+                                            <a class="user" href="#"> Alex Doe </a>
+
+                                            logged in.
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                12 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <i class="pull-left thumbicon fa fa-power-off btn-inverse no-hover"></i>
+                                            <a class="user" href="#"> Alex Doe </a>
+
+                                            logged out.
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                16 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-activity clearfix">
+                                        <div>
+                                            <i class="pull-left thumbicon fa fa-key btn-info no-hover"></i>
+                                            <a class="user" href="#"> Alex Doe </a>
+
+                                            logged in.
+                                            <div class="time">
+                                                <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                16 hours ago
+                                            </div>
+                                        </div>
+
+                                        <div class="tools action-buttons">
+                                            <a href="#" class="blue">
+                                                <i class="ace-icon fa fa-pencil bigger-125"></i>
+                                            </a>
+
+                                            <a href="#" class="red">
+                                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/ng-template" id="AddXulyContent.html">
+        <style>
+            .my-drop-zone {
+                border: dotted 3px lightgray;
+            }
+
+            .nv-file-over {
+                border: dotted 3px red;
+            }
+            /* Default class applied to drop zones on over */
+            .another-file-over-class {
+                border: dotted 3px green;
+            }
+        </style>
+        <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Ý kiến xử lý <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Loại xử lý:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <select class="form-control" ng-model="$ctrl.items.CHUCVU">
+                                <option value="0">Ý kiến chung</option>
+                                <option value="1">Yêu cầu thực hiện</option>
+                                <option value="2">Trao đổi riêng</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Nội dung:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea style="height:100px;" class="form-control" ng-model="$ctrl.items.USERNAME" ng-required="true" placeholder="Ý kiến xử lý"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Gửi tới:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <ui-select multiple ng-model="ctrol.multichosse" style="height:auto;" tagging="transformFunction" theme="bootstrap" class="inputtable" title="Chọn giá trị" data-toggle="tooltip" data-placement="left">
+                                <ui-select-match allow-clear="true" placeholder="Chọn giá trị...">{{$item.values}}</ui-select-match>
+                                <ui-select-choices style="margin: 0 2px 0 0; padding-bottom:0px; padding-top:0px;" repeat="i in dirlist|filter:{'values':$viewValue, 'type': ctrol.dirtype}">
+                                    {{i.values}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Công khai:</label>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                            <label class="inline">
+                                <input type="checkbox" class="ace">
+                                <span class="lbl"></span>
+                            </label>
+                            @*<input type="checkbox" class="form-control" ng-model="$ctrl.items.KHOA" style="height:20px;" />*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">File đính kèm:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9" nv-file-drop="" uploader="uploader" filters="docFilter1">
+                            <div class="col-md-12">
+                                <div ng-show="uploader.isHTML5">
+                                    <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                                    <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                                        Kéo thả vào đây
+                                    </div>
+                                </div>
+                                <input type="file" nv-file-select="" uploader="uploader" />
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr ng-repeat="item in uploader.queue">
+                                            <td><strong>{{ item.file.name }}</strong></td>
+                                            <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                            <td class="text-center;" style="width:50px;">
+                                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                            </td>
+                                            <td style="width:50px;">
+                                                <button type="button" class="btn btn-xs btn-danger " ng-click="item.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> Xóa
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <div>
+                                        Tiến trình:
+                                        <div class="progress" style="">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-send" title="Ghi nhận và thêm mới"></i> Gửi</button>
+                <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+            </div>
+        </form>
+    </script>
+    <script type="text/ng-template" id="PhanhoiContent.html">
+        <style>
+            .my-drop-zone {
+                border: dotted 3px lightgray;
+            }
+
+            .nv-file-over {
+                border: dotted 3px red;
+            }
+            /* Default class applied to drop zones on over */
+            .another-file-over-class {
+                border: dotted 3px green;
+            }
+        </style>
+        <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" ng-valid name="formedit">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Ý kiến phản hồi <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Nội dung:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <textarea style="height:100px;" class="form-control" ng-model="$ctrl.items.USERNAME" ng-required="true" placeholder="Ý kiến xử lý"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">File đính kèm:</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9" nv-file-drop="" uploader="uploader" filters="docFilter1">
+                            <div class="col-md-12">
+                                <div ng-show="uploader.isHTML5">
+                                    <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                                    <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                                        Kéo thả vào đây
+                                    </div>
+                                </div>
+                                <input type="file" nv-file-select="" uploader="uploader" />
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr ng-repeat="item in uploader.queue">
+                                            <td><strong>{{ item.file.name }}</strong></td>
+                                            <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                            <td class="text-center;" style="width:50px;">
+                                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                            </td>
+                                            <td style="width:50px;">
+                                                <button type="button" class="btn btn-xs btn-danger " ng-click="item.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> Xóa
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <div>
+                                        Tiến trình:
+                                        <div class="progress" style="">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-send" title="Ghi nhận và thêm mới"></i> Gửi</button>
+                <button class="btn btn-xs btn-warning" type="button" ng-click="$ctrl.cancel()"><i class="fa fa-sign-out" title=" Thoát"></i> Thoát</button>
+            </div>
+        </form>
+    </script>
+</div>
+
+<script type="text/ng-template" id="Addcongviec.html">
+        @Html.Partial("~/Views/Congviec/Addcongviec.cshtml")
+</script>
+@Html.IncludeVersionedJs("~/MyScript/congviec/themcongviecCtrl.js")
+<script type="text/ng-template" id="viewPDFonline.html">
+    @Html.Partial("~/Views/Viewfile/viewfilepdfonline.cshtml")
+</script>
+@Html.IncludeVersionedJs("~/MyScript/viewfile/viewfilepdfCtrl.js")
+<script type="text/ng-template" id="viewWordonline.html">
+    @Html.Partial("~/Views/Viewfile/viewfilewordonline.cshtml")
+</script>
+@Html.IncludeVersionedJs("~/MyScript/viewfile/viewfilewordCtrl.js")
+
+@Html.IncludeVersionedJs("~/MyScript/congviec/CongviecCtrl.js")
+
+
