@@ -63,206 +63,69 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div id="tintuc" class="tab-pane fade in active">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <ul class="list-unstyled spaced2">
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                </li>
+                                <div class="search-area well col-xs-12">
+                                    <div class="pull-left">
+                                        <b class="text-primary">Display</b>
 
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                </li>
+                                        &nbsp;
+                                        <div id="toggle-result-format" class="btn-group btn-overlap" data-toggle="buttons">
+                                            <label title="Thumbnail view" class="btn btn-lg btn-white btn-success active" data-class="btn-success" aria-pressed="true">
+                                                <input type="radio" value="2" autocomplete="off" />
+                                                <i class="icon-only ace-icon fa fa-th"></i>
+                                            </label>
 
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                </li>
+                                            <label title="List view" class="btn btn-lg btn-white btn-grey" data-class="btn-primary">
+                                                <input type="radio" value="1" checked="" autocomplete="off" />
+                                                <i class="icon-only ace-icon fa fa-list"></i>
+                                            </label>
 
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                </li>
-                                            </ul>
+                                            <label title="Map view" class="btn btn-lg btn-white btn-grey" data-class="btn-warning">
+                                                <input type="radio" value="3" autocomplete="off" />
+                                                <i class="icon-only ace-icon fa fa-crosshairs"></i>
+                                            </label>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div>
-                                            <ul class="pagination">
-                                                <li class="disabled">
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-angle-double-left"></i>
-                                                    </a>
-                                                </li>
 
-                                                <li class="active">
-                                                    <a href="#">1</a>
-                                                </li>
+                                    <div class="pull-right">
+                                        <b class="text-primary">Order</b>
 
-                                                <li>
-                                                    <a href="#">2</a>
-                                                </li>
+                                        &nbsp;
+                                        <select>
+                                            <option>Relevance</option>
+                                            <option>Newest First</option>
+                                            <option>Rating</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                                                <li>
-                                                    <a href="#">3</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">4</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">5</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-angle-double-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div><!-- /.span -->
+                                <div id="tintuc" class="tab-pane fade in active">
+                                    <ul class="list-unstyled spaced2">
+                                        @*<li ng-repeat="x in [].constructor(10) track by $index" class="text-warning bigger-110 orange">*@
+                                        <li ng-repeat="x in [].constructor(10) track by $index">
+                                            <i class="ace-icon fa fa-circle green"></i>
+                                            <a href="#modal-table" role="button" class="dark" data-toggle="modal">
+                                                THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 <div id="thongbao" class="tab-pane fade">
                                     <ul class="list-unstyled spaced2">
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                        </li>
-
-                                        <li>
+                                        <li ng-repeat="x in [].constructor(10) track by $index">
                                             <i class="ace-icon fa fa-circle green"></i>
                                             Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
                                         </li>
                                     </ul>
-                                    <div>
-                                        <div>
-                                            <ul class="pagination">
-                                                <li class="disabled">
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-angle-double-left"></i>
-                                                    </a>
-                                                </li>
-
-                                                <li class="active">
-                                                    <a href="#">1</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">2</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">3</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">4</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">5</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-angle-double-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div><!-- /.span -->
                                 </div>
 
                                 <div id="sawaco" class="tab-pane fade">
                                     <ul class="list-unstyled spaced2">
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                        </li>
-
-                                        <li>
+                                        <li ng-repeat="x in [].constructor(10) track by $index">
                                             <i class="ace-icon fa fa-circle green"></i>
                                             Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
                                         </li>
                                     </ul>
-                                    <div>
-                                        <div>
-                                            <ul class="pagination">
-                                                <li class="disabled">
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-angle-double-left"></i>
-                                                    </a>
-                                                </li>
-
-                                                <li class="active">
-                                                    <a href="#">1</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">2</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">3</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">4</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">5</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-angle-double-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div><!-- /.span -->
                                 </div>
 
                                 <div id="sinhnhat" class="tab-pane fade">
@@ -288,312 +151,90 @@
 
                                             <p></p>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 1
+                                            <a href="#" class="btn btn-app btn-yellow btn-xs" ng-repeat="x in [].constructor(12) track by $index">
+                                                <i class="ace-icon fa fa-calendar bigger-160" id="sn{{$index +1}}"></i>
+                                                Tháng {{$index + 1}}
                                             </a>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 2
-                                            </a>
+                                <div>
+                                    <div>
+                                        <ul class="pagination">
+                                            <li class="disabled">
+                                                <a href="#">
+                                                    <i class="ace-icon fa fa-angle-double-left"></i>
+                                                </a>
+                                            </li>
 
-                                            <a href="#" class="btn btn-app btn-danger btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 3
-                                            </a>
+                                            <li class="active">
+                                                <a href="#">1</a>
+                                            </li>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 4
-                                            </a>
+                                            <li>
+                                                <a href="#">2</a>
+                                            </li>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 5
-                                            </a>
+                                            <li>
+                                                <a href="#">3</a>
+                                            </li>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 6
-                                            </a>
+                                            <li>
+                                                <a href="#">4</a>
+                                            </li>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 7
-                                            </a>
+                                            <li>
+                                                <a href="#">5</a>
+                                            </li>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 8
-                                            </a>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 9
-                                            </a>
+                                <div id="modal-table" class="modal fade" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header no-padding">
+                                                <div class="table-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                        <span class="white">&times;</span>
+                                                    </button>
+                                                    Thông Tin Chi Tiết
+                                                </div>
+                                            </div>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 10
-                                            </a>
+                                            <div class="modal-body">    
+                                                <p>
+                                                    Sáng 17/3, PGS.TS Nguyễn Trường Sơn, Thứ trưởng Bộ Y tế, PGS.TS Lương Ngọc Khuê, Cục trưởng Cục Quản lý Khám, chữa bệnh
+                                                </p>
+                                                <p>
+                                                    Sáng 17/3, PGS.TS Nguyễn Trường Sơn, Thứ trưởng Bộ Y tế, PGS.TS Lương Ngọc Khuê, Cục trưởng Cục Quản lý Khám, chữa bệnh
+                                                </p>
+                                            </div>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 11
-                                            </a>
+                                            <div class="modal-footer no-margin-top">
+                                                <button class="btn btn-sm btn-primary pull-left">
+                                                    <i class="ace-icon fa fa-backward"></i>
+                                                    Bài Trước
+                                                </button>
 
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                Tháng 12
-                                            </a>
+                                                <button class="btn btn-sm btn-primary pull-right">
+                                                    Bài Kế
+                                                    <i class="ace-icon fa fa-forward"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div>
-                            <h3 class="row header smaller lighter blue">
-                                <span class="col-xs-6"> Bảng Tin </span>
-                            </h3>
-
-                            <div id="accordion" class="accordion-style1 panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                                <i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                                &nbsp;Tường Công Ty
-                                                <span class="badge badge-danger">10</span>
-                                            </a>
-                                        </h4>
-                                    </div>
-
-                                    <div class="panel-collapse collapse in" id="collapseOne">
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <ul class="list-unstyled spaced2">
-                                                        <li>
-                                                            <i class="ace-icon fa fa-circle green"></i>
-                                                            THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                        </li>
-
-                                                        <li>
-                                                            <i class="ace-icon fa fa-circle green"></i>
-                                                            THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                        </li>
-
-                                                        <li>
-                                                            <i class="ace-icon fa fa-circle green"></i>
-                                                            THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                        </li>
-
-                                                        <li>
-                                                            <i class="ace-icon fa fa-circle green"></i>
-                                                            THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                        </li>
-
-                                                        <li>
-                                                            <i class="ace-icon fa fa-circle green"></i>
-                                                            THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                                <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                                &nbsp;Tin Tức
-                                                <span class="badge badge-danger">10</span>
-                                            </a>
-                                        </h4>
-                                    </div>
-
-                                    <div class="panel-collapse collapse" id="collapseTwo">
-                                        <div class="panel-body">
-                                            <ul class="list-unstyled spaced2">
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                                &nbsp;Thông Báo
-                                                <span class="badge badge-danger">10</span>
-                                            </a>
-                                        </h4>
-                                    </div>
-
-                                    <div class="panel-collapse collapse" id="collapseThree">
-                                        <div class="panel-body">
-                                            <ul class="list-unstyled spaced2">
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                                <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                                &nbsp;Sinh Nhật Trong Tháng
-                                                <span class="badge badge-danger">10</span>
-                                            </a>
-                                        </h4>
-                                    </div>
-
-                                    <div class="panel-collapse collapse" id="collapseFour">
-                                        <div class="panel-body">
-                                            <ul class="list-unstyled spaced2">
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Lê Hoàng Thiên Vũ - Phòng Công Nghệ Thông Tin ( 03/03/1995 )
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Nguyễn Đình Nghĩa - Phòng Công Nghệ Thông Tin ( 20/03/1995 )
-                                                </li>
-
-                                                <li>
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    Nguyễn Phi Hoàng Nam - Phòng Công Nghệ Thông Tin ( 15/03/1995 )
-                                                </li>
-                                            </ul>
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <h3 class="header smaller lighter green">Sinh Nhật Trong Năm</h3>
-
-                                                    <p></p>
-
-                                                    <a href="#" class="btn btn-app btn-danger btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 1
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-primary btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 2
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 3
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 4
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 5
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 6
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 7
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 8
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 9
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 10
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 11
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-app btn-yellow btn-xs">
-                                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                                        Tháng 12
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.col -->
-                    </div><!-- /.col -->
+                    </div>
 
                     <div class="col-sm-5 widget-container-col" id="widget-container-col-11">
                         <div class="widget-box widget-color-dark" id="widget-box-11">
@@ -967,7 +608,7 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- /.row -->
+                </div>
             </div>
         </div>
     </div>
