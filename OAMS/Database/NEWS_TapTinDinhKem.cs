@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OAMS.Models
+namespace OAMS.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TapTinDinhKem
+    public partial class NEWS_TapTinDinhKem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TapTinDinhKem()
+        public NEWS_TapTinDinhKem()
         {
-            this.TinTucTapTin = new HashSet<TinTucTapTin>();
+            this.NEWS_TinTucTapTin = new HashSet<NEWS_TinTucTapTin>();
         }
     
         public int MaTapTin { get; set; }
@@ -25,6 +25,6 @@ namespace OAMS.Models
         public string Url { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TinTucTapTin> TinTucTapTin { get; set; }
+        public virtual ICollection<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
     }
 }

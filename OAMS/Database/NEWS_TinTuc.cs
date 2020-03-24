@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OAMS.Models
+namespace OAMS.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TinTuc
+    public partial class NEWS_TinTuc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TinTuc()
+        public NEWS_TinTuc()
         {
-            this.BinhLuan = new HashSet<BinhLuan>();
-            this.TinTucTapTin = new HashSet<TinTucTapTin>();
+            this.NEWS_BinhLuan = new HashSet<NEWS_BinhLuan>();
+            this.NEWS_TinTucTapTin = new HashSet<NEWS_TinTucTapTin>();
         }
     
         public int MaTinTuc { get; set; }
@@ -32,12 +32,14 @@ namespace OAMS.Models
         public string NguoiCapNhat { get; set; }
         public Nullable<bool> HienThi { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
+        public Nullable<int> MaTrangThai { get; set; }
         public string HinhAnh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BinhLuan> BinhLuan { get; set; }
-        public virtual LoaiTinTuc LoaiTinTuc { get; set; }
+        public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
+        public virtual NEWS_TrangThaiChung NEWS_TrangThaiChung { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TinTucTapTin> TinTucTapTin { get; set; }
+        public virtual ICollection<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
+        public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }
     }
 }

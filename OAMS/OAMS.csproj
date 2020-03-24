@@ -285,6 +285,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbOAMS.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Database\NEWS_BinhLuan.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\NEWS_LoaiTinTuc.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\NEWS_NguoiSuDung.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\NEWS_TapTinDinhKem.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\NEWS_TinTuc.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\NEWS_TinTucTapTin.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\NEWS_TrangThaiChung.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\tbBophan.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>
@@ -378,87 +399,12 @@
     <Compile Include="JavascriptExtension.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BinhLuan.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Bnle\ModelPar.cs" />
     <Compile Include="Models\CommonSystem.cs" />
-    <Compile Include="Models\DanhMuc.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HopDong.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HopDongThietBi.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LichSuLinhKien.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LichSuThietBi.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LinhKien.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LinhKienThietBi.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoaiLinhKien.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoaiTinTuc.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NguoiSuDung.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NhaCungCap.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Nhanvien.cs" />
-    <Compile Include="Models\PhongBan.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\QuanLyBangTinModel.cs" />
-    <Compile Include="Models\QuanLyTaiSan.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyTaiSan.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\QuanLyTaiSan.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\QuanLyTaiSan.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyTaiSan.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SYSTEM.cs" />
-    <Compile Include="Models\TapTinDinhKem.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ThietBi.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TinhTrang.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TinTuc.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TinTucTapTin.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TrangThaiTinTuc.cs">
-      <DependentUpon>QuanLyTaiSan.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UserInfo\UserParModel.cs" />
     <Compile Include="MyHub\ChatHub.cs" />
     <Compile Include="MyHub\FTPControl.cs" />
@@ -622,16 +568,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\QuanLyTaiSan.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QuanLyTaiSan.edmx</DependentUpon>
-      <LastGenOutput>QuanLyTaiSan.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\QuanLyTaiSan.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QuanLyTaiSan.edmx</DependentUpon>
-      <LastGenOutput>QuanLyTaiSan.cs</LastGenOutput>
-    </Content>
     <Content Include="MyScript\admin\dsnhanvienCtrl.js" />
     <Content Include="MyScript\admin\nhomquyenCtrl.js" />
     <Content Include="MyScript\admin\phanquyenCtrl.js" />
@@ -755,13 +691,6 @@
       <DependentUpon>dbOAMS.edmx</DependentUpon>
     </Content>
     <Content Include="Content\select.min.css.map" />
-    <EntityDeploy Include="Models\QuanLyTaiSan.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QuanLyTaiSan.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QuanLyTaiSan.edmx.diagram">
-      <DependentUpon>QuanLyTaiSan.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\public.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

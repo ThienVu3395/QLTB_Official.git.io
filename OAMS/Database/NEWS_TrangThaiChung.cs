@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OAMS.Models
+namespace OAMS.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class LoaiLinhKien
+    public partial class NEWS_TrangThaiChung
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LoaiLinhKien()
+        public NEWS_TrangThaiChung()
         {
-            this.LinhKien = new HashSet<LinhKien>();
+            this.NEWS_TinTuc = new HashSet<NEWS_TinTuc>();
         }
     
-        public int MaLoaiLinhKien { get; set; }
-        public string TenLinhKien { get; set; }
+        public int MaTrangThai { get; set; }
+        public string Ten { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LinhKien> LinhKien { get; set; }
+        public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }
     }
 }

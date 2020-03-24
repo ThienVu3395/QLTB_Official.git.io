@@ -14,6 +14,12 @@ namespace OAMS.Database
     
     public partial class tbNguoidung
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbNguoidung()
+        {
+            this.NEWS_BinhLuan = new HashSet<NEWS_BinhLuan>();
+        }
+    
         public string ID { get; set; }
         public string USERNAME { get; set; }
         public string EMAIL { get; set; }
@@ -31,5 +37,7 @@ namespace OAMS.Database
     
         public virtual tbBophan tbBophan { get; set; }
         public virtual tbChucvu tbChucvu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
     }
 }

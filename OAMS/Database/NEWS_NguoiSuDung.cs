@@ -7,23 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OAMS.Models
+namespace OAMS.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class BinhLuan
+    public partial class NEWS_NguoiSuDung
     {
-        public int MaBinhLuan { get; set; }
-        public int MaTinTuc { get; set; }
         public int MaNguoiDung { get; set; }
-        public string NoiDung { get; set; }
-        public Nullable<int> MaTrangThai { get; set; }
-        public Nullable<System.DateTime> Ngay { get; set; }
-        public Nullable<System.TimeSpan> Gio { get; set; }
-    
-        public virtual NguoiSuDung NguoiSuDung { get; set; }
-        public virtual TinTuc TinTuc { get; set; }
-        public virtual TrangThaiTinTuc TrangThaiTinTuc { get; set; }
+        public string Ten { get; set; }
+        public int MaPhongBan { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string ChucVu { get; set; }
+        public Nullable<int> NgaySinh { get; set; }
+        public Nullable<int> ThangSinh { get; set; }
+        public Nullable<int> NamSinh { get; set; }
+        public Nullable<System.DateTime> SinhNhat { get; set; }
     }
 }

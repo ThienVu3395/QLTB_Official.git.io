@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OAMS.Models
+namespace OAMS.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class LinhKienThietBi
+    public partial class NEWS_TinTucTapTin
     {
-        public int MaLinhKien { get; set; }
-        public int MaThietBi { get; set; }
+        public int MaTinTuc { get; set; }
+        public int MaTapTin { get; set; }
         public Nullable<System.DateTime> Ngay { get; set; }
     
-        public virtual LinhKien LinhKien { get; set; }
-        public virtual ThietBi ThietBi { get; set; }
+        public virtual NEWS_TapTinDinhKem NEWS_TapTinDinhKem { get; set; }
+        public virtual NEWS_TinTuc NEWS_TinTuc { get; set; }
     }
 }

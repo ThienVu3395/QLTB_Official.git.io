@@ -7,25 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OAMS.Models
+namespace OAMS.Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class DanhMuc
+    public partial class NEWS_LoaiTinTuc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DanhMuc()
+        public NEWS_LoaiTinTuc()
         {
-            this.ThietBi = new HashSet<ThietBi>();
+            this.NEWS_TinTuc = new HashSet<NEWS_TinTuc>();
         }
     
-        public int MaDanhMuc { get; set; }
+        public int MaLoaiTin { get; set; }
         public string Ten { get; set; }
-        public int SoLuong { get; set; }
-        public int ParentID { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
+        public Nullable<int> ThuTuHienThi { get; set; }
+        public string Icon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThietBi> ThietBi { get; set; }
+        public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }
     }
 }

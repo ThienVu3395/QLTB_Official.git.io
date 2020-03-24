@@ -10,6 +10,9 @@ namespace OAMS.Models
         public int MaLoaiTin { get; set; }
         public string Ten { get; set; }
         public bool? TrangThai { get; set; }
+        public int? ThuTuHienThi { get; set; }
+        public string Icon { get; set; }
+        public int Count { get; set; }
     }
 
     public class TinTucModel
@@ -26,13 +29,36 @@ namespace OAMS.Models
         public Nullable<bool> HienThi { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
         public List<BinhLuanModel> BinhLuan { get; set; }
+        public int CountTin { get; set; }
+    }
+
+    public class PageModel
+    {
+        public int MaLoaiTin { get; set; }
+        public int Limit { get; set; }
+        public int itemPerPage { get; set; }
+        public int Month { get; set; }
+    }
+
+    public class NguoiDungModel
+    {
+        public int MaNguoiDung { get; set; }
+        public string Ten { get; set; }
+        public int MaPhongBan { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string ChucVu { get; set; }
+        public Nullable<int> NgaySinh { get; set; }
+        public Nullable<int> ThangSinh { get; set; }
+        public Nullable<int> NamSinh { get; set; }
+        public Nullable<System.DateTime> SinhNhat { get; set; }
     }
 
     public class BinhLuanModel
     {
         public int MaBinhLuan { get; set; }
         public int MaTinTuc { get; set; }
-        public int MaNguoiDung { get; set; }
+        public string MaNguoiDung { get; set; }
         public string TenNguoiDung { get; set; }
         public string DonVi { get; set; }
         public string NoiDung { get; set; }

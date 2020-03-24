@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
 
-<div>
+<div ng-controller="QlbtCrl">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -22,48 +22,27 @@
             </form>
         </div><!-- /.nav-search -->
     </div>
+
     <div id="mescontent" class="page-content">
         <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
             <div class="col-xs-12">
                 <div class="row">
                     <div class="col-sm-7">
                         <div class="tabbable">
-                            <ul class="nav nav-tabs" id="myTab">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#tintuc">
-                                        <i class="green ace-icon fa fa-list bigger-120"></i>
-                                        Tin Tức
-                                        <span class="badge badge-danger">4</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a data-toggle="tab" href="#thongbao">
-                                        <i class="green ace-icon fa fa-bell bigger-120"></i>
-                                        Thông Báo
-                                        <span class="badge badge-danger">4</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a data-toggle="tab" href="#sawaco">
-                                        <i class="green ace-icon fa fa-home bigger-120"></i>
-                                        Tin SAWACO
-                                        <span class="badge badge-danger">10</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a data-toggle="tab" href="#sinhnhat">
-                                        <i class="green ace-icon fa fa-calendar bigger-120"></i>
-                                        Sinh Nhật
-                                        <span class="badge badge-danger">4</span>
+                            <ul class="nav nav-tabs" id="myTab" ng-init="LayDanhSachLoaiTin()">
+                                <li ng-class="{{item.MaLoaiTin == DanhSachLoaiTin[0].MaLoaiTin ? ['active'] : ['']}}"
+                                    ng-repeat="item in DanhSachLoaiTin"
+                                    ng-click="LayDanhSachBaiViet(item.MaLoaiTin)">
+                                    <a data-toggle="tab" href="#tin">
+                                        <i class="green ace-icon fa fa-{{item.Icon}} bigger-120"></i>
+                                        {{item.Ten}}
+                                        <span class="badge badge-danger">{{item.Count}}</span>
                                     </a>
                                 </li>
                             </ul>
 
                             <div class="tab-content">
-                                <div class="search-area well col-xs-12">
+                                <div class="search-area well col-xs-12" ng-show="MaLoaiTin != 5 && DanhSachTinTuc.length > 1">
                                     <div class="pull-left">
                                         <b class="text-primary">Display</b>
 
@@ -98,140 +77,51 @@
                                     </div>
                                 </div>
 
-                                <div id="tintuc" class="tab-pane fade in active">
-                                    <ul class="list-unstyled spaced2">
-                                        @*<li ng-repeat="x in [].constructor(10) track by $index" class="text-warning bigger-110 orange">*@
-                                        <li ng-repeat="x in [].constructor(10) track by $index">
+                                <div id="tin"
+                                     ng-class="{{item.MaLoaiTin == DanhSachLoaiTin[0].MaLoaiTin ? ['tab-pane fade in active'] : ['tab-pane fade']}}">
+                                    <ul class="list-unstyled spaced2" ng-show="MaLoaiTin != 5">
+                                        <li ng-repeat="item in DanhSachTinTuc">
+                                            <i class="ace-icon fa fa-circle green" ng-show="DanhSachTinTuc.length > 1"></i>
+                                            <i class="ace-icon fa fa-circle red" ng-show="DanhSachTinTuc.length <= 1"></i>
+                                            <a href="#" class="dark" id="ct{{item.MaTinTuc}}" ng-click="showBtn(item.MaTinTuc)">
+                                                {{item.TieuDe}}
+                                            </a>
+
+                                            <div class="widget-box hide" id="ctContent{{item.MaTinTuc}}"></div>
+                                        </li>
+                                    </ul>
+
+                                    <ul class="list-unstyled spaced2" ng-show="MaLoaiTin == 5">
+                                        <li ng-repeat="item in DanhSachTinTuc">
                                             <i class="ace-icon fa fa-circle green"></i>
-                                            <a href="#modal-table" role="button" class="dark" data-toggle="modal">
-                                                THÔNG BÁO VỀ VIỆC PHUN THUỐC KHỬ KHUẨN TĂNG CƯỜNG PHÒNG, CHỐNG DỊCH BỆNH COVID-19 (LẦN 4). (7h)
+                                            <a href="#" class="dark">
+                                                Phòng Công Nghệ Thông Tin - {{item.Ten}} ({{item.NgaySinh}}/{{item.ThangSinh}}/{{item.NamSinh}})
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
 
-                                <div id="thongbao" class="tab-pane fade">
-                                    <ul class="list-unstyled spaced2">
-                                        <li ng-repeat="x in [].constructor(10) track by $index">
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo chỉ đạo của Phó Giám đốc Quản trị Tài chính về việc Giải quyết các trở ngại trong khối Kinh Doanh (12/3)
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div id="sawaco" class="tab-pane fade">
-                                    <ul class="list-unstyled spaced2">
-                                        <li ng-repeat="x in [].constructor(10) track by $index">
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Thông báo về việc nâng bậc lương CB.CNV quý 02 năm 2020. (4/3)
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div id="sinhnhat" class="tab-pane fade">
-                                    <ul class="list-unstyled spaced2">
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Lê Hoàng Thiên Vũ - Phòng Công Nghệ Thông Tin ( 03/03/1995 )
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Nguyễn Đình Nghĩa - Phòng Công Nghệ Thông Tin ( 20/03/1995 )
-                                        </li>
-
-                                        <li>
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            Nguyễn Phi Hoàng Nam - Phòng Công Nghệ Thông Tin ( 15/03/1995 )
-                                        </li>
-                                    </ul>
-                                    <div class="row">
+                                    <div class="row" ng-show="MaLoaiTin == 5">
                                         <div class="col-xs-12">
                                             <h3 class="header smaller lighter green">Sinh Nhật Trong Năm</h3>
 
-                                            <p></p>
-
-                                            <a href="#" class="btn btn-app btn-yellow btn-xs" ng-repeat="x in [].constructor(12) track by $index">
-                                                <i class="ace-icon fa fa-calendar bigger-160" id="sn{{$index +1}}"></i>
+                                            <a href="#"
+                                               class="btn btn-app btn-info btn-xs"
+                                               ng-repeat="x in [].constructor(12) track by $index"
+                                               id="sn{{$index + 1}}"
+                                               ng-click="LayDanhSachBaiViet(MaLoaiTin,$index + 1)">
+                                                <i class="ace-icon fa fa-calendar bigger-160"></i>
                                                 Tháng {{$index + 1}}
                                             </a>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div>
-                                        <ul class="pagination">
-                                            <li class="disabled">
-                                                <a href="#">
-                                                    <i class="ace-icon fa fa-angle-double-left"></i>
-                                                </a>
-                                            </li>
-
-                                            <li class="active">
-                                                <a href="#">1</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">2</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">3</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">4</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">5</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ace-icon fa fa-angle-double-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div id="modal-table" class="modal fade" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header no-padding">
-                                                <div class="table-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                        <span class="white">&times;</span>
-                                                    </button>
-                                                    Thông Tin Chi Tiết
-                                                </div>
-                                            </div>
-
-                                            <div class="modal-body">    
-                                                <p>
-                                                    Sáng 17/3, PGS.TS Nguyễn Trường Sơn, Thứ trưởng Bộ Y tế, PGS.TS Lương Ngọc Khuê, Cục trưởng Cục Quản lý Khám, chữa bệnh
-                                                </p>
-                                                <p>
-                                                    Sáng 17/3, PGS.TS Nguyễn Trường Sơn, Thứ trưởng Bộ Y tế, PGS.TS Lương Ngọc Khuê, Cục trưởng Cục Quản lý Khám, chữa bệnh
-                                                </p>
-                                            </div>
-
-                                            <div class="modal-footer no-margin-top">
-                                                <button class="btn btn-sm btn-primary pull-left">
-                                                    <i class="ace-icon fa fa-backward"></i>
-                                                    Bài Trước
-                                                </button>
-
-                                                <button class="btn btn-sm btn-primary pull-right">
-                                                    Bài Kế
-                                                    <i class="ace-icon fa fa-forward"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ul ng-show="MaLoaiTin != 5 && DanhSachTinTuc.length > 1"
+                                    uib-pagination
+                                    total-items="totalItems"
+                                    items-per-page="itemsPerPage"
+                                    ng-model="currentPage"
+                                    ng-change="LayDanhSachBaiViet(MaLoaiTin,0)"></ul>
                             </div>
                         </div>
                     </div>
