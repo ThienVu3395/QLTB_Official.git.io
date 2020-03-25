@@ -430,7 +430,10 @@
                 var urlAPI = {
                     API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
                     API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
-                    API_LayDanhSachBaiViet_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_PhanTrang"
+                    API_LayDanhSachBaiViet_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_PhanTrang",
+                    API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
+                    API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
+                    API_GuiBinhLuan: "API/QuanLyBangTin/GuiBinhLuan",
                 };
 
                 // Hàm Tạo Ra Mã Xác Nhận Ngẫu Nhiên 

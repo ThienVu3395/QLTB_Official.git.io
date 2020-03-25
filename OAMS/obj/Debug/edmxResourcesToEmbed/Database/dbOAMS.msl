@@ -331,19 +331,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_BinhLuan">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_BinhLuan">
-        <MappingFragment StoreEntitySet="NEWS_BinhLuan">
-          <ScalarProperty Name="Gio" ColumnName="Gio" />
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
-          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
-          <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NEWS_TapTinDinhKem">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TapTinDinhKem">
         <MappingFragment StoreEntitySet="NEWS_TapTinDinhKem">
@@ -403,6 +390,7 @@
     <EntitySetMapping Name="NEWS_NguoiSuDung">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_NguoiSuDung">
         <MappingFragment StoreEntitySet="NEWS_NguoiSuDung">
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
           <ScalarProperty Name="SinhNhat" ColumnName="SinhNhat" />
           <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
           <ScalarProperty Name="ThangSinh" ColumnName="ThangSinh" />
@@ -413,6 +401,19 @@
           <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_BinhLuan">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_BinhLuan">
+        <MappingFragment StoreEntitySet="NEWS_BinhLuan">
+          <ScalarProperty Name="Gio" ColumnName="Gio" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
+          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+          <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

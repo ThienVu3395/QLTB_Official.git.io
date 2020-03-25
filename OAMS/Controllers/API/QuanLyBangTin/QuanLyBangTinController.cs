@@ -18,6 +18,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         public IHttpActionResult LayDanhSachLoaiTin()
         {
             var dsLoaiTin = dbContext.NEWS_LoaiTinTuc.Where(x => x.ThuTuHienThi != null).OrderBy(x => x.ThuTuHienThi).ToList();
+            DateTime date = DateTime.Now;
+            var dsSinhNhat = dbContext.NEWS_NguoiSuDung.Where(x => x.ThangSinh == date.Month).ToList();
             List<LoaiTinTucModel> dsLoaiModel = new List<LoaiTinTucModel>();
             if (dsLoaiTin.Count > 0)
             {
@@ -30,85 +32,120 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     loaiTinTuc.TrangThai = item.TrangThai;
                     loaiTinTuc.Icon = item.Icon;
                     loaiTinTuc.Count = dsTin;
+                    loaiTinTuc.CountUser = dsSinhNhat.Count();
+                    loaiTinTuc.Month = date.Month;
                     dsLoaiModel.Add(loaiTinTuc);
                 }
             }
             return Ok(dsLoaiModel);
         }
 
+        [HttpGet]
+        [Route("LaySinhNhat")]
+        public IHttpActionResult LaySinhNhat(int Month)
+        {
+            var dsUser = dbContext.NEWS_NguoiSuDung.Where(x => x.ThangSinh == Month).ToList();
+            List<NguoiDungModel> dsUserModel = new List<NguoiDungModel>();
+            if (dsUser.Count > 0)
+            {
+                foreach (var item in dsUser)
+                {
+                    NguoiDungModel user = new NguoiDungModel();
+                    user.MaNguoiDung = item.MaNguoiDung;
+                    user.Ten = item.Ten;
+                    user.NgaySinh = item.NgaySinh;
+                    user.ThangSinh = item.ThangSinh;
+                    user.NamSinh = item.NamSinh;
+                    user.HinhAnh = item.HinhAnh;
+                    user.CountTin = dsUser.Count();
+                    dsUserModel.Add(user);
+                }
+                return Ok(dsUserModel);
+            }
+            return Ok(dsUserModel);
+        }
+
+
         [HttpPost]
         [Route("LayDanhSachBaiViet_PhanTrang")]
         public IHttpActionResult LayDanhSachBaiViet_PhanTrang(PageModel pm)
         {
-            if(pm.MaLoaiTin == 5)
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == pm.MaLoaiTin && x.HienThi == true).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
             {
-                var dsUser = dbContext.NEWS_NguoiSuDung.Where(x => x.ThangSinh == pm.Month).ToList();
-                if(dsUser.Count > 0)
+                foreach (var item in dsTin)
                 {
-                    List<NguoiDungModel> dsUserModel = new List<NguoiDungModel>();
-                    foreach(var item in dsUser)
-                    {
-                        NguoiDungModel user = new NguoiDungModel();
-                        user.MaNguoiDung = item.MaNguoiDung;
-                        user.Ten = item.Ten;
-                        user.NgaySinh = item.NgaySinh;
-                        user.ThangSinh = item.ThangSinh;
-                        user.NamSinh = item.NamSinh;
-                        dsUserModel.Add(user);
-                    }
-                    return Ok(dsUserModel);
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.TacGia = item.TacGia;
+                    tin.NgayTao = item.NgayTao;
+                    tin.NgayCapNhat = item.NgayCapNhat;
+                    tin.NguoiCapNhat = item.NguoiCapNhat;
+                    tin.HienThi = item.HienThi;
+                    tin.HinhAnh = item.HinhAnh;
+                    tin.TinNoiBat = item.TinNoiBat;
+                    tin.CountTin = dsTin.Count;
+                    dsTinModel.Add(tin);
                 }
-                return Ok("Không Có Người Dùng Nào Có Sinh Nhật Vào Tháng Này");
             }
-            else
+            return Ok(dsTinModel.Skip(pm.Limit).Take(pm.itemPerPage));
+        }
+
+        [HttpGet]
+        [Route("LayBaiVietTuong")]
+        public IHttpActionResult LayBaiVietTuong()
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == 3).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
             {
-                var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == pm.MaLoaiTin && x.HienThi == true).ToList();
-                List<TinTucModel> dsTinModel = new List<TinTucModel>();
-                if (dsTin.Count > 0)
+                foreach (var item in dsTin)
                 {
-                    foreach (var item in dsTin)
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.TacGia = item.TacGia;
+                    tin.NgayTao = item.NgayTao;
+                    tin.NgayCapNhat = item.NgayCapNhat;
+                    tin.NguoiCapNhat = item.NguoiCapNhat;
+                    tin.HienThi = item.HienThi;
+                    tin.HinhAnh = item.HinhAnh;
+                    tin.TinNoiBat = item.TinNoiBat;
+                    tin.CountTin = dsTin.Count;
+                    var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaTinTuc == item.MaTinTuc).ToList();
+                    List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
+                    if (dsBinhLuan.Count > 0)
                     {
-                        TinTucModel tin = new TinTucModel();
-                        tin.MaTinTuc = item.MaTinTuc;
-                        tin.TieuDe = item.TieuDe;
-                        tin.NoiDung = item.NoiDung;
-                        tin.MoTa = item.MoTa;
-                        tin.MaLoaiTin = item.MaLoaiTin;
-                        tin.TacGia = item.TacGia;
-                        tin.NgayTao = item.NgayTao;
-                        tin.NgayCapNhat = item.NgayCapNhat;
-                        tin.NguoiCapNhat = item.NguoiCapNhat;
-                        tin.HienThi = item.HienThi;
-                        tin.TinNoiBat = item.TinNoiBat;
-                        tin.CountTin = dsTin.Count;
-                        if (item.NEWS_LoaiTinTuc.Icon == "book")
+                        foreach (var index in dsBinhLuan)
                         {
-                            var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaTinTuc == item.MaTinTuc).ToList();
-                            List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
-                            if (dsBinhLuan.Count > 0)
-                            {
-                                foreach (var index in dsBinhLuan)
-                                {
-                                    BinhLuanModel binhLuan = new BinhLuanModel();
-                                    binhLuan.MaBinhLuan = index.MaBinhLuan;
-                                    binhLuan.MaTinTuc = index.MaTinTuc;
-                                    binhLuan.MaNguoiDung = index.MaNguoiDung;
-                                    binhLuan.TenNguoiDung = index.tbNguoidung.TEN;
-                                    binhLuan.DonVi = index.tbNguoidung.tbBophan.TENPHONG;
-                                    binhLuan.NoiDung = index.NoiDung;
-                                    binhLuan.MaTrangThai = index.MaTrangThai;
-                                    binhLuan.Ngay = index.Ngay;
-                                    binhLuan.Gio = index.Gio;
-                                    dsBinhLuanModel.Add(binhLuan);
-                                }
-                            }
-                            tin.BinhLuan = dsBinhLuanModel;
+                            BinhLuanModel binhLuan = new BinhLuanModel();
+                            binhLuan.MaBinhLuan = index.MaBinhLuan;
+                            binhLuan.MaTinTuc = index.MaTinTuc;
+                            binhLuan.MaNguoiDung = index.MaNguoiDung;
+                            binhLuan.TenNguoiDung = index.NEWS_NguoiSuDung.Ten;
+                            binhLuan.HinhAnh = index.NEWS_NguoiSuDung.HinhAnh;
+                            binhLuan.DonVi = "Phòng ABCXYAZZ";
+                            binhLuan.NoiDung = index.NoiDung;
+                            binhLuan.MaTrangThai = index.MaTrangThai;
+                            binhLuan.Ngay = index.Ngay;
+                            binhLuan.Gio = index.Gio;
+                            dsBinhLuanModel.Add(binhLuan);
                         }
-                        dsTinModel.Add(tin);
                     }
+                    tin.BinhLuan = dsBinhLuanModel;
+                    dsTinModel.Add(tin);
                 }
-                return Ok(dsTinModel.Skip(pm.Limit).Take(pm.itemPerPage));
+                return Ok(dsTinModel);
             }
+            return Ok(dsTinModel);
         }
 
         [HttpGet]
@@ -121,10 +158,40 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 TinTucModel tinTuc = new TinTucModel();
                 tinTuc.MaTinTuc = dsTin.MaTinTuc;
                 tinTuc.NoiDung = dsTin.NoiDung;
+                tinTuc.TieuDe = dsTin.TieuDe;
                 tinTuc.TacGia = dsTin.TacGia;
+                var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
+                List<TapTinModel> dsttmodel = new List<TapTinModel>();
+                if (dsTapTin.Count > 0)
+                {
+                    foreach (var item in dsTapTin)
+                    {
+                        TapTinModel ttmodel = new TapTinModel();
+                        ttmodel.MaTapTin = item.MaTapTin;
+                        ttmodel.Ten = item.NEWS_TapTinDinhKem.Ten;
+                        ttmodel.Url = item.NEWS_TapTinDinhKem.Url;
+                        dsttmodel.Add(ttmodel);
+                    }
+                    tinTuc.TapTinDinhKem = dsttmodel;
+                }
                 return Ok(tinTuc);
             }
             return Ok("sai rồi");
+        }
+
+        [HttpPost]
+        [Route("GuiBinhLuan")]
+        public IHttpActionResult GuiBinhLuan(BinhLuanModel bl)
+        {
+            NEWS_BinhLuan binhLuan = new NEWS_BinhLuan();
+            binhLuan.MaTinTuc = bl.MaTinTuc;
+            binhLuan.MaNguoiDung = 77;
+            binhLuan.NoiDung = bl.NoiDung;
+            binhLuan.MaTrangThai = 1;
+            binhLuan.Ngay = null;
+            binhLuan.Gio = null;
+            dbContext.NEWS_BinhLuan.Add(binhLuan);
+            return Ok("Bình Luận Của Bạn Đã Được Gửi");
         }
     }
 }

@@ -1,11 +1,14 @@
 ﻿angular.module("oamsapp")
     .controller("QlbtCrl", function ($scope, CommonController) {
         //Lấy danh sách Loại Tin
+        $scope.sinhNhat = false;
         $scope.LayDanhSachLoaiTin = function () {
             var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachLoaiTin, "");
             res.then(
                 function succ(response) {
                     $scope.DanhSachLoaiTin = response.data;
+                    $scope.CountUser = $scope.DanhSachLoaiTin[0].CountUser;
+                    $scope.Month = $scope.DanhSachLoaiTin[0].Month;
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
                     $scope.DanhSachTinTuc = $scope.LayDanhSachBaiViet($scope.MaLoaiTin);
                 },
@@ -20,38 +23,37 @@
         $scope.totalItems = 64;
         $scope.currentPage = 1;
         $scope.itemsPerPage = 3;
-        $scope.LayDanhSachBaiViet = function (MaLoaiTin,index) {
+        $scope.LayDanhSachBaiViet = function (MaLoaiTin, Pages) {
             $scope.MaLoaiTin = MaLoaiTin;
+            $scope.ttshow = false;
+            $scope.sinhNhat = false;
             let pageItems = {
                 MaLoaiTin: $scope.MaLoaiTin,
-                Limit: Math.round(($scope.currentPage - 1) * $scope.itemsPerPage),
-                itemPerPage: $scope.itemsPerPage
-            }
-            if ($scope.MaLoaiTin == 5) {
-                let date = new Date();
-                $scope.month = date.getMonth() + 1;
-                if (index !== undefined) {
-                    pageItems.Month = index;
-                }
-                else {
-                    pageItems.Month = $scope.month;
-                    document.getElementById("sn" + $scope.month).className = "btn btn-app btn-danger btn-xs";
-                }
+                itemPerPage: $scope.itemsPerPage,
+                Limit: Math.round((Pages - 1) * $scope.itemsPerPage)
             }
             var res = CommonController.postData(CommonController.urlAPI.API_LayDanhSachBaiViet_PhanTrang, pageItems);
             res.then(
                 function succ(response) {
-                    if (response.data.length !== 0) {
-                        $scope.DanhSachTinTuc = response.data;
-                        $scope.totalItems = response.data[0].CountTin;
-                    }
-                    else {
-                        $scope.DanhSachTinTuc = [
-                            {
-                                TieuDe: `Danh Sách Bài Viết Cho Danh Mục Này Đang Cập Nhật`,
-                            }
-                        ]
-                    }
+                    $scope.DanhSachTinTuc = response.data;
+                    $scope.totalItems = response.data[0].CountTin;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Lấy User theo sinh nhật
+        $scope.LaySinhNhat = function (month) {
+            $scope.sinhNhat = true;
+            document.getElementById("sn" + $scope.Month).className = "btn btn-app btn-danger btn-xs";
+            let param = "?Month=" + month;
+            var res = CommonController.getData(CommonController.urlAPI.API_LaySinhNhat, param);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachUser = response.data;
                 },
 
                 function errorCallback(response) {
@@ -61,38 +63,14 @@
         }
 
         // Show chi tiết bài viết
+        $scope.ttshow = false;
         $scope.showBtn = function (MaTinTuc) {
             let param = "?MaTinTuc=" + MaTinTuc;
             var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBaiViet, param);
             res.then(
                 function succ(response) {
-                    //console.log(response.data);
                     $scope.ThongTinBV = response.data;
-                    let newClicked = document.getElementById("ctContent" + MaTinTuc);
-                    if (newClicked.className == "widget-box hide") {
-                        newClicked.className = "widget-box";
-                        document.getElementById("ct" + MaTinTuc).className = "red bigger-110";
-                        newClicked.innerHTML = `<div class="widget-header widget-header-flat">
-                                                    <h4 class="widget-title smaller">Nội Dung Chi Tiết</h4>
-                                                </div>
-
-                                                <div class="widget-body">
-                                                    <div class="widget-main">
-                                                        <dl id="dt-list-1">
-                                                            <dt>Nội Dung</dt>
-                                                            <dd>${$scope.ThongTinBV.NoiDung}</dd>
-                                                            <dt>Tập Tin Đính Kèm</dt>
-                                                            <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                                                            <dt>Tác Giả</dt>
-                                                            <dd>${$scope.ThongTinBV.TacGia}</dd>
-                                                        </dl>
-                                                    </div>
-                                                </div>`;
-                    }
-                    else {
-                        document.getElementById("ct" + MaTinTuc).className = "dark";
-                        newClicked.className = "widget-box hide";
-                    }
+                    $scope.ttshow = true;
                 },
 
                 function errorCallback(response) {
@@ -100,5 +78,45 @@
                 }
             )
 
+        }
+
+        // Lấy Bài Viết Tường Công Ty
+        $scope.LayBaiVietTuong = function () {
+            var res = CommonController.getData(CommonController.urlAPI.API_LayBaiVietTuong, "");
+            res.then(
+                function succ(response) {
+                    $scope.BaiVietTuong = response.data;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Gửi Bình Luận
+        $scope.BinhLuan = {
+            NoiDung: "",
+            MaTinTuc: 0,
+            HinhAnh: 'https://cdn.pixabay.com/photo/2016/04/15/18/05/computer-1331579_960_720.png',
+            DonVi: "P.Công Nghệ Thông Tin",
+            TenNguoiDung : "Lê Hoàng Thiên Vũ"
+        }
+        $scope.GuiBinhLuan = function (MaTinTuc) {
+            $scope.BinhLuan.MaTinTuc = MaTinTuc;
+            //let index = $scope.BaiVietTuong.findIndex(x => x.MaTinTuc == MaTinTuc);
+            //$scope.BaiVietTuong[index].BinhLuan.push($scope.BinhLuan);
+            console.log($scope.BinhLuan);
+            //var res = CommonController.postData(CommonController.urlAPI.API_GuiBinhLuan, $scope.BinhLuan);
+            //res.then(
+            //    function succ(response) {
+            //        $scope.DanhSachTinTuc = response.data;
+            //        $scope.totalItems = response.data[0].CountTin;
+            //    },
+
+            //    function errorCallback(response) {
+            //        console.log(response.data.message)
+            //    }
+            //)
         }
     })

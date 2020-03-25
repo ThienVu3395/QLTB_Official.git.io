@@ -14,6 +14,12 @@ namespace OAMS.Database
     
     public partial class NEWS_NguoiSuDung
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NEWS_NguoiSuDung()
+        {
+            this.NEWS_BinhLuan = new HashSet<NEWS_BinhLuan>();
+        }
+    
         public int MaNguoiDung { get; set; }
         public string Ten { get; set; }
         public int MaPhongBan { get; set; }
@@ -24,5 +30,9 @@ namespace OAMS.Database
         public Nullable<int> ThangSinh { get; set; }
         public Nullable<int> NamSinh { get; set; }
         public Nullable<System.DateTime> SinhNhat { get; set; }
+        public string HinhAnh { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
     }
 }

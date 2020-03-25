@@ -67,7 +67,7 @@
     </Key>
     <Property Name="MaBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaTinTuc" Type="int" Nullable="false" />
-    <Property Name="MaNguoiDung" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="MaNguoiDung" Type="int" Nullable="false" />
     <Property Name="NoiDung" Type="nvarchar(max)" />
     <Property Name="MaTrangThai" Type="int" />
     <Property Name="Ngay" Type="date" />
@@ -97,6 +97,7 @@
     <Property Name="ThangSinh" Type="int" />
     <Property Name="NamSinh" Type="int" />
     <Property Name="SinhNhat" Type="date" />
+    <Property Name="HinhAnh" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="NEWS_TapTinDinhKem">
     <Key>
@@ -386,6 +387,18 @@
     <Property Name="USERNAME" Type="nvarchar" MaxLength="256" />
     <Property Name="MANHOM" Type="nvarchar" MaxLength="10" />
   </EntityType>
+  <Association Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
+    <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="1" />
+    <End Role="NEWS_BinhLuan" Type="Self.NEWS_BinhLuan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_NguoiSuDung">
+        <PropertyRef Name="MaNguoiDung" />
+      </Principal>
+      <Dependent Role="NEWS_BinhLuan">
+        <PropertyRef Name="MaNguoiDung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_NEWS_BinhLuan_NEWS_TinTuc">
     <End Role="NEWS_TinTuc" Type="Self.NEWS_TinTuc" Multiplicity="1" />
     <End Role="NEWS_BinhLuan" Type="Self.NEWS_BinhLuan" Multiplicity="*" />
@@ -395,18 +408,6 @@
       </Principal>
       <Dependent Role="NEWS_BinhLuan">
         <PropertyRef Name="MaTinTuc" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NEWS_BinhLuan_tbNguoidung">
-    <End Role="tbNguoidung" Type="Self.tbNguoidung" Multiplicity="1" />
-    <End Role="NEWS_BinhLuan" Type="Self.NEWS_BinhLuan" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbNguoidung">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="NEWS_BinhLuan">
-        <PropertyRef Name="MaNguoiDung" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -709,12 +710,12 @@
     <EntitySet Name="tbNhom" EntityType="Self.tbNhom" Schema="users" store:Type="Tables" />
     <EntitySet Name="tbNhom_Chucnang" EntityType="Self.tbNhom_Chucnang" Schema="users" store:Type="Tables" />
     <EntitySet Name="tbNhom_Users" EntityType="Self.tbNhom_Users" Schema="users" store:Type="Tables" />
-    <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_TinTuc" Association="Self.FK_NEWS_BinhLuan_NEWS_TinTuc">
-      <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
+    <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung" Association="Self.FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
+      <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
       <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
     </AssociationSet>
-    <AssociationSet Name="FK_NEWS_BinhLuan_tbNguoidung" Association="Self.FK_NEWS_BinhLuan_tbNguoidung">
-      <End Role="tbNguoidung" EntitySet="tbNguoidung" />
+    <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_TinTuc" Association="Self.FK_NEWS_BinhLuan_NEWS_TinTuc">
+      <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
       <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
     </AssociationSet>
     <AssociationSet Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc" Association="Self.FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
