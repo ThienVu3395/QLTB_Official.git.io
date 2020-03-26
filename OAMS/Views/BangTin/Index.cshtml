@@ -3,9 +3,10 @@
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
 <style>
-    h3{
-        font-size:14px!important
+    h3 {
+        font-size: 14px !important
     }
+
     .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
         display: block;
         height: 180px;
@@ -50,8 +51,7 @@
                                     </a>
                                 </li>
 
-                                <li
-                                    ng-click="LaySinhNhat(Month)">
+                                <li ng-click="LaySinhNhat(Month)">
                                     <a data-toggle="tab" href="#sn">
                                         <i class="green ace-icon fa fa-calendar bigger-120"></i>
                                         Sinh Nhật
@@ -61,41 +61,40 @@
                             </ul>
 
                             <div class="tab-content">
-                                @*<div class="search-area well col-xs-12" ng-show="MaLoaiTin != 5 && DanhSachTinTuc.length > 1">
-            <div class="pull-left">
-                <b class="text-primary">Display</b>
+                                <div class="search-area well col-xs-12" ng-show="!sinhNhat">
+                                    <div class="pull-left">
+                                        <b class="text-primary">Display</b>
 
-                &nbsp;
-                <div id="toggle-result-format" class="btn-group btn-overlap" data-toggle="buttons">
-                    <label title="Thumbnail view" class="btn btn-lg btn-white btn-success active" data-class="btn-success" aria-pressed="true">
-                        <input type="radio" value="2" autocomplete="off" />
-                        <i class="icon-only ace-icon fa fa-th"></i>
-                    </label>
+                                        &nbsp;
+                                        <div id="toggle-result-format" class="btn-group btn-overlap" data-toggle="buttons">
+                                            <label title="Thumbnail view" class="btn btn-lg btn-white btn-success active" data-class="btn-success" aria-pressed="true">
+                                                <input type="radio" value="2" autocomplete="off" />
+                                                <i class="icon-only ace-icon fa fa-th"></i>
+                                            </label>
 
-                    <label title="List view" class="btn btn-lg btn-white btn-grey" data-class="btn-primary">
-                        <input type="radio" value="1" checked="" autocomplete="off" />
-                        <i class="icon-only ace-icon fa fa-list"></i>
-                    </label>
+                                            <label title="List view" class="btn btn-lg btn-white btn-grey" data-class="btn-primary">
+                                                <input type="radio" value="1" checked="" autocomplete="off" />
+                                                <i class="icon-only ace-icon fa fa-list"></i>
+                                            </label>
 
-                    <label title="Map view" class="btn btn-lg btn-white btn-grey" data-class="btn-warning">
-                        <input type="radio" value="3" autocomplete="off" />
-                        <i class="icon-only ace-icon fa fa-crosshairs"></i>
-                    </label>
-                </div>
-            </div>
+                                            <label title="Map view" class="btn btn-lg btn-white btn-grey" data-class="btn-warning">
+                                                <input type="radio" value="3" autocomplete="off" />
+                                                <i class="icon-only ace-icon fa fa-crosshairs"></i>
+                                            </label>
+                                        </div>
+                                    </div>
 
-            <div class="pull-right">
-                <b class="text-primary">Order</b>
+                                    <div class="pull-right">
+                                        <b class="text-primary">Order</b>
 
-                &nbsp;
-                <select>
-                    <option>Relevance</option>
-                    <option>Newest First</option>
-                    <option>Rating</option>
-                </select>
-            </div>
-        </div>*@
-
+                                        &nbsp;
+                                        <select>
+                                            <option>Relevance</option>
+                                            <option>Newest First</option>
+                                            <option>Rating</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <ul ng-show="!sinhNhat"
                                     uib-pagination
@@ -123,6 +122,16 @@
                                                 <span class="text-success" ng-click="showBtn(item.MaTinTuc)">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <h3 class="header smaller lighter green">Các Tin Cũ Hơn</h3>
+                                        <ul class="list-unstyled spaced2">
+                                            <li ng-repeat="x in [].constructor(5) track by $index">
+                                                <i class="ace-icon fa fa-circle green"></i>
+                                                Công bố thông tin về việc điều chỉnh thời gian họp Đại hội đồng cổ đông thường niên năm 2020
+                                            </li>
+                                        </ul>
                                     </div>
 
                                     <div class="col-xs-6 col-sm-12 col-md-12" ng-show="DanhSachTinTuc.length == 0">
@@ -156,7 +165,7 @@
                                 </div>
 
                                 <div class="row tab-pane fade" id="sn">
-                                    <div ng-repeat="item in DanhSachUser" class="col-xs-6 col-sm-3 col-md-3"">
+                                    <div ng-repeat="item in DanhSachUser" class="col-xs-6 col-sm-3 col-md-3" ">
                                         <div class="thumbnail search-thumbnail">
                                             <span class="search-promotion label label-success arrowed-in arrowed-in-right">Phòng ABCXYZ</span>
                                             <img class="media-object" src="{{item.HinhAnh}}" />

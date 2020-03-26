@@ -24,6 +24,9 @@
         $scope.currentPage = 1;
         $scope.itemsPerPage = 3;
         $scope.LayDanhSachBaiViet = function (MaLoaiTin, Pages) {
+            if (Pages !== $scope.currentPage) {
+                $scope.currentPage = 1;
+            }
             $scope.MaLoaiTin = MaLoaiTin;
             $scope.ttshow = false;
             $scope.sinhNhat = false;
