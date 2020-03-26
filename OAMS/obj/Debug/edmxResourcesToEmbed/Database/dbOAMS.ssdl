@@ -82,6 +82,8 @@
     <Property Name="TrangThai" Type="bit" />
     <Property Name="ThuTuHienThi" Type="int" />
     <Property Name="Icon" Type="varchar" MaxLength="50" />
+    <Property Name="TemplateList" Type="int" />
+    <Property Name="TemplateDetail" Type="int" />
   </EntityType>
   <EntityType Name="NEWS_NguoiSuDung">
     <Key>

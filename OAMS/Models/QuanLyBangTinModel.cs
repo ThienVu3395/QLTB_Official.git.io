@@ -15,6 +15,8 @@ namespace OAMS.Models
         public int Count { get; set; }
         public int CountUser { get; set; }
         public int Month { get; set; }
+        public int? TemplateList { get;set;}
+        public int? TemplateDetail { get; set; }
     }
 
     public class TinTucModel
@@ -34,6 +36,8 @@ namespace OAMS.Models
         public string HinhAnh { get; set; }
         public int CountTin { get; set; }
         public List<TapTinModel> TapTinDinhKem { get; set; }
+        public int? TemplateList { get; set; }
+        public int? TemplateDetail { get; set; }
     }
 
     public class TapTinModel

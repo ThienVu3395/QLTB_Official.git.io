@@ -376,17 +376,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_LoaiTinTuc">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_LoaiTinTuc">
-        <MappingFragment StoreEntitySet="NEWS_LoaiTinTuc">
-          <ScalarProperty Name="Icon" ColumnName="Icon" />
-          <ScalarProperty Name="ThuTuHienThi" ColumnName="ThuTuHienThi" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="MaLoaiTin" ColumnName="MaLoaiTin" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NEWS_NguoiSuDung">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_NguoiSuDung">
         <MappingFragment StoreEntitySet="NEWS_NguoiSuDung">
@@ -414,6 +403,19 @@
           <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
           <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
           <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_LoaiTinTuc">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_LoaiTinTuc">
+        <MappingFragment StoreEntitySet="NEWS_LoaiTinTuc">
+          <ScalarProperty Name="TemplateDetail" ColumnName="TemplateDetail" />
+          <ScalarProperty Name="TemplateList" ColumnName="TemplateList" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="ThuTuHienThi" ColumnName="ThuTuHienThi" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaLoaiTin" ColumnName="MaLoaiTin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

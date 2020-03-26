@@ -114,7 +114,6 @@
 
             <div class="navbar-buttons navbar-header pull-right" role="navigation">
                 <ul class="nav ace-nav">
-
                     <li class="grey dropdown-modal">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="ace-icon fa fa-tasks"></i>
@@ -590,7 +589,7 @@
                             </a><b class="arrow fa fa-angle-down"></b>
                         </li>
 
-                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                        @*<li ng-show="show(501)" class="{{activelink[18]}}">
                             <a href="~/Danhmuc/tudien">
                                 <i class="menu-icon fa fa-circle"></i>Thông Báo
                             </a><b class="arrow fa fa-angle-down"></b>
@@ -600,8 +599,13 @@
                             <a href="~/Danhmuc/tudien">
                                 <i class="menu-icon fa fa-circle"></i>Tin Tức Sự Kiện
                             </a><b class="arrow fa fa-angle-down"></b>
-                        </li>
+                        </li>*@
 
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="@Url.Action("QuanLy","BangTin")">
+                                <i class="menu-icon fa fa-circle"></i>Quản Lý
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
                     </ul>
                 </li>
 

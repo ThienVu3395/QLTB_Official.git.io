@@ -34,6 +34,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     loaiTinTuc.Count = dsTin;
                     loaiTinTuc.CountUser = dsSinhNhat.Count();
                     loaiTinTuc.Month = date.Month;
+                    loaiTinTuc.TemplateList = item.TemplateList;
+                    loaiTinTuc.TemplateDetail = item.TemplateDetail;
                     dsLoaiModel.Add(loaiTinTuc);
                 }
             }
@@ -90,6 +92,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.HinhAnh = item.HinhAnh;
                     tin.TinNoiBat = item.TinNoiBat;
                     tin.CountTin = dsTin.Count;
+                    tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
                     dsTinModel.Add(tin);
                 }
             }
@@ -160,6 +163,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.NoiDung = dsTin.NoiDung;
                 tinTuc.TieuDe = dsTin.TieuDe;
                 tinTuc.TacGia = dsTin.TacGia;
+                tinTuc.HinhAnh = dsTin.HinhAnh;
                 var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
                 List<TapTinModel> dsttmodel = new List<TapTinModel>();
                 if (dsTapTin.Count > 0)

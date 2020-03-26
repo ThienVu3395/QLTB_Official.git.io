@@ -25,6 +25,8 @@ namespace OAMS.Database
         public Nullable<bool> TrangThai { get; set; }
         public Nullable<int> ThuTuHienThi { get; set; }
         public string Icon { get; set; }
+        public Nullable<int> TemplateList { get; set; }
+        public Nullable<int> TemplateDetail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }

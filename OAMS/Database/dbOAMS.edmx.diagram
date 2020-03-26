@@ -53,12 +53,12 @@
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TapTinDinhKem" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_TrangThaiChung" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_LoaiTinTuc" Width="1.5" PointX="0.75" PointY="9.875" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_NguoiSuDung" Width="1.5" PointX="6.375" PointY="9.75" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_BinhLuan" Width="1.5" PointX="19.875" PointY="6.375" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc" />
+        <EntityTypeShape EntityType="dbOAMSModel.NEWS_LoaiTinTuc" Width="1.5" PointX="0.75" PointY="10" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

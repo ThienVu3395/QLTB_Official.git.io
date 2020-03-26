@@ -38,8 +38,8 @@ namespace OAMS.Database
         public virtual NEWS_TrangThaiChung NEWS_TrangThaiChung { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
-        public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
+        public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }
     }
 }

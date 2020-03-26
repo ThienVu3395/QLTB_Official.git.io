@@ -7,6 +7,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachLoaiTin = response.data;
+                    $scope.tmMaLoaiTin = $scope.DanhSachLoaiTin[0];
                     $scope.CountUser = $scope.DanhSachLoaiTin[0].CountUser;
                     $scope.Month = $scope.DanhSachLoaiTin[0].Month;
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
@@ -28,6 +29,7 @@
                 $scope.currentPage = 1;
             }
             $scope.MaLoaiTin = MaLoaiTin;
+            $scope.P = Pages;
             $scope.ttshow = false;
             $scope.sinhNhat = false;
             let pageItems = {
@@ -39,7 +41,9 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachTinTuc = response.data;
+                    $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
                     $scope.totalItems = response.data[0].CountTin;
+                    $scope.ttshow = false;
                 },
 
                 function errorCallback(response) {
