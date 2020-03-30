@@ -17,6 +17,7 @@
     <!-- page specific plugin styles -->
     <!-- text fonts -->
     <link rel="stylesheet" href="~/Content/assetsmes/css/fonts.googleapis.com.css" />
+    <link rel="stylesheet" href="~/Content/assetsmes/css/daterangepicker.min.css" />
 
     <!-- ace styles -->
     <link rel="stylesheet" href="~/Content/assetsmes/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
@@ -706,7 +707,7 @@
         </div>
 
         <div class="main-content" style="height:calc(100%)">
-            <div class="main-content-inner" style="height:calc(100%)">
+            @*<div class="main-content-inner" style="height:calc(100%)">
                 <div class="ace-settings-container" id="ace-settings-container" style="margin-top:45px;" ng-controller="Chatcontroller">
                     <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn" ng-click="clickopenchat()">
                         <i class="{{unread?'ace-icon fa fa-comments-o fa-pulse bigger-130':'ace-icon fa fa-comments-o bigger-130' }}" style="margin-right:10px;"></i>
@@ -724,16 +725,15 @@
 
                                     <li class="" ng-repeat="item in Chats.windowsChats">
                                         <a data-toggle="tab" href="#{{'chat' + item.Name}}" aria-expanded="false" style="{{item.isnew? 'min-width:0px !important; background-color:#6b88f9':'min-width:0px !important; background-color:#fff'}}">
-                                            @*<i class="ace-icon fa fa-rocket"></i>*@
                                             <img style="width: 25px; border-radius: 100%;" alt="{{item.FullName}}" ng-src="{{item.Fileimage}}">
                                         </a>
                                     </li>
 
-                                    @*<li class="">
+                                    <li class="">
                                             <a data-toggle="tab" href="#dropdown13" aria-expanded="false" style="min-width:0px !important;">
                                                 <i class="ace-icon fa fa-rocket"></i>
                                             </a>
-                                        </li>*@
+                                        </li>
                                 </ul>
 
                                 <div class="tab-content" style="padding: 2px 0px; height: 360px;">
@@ -810,16 +810,16 @@
                                         </div>
                                     </div>
 
-                                    @*<div id="dropdown13" class="tab-pane">
+                                    <div id="dropdown13" class="tab-pane">
                                             <div style="width: 250px; height: 300px; overflow-y: auto;">
 
                                             </div>
-                                        </div>*@
+                                        </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!-- /.ace-settings-box -->
-                </div>
+                    </div>
+                </div>*@
                 @RenderBody()
             </div>
         </div><!-- /.main-content -->

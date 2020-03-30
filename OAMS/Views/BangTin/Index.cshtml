@@ -1,4 +1,6 @@
 ﻿@{
+    /**/
+
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
@@ -23,6 +25,12 @@
         select.form-control {
             padding: 4px 6px;
             height: 30px;
+        }
+
+        a {
+            color: #337ab7;
+            text-decoration: none;
+            line-height: 20px;
         }
     </style>
 }
@@ -80,38 +88,47 @@
                             <div class="tab-content">
                                 @*Thanh công cụ cho tin*@
                                 <div class="search-area well col-xs-12" ng-show="!sinhNhat && !ttshow">
-                                    <div class="pull-left">
-                                        <b class="text-primary">Display</b>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar bigger-110"></i>
+                                                </span>
 
-                                        &nbsp;
-                                        <div id="toggle-result-format" class="btn-group btn-overlap" data-toggle="buttons">
-                                            <label title="Thumbnail view" class="btn btn-lg btn-white btn-success active" data-class="btn-success" aria-pressed="true">
-                                                <input type="radio" value="2" autocomplete="off" />
-                                                <i class="icon-only ace-icon fa fa-th"></i>
-                                            </label>
-
-                                            <label title="List view" class="btn btn-lg btn-white btn-grey" data-class="btn-primary">
-                                                <input type="radio" value="1" checked="" autocomplete="off" />
-                                                <i class="icon-only ace-icon fa fa-list"></i>
-                                            </label>
-
-                                            <label title="Map view" class="btn btn-lg btn-white btn-grey" data-class="btn-warning">
-                                                <input type="radio" value="3" autocomplete="off" />
-                                                <i class="icon-only ace-icon fa fa-crosshairs"></i>
-                                            </label>
+                                                <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="pull-right">
-                                        <b class="text-primary">Order</b>
-
-                                        &nbsp;
-                                        <select>
-                                            <option>Relevance</option>
-                                            <option>Newest First</option>
-                                            <option>Rating</option>
-                                        </select>
+                                        @*<div class="col-lg-3">
+                                                <select class="form-control" id="form-field-select-1">
+                                                    <option value="AL">Alabama</option>
+                                                    <option value="AK">Alaska</option>
+                                                    <option value="AZ">Arizona</option>
+                                                </select>
+                                            </div>*@
                                     </div>
+                                    @*<div class="pull-left">
+                                            <b class="text-primary">Ngày</b>
+                                            &nbsp;
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar bigger-110"></i>
+                                                </span>
+
+                                                <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" />
+                                            </div>
+                                        </div>
+
+                                        <div class="pull-right">
+                                            <b class="text-primary">Trạng Thái</b>
+
+                                            &nbsp;
+                                            <select>
+                                                <option>Relevance</option>
+                                                <option>Newest First</option>
+                                                <option>Rating</option>
+                                            </select>
+                                        </div>*@
                                 </div>
                                 @*/ Thanh công cụ cho tin*@
 
@@ -359,7 +376,7 @@
                                                         <hr />
                                                         <div id="timeline-1">
                                                             <div class="row">
-                                                                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                                                                <div class="col-xs-12 col-sm-12">
                                                                     <div class="timeline-container">
                                                                         <div class="timeline-label">
                                                                             <span class="label label-primary arrowed-in-right label-lg">
@@ -496,52 +513,97 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form name="tinThem" novalidate>
+                                    <form name="tinThem" ng-submit="ThemBaiViet()" novalidate>
                                         <div class="form-group">
-                                            <label class="control-label no-padding-right" for="form-field-1-1"> Tiêu Đề </label>
-                                            <input type="text" id="form-field-1-1" placeholder="Nhập Tiêu Đề..." class="form-control" />
+                                            <label class="control-label no-padding-right" for="form-field-1-1"> Tiêu Đề <span class="text-danger">*</span> </label>
+                                            <input type="text"
+                                                   id="form-field-1-1"
+                                                   placeholder="Nhập Tiêu Đề..."
+                                                   ng-model="objThem.TieuDe"
+                                                   name="TieuDe"
+                                                   ng-minlength="10"
+                                                   class="form-control"
+                                                   ng-required=true />
+                                            <div class="text-danger" ng-show="tinThem.TieuDe.$error.required">Bạn Chưa Nhập Tiêu Đề</div>
+                                            <div class="text-danger" ng-show="tinThem.TieuDe.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
+
                                             <span class="help-inline">
                                                 <label class="middle">
-                                                    <input class="ace" type="checkbox" id="id-disable-check" />
-                                                    <span class="lbl"> Tin Quan Trọng</span>
+                                                    <input class="ace" type="checkbox" id="id-disable-check" ng-model="objThem.Hot" />
+                                                    <span class="lbl">
+                                                        <span class="text-danger">
+                                                            <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
+                                                               data-rel="tooltip" href="#" data-placement="bottom">
+                                                                Tin Quan Trọng
+                                                            </a>
+                                                        </span>
+                                                    </span>
+                                                </label>
+                                            </span>
+
+                                            <span class="help-inline">
+                                                <label class="middle">
+                                                    <input class="ace" type="checkbox" ng-model="objThem.TrangThai" />
+                                                    <span class="lbl"> Duyệt Tin Này</span>
                                                 </label>
                                             </span>
                                         </div>
 
                                         <div>
-                                            <label for="form-field-11">Mô Tả Ngắn</label>
-                                            <textarea id="form-field-11" placeholder="Nhập Mô Tả..." class="autosize-transition form-control"></textarea>
+                                            <label for="form-field-11">Mô Tả Ngắn <span class="text-danger">*</span></label>
+                                            <textarea id="form-field-11"
+                                                      ng-model="objThem.MoTa"
+                                                      ng-minlength="10"
+                                                      name="MoTa"
+                                                      placeholder="Nhập Mô Tả..."
+                                                      class="autosize-transition form-control"
+                                                      ng-required=true></textarea>
+                                            <div class="text-danger" ng-show="tinThem.MoTa.$error.required">Bạn Chưa Nhập Nội Dung Cho Mô Tả</div>
+                                            <div class="text-danger" ng-show="tinThem.MoTa.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label no-padding-right" for="form-field-1-1">Hình Đại Diện</label>
+                                            <input type="file" class="form-control" name="HinhAnh" id="id-input-file-2" nv-file-select uploader="uploader" />
                                         </div>
 
                                         <div class="row">
-                                            <div class="form-group col-lg-6">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">Hình Đại Diện</label>
-                                                <input type="file" class="form-control" id="id-input-file-2" />
-                                            </div>
-
-                                            <div class="form-group col-lg-6">
+                                            <div class="form-group col-lg-3">
                                                 <label class="control-label no-padding-right" for="form-field-1-1">Loại Tin</label>
                                                 <select class="form-control"
                                                         id="form-field-select-1"
                                                         ng-model="tmMaLoaiTin"
                                                         ng-options="item as item.Ten for item in DanhSachLoaiTin"></select>
                                             </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="form-group col-lg-4">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">Ngày Hết Hạn</label>
-                                                <input type="date" class="form-control" />
+                                            <div class="form-group col-lg-3">
+                                                <label class="control-label no-padding-right" for="form-field-1-1">
+                                                    <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
+                                                       data-rel="tooltip" href="#" data-placement="bottom">
+                                                        Ngày Hết Hạn
+                                                    </a>
+                                                </label>
+                                                <input type="date" class="form-control" ng-model="objThem.NgayHetHan" />
                                             </div>
 
-                                            <div class="form-group col-lg-4">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">Ngày Hết Hạn Tin Mới</label>
-                                                <input type="date" class="form-control" />
+                                            <div class="form-group col-lg-3">
+                                                <label class="control-label no-padding-right" for="form-field-1-1">
+                                                    <a title="Nếu thiết lập ngày hết hạn tin mới thì tin sẽ có biểu tượng 'NEW MÀU ĐỎ' cho đến hết ngày đó.."
+                                                       data-rel="tooltip" href="#" data-placement="bottom">
+                                                        Ngày Hết Hạn Tin Mới
+                                                    </a>
+                                                </label>
+                                                <input type="date" class="form-control" ng-model="objThem.NgayHetHanTinMoi" />
                                             </div>
 
-                                            <div class="form-group col-lg-4">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">Ngày Hết Hạn Trang Chủ</label>
-                                                <input type="date" class="form-control" />
+                                            <div class="form-group col-lg-3">
+                                                <label class="control-label no-padding-right" for="form-field-1-1">
+                                                    <a title="Nếu thiết lập ngày hết hạn trang chủ thì tin sẽ chay trên trang chủ cho đến hết ngày đó."
+                                                       data-rel="tooltip" href="#" data-placement="bottom">
+                                                        Ngày Hết Hạn Trang Chủ
+                                                    </a>
+                                                </label>
+                                                <input type="date" class="form-control" ng-model="objThem.NgayHetHanTrangChu" />
                                             </div>
                                         </div>
 
@@ -586,7 +648,7 @@
                                         Hủy
                                     </button>
 
-                                    <button class="btn btn-sm btn-primary">
+                                    <button class="btn btn-sm btn-primary" ng-click="ThemBaiViet()" ng-disabled="tinThem.$invalid">
                                         <i class="ace-icon fa fa-check"></i>
                                         Thêm
                                     </button>

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using OAMS.Models;
 using OAMS.Database;
+using System.IO;
 
 namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
 {
@@ -66,7 +67,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             }
             return Ok(dsUserModel);
         }
-
 
         [HttpPost]
         [Route("LayDanhSachBaiViet_PhanTrang")]
@@ -196,6 +196,77 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             binhLuan.Gio = null;
             dbContext.NEWS_BinhLuan.Add(binhLuan);
             return Ok("Bình Luận Của Bạn Đã Được Gửi");
+        }
+
+        [HttpPost]
+        [Route("UploadFiles")]
+        public string UploadFiles()
+        {
+            int iUploadedCnt = 0;
+
+            string sPath = "";
+
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/TinTuc");
+
+            string date = DateTime.Now.Year.ToString();
+
+            sPath = Path.Combine(sPath, date);
+
+            if (!Directory.Exists(sPath))
+            {
+                Directory.CreateDirectory(sPath);
+            }
+
+            date = DateTime.Now.Month.ToString();
+
+            sPath = Path.Combine(sPath, date);
+
+            if (!Directory.Exists(sPath))
+            {
+                Directory.CreateDirectory(sPath);
+            }
+
+            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
+            {
+                System.Web.HttpPostedFile hpf = hfc[iCnt];
+
+                if (hpf.ContentLength > 0)
+                {
+                    if (!File.Exists(sPath + Path.GetFileName(hpf.FileName)))
+                    {
+                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
+
+                        iUploadedCnt = iUploadedCnt + 1;
+                    }
+
+                    else
+                    {
+                        FileInfo f = new FileInfo(sPath + Path.GetFileName(hpf.FileName));
+
+                        f.Delete();
+
+                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
+
+                        iUploadedCnt = iUploadedCnt + 1;
+                    }
+                }
+            }
+            if (iUploadedCnt > 0)
+            {
+                return iUploadedCnt + " Files Uploaded Successfully";
+            }
+            else
+            {
+                return "Upload Failed";
+            }
+        }
+
+        [HttpPost]
+        [Route("ThemBaiViet")]
+        public IHttpActionResult ThemBaiViet()
+        {
+            return Ok("haha");
         }
     }
 }

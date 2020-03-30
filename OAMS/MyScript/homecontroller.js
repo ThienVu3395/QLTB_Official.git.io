@@ -417,10 +417,10 @@
                         }
                         return true;
                     }
-            }])
+                }])
 
         //Phần của Vũ thêm vào để quản lý bảng tin
-        .factory("CommonController", ["$http",
+        .factory("CommonController", ["$http", "FileUploader",
             function ($http) {
                 // Tạo UrlAPI động
                 var baseURL = window.location.protocol + "//" + window.location.host + "/";
