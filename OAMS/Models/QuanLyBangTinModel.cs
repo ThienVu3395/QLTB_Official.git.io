@@ -34,8 +34,12 @@ namespace OAMS.Models
         public Nullable<bool> TinNoiBat { get; set; }
         public List<BinhLuanModel> BinhLuan { get; set; }
         public string HinhAnh { get; set; }
+        public int MaTrangThai { get; set; }
         public int CountTin { get; set; }
         public List<TapTinModel> TapTinDinhKem { get; set; }
+        public DateTime? NgayHetHan { get; set; }
+        public DateTime? NgayHetHanTinMoi { get; set; }
+        public DateTime? NgayHetHanTrangChu { get; set; }
         public int? TemplateList { get; set; }
         public int? TemplateDetail { get; set; }
     }

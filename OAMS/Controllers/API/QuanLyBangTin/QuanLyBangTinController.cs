@@ -264,9 +264,23 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
 
         [HttpPost]
         [Route("ThemBaiViet")]
-        public IHttpActionResult ThemBaiViet()
+        public IHttpActionResult ThemBaiViet(TinTucModel tinTuc)
         {
-            return Ok("haha");
+            NEWS_TinTuc tin = new NEWS_TinTuc();
+            tin.TieuDe = tinTuc.TieuDe;
+            tin.NoiDung = tinTuc.NoiDung;
+            tin.MoTa = tinTuc.MoTa;
+            tin.MaLoaiTin = tinTuc.MaLoaiTin;
+            tin.TacGia = "ThienVu.Lh";
+            tin.HienThi = tinTuc.HienThi;
+            tin.TinNoiBat = tinTuc.TinNoiBat;
+            tin.MaTrangThai = tinTuc.MaTrangThai == 1 ? 2 : 1;
+            tin.HinhAnh = tinTuc.HinhAnh;
+            tin.NgayHetHan = tinTuc.NgayHetHan;
+            tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
+            tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
+            dbContext.NEWS_TinTuc.Add(tin);
+            return Ok("Thêm Bài Viết Thành Công");
         }
     }
 }

@@ -6,9 +6,11 @@
 }
 
 @section Css{
+    <link rel="stylesheet" href="~/Content/assetsmes/css/bootstrap-datepicker3.min.css" />
     <style>
         h3 {
-            font-size: 14px !important
+            font-size: 14px !important;
+            min-height: 50px;
         }
 
         .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
@@ -271,7 +273,7 @@
 
                                 @* Sinh Nhật Trong Tháng*@
                                 <div class="row tab-pane fade" id="sn">
-                                    <div ng-repeat="item in DanhSachUser" class="col-xs-6 col-sm-3 col-md-3" ">
+                                    <div ng-repeat="item in DanhSachUser track by item.MaNguoiDung" class="col-xs-6 col-sm-3 col-md-3">
                                         <div class="thumbnail search-thumbnail">
                                             <span class="search-promotion label label-success arrowed-in arrowed-in-right">Phòng ABCXYZ</span>
                                             <img class="media-object" src="{{item.HinhAnh}}" />
@@ -529,7 +531,7 @@
 
                                             <span class="help-inline">
                                                 <label class="middle">
-                                                    <input class="ace" type="checkbox" id="id-disable-check" ng-model="objThem.Hot" />
+                                                    <input class="ace" type="checkbox" id="id-disable-check" ng-model="objThem.TinNoiBat" />
                                                     <span class="lbl">
                                                         <span class="text-danger">
                                                             <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
@@ -543,7 +545,7 @@
 
                                             <span class="help-inline">
                                                 <label class="middle">
-                                                    <input class="ace" type="checkbox" ng-model="objThem.TrangThai" />
+                                                    <input class="ace" type="checkbox" ng-model="objThem.MaTrangThai" />
                                                     <span class="lbl"> Duyệt Tin Này</span>
                                                 </label>
                                             </span>
@@ -583,7 +585,12 @@
                                                         Ngày Hết Hạn
                                                     </a>
                                                 </label>
-                                                <input type="date" class="form-control" ng-model="objThem.NgayHetHan" />
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="yyyy-mm-dd" />
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-lg-3">
@@ -593,7 +600,12 @@
                                                         Ngày Hết Hạn Tin Mới
                                                     </a>
                                                 </label>
-                                                <input type="date" class="form-control" ng-model="objThem.NgayHetHanTinMoi" />
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" type="text" ng-model="objThem.NgayHetHanTinMoi" data-date-format="yyyy-mm-dd" />
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-lg-3">
@@ -603,8 +615,43 @@
                                                         Ngày Hết Hạn Trang Chủ
                                                     </a>
                                                 </label>
-                                                <input type="date" class="form-control" ng-model="objThem.NgayHetHanTrangChu" />
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker"  type="text" ng-model="objThem.NgayHetHanTrangChu" data-date-format="yyyy-mm-dd" />
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
                                             </div>
+
+                                            @*<div class="form-group col-lg-3">
+                                                    <label class="control-label no-padding-right" for="form-field-1-1">
+                                                        <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
+                                                           data-rel="tooltip" href="#" data-placement="bottom">
+                                                            Ngày Hết Hạn
+                                                        </a>
+                                                    </label>
+                                                    <input type="date" class="form-control" ng-model="objThem.NgayHetHan" />
+                                                </div>
+
+                                                <div class="form-group col-lg-3">
+                                                    <label class="control-label no-padding-right" for="form-field-1-1">
+                                                        <a title="Nếu thiết lập ngày hết hạn tin mới thì tin sẽ có biểu tượng 'NEW MÀU ĐỎ' cho đến hết ngày đó.."
+                                                           data-rel="tooltip" href="#" data-placement="bottom">
+                                                            Ngày Hết Hạn Tin Mới
+                                                        </a>
+                                                    </label>
+                                                    <input type="date" class="form-control" ng-model="objThem.NgayHetHanTinMoi" />
+                                                </div>
+
+                                                <div class="form-group col-lg-3">
+                                                    <label class="control-label no-padding-right" for="form-field-1-1">
+                                                        <a title="Nếu thiết lập ngày hết hạn trang chủ thì tin sẽ chay trên trang chủ cho đến hết ngày đó."
+                                                           data-rel="tooltip" href="#" data-placement="bottom">
+                                                            Ngày Hết Hạn Trang Chủ
+                                                        </a>
+                                                    </label>
+                                                    <input type="date" class="form-control" ng-model="objThem.NgayHetHanTrangChu" />
+                                                </div>*@
                                         </div>
 
                                         <h4 class="header green clearfix">

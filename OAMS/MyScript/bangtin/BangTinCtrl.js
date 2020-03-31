@@ -109,6 +109,7 @@
             DonVi: "P.Công Nghệ Thông Tin",
             TenNguoiDung : "Lê Hoàng Thiên Vũ"
         }
+
         $scope.GuiBinhLuan = function (MaTinTuc) {
             $scope.BinhLuan.MaTinTuc = MaTinTuc;
             //let index = $scope.BaiVietTuong.findIndex(x => x.MaTinTuc == MaTinTuc);
@@ -191,14 +192,27 @@
 
         // Thêm Bài Viết
         $scope.objThem = {
-            Hot: false,
-            TrangThai: false
+            TinNoiBat: false,
+            MaTrangThai: false
         }
         $scope.ThemBaiViet = function () {
             $scope.objThem.MaLoaiTin = $scope.tmMaLoaiTin.MaLoaiTin;
             $scope.objThem.NoiDung = document.getElementById("editor1").innerHTML;
             $scope.objThem.HinhAnh = $scope.HinhAnh;
+            //$scope.objThem.NgayHetHan = moment($scope.objThem.NgayHetHan).format('YYYY-MM-DD');
+            //$scope.objThem.NgayHetHanTinMoi = moment($scope.objThem.NgayHetHanTinMoi).format('YYYY-MM-DD');
+            //$scope.objThem.NgayHetHanTrangChu = moment($scope.objThem.NgayHetHanTrangChu).format('YYYY-MM-DD');
             console.log($scope.objThem);
+            var res = CommonController.postData(CommonController.urlAPI.API_ThemBaiViet, $scope.objThem);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachUser = response.data;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
         }
 
     })

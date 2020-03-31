@@ -434,6 +434,7 @@
                     API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
                     API_GuiBinhLuan: "API/QuanLyBangTin/GuiBinhLuan",
+                    API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet"
                 };
 
                 // Hàm Tạo Ra Mã Xác Nhận Ngẫu Nhiên 

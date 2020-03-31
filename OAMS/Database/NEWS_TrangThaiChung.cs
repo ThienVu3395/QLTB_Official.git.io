@@ -17,12 +17,15 @@ namespace OAMS.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NEWS_TrangThaiChung()
         {
+            this.NEWS_BinhLuan = new HashSet<NEWS_BinhLuan>();
             this.NEWS_TinTuc = new HashSet<NEWS_TinTuc>();
         }
     
         public int MaTrangThai { get; set; }
         public string Ten { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }
     }

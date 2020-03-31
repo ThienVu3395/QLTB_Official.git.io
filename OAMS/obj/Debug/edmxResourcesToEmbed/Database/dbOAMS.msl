@@ -340,25 +340,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_TinTuc">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
-        <MappingFragment StoreEntitySet="NEWS_TinTuc">
-          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
-          <ScalarProperty Name="TinNoiBat" ColumnName="TinNoiBat" />
-          <ScalarProperty Name="HienThi" ColumnName="HienThi" />
-          <ScalarProperty Name="NguoiCapNhat" ColumnName="NguoiCapNhat" />
-          <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
-          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-          <ScalarProperty Name="TacGia" ColumnName="TacGia" />
-          <ScalarProperty Name="MaLoaiTin" ColumnName="MaLoaiTin" />
-          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NEWS_TinTucTapTin">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
         <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
@@ -416,6 +397,28 @@
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="MaLoaiTin" ColumnName="MaLoaiTin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_TinTuc">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
+        <MappingFragment StoreEntitySet="NEWS_TinTuc">
+          <ScalarProperty Name="NgayHetHanTrangChu" ColumnName="NgayHetHanTrangChu" />
+          <ScalarProperty Name="NgayHetHanTinMoi" ColumnName="NgayHetHanTinMoi" />
+          <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+          <ScalarProperty Name="TinNoiBat" ColumnName="TinNoiBat" />
+          <ScalarProperty Name="HienThi" ColumnName="HienThi" />
+          <ScalarProperty Name="NguoiCapNhat" ColumnName="NguoiCapNhat" />
+          <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+          <ScalarProperty Name="TacGia" ColumnName="TacGia" />
+          <ScalarProperty Name="MaLoaiTin" ColumnName="MaLoaiTin" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -3,7 +3,9 @@
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
 
-@section Css{}
+@section Css{
+
+}
 
 <div ng-controller="QlbtCrl">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
@@ -42,31 +44,31 @@
 
                             <li class="active">
                                 <a data-toggle="tab" href="#inbox" data-target="inbox">
-                                    <i class="blue ace-icon fa fa-inbox bigger-130"></i>
-                                    <span class="bigger-110">Inbox</span>
+                                    <i class="green ace-icon fa fa-check bigger-130"></i>
+                                    <span class="bigger-110">Tin / Bình Luận Đã Duyệt</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a data-toggle="tab" href="#sent" data-target="sent">
-                                    <i class="orange ace-icon fa fa-location-arrow bigger-130"></i>
-                                    <span class="bigger-110">Sent</span>
+                                    <i class="blue ace-icon fa fa-clock-o bigger-130"></i>
+                                    <span class="bigger-110">Tin / Bình Luận Chờ Duyệt</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a data-toggle="tab" href="#draft" data-target="draft">
-                                    <i class="green ace-icon fa fa-pencil bigger-130"></i>
-                                    <span class="bigger-110">Draft</span>
+                                    <i class="red ace-icon fa fa-times bigger-130"></i>
+                                    <span class="bigger-110">Tin / Bình Luận Không Duyệt</span>
                                 </a>
                             </li>
 
-                            <li class="dropdown">
+                            @*<li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <i class="pink ace-icon fa fa-tags bigger-130"></i>
+                                    <i class="pink ace-icon fa fa-comment-o bigger-130"></i>
 
                                     <span class="bigger-110">
-                                        Tags
+                                        Bình Luận
                                         <i class="ace-icon fa fa-caret-down"></i>
                                     </span>
                                 </a>
@@ -100,7 +102,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li><!-- /.dropdown -->
+                            </li>*@
                         </ul>
 
                         <div class="tab-content no-border no-padding">
@@ -232,6 +234,14 @@
 
                                                         <li>
                                                             <a id="id-select-message-none" href="#">None</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a id="id-select-message-all" href="#">Tin Tức</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a id="id-select-message-none" href="#">Bình Luận</a>
                                                         </li>
 
                                                         <li class="divider"></li>
