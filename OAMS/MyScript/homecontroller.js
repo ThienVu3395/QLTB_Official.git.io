@@ -431,9 +431,11 @@
                     API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
                     API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
                     API_LayDanhSachBaiViet_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_PhanTrang",
+                    API_LayDanhSachBaiVietLienQuan: "API/QuanLyBangTin/LayDanhSachBaiVietLienQuan",
                     API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
                     API_GuiBinhLuan: "API/QuanLyBangTin/GuiBinhLuan",
+                    API_LocBaiViet: "API/QuanLyBangTin/LayDanhSachBaiViet_Loc",
                     API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet"
                 };
 

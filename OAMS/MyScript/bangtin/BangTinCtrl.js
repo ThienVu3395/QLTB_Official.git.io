@@ -3,6 +3,11 @@
         //Lấy danh sách Loại Tin
         $scope.sinhNhat = false;
         $scope.LayDanhSachLoaiTin = function () {
+            let date = new Date();
+            $scope.day = date.getDate().toString().length == 1 ? "0" + date.getDate() : date.getDate();
+            $scope.month = (date.getMonth() + 1).toString().length == 1 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            $scope.Start = $scope.day + "-" + $scope.month + "-" + date.getFullYear();
+            $scope.End = $scope.day + "-" + $scope.month + "-" + date.getFullYear();
             var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachLoaiTin, "");
             res.then(
                 function succ(response) {
@@ -11,7 +16,7 @@
                     $scope.CountUser = $scope.DanhSachLoaiTin[0].CountUser;
                     $scope.Month = $scope.DanhSachLoaiTin[0].Month;
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
-                    $scope.DanhSachTinTuc = $scope.LayDanhSachBaiViet($scope.MaLoaiTin);
+                    $scope.DanhSachTinTuc = $scope.LayDanhSachBaiViet($scope.MaLoaiTin,1);
                 },
 
                 function errorCallback(response) {
@@ -35,15 +40,77 @@
             let pageItems = {
                 MaLoaiTin: $scope.MaLoaiTin,
                 itemPerPage: $scope.itemsPerPage,
-                Limit: Math.round((Pages - 1) * $scope.itemsPerPage)
+                Limit: Math.round((Pages - 1) * $scope.itemsPerPage),
+                Start: $scope.Start,
+                End: $scope.End,
             }
             var res = CommonController.postData(CommonController.urlAPI.API_LayDanhSachBaiViet_PhanTrang, pageItems);
             res.then(
                 function succ(response) {
                     $scope.DanhSachTinTuc = response.data;
-                    $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
-                    $scope.totalItems = response.data[0].CountTin;
-                    $scope.ttshow = false;
+                    if ($scope.DanhSachTinTuc.length != 0) {
+                        $scope.DanhSachTinTuc = response.data;
+                        $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
+                        $scope.totalItems = response.data[0].CountTin;
+                        $scope.ttshow = false;
+                        var res2 = CommonController.postData(CommonController.urlAPI.API_LayDanhSachBaiVietLienQuan, pageItems);
+                        res2.then(
+                            function succ(response) {
+                                $scope.DanhSachCuHon = response.data;
+                            },
+
+                            function errorCallback(response) {
+                                console.log(response.data.message)
+                            }
+                        )
+                    }
+                    else {
+                        $scope.totalItems = 0;
+                    }
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Tìm Bài Viết
+        $scope.TimBaiViet = function () {
+            let t = document.getElementsByClassName("input-mini");
+            $scope.Start = moment(t[0].value).format('DD-MM-YYYY');
+            $scope.End = moment(t[1].value).format('DD-MM-YYYY');
+            let objTim = {
+                MaLoaiTin: $scope.MaLoaiTin,
+                Start: $scope.Start,
+                End: $scope.End,
+                itemPerPage: $scope.itemsPerPage,
+                Limit: Math.round((1 - 1) * $scope.itemsPerPage)
+            }
+            var res = CommonController.postData(CommonController.urlAPI.API_LocBaiViet, objTim);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachTinTuc = response.data;
+                    if ($scope.DanhSachTinTuc.length != 0) {
+                        console.log($scope.DanhSachTinTuc);
+                        $scope.DanhSachTinTuc = response.data;
+                        $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
+                        $scope.totalItems = response.data[0].CountTin;
+                        $scope.ttshow = false;
+                        var res2 = CommonController.postData(CommonController.urlAPI.API_LayDanhSachBaiVietLienQuan, objTim);
+                        res2.then(
+                            function succ(response) {
+                                $scope.DanhSachCuHon = response.data;
+                            },
+
+                            function errorCallback(response) {
+                                console.log(response.data.message)
+                            }
+                        )
+                    }
+                    else {
+                        $scope.totalItems = 0;
+                    }
                 },
 
                 function errorCallback(response) {
@@ -77,6 +144,7 @@
             res.then(
                 function succ(response) {
                     $scope.ThongTinBV = response.data;
+                    console.log($scope.ThongTinBV);
                     $scope.ttshow = true;
                 },
 
@@ -214,5 +282,4 @@
                 }
             )
         }
-
     })

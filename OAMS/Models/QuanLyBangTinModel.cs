@@ -42,6 +42,7 @@ namespace OAMS.Models
         public DateTime? NgayHetHanTrangChu { get; set; }
         public int? TemplateList { get; set; }
         public int? TemplateDetail { get; set; }
+        public List<TinTucModel> TinLienQuan { get; set; }
     }
 
     public class TapTinModel
@@ -57,6 +58,8 @@ namespace OAMS.Models
         public int Limit { get; set; }
         public int itemPerPage { get; set; }
         public int Month { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
     }
 
     public class NguoiDungModel

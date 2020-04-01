@@ -7,6 +7,8 @@ using System.Web.Http;
 using OAMS.Models;
 using OAMS.Database;
 using System.IO;
+using System.Data.Entity;
+using System.Globalization;
 
 namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
 {
@@ -72,7 +74,39 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         [Route("LayDanhSachBaiViet_PhanTrang")]
         public IHttpActionResult LayDanhSachBaiViet_PhanTrang(PageModel pm)
         {
-            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == pm.MaLoaiTin && x.HienThi == true).ToList();
+            var dsTin = dbContext.NEWS_TinTuc.ToList().Where(x => x.MaLoaiTin == pm.MaLoaiTin && x.HienThi == true && x.NgayTao >= DateTime.ParseExact(pm.Start, "dd-MM-yyyy", CultureInfo.InvariantCulture) && x.NgayTao <= DateTime.ParseExact(pm.End, "dd-MM-yyyy", CultureInfo.InvariantCulture)).OrderByDescending(x => x.NgayTao).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.TacGia = item.TacGia;
+                    tin.NgayTao = item.NgayTao;
+                    tin.NgayCapNhat = item.NgayCapNhat;
+                    tin.NguoiCapNhat = item.NguoiCapNhat;
+                    tin.HienThi = item.HienThi;
+                    tin.HinhAnh = item.HinhAnh;
+                    tin.TinNoiBat = item.TinNoiBat;
+                    tin.CountTin = dsTin.Count;
+                    tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel.Skip(pm.Limit).Take(pm.itemPerPage));
+            }
+            return Ok(dsTinModel);
+        }
+
+        [HttpPost]
+        [Route("LayDanhSachBaiVietLienQuan")]
+        public IHttpActionResult LayDanhSachBaiVietLienQuan(PageModel pm)
+        {
+            var dsTin = dbContext.NEWS_TinTuc.ToList().Where(x => x.MaLoaiTin == pm.MaLoaiTin && x.HienThi == true && x.NgayTao < DateTime.ParseExact(pm.Start, "dd-MM-yyyy", CultureInfo.InvariantCulture)).OrderByDescending(x => x.NgayTao).Take(5).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
             if (dsTin.Count > 0)
             {
@@ -96,7 +130,39 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     dsTinModel.Add(tin);
                 }
             }
-            return Ok(dsTinModel.Skip(pm.Limit).Take(pm.itemPerPage));
+            return Ok(dsTinModel);
+        }
+
+        [HttpPost]
+        [Route("LayDanhSachBaiViet_Loc")]
+        public IHttpActionResult LayDanhSachBaiViet_Loc(PageModel objTim)
+        {
+            var dsTin = dbContext.NEWS_TinTuc.ToList().Where(x => x.MaLoaiTin == objTim.MaLoaiTin && x.HienThi == true && x.NgayTao >= DateTime.ParseExact(objTim.Start, "dd-MM-yyyy", CultureInfo.InvariantCulture) && x.NgayTao <= DateTime.ParseExact(objTim.End, "dd-MM-yyyy", CultureInfo.InvariantCulture)).OrderByDescending(x => x.NgayTao).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.TacGia = item.TacGia;
+                    tin.NgayTao = item.NgayTao;
+                    tin.NgayCapNhat = item.NgayCapNhat;
+                    tin.NguoiCapNhat = item.NguoiCapNhat;
+                    tin.HienThi = item.HienThi;
+                    tin.HinhAnh = item.HinhAnh;
+                    tin.TinNoiBat = item.TinNoiBat;
+                    tin.CountTin = dsTin.Count;
+                    tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel.Skip(objTim.Limit).Take(objTim.itemPerPage));
+            }
+            return Ok(dsTinModel);
         }
 
         [HttpGet]
@@ -177,6 +243,30 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         dsttmodel.Add(ttmodel);
                     }
                     tinTuc.TapTinDinhKem = dsttmodel;
+                }
+                var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(5).ToList();
+                List<TinTucModel> dsTinLQ = new List<TinTucModel>();
+                if(tinLQ.Count > 0)
+                {
+                    foreach(var item in tinLQ)
+                    {
+                        TinTucModel tin = new TinTucModel();
+                        tin.MaTinTuc = item.MaTinTuc;
+                        tin.TieuDe = item.TieuDe;
+                        tin.NoiDung = item.NoiDung;
+                        tin.MoTa = item.MoTa;
+                        tin.MaLoaiTin = item.MaLoaiTin;
+                        tin.TacGia = item.TacGia;
+                        tin.NgayTao = item.NgayTao;
+                        tin.NgayCapNhat = item.NgayCapNhat;
+                        tin.NguoiCapNhat = item.NguoiCapNhat;
+                        tin.HienThi = item.HienThi;
+                        tin.HinhAnh = item.HinhAnh;
+                        tin.TinNoiBat = item.TinNoiBat;
+                        tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
+                        dsTinLQ.Add(tin);
+                    }
+                    tinTuc.TinLienQuan = dsTinLQ;
                 }
                 return Ok(tinTuc);
             }
