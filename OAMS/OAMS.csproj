@@ -1872,6 +1872,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataConversation\" />
+    <Folder Include="Content\attachment\TinTuc\" />
+    <Folder Include="Content\image\TinTuc\" />
     <Folder Include="DataFile\" />
   </ItemGroup>
   <ItemGroup>

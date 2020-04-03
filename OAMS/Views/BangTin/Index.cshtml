@@ -166,7 +166,7 @@
                                                 <h3 class="search-title">
                                                     <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="showBtn(item.MaTinTuc)">{{ item.TieuDe | limitTo: 40 }}{{item.TieuDe.length > 40 ? '...' : ''}}</a>
                                                 </h3>
-                                                <p>{{item.MoTa}}</p>
+                                                <p>{{item.MoTa| limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                                                 <span class="text-success" ng-click="showBtn(item.MaTinTuc)">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
                                             </div>
                                         </div>
@@ -521,22 +521,90 @@
                                             </span>
                                         </div>
 
-                                        <div>
-                                            <label for="form-field-11">Mô Tả Ngắn <span class="text-danger">*</span></label>
-                                            <textarea id="form-field-11"
-                                                      ng-model="objThem.MoTa"
-                                                      ng-minlength="10"
-                                                      name="MoTa"
-                                                      placeholder="Nhập Mô Tả..."
-                                                      class="autosize-transition form-control"
-                                                      ng-required=true></textarea>
-                                            <div class="text-danger" ng-show="tinThem.MoTa.$error.required">Bạn Chưa Nhập Nội Dung Cho Mô Tả</div>
-                                            <div class="text-danger" ng-show="tinThem.MoTa.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
-                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="form-field-11">Mô Tả Ngắn <span class="text-danger">*</span></label>
+                                                <textarea id="form-field-11"
+                                                          ng-model="objThem.MoTa"
+                                                          ng-minlength="10"
+                                                          name="MoTa"
+                                                          placeholder="Nhập Mô Tả..."
+                                                          class="autosize-transition form-control"
+                                                          ng-required=true></textarea>
+                                                <div class="text-danger" ng-show="tinThem.MoTa.$error.required">Bạn Chưa Nhập Nội Dung Cho Mô Tả</div>
+                                                <div class="text-danger" ng-show="tinThem.MoTa.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label no-padding-right" for="form-field-1-1">Hình Đại Diện</label>
-                                            <input type="file" class="form-control" name="HinhAnh" id="id-input-file-2" nv-file-select uploader="uploader" />
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label no-padding-right" for="form-field-1-1">Hình Đại Diện</label>
+                                                <input type="file" class="form-control" name="HinhAnh" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label class="control-label no-padding-right" for="form-field-1-1">File Đính Kèm</label>
+                                                <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderFile" filters="upFile" /><br />
+                                            </div>
+
+                                            <div id="accordion" class="accordion-style1 panel-group col-lg-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                                <i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                                &nbsp;Danh Sách File Đính Kèm
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+
+                                                    <div class="panel-collapse collapse in" id="collapseOne">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <h3 class="header smaller lighter green">
+                                                                        <i class="ace-icon fa fa-bullhorn"></i>
+                                                                        Hình Ảnh
+                                                                    </h3>
+
+                                                                    <div class="alert alert-block alert-success" ng-repeat="item in uploaderImage.queue">
+                                                                        <p>
+                                                                            <strong>
+                                                                                <i class="ace-icon fa fa-check"></i>
+                                                                                {{item.file.name}}
+                                                                            </strong>
+                                                                            ({{item.file.size}} KB)
+                                                                        </p>
+
+                                                                        <p>
+                                                                            <button class="btn btn-sm btn-danger">Remove</button>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-6">
+                                                                    <h3 class="header smaller lighter green">
+                                                                        <i class="ace-icon fa fa-bullhorn"></i>
+                                                                        Tập Tin Đính Kèm
+                                                                    </h3>
+
+                                                                    <div class="alert alert-block alert-success" ng-repeat="item in uploaderFile.queue">
+                                                                        <p>
+                                                                            <strong>
+                                                                                <i class="ace-icon fa fa-book"></i>
+                                                                                {{item.file.name}}
+                                                                            </strong>
+                                                                            ({{item.file.size}} KB)
+                                                                        </p>
+
+                                                                        <p>
+                                                                            <button class="btn btn-sm btn-danger">Remove</button>
+                                                                        </p>
+                                                                    </div>                                               
+                                                                </div>
+                                                            </div><!-- /.row -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">

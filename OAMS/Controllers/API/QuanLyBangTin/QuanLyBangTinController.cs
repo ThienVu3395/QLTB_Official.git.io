@@ -9,6 +9,7 @@ using OAMS.Database;
 using System.IO;
 using System.Data.Entity;
 using System.Globalization;
+using System.Web;
 
 namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
 {
@@ -246,9 +247,9 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 }
                 var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(5).ToList();
                 List<TinTucModel> dsTinLQ = new List<TinTucModel>();
-                if(tinLQ.Count > 0)
+                if (tinLQ.Count > 0)
                 {
-                    foreach(var item in tinLQ)
+                    foreach (var item in tinLQ)
                     {
                         TinTucModel tin = new TinTucModel();
                         tin.MaTinTuc = item.MaTinTuc;
@@ -289,70 +290,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         }
 
         [HttpPost]
-        [Route("UploadFiles")]
-        public string UploadFiles()
-        {
-            int iUploadedCnt = 0;
-
-            string sPath = "";
-
-            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/TinTuc");
-
-            string date = DateTime.Now.Year.ToString();
-
-            sPath = Path.Combine(sPath, date);
-
-            if (!Directory.Exists(sPath))
-            {
-                Directory.CreateDirectory(sPath);
-            }
-
-            date = DateTime.Now.Month.ToString();
-
-            sPath = Path.Combine(sPath, date);
-
-            if (!Directory.Exists(sPath))
-            {
-                Directory.CreateDirectory(sPath);
-            }
-
-            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
-            for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
-            {
-                System.Web.HttpPostedFile hpf = hfc[iCnt];
-
-                if (hpf.ContentLength > 0)
-                {
-                    if (!File.Exists(sPath + Path.GetFileName(hpf.FileName)))
-                    {
-                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
-
-                        iUploadedCnt = iUploadedCnt + 1;
-                    }
-
-                    else
-                    {
-                        FileInfo f = new FileInfo(sPath + Path.GetFileName(hpf.FileName));
-
-                        f.Delete();
-
-                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
-
-                        iUploadedCnt = iUploadedCnt + 1;
-                    }
-                }
-            }
-            if (iUploadedCnt > 0)
-            {
-                return iUploadedCnt + " Files Uploaded Successfully";
-            }
-            else
-            {
-                return "Upload Failed";
-            }
-        }
-
-        [HttpPost]
         [Route("ThemBaiViet")]
         public IHttpActionResult ThemBaiViet(TinTucModel tinTuc)
         {
@@ -370,6 +307,27 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
             tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
             dbContext.NEWS_TinTuc.Add(tin);
+            dbContext.SaveChanges();
+            if (tinTuc.TapTinDinhKem.Count > 0)
+            {
+                List<TapTinModel> dsTapTin = new List<TapTinModel>();
+                foreach (var item in tinTuc.TapTinDinhKem)
+                {
+                    NEWS_TapTinDinhKem ttdk = new NEWS_TapTinDinhKem();
+                    ttdk.Ten = item.file.name;
+                    ttdk.Url = item.file.name;
+                    dbContext.NEWS_TapTinDinhKem.Add(ttdk);
+                    dbContext.SaveChanges();
+
+                    NEWS_TinTucTapTin tttt = new NEWS_TinTucTapTin();
+                    tttt.MaTinTuc = tin.MaTinTuc;
+                    tttt.MaTapTin = ttdk.MaTapTin;
+                    tttt.Ngay = DateTime.Now;
+                    dbContext.NEWS_TinTucTapTin.Add(tttt);
+                    dbContext.SaveChanges();
+                }
+                return Ok("Thêm Bài Viết Thành Công");
+            }
             return Ok("Thêm Bài Viết Thành Công");
         }
     }

@@ -196,90 +196,69 @@
             //)
         }
 
-        // UpLoad hình ảnh
+        // UpLoad
         var baseURL = window.location.protocol + "//" + window.location.host + "/";
         var appURL = { pathAPI: baseURL };
-        var uploader = $scope.uploader = new FileUploader({
-            url: appURL.pathAPI + 'API/QuanLyBangTin/UploadFiles',
-            withCredentials: true
-        });
-        uploader.filters.push({
-            name: 'docFilter1',
-            fn: function (item /*{File|FileLikeObject}*/, options) {
+
+        //Upload Hình Ảnh
+        var uploaderImage = $scope.uploaderImage = new FileUploader();
+
+        uploaderImage.filters.push({
+            name: 'upImg',
+            fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                //debugger
-                if ('|pdf|tif|tiff|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1)
+                if ('|pdf|tif|tiff|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1) {
+                    $scope.HinhAnh = item.name;
+                    setTimeout(deferred.resolve, 1e3);
                     return true;
+                }
                 else {
                     alert("Không hỗ trợ định dạng file này!!");
                     return false;
                 }
             }
         });
-        uploader.filters.push({
-            name: 'asyncFilter',
+
+        //Upload Tập Tin
+        var uploaderFile = $scope.uploaderFile = new FileUploader();
+
+        uploaderFile.filters.push({
+            name: 'upFile',
             fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
-                $scope.HinhAnh = item.name;
-                setTimeout(deferred.resolve, 1e3);
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                //debugger
+                if ('|pdf|tif|tiff|jpg|jpeg|bmp|gif|'.indexOf(type) !== -1) {
+                    setTimeout(deferred.resolve, 1e3);
+                    return true;
+                }
+                else {
+                    alert("Không hỗ trợ định dạng file này!!");
+                    return false;
+                }
             }
         });
-
-        uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
-            //console.info('onWhenAddingFileFailed', item, filter, options);
-        };
-        uploader.onAfterAddingFile = function (fileItem) {
-            fileItem.upload();
-        };
-        uploader.onAfterAddingAll = function (addedFileItems) {
-            //console.info('onAfterAddingAll', addedFileItems);
-        };
-        uploader.onBeforeUploadItem = function (item) {
-            //console.info('onBeforeUploadItem', item);
-        };
-        uploader.onProgressItem = function (fileItem, progress) {
-            //console.info('onProgressItem', fileItem, progress);
-        };
-        uploader.onProgressAll = function (progress) {
-            //console.info('onProgressAll', progress);
-        };
-        uploader.onSuccessItem = function (fileItem, response, status, headers) {
-            //console.info('onSuccessItem', fileItem, response, status, headers);
-        };
-        uploader.onErrorItem = function (fileItem, response, status, headers) {
-            //console.info('onErrorItem', fileItem, response, status, headers);
-        };
-        uploader.onCancelItem = function (fileItem, response, status, headers) {
-            //console.info('onCancelItem', fileItem, response, status, headers);
-        };
-        uploader.onCompleteItem = function (fileItem, response, status, headers) {
-            //console.info('onCompleteItem', fileItem, response, status, headers);
-        };
-        uploader.onCompleteAll = function () {
-            //console.info('onCompleteAll');
-        };
 
         // Thêm Bài Viết
         $scope.objThem = {
             TinNoiBat: false,
             MaTrangThai: false
         }
+
         $scope.ThemBaiViet = function () {
             $scope.objThem.MaLoaiTin = $scope.tmMaLoaiTin.MaLoaiTin;
             $scope.objThem.NoiDung = document.getElementById("editor1").innerHTML;
             $scope.objThem.HinhAnh = $scope.HinhAnh;
-            //$scope.objThem.NgayHetHan = moment($scope.objThem.NgayHetHan).format('YYYY-MM-DD');
-            //$scope.objThem.NgayHetHanTinMoi = moment($scope.objThem.NgayHetHanTinMoi).format('YYYY-MM-DD');
-            //$scope.objThem.NgayHetHanTrangChu = moment($scope.objThem.NgayHetHanTrangChu).format('YYYY-MM-DD');
+            $scope.objThem.TapTinDinhKem = uploaderFile.queue;
             console.log($scope.objThem);
-            var res = CommonController.postData(CommonController.urlAPI.API_ThemBaiViet, $scope.objThem);
-            res.then(
-                function succ(response) {
-                    $scope.DanhSachUser = response.data;
-                },
+            //var res = CommonController.postData(CommonController.urlAPI.API_ThemBaiViet, $scope.objThem);
+            //res.then(
+            //    function succ(response) {
+            //        $scope.DanhSachUser = response.data;
+            //    },
 
-                function errorCallback(response) {
-                    console.log(response.data.message)
-                }
-            )
+            //    function errorCallback(response) {
+            //        console.log(response.data.message)
+            //    }
+            //)
         }
     })

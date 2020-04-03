@@ -420,7 +420,7 @@
                 }])
 
         //Phần của Vũ thêm vào để quản lý bảng tin
-        .factory("CommonController", ["$http", "FileUploader",
+        .factory("CommonController", ["$http",
             function ($http) {
                 // Tạo UrlAPI động
                 var baseURL = window.location.protocol + "//" + window.location.host + "/";
