@@ -289,6 +289,194 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             return Ok("Bình Luận Của Bạn Đã Được Gửi");
         }
 
+
+        [HttpPost]
+        [Route("UploadImage")]
+        public string UploadImage()
+
+        {
+
+            int iUploadedCnt = 0;
+
+            string sPath = "";
+
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/TinTuc");
+
+            string date = DateTime.Now.Year.ToString();
+
+            sPath = Path.Combine(sPath, date);
+
+            if (!Directory.Exists(sPath))
+
+            {
+
+                Directory.CreateDirectory(sPath);
+
+            }
+
+            date = DateTime.Now.Month.ToString();
+
+            sPath = Path.Combine(sPath, date);
+
+            if (!Directory.Exists(sPath))
+
+            {
+
+                Directory.CreateDirectory(sPath);
+
+            }
+
+            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
+
+            {
+
+                System.Web.HttpPostedFile hpf = hfc[iCnt];
+
+                if (hpf.ContentLength > 0)
+
+                {
+
+                    if (!System.IO.File.Exists(sPath + Path.GetFileName(hpf.FileName)))
+
+                    {
+
+                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
+
+                        iUploadedCnt = iUploadedCnt + 1;
+
+                    }
+
+                    else
+
+                    {
+
+                        FileInfo f = new FileInfo(sPath + Path.GetFileName(hpf.FileName));
+
+                        f.Delete();
+
+                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
+
+                        iUploadedCnt = iUploadedCnt + 1;
+
+                        return "Files Is Duplicate,Upload Failed";
+                    }
+
+                }
+
+            }
+
+            if (iUploadedCnt > 0)
+
+            {
+
+                return iUploadedCnt + " Files Uploaded Successfully";
+
+            }
+
+            else
+
+            {
+
+                return "Upload Failed";
+
+            }
+
+        }
+
+        [HttpPost]
+        [Route("UploadFiles")]
+        public string UploadFiles()
+        {
+
+            int iUploadedCnt = 0;
+
+            string sPath = "";
+
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/TinTuc");
+
+            string date = DateTime.Now.Year.ToString();
+
+            sPath = Path.Combine(sPath, date);
+
+            if (!Directory.Exists(sPath))
+
+            {
+
+                Directory.CreateDirectory(sPath);
+
+            }
+
+            date = DateTime.Now.Month.ToString();
+
+            sPath = Path.Combine(sPath, date);
+
+            if (!Directory.Exists(sPath))
+
+            {
+
+                Directory.CreateDirectory(sPath);
+
+            }
+
+            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
+
+            {
+
+                System.Web.HttpPostedFile hpf = hfc[iCnt];
+
+                if (hpf.ContentLength > 0)
+
+                {
+
+                    if (!System.IO.File.Exists(sPath + Path.GetFileName(hpf.FileName)))
+
+                    {
+
+                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
+
+                        iUploadedCnt = iUploadedCnt + 1;
+
+                    }
+
+                    else
+
+                    {
+
+                        FileInfo f = new FileInfo(sPath + Path.GetFileName(hpf.FileName));
+
+                        f.Delete();
+
+                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
+
+                        iUploadedCnt = iUploadedCnt + 1;
+
+                        return "Files Is Duplicate,Upload Failed";
+                    }
+
+                }
+
+            }
+
+            if (iUploadedCnt > 0)
+
+            {
+
+                return iUploadedCnt + " Files Uploaded Successfully";
+
+            }
+
+            else
+
+            {
+
+                return "Upload Failed";
+
+            }
+
+        }
+
         [HttpPost]
         [Route("ThemBaiViet")]
         public IHttpActionResult ThemBaiViet(TinTucModel tinTuc)
@@ -299,23 +487,23 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             tin.MoTa = tinTuc.MoTa;
             tin.MaLoaiTin = tinTuc.MaLoaiTin;
             tin.TacGia = "ThienVu.Lh";
-            tin.HienThi = tinTuc.HienThi;
+            tin.HienThi = true;
             tin.TinNoiBat = tinTuc.TinNoiBat;
             tin.MaTrangThai = tinTuc.MaTrangThai == 1 ? 2 : 1;
             tin.HinhAnh = tinTuc.HinhAnh;
             tin.NgayHetHan = tinTuc.NgayHetHan;
+            tin.NgayTao = DateTime.Now;
             tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
             tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
             dbContext.NEWS_TinTuc.Add(tin);
             dbContext.SaveChanges();
             if (tinTuc.TapTinDinhKem.Count > 0)
             {
-                List<TapTinModel> dsTapTin = new List<TapTinModel>();
                 foreach (var item in tinTuc.TapTinDinhKem)
                 {
                     NEWS_TapTinDinhKem ttdk = new NEWS_TapTinDinhKem();
-                    ttdk.Ten = item.file.name;
-                    ttdk.Url = item.file.name;
+                    ttdk.Ten = item.Ten;
+                    ttdk.Url = item.Url;
                     dbContext.NEWS_TapTinDinhKem.Add(ttdk);
                     dbContext.SaveChanges();
 
@@ -326,7 +514,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     dbContext.NEWS_TinTucTapTin.Add(tttt);
                     dbContext.SaveChanges();
                 }
-                return Ok("Thêm Bài Viết Thành Công");
             }
             return Ok("Thêm Bài Viết Thành Công");
         }

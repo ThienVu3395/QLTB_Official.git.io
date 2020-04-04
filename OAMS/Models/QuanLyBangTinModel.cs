@@ -50,12 +50,6 @@ namespace OAMS.Models
         public int MaTapTin { get; set; }
         public string Ten { get; set; }
         public string Url { get; set; }
-        public File file { get; set; }
-
-        internal void Ten(string v)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class File
