@@ -46,20 +46,15 @@
         <AssociationConnector Association="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" />
         <AssociationConnector Association="dbOAMSModel.FK_tbVBdenWorkflow_tbWorkflow" />
         <AssociationConnector Association="dbOAMSModel.FK_tbYkienxuly_tbWorkflow" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TapTinDinhKem" Width="1.5" PointX="17.625" PointY="8.625" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTucTapTin" Width="1.5" PointX="19.875" PointY="3.5" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TrangThaiChung" Width="1.5" PointX="15.375" PointY="0.75" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TapTinDinhKem" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_NguoiSuDung" Width="1.5" PointX="6.375" PointY="9.75" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_BinhLuan" Width="1.5" PointX="19.875" PointY="6.375" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_LoaiTinTuc" Width="1.5" PointX="0.75" PointY="10" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TrangThaiChung" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTuc" Width="1.5" PointX="17.625" PointY="2.25" />
+        <EntityTypeShape EntityType="dbOAMSModel.NEWS_BinhLuan" Width="1.5" PointX="8.625" PointY="23.25" />
+        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTuc" Width="1.5" PointX="3" PointY="35" />
+        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTucTapTin" Width="1.5" PointX="5.25" PointY="39.75" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_TrangThaiChung" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

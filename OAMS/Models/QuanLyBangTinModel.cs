@@ -34,7 +34,6 @@ namespace OAMS.Models
         public Nullable<bool> TinNoiBat { get; set; }
         public List<BinhLuanModel> BinhLuan { get; set; }
         public string HinhAnh { get; set; }
-        public int MaTrangThai { get; set; }
         public int CountTin { get; set; }
         public List<TapTinModel> TapTinDinhKem { get; set; }
         public DateTime? NgayHetHan { get; set; }
@@ -52,10 +51,6 @@ namespace OAMS.Models
         public string Url { get; set; }
     }
 
-    public class File
-    {
-        public string name { get; set; }
-    }
 
     public class PageModel
     {
@@ -92,7 +87,7 @@ namespace OAMS.Models
         public string HinhAnh { get; set; }
         public string DonVi { get; set; }
         public string NoiDung { get; set; }
-        public Nullable<int> MaTrangThai { get; set; }
+        public Nullable<Boolean> HienThi { get; set; }
         public Nullable<System.DateTime> Ngay { get; set; }
         public Nullable<System.TimeSpan> Gio { get; set; }
     }

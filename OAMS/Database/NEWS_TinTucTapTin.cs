@@ -16,9 +16,10 @@ namespace OAMS.Database
     {
         public int MaTinTuc { get; set; }
         public int MaTapTin { get; set; }
+        public string Ten { get; set; }
+        public string Url { get; set; }
         public Nullable<System.DateTime> Ngay { get; set; }
     
-        public virtual NEWS_TapTinDinhKem NEWS_TapTinDinhKem { get; set; }
         public virtual NEWS_TinTuc NEWS_TinTuc { get; set; }
     }
 }

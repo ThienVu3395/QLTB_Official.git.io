@@ -294,16 +294,10 @@
     <Compile Include="Database\NEWS_NguoiSuDung.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\NEWS_TapTinDinhKem.cs">
-      <DependentUpon>dbOAMS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\NEWS_TinTuc.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\NEWS_TinTucTapTin.cs">
-      <DependentUpon>dbOAMS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\NEWS_TrangThaiChung.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tbBophan.cs">

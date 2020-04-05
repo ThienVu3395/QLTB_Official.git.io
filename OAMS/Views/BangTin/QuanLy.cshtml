@@ -3,9 +3,7 @@
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
 
-@section Css{
-
-}
+@section Css{}
 
 <div ng-controller="QlbtCrl">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
@@ -29,80 +27,48 @@
 
     <div id="mescontent" class="page-content">
         <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
+            <div class="page-header">
+                <h1>
+                    Inbox
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Mailbox with some customizations as described in docs
+                    </small>
+                </h1>
+            </div>
+
             <div class="col-xs-12">
                 <div class="row">
                     <div class="tabbable">
                         <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
+                            @*Thêm Bài Viết*@
                             <li class="li-new-mail pull-right">
                                 <a data-toggle="tab" href="#write" data-target="write" class="btn-new-mail">
                                     <span class="btn btn-purple no-border">
                                         <i class="ace-icon fa fa-envelope bigger-130"></i>
-                                        <span class="bigger-110">Write Mail</span>
+                                        <span class="bigger-110">Thêm Bài Viết</span>
                                     </span>
                                 </a>
-                            </li><!-- /.li-new-mail -->
+                            </li>
+                            @*Thêm Bài Viết*@
 
+                            @*QLBV*@
                             <li class="active">
                                 <a data-toggle="tab" href="#inbox" data-target="inbox">
-                                    <i class="green ace-icon fa fa-check bigger-130"></i>
-                                    <span class="bigger-110">Tin / Bình Luận Đã Duyệt</span>
+                                    <i class="green ace-icon fa fa-book bigger-130"></i>
+                                    <span class="bigger-110">Quản Lý Bài Viết</span>
                                 </a>
                             </li>
+                            @*/QLBV*@
 
+                            @*QLBL*@
                             <li>
-                                <a data-toggle="tab" href="#sent" data-target="sent">
-                                    <i class="blue ace-icon fa fa-clock-o bigger-130"></i>
-                                    <span class="bigger-110">Tin / Bình Luận Chờ Duyệt</span>
+                                <a data-toggle="tab" href="#inbox" data-target="inbox">
+                                    <i class="blue ace-icon fa fa-comment bigger-130"></i>
+                                    <span class="bigger-110">Quản Lý Bình Luận</span>
                                 </a>
                             </li>
-
-                            <li>
-                                <a data-toggle="tab" href="#draft" data-target="draft">
-                                    <i class="red ace-icon fa fa-times bigger-130"></i>
-                                    <span class="bigger-110">Tin / Bình Luận Không Duyệt</span>
-                                </a>
-                            </li>
-
-                            @*<li class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <i class="pink ace-icon fa fa-comment-o bigger-130"></i>
-
-                                    <span class="bigger-110">
-                                        Bình Luận
-                                        <i class="ace-icon fa fa-caret-down"></i>
-                                    </span>
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-light-blue dropdown-125">
-                                    <li>
-                                        <a data-toggle="tab" href="#tag-1">
-                                            <span class="mail-tag badge badge-pink"></span>
-                                            <span class="pink">Tag#1</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a data-toggle="tab" href="#tag-family">
-                                            <span class="mail-tag badge badge-success"></span>
-                                            <span class="green">Family</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a data-toggle="tab" href="#tag-friends">
-                                            <span class="mail-tag badge badge-info"></span>
-                                            <span class="blue">Friends</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a data-toggle="tab" href="#tag-work">
-                                            <span class="mail-tag badge badge-grey"></span>
-                                            <span class="grey">Work</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>*@
+                            @*/QLBL*@
                         </ul>
 
                         <div class="tab-content no-border no-padding">
@@ -110,11 +76,14 @@
                                 <div class="message-container">
                                     <div id="id-message-list-navbar" class="message-navbar clearfix">
                                         <div class="message-bar">
+                                            @*Tiêu đề*@
                                             <div class="message-infobar" id="id-message-infobar">
                                                 <span class="blue bigger-150">Inbox</span>
                                                 <span class="grey bigger-110">(2 unread messages)</span>
                                             </div>
+                                            @*/Tiêu đề*@
 
+                                            @*Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
                                             <div class="message-toolbar hide">
                                                 <div class="inline position-relative align-left">
                                                     <button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -212,9 +181,11 @@
                                                     <span class="bigger-110">Delete</span>
                                                 </button>
                                             </div>
+                                            @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
                                         </div>
 
                                         <div>
+                                            @*Bộ lọc bên trái*@
                                             <div class="messagebar-item-left">
                                                 <label class="inline middle">
                                                     <input type="checkbox" id="id-toggle-all" class="ace" />
@@ -236,14 +207,6 @@
                                                             <a id="id-select-message-none" href="#">None</a>
                                                         </li>
 
-                                                        <li>
-                                                            <a id="id-select-message-all" href="#">Tin Tức</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#">Bình Luận</a>
-                                                        </li>
-
                                                         <li class="divider"></li>
 
                                                         <li>
@@ -256,7 +219,9 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            @*/Bộ lọc bên trái*@
 
+                                            @*Bộ lọc bên phải*@
                                             <div class="messagebar-item-right">
                                                 <div class="inline position-relative">
                                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
@@ -288,7 +253,9 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            @*/Bộ lọc bên phải*@
 
+                                            @*Input tìm kiếm ở bộ lọc bên trái*@
                                             <div class="nav-search minimized">
                                                 <form class="form-search">
                                                     <span class="input-icon">
@@ -297,9 +264,11 @@
                                                     </span>
                                                 </form>
                                             </div>
+                                            @*/Input tìm kiếm ở bộ lọc bên trái*@
                                         </div>
                                     </div>
 
+                                    @*Thanh công cụ trong phần hiển thị thông tin chi tiết của 1 bài viết*@
                                     <div id="id-message-item-navbar" class="hide message-navbar clearfix">
                                         <div class="message-bar">
                                             <div class="message-toolbar">
@@ -415,7 +384,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @*/Thanh công cụ trong phần hiển thị thông tin chi tiết của 1 bài viết*@
 
+                                    @*Thanh công cụ trong phần soạn thảo bài viết*@
                                     <div id="id-message-new-navbar" class="hide message-navbar clearfix">
                                         <div class="message-bar">
                                             <div class="message-toolbar">
@@ -450,7 +421,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @*/Thanh công cụ trong phần soạn thảo bài viết*@
 
+                                    @*Nội dung chính hiển thị ds bài viết / bình luận*@
                                     <div class="message-list-container">
                                         <div class="message-list" id="message-list">
                                             <div class="message-item message-unread">
@@ -459,7 +432,7 @@
                                                     <span class="lbl"></span>
                                                 </label>
 
-                                                <i class="message-star ace-icon fa fa-star orange2"></i>
+                                                <i class="message-star ace-icon fa fa-user orange2"></i>
                                                 <span class="sender" title="Alex John Red Smith">Alex John Red Smith </span>
                                                 <span class="time">1:33 pm</span>
 
@@ -476,11 +449,10 @@
                                                     <span class="lbl"></span>
                                                 </label>
 
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
+                                                <i class="message-star ace-icon fa fa-user orange2"></i>
 
                                                 <span class="sender" title="John Doe">
                                                     John Doe
-                                                    <span class="light-grey">(4)</span>
                                                 </span>
                                                 <span class="time">7:15 pm</span>
 
@@ -489,7 +461,6 @@
                                                 </span>
 
                                                 <span class="summary">
-                                                    <span class="badge badge-pink mail-tag"></span>
                                                     <span class="text">
                                                         Clik to open this message right here
                                                     </span>
@@ -502,7 +473,7 @@
                                                     <span class="lbl"></span>
                                                 </label>
 
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
+                                                <i class="message-star ace-icon fa fa-user grey"></i>
                                                 <span class="sender" title="Philip Markov">Philip Markov </span>
                                                 <span class="time">10:15 am</span>
 
@@ -511,155 +482,16 @@
                                                 </span>
 
                                                 <span class="summary">
-                                                    <span class="message-flags">
-                                                        <i class="ace-icon fa fa-reply light-grey"></i>
-                                                    </span>
                                                     <span class="text">
                                                         Photo booth beard raw denim letterpress vegan
                                                     </span>
                                                 </span>
                                             </div>
-
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-star orange2"></i>
-                                                <span class="sender" title="Sabrina">Sabrina </span>
-                                                <span class="time">Yesterday</span>
-
-                                                <span class="summary">
-                                                    <span class="text">
-                                                        Nullam quis risus eget urna mollis ornare
-                                                    </span>
-                                                </span>
-                                            </div>
-
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
-                                                <span class="sender" title="Philip Markov">Philip Markov </span>
-                                                <span class="time">Yesterday</span>
-
-                                                <span class="attachment">
-                                                    <i class="ace-icon fa fa-paperclip"></i>
-                                                </span>
-
-                                                <span class="summary">
-                                                    <span class="badge badge-success mail-tag"></span>
-                                                    <span class="text">
-                                                        Vestibulum id ligula porta felis euismod
-                                                    </span>
-                                                </span>
-                                            </div>
-
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
-                                                <span class="sender" title="Doctor Gomenz">Doctor Gomenz </span>
-                                                <span class="time">April 5</span>
-
-                                                <span class="summary">
-                                                    <span class="text">
-                                                        Vim te vivendo convenire, summo fuisset
-                                                    </span>
-                                                </span>
-                                            </div>
-
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
-                                                <span class="sender" title="Robin Hood">Robin Hood </span>
-                                                <span class="time">April 4</span>
-
-                                                <span class="summary">
-                                                    <span class="message-flags">
-                                                        <i class="ace-icon fa fa-reply light-grey"></i>
-                                                    </span>
-                                                    <span class="text">
-                                                        No eos veniam equidem mentitum, his porro
-                                                    </span>
-                                                </span>
-                                            </div>
-
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
-                                                <span class="sender" title="Google Inc">Google Inc </span>
-                                                <span class="time">April 3</span>
-
-                                                <span class="summary">
-                                                    <span class="badge badge-grey mail-tag"></span>
-                                                    <span class="text">
-                                                        Convallis facilisis euismod urna sodales
-                                                    </span>
-                                                </span>
-                                            </div>
-
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
-                                                <span class="sender" title="Shrek">Shrek </span>
-                                                <span class="time">March 28</span>
-
-                                                <span class="attachment">
-                                                    <i class="ace-icon fa fa-paperclip"></i>
-                                                </span>
-
-                                                <span class="summary">
-                                                    <span class="message-flags">
-                                                        <i class="ace-icon fa fa-flag fa-flip-horizontal light-grey"></i>
-                                                    </span>
-                                                    <span class="text">
-                                                        Photo booth beard raw denim letterpress vegan messenger
-                                                    </span>
-                                                </span>
-                                            </div>
-
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-star-o light-grey"></i>
-                                                <span class="sender" title="Yahoo!">Yahoo! </span>
-                                                <span class="time">March 27</span>
-
-                                                <span class="summary">
-                                                    <span class="message-flags">
-                                                        <i class="ace-icon fa fa-mail-forward light-grey"></i>
-                                                    </span>
-                                                    <span class="text">
-                                                        Tofu biodiesel williamsburg marfa, four loko mcsweeney
-                                                    </span>
-                                                </span>
-                                            </div>
                                         </div>
                                     </div>
+                                    @*/Nội dung chính hiển thị ds bài viết / bình luận*@
 
+                                    @*Nội dung phía dưới hiển thị ds bài viết , đặt phân trang ở đây*@
                                     <div class="message-footer clearfix">
                                         <div class="pull-left"> 151 messages total </div>
 
@@ -700,7 +532,9 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @*/Nội dung phía dưới hiển thị ds bài viết , đặt phân trang ở đây*@
 
+                                    @*Ô phía dưới hiển thị tổng danh sách object để mà hiển thị total number*@
                                     <div class="hide message-footer message-footer-style2 clearfix">
                                         <div class="pull-left"> simpler footer </div>
 
@@ -723,12 +557,14 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @*/Ô phía dưới hiển thị tổng danh sách object để mà hiển thị total number*@
                                 </div>
                             </div>
-                        </div><!-- /.tab-content -->
+                        </div>
                     </div>
                 </div>
 
+                @*Phần soạn thảo bài viết*@
                 <form id="id-message-form" class="hide form-horizontal message-form col-xs-12">
                     <div>
                         <div class="form-group">
@@ -790,7 +626,9 @@
                         <div class="space"></div>
                     </div>
                 </form>
+                @*/Phần soạn thảo bài viết*@
 
+                @*Nội dung chi tiết của 1 bình luận/bài viết*@
                 <div class="hide message-content" id="id-message-content">
                     <div class="message-header clearfix">
                         <div class="pull-left">
@@ -801,7 +639,7 @@
                             <i class="ace-icon fa fa-star orange2"></i>
 
                             &nbsp;
-                            <img class="middle" alt="John's Avatar" src="assets/images/avatars/avatar.png" width="32" />
+                            <img class="middle" alt="John's Avatar" src="~/Content/assetsmes/images/avatars/avatar.png" width="32" />
                             &nbsp;
                             <a href="#" class="sender">John Doe</a>
 
@@ -920,14 +758,15 @@
                             <div class="vspace-4-sm"></div>
 
                             <div>
-                                <img width="36" alt="image 4" src="assets/images/gallery/thumb-4.jpg" />
-                                <img width="36" alt="image 3" src="assets/images/gallery/thumb-3.jpg" />
-                                <img width="36" alt="image 2" src="assets/images/gallery/thumb-2.jpg" />
-                                <img width="36" alt="image 1" src="assets/images/gallery/thumb-1.jpg" />
+                                <img width="36" alt="image 4" src="~/Content/assetsmes/images/gallery/thumb-4.jpg" />
+                                <img width="36" alt="image 3" src="~/Content/assetsmes/images/gallery/thumb-3.jpg" />
+                                <img width="36" alt="image 2" src="~/Content/assetsmes/images/gallery/thumb-2.jpg" />
+                                <img width="36" alt="image 1" src="~/Content/assetsmes/images/gallery/thumb-1.jpg" />
                             </div>
                         </div>
                     </div>
-                </div><!-- /.message-content -->
+                </div>
+                @*/Nội dung chi tiết của 1 bình luận/bài viết*@
             </div>
         </div>
     </div>
@@ -938,6 +777,7 @@
     <script src="~/Content/assetsmes/js/jquery.hotkeys.index.min.js"></script>
     <script src="~/Content/assetsmes/js/bootstrap-wysiwyg.min.js"></script>
 
+    <!-- inline scripts related to this page -->
     <script type="text/javascript">
         jQuery(function ($) {
 

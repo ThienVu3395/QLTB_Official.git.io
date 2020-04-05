@@ -204,7 +204,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                             binhLuan.HinhAnh = index.NEWS_NguoiSuDung.HinhAnh;
                             binhLuan.DonVi = "Phòng ABCXYAZZ";
                             binhLuan.NoiDung = index.NoiDung;
-                            binhLuan.MaTrangThai = index.MaTrangThai;
+                            binhLuan.HienThi = index.HienThi;
                             binhLuan.Ngay = index.Ngay;
                             binhLuan.Gio = index.Gio;
                             dsBinhLuanModel.Add(binhLuan);
@@ -239,8 +239,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     {
                         TapTinModel ttmodel = new TapTinModel();
                         ttmodel.MaTapTin = item.MaTapTin;
-                        ttmodel.Ten = item.NEWS_TapTinDinhKem.Ten;
-                        ttmodel.Url = item.NEWS_TapTinDinhKem.Url;
+                        ttmodel.Ten = item.Ten;
+                        ttmodel.Url = item.Url;
                         dsttmodel.Add(ttmodel);
                     }
                     tinTuc.TapTinDinhKem = dsttmodel;
@@ -274,20 +274,20 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             return Ok("sai rồi");
         }
 
-        [HttpPost]
-        [Route("GuiBinhLuan")]
-        public IHttpActionResult GuiBinhLuan(BinhLuanModel bl)
-        {
-            NEWS_BinhLuan binhLuan = new NEWS_BinhLuan();
-            binhLuan.MaTinTuc = bl.MaTinTuc;
-            binhLuan.MaNguoiDung = 77;
-            binhLuan.NoiDung = bl.NoiDung;
-            binhLuan.MaTrangThai = 1;
-            binhLuan.Ngay = null;
-            binhLuan.Gio = null;
-            dbContext.NEWS_BinhLuan.Add(binhLuan);
-            return Ok("Bình Luận Của Bạn Đã Được Gửi");
-        }
+        //[HttpPost]
+        //[Route("GuiBinhLuan")]
+        //public IHttpActionResult GuiBinhLuan(BinhLuanModel bl)
+        //{
+        //    NEWS_BinhLuan binhLuan = new NEWS_BinhLuan();
+        //    binhLuan.MaTinTuc = bl.MaTinTuc;
+        //    binhLuan.MaNguoiDung = 77;
+        //    binhLuan.NoiDung = bl.NoiDung;
+        //    binhLuan.MaTrangThai = 1;
+        //    binhLuan.Ngay = null;
+        //    binhLuan.Gio = null;
+        //    dbContext.NEWS_BinhLuan.Add(binhLuan);
+        //    return Ok("Bình Luận Của Bạn Đã Được Gửi");
+        //}
 
 
         [HttpPost]
@@ -489,7 +489,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             tin.TacGia = "ThienVu.Lh";
             tin.HienThi = true;
             tin.TinNoiBat = tinTuc.TinNoiBat;
-            tin.MaTrangThai = tinTuc.MaTrangThai == 1 ? 2 : 1;
+            tin.HienThi = tinTuc.HienThi == true ? true : false;
             tin.HinhAnh = tinTuc.HinhAnh;
             tin.NgayHetHan = tinTuc.NgayHetHan;
             tin.NgayTao = DateTime.Now;
@@ -501,15 +501,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             {
                 foreach (var item in tinTuc.TapTinDinhKem)
                 {
-                    NEWS_TapTinDinhKem ttdk = new NEWS_TapTinDinhKem();
-                    ttdk.Ten = item.Ten;
-                    ttdk.Url = item.Url;
-                    dbContext.NEWS_TapTinDinhKem.Add(ttdk);
-                    dbContext.SaveChanges();
-
                     NEWS_TinTucTapTin tttt = new NEWS_TinTucTapTin();
                     tttt.MaTinTuc = tin.MaTinTuc;
-                    tttt.MaTapTin = ttdk.MaTapTin;
                     tttt.Ngay = DateTime.Now;
                     dbContext.NEWS_TinTucTapTin.Add(tttt);
                     dbContext.SaveChanges();

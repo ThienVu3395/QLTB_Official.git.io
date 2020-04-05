@@ -18,12 +18,11 @@ namespace OAMS.Database
         public int MaTinTuc { get; set; }
         public int MaNguoiDung { get; set; }
         public string NoiDung { get; set; }
-        public Nullable<int> MaTrangThai { get; set; }
+        public Nullable<bool> HienThi { get; set; }
         public Nullable<System.DateTime> Ngay { get; set; }
         public Nullable<System.TimeSpan> Gio { get; set; }
     
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }
-        public virtual NEWS_TrangThaiChung NEWS_TrangThaiChung { get; set; }
         public virtual NEWS_TinTuc NEWS_TinTuc { get; set; }
     }
 }

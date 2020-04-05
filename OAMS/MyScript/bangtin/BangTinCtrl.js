@@ -318,7 +318,7 @@
         // Thêm Bài Viết
         $scope.objThem = {
             TinNoiBat: false,
-            MaTrangThai: false,
+            HienThi : false,
             TapTinDinhKem: $scope.TapTinDinhKem,
             HinhAnh : "",
         }
