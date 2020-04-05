@@ -254,6 +254,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\QuanLyBangTin\AdminBangTinController.cs" />
     <Compile Include="Controllers\API\QuanLyBangTin\QuanLyBangTinController.cs" />
     <Compile Include="Controllers\BangTin\BangTinController.cs" />
     <Compile Include="Controllers\BNLE\Class1.cs" />
@@ -393,6 +394,7 @@
     <Compile Include="JavascriptExtension.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminBangTinModel.cs" />
     <Compile Include="Models\Bnle\ModelPar.cs" />
     <Compile Include="Models\CommonSystem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -567,6 +569,7 @@
     <Content Include="MyScript\admin\phanquyenCtrl.js" />
     <Content Include="MyScript\app.js" />
     <Content Include="MyScript\bangtin\BangTinCtrl.js" />
+    <Content Include="MyScript\bangtin\QuanLyCtrl.js" />
     <Content Include="MyScript\bnle\bnleformeditCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridfCtrl.js" />

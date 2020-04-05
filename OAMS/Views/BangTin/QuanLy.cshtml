@@ -25,7 +25,7 @@
         </div><!-- /.nav-search -->
     </div>
 
-    <div id="mescontent" class="page-content">
+    <div id="mescontent" class="page-content" ng-init="Init('qlbv')">
         <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
             <div class="page-header">
                 <h1>
@@ -53,16 +53,16 @@
                             @*Thêm Bài Viết*@
 
                             @*QLBV*@
-                            <li class="active">
+                            <li class="active" ng-click="Init('qlbv')">
                                 <a data-toggle="tab" href="#inbox" data-target="inbox">
-                                    <i class="green ace-icon fa fa-book bigger-130"></i>
+                                    <i class="blue ace-icon fa fa-inbox bigger-130"></i>
                                     <span class="bigger-110">Quản Lý Bài Viết</span>
                                 </a>
                             </li>
                             @*/QLBV*@
 
                             @*QLBL*@
-                            <li>
+                            <li ng-click="Init('qlbl')">
                                 <a data-toggle="tab" href="#inbox" data-target="inbox">
                                     <i class="blue ace-icon fa fa-comment bigger-130"></i>
                                     <span class="bigger-110">Quản Lý Bình Luận</span>
@@ -200,31 +200,37 @@
 
                                                     <ul class="dropdown-menu dropdown-lighter dropdown-100">
                                                         <li>
-                                                            <a id="id-select-message-all" href="#">Chọn Tất Cả</a>
+                                                            <a id="id-select-message-all" href="#"><i class="ace-icon fa fa-check invisible"></i>Chọn Tất Cả</a>
                                                         </li>
 
                                                         <li>
-                                                            <a id="id-select-message-none" href="#">Bỏ Chọn</a>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#">Đã Duyệt</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#">Chờ Duyệt</a>
+                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Bỏ Chọn</a>
                                                         </li>
 
                                                         <li class="divider"></li>
 
                                                         <li>
-                                                            <a id="id-select-message-unread" href="#">Đã Đọc</a>
+                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Đã Duyệt</a>
                                                         </li>
 
                                                         <li>
-                                                            <a id="id-select-message-read" href="#">Chưa Đọc</a>
+                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Chờ Duyệt</a>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+
+                                                        <li>
+                                                            <a id="id-select-message-unread" href="#"><i class="ace-icon fa fa-check invisible"></i>Đã Đọc</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a id="id-select-message-read" href="#"><i class="ace-icon fa fa-check invisible"></i>Chưa Đọc</a>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+
+                                                        <li ng-repeat="item in DsLoaiTin track by item.MaLoaiTin">
+                                                            <a id="id-select-message-read" href="#"><i class="ace-icon fa fa-check invisible"></i>{{item.Ten}}</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -235,29 +241,29 @@
                                             <div class="messagebar-item-right">
                                                 <div class="inline position-relative">
                                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                                        Sort &nbsp;
+                                                        Lọc &nbsp;
                                                         <i class="ace-icon fa fa-caret-down bigger-125"></i>
                                                     </a>
 
                                                     <ul class="dropdown-menu dropdown-lighter dropdown-menu-right dropdown-100">
                                                         <li>
                                                             <a href="#">
-                                                                <i class="ace-icon fa fa-check green"></i>
-                                                                Date
+                                                                <i class="ace-icon fa fa-check invisible"></i>
+                                                                Ngày
                                                             </a>
                                                         </li>
 
                                                         <li>
                                                             <a href="#">
                                                                 <i class="ace-icon fa fa-check invisible"></i>
-                                                                From
+                                                                Ẩn
                                                             </a>
                                                         </li>
 
                                                         <li>
                                                             <a href="#">
                                                                 <i class="ace-icon fa fa-check invisible"></i>
-                                                                Subject
+                                                                Hiện
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -506,39 +512,11 @@
                                         <div class="pull-left"> 151 messages total </div>
 
                                         <div class="pull-right">
-                                            <div class="inline middle"> page 1 of 16 </div>
-
                                             &nbsp; &nbsp;
-                                            <ul class="pagination middle">
-                                                <li class="disabled">
-                                                    <span>
-                                                        <i class="ace-icon fa fa-step-backward middle"></i>
-                                                    </span>
-                                                </li>
-
-                                                <li class="disabled">
-                                                    <span>
-                                                        <i class="ace-icon fa fa-caret-left bigger-140 middle"></i>
-                                                    </span>
-                                                </li>
-
-                                                <li>
-                                                    <span>
-                                                        <input value="1" maxlength="3" type="text" />
-                                                    </span>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-caret-right bigger-140 middle"></i>
-                                                    </a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-step-forward middle"></i>
-                                                    </a>
-                                                </li>
+                                            <ul uib-pagination 
+                                                total-items="totalItems" 
+                                                ng-model="currentPage" 
+                                                ng-change="pageChanged()">
                                             </ul>
                                         </div>
                                     </div>

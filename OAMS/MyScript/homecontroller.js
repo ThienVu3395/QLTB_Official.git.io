@@ -420,7 +420,7 @@
                 }])
 
         //Phần của Vũ thêm vào để quản lý bảng tin
-        .factory("CommonController", ["$http",
+        .factory("CommonController", ["$http","blockUI",
             function ($http) {
                 // Tạo UrlAPI động
                 var baseURL = window.location.protocol + "//" + window.location.host + "/";
@@ -436,7 +436,10 @@
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
                     API_GuiBinhLuan: "API/QuanLyBangTin/GuiBinhLuan",
                     API_LocBaiViet: "API/QuanLyBangTin/LayDanhSachBaiViet_Loc",
-                    API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet"
+                    API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet",
+
+                    // Admin
+                    API_LayDanhSachBaiViet: "API/QuanLyBangTin/LayDanhSachBaiViet",
                 };
 
                 // Hàm Tạo Ra Mã Xác Nhận Ngẫu Nhiên 
