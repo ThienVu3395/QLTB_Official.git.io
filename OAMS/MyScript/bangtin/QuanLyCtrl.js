@@ -53,7 +53,6 @@
                 message: 'Xin Vui Lòng Chờ...',
             });
             var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachBaiViet, $scope.param);
-            console.log(CommonController.urlAPI.API_LayDanhSachBaiViet + $scope.param);
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
@@ -74,7 +73,6 @@
                 message: 'Xin Vui Lòng Chờ...',
             });
             var res = CommonController.getData(CommonController.urlAPI.API_LayBinhLuan, $scope.param);
-            console.log(CommonController.urlAPI.API_LayDanhSachBaiViet + $scope.param);
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
@@ -104,5 +102,18 @@
         // Hiển Thị Ngày Giờ
         $scope.ReturnDate = function (date) {
             return moment(date).format("DD/MM/YYYY h:mm:ss a");
+        }
+
+        // Lấy Chi Tiết Bài Viết
+        $scope.LayChiTietBaiViet = function () {
+            let variable = document.getElementById("mess0");
+            if (variable.className == "message-item message-unread message-inline-open") {
+                variable.className = "message-item message-unread";
+                document.getElementById("content0").className = "message-content hide";
+            }
+            else if (variable.className == "message-item message-unread") {
+                variable.className = "message-item message-unread message-inline-open";
+                document.getElementById("content0").className = "message-content";
+            }
         }
     })
