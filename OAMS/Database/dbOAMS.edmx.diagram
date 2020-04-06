@@ -49,9 +49,9 @@
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_NguoiSuDung" Width="1.5" PointX="6.375" PointY="9.75" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_LoaiTinTuc" Width="1.5" PointX="0.75" PointY="10" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_BinhLuan" Width="1.5" PointX="8.625" PointY="23.25" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTuc" Width="1.5" PointX="3" PointY="35" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTucTapTin" Width="1.5" PointX="5.25" PointY="39.75" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung" />
+        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTuc" Width="1.5" PointX="3" PointY="35" />
+        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTucTapTin" Width="1.5" PointX="5.25" PointY="36.25" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" />

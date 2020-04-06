@@ -1,23 +1,33 @@
 ﻿angular.module("oamsapp")
-    .controller("adminBT", function ($scope, CommonController, FileUploader, blockUI ,$timeout,$log) {
+    .controller("adminBT", function ($scope, CommonController, FileUploader, blockUI, $timeout, $log) {
+        // Init cho trang quản trị
+        $scope.currentPage = 1;
+        $scope.itemPerPage = 5;
         $scope.Init = function (status) {
             $scope.DsLoaiTin = [];
             $scope.LayDanhSachLoaiTin();
             var hamcho = function () {
                 if ($scope.DsLoaiTin.length == 0) {
-                    $timeout(hamcho, 400);
+                    $timeout(hamcho, 300);
                 }
                 else {
                     blockUI.stop();
+                    $scope.currentPage = 1;
+                    let limit = ($scope.currentPage - 1) * $scope.itemPerPage;
+                    $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemPerPage;
                     if (status == 'qlbv') {
                         $scope.TieuDe = "Bài Viết";
+                        $scope.status = "qlbv";
+                        $scope.LayBaiViet();
                     }
                     else if (status == 'qlbl') {
                         $scope.TieuDe = "Bình Luận";
+                        $scope.status = "qlbl";
+                        $scope.LayBinhLuan();
                     }
                 }
             }
-            $timeout(hamcho, 400);           
+            $timeout(hamcho, 300);
         }
 
         // Lấy Danh Sách Loại Tin
@@ -37,15 +47,19 @@
             );
         }
 
-        // Lấy Toàn Bộ Danh Sách Bài Viết ( mặc định ở trang 1 )
-        $scope.LayDanhSachBaiViet = function () {
+        // Lấy Toàn Bộ Danh Sách Bài Viết
+        $scope.LayBaiViet = function () {
             blockUI.start({
                 message: 'Xin Vui Lòng Chờ...',
             });
-            var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachLoaiTin, '');
+            var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachBaiViet, $scope.param);
+            console.log(CommonController.urlAPI.API_LayDanhSachBaiViet + $scope.param);
             res.then(
                 function succ(response) {
-                    $scope.DsLoaiTin = response.data;
+                    $scope.DanhSach = response.data;
+                    $scope.totalItems = $scope.DanhSach[0].CountTin;
+                    $scope.Tong = $scope.totalItems + " Bài Viết";
+                    blockUI.stop();
                 },
 
                 function errorCallback(response) {
@@ -54,18 +68,41 @@
             );
         }
 
-        $scope.totalItems = 64;
-        $scope.currentPage = 1;
+        // Lấy Toàn Bộ Danh Sách Bình Luận
+        $scope.LayBinhLuan = function () {
+            blockUI.start({
+                message: 'Xin Vui Lòng Chờ...',
+            });
+            var res = CommonController.getData(CommonController.urlAPI.API_LayBinhLuan, $scope.param);
+            console.log(CommonController.urlAPI.API_LayDanhSachBaiViet + $scope.param);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSach = response.data;
+                    $scope.totalItems = $scope.DanhSach.length;
+                    $scope.Tong = $scope.totalItems + " Bình Luận";
+                    blockUI.stop();
+                },
 
-        $scope.setPage = function (pageNo) {
-            $scope.currentPage = pageNo;
-        };
+                function errorCallback(response) {
+                    return response.data.message;
+                }
+            );
+        }
 
-        $scope.pageChanged = function () {
-            $log.log('Page changed to: ' + $scope.currentPage);
-        };
+        // Lấy Danh Sách Phân Trang
+        $scope.LayDanhSach_PhanTrang = function (status) {
+            let limit = ($scope.currentPage - 1) * $scope.itemPerPage;
+            $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemPerPage;
+            if (status == 'qlbl') {
+                $scope.LayBinhLuan();
+            }
+            else if (status == 'qlbv') {
+                $scope.LayBaiViet();
+            }
+        }
 
-        $scope.maxSize = 5;
-        $scope.bigTotalItems = 175;
-        $scope.bigCurrentPage = 1;
+        // Hiển Thị Ngày Giờ
+        $scope.ReturnDate = function (date) {
+            return moment(date).format("DD/MM/YYYY h:mm:ss a");
+        }
     })

@@ -3,7 +3,20 @@
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
 
-@section Css{}
+@section Css{
+    <link rel="stylesheet" href="~/Content/assetsmes/css/bootstrap-datepicker3.min.css" />
+    <style>
+        .message-item .time {
+            float: right;
+            width: auto;
+            height: 18px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            color: #666;
+        }
+    </style>
+}
 
 <div ng-controller="adminBT">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
@@ -79,7 +92,6 @@
                                             @*Tiêu đề*@
                                             <div class="message-infobar" id="id-message-infobar">
                                                 <span class="blue bigger-150">Danh Sách {{TieuDe}}</span>
-                                                <span class="grey bigger-110">(2 unread messages)</span>
                                             </div>
                                             @*/Tiêu đề*@
 
@@ -215,16 +227,6 @@
 
                                                         <li>
                                                             <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Chờ Duyệt</a>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
-                                                            <a id="id-select-message-unread" href="#"><i class="ace-icon fa fa-check invisible"></i>Đã Đọc</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-read" href="#"><i class="ace-icon fa fa-check invisible"></i>Chưa Đọc</a>
                                                         </li>
 
                                                         <li class="divider"></li>
@@ -442,66 +444,78 @@
                                     @*Nội dung chính hiển thị ds bài viết / bình luận*@
                                     <div class="message-list-container">
                                         <div class="message-list" id="message-list">
-                                            <div class="message-item message-unread">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
+                                            <div ng-show="status == 'qlbv'">
+                                                <div class="message-item">
+                                                    <label class="inline">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>
 
-                                                <i class="message-star ace-icon fa fa-user orange2"></i>
-                                                <span class="sender" title="Alex John Red Smith">Alex John Red Smith </span>
-                                                <span class="time">1:33 pm</span>
+                                                    <i class="message-star ace-icon fa fa-user orange2"></i>
 
-                                                <span class="summary">
-                                                    <span class="text">
-                                                        Click to open this message
+                                                    <span class="sender" title="John Doe">
+                                                        Test hihi
                                                     </span>
-                                                </span>
+                                                    <span class="time">7:15 pm</span>
+
+                                                    <span class="attachment">
+                                                        <i class="ace-icon fa fa-clock-o red"></i>
+                                                    </span>
+
+                                                    <span class="summary">
+                                                        <span class="text">
+                                                            sadasdas
+                                                        </span>
+                                                    </span>
+                                                </div>
+
+                                                <div class="message-item" ng-repeat="item in DanhSach track by $index">
+                                                    <label class="inline">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>
+
+                                                    <i class="message-star ace-icon fa fa-user orange2"></i>
+
+                                                    <span class="sender" title="John Doe">
+                                                        {{item.TacGia}}
+                                                    </span>
+                                                    <span class="time">{{ReturnDate(item.NgayTao)}}</span>
+
+                                                    <span class="attachment">
+                                                        <i class="ace-icon fa fa-check green" ng-show="item.HienThi"></i>
+                                                        <i class="ace-icon fa fa-clock-o red" ng-show="!item.HienThi"></i>
+                                                    </span>
+
+                                                    <span class="summary">
+                                                        <span class="text">
+                                                            {{item.TieuDe | limitTo : 100}}
+                                                        </span>
+                                                    </span>
+                                                </div>
                                             </div>
 
-                                            <div class="message-item message-unread">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
+                                            <div ng-show="status == 'qlbl'">
+                                                <div class="message-item" ng-repeat="item in DanhSach track by $index">
+                                                    <label class="inline">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>
 
-                                                <i class="message-star ace-icon fa fa-user orange2"></i>
+                                                    <i class="message-star ace-icon fa fa-user grey"></i>
+                                                    <span class="sender" title="Philip Markov">{{item.TenNguoiDung}} </span>
+                                                    <span class="time">10:15 am</span>
 
-                                                <span class="sender" title="John Doe">
-                                                    John Doe
-                                                </span>
-                                                <span class="time">7:15 pm</span>
-
-                                                <span class="attachment">
-                                                    <i class="ace-icon fa fa-paperclip"></i>
-                                                </span>
-
-                                                <span class="summary">
-                                                    <span class="text">
-                                                        Clik to open this message right here
+                                                    <span class="attachment">
+                                                        <i class="ace-icon fa fa-paperclip"></i>
                                                     </span>
-                                                </span>
-                                            </div>
 
-                                            <div class="message-item">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                <i class="message-star ace-icon fa fa-user grey"></i>
-                                                <span class="sender" title="Philip Markov">Philip Markov </span>
-                                                <span class="time">10:15 am</span>
-
-                                                <span class="attachment">
-                                                    <i class="ace-icon fa fa-paperclip"></i>
-                                                </span>
-
-                                                <span class="summary">
-                                                    <span class="text">
-                                                        Photo booth beard raw denim letterpress vegan
+                                                    <span class="summary">
+                                                        <span class="text">
+                                                            Đã Bình Luận Vào Bài Viết "{{item.TenBaiViet}}"
+                                                        </span>
                                                     </span>
-                                                </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -509,15 +523,15 @@
 
                                     @*Nội dung phía dưới hiển thị ds bài viết , đặt phân trang ở đây*@
                                     <div class="message-footer clearfix">
-                                        <div class="pull-left"> 151 messages total </div>
+                                        <div class="pull-left"> Tổng {{Tong}} </div>
 
                                         <div class="pull-right">
                                             &nbsp; &nbsp;
-                                            <ul uib-pagination 
-                                                total-items="totalItems" 
-                                                ng-model="currentPage" 
-                                                ng-change="pageChanged()">
-                                            </ul>
+                                            <ul uib-pagination
+                                                total-items="totalItems"
+                                                ng-model="currentPage"
+                                                items-per-page="itemPerPage"
+                                                ng-change="LayDanhSach_PhanTrang(status)"></ul>
                                         </div>
                                     </div>
                                     @*/Nội dung phía dưới hiển thị ds bài viết , đặt phân trang ở đây*@
@@ -764,6 +778,7 @@
     <script src="~/Content/assetsmes/js/bootstrap-tag.min.js"></script>
     <script src="~/Content/assetsmes/js/jquery.hotkeys.index.min.js"></script>
     <script src="~/Content/assetsmes/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/Content/assetsmes/js/moment.min.js"></script>
 
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
@@ -1081,10 +1096,10 @@
                             .addClass('width-90 inline')
                             .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>')
                             .parent().append('<div class="action-buttons pull-right col-xs-1">\
-                                <a href="#" data-action="delete" class="middle">\
-                                    <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
-                                </a>\
-                            </div>')
+                                                        <a href="#" data-action="delete" class="middle">\
+                                                            <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
+                                                        </a>\
+                                                    </div>')
                             .find('a[data-action=delete]').on('click', function (e) {
                                 //the button that removes the newly inserted file input
                                 e.preventDefault();

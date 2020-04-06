@@ -439,7 +439,8 @@
                     API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet",
 
                     // Admin
-                    API_LayDanhSachBaiViet: "API/QuanLyBangTin/LayDanhSachBaiViet",
+                    API_LayDanhSachBaiViet: "API/AdminBangTin/LayDanhSachBaiViet",
+                    API_LayBinhLuan: "API/AdminBangTin/LayBinhLuan",
                 };
 
                 // Hàm Tạo Ra Mã Xác Nhận Ngẫu Nhiên 
