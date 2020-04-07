@@ -420,7 +420,7 @@
                 }])
 
         //Phần của Vũ thêm vào để quản lý bảng tin
-        .factory("CommonController", ["$http","blockUI",
+        .factory("CommonController", ["$http", "blockUI",
             function ($http) {
                 // Tạo UrlAPI động
                 var baseURL = window.location.protocol + "//" + window.location.host + "/";
@@ -441,6 +441,7 @@
                     // Admin
                     API_LayDanhSachBaiViet: "API/AdminBangTin/LayDanhSachBaiViet",
                     API_LayBinhLuan: "API/AdminBangTin/LayBinhLuan",
+                    API_LayChiTietBinhLuan : "API/AdminBangTin/LayChiTietBinhLuan",
                 };
 
                 // Hàm Tạo Ra Mã Xác Nhận Ngẫu Nhiên 

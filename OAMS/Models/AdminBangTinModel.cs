@@ -13,6 +13,7 @@ namespace OAMS.Models
         public string TenNguoiDung { get; set; }
         public string NoiDung { get; set; }
         public string TenBaiViet { get; set; }
+        public string HinhNguoiDung { get; set; }
         public int CountTin { get; set; }
         public Nullable<bool> HienThi { get; set; }
         public Nullable<System.DateTime> Ngay { get; set; }
