@@ -315,13 +315,6 @@
     <Property Name="DVQUANLY" Type="nvarchar" MaxLength="10" />
     <Property Name="MADONVI" Type="nvarchar" MaxLength="10" />
   </EntityType>
-  <EntityType Name="tbChucvu">
-    <Key>
-      <PropertyRef Name="MACHUCVU" />
-    </Key>
-    <Property Name="MACHUCVU" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="TENCHUCVU" Type="nvarchar" MaxLength="250" Nullable="false" />
-  </EntityType>
   <EntityType Name="tbCoquan">
     <Key>
       <PropertyRef Name="MACOQUAN" />
@@ -329,6 +322,13 @@
     <Property Name="MACOQUAN" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TENCOQUAN" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="CQQUANLY" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tbChucvu">
+    <Key>
+      <PropertyRef Name="MACHUCVU" />
+    </Key>
+    <Property Name="MACHUCVU" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TENCHUCVU" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
   <EntityType Name="tbNguoidung">
     <Key>
@@ -668,8 +668,8 @@
     <EntitySet Name="tbWorkflow" EntityType="Self.tbWorkflow" Schema="doc" store:Type="Tables" />
     <EntitySet Name="tbYkienxuly" EntityType="Self.tbYkienxuly" Schema="doc" store:Type="Tables" />
     <EntitySet Name="tbBophan" EntityType="Self.tbBophan" Schema="users" store:Type="Tables" />
-    <EntitySet Name="tbChucvu" EntityType="Self.tbChucvu" Schema="users" store:Type="Tables" />
     <EntitySet Name="tbCoquan" EntityType="Self.tbCoquan" Schema="users" store:Type="Tables" />
+    <EntitySet Name="tbChucvu" EntityType="Self.tbChucvu" Schema="users" store:Type="Tables" />
     <EntitySet Name="tbNguoidung" EntityType="Self.tbNguoidung" Schema="users" store:Type="Tables" />
     <EntitySet Name="tbNhom" EntityType="Self.tbNhom" Schema="users" store:Type="Tables" />
     <EntitySet Name="tbNhom_Chucnang" EntityType="Self.tbNhom_Chucnang" Schema="users" store:Type="Tables" />

@@ -426,36 +426,6 @@
                 var baseURL = window.location.protocol + "//" + window.location.host + "/";
                 var appURL = { pathAPI: baseURL };
 
-                // Danh sách các APIs
-                var urlAPI = {
-                    API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
-                    API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
-                    API_LayDanhSachBaiViet_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_PhanTrang",
-                    API_LayDanhSachBaiVietLienQuan: "API/QuanLyBangTin/LayDanhSachBaiVietLienQuan",
-                    API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
-                    API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
-                    API_GuiBinhLuan: "API/QuanLyBangTin/GuiBinhLuan",
-                    API_LocBaiViet: "API/QuanLyBangTin/LayDanhSachBaiViet_Loc",
-                    API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet",
-
-                    // Admin
-                    API_LayDanhSachBaiViet: "API/AdminBangTin/LayDanhSachBaiViet",
-                    API_LayBinhLuan: "API/AdminBangTin/LayBinhLuan",
-                    API_LayChiTietBinhLuan : "API/AdminBangTin/LayChiTietBinhLuan",
-                };
-
-                // Hàm Tạo Ra Mã Xác Nhận Ngẫu Nhiên 
-                //this.getCaptcha = () => {
-                //    var result = "";
-                //    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                //    var charactersLength = characters.length;
-                //    for (var i = 0; i < 6; i++) {
-                //        var j = parseInt(Math.random() * 10000);
-                //        result += characters.charAt(j % charactersLength);
-                //    }
-                //    return result;
-                //};
-
                 // Hàm Get API
                 this.getData = (urlAPI, Param) => {
                     var res = $http({
@@ -485,12 +455,32 @@
                     return res;
                 }
 
+                // Danh sách các APIs
+                var urlAPI = {
+                    // Index
+                    API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
+                    API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
+                    API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_TheoDanhMuc_PhanTrang",
+                    API_LayDanhSachBaiVietCuHon: "API/QuanLyBangTin/LayDanhSachBaiVietCuHon",
+                    API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
+                    API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
+
+                    // Soạn Bài Viết
+                    API_UploadImage: "API/QuanLyBangTin/UploadImage",
+                    API_UploadFile: "API/QuanLyBangTin/UploadFiles",
+                    API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet",
+
+                    // Admin
+                    API_LayDanhSachBaiViet: "API/AdminBangTin/LayDanhSachBaiViet",
+                    API_LayBinhLuan: "API/AdminBangTin/LayBinhLuan",
+                    API_LayChiTietBinhLuan : "API/AdminBangTin/LayChiTietBinhLuan",
+                };
+
                 return {
                     getData: this.getData,
                     postData: this.postData,
                     deleteData: this.deleteData,
                     urlAPI: urlAPI,
-                    //captcha: this.getCaptcha,
                 }
             }]);
 }());

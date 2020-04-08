@@ -374,6 +374,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_TinTucTapTin">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
+        <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
+          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="NEWS_TinTuc">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
         <MappingFragment StoreEntitySet="NEWS_TinTuc">
@@ -391,17 +402,6 @@
           <ScalarProperty Name="MoTa" ColumnName="MoTa" />
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
           <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_TinTucTapTin">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
-        <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
           <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
         </MappingFragment>
       </EntityTypeMapping>

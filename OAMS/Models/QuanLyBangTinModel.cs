@@ -12,9 +12,6 @@ namespace OAMS.Models
         public bool? TrangThai { get; set; }
         public int? ThuTuHienThi { get; set; }
         public string Icon { get; set; }
-        public int Count { get; set; }
-        public int CountUser { get; set; }
-        public int Month { get; set; }
         public int? TemplateList { get;set;}
         public int? TemplateDetail { get; set; }
     }
@@ -44,6 +41,7 @@ namespace OAMS.Models
         public int? TemplateList { get; set; }
         public int? TemplateDetail { get; set; }
         public List<TinTucModel> TinLienQuan { get; set; }
+        public List<TinTucModel> TinCuHon { get; set; }
     }
 
     public class TapTinModel
@@ -51,17 +49,6 @@ namespace OAMS.Models
         public int MaTapTin { get; set; }
         public string Ten { get; set; }
         public string Url { get; set; }
-    }
-
-
-    public class PageModel
-    {
-        public int MaLoaiTin { get; set; }
-        public int Limit { get; set; }
-        public int itemPerPage { get; set; }
-        public int Month { get; set; }
-        public string Start { get; set; }
-        public string End { get; set; }
     }
 
     public class NguoiDungModel
