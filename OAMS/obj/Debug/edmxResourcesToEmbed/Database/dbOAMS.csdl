@@ -93,12 +93,12 @@
     <EntitySet Name="NEWS_NguoiSuDung" EntityType="dbOAMSModel.NEWS_NguoiSuDung" />
     <EntitySet Name="NEWS_LoaiTinTuc" EntityType="dbOAMSModel.NEWS_LoaiTinTuc" />
     <EntitySet Name="NEWS_BinhLuan" EntityType="dbOAMSModel.NEWS_BinhLuan" />
+    <EntitySet Name="NEWS_TinTuc" EntityType="dbOAMSModel.NEWS_TinTuc" />
+    <EntitySet Name="NEWS_TinTucTapTin" EntityType="dbOAMSModel.NEWS_TinTucTapTin" />
     <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
       <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
       <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
     </AssociationSet>
-    <EntitySet Name="NEWS_TinTuc" EntityType="dbOAMSModel.NEWS_TinTuc" />
-    <EntitySet Name="NEWS_TinTucTapTin" EntityType="dbOAMSModel.NEWS_TinTucTapTin" />
     <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_TinTuc" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc">
       <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
       <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
@@ -713,18 +713,6 @@
     <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung" FromRole="NEWS_BinhLuan" ToRole="NEWS_NguoiSuDung" />
     <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc" FromRole="NEWS_BinhLuan" ToRole="NEWS_TinTuc" />
   </EntityType>
-  <Association Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
-    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="1" />
-    <End Type="dbOAMSModel.NEWS_BinhLuan" Role="NEWS_BinhLuan" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_NguoiSuDung">
-        <PropertyRef Name="MaNguoiDung" />
-      </Principal>
-      <Dependent Role="NEWS_BinhLuan">
-        <PropertyRef Name="MaNguoiDung" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="NEWS_TinTuc">
     <Key>
       <PropertyRef Name="MaTinTuc" />
@@ -759,6 +747,18 @@
     <Property Name="Ngay" Type="DateTime" Precision="0" />
     <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTucTapTin" ToRole="NEWS_TinTuc" />
   </EntityType>
+  <Association Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
+    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="1" />
+    <End Type="dbOAMSModel.NEWS_BinhLuan" Role="NEWS_BinhLuan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_NguoiSuDung">
+        <PropertyRef Name="MaNguoiDung" />
+      </Principal>
+      <Dependent Role="NEWS_BinhLuan">
+        <PropertyRef Name="MaNguoiDung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_NEWS_BinhLuan_NEWS_TinTuc">
     <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="1" />
     <End Type="dbOAMSModel.NEWS_BinhLuan" Role="NEWS_BinhLuan" Multiplicity="*" />

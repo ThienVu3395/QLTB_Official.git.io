@@ -31,12 +31,9 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 {
                     LoaiTinTucModel loaiTinTuc = new LoaiTinTucModel();
                     loaiTinTuc.MaLoaiTin = item.MaLoaiTin;
-                    int dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == loaiTinTuc.MaLoaiTin && x.HienThi == true).Count();
                     loaiTinTuc.Ten = item.Ten;
                     loaiTinTuc.TrangThai = item.TrangThai;
                     loaiTinTuc.Icon = item.Icon;
-                    loaiTinTuc.Count = dsTin;
-                    loaiTinTuc.CountUser = dsSinhNhat.Count();
                     loaiTinTuc.Month = date.Month;
                     loaiTinTuc.TemplateList = item.TemplateList;
                     loaiTinTuc.TemplateDetail = item.TemplateDetail;
@@ -75,7 +72,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         [Route("LayDanhSachBaiViet_PhanTrang")]
         public IHttpActionResult LayDanhSachBaiViet_PhanTrang(PageModel pm)
         {
-            var dsTin = dbContext.NEWS_TinTuc.ToList().Where(x => x.MaLoaiTin == pm.MaLoaiTin && x.HienThi == true && x.NgayTao >= DateTime.ParseExact(pm.Start, "dd-MM-yyyy", CultureInfo.InvariantCulture) && x.NgayTao <= DateTime.ParseExact(pm.End, "dd-MM-yyyy", CultureInfo.InvariantCulture)).OrderByDescending(x => x.NgayTao).ToList();
+            var dsTin = dbContext.NEWS_TinTuc.ToList().Where(x => x.MaLoaiTin == pm.MaLoaiTin && x.HienThi == true).OrderByDescending(x => x.NgayTao).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
             if (dsTin.Count > 0)
             {
@@ -98,7 +95,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
                     dsTinModel.Add(tin);
                 }
-                return Ok(dsTinModel.Skip(pm.Limit).Take(pm.itemPerPage));
+                //return Ok(dsTinModel.Skip(pm.Limit).Take(pm.itemPerPage));
+                return Ok(dsTinModel.Skip(0).Take(5));
             }
             return Ok(dsTinModel);
         }

@@ -71,10 +71,10 @@
         <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
             <div class="col-xs-12">
                 <div class="row">
-                    <div class="col-sm-7">
-                        <h4 class="pink">
-                            <a href="#modal-form" role="button" class="btn btn-info" data-toggle="modal"><i class="ace-icon fa fa-edit"></i>Bạn Đang Nghĩ Gì ?</a>
-                        </h4>
+                    <div class="col-sm-9">
+                        @*<h4 class="pink">
+                            <a href="#modal-form" role="button" class="btn btn-info" data-toggle="modal"><i class="ace-icon fa fa-edit"></i></a>
+                        </h4>*@
 
                         <div class="tabbable">
                             <ul class="nav nav-tabs" id="myTab" ng-init="LayDanhSachLoaiTin()">
@@ -82,24 +82,22 @@
                                     ng-repeat="item in DanhSachLoaiTin"
                                     ng-click="LayDanhSachBaiViet(item.MaLoaiTin,1)">
                                     <a data-toggle="tab" href="#tin">
-                                        <i class="green ace-icon fa fa-{{item.Icon}} bigger-120"></i>
+                                        <i class="blue ace-icon fa fa-{{item.Icon}} bigger-120"></i>
                                         {{item.Ten}}
-                                        <span class="badge badge-danger">{{item.Count}}</span>
                                     </a>
                                 </li>
 
                                 <li ng-click="LaySinhNhat(Month)">
                                     <a data-toggle="tab" href="#sn">
-                                        <i class="green ace-icon fa fa-calendar bigger-120"></i>
+                                        <i class="blue ace-icon fa fa-calendar bigger-120"></i>
                                         Sinh Nhật
-                                        <span class="badge badge-danger">{{CountUser}}</span>
                                     </a>
                                 </li>
                             </ul>
 
                             <div class="tab-content">
                                 @*Thanh công cụ cho tin*@
-                                <div class="search-area well col-xs-12" ng-show="!sinhNhat && !ttshow">
+                                @*<div class="search-area well col-xs-12" ng-show="!sinhNhat && !ttshow">
                                     <div class="row">
                                         <div class="col-lg-9">
                                             <div class="input-group">
@@ -117,17 +115,8 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                                 @*/ Thanh công cụ cho tin*@
-
-                                @*Thanh phân trang cho tin*@
-                                <ul ng-show="!sinhNhat && !ttshow"
-                                    uib-pagination
-                                    total-items="totalItems"
-                                    items-per-page="itemsPerPage"
-                                    ng-model="currentPage"
-                                    ng-change="LayDanhSachBaiViet(MaLoaiTin,currentPage)"></ul>
-                                @*/ Thanh phân trang cho tin*@
 
                                 <div class="row tab-pane fade in active" id="tin">
                                     @*Show danh sách tin*@
@@ -146,7 +135,7 @@
                                                 <h3 class="search-title">
                                                     <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="showBtn(item.MaTinTuc)">{{ item.TieuDe | limitTo: 40 }}{{item.TieuDe.length > 40 ? '...' : ''}}</a>
                                                 </h3>
-                                                <p>{{item.MoTa| limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
+                                                <p>{{item.MoTa| limitTo: 37 }}{{item.MoTa.length > 30 ? '...' : ''}}</p>
                                                 <span class="text-success" ng-click="showBtn(item.MaTinTuc)">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
                                             </div>
                                         </div>
@@ -241,18 +230,6 @@
                                         </div>
                                     </div>
                                     @*/Show Chi Tiết Tin*@
-
-                                    @*Show list các tin cũ hơn*@
-                                    <div class="col-xs-12" ng-show="!ttshow">
-                                        <h3 class="header smaller lighter green">Các Tin Cũ Hơn</h3>
-                                        <ul class="list-unstyled spaced2">
-                                            <li ng-repeat="item in DanhSachCuHon">
-                                                <i class="ace-icon fa fa-circle green"></i>
-                                                <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="showBtn(item.MaTinTuc)">[{{item.NgayTao | limitTo : 10}}]{{ item.TieuDe}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    @*/ Show list các tin cũ hơn*@
                                 </div>
                                 @*/ Tin Tức Thường*@
 
@@ -288,11 +265,34 @@
                                     </div>
                                 </div>
                                 @*/ Sinh Nhật Trong Tháng*@
+
+
+                                @*Thanh phân trang cho tin*@
+                                <ul ng-show="!sinhNhat && !ttshow"
+                                    uib-pagination
+                                    total-items="totalItems"
+                                    items-per-page="itemsPerPage"
+                                    ng-model="currentPage"
+                                    ng-change="LayDanhSachBaiViet(MaLoaiTin,currentPage)">
+                                </ul>
+                                @*/ Thanh phân trang cho tin*@
+
+                                @*Show list các tin cũ hơn*@
+                                <div ng-show="!ttshow">
+                                    <h3 class="header smaller lighter green">Các Tin Cũ Hơn</h3>
+                                    <ul class="list-unstyled spaced2">
+                                        <li ng-repeat="item in DanhSachCuHon">
+                                            <i class="ace-icon fa fa-circle green"></i>
+                                            <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="showBtn(item.MaTinTuc)">[{{item.NgayTao | limitTo : 10}}]{{ item.TieuDe}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @*/ Show list các tin cũ hơn*@
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-5 widget-container-col">
+                    <div class="col-sm-3 widget-container-col">
                         <div class="widget-box widget-color-dark">
                             <div class="widget-header">
                                 <h6 class="widget-title">Tường Công Ty</h6>
@@ -302,9 +302,9 @@
                                         <i class="ace-icon fa fa-refresh"></i>
                                     </a>
 
-                                    @*<a href="#" data-action="collapse">
-                                        <i class="ace-icon fa fa-chevron-up"></i>
-                                    </a>*@
+                                    <a href="#" data-action="collapse">
+                                        <i class="ace-icon fa fa-chevron-down"></i>
+                                    </a>
 
                                     <a href="#" data-action="fullscreen" class="orange2">
                                         <i class="ace-icon fa fa-expand"></i>
@@ -312,7 +312,7 @@
                                 </div>
                             </div>
 
-                            <div class="widget-body">
+                            <div class="widget-body" style="display:none">
                                 <div class="widget-main padding-4 scrollable" data-size="800">
                                     <div class="content">
                                         <div class="row" ng-init="LayBaiVietTuong()">

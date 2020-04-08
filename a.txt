@@ -1,0 +1,19 @@
+- Tin tức mới vào hiển thị tin top 10
+- Tin cũ hơn láy tiếp theo top 10
+- Bố cục thông báo , ngày giờ nằm dưới tiêu đề , nhỏ hơn màu nhạt hơn td
+- Bỏ Tìm kiếm , bỏ button bạn đang nghĩ gì
+- Bỏ tường ( minized  , 1/4)
+- Bỏ số hiển thị trong tab , đổi màu icon thành xanh chủ dạo cty
+- De phan trang dưới ds bài viết
+- Giao diện bình luận của tường => table của ace (- Có nút bấm xổ bl)
+
+// sinh nhật
+- 12 tháng nằm ngang
+- phân trang sinh nhật
+
+// Trong menu có select để chọn thông báo nội bộ + tin tức + bảng tin sawaco
+- Chỉnh lại định dạng dd/mm/yyyy
+
+
+/// Tham khảo load trang liền
+$interval	

@@ -18,5 +18,10 @@ namespace OAMS.Controllers.BangTin
         {
             return View();
         }
+
+        public ActionResult SoanBaiViet()
+        {
+            return View();
+        }
     }
 }

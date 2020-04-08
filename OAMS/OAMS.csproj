@@ -1866,6 +1866,7 @@
     <Content Include="Views\Tinnhan\IndexTinnhan.cshtml" />
     <Content Include="Views\BangTin\Index.cshtml" />
     <Content Include="Views\BangTin\QuanLy.cshtml" />
+    <Content Include="Views\BangTin\SoanBaiViet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataConversation\" />

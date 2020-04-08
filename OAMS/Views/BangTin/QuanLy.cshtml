@@ -233,31 +233,11 @@
 
                                                     <ul class="dropdown-menu dropdown-lighter dropdown-100">
                                                         <li>
-                                                            <a id="id-select-message-all" href="#"><i class="ace-icon fa fa-check invisible"></i>Chọn Tất Cả</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Bỏ Chọn</a>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
                                                             <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Đã Duyệt</a>
                                                         </li>
 
                                                         <li>
                                                             <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Chờ Duyệt</a>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Ẩn</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible"></i>Hiện</a>
                                                         </li>
 
                                                         <li class="divider"></li>
@@ -487,11 +467,19 @@
                                                     <span class="sender" title="John Doe">
                                                         {{item.TacGia}}
                                                     </span>
+
                                                     <span class="time">{{ReturnDate(item.NgayTao)}}</span>
 
                                                     <span class="attachment">
                                                         <i class="ace-icon fa fa-check green" ng-show="item.HienThi"></i>
                                                         <i class="ace-icon fa fa-clock-o red" ng-show="!item.HienThi"></i>
+                                                    </span>
+
+                                                    <span class="summary">
+                                                        <span class="badge badge-success mail-tag"></span>
+                                                        <span class="text">
+                                                            {{item.LoaiTin}}
+                                                        </span>
                                                     </span>
 
                                                     <span class="summary">
@@ -625,6 +613,7 @@
                                                     </span>
 
                                                     <span class="summary">
+                                                        <span class="badge badge-pink mail-tag"></span>
                                                         <span class="text" ng-click="LayChiTietBinhLuan(item.MaTinTuc)">
                                                             Đã Bình Luận Vào Bài Viết "{{item.TenBaiViet}}"
                                                         </span>
