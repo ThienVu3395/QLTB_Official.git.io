@@ -540,6 +540,9 @@
     <Content Include="Content\assetsmes\js\spinbox.min.js" />
     <Content Include="Content\assetsmes\js\tree.min.js" />
     <Content Include="Content\assetsmes\js\wizard.min.js" />
+    <Content Include="Content\assetsmes\owl-carousel\owl.carousel.min.css" />
+    <Content Include="Content\assetsmes\owl-carousel\owl.carousel.min.js" />
+    <Content Include="Content\assetsmes\owl-carousel\owl.theme.default.min.css" />
     <Content Include="Content\assetsmes\swf\flashExport.swf" />
     <Content Include="Content\audio\all-eyes-on-me.mp3" />
     <Content Include="Content\audio\you-have-new-message.mp3" />
@@ -570,6 +573,7 @@
     <Content Include="MyScript\app.js" />
     <Content Include="MyScript\bangtin\BangTinCtrl.js" />
     <Content Include="MyScript\bangtin\QuanLyCtrl.js" />
+    <Content Include="MyScript\bangtin\testBT.js" />
     <Content Include="MyScript\bnle\bnleformeditCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridfCtrl.js" />
@@ -1867,6 +1871,7 @@
     <Content Include="Views\BangTin\Index.cshtml" />
     <Content Include="Views\BangTin\QuanLy.cshtml" />
     <Content Include="Views\BangTin\SoanBaiViet.cshtml" />
+    <Content Include="Views\BangTin\TestTinTuc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataConversation\" />

@@ -1,0 +1,821 @@
+﻿
+@{
+    ViewBag.Title = "TestTinTuc";
+    Layout = "~/Views/Shared/_LayoutMes.cshtml";
+}
+
+@section Css{
+    <link href="~/Content/assetsmes/owl-carousel/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/assetsmes/owl-carousel/owl.theme.default.min.css" rel="stylesheet" />
+    <style>
+        .label{
+            margin-bottom:5px
+        }
+    </style>
+}
+
+@section Scripts{
+    <script src="~/MyScript/bangtin/testBT.js"></script>
+    <script src="~/Content/assetsmes/owl-carousel/owl.carousel.min.js"></script>
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        })
+    </script>
+}
+
+<div ng-controller="testBT">
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">FSM</a>
+            </li>
+            <li class="active">Bảng Tin</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="ace-icon fa fa-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div><!-- /.nav-search -->
+    </div>
+
+    <div id="mescontent" class="page-content">
+        <div class="row" style="overflow-y: auto;height: calc(100% - 25px);" ">
+            <div class="page-header">
+                <h1>
+                    Quản Lý
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Tin Tức & Bình Luận
+                    </small>
+                </h1>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12" style="margin-bottom:20px">
+                        <div class="owl-carousel owl-theme">
+                            <div class="item text-danger bigger-110">
+                                <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                Unordered List Item # 5
+                            </div>
+
+                            <div class="item text-danger bigger-110">
+                                <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                Unordered List Item # 5
+                            </div>
+
+                            <div class="item text-danger bigger-110">
+                                <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                Unordered List Item # 5
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">London</span>
+
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">Thumbnail label</a>
+                                </h3>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">London</span>
+
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">Thumbnail label</a>
+                                </h3>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">London</span>
+
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">Thumbnail label</a>
+                                </h3>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">London</span>
+
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">Thumbnail label</a>
+                                </h3>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <span class="label label-danger label-lg arrowed-in">Tin Xem Nhiều</span>
+                        <div class="owl-carousel owl-theme">
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <span class="label label-danger label-lg arrowed-in">Thông Báo</span>
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" data-src="holder.js/72x72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Media heading</a>
+                                    </h4>
+                                </div>
+                                <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
+
+                                <div class="search-actions text-center">
+                                    <span class="blue bolder bigger-150">12/02/20</span>
+
+                                    16:00
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" data-src="holder.js/72x72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Media heading</a>
+                                    </h4>
+                                </div>
+                                <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
+
+                                <div class="search-actions text-center">
+                                    <span class="blue bolder bigger-150">12/02/20</span>
+
+                                    16:00
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" data-src="holder.js/72x72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Media heading</a>
+                                    </h4>
+                                </div>
+                                <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
+
+                                <div class="search-actions text-center">
+                                    <span class="blue bolder bigger-150">12/02/20</span>
+
+                                    16:00
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <span class="label label-danger label-lg arrowed-in">Sự Kiện</span>
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Họp báo cáo tiến độ</a>
+                                    </h4>
+                                </div>
+                                <p>
+                                    up lich kiểm tra
+                                    Họp báo cáo tiến độ
+                                </p>
+
+                                <div class="search-actions text-center">
+                                    <div class="blue bigger-150">12/02/20</div>
+                                    <div class="blue bigger-150">16:00</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Họp báo cáo tiến độ</a>
+                                    </h4>
+                                </div>
+                                <p>
+                                    up lich kiểm tra
+                                    Họp báo cáo tiến độ
+                                </p>
+
+                                <div class="search-actions text-center">
+                                    <div class="blue bigger-150">12/02/20</div>
+                                    <div class="blue bigger-150">16:00</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Họp báo cáo tiến độ</a>
+                                    </h4>
+                                </div>
+                                <p>
+                                    up lich kiểm tra
+                                    Họp báo cáo tiến độ
+                                </p>
+
+                                <div class="search-actions text-center">
+                                    <div class="blue bigger-150">12/02/20</div>
+                                    <div class="blue bigger-150">16:00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:20px">                  
+                    <div class="col-lg-6">
+                        <span class="label label-danger label-lg arrowed-in">Bảng Tin Sawaco</span>
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">London</span>
+
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">Thumbnail label</a>
+                                </h3>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" data-src="holder.js/72x72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Media heading</a>
+                                    </h4>
+                                </div>
+
+                                <div class="search-actions text-center">
+                                    <span class="blue bolder bigger-150">300</span>
+                                    <div class="action-buttons bigger-125">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-phone green"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-heart red"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" data-src="holder.js/72x72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Media heading</a>
+                                    </h4>
+                                </div>
+
+                                <div class="search-actions text-center">
+                                    <span class="blue bolder bigger-150">300</span>
+                                    <div class="action-buttons bigger-125">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-phone green"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-heart red"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <span class="label label-danger label-lg arrowed-in">Sinh Nhật Trong Tháng</span>
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">London</span>
+
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star orange2"></i>
+
+                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">Thumbnail label</a>
+                                </h3>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" data-src="holder.js/72x72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Media heading</a>
+                                    </h4>
+                                </div>
+
+                                <div class="search-actions text-center">
+                                    <span class="blue bolder bigger-150">300</span>
+                                    <div class="action-buttons bigger-125">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-phone green"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-heart red"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="media search-media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" data-src="holder.js/72x72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">Media heading</a>
+                                    </h4>
+                                </div>
+
+                                <div class="search-actions text-center">
+                                    <span class="blue bolder bigger-150">300</span>
+                                    <div class="action-buttons bigger-125">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-phone green"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-heart red"></i>
+                                        </a>
+
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12" style="margin-top:12px">
+                        <span class="label label-danger label-lg arrowed-in">Videos Nổi Bật</span>
+                        <div class="owl-carousel owl-theme">
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <iframe width="100%"
+                                        height="100%"
+                                        src="https://www.youtube.com/embed/1-OEabwDQhE"
+                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <iframe width="100%"
+                                        height="100%"
+                                        src="https://www.youtube.com/embed/1-OEabwDQhE"
+                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail item">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+
+                                <iframe width="100%"
+                                        height="100%"
+                                        src="https://www.youtube.com/embed/1-OEabwDQhE"
+                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
