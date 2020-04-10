@@ -24,11 +24,12 @@ namespace OAMS.Models
         public string MoTa { get; set; }
         public Nullable<int> MaLoaiTin { get; set; }
         public string LoaiTin { get; set; }
-        public string TacGia { get; set; }
         public string HinhNguoiDung { get; set; }
+        public int NguoiTao { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
-        public Nullable<System.DateTime> NgayCapNhat { get; set; }
         public string NguoiCapNhat { get; set; }
+        public Nullable<System.DateTime> NgayCapNhat { get; set; }
+        public int? LuotXem { get; set; }
         public Nullable<bool> HienThi { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
         public List<BinhLuanModel> BinhLuan { get; set; }

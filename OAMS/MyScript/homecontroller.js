@@ -457,6 +457,9 @@
 
                 // Danh sách các APIs
                 var urlAPI = {
+                    // Index mới
+                    API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",
+                    API_LayTinXemNhieu: "API/QuanLyBangTin/LayTinXemNhieu",
                     // Index
                     API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
                     API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",

@@ -54,6 +54,7 @@ namespace OAMS.Database
         public virtual DbSet<NEWS_LoaiTinTuc> NEWS_LoaiTinTuc { get; set; }
         public virtual DbSet<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
         public virtual DbSet<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
+        public virtual DbSet<NEWS_PhongBan> NEWS_PhongBan { get; set; }
         public virtual DbSet<NEWS_TinTuc> NEWS_TinTuc { get; set; }
     }
 }

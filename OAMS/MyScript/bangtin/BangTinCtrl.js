@@ -7,6 +7,40 @@
         $scope.ttshow = false;
         $scope.sinhNhat = false;
 
+        $scope.InitUpdate = function () {
+            $scope.LayTinNoiBat();
+            $scope.LayTinXemNhieu();
+        }
+
+        // Lấy tin nổi bật
+        $scope.LayTinNoiBat = function () {
+            var res = CommonController.getData(CommonController.urlAPI.API_LayTinNoiBat, "");
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachTinNoiBat = response.data;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Lấy tin xem nhiều
+        $scope.LayTinXemNhieu = function () {
+            var res = CommonController.getData(CommonController.urlAPI.API_LayTinXemNhieu, "");
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachTinXemNhieu = response.data;
+                    console.log($scope.DanhSachTinXemNhieu);
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
         $scope.Init = function () {
             $scope.DanhSachLoaiTin = []
             $scope.LayDanhSachLoaiTin();

@@ -15,7 +15,6 @@
 }
 
 @section Scripts{
-    <script src="~/MyScript/bangtin/testBT.js"></script>
     <script src="~/Content/assetsmes/owl-carousel/owl.carousel.min.js"></script>
     <script>
         $('.owl-carousel').owlCarousel({
@@ -39,7 +38,7 @@
     </script>
 }
 
-<div ng-controller="testBT">
+<div ng-controller="QlbtCrl" ng-init="InitUpdate()">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -60,7 +59,7 @@
     </div>
 
     <div id="mescontent" class="page-content">
-        <div class="row" style="overflow-y: auto;height: calc(100% - 25px);" ">
+        <div class="row" style="overflow-y: auto;height: calc(100% - 25px);">
             <div class="page-header">
                 <h1>
                     Quản Lý
@@ -92,122 +91,24 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" ng-repeat="item in DanhSachTinNoiBat">
                         <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
 
-                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                            <img class="media-object w-100" src="{{item.HinhAnh}}" height="100"/>
                             <div class="caption">
                                 <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">London</span>
+                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
 
                                     <div class="pull-left bigger-110">
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                        <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
                                     </div>
                                 </div>
 
                                 <h3 class="search-title">
-                                    <a href="#" class="blue">Thumbnail label</a>
+                                    <a href="#" class="blue">{{item.TieuDe | limitTo: 40 }}{{item.TieuDe.length > 40 ? '...' : ''}}</a>
                                 </h3>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                            <div class="caption">
-                                <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">London</span>
-
-                                    <div class="pull-left bigger-110">
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                        <i class="ace-icon fa fa-star light-grey"></i>
-                                    </div>
-                                </div>
-
-                                <h3 class="search-title">
-                                    <a href="#" class="blue">Thumbnail label</a>
-                                </h3>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                            <div class="caption">
-                                <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">London</span>
-
-                                    <div class="pull-left bigger-110">
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                        <i class="ace-icon fa fa-star light-grey"></i>
-                                    </div>
-                                </div>
-
-                                <h3 class="search-title">
-                                    <a href="#" class="blue">Thumbnail label</a>
-                                </h3>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                            <div class="caption">
-                                <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">London</span>
-
-                                    <div class="pull-left bigger-110">
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                        <i class="ace-icon fa fa-star light-grey"></i>
-                                    </div>
-                                </div>
-
-                                <h3 class="search-title">
-                                    <a href="#" class="blue">Thumbnail label</a>
-                                </h3>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                <p>{{item.MoTa| limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                             </div>
                         </div>
                     </div>
@@ -216,120 +117,7 @@
                         <span class="label label-danger label-lg arrowed-in">Tin Xem Nhiều</span>
                         <div class="owl-carousel owl-theme">
                             <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
-
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
-                                    </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
-
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
-                                    </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
-
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
-                                    </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
-
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
-                                    </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">dsadad</span>
                                 <img class="media-object" data-src="holder.js/100px200?theme=gray" />
                                 <div class="caption">
                                     <div class="clearfix">
@@ -375,9 +163,8 @@
                                 <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
 
                                 <div class="search-actions text-center">
-                                    <span class="blue bolder bigger-150">12/02/20</span>
-
-                                    16:00
+                                    <div class="blue bolder bigger-150">12/02/20</div>
+                                    <div class="blue bigger-150">16:00</div>
                                     <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
                                 </div>
                             </div>
@@ -399,9 +186,8 @@
                                 <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
 
                                 <div class="search-actions text-center">
-                                    <span class="blue bolder bigger-150">12/02/20</span>
-
-                                    16:00
+                                    <div class="blue bolder bigger-150">12/02/20</div>
+                                    <div class="blue bigger-150">16:00</div>
                                     <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
                                 </div>
                             </div>
@@ -423,9 +209,8 @@
                                 <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
 
                                 <div class="search-actions text-center">
-                                    <span class="blue bolder bigger-150">12/02/20</span>
-
-                                    16:00
+                                    <div class="blue bolder bigger-150">12/02/20</div>
+                                    <div class="blue bigger-150">16:00</div>
                                     <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
                                 </div>
                             </div>
@@ -453,8 +238,9 @@
                                 </p>
 
                                 <div class="search-actions text-center">
-                                    <div class="blue bigger-150">12/02/20</div>
+                                    <div class="blue bolder bigger-150">12/02/20</div>
                                     <div class="blue bigger-150">16:00</div>
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
                                 </div>
                             </div>
                         </div>
@@ -478,8 +264,9 @@
                                 </p>
 
                                 <div class="search-actions text-center">
-                                    <div class="blue bigger-150">12/02/20</div>
+                                    <div class="blue bolder bigger-150">12/02/20</div>
                                     <div class="blue bigger-150">16:00</div>
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
                                 </div>
                             </div>
                         </div>
@@ -503,8 +290,9 @@
                                 </p>
 
                                 <div class="search-actions text-center">
-                                    <div class="blue bigger-150">12/02/20</div>
+                                    <div class="blue bolder bigger-150">12/02/20</div>
                                     <div class="blue bigger-150">16:00</div>
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
                                 </div>
                             </div>
                         </div>

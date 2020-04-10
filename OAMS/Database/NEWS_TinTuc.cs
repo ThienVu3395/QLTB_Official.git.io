@@ -26,11 +26,12 @@ namespace OAMS.Database
         public string NoiDung { get; set; }
         public string MoTa { get; set; }
         public Nullable<int> MaLoaiTin { get; set; }
-        public string TacGia { get; set; }
+        public Nullable<int> NguoiTao { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
-        public string NguoiCapNhat { get; set; }
+        public Nullable<int> NguoiCapNhat { get; set; }
         public Nullable<bool> HienThi { get; set; }
+        public Nullable<int> LuotXem { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
         public string HinhAnh { get; set; }
         public Nullable<System.DateTime> NgayHetHan { get; set; }
@@ -40,6 +41,8 @@ namespace OAMS.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
         public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }
+        public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }
+        public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
     }

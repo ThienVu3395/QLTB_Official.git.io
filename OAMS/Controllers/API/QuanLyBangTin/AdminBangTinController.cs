@@ -34,10 +34,8 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.MoTa = item.MoTa;
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
-                    tin.TacGia = item.TacGia;
                     tin.NgayTao = item.NgayTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
-                    tin.NguoiCapNhat = item.NguoiCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
                     tin.TinNoiBat = item.TinNoiBat;
@@ -106,10 +104,8 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 tin.NoiDung = tinTuc.NoiDung;
                 tin.MoTa = tinTuc.MoTa;
                 tin.MaLoaiTin = tinTuc.MaLoaiTin;
-                tin.TacGia = tinTuc.TacGia;
                 tin.NgayTao = tinTuc.NgayTao;
                 tin.NgayCapNhat = tinTuc.NgayCapNhat;
-                tin.NguoiCapNhat = tinTuc.NguoiCapNhat;
                 tin.HienThi = tinTuc.HienThi;
                 tin.HinhAnh = tinTuc.HinhAnh;
                 tin.TinNoiBat = tinTuc.TinNoiBat;

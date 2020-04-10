@@ -18,6 +18,58 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
     {
         dbOAMSEntities dbContext = new dbOAMSEntities();
         [HttpGet]
+        [Route("LayTinNoiBat")]
+        public IHttpActionResult LayTinNoiBat()
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true).ToList().OrderByDescending(x => x.NgayTao).Take(4).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
+                    tin.LuotXem = item.LuotXem;
+                    tin.HinhAnh = item.HinhAnh;
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel);
+            }
+            return Ok(dsTinModel);
+        }
+
+        [HttpGet]
+        [Route("LayTinXemNhieu")]
+        public IHttpActionResult LayTinXemNhieu()
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true).ToList().OrderByDescending(x => x.LuotXem).Take(5).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
+                    tin.LuotXem = item.LuotXem;
+                    tin.HinhAnh = item.HinhAnh;
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel);
+            }
+            return Ok(dsTinModel);
+        }
+
+        [HttpGet]
         [Route("LayDanhSachLoaiTin")]
         public IHttpActionResult LayDanhSachLoaiTin()
         {
@@ -82,10 +134,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.MoTa = item.MoTa;
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
-                    tin.TacGia = item.TacGia;
                     tin.NgayTao = item.NgayTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
-                    tin.NguoiCapNhat = item.NguoiCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
                     tin.TinNoiBat = item.TinNoiBat;
@@ -123,7 +173,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.MaTinTuc = dsTin.MaTinTuc;
                 tinTuc.NoiDung = dsTin.NoiDung;
                 tinTuc.TieuDe = dsTin.TieuDe;
-                tinTuc.TacGia = dsTin.TacGia;
                 tinTuc.HinhAnh = dsTin.HinhAnh;
                 var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
                 List<TapTinModel> dsttmodel = new List<TapTinModel>();
@@ -151,10 +200,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         tin.NoiDung = item.NoiDung;
                         tin.MoTa = item.MoTa;
                         tin.MaLoaiTin = item.MaLoaiTin;
-                        tin.TacGia = item.TacGia;
                         tin.NgayTao = item.NgayTao;
                         tin.NgayCapNhat = item.NgayCapNhat;
-                        tin.NguoiCapNhat = item.NguoiCapNhat;
                         tin.HienThi = item.HienThi;
                         tin.HinhAnh = item.HinhAnh;
                         tin.TinNoiBat = item.TinNoiBat;
@@ -184,10 +231,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.NoiDung = item.NoiDung;
                     tin.MoTa = item.MoTa;
                     tin.MaLoaiTin = item.MaLoaiTin;
-                    tin.TacGia = item.TacGia;
                     tin.NgayTao = item.NgayTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
-                    tin.NguoiCapNhat = item.NguoiCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
                     tin.TinNoiBat = item.TinNoiBat;
@@ -215,10 +260,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.NoiDung = item.NoiDung;
                     tin.MoTa = item.MoTa;
                     tin.MaLoaiTin = item.MaLoaiTin;
-                    tin.TacGia = item.TacGia;
                     tin.NgayTao = item.NgayTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
-                    tin.NguoiCapNhat = item.NguoiCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
                     tin.TinNoiBat = item.TinNoiBat;
@@ -447,7 +490,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             tin.NoiDung = tinTuc.NoiDung;
             tin.MoTa = tinTuc.MoTa;
             tin.MaLoaiTin = tinTuc.MaLoaiTin;
-            tin.TacGia = "ThienVu.Lh";
             tin.HienThi = true;
             tin.TinNoiBat = tinTuc.TinNoiBat;
             tin.HienThi = tinTuc.HienThi == true ? true : false;

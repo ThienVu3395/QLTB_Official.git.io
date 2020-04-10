@@ -295,6 +295,9 @@
     <Compile Include="Database\NEWS_NguoiSuDung.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\NEWS_PhongBan.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\NEWS_TinTuc.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>
@@ -573,7 +576,6 @@
     <Content Include="MyScript\app.js" />
     <Content Include="MyScript\bangtin\BangTinCtrl.js" />
     <Content Include="MyScript\bangtin\QuanLyCtrl.js" />
-    <Content Include="MyScript\bangtin\testBT.js" />
     <Content Include="MyScript\bnle\bnleformeditCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridfCtrl.js" />

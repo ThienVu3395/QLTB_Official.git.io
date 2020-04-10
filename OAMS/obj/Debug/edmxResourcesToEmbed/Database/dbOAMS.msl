@@ -385,6 +385,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_PhongBan">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_PhongBan">
+        <MappingFragment StoreEntitySet="NEWS_PhongBan">
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="NEWS_TinTuc">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
         <MappingFragment StoreEntitySet="NEWS_TinTuc">
@@ -393,11 +401,12 @@
           <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
           <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
           <ScalarProperty Name="TinNoiBat" ColumnName="TinNoiBat" />
+          <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
           <ScalarProperty Name="HienThi" ColumnName="HienThi" />
           <ScalarProperty Name="NguoiCapNhat" ColumnName="NguoiCapNhat" />
           <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
           <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-          <ScalarProperty Name="TacGia" ColumnName="TacGia" />
+          <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
           <ScalarProperty Name="MaLoaiTin" ColumnName="MaLoaiTin" />
           <ScalarProperty Name="MoTa" ColumnName="MoTa" />
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />

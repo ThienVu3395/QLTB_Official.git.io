@@ -18,6 +18,8 @@ namespace OAMS.Database
         public NEWS_NguoiSuDung()
         {
             this.NEWS_BinhLuan = new HashSet<NEWS_BinhLuan>();
+            this.NEWS_TinTuc = new HashSet<NEWS_TinTuc>();
+            this.NEWS_TinTuc1 = new HashSet<NEWS_TinTuc>();
         }
     
         public int MaNguoiDung { get; set; }
@@ -34,5 +36,10 @@ namespace OAMS.Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
+        public virtual NEWS_PhongBan NEWS_PhongBan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc1 { get; set; }
     }
 }
