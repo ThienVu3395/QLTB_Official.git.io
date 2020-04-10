@@ -8,8 +8,15 @@
     <link href="~/Content/assetsmes/owl-carousel/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/Content/assetsmes/owl-carousel/owl.theme.default.min.css" rel="stylesheet" />
     <style>
-        .label{
-            margin-bottom:5px
+        .label {
+            margin-bottom: 5px
+        }
+        h3 {
+            font-size: 15px;
+        }
+        .row{
+            margin-left:0px;
+            margin-right:0px
         }
     </style>
 }
@@ -72,7 +79,7 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12" style="margin-bottom:20px">
+                    @*<div class="col-lg-12" style="margin-bottom:20px">
                         <div class="owl-carousel owl-theme">
                             <div class="item text-danger bigger-110">
                                 <i class="ace-icon fa fa-exclamation-triangle"></i>
@@ -89,36 +96,179 @@
                                 Unordered List Item # 5
                             </div>
                         </div>
-                    </div>
+                    </div>*@
 
-                    <div class="col-lg-6" ng-repeat="item in DanhSachTinNoiBat">
+                    <div class="col-lg-3">
                         <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
-
-                            <img class="media-object w-100" src="{{item.HinhAnh}}" height="100"/>
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat1.LoaiTin}}</span>
+                            <img class="media-object" src="{{NoiBat1.HinhAnh}}" style="height:200px"/>
                             <div class="caption">
                                 <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
-
+                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat1.NgayTao)}}</span>
                                     <div class="pull-left bigger-110">
-                                        <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                        <i class="ace-icon fa fa-eye orange2"></i> {{NoiBat1.LuotXem}}
                                     </div>
                                 </div>
 
                                 <h3 class="search-title">
-                                    <a href="#" class="blue">{{item.TieuDe | limitTo: 40 }}{{item.TieuDe.length > 40 ? '...' : ''}}</a>
+                                    <a href="#" class="blue">{{NoiBat1.TieuDe | limitTo: 30 }}{{NoiBat1.TieuDe.length > 30 ? '...' : ''}}</a>
                                 </h3>
-                                <p>{{item.MoTa| limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
+                                <p>{{NoiBat1.MoTa| limitTo: 100 }}{{NoiBat1.MoTa.length > 100 ? '...' : ''}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat2.LoaiTin}}</span>
+                            <img class="media-object" src="{{NoiBat2.HinhAnh}}" />
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat2.NgayTao)}}</span>
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-eye orange2"></i> {{NoiBat2.LuotXem}}
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">{{NoiBat2.TieuDe | limitTo: 30 }}{{NoiBat2.TieuDe.length > 30 ? '...' : ''}}</a>
+                                </h3>
+                                <p>{{NoiBat2.MoTa| limitTo: 100 }}{{NoiBat2.MoTa.length > 100 ? '...' : ''}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="thumbnail search-thumbnail">
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat3.LoaiTin}}</span>
+                            <img class="media-object" src="{{NoiBat3.HinhAnh}}" style="height:200px"/>
+                            <div class="caption">
+                                <div class="clearfix">
+                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat3.NgayTao)}}</span>
+                                    <div class="pull-left bigger-110">
+                                        <i class="ace-icon fa fa-eye orange2"></i> {{NoiBat3.LuotXem}}
+                                    </div>
+                                </div>
+
+                                <h3 class="search-title">
+                                    <a href="#" class="blue">{{NoiBat3.TieuDe | limitTo: 30 }}{{NoiBat3.TieuDe.length > 30 ? '...' : ''}}</a>
+                                </h3>
+                                <p>{{NoiBat3.MoTa| limitTo: 100 }}{{NoiBat3.MoTa.length > 100 ? '...' : ''}}</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <span class="label label-danger label-lg arrowed-in">Tin Xem Nhiều</span>
-                        <div class="owl-carousel owl-theme">
-                            <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">dsadad</span>
-                                <img class="media-object" data-src="holder.js/100px200?theme=gray" />
+                        <div class="row">
+                            <div class="thumbnail search-thumbnail item col-lg-4" ng-repeat="item in DanhSachTinXemNhieu">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
+                                <img class="media-object" src="{{item.HinhAnh}}" style="width:100%;height:235px" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 50 }}{{item.TieuDe.length > 50 ? '...' : ''}}</a>
+                                    </h3>
+                                    <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <span class="label label-danger label-lg arrowed-in">Thông Báo</span>
+                        <div class="media search-media" ng-repeat="item in DanhSachThongBao">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="{{item.HinhAnh}}" height="72" width="72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}</a>
+                                    </h4>
+                                </div>
+                                <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
+
+                                <div class="search-actions text-center">
+                                    <div class="blue bolder bigger-150">{{ReturnDDMMYY(item.NgayTao)}}</div>
+                                    <div class="blue bigger-150">{{ReturnHMM(item.NgayTao)}}</div>
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <span class="label label-danger label-lg arrowed-in">Sự Kiện</span>
+                        <div class="media search-media" ng-repeat="item in DanhSachSuKien">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <h4 class="media-heading">
+                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}</a>
+                                    </h4>
+                                </div>
+                                <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
+
+                                <div class="search-actions text-center">
+                                    <div class="blue bolder bigger-150">{{ReturnDDMMYY(item.NgayTao)}}</div>
+                                    <div class="blue bigger-150">{{ReturnHMM(item.NgayTao)}}</div>
+                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:20px">
+                    <div class="col-lg-12">
+                        <span class="label label-danger label-lg arrowed-in">Bảng Tin Sawaco</span>
+                        <div class="row">
+                            <div class="thumbnail search-thumbnail col-lg-6">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+                                <img class="media-object" src="https://www.designbold.com/academy/wp-content/uploads/2018/06/Trial-Logo-4.png" style="height:200px;width:100%" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">London</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
+
+                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">Thumbnail label</a>
+                                    </h3>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail col-lg-6">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+                                <img class="media-object" src="https://www.designbold.com/academy/wp-content/uploads/2018/06/Trial-Logo-4.png" style="height:200px;width:100%" />
                                 <div class="caption">
                                     <div class="clearfix">
                                         <span class="pull-right label label-grey info-label">London</span>
@@ -143,366 +293,73 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-6">
-                        <span class="label label-danger label-lg arrowed-in">Thông Báo</span>
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" data-src="holder.js/72x72" />
-                                </a>
-                            </div>
+                        <div class="row">
+                            <div class="thumbnail search-thumbnail col-lg-3" ng-repeat="item in DanhSachSawaco">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
+                                <img class="media-object w-100" src="{{item.HinhAnh}}" style="height:200px" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
 
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Media heading</a>
-                                    </h4>
-                                </div>
-                                <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
-
-                                <div class="search-actions text-center">
-                                    <div class="blue bolder bigger-150">12/02/20</div>
-                                    <div class="blue bigger-150">16:00</div>
-                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" data-src="holder.js/72x72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Media heading</a>
-                                    </h4>
-                                </div>
-                                <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
-
-                                <div class="search-actions text-center">
-                                    <div class="blue bolder bigger-150">12/02/20</div>
-                                    <div class="blue bigger-150">16:00</div>
-                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" data-src="holder.js/72x72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Media heading</a>
-                                    </h4>
-                                </div>
-                                <p>Cras sit amet nibh libero, in gravida nulla.vestibulum in vulputate at, tempus viverra turpis ...</p>
-
-                                <div class="search-actions text-center">
-                                    <div class="blue bolder bigger-150">12/02/20</div>
-                                    <div class="blue bigger-150">16:00</div>
-                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <span class="label label-danger label-lg arrowed-in">Sự Kiện</span>
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Họp báo cáo tiến độ</a>
-                                    </h4>
-                                </div>
-                                <p>
-                                    up lich kiểm tra
-                                    Họp báo cáo tiến độ
-                                </p>
-
-                                <div class="search-actions text-center">
-                                    <div class="blue bolder bigger-150">12/02/20</div>
-                                    <div class="blue bigger-150">16:00</div>
-                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Họp báo cáo tiến độ</a>
-                                    </h4>
-                                </div>
-                                <p>
-                                    up lich kiểm tra
-                                    Họp báo cáo tiến độ
-                                </p>
-
-                                <div class="search-actions text-center">
-                                    <div class="blue bolder bigger-150">12/02/20</div>
-                                    <div class="blue bigger-150">16:00</div>
-                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Họp báo cáo tiến độ</a>
-                                    </h4>
-                                </div>
-                                <p>
-                                    up lich kiểm tra
-                                    Họp báo cáo tiến độ
-                                </p>
-
-                                <div class="search-actions text-center">
-                                    <div class="blue bolder bigger-150">12/02/20</div>
-                                    <div class="blue bigger-150">16:00</div>
-                                    <a class="search-btn-action btn btn-sm btn-block btn-info">Xem</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="margin-top:20px">                  
-                    <div class="col-lg-6">
-                        <span class="label label-danger label-lg arrowed-in">Bảng Tin Sawaco</span>
-                        <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                            <div class="caption">
-                                <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">London</span>
-
-                                    <div class="pull-left bigger-110">
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                        </div>
                                     </div>
+
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
+                                    </h3>
+                                    <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                                 </div>
-
-                                <h3 class="search-title">
-                                    <a href="#" class="blue">Thumbnail label</a>
-                                </h3>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                            </div>
-                        </div>
-
-                        <hr />
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" data-src="holder.js/72x72" />
-                                </a>
                             </div>
 
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Media heading</a>
-                                    </h4>
-                                </div>
+                            <div class="thumbnail search-thumbnail col-lg-3" ng-repeat="item in DanhSachSawaco">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
+                                <img class="media-object w-100" src="{{item.HinhAnh}}" style="height:200px" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
 
-                                <div class="search-actions text-center">
-                                    <span class="blue bolder bigger-150">300</span>
-                                    <div class="action-buttons bigger-125">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-phone green"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-heart red"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-                                        </a>
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <hr />
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" data-src="holder.js/72x72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Media heading</a>
-                                    </h4>
-                                </div>
-
-                                <div class="search-actions text-center">
-                                    <span class="blue bolder bigger-150">300</span>
-                                    <div class="action-buttons bigger-125">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-phone green"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-heart red"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-                                        </a>
-                                    </div>
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
+                                    </h3>
+                                    <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <span class="label label-danger label-lg arrowed-in">Sinh Nhật Trong Tháng</span>
-                        <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
+                        <div class="row">
+                            <div class="thumbnail search-thumbnail col-lg-2" ng-repeat="item in DanhSachUser">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.PhongBan}}</span>
 
-                            <img class="media-object" data-src="holder.js/100px200?theme=gray" />
-                            <div class="caption">
-                                <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">London</span>
-
-                                    <div class="pull-left bigger-110">
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star orange2"></i>
-
-                                        <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                        <i class="ace-icon fa fa-star light-grey"></i>
+                                <img class="media-object w-100" src="{{item.HinhAnh}}" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-calendar orange2"></i>
+                                            <i class="ace-icon fa fa-calendar orange2"></i>
+                                            <i class="ace-icon fa fa-calendar orange2"></i> {{item.NgaySinh + '/' + item.ThangSinh + '/' + item.NamSinh}}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <h3 class="search-title">
-                                    <a href="#" class="blue">Thumbnail label</a>
-                                </h3>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                            </div>
-                        </div>
-
-                        <hr />
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" data-src="holder.js/72x72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Media heading</a>
-                                    </h4>
-                                </div>
-
-                                <div class="search-actions text-center">
-                                    <span class="blue bolder bigger-150">300</span>
-                                    <div class="action-buttons bigger-125">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-phone green"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-heart red"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr />
-
-                        <div class="media search-media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" data-src="holder.js/72x72" />
-                                </a>
-                            </div>
-
-                            <div class="media-body">
-                                <div>
-                                    <h4 class="media-heading">
-                                        <a href="#" class="blue">Media heading</a>
-                                    </h4>
-                                </div>
-
-                                <div class="search-actions text-center">
-                                    <span class="blue bolder bigger-150">300</span>
-                                    <div class="action-buttons bigger-125">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-phone green"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-heart red"></i>
-                                        </a>
-
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-                                        </a>
-                                    </div>
+                                    <h3 class="search-title">
+                                        <a href="#" class="blue">{{item.Ten}}</a>
+                                    </h3>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-12" style="margin-top:12px">
+                    <div class="col-lg-12">
                         <span class="label label-danger label-lg arrowed-in">Videos Nổi Bật</span>
                         <div class="owl-carousel owl-theme">
                             <div class="thumbnail search-thumbnail item">

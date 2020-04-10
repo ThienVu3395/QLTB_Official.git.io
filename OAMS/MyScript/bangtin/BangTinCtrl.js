@@ -10,6 +10,10 @@
         $scope.InitUpdate = function () {
             $scope.LayTinNoiBat();
             $scope.LayTinXemNhieu();
+            $scope.LayTinThongBao();
+            $scope.LayTinSuKien();
+            $scope.LayTinSawaco();
+            $scope.LaySinhNhat();
         }
 
         // Lấy tin nổi bật
@@ -18,6 +22,9 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachTinNoiBat = response.data;
+                    $scope.NoiBat1 = $scope.DanhSachTinNoiBat[0];
+                    $scope.NoiBat2 = $scope.DanhSachTinNoiBat[1];
+                    $scope.NoiBat3 = $scope.DanhSachTinNoiBat[2];
                 },
 
                 function errorCallback(response) {
@@ -32,7 +39,6 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachTinXemNhieu = response.data;
-                    console.log($scope.DanhSachTinXemNhieu);
                 },
 
                 function errorCallback(response) {
@@ -40,6 +46,79 @@
                 }
             )
         }
+
+        // Lấy tin thông báo
+        $scope.LayTinThongBao = function () {
+            var res = CommonController.getData(CommonController.urlAPI.API_LayTinThongBao, "");
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachThongBao = response.data;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Lấy tin sự kiện
+        $scope.LayTinSuKien = function () {
+            var res = CommonController.getData(CommonController.urlAPI.API_LayTinSuKien, "");
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachSuKien = response.data;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Lấy tin Sawaco
+        $scope.LayTinSawaco = function () {
+            var res = CommonController.getData(CommonController.urlAPI.API_LayTinSawaco, "");
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachSawaco = response.data;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Lấy User theo sinh nhật
+        $scope.LaySinhNhat = function () {
+            let param = "?Month=" + 4;
+            var res = CommonController.getData(CommonController.urlAPI.API_LaySinhNhat, param);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSachUser = response.data;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+        }
+
+        // Hiển Thị dd/mm/yy
+        $scope.ReturnDDMMYY = function (date) {
+            return moment(date).format("DD/MM/YY");
+        }
+
+        // Hiển Thị hh
+        $scope.ReturnHMM = function (date) {
+            return moment(date).format("h:mm a")
+        }
+
+        // Hiển Thị Ngày Giờ
+        $scope.ReturnFullDateTime = function (date) {
+            return moment(date).format("DD/MM/YYYY , h:mm:ss a");
+        }
+
 
         $scope.Init = function () {
             $scope.DanhSachLoaiTin = []
@@ -95,33 +174,6 @@
                     console.log(response.data.message)
                 }
             )
-        }
-
-        // Lấy User theo sinh nhật
-        $scope.LaySinhNhat = function (month) {
-            document.getElementById("sn" + $scope.month).className = "btn btn-app btn-danger btn-xs";
-            let param = "?Month=" + month;
-            var res = CommonController.getData(CommonController.urlAPI.API_LaySinhNhat, param);
-            res.then(
-                function succ(response) {
-                    $scope.DanhSachUser = response.data;
-                    $scope.sinhNhat = true;
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message)
-                }
-            )
-        }
-
-        // Hiển Thị Ngày Giờ
-        $scope.ReturnFullDateTime = function (date) {
-            return moment(date).format("DD/MM/YYYY , h:mm:ss a");
-        }
-
-        // Hiển Thị Ngày
-        $scope.ReturnDate = function (date) {
-            return moment(date).format("DD/MM/YYYY");
         }
 
         // Lấy Chi Tiết Bài Viết

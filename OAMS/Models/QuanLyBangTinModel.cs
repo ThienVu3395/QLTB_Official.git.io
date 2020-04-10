@@ -45,27 +45,26 @@ namespace OAMS.Models
         public List<TinTucModel> TinCuHon { get; set; }
     }
 
-    public class TapTinModel
-    {
-        public int MaTapTin { get; set; }
-        public string Ten { get; set; }
-        public string Url { get; set; }
-    }
-
     public class NguoiDungModel
     {
         public int MaNguoiDung { get; set; }
         public string Ten { get; set; }
         public int MaPhongBan { get; set; }
+        public string PhongBan { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string ChucVu { get; set; }
         public Nullable<int> NgaySinh { get; set; }
         public Nullable<int> ThangSinh { get; set; }
         public Nullable<int> NamSinh { get; set; }
-        public Nullable<System.DateTime> SinhNhat { get; set; }
         public string HinhAnh { get; set; }
-        public int CountTin { get; set; }
+    }
+
+    public class TapTinModel
+    {
+        public int MaTapTin { get; set; }
+        public string Ten { get; set; }
+        public string Url { get; set; }
     }
 
     public class BinhLuanModel

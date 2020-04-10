@@ -21,7 +21,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         [Route("LayTinNoiBat")]
         public IHttpActionResult LayTinNoiBat()
         {
-            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true).ToList().OrderByDescending(x => x.NgayTao).Take(4).ToList();
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true).ToList().OrderByDescending(x => x.NgayTao).Take(3).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
             if (dsTin.Count > 0)
             {
@@ -32,6 +32,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.TieuDe = item.TieuDe;
                     tin.NoiDung = item.NoiDung;
                     tin.MoTa = item.MoTa;
+                    tin.NgayTao = item.NgayTao;
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.LuotXem = item.LuotXem;
@@ -47,7 +48,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         [Route("LayTinXemNhieu")]
         public IHttpActionResult LayTinXemNhieu()
         {
-            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true).ToList().OrderByDescending(x => x.LuotXem).Take(5).ToList();
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true).ToList().OrderByDescending(x => x.LuotXem).Take(3).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
             if (dsTin.Count > 0)
             {
@@ -58,6 +59,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.TieuDe = item.TieuDe;
                     tin.NoiDung = item.NoiDung;
                     tin.MoTa = item.MoTa;
+                    tin.NgayTao = item.NgayTao;
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.LuotXem = item.LuotXem;
@@ -67,6 +69,112 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 return Ok(dsTinModel);
             }
             return Ok(dsTinModel);
+        }
+
+        [HttpGet]
+        [Route("LayTinThongBao")]
+        public IHttpActionResult LayTinThongBao()
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true && x.MaLoaiTin == 2).ToList().OrderByDescending(x => x.LuotXem).Take(3).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.NgayTao = item.NgayTao;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
+                    tin.LuotXem = item.LuotXem;
+                    tin.HinhAnh = item.HinhAnh;
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel);
+            }
+            return Ok(dsTinModel);
+        }
+
+        [HttpGet]
+        [Route("LayTinSuKien")]
+        public IHttpActionResult LayTinSuKien()
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true && x.MaLoaiTin == 4).ToList().OrderByDescending(x => x.LuotXem).Take(3).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.NgayTao = item.NgayTao;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
+                    tin.LuotXem = item.LuotXem;
+                    tin.HinhAnh = item.HinhAnh;
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel);
+            }
+            return Ok(dsTinModel);
+        }
+
+        [HttpGet]
+        [Route("LayTinSawaco")]
+        public IHttpActionResult LayTinSawaco()
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == true && x.MaLoaiTin == 1).ToList().OrderByDescending(x => x.LuotXem).Take(2).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.MaTinTuc;
+                    tin.TieuDe = item.TieuDe;
+                    tin.NoiDung = item.NoiDung;
+                    tin.MoTa = item.MoTa;
+                    tin.NgayTao = item.NgayTao;
+                    tin.MaLoaiTin = item.MaLoaiTin;
+                    tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
+                    tin.LuotXem = item.LuotXem;
+                    tin.HinhAnh = item.HinhAnh;
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel);
+            }
+            return Ok(dsTinModel);
+        }
+
+        [HttpGet]
+        [Route("LaySinhNhat")]
+        public IHttpActionResult LaySinhNhat(int Month)
+        {
+            var dsUser = dbContext.NEWS_NguoiSuDung.Where(x => x.ThangSinh == Month).ToList();
+            List<NguoiDungModel> dsUserModel = new List<NguoiDungModel>();
+            if (dsUser.Count > 0)
+            {
+                foreach (var item in dsUser)
+                {
+                    NguoiDungModel user = new NguoiDungModel();
+                    user.MaNguoiDung = item.MaNguoiDung;
+                    user.Ten = item.Ten;
+                    user.PhongBan = item.NEWS_PhongBan.Ten;
+                    user.NgaySinh = item.NgaySinh;
+                    user.ThangSinh = item.ThangSinh;
+                    user.NamSinh = item.NamSinh;
+                    user.HinhAnh = item.HinhAnh;
+                    dsUserModel.Add(user);
+                }
+                return Ok(dsUserModel);
+            }
+            return Ok(dsUserModel);
         }
 
         [HttpGet]
@@ -90,31 +198,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 }
             }
             return Ok(dsLoaiModel);
-        }
-
-        [HttpGet]
-        [Route("LaySinhNhat")]
-        public IHttpActionResult LaySinhNhat(int Month)
-        {
-            var dsUser = dbContext.NEWS_NguoiSuDung.Where(x => x.ThangSinh == Month).ToList();
-            List<NguoiDungModel> dsUserModel = new List<NguoiDungModel>();
-            if (dsUser.Count > 0)
-            {
-                foreach (var item in dsUser)
-                {
-                    NguoiDungModel user = new NguoiDungModel();
-                    user.MaNguoiDung = item.MaNguoiDung;
-                    user.Ten = item.Ten;
-                    user.NgaySinh = item.NgaySinh;
-                    user.ThangSinh = item.ThangSinh;
-                    user.NamSinh = item.NamSinh;
-                    user.HinhAnh = item.HinhAnh;
-                    user.CountTin = dsUser.Count();
-                    dsUserModel.Add(user);
-                }
-                return Ok(dsUserModel);
-            }
-            return Ok(dsUserModel);
         }
 
         [HttpGet]
