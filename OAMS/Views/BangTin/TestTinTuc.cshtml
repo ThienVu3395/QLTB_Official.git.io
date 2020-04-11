@@ -11,12 +11,14 @@
         .label {
             margin-bottom: 5px
         }
+
         h3 {
             font-size: 15px;
         }
-        .row{
-            margin-left:0px;
-            margin-right:0px
+
+        .row {
+            margin-left: 0px;
+            margin-right: 0px
         }
     </style>
 }
@@ -66,6 +68,44 @@
     </div>
 
     <div id="mescontent" class="page-content">
+        <div class="ace-settings-container" id="ace-settings-container">
+            <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+                <i class="ace-icon fa fa-calendar bigger-130"></i>
+            </div>
+
+            <div class="ace-settings-box clearfix" id="ace-settings-box">
+                <div class="row">
+                    <div class="thumbnail search-thumbnail col-lg-12">
+                        <span class="search-promotion label label-success arrowed-in arrowed-in-right">Phòng CNTT</span>
+                        <img class="media-object" data-src="holder.js/100px200?theme=social" />
+                        <div class="caption">
+                            <div class="clearfix">
+                                <span class="pull-right label label-grey info-label">03/03/1995</span>
+                            </div>
+
+                            <h3 class="search-title">
+                                <a href="#" class="blue">Lê Hoàng Thiên Vũ</a>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="thumbnail search-thumbnail col-lg-12">
+                        <span class="search-promotion label label-success arrowed-in arrowed-in-right">Phòng CNTT</span>
+                        <img class="media-object" data-src="holder.js/100px200?theme=social" />
+                        <div class="caption">
+                            <div class="clearfix">
+                                <span class="pull-right label label-grey info-label">03/03/1995</span>
+                            </div>
+
+                            <h3 class="search-title">
+                                <a href="#" class="blue">Lê Hoàng Thiên Vũ</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row" style="overflow-y: auto;height: calc(100% - 25px);">
             <div class="page-header">
                 <h1>
@@ -80,28 +120,28 @@
             <div class="container">
                 <div class="row">
                     @*<div class="col-lg-12" style="margin-bottom:20px">
-                        <div class="owl-carousel owl-theme">
-                            <div class="item text-danger bigger-110">
-                                <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                Unordered List Item # 5
-                            </div>
+                            <div class="owl-carousel owl-theme">
+                                <div class="item text-danger bigger-110">
+                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                    Unordered List Item # 5
+                                </div>
 
-                            <div class="item text-danger bigger-110">
-                                <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                Unordered List Item # 5
-                            </div>
+                                <div class="item text-danger bigger-110">
+                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                    Unordered List Item # 5
+                                </div>
 
-                            <div class="item text-danger bigger-110">
-                                <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                Unordered List Item # 5
+                                <div class="item text-danger bigger-110">
+                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                    Unordered List Item # 5
+                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
 
                     <div class="col-lg-3">
                         <div class="thumbnail search-thumbnail">
                             <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat1.LoaiTin}}</span>
-                            <img class="media-object" src="{{NoiBat1.HinhAnh}}" style="height:200px"/>
+                            <img class="media-object" src="{{NoiBat1.HinhAnh}}" style="height:200px" />
                             <div class="caption">
                                 <div class="clearfix">
                                     <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat1.NgayTao)}}</span>
@@ -141,7 +181,7 @@
                     <div class="col-lg-3">
                         <div class="thumbnail search-thumbnail">
                             <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat3.LoaiTin}}</span>
-                            <img class="media-object" src="{{NoiBat3.HinhAnh}}" style="height:200px"/>
+                            <img class="media-object" src="{{NoiBat3.HinhAnh}}" style="height:200px" />
                             <div class="caption">
                                 <div class="clearfix">
                                     <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat3.NgayTao)}}</span>
@@ -159,7 +199,7 @@
                     </div>
 
                     <div class="col-lg-12">
-                        <span class="label label-danger label-lg arrowed-in">Tin Xem Nhiều</span>
+                        <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Tin Xem Nhiều</a></span>
                         <div class="row">
                             <div class="thumbnail search-thumbnail item col-lg-4" ng-repeat="item in DanhSachTinXemNhieu">
                                 <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
@@ -174,7 +214,7 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 50 }}{{item.TieuDe.length > 50 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 50 }}{{item.TieuDe.length > 50 ? '...' : ''}}</a>
                                     </h3>
                                     <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                                 </div>
@@ -183,10 +223,10 @@
                     </div>
 
                     <div class="col-lg-6">
-                        <span class="label label-danger label-lg arrowed-in">Thông Báo</span>
+                        <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Thông Báo</a></span>
                         <div class="media search-media" ng-repeat="item in DanhSachThongBao">
                             <div class="media-left">
-                                <a href="#">
+                                <a href="@Url.Action("ChiTietTin","BangTin")">
                                     <img class="media-object" src="{{item.HinhAnh}}" height="72" width="72" />
                                 </a>
                             </div>
@@ -194,7 +234,7 @@
                             <div class="media-body">
                                 <div>
                                     <h4 class="media-heading">
-                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}</a>
                                     </h4>
                                 </div>
                                 <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
@@ -209,10 +249,10 @@
                     </div>
 
                     <div class="col-lg-6">
-                        <span class="label label-danger label-lg arrowed-in">Sự Kiện</span>
+                        <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Sự Kiện</a></span>
                         <div class="media search-media" ng-repeat="item in DanhSachSuKien">
                             <div class="media-left">
-                                <a href="#">
+                                <a href="@Url.Action("ChiTietTin","BangTin")">
                                     <img class="media-object" src="https://fvm.ukim.edu.mk/vetnest-summerschool/wp-content/uploads/2018/11/calendars-icon.png" width="72" height="72" />
                                 </a>
                             </div>
@@ -220,7 +260,7 @@
                             <div class="media-body">
                                 <div>
                                     <h4 class="media-heading">
-                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}</a>
                                     </h4>
                                 </div>
                                 <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
@@ -237,7 +277,7 @@
 
                 <div class="row" style="margin-top:20px">
                     <div class="col-lg-12">
-                        <span class="label label-danger label-lg arrowed-in">Bảng Tin Sawaco</span>
+                        <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Bảng Tin Sawaco</a></span>
                         <div class="row">
                             <div class="thumbnail search-thumbnail col-lg-6">
                                 <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
@@ -260,7 +300,7 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">Thumbnail label</a>
                                     </h3>
                                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
                                 </div>
@@ -287,7 +327,7 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">Thumbnail label</a>
                                     </h3>
                                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
                                 </div>
@@ -308,7 +348,7 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
                                     </h3>
                                     <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                                 </div>
@@ -327,33 +367,9 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
                                     </h3>
                                     <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <span class="label label-danger label-lg arrowed-in">Sinh Nhật Trong Tháng</span>
-                        <div class="row">
-                            <div class="thumbnail search-thumbnail col-lg-2" ng-repeat="item in DanhSachUser">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.PhongBan}}</span>
-
-                                <img class="media-object w-100" src="{{item.HinhAnh}}" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-calendar orange2"></i>
-                                            <i class="ace-icon fa fa-calendar orange2"></i>
-                                            <i class="ace-icon fa fa-calendar orange2"></i> {{item.NgaySinh + '/' + item.ThangSinh + '/' + item.NamSinh}}
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="#" class="blue">{{item.Ten}}</a>
-                                    </h3>
                                 </div>
                             </div>
                         </div>

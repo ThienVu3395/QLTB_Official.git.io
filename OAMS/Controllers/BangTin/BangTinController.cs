@@ -28,5 +28,15 @@ namespace OAMS.Controllers.BangTin
         {
             return View();
         }
+
+        public ActionResult DanhMucTin()
+        {
+            return View();
+        }
+
+        public ActionResult ChiTietTin()
+        {
+            return View();
+        }
     }
 }
