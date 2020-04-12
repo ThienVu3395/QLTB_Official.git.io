@@ -457,21 +457,25 @@
 
                 // Danh sách các APIs
                 var urlAPI = {
-                    // Index mới
-                    API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",
-                    API_LayTinXemNhieu: "API/QuanLyBangTin/LayTinXemNhieu",
-                    API_LayTinThongBao: "API/QuanLyBangTin/LayTinThongBao",
-                    API_LayTinSuKien: "API/QuanLyBangTin/LayTinSuKien",
-                    API_LayTinSawaco: "API/QuanLyBangTin/LayTinSawaco",
-                    API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
-                    // Index
+                    // Index 00 
                     API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
                     API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
                     API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_TheoDanhMuc_PhanTrang",
                     API_LayDanhSachBaiVietCuHon: "API/QuanLyBangTin/LayDanhSachBaiVietCuHon",
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
 
-                    // Soạn Bài Viết
+                    // Index 001
+                    API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",
+                    API_LayTinXemNhieu: "API/QuanLyBangTin/LayTinXemNhieu",
+                    API_LayTinThongBao: "API/QuanLyBangTin/LayTinThongBao",
+                    API_LayTinSuKien: "API/QuanLyBangTin/LayTinSuKien",
+                    API_LayTinSawaco: "API/QuanLyBangTin/LayTinSawaco",
+                    API_LayTinTuong: "API/QuanLyBangTin/LayTinTuong",
+                    API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
+
+                    // Index 002
+
+                    // Thêm Bài Viết
                     API_UploadImage: "API/QuanLyBangTin/UploadImage",
                     API_UploadFile: "API/QuanLyBangTin/UploadFiles",
                     API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet",

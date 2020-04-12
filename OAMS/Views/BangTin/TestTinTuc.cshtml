@@ -7,6 +7,7 @@
 @section Css{
     <link href="~/Content/assetsmes/owl-carousel/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/Content/assetsmes/owl-carousel/owl.theme.default.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <style>
         .label {
             margin-bottom: 5px
@@ -25,6 +26,7 @@
 
 @section Scripts{
     <script src="~/Content/assetsmes/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/MyScript/bangtin/TrangChu01Ctrl.js"></script>
     <script>
         $('.owl-carousel').owlCarousel({
             loop: true,
@@ -47,7 +49,7 @@
     </script>
 }
 
-<div ng-controller="QlbtCrl" ng-init="InitUpdate()">
+<div ng-controller="TC01Ctrl" ng-init="Init()">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -69,41 +71,25 @@
 
     <div id="mescontent" class="page-content">
         <div class="ace-settings-container" id="ace-settings-container">
+            @*Sinh Nhật Trong Tháng*@
             <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
                 <i class="ace-icon fa fa-calendar bigger-130"></i>
             </div>
 
             <div class="ace-settings-box clearfix" id="ace-settings-box">
-                <div class="row">
-                    <div class="thumbnail search-thumbnail col-lg-12">
-                        <span class="search-promotion label label-success arrowed-in arrowed-in-right">Phòng CNTT</span>
-                        <img class="media-object" data-src="holder.js/100px200?theme=social" />
-                        <div class="caption">
-                            <div class="clearfix">
-                                <span class="pull-right label label-grey info-label">03/03/1995</span>
-                            </div>
+                <ul class="list-unstyled spaced2">
+                    <li ng-repeat="item in DanhSachUser" ng-show="DanhSachUser.length > 0">
+                        <i class="ace-icon fa fa-user green"></i>
+                        [{{item.PhongBan}}]{{' ' + item.Ten}} - {{item.NgaySinh + '/' + item.ThangSinh + '/' + item.NamSinh}}
+                    </li>
 
-                            <h3 class="search-title">
-                                <a href="#" class="blue">Lê Hoàng Thiên Vũ</a>
-                            </h3>
-                        </div>
-                    </div>
-
-                    <div class="thumbnail search-thumbnail col-lg-12">
-                        <span class="search-promotion label label-success arrowed-in arrowed-in-right">Phòng CNTT</span>
-                        <img class="media-object" data-src="holder.js/100px200?theme=social" />
-                        <div class="caption">
-                            <div class="clearfix">
-                                <span class="pull-right label label-grey info-label">03/03/1995</span>
-                            </div>
-
-                            <h3 class="search-title">
-                                <a href="#" class="blue">Lê Hoàng Thiên Vũ</a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
+                    <li ng-show="DanhSachUser.length == 0">
+                        <i class="ace-icon fa fa-circle red"></i>
+                         Không Có Sinh Nhật Trong Tháng Này
+                    </li>
+                </ul>
             </div>
+            @*/Sinh Nhật Trong Tháng*@
         </div>
 
         <div class="row" style="overflow-y: auto;height: calc(100% - 25px);">
@@ -119,52 +105,63 @@
 
             <div class="container">
                 <div class="row">
-                    @*<div class="col-lg-12" style="margin-bottom:20px">
-                            <div class="owl-carousel owl-theme">
-                                <div class="item text-danger bigger-110">
-                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                    Unordered List Item # 5
-                                </div>
-
-                                <div class="item text-danger bigger-110">
-                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                    Unordered List Item # 5
-                                </div>
-
-                                <div class="item text-danger bigger-110">
-                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                    Unordered List Item # 5
+                    @*Slide thông báo*@
+                    <div class="col-lg-12" style="margin-bottom:20px">
+                        <div class="owl-carousel owl-theme">
+                            <div class="item">
+                                <div class="text-danger bigger-110">
+                                    <i class="ace-icon fa fa-star"></i>
+                                    Thông Báo Bài Viết Mới
                                 </div>
                             </div>
-                        </div>*@
 
-                    <div class="col-lg-3">
+                            <div class="item">
+                                <div class="text-success bigger-110">
+                                    <i class="ace-icon fa fa-calendar"></i>
+                                    Hôm Nay Là Sinh Nhật Của Vũ
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="text-warning bigger-110">
+                                    <i class="ace-icon fa fa-star"></i>
+                                    Thông Báo Tin Tức Mới
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*/Slide thông báo*@
+
+                    @*Tin Nổi Bật*@
+                    <div class="col-lg-3 animated swing">
                         <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat1.LoaiTin}}</span>
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right"> <i class="ace-icon fa fa-user"></i> {{NoiBat1.TenNguoiDung}}</span>
                             <img class="media-object" src="{{NoiBat1.HinhAnh}}" style="height:200px" />
                             <div class="caption">
                                 <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat1.NgayTao)}}</span>
+                                    <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(NoiBat1.NgayTao)}}</span>
+                                    <span class="pull-right label label-info info-label">{{NoiBat1.LoaiTin}}</span>
                                     <div class="pull-left bigger-110">
                                         <i class="ace-icon fa fa-eye orange2"></i> {{NoiBat1.LuotXem}}
                                     </div>
                                 </div>
 
                                 <h3 class="search-title">
-                                    <a href="#" class="blue">{{NoiBat1.TieuDe | limitTo: 30 }}{{NoiBat1.TieuDe.length > 30 ? '...' : ''}}</a>
+                                    <a href="#" class="blue">{{NoiBat1.TieuDe | limitTo: 27 }}{{NoiBat1.TieuDe.length > 27 ? '...' : ''}}</a>
                                 </h3>
-                                <p>{{NoiBat1.MoTa| limitTo: 100 }}{{NoiBat1.MoTa.length > 100 ? '...' : ''}}</p>
+                                <p>{{NoiBat1.MoTa| limitTo: 50 }}{{NoiBat1.MoTa.length > 50 ? '...' : ''}}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 animated swing">
                         <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat2.LoaiTin}}</span>
-                            <img class="media-object" src="{{NoiBat2.HinhAnh}}" />
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right"> <i class="ace-icon fa fa-user"></i> {{NoiBat2.TenNguoiDung}}</span>
+                            <img class="media-object" src="{{NoiBat2.HinhAnh}}" style="height:200px;width:100%" />
                             <div class="caption">
                                 <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat2.NgayTao)}}</span>
+                                    <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(NoiBat2.NgayTao)}}</span>
+                                    <span class="pull-right label label-info info-label">{{NoiBat2.LoaiTin}}</span>
                                     <div class="pull-left bigger-110">
                                         <i class="ace-icon fa fa-eye orange2"></i> {{NoiBat2.LuotXem}}
                                     </div>
@@ -178,50 +175,55 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 animated swing">
                         <div class="thumbnail search-thumbnail">
-                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{NoiBat3.LoaiTin}}</span>
+                            <span class="search-promotion label label-success arrowed-in arrowed-in-right"> <i class="ace-icon fa fa-user"></i> {{NoiBat3.TenNguoiDung}}</span>
                             <img class="media-object" src="{{NoiBat3.HinhAnh}}" style="height:200px" />
                             <div class="caption">
                                 <div class="clearfix">
-                                    <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(NoiBat3.NgayTao)}}</span>
+                                    <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(NoiBat3.NgayTao)}}</span>
+                                    <span class="pull-right label label-info info-label">{{NoiBat3.LoaiTin}}</span>
                                     <div class="pull-left bigger-110">
                                         <i class="ace-icon fa fa-eye orange2"></i> {{NoiBat3.LuotXem}}
                                     </div>
                                 </div>
 
                                 <h3 class="search-title">
-                                    <a href="#" class="blue">{{NoiBat3.TieuDe | limitTo: 30 }}{{NoiBat3.TieuDe.length > 30 ? '...' : ''}}</a>
+                                    <a href="#" class="blue">{{NoiBat3.TieuDe | limitTo: 27 }}{{NoiBat3.TieuDe.length > 27 ? '...' : ''}}</a>
                                 </h3>
-                                <p>{{NoiBat3.MoTa| limitTo: 100 }}{{NoiBat3.MoTa.length > 100 ? '...' : ''}}</p>
+                                <p>{{NoiBat3.MoTa| limitTo: 50 }}{{NoiBat3.MoTa.length > 50 ? '...' : ''}}</p>
                             </div>
                         </div>
                     </div>
+                    @*/Tin Nổi Bật*@
 
+                    @*Tin xem nhiều*@
                     <div class="col-lg-12">
                         <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Tin Xem Nhiều</a></span>
                         <div class="row">
                             <div class="thumbnail search-thumbnail item col-lg-4" ng-repeat="item in DanhSachTinXemNhieu">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
                                 <img class="media-object" src="{{item.HinhAnh}}" style="width:100%;height:235px" />
                                 <div class="caption">
                                     <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
-
+                                        <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(item.NgayTao)}}</span>
+                                        <span class="pull-right label label-info info-label">{{item.LoaiTin}}</span>
                                         <div class="pull-left bigger-110">
                                             <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
                                         </div>
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 50 }}{{item.TieuDe.length > 50 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 35 }}{{item.TieuDe.length > 35 ? '...' : ''}}</a>
                                     </h3>
                                     <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @*/Tin xem nhiều*@
 
+                    @*Thông Báo*@
                     <div class="col-lg-6">
                         <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Thông Báo</a></span>
                         <div class="media search-media" ng-repeat="item in DanhSachThongBao">
@@ -247,7 +249,9 @@
                             </div>
                         </div>
                     </div>
+                    @*/Thông Báo*@
 
+                    @*Sự Kiện*@
                     <div class="col-lg-6">
                         <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Sự Kiện</a></span>
                         <div class="media search-media" ng-repeat="item in DanhSachSuKien">
@@ -273,93 +277,39 @@
                             </div>
                         </div>
                     </div>
+                    @*/Sự Kiện*@
                 </div>
 
                 <div class="row" style="margin-top:20px">
-                    <div class="col-lg-12">
+                    @*Bảng Tin Sawaco*@
+                    <div class="col-lg-6">
                         <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Bảng Tin Sawaco</a></span>
                         <div class="row">
-                            <div class="thumbnail search-thumbnail col-lg-6">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-                                <img class="media-object" src="https://www.designbold.com/academy/wp-content/uploads/2018/06/Trial-Logo-4.png" style="height:200px;width:100%" />
+                            <div class="thumbnail search-thumbnail col-lg-12">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{DanhSachSawaco.TenNguoiDung}}</span>
+                                <img class="media-object" src="{{DanhSachSawaco.HinhAnh}}" style="height:200px;width:100%" />
                                 <div class="caption">
                                     <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
+                                        <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(DanhSachSawaco.NgayTao)}}</span>
 
                                         <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                            <i class="ace-icon fa fa-eye orange2"></i> {{DanhSachSawaco.LuotXem}}
                                         </div>
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">Thumbnail label</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{DanhSachSawaco.TieuDe | limitTo: 25 }}{{DanhSachSawaco.TieuDe.length > 25 ? '...' : ''}}</a>
                                     </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                    <p>{{DanhSachSawaco.MoTa | limitTo: 80 }}{{DanhSachSawaco.MoTa.length > 80 ? '...' : ''}}</p>
                                 </div>
                             </div>
 
-                            <div class="thumbnail search-thumbnail col-lg-6">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-                                <img class="media-object" src="https://www.designbold.com/academy/wp-content/uploads/2018/06/Trial-Logo-4.png" style="height:200px;width:100%" />
+                            <div class="thumbnail search-thumbnail col-lg-6" ng-repeat="item in DanhSachSawaco.TinLienQuan">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
+                                <img class="media-object" src="{{item.HinhAnh}}" style="height:200px;width:100%" />
                                 <div class="caption">
                                     <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
-
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">Thumbnail label</a>
-                                    </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="thumbnail search-thumbnail col-lg-3" ng-repeat="item in DanhSachSawaco">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
-                                <img class="media-object w-100" src="{{item.HinhAnh}}" style="height:200px" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
-
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
-                                    </h3>
-                                    <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail search-thumbnail col-lg-3" ng-repeat="item in DanhSachSawaco">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.LoaiTin}}</span>
-                                <img class="media-object w-100" src="{{item.HinhAnh}}" style="height:200px" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
+                                        <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(item.NgayTao)}}</span>
 
                                         <div class="pull-left bigger-110">
                                             <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
@@ -374,13 +324,59 @@
                             </div>
                         </div>
                     </div>
+                    @*/Bảng Tin Sawaco*@
 
+                    @*Tường Công Ty*@
+                    <div class="col-lg-6">
+                        <span class="label label-danger label-lg arrowed-in"><a href="@Url.Action("DanhMucTin","BangTin")" class="white">Tường Công Ty</a></span>
+                        <div class="row">
+                            <div class="thumbnail search-thumbnail col-lg-12">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{DanhSachTuong.TenNguoiDung}}</span>
+                                <img class="media-object" src="{{DanhSachTuong.HinhAnh}}" style="height:200px;width:100%" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(DanhSachTuong.NgayTao)}}</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-eye orange2"></i> {{DanhSachTuong.LuotXem}}
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{DanhSachTuong.TieuDe | limitTo: 25 }}{{DanhSachTuong.TieuDe.length > 25 ? '...' : ''}}</a>
+                                    </h3>
+                                    <p>{{DanhSachTuong.MoTa | limitTo: 80 }}{{DanhSachTuong.MoTa.length > 80 ? '...' : ''}}</p>
+                                </div>
+                            </div>
+
+                            <div class="thumbnail search-thumbnail col-lg-6" ng-repeat="item in DanhSachTuong.TinLienQuan">
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
+                                <img class="media-object" src="{{item.HinhAnh}}" style="height:200px;width:100%" />
+                                <div class="caption">
+                                    <div class="clearfix">
+                                        <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(item.NgayTao)}}</span>
+
+                                        <div class="pull-left bigger-110">
+                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                        </div>
+                                    </div>
+
+                                    <h3 class="search-title">
+                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
+                                    </h3>
+                                    <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*/Tường Công Ty*@
+
+                    @*Video Nổi Bật*@
                     <div class="col-lg-12">
                         <span class="label label-danger label-lg arrowed-in">Videos Nổi Bật</span>
                         <div class="owl-carousel owl-theme">
                             <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> Lê Hoàng Fakse</span>
                                 <iframe width="100%"
                                         height="100%"
                                         src="https://www.youtube.com/embed/1-OEabwDQhE"
@@ -388,18 +384,10 @@
 
                                 <div class="caption">
                                     <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
+                                        <span class="pull-right label label-success info-label">12/02/2020</span>
 
                                         <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                            <i class="ace-icon fa fa-eye orange2"></i> 456
                                         </div>
                                     </div>
 
@@ -411,59 +399,17 @@
                             </div>
 
                             <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                                <iframe width="100%"
-                                        height="100%"
-                                        src="https://www.youtube.com/embed/1-OEabwDQhE"
-                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> Lê Hoàng Fakse</span><iframe width="100%"
+                                                                                                                                                                                height="100%"
+                                                                                                                                                                                src="https://www.youtube.com/embed/1-OEabwDQhE"
+                                                                                                                                                                                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                                 <div class="caption">
                                     <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
+                                        <span class="pull-right label label-success info-label">12/02/2020</span>
 
                                         <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
-                                    </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                                </div>
-                            </div>
-
-                            <div class="thumbnail search-thumbnail item">
-                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">Sponsored</span>
-
-                                <iframe width="100%"
-                                        height="100%"
-                                        src="https://www.youtube.com/embed/1-OEabwDQhE"
-                                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">London</span>
-
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                            <i class="ace-icon fa fa-eye orange2"></i> 656
                                         </div>
                                     </div>
 
@@ -475,6 +421,7 @@
                             </div>
                         </div>
                     </div>
+                    @*Video Nổi Bật*@
                 </div>
             </div>
         </div>

@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
 
+@section Scripts{
+    <script src="~/MyScript/bangtin/ThemBaiViet.js"></script>
+}
+
 <div>
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
@@ -35,6 +39,249 @@
             </h1>
         </div>
 
+        <h4 class="pink">
+            <a href="#modal-form" role="button" class="btn btn-info" data-toggle="modal"><i class="ace-icon fa fa-edit"></i></a>
+        </h4>
+        @*Modal thêm mới*@
+        <div id="modal-form" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="blue bigger">Thêm Mới Bài Viết</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form name="tinThem" novalidate>
+                            <div class="form-group">
+                                <label class="control-label no-padding-right" for="form-field-1-1"> Tiêu Đề <span class="text-danger">*</span> </label>
+                                <input type="text"
+                                       id="form-field-1-1"
+                                       placeholder="Nhập Tiêu Đề..."
+                                       ng-model="objThem.TieuDe"
+                                       name="TieuDe"
+                                       ng-minlength="10"
+                                       class="form-control"
+                                       ng-required=true />
+                                <div class="text-danger" ng-show="tinThem.TieuDe.$error.required">Bạn Chưa Nhập Tiêu Đề</div>
+                                <div class="text-danger" ng-show="tinThem.TieuDe.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
+
+                                <span class="help-inline">
+                                    <label class="middle">
+                                        <input class="ace" type="checkbox" id="id-disable-check" ng-model="objThem.TinNoiBat" />
+                                        <span class="lbl">
+                                            <span class="text-danger">
+                                                <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
+                                                   data-rel="tooltip" href="#" data-placement="bottom">
+                                                    Tin Quan Trọng
+                                                </a>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </span>
+
+                                <span class="help-inline">
+                                    <label class="middle">
+                                        <input class="ace" type="checkbox" ng-model="objThem.HienThi" />
+                                        <span class="lbl"> Duyệt Tin Này</span>
+                                    </label>
+                                </span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="form-field-11">Mô Tả Ngắn <span class="text-danger">*</span></label>
+                                    <textarea id="form-field-11"
+                                              ng-model="objThem.MoTa"
+                                              ng-minlength="10"
+                                              name="MoTa"
+                                              placeholder="Nhập Mô Tả..."
+                                              class="autosize-transition form-control"
+                                              ng-required=true></textarea>
+                                    <div class="text-danger" ng-show="tinThem.MoTa.$error.required">Bạn Chưa Nhập Nội Dung Cho Mô Tả</div>
+                                    <div class="text-danger" ng-show="tinThem.MoTa.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <label class="control-label no-padding-right" for="form-field-1-1">Hình Đại Diện</label>
+                                    <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <label class="control-label no-padding-right" for="form-field-1-1">File Đính Kèm</label>
+                                    <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderFile" filters="upFile" /><br />
+                                </div>
+
+                                <div id="accordion" class="accordion-style1 panel-group col-lg-12" ng-show="ttup">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                    <i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                    &nbsp;Danh Sách File Đính Kèm
+                                                </a>
+                                            </h4>
+                                        </div>
+
+                                        <div class="panel-collapse collapse" id="collapseOne">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <h3 class="header smaller lighter green">
+                                                            <i class="ace-icon fa fa-bullhorn"></i>
+                                                            Ảnh Đại Diện
+                                                        </h3>
+
+                                                        <div class="alert alert-block alert-success" ng-show="ttIm">
+                                                            <p>
+                                                                <strong>
+                                                                    <i class="ace-icon fa fa-check"></i>
+                                                                    {{HinhAnh.file.name}}
+                                                                </strong>
+                                                                ({{HinhAnh.file.size}} KB)
+                                                            </p>
+
+                                                            <p ng-show="ttImg">
+                                                                @*<button class="btn btn-sm btn-success" ng-click="item.upload()">Upload</button>*@
+                                                                <button class="btn btn-sm btn-success" ng-click="uploadImg(HinhAnh)">Upload</button>
+                                                                <button class="btn btn-sm btn-danger" ng-click="removeImg()">Remove</button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <h3 class="header smaller lighter green">
+                                                            <i class="ace-icon fa fa-bullhorn"></i>
+                                                            Tập Tin Đính Kèm
+                                                        </h3>
+
+                                                        <div class="alert alert-block alert-success" ng-repeat="item in uploaderFile.queue">
+                                                            <p>
+                                                                <strong>
+                                                                    <i class="ace-icon fa fa-book"></i>
+                                                                    {{item.file.name}}
+                                                                </strong>
+                                                                ({{item.file.size}} KB)
+                                                            </p>
+
+                                                            <p id="ttFile{{$index}}">
+                                                                <button class="btn btn-sm btn-success" ng-click="uploadfile(item)">Upload</button>
+                                                                <button class="btn btn-sm btn-danger" ng-click="removeFile(item)">Remove</button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.row -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-lg-3">
+                                    <label class="control-label no-padding-right" for="form-field-1-1">Loại Tin</label>
+                                    <select class="form-control"
+                                            id="form-field-select-1"
+                                            ng-model="tmMaLoaiTin"
+                                            ng-options="item as item.Ten for item in DanhSachLoaiTin"></select>
+                                </div>
+
+                                <div class="form-group col-lg-3">
+                                    <label class="control-label no-padding-right" for="form-field-1-1">
+                                        <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
+                                           data-rel="tooltip" href="#" data-placement="bottom">
+                                            Ngày Hết Hạn
+                                        </a>
+                                    </label>
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="yyyy-mm-dd" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-3">
+                                    <label class="control-label no-padding-right" for="form-field-1-1">
+                                        <a title="Nếu thiết lập ngày hết hạn tin mới thì tin sẽ có biểu tượng 'NEW MÀU ĐỎ' cho đến hết ngày đó.."
+                                           data-rel="tooltip" href="#" data-placement="bottom">
+                                            Ngày Hết Hạn Tin Mới
+                                        </a>
+                                    </label>
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" type="text" ng-model="objThem.NgayHetHanTinMoi" data-date-format="yyyy-mm-dd" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-3">
+                                    <label class="control-label no-padding-right" for="form-field-1-1">
+                                        <a title="Nếu thiết lập ngày hết hạn trang chủ thì tin sẽ chay trên trang chủ cho đến hết ngày đó."
+                                           data-rel="tooltip" href="#" data-placement="bottom">
+                                            Ngày Hết Hạn Trang Chủ
+                                        </a>
+                                    </label>
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" type="text" ng-model="objThem.NgayHetHanTrangChu" data-date-format="yyyy-mm-dd" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="header green clearfix">
+                                Nội Dung Bài Viết
+                                <span class="block pull-right">
+                                    <small class="grey middle">Chọn Màu: &nbsp;</small>
+
+                                    <span class="btn-toolbar inline middle no-margin">
+                                        <span data-toggle="buttons" class="btn-group no-margin">
+                                            <label class="btn btn-sm btn-yellow">
+                                                1
+                                                <input type="radio" value="1" />
+                                            </label>
+
+                                            <label class="btn btn-sm btn-yellow active">
+                                                2
+                                                <input type="radio" value="2" />
+                                            </label>
+
+                                            <label class="btn btn-sm btn-yellow">
+                                                3
+                                                <input type="radio" value="3" />
+                                            </label>
+
+                                            <label class="btn btn-sm btn-yellow">
+                                                4
+                                                <input type="radio" value="4" />
+                                            </label>
+                                        </span>
+                                    </span>
+                                </span>
+                            </h4>
+
+                            <div class="wysiwyg-editor" id="editor1"></div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-sm" data-dismiss="modal">
+                            <i class="ace-icon fa fa-times"></i>
+                            Hủy
+                        </button>
+
+                        <button class="btn btn-sm btn-primary" ng-click="ThemBaiViet()" ng-disabled="tinThem.$invalid">
+                            <i class="ace-icon fa fa-check"></i>
+                            Thêm
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*/Modal thêm mới*@
         <div id="id-message-list-navbar" class="message-navbar clearfix hide">
             <div class="message-bar">
                 <div class="message-infobar" id="id-message-infobar">

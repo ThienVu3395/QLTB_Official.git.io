@@ -1,7 +1,7 @@
-- Tin tức mới vào hiển thị tin top 10
-- Tin cũ hơn láy tiếp theo top 10
+- Tin tức mới vào hiển thị tin top 10 ( ok )
+- Tin cũ hơn láy tiếp theo top 10 ( em bỏ vì đã có phân trang rồi ) 
 - Bố cục thông báo , ngày giờ nằm dưới tiêu đề , nhỏ hơn màu nhạt hơn td
-- Bỏ Tìm kiếm , bỏ button bạn đang nghĩ gì
+- bỏ button bạn đang nghĩ gì
 - Bỏ tường ( minized  , 1/4)
 - Bỏ số hiển thị trong tab , đổi màu icon thành xanh chủ dạo cty
 - De phan trang dưới ds bài viết

@@ -87,9 +87,6 @@
     @Html.IncludeVersionedJs("~/MyScript/configapp.js")
     <script src="~/MyScript/app.js"></script>
     <script src="~/MyScript/common.js"></script>
-    @*File angularJS quản lý bảng tin của Vũ*@
-    <script src="~/MyScript/bangtin/BangTinCtrl.js"></script>
-    <script src="~/MyScript/bangtin/QuanLyCtrl.js"></script>
     @Html.IncludeVersionedJs("~/MyScript/login/UserProfile.js")
     @Html.IncludeVersionedJs("~/MyScript/homecontroller.js")
 </head>
@@ -588,16 +585,28 @@
                     <b class="arrow"></b>
                     <ul class="submenu">
                         @*<li ng-show="show(501)" class="{{activelink[18]}}">
-                                <a href="~/Danhmuc/tudien">
-                                    <i class="menu-icon fa fa-circle"></i>Thông Báo
-                                </a><b class="arrow fa fa-angle-down"></b>
-                            </li>
+            <a href="~/Danhmuc/tudien">
+                <i class="menu-icon fa fa-circle"></i>Thông Báo
+            </a><b class="arrow fa fa-angle-down"></b>
+        </li>
 
-                            <li ng-show="show(501)" class="{{activelink[18]}}">
-                                <a href="~/Danhmuc/tudien">
-                                    <i class="menu-icon fa fa-circle"></i>Tin Tức Sự Kiện
-                                </a><b class="arrow fa fa-angle-down"></b>
-                            </li>*@
+        <li ng-show="show(501)" class="{{activelink[18]}}">
+            <a href="~/Danhmuc/tudien">
+                <i class="menu-icon fa fa-circle"></i>Tin Tức Sự Kiện
+            </a><b class="arrow fa fa-angle-down"></b>
+        </li>*@
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="@Url.Action("TestTinTuc","BangTin")">
+                                <i class="menu-icon fa fa-cogs"></i>Trang Chủ 01
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
+                        <li ng-show="show(501)" class="{{activelink[18]}}">
+                            <a href="@Url.Action("TestTinTucHai","BangTin")">
+                                <i class="menu-icon fa fa-cogs"></i>Trang Chủ 02
+                            </a><b class="arrow fa fa-angle-down"></b>
+                        </li>
+
 
                         <li ng-show="show(501)" class="{{activelink[18]}}">
                             <a href="@Url.Action("SoanBaiViet","BangTin")">
@@ -611,11 +620,6 @@
                             </a><b class="arrow fa fa-angle-down"></b>
                         </li>
 
-                        <li ng-show="show(501)" class="{{activelink[18]}}">
-                            <a href="@Url.Action("TestTinTuc","BangTin")">
-                                <i class="menu-icon fa fa-cogs"></i>Test Tin Tức
-                            </a><b class="arrow fa fa-angle-down"></b>
-                        </li>
                     </ul>
                 </li>
 

@@ -37,7 +37,11 @@
     </style>
 }
 
-<div ng-controller="QlbtCrl" ng-init="Init()">
+@section Scripts{
+    <script src="~/MyScript/bangtin/TrangChu00Ctrl.js"></script>
+}
+
+<div ng-controller="TC00Ctrl" ng-init="Init()">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -58,6 +62,178 @@
     </div>
 
     <div id="mescontent" class="page-content">
+        <div class="ace-settings-container" id="ace-settings-container">
+            @*Tường Công Ty*@
+            <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+                <i class="ace-icon fa fa-book bigger-130"></i>
+            </div>
+
+            <div class="ace-settings-box clearfix" id="ace-settings-box">
+                <div class="widget-container-col">
+                    <div class="widget-box widget-color-dark">
+                        <div class="widget-header">
+                            <h6 class="widget-title">Tường Công Ty</h6>
+
+                            @*<div class="widget-toolbar">
+                                    <a href="#" data-action="reload">
+                                        <i class="ace-icon fa fa-refresh"></i>
+                                    </a>
+
+                                    <a href="#" data-action="collapse">
+                                        <i class="ace-icon fa fa-chevron-down"></i>
+                                    </a>
+
+                                    <a href="#" data-action="fullscreen" class="orange2">
+                                        <i class="ace-icon fa fa-expand"></i>
+                                    </a>
+                                </div>*@
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main padding-4 scrollable" data-size="800">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12" ng-repeat="item in BaiVietTuong">
+                                            <div class="thumbnail search-thumbnail">
+                                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">20/03/2020 - By : {{item.TacGia}}</span>
+
+                                                <div class="caption">
+                                                    <h3 class="search-title">
+                                                        <a href="#" class="blue">{{item.TieuDe}}</a>
+                                                    </h3>
+                                                    <p>{{item.NoiDung | limitTo: 100 }}{{item.NoiDung.length > 100 ? '...' : ''}}</p>
+                                                    <hr />
+                                                    <div id="timeline-1">
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12">
+                                                                <div class="timeline-container">
+                                                                    <div class="timeline-label">
+                                                                        <span class="label label-primary arrowed-in-right label-lg">
+                                                                            <b>Today</b>
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="timeline-items" ng-repeat="j in item.BinhLuan">
+                                                                        <div class="timeline-item clearfix">
+                                                                            <div class="timeline-info">
+                                                                                <img alt="Susan't Avatar" src="{{j.HinhAnh}}" />
+                                                                                <span class="label label-info label-sm">16:22</span>
+                                                                            </div>
+
+                                                                            <div class="widget-box transparent">
+                                                                                <div class="widget-header widget-header-small">
+                                                                                    <h5 class="widget-title smaller">
+                                                                                        <span class="red">{{j.DonVi}} </span> - {{j.TenNguoiDung}}
+                                                                                        <span class="grey">đã bình luận</span>
+                                                                                    </h5>
+
+                                                                                    <span class="widget-toolbar">
+                                                                                        @*<a href="#" data-action="reload">
+                                                                                                <i class="ace-icon fa fa-refresh"></i>
+                                                                                            </a>*@
+
+                                                                                        <a href="#" data-action="collapse">
+                                                                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+
+                                                                                <div class="widget-body">
+                                                                                    <div class="widget-main">
+                                                                                        {{j.NoiDung}}
+
+                                                                                        @*<div class="space-6"></div>
+
+                                                                                            <div class="widget-toolbox clearfix">
+                                                                                                <div class="pull-left">
+                                                                                                    <i class="ace-icon fa fa-hand-o-right grey bigger-125"></i>
+                                                                                                    <a href="#" class="bigger-110">Click to read &hellip;</a>
+                                                                                                </div>
+
+                                                                                                <div class="pull-right action-buttons">
+                                                                                                    <a href="#">
+                                                                                                        <i class="ace-icon fa fa-check green bigger-130"></i>
+                                                                                                    </a>
+
+                                                                                                    <a href="#">
+                                                                                                        <i class="ace-icon fa fa-pencil blue bigger-125"></i>
+                                                                                                    </a>
+
+                                                                                                    <a href="#">
+                                                                                                        <i class="ace-icon fa fa-times red bigger-125"></i>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            </div>*@
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="timeline-container">
+                                                                    <div class="timeline-label">
+                                                                        <span class="label label-grey arrowed-in-right label-lg">
+                                                                            <b>16/03/2020 10:22</b>
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <div class="timeline-items">
+                                                                        <div class="timeline-item clearfix">
+                                                                            <div class="timeline-info">
+                                                                                <i class="timeline-indicator ace-icon fa fa-edit btn btn-primary no-hover green"></i>
+                                                                            </div>
+
+                                                                            <div class="widget-box transparent">
+                                                                                <div class="widget-header widget-header-small">
+                                                                                    <h5 class="widget-title smaller">Nhập Bình Luận Của Bạn</h5>
+
+                                                                                    <span class="widget-toolbar">
+                                                                                        <a href="#" data-action="collapse">
+                                                                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+
+                                                                                <div class="widget-body">
+                                                                                    <div class="widget-main">
+                                                                                        <form>
+                                                                                            <fieldset>
+                                                                                                <textarea class="width-100" resize="none" placeholder="Type something…" ng-model="BinhLuan.NoiDung"></textarea>
+                                                                                            </fieldset>
+
+                                                                                            <div class="hr hr-dotted"></div>
+
+                                                                                            <div class="clearfix">
+                                                                                                <button class="pull-right btn btn-sm btn-primary btn-white btn-round" ng-click="GuiBinhLuan(item.MaTinTuc)">
+                                                                                                    Gửi Bình Luận
+                                                                                                    <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-12"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*/Tường Công Ty*@
+        </div>
         <div class="page-header">
             <h1>
                 Tin Tức
@@ -71,12 +247,9 @@
         <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
             <div class="col-xs-12">
                 <div class="row">
-                    <div class="col-sm-9">
-                        <h4 class="pink">
-                                <a href="#modal-form" role="button" class="btn btn-info" data-toggle="modal"><i class="ace-icon fa fa-edit"></i></a>
-                            </h4>
-
+                    <div class="col-sm-12">
                         <div class="tabbable">
+                            @*Danh sách loại tin*@
                             <ul class="nav nav-tabs" id="myTab">
                                 <li ng-class="{{item.MaLoaiTin == DanhSachLoaiTin[0].MaLoaiTin ? ['active'] : ['']}}"
                                     ng-repeat="item in DanhSachLoaiTin"
@@ -87,180 +260,142 @@
                                     </a>
                                 </li>
 
-                                <li ng-click="LaySinhNhat(month)">
+                                <li ng-click="LaySinhNhat()">
                                     <a data-toggle="tab" href="#sn">
                                         <i class="blue ace-icon fa fa-calendar bigger-120"></i>
                                         Sinh Nhật
                                     </a>
                                 </li>
                             </ul>
+                            @*/ Danh sách loại tin*@
 
                             <div class="tab-content">
-                                @*Thanh công cụ cho tin*@
-                                @*<div class="search-area well col-xs-12" ng-show="!sinhNhat && !ttshow">
-                                        <div class="row">
-                                            <div class="col-lg-9">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar bigger-110"></i>
-                                                    </span>
+                                <div class="tab-pane fade in active" id="tin">
+                                    <div class="row">
+                                        @*Show theo templateList = 1*@
+                                        <div ng-repeat="item in DanhSachTinTuc" class="col-xs-6 col-sm-3 col-md-3" ng-show="DanhSachTinTuc.length > 0 && !ttshow && TemplateList == 1">
+                                            <div class="thumbnail search-thumbnail">
+                                                <span class="search-promotion label label-danger arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
+                                                <img class="media-object" src="{{item.HinhAnh}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)" />
 
-                                                    <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" />
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-3">
-                                                <button class="btn btn-primary btn-sm" ng-click="TimBaiViet()">
-                                                    <i class="ace-icon fa fa-search align-top bigger-125"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>*@
-                                @*/ Thanh công cụ cho tin*@
-
-                                @*Show danh sách tin*@
-                                <div class="row tab-pane fade in active" id="tin">
-                                    @*Show theo templateList = 1*@
-                                    <div ng-repeat="item in DanhSachTinTuc" class="col-xs-6 col-sm-4 col-md-4" ng-show="DanhSachTinTuc.length > 0 && !ttshow && TemplateList == 1">
-                                        <div class="thumbnail search-thumbnail">
-                                            <span class="search-promotion label label-danger arrowed-in arrowed-in-right">Tin Nổi Bật</span>
-                                            <img class="media-object" src="{{item.HinhAnh}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)" />
-
-                                            <div class="caption">
-                                                <div class="clearfix">
-                                                    <span class="label label-success info-label">{{'By : ' + item.TacGia || item.Ten }}</span>
-                                                    <span class="pull-right label label-success info-label">{{ReturnDate(item.NgayTao) | limitTo: 10 }}</span>
-                                                </div>
-
-                                                <h3 class="search-title">
-                                                    <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)">{{ item.TieuDe | limitTo: 40 }}{{item.TieuDe.length > 40 ? '...' : ''}}</a>
-                                                </h3>
-                                                <p>{{item.MoTa| limitTo: 37 }}{{item.MoTa.length > 30 ? '...' : ''}}</p>
-                                                <span class="text-success" ng-click="LayChiTietBaiViet(item.MaTinTuc)">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @*/Show theo templateList = 1*@
-
-                                    @*Show theo templateList = 2*@
-                                    <div ng-repeat="item in DanhSachTinTuc" class="col-xs-12" ng-show="DanhSachTinTuc.length > 0 && !ttshow && TemplateList == 2">
-                                        <div class="media search-media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" src="{{item.HinhAnh}}" width="72" height="72" ng-click="showBtn(item.MaTinTuc)" />
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <div>
-                                                    <h4 class="media-heading">
-                                                        <a href="#" class="blue" ng-click="LayChiTietBaiViet(item.MaTinTuc)">{{ item.TieuDe | limitTo: 80 }}{{item.TieuDe.length > 80 ? '...' : ''}}</a>
-                                                    </h4>
-                                                </div>
-                                                <p>{{ item.MoTa | limitTo: 80 }}{{item.MoTa.length > 80 ? '...' : ''}}</p>
-
-                                                <div class="search-actions text-center">
-                                                    <span class="blue bolder bigger-150">{{ReturnDate(item.NgayTao) | limitTo: 10 }}</span>
-
-                                                    <div class="action-buttons bigger-125">
-                                                        <a href="#" title="Tin Hot" data-rel="tooltip">
-                                                            <i class="ace-icon fa fa-star red"></i>
-                                                        </a>
-
-                                                        <a href="#" title="{{item.TacGia}}" data-rel="tooltip">
-                                                            <i class="ace-icon fa fa-user green"></i>
-                                                        </a>
+                                                <div class="caption">
+                                                    <div class="clearfix">
+                                                        <div class="pull-left bigger-110">
+                                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                                        </div>
+                                                        <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(item.NgayTao)}}</span>
                                                     </div>
-                                                    <a class="search-btn-action btn btn-sm btn-block btn-info" ng-click="LayChiTietBaiViet(item.MaTinTuc)">Xem Chi Tiết</a>
+
+                                                    <h3 class="search-title">
+                                                        <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)">{{ item.TieuDe | limitTo: 40 }}{{item.TieuDe.length > 40 ? '...' : ''}}</a>
+                                                    </h3>
+                                                    <p>{{item.MoTa| limitTo: 37 }}{{item.MoTa.length > 30 ? '...' : ''}}</p>
+                                                    <span class="text-success" ng-click="LayChiTietBaiViet(item.MaTinTuc)">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    @*/Show theo templateList = 2*@
+                                        @*/Show theo templateList = 1*@
 
-                                    @*Show Chi Tiết Tin*@
-                                    <div class="col-xs-12" ng-show="ttshow">
-                                        <div class="well well-lg" style="background-color: #fff">
-                                            <span class="label label-lg label-success arrowed" ng-click="LayDanhSachBaiViet(MaLoaiTin)">Trở Về</span>
-                                            <h4 class="blue">{{ThongTinBV.TieuDe}}</h4>
-                                            <img class="width-100" src="{{ThongTinBV.HinhAnh}}" />
-                                            <p ng-bind-html="ThongTinBV.NoiDung"></p>
-                                            <br />
-                                            <h4 class="blue">Tập Tin Đính Kèm ({{ThongTinBV.TapTinDinhKem.length}})</h4>
-                                            <ul class="list-unstyled spaced2">
-                                                <li ng-repeat="item in ThongTinBV.TapTinDinhKem">
-                                                    <i class="ace-icon fa fa-circle green" ng-show="DanhSachTinTuc.length > 1"></i>
-                                                    <a href="#" class="dark" id="ct{{item.MaTinTuc}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
-                                                        {{item.Url}}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <h4 class="blue">Các Tin Liên Quan</h4>
-                                            <ul class="list-unstyled spaced2">
-                                                <li ng-repeat="j in ThongTinBV.TinLienQuan">
-                                                    <i class="ace-icon fa fa-circle green"></i>
-                                                    <a href="#" class="dark" ng-click="LayChiTietBaiViet(j.MaTinTuc)">
-                                                        {{j.TieuDe}}
-                                                    </a>
-                                                </li>
-                                            </ul>
-
+                                        @*Show theo templateList = 2*@
+                                        <div ng-repeat="item in DanhSachTinTuc" class="col-xs-12" ng-show="DanhSachTinTuc.length > 0 && !ttshow && TemplateList == 2">
                                             <div class="row">
-                                                <div class="col-sm-6" id="default-buttons">
-                                                    <p>
-                                                        <span class="label label-lg label-success arrowed" ng-click="LayDanhSachBaiViet(MaLoaiTin)">Trở Về</span>
-                                                        <span class="label label-lg label-pink">Chia Sẻ <i class="ace-icon fa fa-share"></i></span>
-                                                    </p>
+                                                <div class="col-lg-2">
+                                                    <a href="#">
+                                                        <img class="media-object" src="{{item.HinhAnh}}" width="100%" ng-click="LayChiTietBaiViet(item.MaTinTuc)" />
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-10">
+                                                    <h4 class="media-heading">
+                                                        <a href="#" class="blue" ng-click="LayChiTietBaiViet(item.MaTinTuc)">{{ item.TieuDe }}</a>
+                                                    </h4>
+                                                    <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
+                                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY(item.NgayTao)}}
+                                                    <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                                    <p>{{ item.MoTa }}</p>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                        </div>
+                                        @*/Show theo templateList = 2*@
+
+                                        @*Show Chi Tiết Tin*@
+                                        <div class="col-xs-12" ng-show="ttshow">
+                                            <div class="well well-lg" style="background-color: #fff">
+                                                <span class="label label-lg label-success arrowed" ng-click="LayDanhSachBaiViet(MaLoaiTin)">Trở Về</span>
+                                                <h4 class="blue">{{ThongTinBV.TieuDe}}</h4>
+                                                <img class="width-100" src="{{ThongTinBV.HinhAnh}}" />
+                                                <p ng-bind-html="ThongTinBV.NoiDung"></p>
+                                                <br />
+                                                <h4 class="blue">Tập Tin Đính Kèm ({{ThongTinBV.TapTinDinhKem.length}})</h4>
+                                                <ul class="list-unstyled spaced2">
+                                                    <li ng-repeat="item in ThongTinBV.TapTinDinhKem">
+                                                        <i class="ace-icon fa fa-circle green" ng-show="DanhSachTinTuc.length > 1"></i>
+                                                        <a href="#" class="dark" id="ct{{item.MaTinTuc}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
+                                                            {{item.Url}}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <h4 class="blue">Các Tin Liên Quan</h4>
+                                                <ul class="list-unstyled spaced2">
+                                                    <li ng-repeat="j in ThongTinBV.TinLienQuan">
+                                                        <i class="ace-icon fa fa-circle green"></i>
+                                                        <a href="#" class="dark" ng-click="LayChiTietBaiViet(j.MaTinTuc)">
+                                                            {{j.TieuDe}}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6" id="default-buttons">
+                                                        <p>
+                                                            <span class="label label-lg label-success arrowed" ng-click="LayDanhSachBaiViet(MaLoaiTin)">Trở Về</span>
+                                                            <span class="label label-lg label-pink">Chia Sẻ <i class="ace-icon fa fa-share"></i></span>
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    @*/ Show Chi Tiết Tin*@
-
-                                    @*Show Thông báo k tìm thấy bài viết*@
-                                    <div class="col-xs-6 col-sm-12 col-md-12" ng-show="DanhSachTinTuc.length == 0">
-                                        <div class="thumbnail search-thumbnail">
-                                            <img class="media-object" src="https://vdodata.vn/wp-content/uploads/2019/05/loi-404-nguyen-nhan-va-cach-khac-phuc.png" />
-
-                                            <div class="caption">
-                                                <h3 class="search-title">
-                                                    <a href="#" class="blue">Xin Lỗi,Bài Viết Cho Danh Mục Này Đang Cập Nhật</a>
-                                                </h3>
-                                            </div>
-                                        </div>
+                                        @*/ Show Chi Tiết Tin*@
                                     </div>
                                 </div>
                                 @*/Show Chi Tiết Tin*@
 
                                 @* Sinh Nhật Trong Tháng*@
-                                <div class="row tab-pane fade" id="sn">
-                                    <div ng-repeat="item in DanhSachUser track by item.MaNguoiDung" class="col-xs-6 col-sm-3 col-md-3">
-                                        <div class="thumbnail search-thumbnail">
-                                            <span class="search-promotion label label-success arrowed-in arrowed-in-right">Phòng ABCXYZ</span>
-                                            <img class="media-object" src="{{item.HinhAnh}}" />
+                                <div class="tab-pane fade" id="sn">
+                                    <div class="row">
+                                        <div ng-repeat="item in DanhSachUser track by item.MaNguoiDung" class="col-xs-6 col-sm-3 col-md-3">
+                                            <div class="thumbnail search-thumbnail">
+                                                <span class="search-promotion label label-success arrowed-in arrowed-in-right">{{item.PhongBan}}</span>
+                                                <img class="media-object" src="{{item.HinhAnh}}" />
 
-                                            <div class="caption">
-                                                <div class="clearfix">
-                                                    <span class="pull-right label label-grey info-label">{{item.NgaySinh}}/{{item.ThangSinh}}/{{item.NamSinh}}</span>
+                                                <div class="caption">
+                                                    <div class="clearfix">
+                                                        <span class="pull-right label label-grey info-label">{{item.NgaySinh}}/{{item.ThangSinh}}/{{item.NamSinh}}</span>
+                                                    </div>
+
+                                                    <h3 class="search-title">
+                                                        <a href="#" class="blue">{{item.Ten}}</a>
+                                                    </h3>
                                                 </div>
-
-                                                <h3 class="search-title">
-                                                    <a href="#" class="blue">{{item.Ten}}</a>
-                                                </h3>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-12">
-                                        <h3 class="header smaller lighter green">Sinh Nhật Trong Năm</h3>
-                                        <a href="#"
-                                           class="btn btn-app btn-info btn-xs"
-                                           ng-repeat="x in [].constructor(12) track by $index"
-                                           id="sn{{$index + 1}}"
-                                           ng-click="LaySinhNhat($index + 1)">
-                                            <i class="ace-icon fa fa-calendar bigger-160"></i>
-                                            Tháng {{$index + 1}}
-                                        </a>
-                                    </div>
+                                    <ul ng-show="!ttshow && sinhNhat"
+                                        uib-pagination
+                                        total-items="totalItems"
+                                        items-per-page="itemsPerPage"
+                                        ng-model="currentPage"></ul>
+
+                                    <h3 class="header smaller lighter green">Sinh Nhật Trong Năm</h3>
+                                    <a href="#"
+                                       class="btn btn-app btn-info btn-xs"
+                                       ng-repeat="x in [].constructor(12) track by $index"
+                                       id="sn{{$index + 1}}"
+                                       ng-click="LaySinhNhatTheoThang($index + 1)">
+                                        <i class="ace-icon fa fa-calendar bigger-160"></i>
+                                        Tháng {{$index + 1}}
+                                    </a>
                                 </div>
                                 @*/ Sinh Nhật Trong Tháng*@
 
@@ -272,425 +407,9 @@
                                     ng-model="currentPage"
                                     ng-change="LayDanhSachBaiViet(MaLoaiTin)"></ul>
                                 @*/ Thanh phân trang cho tin*@
-
-                                @*Show list các tin cũ hơn*@
-                                <div ng-show="!ttshow">
-                                    @*<h3 class="header smaller lighter green">Các Tin Cũ Hơn</h3>
-                                    <ul class="list-unstyled spaced2">
-                                        <li ng-repeat="item in DanhSachCuHon">
-                                            <i class="ace-icon fa fa-circle green"></i>
-                                            <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="showBtn(item.MaTinTuc)">[{{item.NgayTao | limitTo : 10}}]{{ item.TieuDe}}</a>
-                                        </li>
-                                    </ul>*@
-                                </div>
-                                @*/ Show list các tin cũ hơn*@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-sm-3 widget-container-col">
-                        <div class="widget-box widget-color-dark">
-                            <div class="widget-header">
-                                <h6 class="widget-title">Tường Công Ty</h6>
-
-                                <div class="widget-toolbar">
-                                    <a href="#" data-action="reload">
-                                        <i class="ace-icon fa fa-refresh"></i>
-                                    </a>
-
-                                    <a href="#" data-action="collapse">
-                                        <i class="ace-icon fa fa-chevron-down"></i>
-                                    </a>
-
-                                    <a href="#" data-action="fullscreen" class="orange2">
-                                        <i class="ace-icon fa fa-expand"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="widget-body" style="display:none">
-                                <div class="widget-main padding-4 scrollable" data-size="800">
-                                    <div class="content">
-                                        <div class="row" ng-init="LayBaiVietTuong()">
-                                            <div class="col-xs-12 col-sm-12 col-md-12" ng-repeat="item in BaiVietTuong">
-                                                <div class="thumbnail search-thumbnail">
-                                                    <span class="search-promotion label label-success arrowed-in arrowed-in-right">20/03/2020 - By : {{item.TacGia}}</span>
-
-                                                    <div class="caption">
-                                                        <h3 class="search-title">
-                                                            <a href="#" class="blue">{{item.TieuDe}}</a>
-                                                        </h3>
-                                                        <p>{{item.NoiDung | limitTo: 100 }}{{item.NoiDung.length > 100 ? '...' : ''}}</p>
-                                                        <hr />
-                                                        <div id="timeline-1">
-                                                            <div class="row">
-                                                                <div class="col-xs-12 col-sm-12">
-                                                                    <div class="timeline-container">
-                                                                        <div class="timeline-label">
-                                                                            <span class="label label-primary arrowed-in-right label-lg">
-                                                                                <b>Today</b>
-                                                                            </span>
-                                                                        </div>
-
-                                                                        <div class="timeline-items" ng-repeat="j in item.BinhLuan">
-                                                                            <div class="timeline-item clearfix">
-                                                                                <div class="timeline-info">
-                                                                                    <img alt="Susan't Avatar" src="{{j.HinhAnh}}" />
-                                                                                    <span class="label label-info label-sm">16:22</span>
-                                                                                </div>
-
-                                                                                <div class="widget-box transparent">
-                                                                                    <div class="widget-header widget-header-small">
-                                                                                        <h5 class="widget-title smaller">
-                                                                                            <span class="red">{{j.DonVi}} </span> - {{j.TenNguoiDung}}
-                                                                                            <span class="grey">đã bình luận</span>
-                                                                                        </h5>
-
-                                                                                        <span class="widget-toolbar">
-                                                                                            @*<a href="#" data-action="reload">
-                                                                                                    <i class="ace-icon fa fa-refresh"></i>
-                                                                                                </a>*@
-
-                                                                                            <a href="#" data-action="collapse">
-                                                                                                <i class="ace-icon fa fa-chevron-up"></i>
-                                                                                            </a>
-                                                                                        </span>
-                                                                                    </div>
-
-                                                                                    <div class="widget-body">
-                                                                                        <div class="widget-main">
-                                                                                            {{j.NoiDung}}
-
-                                                                                            @*<div class="space-6"></div>
-
-                                                                                                <div class="widget-toolbox clearfix">
-                                                                                                    <div class="pull-left">
-                                                                                                        <i class="ace-icon fa fa-hand-o-right grey bigger-125"></i>
-                                                                                                        <a href="#" class="bigger-110">Click to read &hellip;</a>
-                                                                                                    </div>
-
-                                                                                                    <div class="pull-right action-buttons">
-                                                                                                        <a href="#">
-                                                                                                            <i class="ace-icon fa fa-check green bigger-130"></i>
-                                                                                                        </a>
-
-                                                                                                        <a href="#">
-                                                                                                            <i class="ace-icon fa fa-pencil blue bigger-125"></i>
-                                                                                                        </a>
-
-                                                                                                        <a href="#">
-                                                                                                            <i class="ace-icon fa fa-times red bigger-125"></i>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                </div>*@
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="timeline-container">
-                                                                        <div class="timeline-label">
-                                                                            <span class="label label-grey arrowed-in-right label-lg">
-                                                                                <b>16/03/2020 10:22</b>
-                                                                            </span>
-                                                                        </div>
-
-                                                                        <div class="timeline-items">
-                                                                            <div class="timeline-item clearfix">
-                                                                                <div class="timeline-info">
-                                                                                    <i class="timeline-indicator ace-icon fa fa-edit btn btn-primary no-hover green"></i>
-                                                                                </div>
-
-                                                                                <div class="widget-box transparent">
-                                                                                    <div class="widget-header widget-header-small">
-                                                                                        <h5 class="widget-title smaller">Nhập Bình Luận Của Bạn</h5>
-
-                                                                                        <span class="widget-toolbar">
-                                                                                            <a href="#" data-action="collapse">
-                                                                                                <i class="ace-icon fa fa-chevron-up"></i>
-                                                                                            </a>
-                                                                                        </span>
-                                                                                    </div>
-
-                                                                                    <div class="widget-body">
-                                                                                        <div class="widget-main">
-                                                                                            <form>
-                                                                                                <fieldset>
-                                                                                                    <textarea class="width-100" resize="none" placeholder="Type something…" ng-model="BinhLuan.NoiDung"></textarea>
-                                                                                                </fieldset>
-
-                                                                                                <div class="hr hr-dotted"></div>
-
-                                                                                                <div class="clearfix">
-                                                                                                    <button class="pull-right btn btn-sm btn-primary btn-white btn-round" ng-click="GuiBinhLuan(item.MaTinTuc)">
-                                                                                                        Gửi Bình Luận
-                                                                                                        <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
-                                                                                                    </button>
-                                                                                                </div>
-                                                                                            </form>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="space-12"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @*Modal thêm mới*@
-                    <div id="modal-form" class="modal fade" tabindex="-1">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="blue bigger">Thêm Mới Bài Viết</h4>
-                                </div>
-
-                                <div class="modal-body">
-                                    <form name="tinThem" novalidate>
-                                        <div class="form-group">
-                                            <label class="control-label no-padding-right" for="form-field-1-1"> Tiêu Đề <span class="text-danger">*</span> </label>
-                                            <input type="text"
-                                                   id="form-field-1-1"
-                                                   placeholder="Nhập Tiêu Đề..."
-                                                   ng-model="objThem.TieuDe"
-                                                   name="TieuDe"
-                                                   ng-minlength="10"
-                                                   class="form-control"
-                                                   ng-required=true />
-                                            <div class="text-danger" ng-show="tinThem.TieuDe.$error.required">Bạn Chưa Nhập Tiêu Đề</div>
-                                            <div class="text-danger" ng-show="tinThem.TieuDe.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
-
-                                            <span class="help-inline">
-                                                <label class="middle">
-                                                    <input class="ace" type="checkbox" id="id-disable-check" ng-model="objThem.TinNoiBat" />
-                                                    <span class="lbl">
-                                                        <span class="text-danger">
-                                                            <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
-                                                               data-rel="tooltip" href="#" data-placement="bottom">
-                                                                Tin Quan Trọng
-                                                            </a>
-                                                        </span>
-                                                    </span>
-                                                </label>
-                                            </span>
-
-                                            <span class="help-inline">
-                                                <label class="middle">
-                                                    <input class="ace" type="checkbox" ng-model="objThem.HienThi" />
-                                                    <span class="lbl"> Duyệt Tin Này</span>
-                                                </label>
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <label for="form-field-11">Mô Tả Ngắn <span class="text-danger">*</span></label>
-                                                <textarea id="form-field-11"
-                                                          ng-model="objThem.MoTa"
-                                                          ng-minlength="10"
-                                                          name="MoTa"
-                                                          placeholder="Nhập Mô Tả..."
-                                                          class="autosize-transition form-control"
-                                                          ng-required=true></textarea>
-                                                <div class="text-danger" ng-show="tinThem.MoTa.$error.required">Bạn Chưa Nhập Nội Dung Cho Mô Tả</div>
-                                                <div class="text-danger" ng-show="tinThem.MoTa.$error.minlength">Tiêu Đề Phải Tối Thiểu 10 Ký Tự</div>
-                                            </div>
-
-                                            <div class="form-group col-lg-6">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">Hình Đại Diện</label>
-                                                <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
-                                            </div>
-
-                                            <div class="form-group col-lg-6">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">File Đính Kèm</label>
-                                                <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderFile" filters="upFile" /><br />
-                                            </div>
-
-                                            <div id="accordion" class="accordion-style1 panel-group col-lg-12" ng-show="ttup">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h4 class="panel-title">
-                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                                                <i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
-                                                                &nbsp;Danh Sách File Đính Kèm
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-
-                                                    <div class="panel-collapse collapse" id="collapseOne">
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <h3 class="header smaller lighter green">
-                                                                        <i class="ace-icon fa fa-bullhorn"></i>
-                                                                        Ảnh Đại Diện
-                                                                    </h3>
-
-                                                                    <div class="alert alert-block alert-success" ng-show="ttIm">
-                                                                        <p>
-                                                                            <strong>
-                                                                                <i class="ace-icon fa fa-check"></i>
-                                                                                {{HinhAnh.file.name}}
-                                                                            </strong>
-                                                                            ({{HinhAnh.file.size}} KB)
-                                                                        </p>
-
-                                                                        <p ng-show="ttImg">
-                                                                            @*<button class="btn btn-sm btn-success" ng-click="item.upload()">Upload</button>*@
-                                                                            <button class="btn btn-sm btn-success" ng-click="uploadImg(HinhAnh)">Upload</button>
-                                                                            <button class="btn btn-sm btn-danger" ng-click="removeImg()">Remove</button>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-sm-6">
-                                                                    <h3 class="header smaller lighter green">
-                                                                        <i class="ace-icon fa fa-bullhorn"></i>
-                                                                        Tập Tin Đính Kèm
-                                                                    </h3>
-
-                                                                    <div class="alert alert-block alert-success" ng-repeat="item in uploaderFile.queue">
-                                                                        <p>
-                                                                            <strong>
-                                                                                <i class="ace-icon fa fa-book"></i>
-                                                                                {{item.file.name}}
-                                                                            </strong>
-                                                                            ({{item.file.size}} KB)
-                                                                        </p>
-
-                                                                        <p id="ttFile{{$index}}">
-                                                                            <button class="btn btn-sm btn-success" ng-click="uploadfile(item)">Upload</button>
-                                                                            <button class="btn btn-sm btn-danger" ng-click="removeFile(item)">Remove</button>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- /.row -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group col-lg-3">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">Loại Tin</label>
-                                                <select class="form-control"
-                                                        id="form-field-select-1"
-                                                        ng-model="tmMaLoaiTin"
-                                                        ng-options="item as item.Ten for item in DanhSachLoaiTin"></select>
-                                            </div>
-
-                                            <div class="form-group col-lg-3">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">
-                                                    <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
-                                                       data-rel="tooltip" href="#" data-placement="bottom">
-                                                        Ngày Hết Hạn
-                                                    </a>
-                                                </label>
-                                                <div class="input-group">
-                                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="yyyy-mm-dd" />
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar bigger-110"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-lg-3">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">
-                                                    <a title="Nếu thiết lập ngày hết hạn tin mới thì tin sẽ có biểu tượng 'NEW MÀU ĐỎ' cho đến hết ngày đó.."
-                                                       data-rel="tooltip" href="#" data-placement="bottom">
-                                                        Ngày Hết Hạn Tin Mới
-                                                    </a>
-                                                </label>
-                                                <div class="input-group">
-                                                    <input class="form-control date-picker" type="text" ng-model="objThem.NgayHetHanTinMoi" data-date-format="yyyy-mm-dd" />
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar bigger-110"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-lg-3">
-                                                <label class="control-label no-padding-right" for="form-field-1-1">
-                                                    <a title="Nếu thiết lập ngày hết hạn trang chủ thì tin sẽ chay trên trang chủ cho đến hết ngày đó."
-                                                       data-rel="tooltip" href="#" data-placement="bottom">
-                                                        Ngày Hết Hạn Trang Chủ
-                                                    </a>
-                                                </label>
-                                                <div class="input-group">
-                                                    <input class="form-control date-picker" type="text" ng-model="objThem.NgayHetHanTrangChu" data-date-format="yyyy-mm-dd" />
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar bigger-110"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <h4 class="header green clearfix">
-                                            Nội Dung Bài Viết
-                                            <span class="block pull-right">
-                                                <small class="grey middle">Chọn Màu: &nbsp;</small>
-
-                                                <span class="btn-toolbar inline middle no-margin">
-                                                    <span data-toggle="buttons" class="btn-group no-margin">
-                                                        <label class="btn btn-sm btn-yellow">
-                                                            1
-                                                            <input type="radio" value="1" />
-                                                        </label>
-
-                                                        <label class="btn btn-sm btn-yellow active">
-                                                            2
-                                                            <input type="radio" value="2" />
-                                                        </label>
-
-                                                        <label class="btn btn-sm btn-yellow">
-                                                            3
-                                                            <input type="radio" value="3" />
-                                                        </label>
-
-                                                        <label class="btn btn-sm btn-yellow">
-                                                            4
-                                                            <input type="radio" value="4" />
-                                                        </label>
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </h4>
-
-                                        <div class="wysiwyg-editor" id="editor1"></div>
-                                    </form>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button class="btn btn-sm" data-dismiss="modal">
-                                        <i class="ace-icon fa fa-times"></i>
-                                        Hủy
-                                    </button>
-
-                                    <button class="btn btn-sm btn-primary" ng-click="ThemBaiViet()" ng-disabled="tinThem.$invalid">
-                                        <i class="ace-icon fa fa-check"></i>
-                                        Thêm
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @*/Modal thêm mới*@
                 </div>
             </div>
         </div>

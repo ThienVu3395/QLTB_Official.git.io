@@ -683,3 +683,4 @@ C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CoreCompil
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.pdb
+C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csprojAssemblyReference.cache

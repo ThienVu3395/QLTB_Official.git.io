@@ -26,6 +26,7 @@ namespace OAMS.Models
         public string LoaiTin { get; set; }
         public string HinhNguoiDung { get; set; }
         public int NguoiTao { get; set; }
+        public string TenNguoiDung { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public string NguoiCapNhat { get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
