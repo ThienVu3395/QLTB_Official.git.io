@@ -141,35 +141,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         }
 
         [HttpGet]
-        [Route("LayDanhSachBaiVietCuHon")]
-        public IHttpActionResult LayDanhSachBaiVietCuHon(int page, int pageLimit, int MaLoaiTin)
-        {
-            var dsTin = dbContext.NEWS_TinTuc.ToList().Where(x => x.MaLoaiTin == MaLoaiTin && x.HienThi == true).OrderByDescending(x => x.NgayTao).ToList();
-            List<TinTucModel> dsTinModel = new List<TinTucModel>();
-            if (dsTin.Count > 0)
-            {
-                foreach (var item in dsTin)
-                {
-                    TinTucModel tin = new TinTucModel();
-                    tin.MaTinTuc = item.MaTinTuc;
-                    tin.TieuDe = item.TieuDe;
-                    tin.NoiDung = item.NoiDung;
-                    tin.MoTa = item.MoTa;
-                    tin.MaLoaiTin = item.MaLoaiTin;
-                    tin.NgayTao = item.NgayTao;
-                    tin.NgayCapNhat = item.NgayCapNhat;
-                    tin.HienThi = item.HienThi;
-                    tin.HinhAnh = item.HinhAnh;
-                    tin.TinNoiBat = item.TinNoiBat;
-                    tin.CountTin = dsTin.Count;
-                    tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
-                    dsTinModel.Add(tin);
-                }
-            }
-            return Ok(dsTinModel.Skip(pageLimit).Take(pageLimit));
-        }
-
-        [HttpGet]
         [Route("LayBaiVietTuong")]
         public IHttpActionResult LayBaiVietTuong()
         {
@@ -186,6 +157,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.MoTa = item.MoTa;
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.NgayTao = item.NgayTao;
+                    tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;

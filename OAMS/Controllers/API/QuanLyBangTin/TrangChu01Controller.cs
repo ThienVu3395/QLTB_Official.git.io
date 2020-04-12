@@ -237,6 +237,5 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             }
             return Ok(dsUserModel);
         }
-
     }
 }

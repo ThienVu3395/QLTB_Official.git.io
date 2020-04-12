@@ -1,15 +1,12 @@
 ﻿using OAMS.Database;
 using OAMS.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace OAMS.Controllers.API.QuanLyBangTin
 {
+    [RoutePrefix("API/QuanLyBangTin")]
     public class ThemTinTucController : ApiController
     {
         dbOAMSEntities dbContext = new dbOAMSEntities();
@@ -144,13 +141,11 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
             System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
             for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
-
             {
 
                 System.Web.HttpPostedFile hpf = hfc[iCnt];
 
                 if (hpf.ContentLength > 0)
-
                 {
 
                     if (!System.IO.File.Exists(sPath + Path.GetFileName(hpf.FileName)))

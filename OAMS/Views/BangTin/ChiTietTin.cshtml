@@ -12,8 +12,11 @@
     </style>
 }
 
+@section Scripts{
+    <script src="~/MyScript/bangtin/TrangChu01Ctrl.js"></script>
+}
 
-<div ng-controller="QlbtCrl">
+<div ng-controller="TC01Ctrl" ng-init="InitChiTiet(@ViewBag.MaTinTuc)">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>

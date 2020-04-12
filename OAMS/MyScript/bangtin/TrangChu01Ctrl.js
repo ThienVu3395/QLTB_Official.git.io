@@ -137,4 +137,14 @@
         $scope.ReturnFullDateTime = function (date) {
             return moment(date).format("DD/MM/YYYY , h:mm:ss a");
         }
+
+        // Phần Init của Danh Mục Tin
+        $scope.InitDanhMuc = function (MaLoaiTin) {
+            console.log(MaLoaiTin);
+        }
+
+        // Phần Init của Chi Tiết Tin
+        $scope.InitChiTiet = function (MaTinTuc) {
+            console.log(MaTinTuc);
+        }
     })

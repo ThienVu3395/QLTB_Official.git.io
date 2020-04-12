@@ -93,46 +93,18 @@
             )
         }
 
-        // Lấy tin thông báo
-        $scope.LayTinThongBao = function () {
-            var res = CommonController.getData(CommonController.urlAPI.API_LayTinThongBao, "");
-            res.then(
-                function succ(response) {
-                    $scope.DanhSachThongBao = response.data;
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message)
-                }
-            )
-        }
-
-        // Lấy tin sự kiện
-        $scope.LayTinSuKien = function () {
-            var res = CommonController.getData(CommonController.urlAPI.API_LayTinSuKien, "");
-            res.then(
-                function succ(response) {
-                    $scope.DanhSachSuKien = response.data;
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message)
-                }
-            )
-        }
-
-        // Lấy tin Sawaco
-        $scope.LayTinSawaco = function () {
-            var res = CommonController.getData(CommonController.urlAPI.API_LayTinSawaco, "");
-            res.then(
-                function succ(response) {
-                    $scope.DanhSachSawaco = response.data;
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message)
-                }
-            )
+        // Show bình luận bài viết tường
+        $scope.XemBinhLuan = function (index) {
+            let comment = document.getElementById("comment" + index);
+            let angle = document.getElementById("angle" + index);
+            if (comment.className == "detail-row") {
+                comment.className = "detail-row open";
+                angle.className = "ace-icon fa fa-angle-double-up";
+            }
+            else if (comment.className == "detail-row open") {
+                comment.className = "detail-row";
+                angle.className = "ace-icon fa fa-angle-double-down";
+            }
         }
 
         // Lấy sinh nhật mặc định
@@ -186,49 +158,5 @@
         // Hiển Thị Ngày Giờ
         $scope.ReturnFullDateTime = function (date) {
             return moment(date).format("DD/MM/YYYY , h:mm:ss a");
-        }
-
-        // Tìm Bài Viết
-        $scope.TimBaiViet = function () {
-            let t = document.getElementsByClassName("input-mini");
-            $scope.Start = moment(t[0].value).format('DD-MM-YYYY');
-            $scope.End = moment(t[1].value).format('DD-MM-YYYY');
-            let objTim = {
-                MaLoaiTin: $scope.MaLoaiTin,
-                Start: $scope.Start,
-                End: $scope.End,
-                itemPerPage: $scope.itemsPerPage,
-                Limit: Math.round((1 - 1) * $scope.itemsPerPage)
-            }
-            var res = CommonController.postData(CommonController.urlAPI.API_LocBaiViet, objTim);
-            res.then(
-                function succ(response) {
-                    $scope.DanhSachTinTuc = response.data;
-                    if ($scope.DanhSachTinTuc.length != 0) {
-                        console.log($scope.DanhSachTinTuc);
-                        $scope.DanhSachTinTuc = response.data;
-                        $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
-                        $scope.totalItems = response.data[0].CountTin;
-                        $scope.ttshow = false;
-                        var res2 = CommonController.postData(CommonController.urlAPI.API_LayDanhSachBaiVietLienQuan, objTim);
-                        res2.then(
-                            function succ(response) {
-                                $scope.DanhSachCuHon = response.data;
-                            },
-
-                            function errorCallback(response) {
-                                console.log(response.data.message)
-                            }
-                        )
-                    }
-                    else {
-                        $scope.totalItems = 0;
-                    }
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message)
-                }
-            )
         }
     })

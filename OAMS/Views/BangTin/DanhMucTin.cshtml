@@ -12,7 +12,11 @@
     </style>
 }
 
-<div ng-controller="QlbtCrl">
+@section Scripts{
+    <script src="~/MyScript/bangtin/TrangChu01Ctrl.js"></script>
+}
+
+<div ng-controller="TC01Ctrl" ng-init="InitDanhMuc(@ViewBag.MaLoaiTin)">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -39,7 +43,7 @@
                     <a href="@Url.Action("TestTinTuc","BangTin")">Bảng Tin</a>
                     <small>
                         <i class="ace-icon fa fa-angle-double-right"></i>
-                        Nơi Chứa Những Thông Báo Mới Nhất Của Công Ty
+                        @ViewBag.Header
                     </small>
                 </h1>
             </div>
