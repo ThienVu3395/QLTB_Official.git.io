@@ -25,6 +25,7 @@ $interval
 - Có nút xem chi tiết
 - Thông tin chính ở giửa cho tràn ra full mh
 - Thông báo + sư kiện giống bố cục thông báo
+- Vẫn tiếp tục show ra tin cũ hơn dưới tin theo danh mục
 
 * giao diện chi tiết bv :
 - 1 bài viết có thể  bên tường bên tb , chỉ đc cmt + show cmt bên tường
