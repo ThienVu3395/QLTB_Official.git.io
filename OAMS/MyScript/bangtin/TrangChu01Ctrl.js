@@ -145,6 +145,23 @@
 
         // Phần Init của Chi Tiết Tin
         $scope.InitChiTiet = function (MaTinTuc) {
-            console.log(MaTinTuc);
+            $scope.LayChiTietBaiViet(MaTinTuc);
+        }
+
+        // Lấy Chi Tiết Bài Viết
+        $scope.LayChiTietBaiViet = function (MaTinTuc) {
+            let param = "?MaTinTuc=" + MaTinTuc;
+            var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBaiViet, param);
+            res.then(
+                function succ(response) {
+                    $scope.ThongTinBV = response.data;
+                    console.log($scope.ThongTinBV)
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
+
         }
     })

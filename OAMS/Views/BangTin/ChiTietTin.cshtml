@@ -49,50 +49,37 @@
             </div>
 
             <div class="container">
-                <div class="col-lg-8">
-                    <h1>Biểu tượng truyện tranh '7 viên ngọc rồng' có doanh thu 25 tỷ USD</h1>
-                    <p><b><i>Thiên Vũ</i></b> - 11/04/2020 , 9:20 am</p>
+                <div class="col-lg-9">
+                    <h1>{{ThongTinBV.TieuDe}}</h1>
+                    <p><b><i><i class="ace-icon fa fa-user"></i> {{ThongTinBV.TenNguoiDung}}</i></b> - {{ReturnFullDateTime(ThongTinBV.TenNguoiDung)}}</p>
                     <p>
                         <b>
-                            Không chỉ dừng lại ở loạt truyện tranh nổi tiếng, "7 viên ngọc rồng"
-                            được dựng phim, chuyển thể game, 2 công viên và 1 bảo tàng chủ đề của truyện
+                            {{ThongTinBV.MoTa}}
                         </b>
                     </p>
 
                     <p>
-                        Khi tác giả Akira Toriyama sáng tạo ra 7 viên ngọc rồng (Dragon Ball), ông không thể ngờ rằng,
-                        mình đã tạo ra một biểu tượng văn hóa thế giới.
-                        Ngày nay, 7 viên ngọc rồng là một trong những series manga thành công nhất trên thế giới.
-                        Tổng doanh thu từ sách xuất bản, tạp chí, bản quyền phim, trò chơi, thẻ bài... là 25 tỷ USD.
+                        {{ThongTinBV.NoiDung}}
                     </p>
 
-                    <p>
-                        Không chỉ dừng lại ở một loạt truyện tranh nổi tiếng, 7 viên ngọc rồng mở rộng thành một thương hiệu toàn cầu với hàng trăm sản phẩm ăn theo. Bên cạnh bộ sách gốc với 42 tập từ 20 năm trước, một loạt truyện spin-off (ngoại truyện) mới được ra mắt gần đây tên là Dragon Ball Super cũng nhanh chóng trở thành best-seller.
+                    @*Tập tin đính kèm*@
+                    <div ng-show="ThongTinBV.TapTinDinhKem.length > 0">
+                        <h3 class="header smaller lighter green">
+                            <i class="ace-icon fa fa-book"></i>
+                            Tập Tin Đính Kèm
+                        </h3>
 
-                        Nhắc tới 7 viên ngọc rồng cũng không thể không kể đến 4 loạt phim hoạt hình series (Dragon Ball, Dragon Ball Z, Dragon Ball GT, Dragon Ball Super) với gần 700 tập phim. Bên cạnh đó, còn có 19 phim hoạt hình chiếu rạp, 3 phim điện ảnh người đóng (dù sản phẩm chuyển thể của Hollywood có tên Dragonball Evolution bị fan hâm bộ bộ truyện tẩy chay kịch liệt).
-                    </p>
+                        <ul class="list-unstyled spaced2">
+                            <li>
+                                <i class="ace-icon fa fa-circle green"></i>
+                                <a href="#">File Đính Kèm (123 KB)</a>
+                            </li>
+                        </ul>
+                    </div>
+                    @*/Tập tin đính kèm*@
 
-                    <p>
-                        Nếu nhìn sang lĩnh vực game, có đến 149 video game được sản xuất dựa trên Dragon Ball, bán được 44 triệu bản trên toàn cầu, là một trong những đầu truyện tranh chuyển thể game thành công nhất.
-
-                        Hơn thế nữa, ở Tokyo có 2 công viên chủ đề Dragon Ball, một bảo tàng, và một quán cafe theo thương hiệu này. 7 viên ngọc rồng cũng rất thành công khi nhượng quyền hình ảnh. Có 15.000 dòng sản phẩm trên thế giới mua bản quyền hình ảnh Dragon Ball, 3 trò chơi thẻ bài sưu tầm, rất nhiều cuốn art book...
-
-                        Và thậm chí, Hiệp hội ngày lễ Nhật Bản đã chính thức chọn ngày 9/5 hàng năm là ngày “Goku Day” (Son Goku là tên nhân vật chính của bộ truyện). Trong Tiếng Nhật "Go" và "Ku" phát âm giống số 5 và số 9. Và còn một giáo phái trên thế giới lấy tên là Gokuism (Thánh đường của Goku).
-                    </p>
-
-                    <h3 class="header smaller lighter green">
-                        <i class="ace-icon fa fa-book"></i>
-                        Tập Tin Đính Kèm
-                    </h3>
-
-                    <ul class="list-unstyled spaced2">
-                        <li>
-                            <i class="ace-icon fa fa-circle green"></i>
-                            <a href="#">File Đính Kèm (123 KB)</a>
-                        </li>
-                    </ul>
-
-                    <div class="widget-box transparent" id="recent-box">
+                    @*Bình Luận*@
+                    <div class="widget-box transparent" id="recent-box" ng-show="ThongTinBV.BinhLuan.length > 0">
                         <div class="widget-header">
                             <h4 class="widget-title lighter smaller">
                                 <i class="ace-icon fa fa-comments-o orange"></i>Bình Luận
@@ -104,14 +91,14 @@
                                 <div class="tab-content padding-8">
                                     <div id="comment-tab" class="tab-pane active">
                                         <div class="comments">
-                                            <div class="itemdiv commentdiv">
+                                            <div class="itemdiv commentdiv" ng-repeat="item in ThongTinBV.BinhLuan">
                                                 <div class="user">
-                                                    <img alt="Jennifer's Avatar" src="~/Content/assetsmes/images/avatars/avatar1.png" />
+                                                    <img alt="Jennifer's Avatar" src="{{item.HinhAnh}}" />
                                                 </div>
 
                                                 <div class="body">
                                                     <div class="name">
-                                                        <a href="#">Jennifer</a>
+                                                        <a href="#">{{item.Ten}}</a>
                                                     </div>
 
                                                     <div class="time">
@@ -121,75 +108,7 @@
 
                                                     <div class="text">
                                                         <i class="ace-icon fa fa-quote-left"></i>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis &hellip;
-                                                    </div>
-                                                </div>
-
-                                                <div class="tools">
-                                                    <div class="action-buttons bigger-125">
-                                                        <a href="#">
-                                                            <i class="ace-icon fa fa-pencil blue"></i>
-                                                        </a>
-
-                                                        <a href="#">
-                                                            <i class="ace-icon fa fa-trash-o red"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="itemdiv commentdiv">
-                                                <div class="user">
-                                                    <img alt="Joe's Avatar" src="~/Content/assetsmes/images/avatars/avatar2.png" />
-                                                </div>
-
-                                                <div class="body">
-                                                    <div class="name">
-                                                        <a href="#">Joe</a>
-                                                    </div>
-
-                                                    <div class="time">
-                                                        <i class="ace-icon fa fa-clock-o"></i>
-                                                        <span class="orange">22 min</span>
-                                                    </div>
-
-                                                    <div class="text">
-                                                        <i class="ace-icon fa fa-quote-left"></i>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis &hellip;
-                                                    </div>
-                                                </div>
-
-                                                <div class="tools">
-                                                    <div class="action-buttons bigger-125">
-                                                        <a href="#">
-                                                            <i class="ace-icon fa fa-pencil blue"></i>
-                                                        </a>
-
-                                                        <a href="#">
-                                                            <i class="ace-icon fa fa-trash-o red"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="itemdiv commentdiv">
-                                                <div class="user">
-                                                    <img alt="Rita's Avatar" src="~/Content/assetsmes/images/avatars/avatar3.png" />
-                                                </div>
-
-                                                <div class="body">
-                                                    <div class="name">
-                                                        <a href="#">Rita</a>
-                                                    </div>
-
-                                                    <div class="time">
-                                                        <i class="ace-icon fa fa-clock-o"></i>
-                                                        <span class="red">50 min</span>
-                                                    </div>
-
-                                                    <div class="text">
-                                                        <i class="ace-icon fa fa-quote-left"></i>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis &hellip;
+                                                        {{item.NoiDung}}
                                                     </div>
                                                 </div>
 
@@ -236,6 +155,7 @@
                             </div>
                         </div>
                     </div>
+                    @*/ Bình Luận*@
 
                     <h3 class="header smaller lighter green">
                         <i class="ace-icon fa fa-star"></i>
@@ -243,89 +163,29 @@
                     </h3>
 
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-4" ng-repeat="item in ThongTinBV.TinLienQuan">
                             <div class="thumbnail search-thumbnail">
-                                <img class="media-object" data-src="holder.js/100px200?theme=social" />
+                                <img class="media-object" src="{{item.HinhAnh}}" style="height:200px" />
                                 <div class="caption">
                                     <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">Chicago</span>
+                                        <span class="pull-right label label-grey info-label">{{item.TenNguoiDung}}</span>
                                         <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
+                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
                                         </div>
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
+                                        <a href="#" class="blue">{{item.TieuDe | limitTo: 20 }}{{item.TieuDe.length > 20 ? '...' : ''}}</a>
                                     </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="thumbnail search-thumbnail">
-                                <img class="media-object" data-src="holder.js/100px200?theme=social" />
-                                <div class="caption">
-                                    <div class="clearfix">
-                                        <span class="pull-right label label-grey info-label">Chicago</span>
-                                        <div class="pull-left bigger-110">
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                            <i class="ace-icon fa fa-star light-grey"></i>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="search-title">
-                                        <a href="#" class="blue">Thumbnail label</a>
-                                    </h3>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
+                                    <p>{{item.MoTa | limitTo: 27 }}{{item.MoTa.length > 27 ? '...' : ''}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4">
-                    <span class="label label-danger label-lg arrowed-in">Đọc Tiếp</span>
-                    <div class="thumbnail search-thumbnail">
-                        <img class="media-object" data-src="holder.js/100px200?theme=social" />
-                        <div class="caption">
-                            <div class="clearfix">
-                                <span class="pull-right label label-grey info-label">Chicago</span>
-                                <div class="pull-left bigger-110">
-                                    <i class="ace-icon fa fa-star orange2"></i>
-
-                                    <i class="ace-icon fa fa-star orange2"></i>
-
-                                    <i class="ace-icon fa fa-star orange2"></i>
-
-                                    <i class="ace-icon fa fa-star-half-o orange2"></i>
-
-                                    <i class="ace-icon fa fa-star light-grey"></i>
-                                </div>
-                            </div>
-
-                            <h3 class="search-title">
-                                <a href="#" class="blue">Thumbnail label</a>
-                            </h3>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam ...</p>
-                        </div>
-                    </div>
-
+                <div class="col-lg-3">
+                    <span class="label label-danger label-lg arrowed-in">Cùng Chủ Đề</span>
                     <div class="thumbnail search-thumbnail">
                         <img class="media-object" data-src="holder.js/100px200?theme=social" />
                         <div class="caption">

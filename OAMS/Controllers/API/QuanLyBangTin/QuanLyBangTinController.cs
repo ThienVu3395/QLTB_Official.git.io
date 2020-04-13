@@ -99,6 +99,12 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.NoiDung = dsTin.NoiDung;
                 tinTuc.TieuDe = dsTin.TieuDe;
                 tinTuc.HinhAnh = dsTin.HinhAnh;
+                tinTuc.MoTa = dsTin.MoTa;
+                tinTuc.NgayTao = dsTin.NgayTao;
+                tinTuc.TenNguoiDung = dsTin.NEWS_NguoiSuDung.Ten;
+                tinTuc.MaLoaiTin = dsTin.MaLoaiTin;
+                tinTuc.LoaiTin = dsTin.NEWS_LoaiTinTuc.Ten;
+                tinTuc.LuotXem = dsTin.LuotXem;
                 var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
                 List<TapTinModel> dsttmodel = new List<TapTinModel>();
                 if (dsTapTin.Count > 0)
@@ -129,11 +135,35 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         tin.NgayCapNhat = item.NgayCapNhat;
                         tin.HienThi = item.HienThi;
                         tin.HinhAnh = item.HinhAnh;
+                        tin.LuotXem = item.LuotXem;
+                        tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                         tin.TinNoiBat = item.TinNoiBat;
                         tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
                         dsTinLQ.Add(tin);
                     }
                     tinTuc.TinLienQuan = dsTinLQ;
+                }
+
+                var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaTinTuc == MaTinTuc).ToList();
+                List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
+                if (dsBinhLuan.Count > 0)
+                {
+                    foreach (var index in dsBinhLuan)
+                    {
+                        BinhLuanModel binhLuan = new BinhLuanModel();
+                        binhLuan.MaBinhLuan = index.MaBinhLuan;
+                        binhLuan.MaTinTuc = index.MaTinTuc;
+                        binhLuan.MaNguoiDung = index.MaNguoiDung;
+                        binhLuan.TenNguoiDung = index.NEWS_NguoiSuDung.Ten;
+                        binhLuan.HinhAnh = index.NEWS_NguoiSuDung.HinhAnh;
+                        binhLuan.DonVi = "Phòng ABCXYAZZ";
+                        binhLuan.NoiDung = index.NoiDung;
+                        binhLuan.HienThi = index.HienThi;
+                        binhLuan.Ngay = index.Ngay;
+                        binhLuan.Gio = index.Gio;
+                        dsBinhLuanModel.Add(binhLuan);
+                    }
+                    tinTuc.BinhLuan = dsBinhLuanModel;
                 }
                 return Ok(tinTuc);
             }

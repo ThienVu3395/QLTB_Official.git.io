@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "TestTinTuc";
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
@@ -140,14 +139,14 @@
                             <div class="caption">
                                 <div class="clearfix">
                                     <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(NoiBat1.NgayTao)}}</span>
-                                    <span class="pull-right label label-info info-label">{{NoiBat1.LoaiTin}}</span>
+                                    <span class="pull-right label label-info info-label"><a href="@Url.Action("DanhMucTin","BangTin")?MaLoaiTin={{NoiBat1.MaLoaiTin}}" class="white">{{NoiBat1.LoaiTin}}</a></span>
                                     <div class="pull-left bigger-110">
                                         <i class="ace-icon fa fa-eye orange2"></i> {{NoiBat1.LuotXem}}
                                     </div>
                                 </div>
 
                                 <h3 class="search-title">
-                                    <a href="#" class="blue">{{NoiBat1.TieuDe | limitTo: 27 }}{{NoiBat1.TieuDe.length > 27 ? '...' : ''}}</a>
+                                    <a href="@Url.Action("ChiTietTin","BangTin")?MaTinTuc={{NoiBat1.MaTinTuc}}">{{NoiBat1.TieuDe | limitTo: 27 }}{{NoiBat1.TieuDe.length > 27 ? '...' : ''}}</a>
                                 </h3>
                                 <p>{{NoiBat1.MoTa| limitTo: 50 }}{{NoiBat1.MoTa.length > 50 ? '...' : ''}}</p>
                             </div>
@@ -343,7 +342,7 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{DanhSachTuong.TieuDe | limitTo: 25 }}{{DanhSachTuong.TieuDe.length > 25 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")?MaTinTuc={{DanhSachTuong.MaTinTuc}}">{{DanhSachTuong.TieuDe | limitTo: 25 }}{{DanhSachTuong.TieuDe.length > 25 ? '...' : ''}}</a>
                                     </h3>
                                     <p>{{DanhSachTuong.MoTa | limitTo: 80 }}{{DanhSachTuong.MoTa.length > 80 ? '...' : ''}}</p>
                                 </div>
@@ -362,7 +361,7 @@
                                     </div>
 
                                     <h3 class="search-title">
-                                        <a href="@Url.Action("ChiTietTin","BangTin")" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
+                                        <a href="@Url.Action("ChiTietTin","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="blue">{{item.TieuDe | limitTo: 25 }}{{item.TieuDe.length > 25 ? '...' : ''}}</a>
                                     </h3>
                                     <p>{{item.MoTa | limitTo: 40 }}{{item.MoTa.length > 40 ? '...' : ''}}</p>
                                 </div>

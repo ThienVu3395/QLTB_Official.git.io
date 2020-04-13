@@ -460,10 +460,10 @@
                     // Xài chung
                     API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
                     API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
+                    API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
 
                     // Index 00                
                     API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_TheoDanhMuc_PhanTrang",
-                    API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
 
                     // Index 01

@@ -17,3 +17,22 @@
 
 /// Tham khảo load trang liền
 $interval	
+
+
+// Tỉ lệ Hình
+- 1920 ( 16:9 hoặc 3:4)
+- Ân luot xem
+- Có nút xem chi tiết
+- Thông tin chính ở giửa cho tràn ra full mh
+- Thông báo + sư kiện giống bố cục thông báo
+
+* giao diện chi tiết bv :
+- 1 bài viết có thể  bên tường bên tb , chỉ đc cmt + show cmt bên tường
+* trang chủ :
+- tường cho nhỏ lại
+- trình bày theo fb
+
+
+<a href="@Url.Action("DanhMucTin","BangTin")?MaLoaiTin={{NoiBat1.MaLoaiTin}}" class="white">
+
+<a href="@Url.Action("ChiTietTin","BangTin")?MaTinTuc={{NoiBat1.MaTinTuc}}">
