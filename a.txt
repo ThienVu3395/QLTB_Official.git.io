@@ -21,17 +21,17 @@ $interval
 
 // Tỉ lệ Hình
 - 1920 ( 16:9 hoặc 3:4)
-- Ân luot xem
-- Có nút xem chi tiết
-- Thông tin chính ở giửa cho tràn ra full mh
-- Thông báo + sư kiện giống bố cục thông báo
+- Ân luot xem ( ok )
+- Có nút xem chi tiết ( ok )
+- Thông tin chính ở giửa cho tràn ra full mh ( ok )
+- Thông báo + sư kiện giống bố cục thông báo ( ok )
 - Vẫn tiếp tục show ra tin cũ hơn dưới tin theo danh mục
 
 * giao diện chi tiết bv :
 - 1 bài viết có thể  bên tường bên tb , chỉ đc cmt + show cmt bên tường
 * trang chủ :
-- tường cho nhỏ lại
-- trình bày theo fb
+- tường cho nhỏ lại ( ok )
+- trình bày theo fb ( ok )
 
 
 <a href="@Url.Action("DanhMucTin","BangTin")?MaLoaiTin={{NoiBat1.MaLoaiTin}}" class="white">

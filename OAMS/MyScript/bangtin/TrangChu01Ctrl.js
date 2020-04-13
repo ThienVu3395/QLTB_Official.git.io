@@ -94,6 +94,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachTuong = response.data;
+                    console.log($scope.DanhSachTuong)
                 },
 
                 function errorCallback(response) {

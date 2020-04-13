@@ -21,6 +21,7 @@
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
                     $scope.LayDanhSachBaiViet($scope.MaLoaiTin);
                     $scope.LayBaiVietTuong();
+                    $scope.LaySinhNhat();
                 }
             }
             $timeout(hamcho, 300);
@@ -85,6 +86,7 @@
             res.then(
                 function succ(response) {
                     $scope.BaiVietTuong = response.data;
+                    console.log($scope.BaiVietTuong)
                 },
 
                 function errorCallback(response) {
