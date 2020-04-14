@@ -1,14 +1,14 @@
 ﻿angular.module("oamsapp")
-    .controller("TC00Ctrl", function ($scope, CommonController, FileUploader, $timeout, blockUI) {
+    .controller("TC00Ctrl", function ($scope, CommonController, $timeout, blockUI) {
         // Hàm + biến khởi tạo ban đầu
         $scope.totalItems = 64;
         $scope.currentPage = 1;
         $scope.itemsPerPage = 4;
         $scope.ttshow = false;
-        $scope.sinhNhat = false;
 
         $scope.Init = function () {
-            $scope.DanhSachLoaiTin = []
+            $scope.DanhSachLoaiTin = [];
+            $scope.TieuDe = "Bảng Tin Tường Công Ty";
             $scope.LayDanhSachLoaiTin();
             var hamcho = function () {
                 if ($scope.DanhSachLoaiTin.length == 0) {
@@ -51,7 +51,6 @@
                 function succ(response) {
                     $scope.DanhSachTinTuc = response.data;
                     $scope.ttshow = false;
-                    $scope.sinhNhat = false;
                     $scope.totalItems = $scope.DanhSachTinTuc[0].CountTin;
                     $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
                 },
@@ -70,7 +69,6 @@
                 function succ(response) {
                     $scope.ThongTinBV = response.data;
                     $scope.ttshow = true;
-                    $scope.sinhNhat = false;
                 },
 
                 function errorCallback(response) {
@@ -81,6 +79,7 @@
         }
 
         // Lấy Bài Viết Tường Công Ty
+        $scope.rm = false;
         $scope.LayBaiVietTuong = function () {
             var res = CommonController.getData(CommonController.urlAPI.API_LayBaiVietTuong, "");
             res.then(
@@ -93,6 +92,21 @@
                     console.log(response.data.message)
                 }
             )
+        }
+
+        // Đọc tiếp - Thu Gọn
+        $scope.read = function (status) {
+            if (status == 'more') {
+                $scope.rm = true;
+            }
+            else if (status == 'less') {
+                $scope.rm = false;
+            }
+        }
+
+        // Đổi tiêu đề
+        $scope.doiTieuDe = function (tieude) {
+            $scope.TieuDe = tieude;
         }
 
         // Show bình luận bài viết tường
@@ -118,7 +132,6 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachUser = response.data;
-                    $scope.sinhNhat = true;
                 },
 
                 function errorCallback(response) {
@@ -129,6 +142,7 @@
 
         // Lấy sinh nhật theo tháng
         $scope.LaySinhNhatTheoThang = function (month) {
+            $scope.m = month;
             let param = "?Month=" + month;
             var res = CommonController.getData(CommonController.urlAPI.API_LaySinhNhat, param);
             res.then(
