@@ -257,7 +257,6 @@
     <Compile Include="Controllers\API\QuanLyBangTin\AdminBangTinController.cs" />
     <Compile Include="Controllers\API\QuanLyBangTin\QuanLyBangTinController.cs" />
     <Compile Include="Controllers\API\QuanLyBangTin\ThemTinTucController.cs" />
-    <Compile Include="Controllers\API\QuanLyBangTin\TrangChu01Controller.cs" />
     <Compile Include="Controllers\BangTin\BangTinController.cs" />
     <Compile Include="Controllers\BNLE\Class1.cs" />
     <Compile Include="Controllers\BNLE\FunctionClass.cs" />
@@ -579,7 +578,6 @@
     <Content Include="MyScript\bangtin\ThemBaiViet.js" />
     <Content Include="MyScript\bangtin\TrangChu00Ctrl.js" />
     <Content Include="MyScript\bangtin\QuanLyCtrl.js" />
-    <Content Include="MyScript\bangtin\TrangChu01Ctrl.js" />
     <Content Include="MyScript\bnle\bnleformeditCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridCtrl.js" />
     <Content Include="MyScript\bnle\bnlegridfCtrl.js" />

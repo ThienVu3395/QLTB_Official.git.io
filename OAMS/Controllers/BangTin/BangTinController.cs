@@ -23,10 +23,5 @@ namespace OAMS.Controllers.BangTin
         {
             return View();
         }
-
-        public ActionResult TestTinTuc()
-        {
-            return View();
-        }
     }
 }

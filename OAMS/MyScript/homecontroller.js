@@ -457,23 +457,13 @@
 
                 // Danh sách các APIs
                 var urlAPI = {
-                    // Xài chung
+                    // Trang Chủ
                     API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
                     API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
-                    API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",
-
-                    // Index 00                
+                    API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",              
                     API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_TheoDanhMuc_PhanTrang",
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
-
-                    // Index 01
-                    API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",
-                    API_LayTinXemNhieu: "API/QuanLyBangTin/LayTinXemNhieu",
-                    API_LayTinThongBao: "API/QuanLyBangTin/LayTinThongBao",
-                    API_LayTinSuKien: "API/QuanLyBangTin/LayTinSuKien",
-                    API_LayTinSawaco: "API/QuanLyBangTin/LayTinSawaco",
-                    API_LayTinTuong: "API/QuanLyBangTin/LayTinTuong",
-                    
+              
                     // Thêm Bài Viết
                     API_UploadImage: "API/QuanLyBangTin/UploadImage",
                     API_UploadFile: "API/QuanLyBangTin/UploadFiles",

@@ -369,7 +369,7 @@
                                         <div class="widget-box widget-color-blue">
                                             <div class="widget-body">
                                                 <div class="widget-main">
-                                                    <div class="clearfix" ng-show="DanhSachUser.length > 0">
+                                                    <div class="clearfix" ng-show="DanhSachUser.length > 0"> 
                                                         <div class="itemdiv memberdiv col-lg-4" ng-repeat="item in DanhSachUser track by item.MaNguoiDung">
                                                             <div class="user">
                                                                 <img alt="avatar" src="{{item.HinhAnh}}" />
@@ -613,7 +613,7 @@
                                             @*Nút trở về + chia sẻ*@
                                             <div id="default-buttons">
                                                 <p>
-                                                    <button class="btn btn-xs btn-info">
+                                                    <button class="btn btn-xs btn-info" ng-click="LayDanhSachBaiViet(MaLoaiTin)">
                                                         <i class="ace-icon fa fa-reply icon-only"></i> Trở Về
                                                     </button>
 
@@ -656,7 +656,7 @@
                                 @*/Show Chi Tiết Tin*@
 
                                 @*Thanh phân trang cho tin*@
-                                <ul ng-show="!ttshow && !sinhNhat"
+                                <ul ng-show="!ttshow"
                                     uib-pagination
                                     total-items="totalItems"
                                     items-per-page="itemsPerPage"
