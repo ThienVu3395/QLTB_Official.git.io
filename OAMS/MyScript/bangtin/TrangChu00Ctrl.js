@@ -85,7 +85,6 @@
             res.then(
                 function succ(response) {
                     $scope.BaiVietTuong = response.data;
-                    console.log($scope.BaiVietTuong)
                 },
 
                 function errorCallback(response) {
@@ -132,6 +131,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachUser = response.data;
+                    console.log($scope.DanhSachUser);
                 },
 
                 function errorCallback(response) {
@@ -148,6 +148,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachUser = response.data;
+                    console.log($scope.DanhSachUser);
                 },
 
                 function errorCallback(response) {

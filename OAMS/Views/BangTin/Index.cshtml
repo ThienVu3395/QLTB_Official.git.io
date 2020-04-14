@@ -31,6 +31,14 @@
             font-size: 13px
         }
 
+        .itemdiv.memberdiv {
+            /* width: 175px; */
+            padding: 2px;
+            margin: 3px 0;
+            float: left;
+            border-bottom: 1px solid #E8E8E8;
+        }
+
         h3 {
             font-size: 14px !important;
             min-height: 50px;
@@ -69,6 +77,22 @@
             -moz-transition-delay: 0s;
             -o-transition-delay: 0s;
             transition-delay: 0s;
+        }
+
+        .itemdiv.memberdiv > .body > .name > a {
+            display: inline-block;
+            max-width: 100%;
+            max-height: 18px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+        }
+
+        .itemdiv > .body {
+            width: 100%;
+            margin-left: 50px;
+            margin-right: 12px;
+            position: relative;
         }
     </style>
 }
@@ -345,17 +369,31 @@
                                         <div class="widget-box widget-color-blue">
                                             <div class="widget-body">
                                                 <div class="widget-main">
-                                                    <ul class="list-unstyled spaced2">
-                                                        <li ng-repeat="item in DanhSachUser track by item.MaNguoiDung" ng-show="DanhSachUser.length > 0">
-                                                            <i class="ace-icon fa fa-circle green"></i>
-                                                            {{item.Ten}} ({{item.NgaySinh}}/{{item.ThangSinh}}/{{item.NamSinh}})
-                                                        </li>
+                                                    <div class="clearfix" ng-show="DanhSachUser.length > 0">
+                                                        <div class="itemdiv memberdiv col-lg-4" ng-repeat="item in DanhSachUser track by item.MaNguoiDung">
+                                                            <div class="user">
+                                                                <img alt="avatar" src="{{item.HinhAnh}}" />
+                                                            </div>
 
-                                                        <li ng-show="DanhSachUser.length == 0">
+                                                            <div class="body">
+                                                                <div class="name">
+                                                                    <a href="#">{{item.Ten}}</a>
+                                                                </div>
+
+                                                                <div>
+                                                                    <span class="label label-success label-sm">{{item.NgaySinh}}/{{item.ThangSinh}}/{{item.NamSinh}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <ul class="list-unstyled spaced2" ng-show="DanhSachUser.length == 0">
+                                                        <li>
                                                             <i class="ace-icon fa fa-circle red"></i>
                                                             Không Có Sinh Nhật Trong Tháng {{m}}
                                                         </li>
                                                     </ul>
+
                                                     <a href="#"
                                                        class="btn btn-app btn-info btn-xs"
                                                        ng-repeat="x in [].constructor(12) track by $index"

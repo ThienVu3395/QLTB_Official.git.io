@@ -220,5 +220,30 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             }
             return Ok(dsTinModel);
         }
+
+        [HttpGet]
+        [Route("LaySinhNhat")]
+        public IHttpActionResult LaySinhNhat(int Month)
+        {
+            var dsUser = dbContext.NEWS_NguoiSuDung.Where(x => x.ThangSinh == Month).ToList();
+            List<NguoiDungModel> dsUserModel = new List<NguoiDungModel>();
+            if (dsUser.Count > 0)
+            {
+                foreach (var item in dsUser)
+                {
+                    NguoiDungModel user = new NguoiDungModel();
+                    user.MaNguoiDung = item.MaNguoiDung;
+                    user.Ten = item.Ten;
+                    user.PhongBan = item.NEWS_PhongBan.Ten;
+                    user.NgaySinh = item.NgaySinh;
+                    user.ThangSinh = item.ThangSinh;
+                    user.NamSinh = item.NamSinh;
+                    user.HinhAnh = item.HinhAnh;
+                    dsUserModel.Add(user);
+                }
+                return Ok(dsUserModel);
+            }
+            return Ok(dsUserModel);
+        }
     }
 }

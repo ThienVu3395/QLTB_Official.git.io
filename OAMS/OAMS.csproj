@@ -1877,10 +1877,6 @@
     <Content Include="Views\BangTin\Index.cshtml" />
     <Content Include="Views\BangTin\QuanLy.cshtml" />
     <Content Include="Views\BangTin\SoanBaiViet.cshtml" />
-    <Content Include="Views\BangTin\TestTinTuc.cshtml" />
-    <Content Include="Views\BangTin\DanhMucTin.cshtml" />
-    <Content Include="Views\BangTin\ChiTietTin.cshtml" />
-    <Content Include="Views\BangTin\TestTinTucHai.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataConversation\" />
