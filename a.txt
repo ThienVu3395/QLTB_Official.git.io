@@ -34,6 +34,12 @@ $interval
 - trình bày theo fb ( ok )
 
 
-<a href="@Url.Action("DanhMucTin","BangTin")?MaLoaiTin={{NoiBat1.MaLoaiTin}}" class="white">
+// tiêu đề : 20px
+nút xem chi tiết nhỏ lại
+trích dẫn 
+tin sawaco có tin lq ben duoi
 
-<a href="@Url.Action("ChiTietTin","BangTin")?MaTinTuc={{NoiBat1.MaTinTuc}}">
+logic :
+Check css tieu de da xem - chua xem
+
+-- cắt chữ , hiển thị tin tức k hình có hình , tiêu đề thống nhất 1 kiểu Hoa Thường
