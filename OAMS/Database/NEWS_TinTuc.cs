@@ -33,6 +33,7 @@ namespace OAMS.Database
         public Nullable<int> LuotXem { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
         public string HinhAnh { get; set; }
+        public string HinhAnhDuPhong { get; set; }
         public Nullable<System.DateTime> NgayHetHan { get; set; }
         public Nullable<System.DateTime> NgayHetHanTinMoi { get; set; }
         public Nullable<System.DateTime> NgayHetHanTrangChu { get; set; }

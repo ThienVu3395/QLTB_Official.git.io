@@ -134,7 +134,8 @@
           <Property Name="HienThi" Type="bit" />
           <Property Name="LuotXem" Type="int" />
           <Property Name="TinNoiBat" Type="bit" />
-          <Property Name="HinhAnh" Type="varchar(max)" />
+          <Property Name="HinhAnh" Type="nvarchar(max)" />
+          <Property Name="HinhAnhDuPhong" Type="nvarchar(max)" />
           <Property Name="NgayHetHan" Type="datetime" />
           <Property Name="NgayHetHanTinMoi" Type="datetime" />
           <Property Name="NgayHetHanTrangChu" Type="datetime" />
@@ -1796,7 +1797,7 @@
           <Property Name="HienThi" Type="Boolean" />
           <Property Name="LuotXem" Type="Int32" />
           <Property Name="TinNoiBat" Type="Boolean" />
-          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
           <Property Name="NgayHetHanTinMoi" Type="DateTime" Precision="3" />
           <Property Name="NgayHetHanTrangChu" Type="DateTime" Precision="3" />
@@ -1811,12 +1812,13 @@
           <Property Name="ThangDang" Type="Int32" />
           <Property Name="NamDang" Type="Int32" />
           <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhDuPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
           <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
           <NavigationProperty Name="NEWS_NguoiSuDung2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
           <NavigationProperty Name="NEWS_NguoiSuDung3" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
           <NavigationProperty Name="NEWS_TinTucTapTin" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTuc" ToRole="NEWS_TinTucTapTin" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
           <End Type="dbOAMSModel.NEWS_LoaiTinTuc" Role="NEWS_LoaiTinTuc" Multiplicity="0..1" />
           <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
@@ -2499,6 +2501,7 @@
           <EntitySetMapping Name="NEWS_TinTuc">
             <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
               <MappingFragment StoreEntitySet="NEWS_TinTuc">
+                <ScalarProperty Name="HinhAnhDuPhong" ColumnName="HinhAnhDuPhong" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
                 <ScalarProperty Name="NamDang" ColumnName="NamDang" />
                 <ScalarProperty Name="ThangDang" ColumnName="ThangDang" />

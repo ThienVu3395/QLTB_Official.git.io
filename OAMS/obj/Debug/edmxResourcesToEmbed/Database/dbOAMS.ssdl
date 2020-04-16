@@ -129,7 +129,8 @@
     <Property Name="HienThi" Type="bit" />
     <Property Name="LuotXem" Type="int" />
     <Property Name="TinNoiBat" Type="bit" />
-    <Property Name="HinhAnh" Type="varchar(max)" />
+    <Property Name="HinhAnh" Type="nvarchar(max)" />
+    <Property Name="HinhAnhDuPhong" Type="nvarchar(max)" />
     <Property Name="NgayHetHan" Type="datetime" />
     <Property Name="NgayHetHanTinMoi" Type="datetime" />
     <Property Name="NgayHetHanTrangChu" Type="datetime" />

@@ -369,7 +369,7 @@
                                         <div class="widget-box widget-color-blue">
                                             <div class="widget-body">
                                                 <div class="widget-main">
-                                                    <div class="clearfix" ng-show="DanhSachUser.length > 0"> 
+                                                    <div class="clearfix" ng-show="DanhSachUser.length > 0">
                                                         <div class="itemdiv memberdiv col-lg-4" ng-repeat="item in DanhSachUser track by item.MaNguoiDung">
                                                             <div class="user">
                                                                 <img alt="avatar" src="{{item.HinhAnh}}" />
@@ -475,7 +475,8 @@
                                             <div class="row">
                                                 <div class="col-lg-2">
                                                     <a href="#">
-                                                        <img class="media-object width-100" src="{{item.HinhAnh}}" height="108" ng-click="LayChiTietBaiViet(item.MaTinTuc)" />
+                                                        <img ng-show="item.HinhAnh != null" class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108" ng-click="LayChiTietBaiViet(item.MaTinTuc)" />
+                                                        <img ng-show="item.HinhAnh == null" class="media-object width-100" src="~/Content/image/{{item.HinhAnhDuPhong}}" height="108" ng-click="LayChiTietBaiViet(item.MaTinTuc)" />
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-10">
@@ -485,7 +486,11 @@
                                                     <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
                                                     <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
                                                     <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                                    <p><b>{{item.MoTa | limitTo : 250}}</b></p>
+                                                    <span class="label label-danger" ng-show="item.LuotXem > 0">
+                                                        <i class="ace-icon fa fa-check bigger-120"></i>
+                                                        Đã Xem
+                                                    </span>
+                                                    <p><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{item.MoTa | limitTo : 250}}{{SliceString(item.MoTa,250)}}</b></a></p>
                                                     <button class="btn btn-minier btn-success" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -658,9 +663,13 @@
                                 @*Thanh phân trang cho tin*@
                                 <ul ng-show="!ttshow"
                                     uib-pagination
-                                    total-items="totalItems"
+                                    total-items="bigTotalItems"
+                                    ng-model="bigCurrentPage"
                                     items-per-page="itemsPerPage"
-                                    ng-model="currentPage"
+                                    max-size="maxSize"
+                                    class="pagination-sm"
+                                    boundary-link-numbers="true"
+                                    rotate="false"
                                     ng-change="LayDanhSachBaiViet(MaLoaiTin)">
                                 </ul>
                                 @*/ Thanh phân trang cho tin*@

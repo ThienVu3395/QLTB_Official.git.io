@@ -752,7 +752,7 @@
     <Property Name="HienThi" Type="Boolean" />
     <Property Name="LuotXem" Type="Int32" />
     <Property Name="TinNoiBat" Type="Boolean" />
-    <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
     <Property Name="NgayHetHanTinMoi" Type="DateTime" Precision="3" />
     <Property Name="NgayHetHanTrangChu" Type="DateTime" Precision="3" />
@@ -767,6 +767,7 @@
     <Property Name="ThangDang" Type="Int32" />
     <Property Name="NamDang" Type="Int32" />
     <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnhDuPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
     <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
     <NavigationProperty Name="NEWS_NguoiSuDung2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />

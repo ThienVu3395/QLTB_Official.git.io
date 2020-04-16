@@ -1,37 +1,9 @@
-- Tin tức mới vào hiển thị tin top 10 ( ok )
-- Tin cũ hơn láy tiếp theo top 10 ( em bỏ vì đã có phân trang rồi ) 
-- Bố cục thông báo , ngày giờ nằm dưới tiêu đề , nhỏ hơn màu nhạt hơn td
-- bỏ button bạn đang nghĩ gì
-- Bỏ tường ( minized  , 1/4)
-- Bỏ số hiển thị trong tab , đổi màu icon thành xanh chủ dạo cty
-- De phan trang dưới ds bài viết
-- Giao diện bình luận của tường => table của ace (- Có nút bấm xổ bl)
-
-// sinh nhật
-- 12 tháng nằm ngang
-- phân trang sinh nhật
-
-// Trong menu có select để chọn thông báo nội bộ + tin tức + bảng tin sawaco
-- Chỉnh lại định dạng dd/mm/yyyy
-
-
 /// Tham khảo load trang liền
 $interval	
-
-
-// Tỉ lệ Hình
-- 1920 ( 16:9 hoặc 3:4)
-- Ân luot xem ( ok )
-- Có nút xem chi tiết ( ok )
-- Thông tin chính ở giửa cho tràn ra full mh ( ok )
-- Thông báo + sư kiện giống bố cục thông báo ( ok )
-- Vẫn tiếp tục show ra tin cũ hơn dưới tin theo danh mục
 
 * giao diện chi tiết bv :
 - 1 bài viết có thể  bên tường bên tb , chỉ đc cmt + show cmt bên tường
 * trang chủ :
-- tường cho nhỏ lại ( ok )
-- trình bày theo fb ( ok )
 
 
 // tiêu đề : 20px
@@ -40,6 +12,6 @@ trích dẫn
 tin sawaco có tin lq ben duoi
 
 logic :
-Check css tieu de da xem - chua xem
+Check css tieu de da xem - chua xem ( ok )
 
--- cắt chữ , hiển thị tin tức k hình có hình , tiêu đề thống nhất 1 kiểu Hoa Thường
+-- cắt chữ (ok) , hiển thị tin tức k hình có hình (ok), tiêu đề thống nhất 1 kiểu Hoa Thường(ok)

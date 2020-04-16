@@ -351,6 +351,7 @@
     <EntitySetMapping Name="NEWS_TinTuc">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
         <MappingFragment StoreEntitySet="NEWS_TinTuc">
+          <ScalarProperty Name="HinhAnhDuPhong" ColumnName="HinhAnhDuPhong" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
           <ScalarProperty Name="NamDang" ColumnName="NamDang" />
           <ScalarProperty Name="ThangDang" ColumnName="ThangDang" />

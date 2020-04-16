@@ -63,6 +63,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
+                    tin.HinhAnhDuPhong = item.HinhAnhDuPhong;
                     tin.TinNoiBat = item.TinNoiBat;
                     tin.CountTin = dsTin.Count;
                     tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
@@ -165,6 +166,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 //    }
                 //    tinTuc.BinhLuan = dsBinhLuanModel;
                 //}
+                dsTin.LuotXem += 1;
+                dbContext.SaveChanges();
                 return Ok(tinTuc);
             }
             return Ok("sai rồi");

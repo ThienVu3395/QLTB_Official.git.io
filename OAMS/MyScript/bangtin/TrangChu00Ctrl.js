@@ -1,9 +1,10 @@
 ﻿angular.module("oamsapp")
     .controller("TC00Ctrl", function ($scope, CommonController, $timeout, blockUI) {
         // Hàm + biến khởi tạo ban đầu
-        $scope.totalItems = 64;
-        $scope.currentPage = 1;
         $scope.itemsPerPage = 10;
+        $scope.maxSize = 5;
+        $scope.bigTotalItems = 175;
+        $scope.bigCurrentPage = 1;
         $scope.ttshow = false;
         $scope.TieuDe = "Bảng Tin Tường Công Ty";
 
@@ -16,7 +17,7 @@
                 }
                 else {
                     blockUI.stop();
-                    $scope.currentPage = 1;
+                    $scope.bigCurrentPage = 1;
                     // Tạo biến tháng sinh nhật
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
                     $scope.LayDanhSachBaiViet($scope.MaLoaiTin);
@@ -43,7 +44,7 @@
 
         // Lấy Danh Sách Bài Viết
         $scope.LayDanhSachBaiViet = function (MaLoaiTin) {
-            let limit = ($scope.currentPage - 1) * $scope.itemsPerPage;
+            let limit = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
             $scope.MaLoaiTin = MaLoaiTin;
             $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemsPerPage + "&MaLoaiTin=" + MaLoaiTin;
             var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang, $scope.param);
@@ -53,11 +54,11 @@
                     blockUI.stop();
                     $scope.ttshow = false;
                     if ($scope.DanhSachTinTuc.length > 0) {
-                        $scope.totalItems = $scope.DanhSachTinTuc[0].CountTin;
+                        $scope.bigTotalItems = $scope.DanhSachTinTuc[0].CountTin;
                         $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
                     }
                     else {
-                        $scope.totalItems = 0;
+                        $scope.bigTotalItems = 0;
                         alert("Phần tin này đang cập nhật...");
                     }
                 },
@@ -158,9 +159,9 @@
         // Hàm cắt chữ
         $scope.SliceString = function (string, limit) {
             if (string.length > limit) {
-                string = string.slice(limit, string.length) + "...";
+                return string = "...";
             }
-            return string;
+            else return "";
         }
 
         // Hiển Thị dd/mm/yy
