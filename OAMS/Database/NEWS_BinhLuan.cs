@@ -15,7 +15,7 @@ namespace OAMS.Database
     public partial class NEWS_BinhLuan
     {
         public int MaBinhLuan { get; set; }
-        public int MaTinTuc { get; set; }
+        public int MaBaiViet { get; set; }
         public int MaNguoiDung { get; set; }
         public string NoiDung { get; set; }
         public Nullable<bool> HienThi { get; set; }
@@ -23,6 +23,6 @@ namespace OAMS.Database
         public Nullable<System.TimeSpan> Gio { get; set; }
     
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }
-        public virtual NEWS_TinTuc NEWS_TinTuc { get; set; }
+        public virtual NEWSTUONG_BaiViet NEWSTUONG_BaiViet { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace OAMS.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NEWS_TinTuc()
         {
-            this.NEWS_BinhLuan = new HashSet<NEWS_BinhLuan>();
             this.NEWS_TinTucTapTin = new HashSet<NEWS_TinTucTapTin>();
         }
     
@@ -37,12 +36,22 @@ namespace OAMS.Database
         public Nullable<System.DateTime> NgayHetHan { get; set; }
         public Nullable<System.DateTime> NgayHetHanTinMoi { get; set; }
         public Nullable<System.DateTime> NgayHetHanTrangChu { get; set; }
+        public Nullable<int> NguoiDuyet { get; set; }
+        public Nullable<System.DateTime> NgayDuyet { get; set; }
+        public Nullable<bool> Khoa { get; set; }
+        public Nullable<int> NguoiKhoa { get; set; }
+        public Nullable<System.DateTime> NgayKhoa { get; set; }
+        public string DuongDan { get; set; }
+        public Nullable<int> NgayDang { get; set; }
+        public Nullable<int> ThangDang { get; set; }
+        public Nullable<int> NamDang { get; set; }
+        public string GhiChu { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
         public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung1 { get; set; }
+        public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung2 { get; set; }
+        public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
     }

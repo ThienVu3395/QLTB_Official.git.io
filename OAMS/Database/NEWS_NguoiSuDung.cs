@@ -20,6 +20,12 @@ namespace OAMS.Database
             this.NEWS_BinhLuan = new HashSet<NEWS_BinhLuan>();
             this.NEWS_TinTuc = new HashSet<NEWS_TinTuc>();
             this.NEWS_TinTuc1 = new HashSet<NEWS_TinTuc>();
+            this.NEWS_TinTuc2 = new HashSet<NEWS_TinTuc>();
+            this.NEWS_TinTuc3 = new HashSet<NEWS_TinTuc>();
+            this.NEWSTUONG_BaiViet = new HashSet<NEWSTUONG_BaiViet>();
+            this.NEWSTUONG_BaiViet1 = new HashSet<NEWSTUONG_BaiViet>();
+            this.NEWSTUONG_NhomTinTuong = new HashSet<NEWSTUONG_NhomTinTuong>();
+            this.NEWSTUONG_TinDinhKem = new HashSet<NEWSTUONG_TinDinhKem>();
         }
     
         public int MaNguoiDung { get; set; }
@@ -33,6 +39,7 @@ namespace OAMS.Database
         public Nullable<int> NamSinh { get; set; }
         public Nullable<System.DateTime> SinhNhat { get; set; }
         public string HinhAnh { get; set; }
+        public Nullable<int> SoLuongBaiViet { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
@@ -41,5 +48,17 @@ namespace OAMS.Database
         public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWSTUONG_BaiViet> NEWSTUONG_BaiViet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWSTUONG_BaiViet> NEWSTUONG_BaiViet1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWSTUONG_NhomTinTuong> NEWSTUONG_NhomTinTuong { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWSTUONG_TinDinhKem> NEWSTUONG_TinDinhKem { get; set; }
     }
 }

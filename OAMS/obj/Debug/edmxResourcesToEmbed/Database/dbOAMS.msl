@@ -331,26 +331,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_NguoiSuDung">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_NguoiSuDung">
-        <MappingFragment StoreEntitySet="NEWS_NguoiSuDung">
-          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-          <ScalarProperty Name="SinhNhat" ColumnName="SinhNhat" />
-          <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
-          <ScalarProperty Name="ThangSinh" ColumnName="ThangSinh" />
-          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-          <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NEWS_LoaiTinTuc">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_LoaiTinTuc">
         <MappingFragment StoreEntitySet="NEWS_LoaiTinTuc">
+          <ScalarProperty Name="NotifiedUsers" ColumnName="NotifiedUsers" />
+          <ScalarProperty Name="RequiredApproved" ColumnName="RequiredApproved" />
+          <ScalarProperty Name="IsOnHome" ColumnName="IsOnHome" />
+          <ScalarProperty Name="NumberOfItems" ColumnName="NumberOfItems" />
           <ScalarProperty Name="TemplateDetail" ColumnName="TemplateDetail" />
           <ScalarProperty Name="TemplateList" ColumnName="TemplateList" />
           <ScalarProperty Name="Icon" ColumnName="Icon" />
@@ -361,41 +348,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_BinhLuan">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_BinhLuan">
-        <MappingFragment StoreEntitySet="NEWS_BinhLuan">
-          <ScalarProperty Name="Gio" ColumnName="Gio" />
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="HienThi" ColumnName="HienThi" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
-          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
-          <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_TinTucTapTin">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
-        <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
-          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_PhongBan">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_PhongBan">
-        <MappingFragment StoreEntitySet="NEWS_PhongBan">
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NEWS_TinTuc">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
         <MappingFragment StoreEntitySet="NEWS_TinTuc">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="NamDang" ColumnName="NamDang" />
+          <ScalarProperty Name="ThangDang" ColumnName="ThangDang" />
+          <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+          <ScalarProperty Name="DuongDan" ColumnName="DuongDan" />
+          <ScalarProperty Name="NgayKhoa" ColumnName="NgayKhoa" />
+          <ScalarProperty Name="NguoiKhoa" ColumnName="NguoiKhoa" />
+          <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+          <ScalarProperty Name="NgayDuyet" ColumnName="NgayDuyet" />
+          <ScalarProperty Name="NguoiDuyet" ColumnName="NguoiDuyet" />
           <ScalarProperty Name="NgayHetHanTrangChu" ColumnName="NgayHetHanTrangChu" />
           <ScalarProperty Name="NgayHetHanTinMoi" ColumnName="NgayHetHanTinMoi" />
           <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
@@ -412,6 +377,122 @@
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
           <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
           <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_BinhLuan">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_BinhLuan">
+        <MappingFragment StoreEntitySet="NEWS_BinhLuan">
+          <ScalarProperty Name="Gio" ColumnName="Gio" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="HienThi" ColumnName="HienThi" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
+          <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+          <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_NguoiSuDung">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_NguoiSuDung">
+        <MappingFragment StoreEntitySet="NEWS_NguoiSuDung">
+          <ScalarProperty Name="SoLuongBaiViet" ColumnName="SoLuongBaiViet" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="SinhNhat" ColumnName="SinhNhat" />
+          <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+          <ScalarProperty Name="ThangSinh" ColumnName="ThangSinh" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_PhongBan">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_PhongBan">
+        <MappingFragment StoreEntitySet="NEWS_PhongBan">
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_TinTucTapTin">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
+        <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
+          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWSTUONG_BaiViet">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWSTUONG_BaiViet">
+        <MappingFragment StoreEntitySet="NEWSTUONG_BaiViet">
+          <ScalarProperty Name="IsFavorit" ColumnName="IsFavorit" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LastUpdatedUser" ColumnName="LastUpdatedUser" />
+          <ScalarProperty Name="LastUpdatedUserId" ColumnName="LastUpdatedUserId" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="LastPostId" ColumnName="LastPostId" />
+          <ScalarProperty Name="LastPost" ColumnName="LastPost" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+          <ScalarProperty Name="TotalView" ColumnName="TotalView" />
+          <ScalarProperty Name="TotalReplies" ColumnName="TotalReplies" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ReplyToId" ColumnName="ReplyToId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWSTUONG_NhomTinTuong">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWSTUONG_NhomTinTuong">
+        <MappingFragment StoreEntitySet="NEWSTUONG_NhomTinTuong">
+          <ScalarProperty Name="TopicLastestPostFirst" ColumnName="TopicLastestPostFirst" />
+          <ScalarProperty Name="EditMyPost" ColumnName="EditMyPost" />
+          <ScalarProperty Name="AutoSort" ColumnName="AutoSort" />
+          <ScalarProperty Name="RequirePostPermission" ColumnName="RequirePostPermission" />
+          <ScalarProperty Name="RequireViewPermission" ColumnName="RequireViewPermission" />
+          <ScalarProperty Name="LastTopicId" ColumnName="LastTopicId" />
+          <ScalarProperty Name="LastPostId" ColumnName="LastPostId" />
+          <ScalarProperty Name="LastPost" ColumnName="LastPost" />
+          <ScalarProperty Name="LastUpdatedUserId" ColumnName="LastUpdatedUserId" />
+          <ScalarProperty Name="LastUpdatedUser" ColumnName="LastUpdatedUser" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ViewOrder" ColumnName="ViewOrder" />
+          <ScalarProperty Name="AutoApproved" ColumnName="AutoApproved" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="NumberOfReplies" ColumnName="NumberOfReplies" />
+          <ScalarProperty Name="NumberOfTopics" ColumnName="NumberOfTopics" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWSTUONG_TinDinhKem">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWSTUONG_TinDinhKem">
+        <MappingFragment StoreEntitySet="NEWSTUONG_TinDinhKem">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="OriginalFilename" ColumnName="OriginalFilename" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FileId" ColumnName="FileId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

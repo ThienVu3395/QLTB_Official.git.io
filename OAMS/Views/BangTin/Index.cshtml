@@ -13,10 +13,6 @@
             overflow: hidden
         }
 
-        .col-lg-2{
-            width : 13% !important;
-        }
-
         .no-deco {
             text-decoration: none !important;
         }
@@ -484,14 +480,14 @@
                                                 </div>
                                                 <div class="col-lg-10">
                                                     <h4 class="media-heading">
-                                                        <a href="#" class="blue fs-16 no-deco" ng-click="LayChiTietBaiViet(item.MaTinTuc)">{{ item.TieuDe }}</a>
+                                                        <a href="#" class="blue fs-16 no-deco" ng-click="LayChiTietBaiViet(item.MaTinTuc)">{{capitalize(item.TieuDe)}}</a>
                                                     </h4>
                                                     <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
-                                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY(item.NgayTao)}}
-                                                    @*<i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}*@
-                                                    <p>{{ item.MoTa }}</p>
-                                                    <button class="btn btn-xs btn-success" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
-                                                        Xem Chi Tiết
+                                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
+                                                    <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
+                                                    <p><b>{{item.MoTa | limitTo : 250}}</b></p>
+                                                    <button class="btn btn-minier btn-success" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
+                                                        Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </button>
                                                 </div>

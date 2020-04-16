@@ -463,6 +463,9 @@
                     API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",              
                     API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_TheoDanhMuc_PhanTrang",
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
+
+                    // Trang chủ dự phòng
+                    API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",
               
                     // Thêm Bài Viết
                     API_UploadImage: "API/QuanLyBangTin/UploadImage",

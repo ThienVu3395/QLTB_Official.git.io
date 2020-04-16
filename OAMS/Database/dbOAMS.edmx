@@ -67,11 +67,9 @@
         <EntityType Name="NEWS_BinhLuan">
           <Key>
             <PropertyRef Name="MaBinhLuan" />
-            <PropertyRef Name="MaTinTuc" />
-            <PropertyRef Name="MaNguoiDung" />
           </Key>
           <Property Name="MaBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaTinTuc" Type="int" Nullable="false" />
+          <Property Name="MaBaiViet" Type="int" Nullable="false" />
           <Property Name="MaNguoiDung" Type="int" Nullable="false" />
           <Property Name="NoiDung" Type="nvarchar(max)" />
           <Property Name="HienThi" Type="bit" />
@@ -89,6 +87,10 @@
           <Property Name="Icon" Type="varchar" MaxLength="50" />
           <Property Name="TemplateList" Type="int" />
           <Property Name="TemplateDetail" Type="int" />
+          <Property Name="NumberOfItems" Type="int" />
+          <Property Name="IsOnHome" Type="bit" />
+          <Property Name="RequiredApproved" Type="bit" />
+          <Property Name="NotifiedUsers" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="NEWS_NguoiSuDung">
           <Key>
@@ -105,6 +107,7 @@
           <Property Name="NamSinh" Type="int" />
           <Property Name="SinhNhat" Type="date" />
           <Property Name="HinhAnh" Type="varchar" MaxLength="500" />
+          <Property Name="SoLuongBaiViet" Type="int" />
         </EntityType>
         <EntityType Name="NEWS_PhongBan">
           <Key>
@@ -123,16 +126,26 @@
           <Property Name="MoTa" Type="nvarchar(max)" />
           <Property Name="MaLoaiTin" Type="int" />
           <Property Name="NguoiTao" Type="int" />
-          <Property Name="NgayTao" Type="date" />
-          <Property Name="NgayCapNhat" Type="date" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayCapNhat" Type="datetime" />
           <Property Name="NguoiCapNhat" Type="int" />
+          <Property Name="NguoiDuyet" Type="int" />
+          <Property Name="NgayDuyet" Type="datetime" />
           <Property Name="HienThi" Type="bit" />
           <Property Name="LuotXem" Type="int" />
           <Property Name="TinNoiBat" Type="bit" />
           <Property Name="HinhAnh" Type="varchar(max)" />
-          <Property Name="NgayHetHan" Type="date" />
-          <Property Name="NgayHetHanTinMoi" Type="date" />
-          <Property Name="NgayHetHanTrangChu" Type="date" />
+          <Property Name="NgayHetHan" Type="datetime" />
+          <Property Name="NgayHetHanTinMoi" Type="datetime" />
+          <Property Name="NgayHetHanTrangChu" Type="datetime" />
+          <Property Name="Khoa" Type="bit" />
+          <Property Name="NguoiKhoa" Type="int" />
+          <Property Name="NgayKhoa" Type="datetime" />
+          <Property Name="DuongDan" Type="varchar" MaxLength="30" />
+          <Property Name="NgayDang" Type="int" />
+          <Property Name="ThangDang" Type="int" />
+          <Property Name="NamDang" Type="int" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NEWS_TinTucTapTin">
           <Key>
@@ -143,6 +156,69 @@
           <Property Name="Ten" Type="nchar" MaxLength="250" />
           <Property Name="Url" Type="nchar" MaxLength="500" />
           <Property Name="Ngay" Type="date" />
+        </EntityType>
+        <EntityType Name="NEWSTUONG_BaiViet">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="ReplyToId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Content" Type="ntext" />
+          <Property Name="TotalReplies" Type="int" />
+          <Property Name="TotalView" Type="int" />
+          <Property Name="CreatedUserId" Type="int" />
+          <Property Name="CreatedUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastPost" Type="nvarchar" MaxLength="150" />
+          <Property Name="LastPostId" Type="int" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedUserId" Type="int" />
+          <Property Name="LastUpdatedUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="IsFavorit" Type="bit" />
+        </EntityType>
+        <EntityType Name="NEWSTUONG_NhomTinTuong">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NumberOfTopics" Type="int" />
+          <Property Name="NumberOfReplies" Type="int" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+          <Property Name="AutoApproved" Type="bit" />
+          <Property Name="ViewOrder" Type="int" />
+          <Property Name="CreatedDate" Type="char" MaxLength="10" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedUser" Type="varchar" MaxLength="50" />
+          <Property Name="LastUpdatedUserId" Type="int" />
+          <Property Name="LastPost" Type="nvarchar" MaxLength="150" />
+          <Property Name="LastPostId" Type="int" />
+          <Property Name="LastTopicId" Type="int" />
+          <Property Name="RequireViewPermission" Type="bit" />
+          <Property Name="RequirePostPermission" Type="bit" />
+          <Property Name="AutoSort" Type="bit" />
+          <Property Name="EditMyPost" Type="char" MaxLength="1" />
+          <Property Name="TopicLastestPostFirst" Type="bit" />
+        </EntityType>
+        <EntityType Name="NEWSTUONG_TinDinhKem">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FileSize" Type="varchar" MaxLength="20" />
+          <Property Name="OriginalFilename" Type="nvarchar" MaxLength="100" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="tbFilecongvan">
           <Key>
@@ -390,7 +466,7 @@
           <Property Name="USERNAME" Type="nvarchar" MaxLength="256" />
           <Property Name="MANHOM" Type="nvarchar" MaxLength="10" />
         </EntityType>
-        <Association Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
+        <Association Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung1">
           <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="1" />
           <End Role="NEWS_BinhLuan" Type="Self.NEWS_BinhLuan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -402,15 +478,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NEWS_BinhLuan_NEWS_TinTuc">
-          <End Role="NEWS_TinTuc" Type="Self.NEWS_TinTuc" Multiplicity="1" />
+        <Association Name="FK_NEWS_BinhLuan_NEWSTUONG_BaiViet">
+          <End Role="NEWSTUONG_BaiViet" Type="Self.NEWSTUONG_BaiViet" Multiplicity="1" />
           <End Role="NEWS_BinhLuan" Type="Self.NEWS_BinhLuan" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="NEWS_TinTuc">
-              <PropertyRef Name="MaTinTuc" />
+            <Principal Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="PostId" />
             </Principal>
             <Dependent Role="NEWS_BinhLuan">
-              <PropertyRef Name="MaTinTuc" />
+              <PropertyRef Name="MaBaiViet" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -462,6 +538,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung2">
+          <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Role="NEWS_TinTuc" Type="Self.NEWS_TinTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWS_TinTuc">
+              <PropertyRef Name="NguoiDuyet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung3">
+          <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Role="NEWS_TinTuc" Type="Self.NEWS_TinTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWS_TinTuc">
+              <PropertyRef Name="NguoiKhoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
           <End Role="NEWS_TinTuc" Type="Self.NEWS_TinTuc" Multiplicity="1" />
           <End Role="NEWS_TinTucTapTin" Type="Self.NEWS_TinTucTapTin" Multiplicity="*" />
@@ -471,6 +571,90 @@
             </Principal>
             <Dependent Role="NEWS_TinTucTapTin">
               <PropertyRef Name="MaTinTuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung">
+          <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Role="NEWSTUONG_BaiViet" Type="Self.NEWSTUONG_BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1">
+          <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Role="NEWSTUONG_BaiViet" Type="Self.NEWSTUONG_BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="LastUpdatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong">
+          <End Role="NEWSTUONG_NhomTinTuong" Type="Self.NEWSTUONG_NhomTinTuong" Multiplicity="0..1" />
+          <End Role="NEWSTUONG_BaiViet" Type="Self.NEWSTUONG_BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSTUONG_NhomTinTuong">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung">
+          <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Role="NEWSTUONG_NhomTinTuong" Type="Self.NEWSTUONG_NhomTinTuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_NhomTinTuong">
+              <PropertyRef Name="LastUpdatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung">
+          <End Role="NEWS_NguoiSuDung" Type="Self.NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Role="NEWSTUONG_TinDinhKem" Type="Self.NEWSTUONG_TinDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_TinDinhKem">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet">
+          <End Role="NEWSTUONG_BaiViet" Type="Self.NEWSTUONG_BaiViet" Multiplicity="0..1" />
+          <End Role="NEWSTUONG_TinDinhKem" Type="Self.NEWSTUONG_TinDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_TinDinhKem">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong">
+          <End Role="NEWSTUONG_NhomTinTuong" Type="Self.NEWSTUONG_NhomTinTuong" Multiplicity="0..1" />
+          <End Role="NEWSTUONG_TinDinhKem" Type="Self.NEWSTUONG_TinDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSTUONG_NhomTinTuong">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_TinDinhKem">
+              <PropertyRef Name="GroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -705,6 +889,9 @@
           <EntitySet Name="NEWS_PhongBan" EntityType="Self.NEWS_PhongBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NEWS_TinTuc" EntityType="Self.NEWS_TinTuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NEWS_TinTucTapTin" EntityType="Self.NEWS_TinTucTapTin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NEWSTUONG_BaiViet" EntityType="Self.NEWSTUONG_BaiViet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NEWSTUONG_NhomTinTuong" EntityType="Self.NEWSTUONG_NhomTinTuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NEWSTUONG_TinDinhKem" EntityType="Self.NEWSTUONG_TinDinhKem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbFilecongvan" EntityType="Self.tbFilecongvan" Schema="doc" store:Type="Tables" />
           <EntitySet Name="tbFiledinhkem" EntityType="Self.tbFiledinhkem" Schema="doc" store:Type="Tables" />
           <EntitySet Name="tbFilexuly" EntityType="Self.tbFilexuly" Schema="doc" store:Type="Tables" />
@@ -724,12 +911,12 @@
           <EntitySet Name="tbNhom" EntityType="Self.tbNhom" Schema="users" store:Type="Tables" />
           <EntitySet Name="tbNhom_Chucnang" EntityType="Self.tbNhom_Chucnang" Schema="users" store:Type="Tables" />
           <EntitySet Name="tbNhom_Users" EntityType="Self.tbNhom_Users" Schema="users" store:Type="Tables" />
-          <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung" Association="Self.FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
+          <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung1" Association="Self.FK_NEWS_BinhLuan_NEWS_NguoiSuDung1">
             <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
             <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_TinTuc" Association="Self.FK_NEWS_BinhLuan_NEWS_TinTuc">
-            <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
+          <AssociationSet Name="FK_NEWS_BinhLuan_NEWSTUONG_BaiViet" Association="Self.FK_NEWS_BinhLuan_NEWSTUONG_BaiViet">
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
             <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
           </AssociationSet>
           <AssociationSet Name="FK_NEWS_NguoiSuDung_NEWS_PhongBan" Association="Self.FK_NEWS_NguoiSuDung_NEWS_PhongBan">
@@ -748,9 +935,45 @@
             <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
             <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
           </AssociationSet>
+          <AssociationSet Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung2" Association="Self.FK_NEWS_TinTuc_NEWS_NguoiSuDung2">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung3" Association="Self.FK_NEWS_TinTuc_NEWS_NguoiSuDung3">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
+          </AssociationSet>
           <AssociationSet Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1" Association="Self.FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
             <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
             <End Role="NEWS_TinTucTapTin" EntitySet="NEWS_TinTucTapTin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" Association="Self.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" Association="Self.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" Association="Self.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong">
+            <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung" Association="Self.FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung" Association="Self.FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" Association="Self.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet">
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+            <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong" Association="Self.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong">
+            <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
+            <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
           </AssociationSet>
           <AssociationSet Name="FK_tbChucnang_tbNhomchucnang1" Association="Self.FK_tbChucnang_tbNhomchucnang1">
             <End Role="tbNhomchucnang" EntitySet="tbNhomchucnang" />
@@ -911,27 +1134,30 @@
             <End Role="tbWorkflow" EntitySet="tbWorkflows" />
             <End Role="tbYkienxuly" EntitySet="tbYkienxulies" />
           </AssociationSet>
-          <EntitySet Name="NEWS_NguoiSuDung" EntityType="dbOAMSModel.NEWS_NguoiSuDung" />
           <EntitySet Name="NEWS_LoaiTinTuc" EntityType="dbOAMSModel.NEWS_LoaiTinTuc" />
-          <EntitySet Name="NEWS_BinhLuan" EntityType="dbOAMSModel.NEWS_BinhLuan" />
-          <EntitySet Name="NEWS_TinTucTapTin" EntityType="dbOAMSModel.NEWS_TinTucTapTin" />
-          <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
-            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
-            <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
-          </AssociationSet>
-          <EntitySet Name="NEWS_PhongBan" EntityType="dbOAMSModel.NEWS_PhongBan" />
-          <AssociationSet Name="FK_NEWS_NguoiSuDung_NEWS_PhongBan" Association="dbOAMSModel.FK_NEWS_NguoiSuDung_NEWS_PhongBan">
-            <End Role="NEWS_PhongBan" EntitySet="NEWS_PhongBan" />
-            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
-          </AssociationSet>
           <EntitySet Name="NEWS_TinTuc" EntityType="dbOAMSModel.NEWS_TinTuc" />
-          <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_TinTuc" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc">
-            <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
-            <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
-          </AssociationSet>
           <AssociationSet Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc" Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
             <End Role="NEWS_LoaiTinTuc" EntitySet="NEWS_LoaiTinTuc" />
             <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
+          </AssociationSet>
+          <EntitySet Name="NEWS_BinhLuan" EntityType="dbOAMSModel.NEWS_BinhLuan" />
+          <EntitySet Name="NEWS_NguoiSuDung" EntityType="dbOAMSModel.NEWS_NguoiSuDung" />
+          <EntitySet Name="NEWS_PhongBan" EntityType="dbOAMSModel.NEWS_PhongBan" />
+          <EntitySet Name="NEWS_TinTucTapTin" EntityType="dbOAMSModel.NEWS_TinTucTapTin" />
+          <EntitySet Name="NEWSTUONG_BaiViet" EntityType="dbOAMSModel.NEWSTUONG_BaiViet" />
+          <EntitySet Name="NEWSTUONG_NhomTinTuong" EntityType="dbOAMSModel.NEWSTUONG_NhomTinTuong" />
+          <EntitySet Name="NEWSTUONG_TinDinhKem" EntityType="dbOAMSModel.NEWSTUONG_TinDinhKem" />
+          <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung1" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung1">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWS_BinhLuan_NEWSTUONG_BaiViet" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWSTUONG_BaiViet">
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+            <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWS_NguoiSuDung_NEWS_PhongBan" Association="dbOAMSModel.FK_NEWS_NguoiSuDung_NEWS_PhongBan">
+            <End Role="NEWS_PhongBan" EntitySet="NEWS_PhongBan" />
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
           </AssociationSet>
           <AssociationSet Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung">
             <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
@@ -941,9 +1167,45 @@
             <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
             <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
           </AssociationSet>
+          <AssociationSet Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung2" Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung3" Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung">
+            <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+            <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
+          </AssociationSet>
           <AssociationSet Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1" Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
             <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
             <End Role="NEWS_TinTucTapTin" EntitySet="NEWS_TinTucTapTin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong">
+            <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet">
+            <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+            <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong" Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong">
+            <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
+            <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="tbChucnang">
@@ -1501,6 +1763,86 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="NEWS_LoaiTinTuc">
+          <Key>
+            <PropertyRef Name="MaLoaiTin" />
+          </Key>
+          <Property Name="MaLoaiTin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="ThuTuHienThi" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TemplateList" Type="Int32" />
+          <Property Name="TemplateDetail" Type="Int32" />
+          <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" FromRole="NEWS_LoaiTinTuc" ToRole="NEWS_TinTuc" />
+          <Property Name="NumberOfItems" Type="Int32" />
+          <Property Name="IsOnHome" Type="Boolean" />
+          <Property Name="RequiredApproved" Type="Boolean" />
+          <Property Name="NotifiedUsers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NEWS_TinTuc">
+          <Key>
+            <PropertyRef Name="MaTinTuc" />
+          </Key>
+          <Property Name="MaTinTuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoaiTin" Type="Int32" />
+          <Property Name="NguoiTao" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+          <Property Name="NguoiCapNhat" Type="Int32" />
+          <Property Name="HienThi" Type="Boolean" />
+          <Property Name="LuotXem" Type="Int32" />
+          <Property Name="TinNoiBat" Type="Boolean" />
+          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
+          <Property Name="NgayHetHanTinMoi" Type="DateTime" Precision="3" />
+          <Property Name="NgayHetHanTrangChu" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NEWS_LoaiTinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" FromRole="NEWS_TinTuc" ToRole="NEWS_LoaiTinTuc" />
+          <Property Name="NguoiDuyet" Type="Int32" />
+          <Property Name="NgayDuyet" Type="DateTime" Precision="3" />
+          <Property Name="Khoa" Type="Boolean" />
+          <Property Name="NguoiKhoa" Type="Int32" />
+          <Property Name="NgayKhoa" Type="DateTime" Precision="3" />
+          <Property Name="DuongDan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NgayDang" Type="Int32" />
+          <Property Name="ThangDang" Type="Int32" />
+          <Property Name="NamDang" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWS_NguoiSuDung2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWS_NguoiSuDung3" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWS_TinTucTapTin" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTuc" ToRole="NEWS_TinTucTapTin" />
+        </EntityType>
+        <Association Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
+          <End Type="dbOAMSModel.NEWS_LoaiTinTuc" Role="NEWS_LoaiTinTuc" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_LoaiTinTuc">
+              <PropertyRef Name="MaLoaiTin" />
+            </Principal>
+            <Dependent Role="NEWS_TinTuc">
+              <PropertyRef Name="MaLoaiTin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NEWS_BinhLuan">
+          <Key>
+            <PropertyRef Name="MaBinhLuan" />
+          </Key>
+          <Property Name="MaBinhLuan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaBaiViet" Type="Int32" Nullable="false" />
+          <Property Name="MaNguoiDung" Type="Int32" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HienThi" Type="Boolean" />
+          <Property Name="Ngay" Type="DateTime" Precision="0" />
+          <Property Name="Gio" Type="Time" Precision="7" />
+          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung1" FromRole="NEWS_BinhLuan" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWSTUONG_BaiViet" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWSTUONG_BaiViet" FromRole="NEWS_BinhLuan" ToRole="NEWSTUONG_BaiViet" />
+        </EntityType>
         <EntityType Name="NEWS_NguoiSuDung">
           <Key>
             <PropertyRef Name="MaNguoiDung" />
@@ -1516,39 +1858,25 @@
           <Property Name="NamSinh" Type="Int32" />
           <Property Name="SinhNhat" Type="DateTime" Precision="0" />
           <Property Name="HinhAnh" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="NEWS_BinhLuan" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_BinhLuan" />
+          <Property Name="SoLuongBaiViet" Type="Int32" />
+          <NavigationProperty Name="NEWS_BinhLuan" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung1" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_BinhLuan" />
           <NavigationProperty Name="NEWS_PhongBan" Relationship="dbOAMSModel.FK_NEWS_NguoiSuDung_NEWS_PhongBan" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_PhongBan" />
           <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
           <NavigationProperty Name="NEWS_TinTuc1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
-          </EntityType>
-        <EntityType Name="NEWS_LoaiTinTuc">
-          <Key>
-            <PropertyRef Name="MaLoaiTin" />
-          </Key>
-          <Property Name="MaLoaiTin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ten" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThai" Type="Boolean" />
-          <Property Name="ThuTuHienThi" Type="Int32" />
-          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TemplateList" Type="Int32" />
-          <Property Name="TemplateDetail" Type="Int32" />
-          <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" FromRole="NEWS_LoaiTinTuc" ToRole="NEWS_TinTuc" />
+          <NavigationProperty Name="NEWS_TinTuc2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
+          <NavigationProperty Name="NEWS_TinTuc3" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
+          <NavigationProperty Name="NEWSTUONG_BaiViet" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_BaiViet" />
+          <NavigationProperty Name="NEWSTUONG_BaiViet1" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_BaiViet" />
+          <NavigationProperty Name="NEWSTUONG_NhomTinTuong" Relationship="dbOAMSModel.FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_NhomTinTuong" />
+          <NavigationProperty Name="NEWSTUONG_TinDinhKem" Relationship="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_TinDinhKem" />
         </EntityType>
-        <EntityType Name="NEWS_BinhLuan">
+        <EntityType Name="NEWS_PhongBan">
           <Key>
-            <PropertyRef Name="MaBinhLuan" />
-            <PropertyRef Name="MaTinTuc" />
-            <PropertyRef Name="MaNguoiDung" />
+            <PropertyRef Name="MaPhongBan" />
           </Key>
-          <Property Name="MaBinhLuan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaTinTuc" Type="Int32" Nullable="false" />
-          <Property Name="MaNguoiDung" Type="Int32" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HienThi" Type="Boolean" />
-          <Property Name="Ngay" Type="DateTime" Precision="0" />
-          <Property Name="Gio" Type="Time" Precision="7" />
-          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung" FromRole="NEWS_BinhLuan" ToRole="NEWS_NguoiSuDung" />
-          <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc" FromRole="NEWS_BinhLuan" ToRole="NEWS_TinTuc" />
+          <Property Name="MaPhongBan" Type="Int32" Nullable="false" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_NguoiSuDung_NEWS_PhongBan" FromRole="NEWS_PhongBan" ToRole="NEWS_NguoiSuDung" />
         </EntityType>
         <EntityType Name="NEWS_TinTucTapTin">
           <Key>
@@ -1561,7 +1889,81 @@
           <Property Name="Ngay" Type="DateTime" Precision="0" />
           <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTucTapTin" ToRole="NEWS_TinTuc" />
         </EntityType>
-        <Association Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung">
+        <EntityType Name="NEWSTUONG_BaiViet">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="ReplyToId" Type="Int32" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalReplies" Type="Int32" />
+          <Property Name="TotalView" Type="Int32" />
+          <Property Name="CreatedUserId" Type="Int32" />
+          <Property Name="CreatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastPost" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LastPostId" Type="Int32" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedUserId" Type="Int32" />
+          <Property Name="LastUpdatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="IsFavorit" Type="Boolean" />
+          <NavigationProperty Name="NEWS_BinhLuan" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWSTUONG_BaiViet" FromRole="NEWSTUONG_BaiViet" ToRole="NEWS_BinhLuan" />
+          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" FromRole="NEWSTUONG_BaiViet" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" FromRole="NEWSTUONG_BaiViet" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWSTUONG_NhomTinTuong" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" FromRole="NEWSTUONG_BaiViet" ToRole="NEWSTUONG_NhomTinTuong" />
+          <NavigationProperty Name="NEWSTUONG_TinDinhKem" Relationship="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" FromRole="NEWSTUONG_BaiViet" ToRole="NEWSTUONG_TinDinhKem" />
+        </EntityType>
+        <EntityType Name="NEWSTUONG_NhomTinTuong">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfTopics" Type="Int32" />
+          <Property Name="NumberOfReplies" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="AutoApproved" Type="Boolean" />
+          <Property Name="ViewOrder" Type="Int32" />
+          <Property Name="CreatedDate" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdatedUserId" Type="Int32" />
+          <Property Name="LastPost" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LastPostId" Type="Int32" />
+          <Property Name="LastTopicId" Type="Int32" />
+          <Property Name="RequireViewPermission" Type="Boolean" />
+          <Property Name="RequirePostPermission" Type="Boolean" />
+          <Property Name="AutoSort" Type="Boolean" />
+          <Property Name="EditMyPost" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TopicLastestPostFirst" Type="Boolean" />
+          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung" FromRole="NEWSTUONG_NhomTinTuong" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWSTUONG_BaiViet" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" FromRole="NEWSTUONG_NhomTinTuong" ToRole="NEWSTUONG_BaiViet" />
+          <NavigationProperty Name="NEWSTUONG_TinDinhKem" Relationship="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong" FromRole="NEWSTUONG_NhomTinTuong" ToRole="NEWSTUONG_TinDinhKem" />
+        </EntityType>
+        <EntityType Name="NEWSTUONG_TinDinhKem">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FileSize" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OriginalFilename" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="PostId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung" FromRole="NEWSTUONG_TinDinhKem" ToRole="NEWS_NguoiSuDung" />
+          <NavigationProperty Name="NEWSTUONG_BaiViet" Relationship="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" FromRole="NEWSTUONG_TinDinhKem" ToRole="NEWSTUONG_BaiViet" />
+          <NavigationProperty Name="NEWSTUONG_NhomTinTuong" Relationship="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong" FromRole="NEWSTUONG_TinDinhKem" ToRole="NEWSTUONG_NhomTinTuong" />
+        </EntityType>
+        <Association Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung1">
           <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="1" />
           <End Type="dbOAMSModel.NEWS_BinhLuan" Role="NEWS_BinhLuan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1573,14 +1975,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="NEWS_PhongBan">
-          <Key>
-            <PropertyRef Name="MaPhongBan" />
-          </Key>
-          <Property Name="MaPhongBan" Type="Int32" Nullable="false" />
-          <Property Name="Ten" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_NguoiSuDung_NEWS_PhongBan" FromRole="NEWS_PhongBan" ToRole="NEWS_NguoiSuDung" />
-        </EntityType>
+        <Association Name="FK_NEWS_BinhLuan_NEWSTUONG_BaiViet">
+          <End Type="dbOAMSModel.NEWSTUONG_BaiViet" Role="NEWSTUONG_BaiViet" Multiplicity="1" />
+          <End Type="dbOAMSModel.NEWS_BinhLuan" Role="NEWS_BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="NEWS_BinhLuan">
+              <PropertyRef Name="MaBaiViet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NEWS_NguoiSuDung_NEWS_PhongBan">
           <End Type="dbOAMSModel.NEWS_PhongBan" Role="NEWS_PhongBan" Multiplicity="1" />
           <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="*" />
@@ -1590,56 +1996,6 @@
             </Principal>
             <Dependent Role="NEWS_NguoiSuDung">
               <PropertyRef Name="MaPhongBan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="NEWS_TinTuc">
-          <Key>
-            <PropertyRef Name="MaTinTuc" />
-          </Key>
-          <Property Name="MaTinTuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MaLoaiTin" Type="Int32" />
-          <Property Name="NguoiTao" Type="Int32" />
-          <Property Name="NgayTao" Type="DateTime" Precision="0" />
-          <Property Name="NgayCapNhat" Type="DateTime" Precision="0" />
-          <Property Name="NguoiCapNhat" Type="Int32" />
-          <Property Name="HienThi" Type="Boolean" />
-          <Property Name="LuotXem" Type="Int32" />
-          <Property Name="TinNoiBat" Type="Boolean" />
-          <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="NgayHetHan" Type="DateTime" Precision="0" />
-          <Property Name="NgayHetHanTinMoi" Type="DateTime" Precision="0" />
-          <Property Name="NgayHetHanTrangChu" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="NEWS_BinhLuan" Relationship="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_TinTuc" FromRole="NEWS_TinTuc" ToRole="NEWS_BinhLuan" />
-          <NavigationProperty Name="NEWS_LoaiTinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" FromRole="NEWS_TinTuc" ToRole="NEWS_LoaiTinTuc" />
-          <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
-          <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
-          <NavigationProperty Name="NEWS_TinTucTapTin" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTuc" ToRole="NEWS_TinTucTapTin" />
-        </EntityType>
-        <Association Name="FK_NEWS_BinhLuan_NEWS_TinTuc">
-          <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="1" />
-          <End Type="dbOAMSModel.NEWS_BinhLuan" Role="NEWS_BinhLuan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NEWS_TinTuc">
-              <PropertyRef Name="MaTinTuc" />
-            </Principal>
-            <Dependent Role="NEWS_BinhLuan">
-              <PropertyRef Name="MaTinTuc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
-          <End Type="dbOAMSModel.NEWS_LoaiTinTuc" Role="NEWS_LoaiTinTuc" Multiplicity="0..1" />
-          <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NEWS_LoaiTinTuc">
-              <PropertyRef Name="MaLoaiTin" />
-            </Principal>
-            <Dependent Role="NEWS_TinTuc">
-              <PropertyRef Name="MaLoaiTin" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1667,6 +2023,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung2">
+          <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWS_TinTuc">
+              <PropertyRef Name="NguoiDuyet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung3">
+          <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWS_TinTuc">
+              <PropertyRef Name="NguoiKhoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung">
+          <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWSTUONG_BaiViet" Role="NEWSTUONG_BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1">
+          <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWSTUONG_BaiViet" Role="NEWSTUONG_BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="LastUpdatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung">
+          <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWSTUONG_NhomTinTuong" Role="NEWSTUONG_NhomTinTuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_NhomTinTuong">
+              <PropertyRef Name="LastUpdatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung">
+          <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWSTUONG_TinDinhKem" Role="NEWSTUONG_TinDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWS_NguoiSuDung">
+              <PropertyRef Name="MaNguoiDung" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_TinDinhKem">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
           <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="1" />
           <End Type="dbOAMSModel.NEWS_TinTucTapTin" Role="NEWS_TinTucTapTin" Multiplicity="*" />
@@ -1676,6 +2104,42 @@
             </Principal>
             <Dependent Role="NEWS_TinTucTapTin">
               <PropertyRef Name="MaTinTuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong">
+          <End Type="dbOAMSModel.NEWSTUONG_NhomTinTuong" Role="NEWSTUONG_NhomTinTuong" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWSTUONG_BaiViet" Role="NEWSTUONG_BaiViet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSTUONG_NhomTinTuong">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet">
+          <End Type="dbOAMSModel.NEWSTUONG_BaiViet" Role="NEWSTUONG_BaiViet" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWSTUONG_TinDinhKem" Role="NEWSTUONG_TinDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSTUONG_BaiViet">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_TinDinhKem">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong">
+          <End Type="dbOAMSModel.NEWSTUONG_NhomTinTuong" Role="NEWSTUONG_NhomTinTuong" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.NEWSTUONG_TinDinhKem" Role="NEWSTUONG_TinDinhKem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSTUONG_NhomTinTuong">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="NEWSTUONG_TinDinhKem">
+              <PropertyRef Name="GroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2015,26 +2479,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NEWS_NguoiSuDung">
-            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_NguoiSuDung">
-              <MappingFragment StoreEntitySet="NEWS_NguoiSuDung">
-                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-                <ScalarProperty Name="SinhNhat" ColumnName="SinhNhat" />
-                <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
-                <ScalarProperty Name="ThangSinh" ColumnName="ThangSinh" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NEWS_LoaiTinTuc">
             <EntityTypeMapping TypeName="dbOAMSModel.NEWS_LoaiTinTuc">
               <MappingFragment StoreEntitySet="NEWS_LoaiTinTuc">
+                <ScalarProperty Name="NotifiedUsers" ColumnName="NotifiedUsers" />
+                <ScalarProperty Name="RequiredApproved" ColumnName="RequiredApproved" />
+                <ScalarProperty Name="IsOnHome" ColumnName="IsOnHome" />
+                <ScalarProperty Name="NumberOfItems" ColumnName="NumberOfItems" />
                 <ScalarProperty Name="TemplateDetail" ColumnName="TemplateDetail" />
                 <ScalarProperty Name="TemplateList" ColumnName="TemplateList" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
@@ -2045,41 +2496,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NEWS_BinhLuan">
-            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_BinhLuan">
-              <MappingFragment StoreEntitySet="NEWS_BinhLuan">
-                <ScalarProperty Name="Gio" ColumnName="Gio" />
-                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-                <ScalarProperty Name="HienThi" ColumnName="HienThi" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
-                <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
-                <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NEWS_TinTucTapTin">
-            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
-              <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
-                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
-                <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NEWS_PhongBan">
-            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_PhongBan">
-              <MappingFragment StoreEntitySet="NEWS_PhongBan">
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NEWS_TinTuc">
             <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTuc">
               <MappingFragment StoreEntitySet="NEWS_TinTuc">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NamDang" ColumnName="NamDang" />
+                <ScalarProperty Name="ThangDang" ColumnName="ThangDang" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="DuongDan" ColumnName="DuongDan" />
+                <ScalarProperty Name="NgayKhoa" ColumnName="NgayKhoa" />
+                <ScalarProperty Name="NguoiKhoa" ColumnName="NguoiKhoa" />
+                <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+                <ScalarProperty Name="NgayDuyet" ColumnName="NgayDuyet" />
+                <ScalarProperty Name="NguoiDuyet" ColumnName="NguoiDuyet" />
                 <ScalarProperty Name="NgayHetHanTrangChu" ColumnName="NgayHetHanTrangChu" />
                 <ScalarProperty Name="NgayHetHanTinMoi" ColumnName="NgayHetHanTinMoi" />
                 <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
@@ -2096,6 +2525,122 @@
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
                 <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWS_BinhLuan">
+            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_BinhLuan">
+              <MappingFragment StoreEntitySet="NEWS_BinhLuan">
+                <ScalarProperty Name="Gio" ColumnName="Gio" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="HienThi" ColumnName="HienThi" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
+                <ScalarProperty Name="MaBaiViet" ColumnName="MaBaiViet" />
+                <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWS_NguoiSuDung">
+            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_NguoiSuDung">
+              <MappingFragment StoreEntitySet="NEWS_NguoiSuDung">
+                <ScalarProperty Name="SoLuongBaiViet" ColumnName="SoLuongBaiViet" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="SinhNhat" ColumnName="SinhNhat" />
+                <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+                <ScalarProperty Name="ThangSinh" ColumnName="ThangSinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaNguoiDung" ColumnName="MaNguoiDung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWS_PhongBan">
+            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_PhongBan">
+              <MappingFragment StoreEntitySet="NEWS_PhongBan">
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWS_TinTucTapTin">
+            <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
+              <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
+                <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWSTUONG_BaiViet">
+            <EntityTypeMapping TypeName="dbOAMSModel.NEWSTUONG_BaiViet">
+              <MappingFragment StoreEntitySet="NEWSTUONG_BaiViet">
+                <ScalarProperty Name="IsFavorit" ColumnName="IsFavorit" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastUpdatedUser" ColumnName="LastUpdatedUser" />
+                <ScalarProperty Name="LastUpdatedUserId" ColumnName="LastUpdatedUserId" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastPostId" ColumnName="LastPostId" />
+                <ScalarProperty Name="LastPost" ColumnName="LastPost" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="TotalView" ColumnName="TotalView" />
+                <ScalarProperty Name="TotalReplies" ColumnName="TotalReplies" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ReplyToId" ColumnName="ReplyToId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWSTUONG_NhomTinTuong">
+            <EntityTypeMapping TypeName="dbOAMSModel.NEWSTUONG_NhomTinTuong">
+              <MappingFragment StoreEntitySet="NEWSTUONG_NhomTinTuong">
+                <ScalarProperty Name="TopicLastestPostFirst" ColumnName="TopicLastestPostFirst" />
+                <ScalarProperty Name="EditMyPost" ColumnName="EditMyPost" />
+                <ScalarProperty Name="AutoSort" ColumnName="AutoSort" />
+                <ScalarProperty Name="RequirePostPermission" ColumnName="RequirePostPermission" />
+                <ScalarProperty Name="RequireViewPermission" ColumnName="RequireViewPermission" />
+                <ScalarProperty Name="LastTopicId" ColumnName="LastTopicId" />
+                <ScalarProperty Name="LastPostId" ColumnName="LastPostId" />
+                <ScalarProperty Name="LastPost" ColumnName="LastPost" />
+                <ScalarProperty Name="LastUpdatedUserId" ColumnName="LastUpdatedUserId" />
+                <ScalarProperty Name="LastUpdatedUser" ColumnName="LastUpdatedUser" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ViewOrder" ColumnName="ViewOrder" />
+                <ScalarProperty Name="AutoApproved" ColumnName="AutoApproved" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NumberOfReplies" ColumnName="NumberOfReplies" />
+                <ScalarProperty Name="NumberOfTopics" ColumnName="NumberOfTopics" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWSTUONG_TinDinhKem">
+            <EntityTypeMapping TypeName="dbOAMSModel.NEWSTUONG_TinDinhKem">
+              <MappingFragment StoreEntitySet="NEWSTUONG_TinDinhKem">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="OriginalFilename" ColumnName="OriginalFilename" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

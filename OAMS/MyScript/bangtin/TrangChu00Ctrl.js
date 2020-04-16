@@ -3,12 +3,12 @@
         // Hàm + biến khởi tạo ban đầu
         $scope.totalItems = 64;
         $scope.currentPage = 1;
-        $scope.itemsPerPage = 4;
+        $scope.itemsPerPage = 10;
         $scope.ttshow = false;
+        $scope.TieuDe = "Bảng Tin Tường Công Ty";
 
         $scope.Init = function () {
             $scope.DanhSachLoaiTin = [];
-            $scope.TieuDe = "Bảng Tin Tường Công Ty";
             $scope.LayDanhSachLoaiTin();
             var hamcho = function () {
                 if ($scope.DanhSachLoaiTin.length == 0) {
@@ -50,9 +50,16 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachTinTuc = response.data;
+                    blockUI.stop();
                     $scope.ttshow = false;
-                    $scope.totalItems = $scope.DanhSachTinTuc[0].CountTin;
-                    $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
+                    if ($scope.DanhSachTinTuc.length > 0) {
+                        $scope.totalItems = $scope.DanhSachTinTuc[0].CountTin;
+                        $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
+                    }
+                    else {
+                        $scope.totalItems = 0;
+                        alert("Phần tin này đang cập nhật...");
+                    }
                 },
 
                 function errorCallback(response) {
@@ -108,20 +115,6 @@
             $scope.TieuDe = tieude;
         }
 
-        // Show bình luận bài viết tường
-        $scope.XemBinhLuan = function (index) {
-            let comment = document.getElementById("comment" + index);
-            let angle = document.getElementById("angle" + index);
-            if (comment.className == "detail-row") {
-                comment.className = "detail-row open";
-                angle.className = "ace-icon fa fa-angle-double-up";
-            }
-            else if (comment.className == "detail-row open") {
-                comment.className = "detail-row";
-                angle.className = "ace-icon fa fa-angle-double-down";
-            }
-        }
-
         // Lấy sinh nhật mặc định
         $scope.LaySinhNhat = function () {
             let current = new Date();
@@ -131,7 +124,6 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachUser = response.data;
-                    console.log($scope.DanhSachUser);
                 },
 
                 function errorCallback(response) {
@@ -155,6 +147,20 @@
                     console.log(response.data.message)
                 }
             )
+        }
+
+        //////////////////////////// Các Hàm Viết Sử dụng chung /////////////////
+        //Hàm chuyển chữ thành kiểu viết hoa đầu
+        $scope.capitalize = function(string) {
+            return string.charAt(0).toUpperCase() + (string.slice(1)).toLowerCase();
+        }
+
+        // Hàm cắt chữ
+        $scope.SliceString = function (string, limit) {
+            if (string.length > limit) {
+                string = string.slice(limit, string.length) + "...";
+            }
+            return string;
         }
 
         // Hiển Thị dd/mm/yy
