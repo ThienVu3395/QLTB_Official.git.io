@@ -120,7 +120,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     }
                     tinTuc.TapTinDinhKem = dsttmodel;
                 }
-                var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(5).ToList();
+                var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(4).ToList();
                 List<TinTucModel> dsTinLQ = new List<TinTucModel>();
                 if (tinLQ.Count > 0)
                 {
@@ -144,30 +144,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     }
                     tinTuc.TinLienQuan = dsTinLQ;
                 }
-
-                //var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaTinTuc == MaTinTuc).ToList();
-                //List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
-                //if (dsBinhLuan.Count > 0)
-                //{
-                //    foreach (var index in dsBinhLuan)
-                //    {
-                //        BinhLuanModel binhLuan = new BinhLuanModel();
-                //        binhLuan.MaBinhLuan = index.MaBinhLuan;
-                //        binhLuan.MaTinTuc = index.MaTinTuc;
-                //        binhLuan.MaNguoiDung = index.MaNguoiDung;
-                //        binhLuan.TenNguoiDung = index.NEWS_NguoiSuDung.Ten;
-                //        binhLuan.HinhAnh = index.NEWS_NguoiSuDung.HinhAnh;
-                //        binhLuan.DonVi = "Phòng ABCXYAZZ";
-                //        binhLuan.NoiDung = index.NoiDung;
-                //        binhLuan.HienThi = index.HienThi;
-                //        binhLuan.Ngay = index.Ngay;
-                //        binhLuan.Gio = index.Gio;
-                //        dsBinhLuanModel.Add(binhLuan);
-                //    }
-                //    tinTuc.BinhLuan = dsBinhLuanModel;
-                //}
-                dsTin.LuotXem += 1;
-                dbContext.SaveChanges();
+                //dsTin.LuotXem += 1;
+                //dbContext.SaveChanges();
                 return Ok(tinTuc);
             }
             return Ok("sai rồi");

@@ -28,5 +28,11 @@ namespace OAMS.Controllers.BangTin
         {
             return View();
         }
+
+        public ActionResult ChiTietBaiViet(int MaTinTuc)
+        {
+            ViewBag.MaTinTuc = MaTinTuc;
+            return View();
+        }
     }
 }

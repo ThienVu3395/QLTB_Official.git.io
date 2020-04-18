@@ -5,9 +5,9 @@
         $scope.maxSize = 5;
         $scope.bigTotalItems = 175;
         $scope.bigCurrentPage = 1;
-        $scope.ttshow = false;
         $scope.TieuDe = "Bảng Tin Tường Công Ty";
 
+        //////////////////////////////////// Trang Chủ //////////////////////////////////
         $scope.Init = function () {
             $scope.DanhSachLoaiTin = [];
             $scope.LayDanhSachLoaiTin();
@@ -18,7 +18,6 @@
                 else {
                     blockUI.stop();
                     $scope.bigCurrentPage = 1;
-                    // Tạo biến tháng sinh nhật
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
                     $scope.LayDanhSachBaiViet($scope.MaLoaiTin);
                     $scope.LayBaiVietTuong();
@@ -52,7 +51,6 @@
                 function succ(response) {
                     $scope.DanhSachTinTuc = response.data;
                     blockUI.stop();
-                    $scope.ttshow = false;
                     if ($scope.DanhSachTinTuc.length > 0) {
                         $scope.bigTotalItems = $scope.DanhSachTinTuc[0].CountTin;
                         $scope.TemplateList = $scope.DanhSachTinTuc[0].TemplateList;
@@ -76,7 +74,6 @@
             res.then(
                 function succ(response) {
                     $scope.ThongTinBV = response.data;
-                    $scope.ttshow = true;
                 },
 
                 function errorCallback(response) {
@@ -93,6 +90,7 @@
             res.then(
                 function succ(response) {
                     $scope.BaiVietTuong = response.data;
+                    console.log($scope.BaiVietTuong)
                 },
 
                 function errorCallback(response) {
@@ -125,6 +123,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachUser = response.data;
+                    console.log($scope.DanhSachUser);
                 },
 
                 function errorCallback(response) {
@@ -148,6 +147,13 @@
                     console.log(response.data.message)
                 }
             )
+        }
+
+        //////////////////////////////////// Trang Chi Tiết //////////////////////////////////
+        $scope.InitChiTiet = function (MaTinTuc) {
+            $scope.LayChiTietBaiViet(MaTinTuc);
+            $scope.LayBaiVietTuong();
+            $scope.LaySinhNhatTheoThang(4);
         }
 
         //////////////////////////// Các Hàm Viết Sử dụng chung /////////////////

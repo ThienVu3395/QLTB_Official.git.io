@@ -5,13 +5,11 @@ $interval
 - 1 bài viết có thể  bên tường bên tb , chỉ đc cmt + show cmt bên tường
 * trang chủ :
 
-
-// tiêu đề : 20px
-nút xem chi tiết nhỏ lại
-trích dẫn 
-tin sawaco có tin lq ben duoi
-
 logic :
 Check css tieu de da xem - chua xem ( ok )
 
 -- cắt chữ (ok) , hiển thị tin tức k hình có hình (ok), tiêu đề thống nhất 1 kiểu Hoa Thường(ok)
+
+17/4/2020 : 
+- Sua lai button "da xem" thanh doi mau chu css binh thuong la duoc roi
+- 
