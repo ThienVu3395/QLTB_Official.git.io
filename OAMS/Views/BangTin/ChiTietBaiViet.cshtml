@@ -5,99 +5,209 @@
 }
 
 @section Css{
-    <style>
-        .widget-box {
-            margin-bottom: 12px;
-            border-radius: 16px;
-            overflow: hidden
-        }
+<style>
+    .widget-box {
+        margin-bottom: 12px;
+        border-radius: 16px;
+        overflow: hidden
+    }
 
-        .no-deco {
-            text-decoration: none !important;
-        }
+    iframe {
+        width: 100% !important;
+        height: 200px !important;
+    }
 
-        .ava {
-            height: 100%;
-            border-radius: 50%;
-            border: 1px solid black
-        }
+    .cms-body, .cms-desc, p {
+        width: 100% !important;
+    }
 
-        .fs-16 {
-            font-size: 16px
-        }
+    .no-deco {
+        text-decoration: none !important;
+    }
 
-        .fs-13 {
-            font-size: 13px
-        }
+    .ava {
+        height: 100%;
+        border-radius: 50%;
+        border: 1px solid black
+    }
 
-        .itemdiv.memberdiv {
-            /* width: 175px; */
-            padding: 2px;
-            margin: 3px 0;
-            float: left;
-            border-bottom: 1px solid #E8E8E8;
-        }
+    .fs-16 {
+        font-size: 16px
+    }
 
-        h3 {
-            font-size: 14px !important;
-            min-height: 50px;
-        }
+    .fs-13 {
+        font-size: 13px
+    }
 
-        .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
-            display: block;
-            height: 180px;
-            width: 100%;
-        }
+    .itemdiv.memberdiv {
+        /* width: 175px; */
+        padding: 2px;
+        margin: 3px 0;
+        float: left;
+        border-bottom: 1px solid #E8E8E8;
+    }
 
-        .label-lg.arrowed, .label-lg.arrowed-in, .label {
-            /* margin-left: 6px; */
-            margin-bottom: 4px;
-        }
+    h3 {
+        font-size: 14px !important;
+        min-height: 50px;
+    }
 
-        select.form-control {
-            padding: 4px 6px;
-            height: 30px;
-        }
+    .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
+        display: block;
+        height: 180px;
+        width: 100%;
+    }
 
-        a {
-            color: #337ab7;
-            text-decoration: none;
-            line-height: 20px;
-        }
+    .label-lg.arrowed, .label-lg.arrowed-in {
+        /* margin-left: 6px; */
+        margin-bottom: 15px;
+    }
 
-        .ace-settings-box.open {
-            width: 500px;
-            height: 100%;
-            max-width: 500px;
-            max-height: 100%;
-            padding: 12px;
-            border-width: 2px;
-            -webkit-transition-delay: 0s;
-            -moz-transition-delay: 0s;
-            -o-transition-delay: 0s;
-            transition-delay: 0s;
-        }
+    select.form-control {
+        padding: 4px 6px;
+        height: 30px;
+    }
 
-        .itemdiv.memberdiv > .body > .name > a {
-            display: inline-block;
-            max-width: 100%;
-            max-height: 18px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            word-break: break-all;
-        }
+    a {
+        color: #337ab7;
+        text-decoration: none;
+        line-height: 20px;
+    }
 
-        .itemdiv > .body {
-            width: 100%;
-            margin-left: 50px;
-            margin-right: 12px;
-            position: relative;
-        }
-    </style>
+    .ace-settings-box.open {
+        width: 500px;
+        height: 100%;
+        max-width: 500px;
+        max-height: 100%;
+        padding: 12px;
+        border-width: 2px;
+        -webkit-transition-delay: 0s;
+        -moz-transition-delay: 0s;
+        -o-transition-delay: 0s;
+        transition-delay: 0s;
+    }
+
+    .itemdiv.memberdiv > .body > .name > a {
+        display: inline-block;
+        max-width: 100%;
+        max-height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+    }
+
+    .itemdiv > .body {
+        /*width: 100%;*/
+        margin-left: 50px;
+        margin-right: 12px;
+        position: relative;
+    }
+</style>
 }
 
 @section Scripts{
     <script src="~/MyScript/bangtin/TrangChu00Ctrl.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            // scrollables
+            $('.scrollable').each(function () {
+                var $this = $(this);
+                $(this).ace_scroll({
+                    size: $this.attr('data-size') || 100,
+                    //styleClass: 'scroll-left scroll-margin scroll-thin scroll-dark scroll-light no-track scroll-visible'
+                });
+            });
+            $('.scrollable-horizontal').each(function () {
+                var $this = $(this);
+                $(this).ace_scroll(
+                    {
+                        horizontal: true,
+                        styleClass: 'scroll-top',//show the scrollbars on top(default is bottom)
+                        size: $this.attr('data-size') || 500,
+                        mouseWheelLock: true
+                    }
+                ).css({ 'padding-top': 12 });
+            });
+
+            $(window).on('resize.scroll_reset', function () {
+                $('.scrollable-horizontal').ace_scroll('reset');
+            });
+
+
+            $('#id-checkbox-vertical').prop('checked', false).on('click', function () {
+                $('#widget-toolbox-1').toggleClass('toolbox-vertical')
+                    .find('.btn-group').toggleClass('btn-group-vertical')
+                    .filter(':first').toggleClass('hidden')
+                    .parent().toggleClass('btn-toolbar')
+            });
+
+
+            ///////////////////////
+
+            //when a widget is shown/hidden/closed, we save its state for later retrieval
+            $(document).on('shown.ace.widget hidden.ace.widget closed.ace.widget', '.widget-box', function (event) {
+                var widgets = ace.data.get('demo', 'widget-state', true);
+                if (widgets == null) widgets = {}
+
+                var id = $(this).attr('id');
+                widgets[id] = event.type;
+                ace.data.set('demo', 'widget-state', widgets, null, true);
+            });
+
+
+            (function () {
+                //restore widget order
+                var container_list = ace.data.get('demo', 'widget-order', true);
+                if (container_list) {
+                    for (var container_id in container_list) if (container_list.hasOwnProperty(container_id)) {
+
+                        var widgets_inside_container = container_list[container_id];
+                        if (widgets_inside_container.length == 0) continue;
+
+                        for (var i = 0; i < widgets_inside_container.length; i++) {
+                            var widget = widgets_inside_container[i];
+                            $('#' + widget).appendTo('#' + container_id);
+                        }
+
+                    }
+                }
+
+
+                //restore widget state
+                var widgets = ace.data.get('demo', 'widget-state', true);
+                if (widgets != null) {
+                    for (var id in widgets) if (widgets.hasOwnProperty(id)) {
+                        var state = widgets[id];
+                        var widget = $('#' + id);
+                        if
+                        (
+                            (state == 'shown' && widget.hasClass('collapsed'))
+                            ||
+                            (state == 'hidden' && !widget.hasClass('collapsed'))
+                        ) {
+                            widget.widget_box('toggleFast');
+                        }
+                        else if (state == 'closed') {
+                            widget.widget_box('closeFast');
+                        }
+                    }
+                }
+
+
+                $('#main-widget-container').removeClass('invisible');
+
+
+                //reset saved positions and states
+                $('#reset-widgets').on('click', function () {
+                    ace.data.remove('demo', 'widget-state');
+                    ace.data.remove('demo', 'widget-order');
+                    document.location.reload();
+                });
+
+            })();
+
+        });
+    </script>
 }
 
 <div ng-controller="TC00Ctrl" ng-init="InitChiTiet(@ViewBag.MaTinTuc)">
@@ -161,13 +271,16 @@
 
                                                             <div class="col-lg-9">
                                                                 <b>{{item.TenNguoiDung}}</b>
-                                                                <p><i class="ace-icon fa fa-clock-o"></i> 14/04/2020</p>
+                                                                <p>
+                                                                    <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnFullDateTime(item.NgayTao)}}
+                                                                </p>
                                                             </div>
 
                                                             <div class="col-lg-12" style="margin-top:8px">
                                                                 <p><b>{{item.TieuDe}}</b></p>
-                                                                <p ng-show="!rm">{{item.NoiDung | limitTo : 150}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('more')"> Đọc Tiếp</span></p>
-                                                                <p ng-show="rm">{{item.NoiDung}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('less')"> Thu Gọn</span></p>
+                                                                <p ng-bind-html="htmlSafe(item.NoiDung)"></p>
+                                                                @*<p ng-show="!rm">{{item.NoiDung | limitTo : 150}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('more')"> Đọc Tiếp</span></p>*@
+                                                                @*<p ng-show="rm">{{item.NoiDung}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('less')"> Thu Gọn</span></p>*@
                                                             </div>
 
                                                             <div class="col-lg-12">
@@ -325,7 +438,7 @@
 
         <div class="container">
             <h1>{{ThongTinBV.TieuDe}}</h1>
-            <p><b><i><i class="ace-icon fa fa-user"></i> {{ThongTinBV.TenNguoiDung}}</i></b> - 12/02/2020</p>
+            <p><b><i><i class="ace-icon fa fa-user"></i> {{ThongTinBV.TenNguoiDung}}</i></b> - {{ReturnFullDateTime(ThongTinBV.NgayTao)}}</p>
             <p>
                 <b>
                     {{ThongTinBV.MoTa}}
@@ -359,9 +472,9 @@
             @*Nút trở về + chia sẻ*@
             <div id="default-buttons">
                 <p>
-                    <button class="btn btn-xs btn-info">
+                    <a class="btn btn-xs btn-info" href="@Url.Action("Index","BangTin")">
                         <i class="ace-icon fa fa-reply icon-only"></i> Trở Về
-                    </button>
+                    </a>
 
                     <button class="btn  btn-xs btn-success">
                         Chia Sẻ <i class="ace-icon fa fa-share"></i>
@@ -372,102 +485,110 @@
 
             @*Bình Luận*@
             <div class="widget-box transparent" id="recent-box">
-                <div class="widget-header">
-                    <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon fa fa-comments-o orange"></i>Bình Luận
-                    </h4>
-                </div>
+                @*<div class="widget-header">
+                        <h4 class="widget-title lighter smaller">
+                            <i class="ace-icon fa fa-comments-o orange"></i>Bình Luận
+                        </h4>
+                    </div>
 
-                <div class="widget-body">
-                    <div class="widget-main padding-4">
-                        <div class="tab-content padding-8">
-                            <div id="comment-tab" class="tab-pane active">
-                                <div class="comments">
-                                    <div class="itemdiv commentdiv" ng-repeat="item in ThongTinBV.BinhLuan">
-                                        <div class="user">
-                                            <img alt="Jennifer's Avatar" src="{{item.HinhAnh}}" />
-                                        </div>
-
-                                        <div class="body">
-                                            <div class="name">
-                                                <a href="#">{{item.Ten}}</a>
+                    <div class="widget-body">
+                        <div class="widget-main padding-4">
+                            <div class="tab-content padding-8">
+                                <div id="comment-tab" class="tab-pane active">
+                                    <div class="comments">
+                                        <div class="itemdiv commentdiv" ng-repeat="item in ThongTinBV.BinhLuan">
+                                            <div class="user">
+                                                <img alt="Jennifer's Avatar" src="{{item.HinhAnh}}" />
                                             </div>
 
-                                            <div class="time">
-                                                <i class="ace-icon fa fa-clock-o"></i>
-                                                <span class="blue">15 min</span>
+                                            <div class="body">
+                                                <div class="name">
+                                                    <a href="#">{{item.Ten}}</a>
+                                                </div>
+
+                                                <div class="time">
+                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                    <span class="blue">15 min</span>
+                                                </div>
+
+                                                <div class="text">
+                                                    <i class="ace-icon fa fa-quote-left"></i>
+                                                    {{item.NoiDung}}
+                                                </div>
                                             </div>
 
-                                            <div class="text">
-                                                <i class="ace-icon fa fa-quote-left"></i>
-                                                {{item.NoiDung}}
+                                            <div class="tools">
+                                                <div class="action-buttons bigger-125">
+                                                    <a href="#">
+                                                        <i class="ace-icon fa fa-pencil blue"></i>
+                                                    </a>
+
+                                                    <a href="#">
+                                                        <i class="ace-icon fa fa-trash-o red"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="tools">
-                                            <div class="action-buttons bigger-125">
-                                                <a href="#">
-                                                    <i class="ace-icon fa fa-pencil blue"></i>
-                                                </a>
-
-                                                <a href="#">
-                                                    <i class="ace-icon fa fa-trash-o red"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="center">
-                                    <i class="ace-icon fa fa-comments-o fa-2x green middle"></i>
-
-                                    &nbsp;
-                                    <a href="#" class="btn btn-sm btn-white btn-info">
-                                        See all comments &nbsp;
-                                        <i class="ace-icon fa fa-arrow-right"></i>
-                                    </a>
-                                </div>
-
-                                <form>
-                                    <div class="form-actions">
-                                        <div class="input-group">
-                                            <input placeholder="Bạn nghĩ sao về bài viết này ?" type="text" class="form-control" name="message" />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-sm btn-info no-radius" type="button">
-                                                    <i class="ace-icon fa fa-share"></i>
-                                                    Send
-                                                </button>
-                                            </span>
                                         </div>
                                     </div>
-                                </form>
-                                <div class="hr hr-double hr8"></div>
+
+                                    <div class="center">
+                                        <i class="ace-icon fa fa-comments-o fa-2x green middle"></i>
+
+                                        &nbsp;
+                                        <a href="#" class="btn btn-sm btn-white btn-info">
+                                            See all comments &nbsp;
+                                            <i class="ace-icon fa fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+
+                                    <form>
+                                        <div class="form-actions">
+                                            <div class="input-group">
+                                                <input placeholder="Bạn nghĩ sao về bài viết này ?" type="text" class="form-control" name="message" />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-sm btn-info no-radius" type="button">
+                                                        <i class="ace-icon fa fa-share"></i>
+                                                        Send
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="hr hr-double hr8"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>*@
             </div>
+            <div class="hr hr-double hr8"></div>
             @*/ Bình Luận*@
 
             <div class="label label-lg label-pink arrowed-right">Xem Tiếp</div>
             <div class="row">
                 <div class="col-lg-3 col-sm-3 col-xs-6" ng-repeat="item in ThongTinBV.TinLienQuan">
                     <div class="thumbnail search-thumbnail">
-                        <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> Thiên Vũ Lê Hoàng</span>
+                        <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
 
-                        <img class="media-object" src="{{item.HinhAnh}}" />
+                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
+                            <img ng-show="item.HinhAnh != null" class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
+                            <img ng-show="item.HinhAnh == null" class="media-object width-100" src="~/Content/image/{{item.HinhAnhDuPhong}}" height="108" />
+                        </a>
                         <div class="caption">
                             <div class="clearfix">
                                 <div class="pull-left bigger-110">
-                                    <i class="ace-icon fa fa-calendar orange2"></i> 12/02/2020
+                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY(item.NgayTao)}}
 
-                                    <i class="ace-icon fa fa-clock-o orange2"></i> 2:39 pm
+                                    <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
                                 </div>
                             </div>
 
                             <h3 class="search-title">
-                                <a href="#" class="blue">{{item.TieuDe}}</a>
+                                <a title="{{item.TieuDe}}" data-rel="tooltip" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="blue fs-16 no-deco">{{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}</a>
                             </h3>
+                            <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-xs btn-primary">
+                                Xem Chi Tiết
+                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>

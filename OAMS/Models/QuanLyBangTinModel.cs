@@ -67,6 +67,7 @@ namespace OAMS.Models
         public int MaTapTin { get; set; }
         public string Ten { get; set; }
         public string Url { get; set; }
+        public string KichCo { get; set; }
     }
 
     public class BinhLuanModel

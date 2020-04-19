@@ -1,5 +1,5 @@
 ﻿angular.module("oamsapp")
-    .controller("TC00Ctrl", function ($scope, CommonController, $timeout, blockUI) {
+    .controller("TC00Ctrl", function ($scope, CommonController, $timeout, blockUI,$sce) {
         // Hàm + biến khởi tạo ban đầu
         $scope.itemsPerPage = 10;
         $scope.maxSize = 5;
@@ -86,17 +86,23 @@
         // Lấy Bài Viết Tường Công Ty
         $scope.rm = false;
         $scope.LayBaiVietTuong = function () {
+            let page = 1;
+            let item = 3;
+            let lm = (page - 1) * item;
             var res = CommonController.getData(CommonController.urlAPI.API_LayBaiVietTuong, "");
             res.then(
                 function succ(response) {
                     $scope.BaiVietTuong = response.data;
-                    console.log($scope.BaiVietTuong)
                 },
 
                 function errorCallback(response) {
                     console.log(response.data.message)
                 }
             )
+        }
+
+        $scope.htmlSafe = function (data) {
+            return $sce.trustAsHtml(data);
         }
 
         // Đọc tiếp - Thu Gọn
@@ -123,7 +129,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachUser = response.data;
-                    console.log($scope.DanhSachUser);
+                    //console.log($scope.DanhSachUser);
                 },
 
                 function errorCallback(response) {
@@ -168,11 +174,6 @@
                 return string = "...";
             }
             else return "";
-        }
-
-        // Hiển Thị dd/mm/yy
-        $scope.ReturnDDMMYY = function (date) {
-            return moment(date).format("DD/MM/YY");
         }
 
         // Hiển Thị dd/mm/yyyy

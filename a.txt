@@ -9,7 +9,3 @@ logic :
 Check css tieu de da xem - chua xem ( ok )
 
 -- cắt chữ (ok) , hiển thị tin tức k hình có hình (ok), tiêu đề thống nhất 1 kiểu Hoa Thường(ok)
-
-17/4/2020 : 
-- Sua lai button "da xem" thanh doi mau chu css binh thuong la duoc roi
-- 

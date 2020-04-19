@@ -136,6 +136,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         tin.NgayCapNhat = item.NgayCapNhat;
                         tin.HienThi = item.HienThi;
                         tin.HinhAnh = item.HinhAnh;
+                        tin.HinhAnhDuPhong = item.HinhAnhDuPhong;
                         tin.LuotXem = item.LuotXem;
                         tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                         tin.TinNoiBat = item.TinNoiBat;
@@ -144,8 +145,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     }
                     tinTuc.TinLienQuan = dsTinLQ;
                 }
-                //dsTin.LuotXem += 1;
-                //dbContext.SaveChanges();
+                dsTin.LuotXem += 1;
+                dbContext.SaveChanges();
                 return Ok(tinTuc);
             }
             return Ok("sai rồi");
@@ -155,46 +156,57 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         [Route("LayBaiVietTuong")]
         public IHttpActionResult LayBaiVietTuong()
         {
-            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == 3).ToList();
+            var dsTin = dbContext.NEWSTUONG_BaiViet.Where(x => x.IsApproved == true).ToList().OrderByDescending(x => x.CreatedDate).Take(3).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
             if (dsTin.Count > 0)
             {
                 foreach (var item in dsTin)
                 {
                     TinTucModel tin = new TinTucModel();
-                    tin.MaTinTuc = item.MaTinTuc;
-                    tin.TieuDe = item.TieuDe;
-                    tin.NoiDung = item.NoiDung;
-                    tin.MoTa = item.MoTa;
-                    tin.MaLoaiTin = item.MaLoaiTin;
-                    tin.NgayTao = item.NgayTao;
-                    tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
-                    tin.NgayCapNhat = item.NgayCapNhat;
-                    tin.HienThi = item.HienThi;
-                    tin.HinhAnh = item.HinhAnh;
-                    tin.TinNoiBat = item.TinNoiBat;
+                    tin.MaTinTuc = item.PostId;
+                    tin.TieuDe = item.Title;
+                    tin.NoiDung = item.Content;
+                    tin.MaLoaiTin = item.GroupId;
+                    tin.NgayTao = item.CreatedDate;
+                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.NgayCapNhat = item.LastUpdated;
                     tin.CountTin = dsTin.Count;
-                    //var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaTinTuc == item.MaTinTuc).ToList();
-                    //List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
-                    //if (dsBinhLuan.Count > 0)
-                    //{
-                    //    foreach (var index in dsBinhLuan)
-                    //    {
-                    //        BinhLuanModel binhLuan = new BinhLuanModel();
-                    //        binhLuan.MaBinhLuan = index.MaBinhLuan;
-                    //        binhLuan.MaTinTuc = index.MaTinTuc;
-                    //        binhLuan.MaNguoiDung = index.MaNguoiDung;
-                    //        binhLuan.TenNguoiDung = index.NEWS_NguoiSuDung.Ten;
-                    //        binhLuan.HinhAnh = index.NEWS_NguoiSuDung.HinhAnh;
-                    //        binhLuan.DonVi = "Phòng ABCXYAZZ";
-                    //        binhLuan.NoiDung = index.NoiDung;
-                    //        binhLuan.HienThi = index.HienThi;
-                    //        binhLuan.Ngay = index.Ngay;
-                    //        binhLuan.Gio = index.Gio;
-                    //        dsBinhLuanModel.Add(binhLuan);
-                    //    }
-                    //}
-                    //tin.BinhLuan = dsBinhLuanModel;
+                    var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == item.PostId).ToList();
+                    List<TapTinModel> dsttmodel = new List<TapTinModel>();
+                    if (dsTapTin.Count > 0)
+                    {
+                        foreach (var i in dsTapTin)
+                        {
+                            TapTinModel ttmodel = new TapTinModel();
+                            ttmodel.MaTapTin = i.FileId;
+                            ttmodel.Ten = i.FileName;
+                            ttmodel.KichCo = i.FileSize;
+                            ttmodel.Url = i.OriginalFilename;
+                            dsttmodel.Add(ttmodel);
+                        }
+                        tin.TapTinDinhKem = dsttmodel;
+                    }
+                    var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaBaiViet == item.PostId).ToList();
+                    List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
+                    if (dsBinhLuan.Count > 0)
+                    {
+                        foreach (var index in dsBinhLuan)
+                        {
+                            BinhLuanModel binhLuan = new BinhLuanModel();
+                            binhLuan.MaBinhLuan = index.MaBinhLuan;
+                            binhLuan.MaTinTuc = index.MaBaiViet;
+                            binhLuan.MaNguoiDung = index.MaNguoiDung;
+                            binhLuan.TenNguoiDung = index.NEWS_NguoiSuDung.Ten;
+                            binhLuan.HinhAnh = index.NEWS_NguoiSuDung.HinhAnh;
+                            binhLuan.DonVi = "Phòng ABCXYAZZ";
+                            binhLuan.NoiDung = index.NoiDung;
+                            binhLuan.HienThi = index.HienThi;
+                            binhLuan.Ngay = index.Ngay;
+                            binhLuan.Gio = index.Gio;
+                            dsBinhLuanModel.Add(binhLuan);
+                        }
+                    }
+                    tin.BinhLuan = dsBinhLuanModel;
                     dsTinModel.Add(tin);
                 }
                 return Ok(dsTinModel);
