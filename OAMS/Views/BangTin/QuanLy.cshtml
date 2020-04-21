@@ -32,7 +32,7 @@
     <script src="~/MyScript/bangtin/QuanLyCtrl.js"></script>
 }
 
-<div ng-controller="adminBT">
+<div ng-controller="adminBT" ng-init="Init('qlbv')">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -52,14 +52,15 @@
         </div><!-- /.nav-search -->
     </div>
 
-    <div id="mescontent" class="page-content" ng-init="Init('qlbv')">
+    <div id="mescontent" class="page-content">
         <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
             <div class="page-header">
                 <h1>
-                    Quản Lý
+                    <a href="@Url.Action("Index","BangTin")">Bảng Tin</a>
                     <small>
                         <i class="ace-icon fa fa-angle-double-right"></i>
-                        Tin Tức & Bình Luận
+                        <a href="#">Quản Lý Tin Tức</a>
+                        : Nơi Người Quản Trị Có Thể Duyệt/Không Duyệt Các Bài Viết & Bình Luận
                     </small>
                 </h1>
             </div>
@@ -70,12 +71,12 @@
                         <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
                             @*Thêm Bài Viết*@
                             <li class="li-new-mail pull-right">
-                                <a data-toggle="tab" href="#write" data-target="write" class="btn-new-mail">
-                                    <span class="btn btn-purple no-border">
-                                        <i class="ace-icon fa fa-envelope bigger-130"></i>
-                                        <span class="bigger-110">Thêm Bài Viết</span>
-                                    </span>
-                                </a>
+                                @*<a data-toggle="tab" href="#write" data-target="write" class="btn-new-mail">
+                                        <span class="btn btn-purple no-border">
+                                            <i class="ace-icon fa fa-envelope bigger-130"></i>
+                                            <span class="bigger-110">Thêm Bài Viết</span>
+                                        </span>
+                                    </a>*@
                             </li>
                             @*Thêm Bài Viết*@
 
@@ -105,7 +106,7 @@
                                         <div class="message-bar">
                                             @*Tiêu đề*@
                                             <div class="message-infobar" id="id-message-infobar">
-                                                <span class="blue bigger-150">Danh Sách {{TieuDe}}</span>
+                                                <span class="blue bigger-150">Danh Sách {{TieuDe}} ({{bigTotalItems}})</span>
                                             </div>
                                             @*/Tiêu đề*@
 
@@ -469,7 +470,7 @@
                                                     <i class="message-star ace-icon fa fa-user grey"></i>
 
                                                     <span class="sender" title="John Doe">
-                                                        {{item.TacGia}}
+                                                        {{item.TenNguoiDung}}
                                                     </span>
 
                                                     <span class="time">{{ReturnDate(item.NgayTao)}}</span>
@@ -489,7 +490,10 @@
                                                     <span class="summary">
                                                         <span class="badge badge-pink mail-tag"></span>
                                                         <span class="text" ng-click="LayChiTietBaiViet($index)">
-                                                            {{item.TieuDe | limitTo : 100}}
+                                                            <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
+                                                               data-rel="tooltip" href="#" data-placement="bottom">
+                                                                {{item.TieuDe | limitTo : 50}}{{SliceString(item.TieuDe,50)}}
+                                                            </a>
                                                         </span>
                                                     </span>
 
@@ -853,20 +857,18 @@
                                     </div>
                                     @*/Nội dung chính hiển thị ds bài viết / bình luận*@
 
-                                    @*Nội dung phía dưới hiển thị ds bài viết , đặt phân trang ở đây*@
-                                    <div class="message-footer clearfix" id="pagiMain">
-                                        <div class="pull-left"> Tổng {{Tong}} </div>
-
-                                        <div class="pull-right">
-                                            &nbsp; &nbsp;
-                                            <ul uib-pagination
-                                                total-items="totalItems"
-                                                ng-model="currentPage"
-                                                items-per-page="itemPerPage"
-                                                ng-change="LayDanhSach_PhanTrang(status)"></ul>
-                                        </div>
-                                    </div>
-                                    @*/Nội dung phía dưới hiển thị ds bài viết , đặt phân trang ở đây*@
+                                    @*Phân trang ở đây*@
+                                    <div class="hr hr-double hr8"></div>
+                                    <ul uib-pagination
+                                        total-items="bigTotalItems"
+                                        ng-model="bigCurrentPage"
+                                        items-per-page="itemsPerPage"
+                                        max-size="maxSize"
+                                        class="pagination-sm"
+                                        boundary-link-numbers="true"
+                                        rotate="false"
+                                        ng-change="LayDanhSach_PhanTrang(status)"></ul>
+                                    @*/Phân trang ở đây*@
 
                                     @*Ô phía dưới hiển thị tổng danh sách object để mà hiển thị total number*@
                                     <div class="hide message-footer message-footer-style2 clearfix">
@@ -900,65 +902,65 @@
 
                 @*Phần soạn thảo bài viết*@
                 <form id="id-message-form" class="hide form-horizontal message-form col-xs-12">
-                    <div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Recipient:</label>
+                    @*<div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Recipient:</label>
 
-                            <div class="col-sm-9">
-                                <span class="input-icon">
-                                    <input type="email" name="recipient" id="form-field-recipient" data-value="alex@doe.com" value="alex@doe.com" placeholder="Recipient(s)" />
-                                    <i class="ace-icon fa fa-user"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="hr hr-18 dotted"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Subject:</label>
-
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="input-icon block col-xs-12 no-padding">
-                                    <input maxlength="100" type="text" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Subject" />
-                                    <i class="ace-icon fa fa-comment-o"></i>
+                                <div class="col-sm-9">
+                                    <span class="input-icon">
+                                        <input type="email" name="recipient" id="form-field-recipient" data-value="alex@doe.com" value="alex@doe.com" placeholder="Recipient(s)" />
+                                        <i class="ace-icon fa fa-user"></i>
+                                    </span>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="hr hr-18 dotted"></div>
+                            <div class="hr hr-18 dotted"></div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">
-                                <span class="inline space-24 hidden-480"></span>
-                                Message:
-                            </label>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Subject:</label>
 
-                            <div class="col-sm-9">
-                                <div class="wysiwyg-editor"></div>
-                            </div>
-                        </div>
-
-                        <div class="hr hr-18 dotted"></div>
-
-                        <div class="form-group no-margin-bottom">
-                            <label class="col-sm-3 control-label no-padding-right">Attachments:</label>
-
-                            <div class="col-sm-9">
-                                <div id="form-attachments">
-                                    <input type="file" name="attachment[]" />
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="input-icon block col-xs-12 no-padding">
+                                        <input maxlength="100" type="text" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Subject" />
+                                        <i class="ace-icon fa fa-comment-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="align-right">
-                            <button id="id-add-attachment" type="button" class="btn btn-sm btn-danger">
-                                <i class="ace-icon fa fa-paperclip bigger-140"></i>
-                                Add Attachment
-                            </button>
-                        </div>
+                            <div class="hr hr-18 dotted"></div>
 
-                        <div class="space"></div>
-                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">
+                                    <span class="inline space-24 hidden-480"></span>
+                                    Message:
+                                </label>
+
+                                <div class="col-sm-9">
+                                    <div class="wysiwyg-editor"></div>
+                                </div>
+                            </div>
+
+                            <div class="hr hr-18 dotted"></div>
+
+                            <div class="form-group no-margin-bottom">
+                                <label class="col-sm-3 control-label no-padding-right">Attachments:</label>
+
+                                <div class="col-sm-9">
+                                    <div id="form-attachments">
+                                        <input type="file" name="attachment[]" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="align-right">
+                                <button id="id-add-attachment" type="button" class="btn btn-sm btn-danger">
+                                    <i class="ace-icon fa fa-paperclip bigger-140"></i>
+                                    Add Attachment
+                                </button>
+                            </div>
+
+                            <div class="space"></div>
+                        </div>*@
                 </form>
                 @*/Phần soạn thảo bài viết*@
 
@@ -1428,10 +1430,10 @@
                             .addClass('width-90 inline')
                             .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>')
                             .parent().append('<div class="action-buttons pull-right col-xs-1">\
-                                                            <a href="#" data-action="delete" class="middle">\
-                                                                <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
-                                                            </a>\
-                                                        </div>')
+                                                                        <a href="#" data-action="delete" class="middle">\
+                                                                            <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
+                                                                        </a>\
+                                                                    </div>')
                             .find('a[data-action=delete]').on('click', function (e) {
                                 //the button that removes the newly inserted file input
                                 e.preventDefault();

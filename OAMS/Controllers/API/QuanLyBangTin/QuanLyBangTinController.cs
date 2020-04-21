@@ -32,6 +32,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     loaiTinTuc.Ten = item.Ten;
                     loaiTinTuc.TrangThai = item.TrangThai;
                     loaiTinTuc.Icon = item.Icon;
+                    loaiTinTuc.HinhAnhDuPhong = item.HinhAnhDuPhong;
                     loaiTinTuc.TemplateList = item.TemplateList;
                     loaiTinTuc.TemplateDetail = item.TemplateDetail;
                     dsLoaiModel.Add(loaiTinTuc);
@@ -103,6 +104,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.MoTa = dsTin.MoTa;
                 tinTuc.NgayTao = dsTin.NgayTao;
                 tinTuc.TenNguoiDung = dsTin.NEWS_NguoiSuDung.Ten;
+                tinTuc.TemplateList = dsTin.NEWS_LoaiTinTuc.TemplateList;
                 tinTuc.MaLoaiTin = dsTin.MaLoaiTin;
                 tinTuc.LoaiTin = dsTin.NEWS_LoaiTinTuc.Ten;
                 tinTuc.LuotXem = dsTin.LuotXem;
@@ -180,7 +182,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                             TapTinModel ttmodel = new TapTinModel();
                             ttmodel.MaTapTin = i.FileId;
                             ttmodel.Ten = i.FileName;
-                            ttmodel.KichCo = i.FileSize;
+                            ttmodel.Size = i.FileSize;
                             ttmodel.Url = i.OriginalFilename;
                             dsttmodel.Add(ttmodel);
                         }

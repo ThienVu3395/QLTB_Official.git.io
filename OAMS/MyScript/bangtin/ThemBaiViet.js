@@ -1,31 +1,55 @@
 ﻿angular.module("oamsapp")
     .controller("ThemBaiViet", function ($scope, CommonController, FileUploader) {
-        // Hiển Thị dd/mm/yy
-        $scope.ReturnDDMMYY = function (date) {
-            return moment(date).format("DD/MM/YY");
+        // Get Date Format
+        function GetDateTimeFormat(string) {
+            let d = string[0] + string[1];
+            let m = string[3] + string[4];
+            let y = string[6] + string[7] + string[8] + string[9];
+            return y + "-" + m + "-" + d;
         }
 
-        // Hiển Thị dd/mm/yyyy
-        $scope.ReturnDDMMYYYY = function (date) {
-            return moment(date).format("DD/MM/YYYY");
+        // Get Time Format
+        function GetTime() {
+            let cr = new Date();
+            let times = cr.getFullYear() + "-" + (cr.getMonth() + 1) + "-" + cr.getDate() + " " + cr.getHours() + ":" + cr.getMinutes() + ":" + cr.getSeconds() + "." + cr.getMilliseconds();
+            return times;
         }
 
-        // Hiển Thị hh
-        $scope.ReturnHMM = function (date) {
-            return moment(date).format("h:mm a")
+        // Khai Báo OBJ THÊM
+        $scope.objThem = {
+            TinNoiBat: false,
+            HienThi: false,
+            TapTinDinhKem: [],
+            HinhAnh: "",
         }
 
-        // Hiển Thị Ngày Giờ
-        $scope.ReturnFullDateTime = function (date) {
-            return moment(date).format("DD/MM/YYYY , h:mm:ss a");
+        // Giả Lập Việc Duyệt Tin
+        localStorage.setItem("Permission", "0");
+
+        // Kiểm Tra Quyền Khi Duyệt Tin
+        $scope.checkPermission = function () {
+            let t = localStorage.getItem("Permission");
+            if (t == "0") {
+                alert("Bạn Chưa Được Cấp Quyền Để Duyệt Tin");
+                $scope.objThem.HienThi = false;
+            }
+            else {
+                $scope.objThem.HienThi != $scope.objThem.HienThi;
+            }
         }
 
         // Lấy Danh sách loại tin
         $scope.LayDanhSachLoaiTin = function () {
-            var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachLoaiTin, "");
+            //var res = CommonController.getData(CommonController.urlAPI.API_LayLoaiTin_ThemBaiViet, "");
+            var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachLoaiTin, ""); // test demo
             res.then(
                 function succ(response) {
                     $scope.DanhSachLoaiTin = response.data;
+                    let wall = {
+                        MaLoaiTin: 0,
+                        Ten: "Tường Công Ty",
+                    }
+                    $scope.DanhSachLoaiTin.push(wall);
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0];
                 },
 
@@ -145,34 +169,38 @@
                 let objItem = {
                     Ten: item.file.name,
                     Url: item.file.name,
+                    Size : item.file.size
                 }
                 $scope.TapTinDinhKem.push(objItem);
             }
         }
 
         // Thêm Bài Viết
-        $scope.objThem = {
-            TinNoiBat: false,
-            HienThi: false,
-            TapTinDinhKem: $scope.TapTinDinhKem,
-            HinhAnh: "",
-        }
-
         $scope.ThemBaiViet = function () {
             $scope.objThem.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
             $scope.objThem.NoiDung = document.getElementById("editor1").innerHTML;
-            //$scope.objThem.NgayHetHanTM = moment($scope.objThem.NgayHetHanTM).format("YYYY/MM/DD");
-            //$scope.objThem.NgayHetHanTC = moment($scope.objThem.NgayHetHanTC).format("YYYY/MM/DD");
+            $scope.objThem.NgayTao = GetTime();
+            $scope.objThem.NgayHetHan = GetDateTimeFormat($scope.objThem.NgayHetHan);
+            $scope.objThem.NgayHetHanTM = GetDateTimeFormat($scope.objThem.NgayHetHanTM);
+            $scope.objThem.NgayHetHanTC = GetDateTimeFormat($scope.objThem.NgayHetHanTC);
+            $scope.objThem.TapTinDinhKem = $scope.TapTinDinhKem;
             console.log($scope.objThem);
-            //var res = CommonController.postData(CommonController.urlAPI.API_ThemBaiViet, $scope.objThem);
-            //res.then(
-            //    function succ(response) {
-            //        alert(response.data);
-            //    },
+            let API = "";
+            if ($scope.objThem.MaLoaiTin !== 0) {
+                API = CommonController.urlAPI.API_ThemBaiViet;
+            }
+            else {
+                API = CommonController.urlAPI.API_ThemBaiViet_Tuong;
+            }
+            var res = CommonController.postData(API, $scope.objThem);
+            res.then(
+                function succ(response) {
+                    alert(response.data);
+                },
 
-            //    function errorCallback(response) {
-            //        console.log(response.data.message)
-            //    }
-            //)
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
         }
     })

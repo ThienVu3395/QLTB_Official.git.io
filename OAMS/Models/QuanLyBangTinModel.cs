@@ -14,6 +14,7 @@ namespace OAMS.Models
         public string Icon { get; set; }
         public int? TemplateList { get;set;}
         public int? TemplateDetail { get; set; }
+        public string HinhAnhDuPhong { get; set; }
     }
 
     public class TinTucModel
@@ -67,7 +68,7 @@ namespace OAMS.Models
         public int MaTapTin { get; set; }
         public string Ten { get; set; }
         public string Url { get; set; }
-        public string KichCo { get; set; }
+        public string Size { get; set; }
     }
 
     public class BinhLuanModel

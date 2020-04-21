@@ -33,7 +33,6 @@ namespace OAMS.Database
         public Nullable<int> LuotXem { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
         public string HinhAnh { get; set; }
-        public string HinhAnhDuPhong { get; set; }
         public Nullable<System.DateTime> NgayHetHan { get; set; }
         public Nullable<System.DateTime> NgayHetHanTinMoi { get; set; }
         public Nullable<System.DateTime> NgayHetHanTrangChu { get; set; }
@@ -47,6 +46,7 @@ namespace OAMS.Database
         public Nullable<int> ThangDang { get; set; }
         public Nullable<int> NamDang { get; set; }
         public string GhiChu { get; set; }
+        public string HinhAnhDuPhong { get; set; }
     
         public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }

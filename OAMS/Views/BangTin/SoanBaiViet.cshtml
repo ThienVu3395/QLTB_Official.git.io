@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "SoanBaiViet";
     Layout = "~/Views/Shared/_LayoutMes.cshtml";
 }
@@ -827,17 +826,6 @@
                     <span class="blue bigger-150">Soạn Bài Viết</span>
                 </div>
             </div>
-
-            <div>
-                <div class="messagebar-item-right">
-                    <span class="inline btn-send-message">
-                        <button type="button" class="btn btn-sm btn-primary no-border btn-white btn-round" ng-click="ThemBaiViet()">
-                            <span class="bigger-110">Thêm Bài Viết</span>
-                            <i class="ace-icon fa fa-check"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
         </div>
 
         <div class="message-list-container">
@@ -852,10 +840,10 @@
                                 <input type="text" ng-model="objThem.TieuDe" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Tiêu đề bài viết">
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
-                            <div style="margin-top:12px">
+                            <div>
                                 <span class="help-inline">
                                     <label class="middle">
-                                        <input class="ace" type="checkbox" id="id-disable-check" ng-model="objThem.TinNoiBat" />
+                                        <input class="ace" type="checkbox" ng-model="objThem.TinNoiBat" />
                                         <span class="lbl">
                                             <span class="text-danger">
                                                 <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
@@ -869,10 +857,10 @@
 
                                 <span class="help-inline">
                                     <label class="middle">
-                                        <input class="ace" type="checkbox" ng-model="objThem.HienThi" />
+                                        <input class="ace" type="checkbox" ng-model="objThem.HienThi" ng-click="checkPermission()" />
                                         <span class="lbl">
                                             <span class="text-danger">
-                                                <a title="Bạn sẽ được duyệt ngay tin này nếu bạn là người quản trị"
+                                                <a title="Bạn sẽ được duyệt ngay tin này nếu bạn đã được cấp quyền"
                                                    data-rel="tooltip" href="#" data-placement="bottom">
                                                     Duyệt Tin Này
                                                 </a>
@@ -883,9 +871,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*/Tiêu đề*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Loại Tin*@
                     <div class="form-group">
@@ -901,9 +888,8 @@
                             </span>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*/Loại Tin*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Ngày Hết Hạn*@
                     <div class="form-group">
@@ -911,7 +897,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="dd-mm-yyyy" />
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="dd-mm-yyyy" readonly/>
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -920,9 +906,8 @@
                             <p><i>Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang</i></p>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*/Ngày Hết Hạn*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Ngày Hết Hạn Tin Mới*@
                     <div class="form-group">
@@ -930,7 +915,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTM" type="text" data-date-format="dd-mm-yyyy" />
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTM" type="text" data-date-format="dd-mm-yyyy" readonly/>
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -939,9 +924,8 @@
                             <p><i>Nếu thiết lập ngày hết hạn tin mới thì tin sẽ có biểu tượng 'NEW MÀU ĐỎ' cho đến hết ngày đó</i></p>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*/Ngày Hết Hạn Tin Mới*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Ngày Hết Hạn Trang Chủ*@
                     <div class="form-group">
@@ -949,7 +933,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTC" type="text" data-date-format="dd-mm-yyyy" />
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTC" type="text" data-date-format="dd-mm-yyyy" readonly/>
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -958,9 +942,8 @@
                             <p><i>Nếu thiết lập ngày hết hạn trang chủ thì tin sẽ chay trên trang chủ cho đến hết ngày đó</i></p>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*/Ngày Hết Hạn Trang Chủ*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Mô tả*@
                     <div class="form-group">
@@ -973,9 +956,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*/Mô tả*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Nội Dung*@
                     <div class="form-group">
@@ -988,9 +970,8 @@
                             <div class="wysiwyg-editor" id="editor1"></div>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*Nội Dung*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Hình Ảnh*@
                     <div class="form-group no-margin-bottom">
@@ -1022,9 +1003,8 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="hr hr-18 dotted"></div>
                     @*Hình Ảnh*@
+                    <div class="hr hr-18 dotted"></div>
 
                     @*Tập Tin Đính Kèm*@
                     <div class="form-group no-margin-bottom">
@@ -1058,9 +1038,16 @@
                             </ul>
                         </div>
                     </div>
+                    @*/Tập Tin Đính Kèm*@
+
+                    <div class="align-right">
+                        <button class="btn btn-sm btn-success" ng-click="ThemBaiViet()">
+                            <i class="ace-icon fa fa-check bigger-140"></i>
+                            Thêm Bài Viết
+                        </button>
+                    </div>
 
                     <div class="hr hr-18 dotted"></div>
-                    @*/Tập Tin Đính Kèm*@
                 </div>
             </form>
         </div>

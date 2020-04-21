@@ -34,5 +34,6 @@ namespace OAMS.Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }
+        public string HinhAnhDuPhong { get; set; }
     }
 }

@@ -468,9 +468,11 @@
                     API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",
               
                     // Thêm Bài Viết
+                    API_LayLoaiTin_ThemBaiViet: "API/QuanLyBangTin/LayLoaiTin_ThemBaiViet",
                     API_UploadImage: "API/QuanLyBangTin/UploadImage",
                     API_UploadFile: "API/QuanLyBangTin/UploadFiles",
                     API_ThemBaiViet: "API/QuanLyBangTin/ThemBaiViet",
+                    API_ThemBaiViet_Tuong: "API/QuanLyBangTin/ThemBaiViet_Tuong",
 
                     // Admin
                     API_LayDanhSachBaiViet: "API/AdminBangTin/LayDanhSachBaiViet",

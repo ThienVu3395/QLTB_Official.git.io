@@ -1,8 +1,10 @@
 ﻿angular.module("oamsapp")
     .controller("adminBT", function ($scope, CommonController, FileUploader, blockUI, $timeout, $log) {
         // Init cho trang quản trị
-        $scope.currentPage = 1;
-        $scope.itemPerPage = 5;
+        $scope.itemsPerPage = 10;
+        $scope.maxSize = 5;
+        $scope.bigTotalItems = 175;
+        $scope.bigCurrentPage = 1;
         $scope.Init = function (status) {
             $scope.DsLoaiTin = [];
             $scope.LayDanhSachLoaiTin();
@@ -12,9 +14,9 @@
                 }
                 else {
                     blockUI.stop();
-                    $scope.currentPage = 1;
-                    let limit = ($scope.currentPage - 1) * $scope.itemPerPage;
-                    $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemPerPage;
+                    $scope.bigCurrentPage = 1;
+                    let limit = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+                    $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemsPerPage;
                     if (status == 'qlbv') {
                         $scope.TieuDe = "Bài Viết";
                         $scope.status = "qlbv";
@@ -23,7 +25,7 @@
                     else if (status == 'qlbl') {
                         $scope.TieuDe = "Bình Luận";
                         $scope.status = "qlbl";
-                        $scope.LayBinhLuan();
+                        //$scope.LayBinhLuan();
                     }
                     $scope.resetStatus();
                 }
@@ -57,8 +59,8 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
-                    $scope.totalItems = $scope.DanhSach[0].CountTin;
-                    $scope.Tong = $scope.totalItems + " Bài Viết";
+                    console.log($scope.DanhSach);
+                    $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
                     blockUI.stop();
                 },
 
@@ -77,8 +79,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
-                    $scope.totalItems = $scope.DanhSach.length;
-                    $scope.Tong = $scope.totalItems + " Bình Luận";
+                    $scope.bigTotalItems = $scope.DanhSach.length;
                     blockUI.stop();
                 },
 
@@ -90,19 +91,14 @@
 
         // Lấy Danh Sách Phân Trang
         $scope.LayDanhSach_PhanTrang = function (status) {
-            let limit = ($scope.currentPage - 1) * $scope.itemPerPage;
-            $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemPerPage;
+            let limit = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+            $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemsPerPage;
             if (status == 'qlbl') {
                 $scope.LayBinhLuan();
             }
             else if (status == 'qlbv') {
                 $scope.LayBaiViet();
             }
-        }
-
-        // Hiển Thị Ngày Giờ
-        $scope.ReturnDate = function (date) {
-            return moment(date).format("DD/MM/YYYY , h:mm:ss a");
         }
 
         // Lấy Chi Tiết Bài Viết
@@ -120,6 +116,7 @@
 
         // Lấy Chi Tiết Bình Luận
         $scope.ctBinhLuan = false;
+
         $scope.LayChiTietBinhLuan = function (MaTinTuc) {
             $scope.ctBinhLuan = true;
             document.getElementById("id-message-infobar").className = "message-infobar hide";
@@ -150,7 +147,21 @@
             document.getElementById("leftToolBar").className = "messagebar-item-left";
             document.getElementById("searchInput").className = "nav-search minimized";
             document.getElementById("contentComment").className = "message-container hide";
-            document.getElementById("pagiMain").className = "message-footer clearfix";
+            //document.getElementById("pagiMain").className = "message-footer clearfix";
             $scope.ctBinhLuan = false;
+        }
+
+        ///////////////// CÁC HÀM ĐỊNH NGHĨA RIÊNG ///////////
+        // Hiển Thị Ngày Giờ
+        $scope.ReturnDate = function (date) {
+            return moment(date).format("DD/MM/YYYY , h:mm:ss a");
+        }
+
+        // Hàm cắt chữ
+        $scope.SliceString = function (string, limit) {
+            if (string.length > limit) {
+                return string = "...";
+            }
+            else return "";
         }
     })

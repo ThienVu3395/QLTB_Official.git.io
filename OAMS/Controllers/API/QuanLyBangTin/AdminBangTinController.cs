@@ -35,6 +35,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
+                    //tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;

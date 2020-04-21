@@ -13,6 +13,11 @@
             overflow: hidden
         }
 
+        .ace-icon {
+            text-align: center;
+            font-size: 12px;
+        }
+
         iframe{
             width: 100% !important;
             height : 200px !important;
@@ -529,8 +534,22 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-9">
-                                                    <h4 class="media-heading">
-                                                        <a title="{{item.TieuDe}}" data-rel="tooltip" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="blue fs-16 no-deco">{{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}</a>
+                                                    <h4 class="media-heading">                                               
+                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
+                                                           class="blue fs-16 no-deco"
+                                                           title="{{item.TieuDe}}" 
+                                                           data-rel="tooltip"
+                                                           ng-show="item.LuotXem == 0">
+                                                            {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
+                                                        </a>
+
+                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
+                                                           class="red fs-16 no-deco"
+                                                           title="{{item.TieuDe}}" 
+                                                           data-rel="tooltip"
+                                                           ng-show="item.LuotXem > 0">
+                                                            {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
+                                                        </a>
                                                     </h4>
                                                     <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
                                                     <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
@@ -547,15 +566,26 @@
 
                                         <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3 && $index >= 2">
                                             <h4 class="media-heading">
-                                                <a title="{{item.TieuDe}}" data-rel="tooltip" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="blue fs-16 no-deco">{{capitalize(item.TieuDe | limitTo : 70)}}{{SliceString(item.TieuDe,70)}}</a>
+                                                <i class="ace-icon fa fa-circle green"></i>
+                                                <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
+                                                   class="blue fs-16 no-deco"
+                                                   title="{{item.TieuDe}}"
+                                                   data-rel="tooltip"
+                                                   ng-show="item.LuotXem == 0">
+                                                    {{capitalize(item.TieuDe | limitTo : 70)}}{{SliceString(item.TieuDe,70)}}
+                                                </a>
+
+                                                <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
+                                                   class="red fs-16 no-deco"
+                                                   title="{{item.TieuDe}}"
+                                                   data-rel="tooltip"
+                                                   ng-show="item.LuotXem > 0">
+                                                    {{capitalize(item.TieuDe | limitTo : 70)}}{{SliceString(item.TieuDe,70)}}
+                                                </a>
                                             </h4>
                                             <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
                                             <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
                                             <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                            <span class="label label-danger" ng-show="item.LuotXem > 0">
-                                                <i class="ace-icon fa fa-check bigger-120"></i>
-                                                Đã Xem
-                                            </span>
                                             <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{item.MoTa | limitTo : 60}}{{SliceString(item.MoTa,60)}}</b></a></p>
                                             <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-minier btn-success">
                                                 Chi Tiết
