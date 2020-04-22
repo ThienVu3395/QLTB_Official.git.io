@@ -103,6 +103,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.HinhAnh = dsTin.HinhAnh;
                 tinTuc.MoTa = dsTin.MoTa;
                 tinTuc.NgayTao = dsTin.NgayTao;
+                tinTuc.HienThi = dsTin.HienThi;
                 tinTuc.TenNguoiDung = dsTin.NEWS_NguoiSuDung.Ten;
                 tinTuc.TemplateList = dsTin.NEWS_LoaiTinTuc.TemplateList;
                 tinTuc.MaLoaiTin = dsTin.MaLoaiTin;
@@ -120,8 +121,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         ttmodel.Url = item.Url;
                         dsttmodel.Add(ttmodel);
                     }
-                    tinTuc.TapTinDinhKem = dsttmodel;
                 }
+                tinTuc.TapTinDinhKem = dsttmodel;
                 var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(4).ToList();
                 List<TinTucModel> dsTinLQ = new List<TinTucModel>();
                 if (tinLQ.Count > 0)

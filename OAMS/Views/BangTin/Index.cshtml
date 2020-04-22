@@ -467,21 +467,23 @@
                                         <div ng-repeat="item in DanhSachTinTuc" class="col-lg-2" style="width:20% !important" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 1">
                                             <div class="thumbnail search-thumbnail">
                                                 <span class="search-promotion label label-danger arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
-                                                <img class="media-object" src="{{item.HinhAnh}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)" />
+                                                <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
+                                                    <img class="media-object" src="~/Content/image/{{item.HinhAnh}}" />
+                                                </a>
 
                                                 <div class="caption">
                                                     <div class="clearfix">
-                                                        <div class="pull-left bigger-110">
+                                                        @*<div class="pull-left bigger-110">
                                                             <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
-                                                        </div>
-                                                        <span class="pull-right label label-success info-label">{{ReturnDDMMYYYY(item.NgayTao)}}</span>
+                                                        </div>*@
+                                                        <span class="pull-right label label-success info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
                                                     </div>
 
                                                     <h3 class="search-title">
-                                                        <a href="#" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}" ng-click="LayChiTietBaiViet(item.MaTinTuc)">{{ item.TieuDe | limitTo: 32 }}{{item.TieuDe.length > 32 ? '...' : ''}}</a>
+                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}">{{ item.TieuDe | limitTo: 32 }}{{item.TieuDe.length > 32 ? '...' : ''}}</a>
                                                     </h3>
                                                     <p>{{item.MoTa| limitTo: 37 }}{{item.MoTa.length > 30 ? '...' : ''}}</p>
-                                                    <span class="text-success" ng-click="LayChiTietBaiViet(item.MaTinTuc)">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
+                                                    <span class="text-success">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
                                                 </div>
                                             </div>
                                         </div>

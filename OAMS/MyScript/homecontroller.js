@@ -476,9 +476,17 @@
 
                     // Admin
                     API_LayDanhSachBaiViet: "API/AdminBangTin/LayDanhSachBaiViet",
-                    API_LayDanhSachBaiViet_Loc: "API/AdminBangTin/LayDanhSachBaiViet_Loc",
-                    API_LayBinhLuan: "API/AdminBangTin/LayBinhLuan",
-                    API_LayChiTietBinhLuan : "API/AdminBangTin/LayChiTietBinhLuan",
+                    API_LayDanhSachBaiViet_TheoDanhMuc: "API/AdminBangTin/LayDanhSachBaiViet_TheoDanhMuc",
+                    API_LayDanhSachBaiViet_TheoHienThi: "API/AdminBangTin/LayDanhSachBaiViet_TheoHienThi",
+                    API_LayDanhSachBaiViet_TheoDieuKien: "API/AdminBangTin/LayDanhSachBaiViet_TheoDieuKien",
+
+                    API_PhanTrang_TatCa: "API/AdminBangTin/PhanTrang_TatCa",
+                    API_PhanTrang_TheoDanhMuc: "API/AdminBangTin/PhanTrang_TheoDanhMuc",
+                    API_PhanTrang_TheoHienThi: "API/AdminBangTin/PhanTrang_TheoHienThi",
+                    API_PhanTrang_TheoDieuKien: "API/AdminBangTin/PhanTrang_TheoDieuKien",
+                    API_PhanTrang_Tuong: "API/AdminBangTin/PhanTrang_Tuong",
+
+                    API_DuyetTin: "API/AdminBangTin/DuyetTin"
                 };
 
                 return {

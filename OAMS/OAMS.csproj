@@ -1885,11 +1885,11 @@
     <Content Include="Views\BangTin\QuanLy.cshtml" />
     <Content Include="Views\BangTin\SoanBaiViet.cshtml" />
     <Content Include="Views\BangTin\ChiTietBaiViet.cshtml" />
+    <Content Include="Views\BangTin\SuaBaiViet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataConversation\" />
-    <Folder Include="Content\attachment\TinTuc\" />
-    <Folder Include="Content\image\TinTuc\" />
+    <Folder Include="Content\attachment\" />
     <Folder Include="DataFile\" />
   </ItemGroup>
   <ItemGroup>

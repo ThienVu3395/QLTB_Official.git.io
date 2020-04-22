@@ -34,603 +34,109 @@
 
 @section Scripts{
     <script src="~/MyScript/bangtin/QuanLyCtrl.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            // scrollables
+            $('.scrollable').each(function () {
+                var $this = $(this);
+                $(this).ace_scroll({
+                    size: $this.attr('data-size') || 100,
+                    //styleClass: 'scroll-left scroll-margin scroll-thin scroll-dark scroll-light no-track scroll-visible'
+                });
+            });
+            $('.scrollable-horizontal').each(function () {
+                var $this = $(this);
+                $(this).ace_scroll(
+                    {
+                        horizontal: true,
+                        styleClass: 'scroll-top',//show the scrollbars on top(default is bottom)
+                        size: $this.attr('data-size') || 500,
+                        mouseWheelLock: true
+                    }
+                ).css({ 'padding-top': 12 });
+            });
+
+            $(window).on('resize.scroll_reset', function () {
+                $('.scrollable-horizontal').ace_scroll('reset');
+            });
+
+
+            $('#id-checkbox-vertical').prop('checked', false).on('click', function () {
+                $('#widget-toolbox-1').toggleClass('toolbox-vertical')
+                    .find('.btn-group').toggleClass('btn-group-vertical')
+                    .filter(':first').toggleClass('hidden')
+                    .parent().toggleClass('btn-toolbar')
+            });
+
+
+            ///////////////////////
+
+            //when a widget is shown/hidden/closed, we save its state for later retrieval
+            $(document).on('shown.ace.widget hidden.ace.widget closed.ace.widget', '.widget-box', function (event) {
+                var widgets = ace.data.get('demo', 'widget-state', true);
+                if (widgets == null) widgets = {}
+
+                var id = $(this).attr('id');
+                widgets[id] = event.type;
+                ace.data.set('demo', 'widget-state', widgets, null, true);
+            });
+
+
+            (function () {
+                //restore widget order
+                var container_list = ace.data.get('demo', 'widget-order', true);
+                if (container_list) {
+                    for (var container_id in container_list) if (container_list.hasOwnProperty(container_id)) {
+
+                        var widgets_inside_container = container_list[container_id];
+                        if (widgets_inside_container.length == 0) continue;
+
+                        for (var i = 0; i < widgets_inside_container.length; i++) {
+                            var widget = widgets_inside_container[i];
+                            $('#' + widget).appendTo('#' + container_id);
+                        }
+
+                    }
+                }
+
+
+                //restore widget state
+                var widgets = ace.data.get('demo', 'widget-state', true);
+                if (widgets != null) {
+                    for (var id in widgets) if (widgets.hasOwnProperty(id)) {
+                        var state = widgets[id];
+                        var widget = $('#' + id);
+                        if
+                        (
+                            (state == 'shown' && widget.hasClass('collapsed'))
+                            ||
+                            (state == 'hidden' && !widget.hasClass('collapsed'))
+                        ) {
+                            widget.widget_box('toggleFast');
+                        }
+                        else if (state == 'closed') {
+                            widget.widget_box('closeFast');
+                        }
+                    }
+                }
+
+
+                $('#main-widget-container').removeClass('invisible');
+
+
+                //reset saved positions and states
+                $('#reset-widgets').on('click', function () {
+                    ace.data.remove('demo', 'widget-state');
+                    ace.data.remove('demo', 'widget-order');
+                    document.location.reload();
+                });
+
+            })();
+
+        });
+    </script>
 }
 
-<div ng-controller="adminBT" ng-init="Init('qlbv')">
-    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
-        <ul class="breadcrumb">
-            <li>
-                <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="~/Home">FSM</a>
-            </li>
-            <li class="active">Bảng Tin</li>
-        </ul><!-- /.breadcrumb -->
-
-        <div class="nav-search" id="nav-search">
-            <form class="form-search">
-                <span class="input-icon">
-                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                    <i class="ace-icon fa fa-search nav-search-icon"></i>
-                </span>
-            </form>
-        </div><!-- /.nav-search -->
-    </div>
-
-    <div id="mescontent" class="page-content">
-        <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
-            <div class="page-header">
-                <h1>
-                    <a href="@Url.Action("Index","BangTin")">Bảng Tin</a>
-                    <small>
-                        <i class="ace-icon fa fa-angle-double-right"></i>
-                        <a href="#">Quản Lý Tin Tức</a>
-                        : Nơi Người Quản Trị Có Thể Duyệt/Không Duyệt Các Bài Viết & Bình Luận
-                    </small>
-                </h1>
-            </div>
-
-            <div class="col-xs-12">
-                <div class="row">
-                    <div class="tabbable">
-                        <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
-                            @*QLBV*@
-                            <li class="active" ng-click="Init('qlbv')">
-                                <a data-toggle="tab" href="#inbox" data-target="inbox">
-                                    <i class="blue ace-icon fa fa-inbox bigger-130"></i>
-                                    <span class="bigger-110">Quản Lý Bài Viết</span>
-                                </a>
-                            </li>
-                            @*/QLBV*@
-
-                            @*QLBL*@
-                            <li ng-click="Init('qlbl')">
-                                <a data-toggle="tab" href="#inbox" data-target="inbox">
-                                    <i class="blue ace-icon fa fa-comment bigger-130"></i>
-                                    <span class="bigger-110">Quản Lý Bình Luận</span>
-                                </a>
-                            </li>
-                            @*/QLBL*@
-                        </ul>
-
-                        <div class="tab-content no-border no-padding">
-                            <div id="inbox" class="tab-pane in active">
-                                <div class="message-container">
-                                    <div id="id-message-list-navbar" class="message-navbar clearfix">
-                                        <div class="message-bar">
-                                            @*Tiêu đề*@
-                                            <div class="message-infobar" id="id-message-infobar">
-                                                <span class="blue bigger-150">Danh Sách {{TieuDe}} ({{bigTotalItems}})</span>
-                                            </div>
-                                            @*/Tiêu đề*@
-
-                                            @*Thanh công cụ khi hiển thị bên chi tiết bl*@
-                                            <div class="hide" id="toolbarComment">
-                                                <div class="message-toolbar">
-                                                    <div class="inline position-relative align-left">
-                                                        <button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="bigger-110">Action</span>
-
-                                                            <i class="ace-icon fa fa-caret-down icon-on-right"></i>
-                                                        </button>
-
-                                                        <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-mail-reply blue"></i>&nbsp; Reply
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-mail-forward green"></i>&nbsp; Forward
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-folder-open orange"></i>&nbsp; Archive
-                                                                </a>
-                                                            </li>
-
-                                                            <li class="divider"></li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-eye blue"></i>&nbsp; Mark as read
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-eye-slash green"></i>&nbsp; Mark unread
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-flag-o red"></i>&nbsp; Flag
-                                                                </a>
-                                                            </li>
-
-                                                            <li class="divider"></li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-trash-o red bigger-110"></i>&nbsp; Delete
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="inline position-relative align-left">
-                                                        <button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="ace-icon fa fa-folder-o bigger-110 blue"></i>
-                                                            <span class="bigger-110">Move to</span>
-
-                                                            <i class="ace-icon fa fa-caret-down icon-on-right"></i>
-                                                        </button>
-
-                                                        <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop pink2"></i>&nbsp; Tag#1
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop blue"></i>&nbsp; Family
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop green"></i>&nbsp; Friends
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop grey"></i>&nbsp; Work
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <button type="button" class="btn btn-xs btn-white btn-primary">
-                                                        <i class="ace-icon fa fa-trash-o bigger-125 orange"></i>
-                                                        <span class="bigger-110">Delete</span>
-                                                    </button>
-                                                </div>
-
-                                                <div>
-                                                    <div class="messagebar-item-left">
-                                                        <a href="#" class="btn-back-message-list" ng-click="resetStatus()">
-                                                            <i class="ace-icon fa fa-arrow-left bigger-110 middle blue"></i>
-                                                            <b class="middle bigger-110">Back</b>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
-                                        </div>
-
-                                        <div>
-                                            @*Bộ lọc bên trái*@
-                                            <div class="messagebar-item-left" id="leftToolBar">
-                                                <label class="inline middle">
-                                                    <input type="checkbox" id="id-toggle-all" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                &nbsp;
-                                                <div class="inline position-relative">
-                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                                        <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
-                                                    </a>
-
-                                                    <ul class="dropdown-menu dropdown-lighter dropdown-100">
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check green select1"></i> Tất Cả</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible green select2"></i> Đã Duyệt</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#"><i class="ace-icon fa fa-check invisible green select3"></i> Chờ Duyệt</a>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#" ng-click="LayBaiVietTatCa()"><i class="ace-icon fa fa-check green select4"></i> Tất Cả</a>
-                                                        </li>
-
-                                                        <li ng-repeat="item in DsLoaiTin track by item.MaLoaiTin">
-                                                            <a id="id-select-message-read" href="#" ng-click="LayBaiViet_Loc(item.MaLoaiTin)"><i class="ace-icon fa fa-check invisible green loaitin{{$index + 1}}"></i> {{item.Ten}}</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @*/Bộ lọc bên trái*@
-
-                                            @*Bộ lọc bên phải*@
-                                            <div class="messagebar-item-right">
-                                                @*<div class="inline position-relative">
-                                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                                            Lọc &nbsp;
-                                                            <i class="ace-icon fa fa-caret-down bigger-125"></i>
-                                                        </a>
-
-                                                        <ul class="dropdown-menu dropdown-lighter dropdown-menu-right dropdown-100">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-check invisible"></i>
-                                                                    Ngày
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-check invisible"></i>
-                                                                    Ẩn
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-check invisible"></i>
-                                                                    Hiện
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>*@
-                                            </div>
-                                            @*/Bộ lọc bên phải*@
-
-                                            @*Input tìm kiếm ở bộ lọc bên trái*@
-                                            <div class="nav-search minimized" id="searchInput">
-                                                @*<form class="form-search">
-                                                        <span class="input-icon">
-                                                            <input type="text" autocomplete="off" class="input-small nav-search-input" placeholder="Search inbox ..." />
-                                                            <i class="ace-icon fa fa-search nav-search-icon"></i>
-                                                        </span>
-                                                    </form>*@
-                                            </div>
-                                            @*/Input tìm kiếm ở bộ lọc bên trái*@
-                                        </div>
-                                    </div>
-
-                                    @*Nội dung chính hiển thị ds bài viết / bình luận*@
-                                    <div class="message-list-container">
-                                        <div class="message-list" id="message-list">
-                                            @*Danh Sách BV*@
-                                            <div ng-show="status == 'qlbv'">
-                                                <div class="message-item message-unread" ng-repeat="item in DanhSach track by $index">
-                                                    <label class="inline">
-                                                        <input type="checkbox" class="ace" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-
-                                                    <i class="message-star ace-icon fa fa-user orange2"></i>
-
-                                                    <span class="sender" title="{{item.TenNguoiDung}}">
-                                                        {{item.TenNguoiDung}}
-                                                    </span>
-
-                                                    <span class="time">{{ReturnDate(item.NgayTao)}}</span>
-
-                                                    <span class="attachment">
-                                                        <i class="ace-icon fa fa-check green" ng-show="item.HienThi"></i>
-                                                        <i class="ace-icon fa fa-clock-o red" ng-show="!item.HienThi"></i>
-                                                    </span>
-
-                                                    <span class="summary">
-                                                        <span class="badge badge-success mail-tag"></span>
-                                                        <span class="text">
-                                                            {{item.LoaiTin}}
-                                                        </span>
-                                                    </span>
-
-                                                    <span class="summary">
-                                                        <span class="badge badge-pink mail-tag"></span>
-                                                        <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
-                                                            <a title="{{item.TieuDe}}"
-                                                               data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
-                                                                {{item.TieuDe | limitTo : 50}}{{SliceString(item.TieuDe,50)}}
-                                                            </a>
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            @*/ Danh Sách BV*@
-
-                                            @*Danh Sách Bình Luận*@
-                                            <div ng-show="status == 'qlbl'">
-                                                <div class="message-item" ng-show="!ctBinhLuan" ng-repeat="item in DanhSach track by $index">
-                                                    <label class="inline">
-                                                        <input type="checkbox" class="ace" />
-                                                        <span class="lbl"></span>
-                                                    </label>
-
-                                                    <i class="message-star ace-icon fa fa-user grey"></i>
-                                                    <span class="sender" title="Philip Markov">{{item.TenNguoiDung}} </span>
-                                                    <span class="time">10:15 am</span>
-
-                                                    <span class="attachment">
-                                                        <i class="ace-icon fa fa-paperclip"></i>
-                                                    </span>
-
-                                                    <span class="summary">
-                                                        <span class="badge badge-pink mail-tag"></span>
-                                                        <span class="text" ng-click="LayChiTietBinhLuan(item.MaTinTuc)">
-                                                            Đã Bình Luận Vào Bài Viết "{{item.TenBaiViet}}"
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            @*Danh Sách Bình Luận*@
-                                        </div>
-                                    </div>
-                                    @*/Nội dung chính hiển thị ds bài viết / bình luận*@
-
-                                    @*Phân trang*@
-                                    <div class="hr hr-double hr8"></div>
-                                    <ul uib-pagination
-                                        total-items="bigTotalItems"
-                                        ng-model="bigCurrentPage"
-                                        items-per-page="itemsPerPage"
-                                        max-size="maxSize"
-                                        class="pagination-sm"
-                                        boundary-link-numbers="true"
-                                        rotate="false"
-                                        ng-change="LayDanhSach_PhanTrang(status)"></ul>
-                                    @*/Phân trang*@
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @*Nội Dung Chi Tiết Của BV*@
-        <div id="modal-table" class="modal fade" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header no-padding">
-                        <div class="table-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                <span class="white">&times;</span>
-                            </button>
-                            Thông Tin Bài Viết
-                        </div>
-                    </div>
-
-                    <div class="modal-body no-padding">
-                        <div class="message-container" id="contentComment">
-                            <div class="message-list-container">
-                                <div class="message-content" id="id-message-content">
-                                    @*Tiêu Đề*@
-                                    <div class="message-header clearfix">
-                                        <div class="pull-left">
-                                            <span class="blue bigger-125"> {{TTBV.TieuDe}} </span>
-                                            <div class="space-4"></div>
-
-                                            <i class="ace-icon fa fa-star orange2"></i>
-
-                                            &nbsp;
-                                            <img class="middle" alt="John's Avatar" src="~/Content/assetsmes/images/avatars/avatar.png" width="32">
-                                            &nbsp;
-                                            <a href="#" class="sender">{{TTBV.TenNguoiDung}}</a>
-
-                                            &nbsp;
-                                            <i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>
-                                            <span class="time grey">{{ReturnDate(TTBV.NgayTao)}}</span>
-                                        </div>
-                                    </div>
-                                    @*Tiêu Đề*@
-
-                                    <div class="hr hr-double"></div>
-                                    @*Mô Tả*@
-                                    <div class="message-body ace-scroll" style="position: relative;">
-                                        <div class="scroll-track scroll-visible scroll-active" style="display: block; height: 150px;"><div class="scroll-bar" style="height: 129px; top: 0px;"></div></div><div class="scroll-content" style="max-height: 150px;">
-                                            <span class="blue bolder bigger-110">Mô Tả</span>
-                                            <p>
-                                                {{TTBV.MoTa}}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    @*Mô Tả*@
-
-                                    <div class="hr hr-double"></div>
-
-                                    @*Nội Dung BL*@
-                                    <div class="message-body">
-                                        <div class="ctArticle">
-                                            <span class="blue bolder bigger-110">Nội Dung</span>
-                                            <p ng-bind-html="htmlSafe(TTBV.NoiDung)"></p>
-                                        </div>
-                                    </div>
-                                    @*Nội Dung BL*@
-
-                                    <div class="hr hr-double"></div>
-
-                                    @*File Đính Kèm*@
-                                    <div class="message-attachment clearfix">
-                                        <div class="attachment-title">
-                                            <span class="blue bolder bigger-110">File Đính Kèm</span>
-                                            &nbsp;
-                                            <span class="grey">(2 files, 4.5 MB)</span>
-
-                                            <div class="inline position-relative">
-                                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                                    &nbsp;
-                                                    <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
-                                                </a>
-
-                                                <ul class="dropdown-menu dropdown-lighter">
-                                                    <li>
-                                                        <a href="#">Download all as zip</a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#">Display in slideshow</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        &nbsp;
-                                        <ul class="attachment-list pull-left list-unstyled">
-                                            <li>
-                                                <a href="#" class="attached-file">
-                                                    <i class="ace-icon fa fa-file-o bigger-110"></i>
-                                                    <span class="attached-name">Document1.pdf</span>
-                                                </a>
-
-                                                <span class="action-buttons">
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-download bigger-125 blue"></i>
-                                                    </a>
-
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
-                                                    </a>
-                                                </span>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="attached-file">
-                                                    <i class="ace-icon fa fa-film bigger-110"></i>
-                                                    <span class="attached-name">Sample.mp4</span>
-                                                </a>
-
-                                                <span class="action-buttons">
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-download bigger-125 blue"></i>
-                                                    </a>
-
-                                                    <a href="#">
-                                                        <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        </ul>
-
-                                        <div class="attachment-images pull-right">
-                                            <div class="vspace-4-sm"></div>
-
-                                            <div>
-                                                <img width="160" alt="image 4" src="~/Content/image/TinTuc/2020/4{{TTBV.HinhAnh}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @*File Đính Kèm*@
-
-                                    <div class="hr hr-double"></div>
-
-                                    @*DS BL*@
-                                    <div class="message-attachment clearfix">
-                                        <div class="attachment-title">
-                                            <span class="blue bolder bigger-110">Danh Sách Bình Luận</span>
-                                            &nbsp;
-                                            <span class="grey">(3)</span>
-
-                                            <div class="inline position-relative">
-                                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                                    &nbsp;
-                                                    <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
-                                                </a>
-
-                                                <ul class="dropdown-menu dropdown-lighter">
-                                                    <li>
-                                                        <a href="#">Tất Cả</a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#">Đã Duyệt</a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#">Chờ Duyệt</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        &nbsp;
-                                        <table id="simple-table" class="table  table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>Thời Gian</th>
-                                                    <th><i class="ace-icon fa fa-home bigger-110 hidden-480"></i>Đơn Vị</th>
-                                                    <th><i class="ace-icon fa fa-user bigger-110 hidden-480"></i>Người Bình Luận</th>
-                                                    <th><i class="ace-icon fa fa-comment bigger-110 hidden-480"></i>Nội Dung</th>
-                                                    <th><i class="ace-icon fa fa-comment bigger-110 hidden-480"></i>Trạng Thái</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr ng-repeat="item in TTBV.BinhLuan track by $index">
-                                                    <td>
-                                                        {{ReturnDate(TTBV.NgayTao)}}
-                                                    </td>
-                                                    <td>{{item.DonVi}}</td>
-                                                    <td class="hidden-480">{{item.TenNguoiDung}}</td>
-                                                    <td>{{item.NoiDung}}</td>
-
-                                                    <td class="hidden-480">
-                                                        <span class="label label-sm label-warning">Đang Chờ Duyệt</span>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="hidden-sm hidden-xs btn-group">
-                                                            <button class="btn btn-xs btn-success">
-                                                                <i class="ace-icon fa fa-check bigger-120"></i>
-                                                            </button>
-
-                                                            <button class="btn btn-xs btn-danger">
-                                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <ul uib-pagination
-                                            total-items="totalItems"
-                                            ng-model="currentPage"
-                                            items-per-page="itemPerPage"
-                                            ng-change="LayDanhSach_PhanTrang(status)"></ul>
-                                    </div>
-                                    @*DS BL*@
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer no-margin-top">
-                        <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-                            <i class="ace-icon fa fa-times"></i>
-                            Close
-                        </button>
-
-                        <ul class="pagination pull-right no-margin"
-                            uib-pagination total-items="totalItems"
-                            ng-model="currentPage"
-                            ng-change="pageChanged()">
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section ScriptsCode{
     <script src="~/Content/assetsmes/js/bootstrap-tag.min.js"></script>
@@ -952,10 +458,10 @@
                             .addClass('width-90 inline')
                             .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>')
                             .parent().append('<div class="action-buttons pull-right col-xs-1">\
-                                                                                        <a href="#" data-action="delete" class="middle">\
-                                                                                            <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
-                                                                                        </a>\
-                                                                                    </div>')
+                                                                                                                                    <a href="#" data-action="delete" class="middle">\
+                                                                                                                                        <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
+                                                                                                                                    </a>\
+                                                                                                                                </div>')
                             .find('a[data-action=delete]').on('click', function (e) {
                                 //the button that removes the newly inserted file input
                                 e.preventDefault();
@@ -990,3 +496,553 @@
         });
     </script>
 }
+
+<div ng-controller="adminBT" ng-init="Init()">
+    <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="~/Home">FSM</a>
+            </li>
+            <li class="active">Bảng Tin</li>
+        </ul><!-- /.breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="ace-icon fa fa-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div><!-- /.nav-search -->
+    </div>
+
+    <div id="mescontent" class="page-content">
+        <div class="row" style="overflow-y: auto; height: calc(100% - 25px);">
+            <div class="page-header">
+                <h1>
+                    <a href="@Url.Action("Index","BangTin")">Bảng Tin</a>
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        <a href="#">Quản Lý Tin Tức</a>
+                        : Nơi Người Quản Trị Có Thể Duyệt/Không Duyệt Các Bài Viết & Bình Luận
+                    </small>
+                </h1>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="tabbable">
+                        <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
+                            @*QLBV*@
+                            <li class="active">
+                                <a data-toggle="tab" href="#inbox" data-target="inbox">
+                                    <i class="blue ace-icon fa fa-inbox bigger-130"></i>
+                                    <span class="bigger-110">Quản Lý Bài Viết / Bình Luận</span>
+                                </a>
+                            </li>
+                            @*/QLBV*@
+                        </ul>
+
+                        <div class="tab-content no-border no-padding">
+                            <div id="inbox" class="tab-pane in active">
+                                <div class="message-container">
+                                    <div id="id-message-list-navbar" class="message-navbar clearfix">
+                                        <div class="message-bar">
+                                            @*Tiêu đề*@
+                                            <div class="message-infobar" id="id-message-infobar">
+                                                <span class="blue bigger-150">{{TieuDe}} ({{bigTotalItems}})</span>
+                                            </div>
+                                            @*/Tiêu đề*@
+
+                                            @*Thanh công cụ khi hiển thị bên chi tiết bl*@
+                                            <div id="toolbarComment">
+                                                <div class="message-toolbar hide">
+                                                    <div class="inline position-relative align-left">
+                                                        <button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="bigger-110">Action</span>
+
+                                                            <i class="ace-icon fa fa-caret-down icon-on-right"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-mail-reply blue"></i>&nbsp; Reply
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-mail-forward green"></i>&nbsp; Forward
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-folder-open orange"></i>&nbsp; Archive
+                                                                </a>
+                                                            </li>
+
+                                                            <li class="divider"></li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-eye blue"></i>&nbsp; Mark as read
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-eye-slash green"></i>&nbsp; Mark unread
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-flag-o red"></i>&nbsp; Flag
+                                                                </a>
+                                                            </li>
+
+                                                            <li class="divider"></li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-trash-o red bigger-110"></i>&nbsp; Delete
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="inline position-relative align-left">
+                                                        <button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="ace-icon fa fa-folder-o bigger-110 blue"></i>
+                                                            <span class="bigger-110">Move to</span>
+
+                                                            <i class="ace-icon fa fa-caret-down icon-on-right"></i>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-stop pink2"></i>&nbsp; Tag#1
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-stop blue"></i>&nbsp; Family
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-stop green"></i>&nbsp; Friends
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ace-icon fa fa-stop grey"></i>&nbsp; Work
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <button type="button" class="btn btn-xs btn-white btn-primary">
+                                                        <i class="ace-icon fa fa-trash-o bigger-125 orange"></i>
+                                                        <span class="bigger-110">Delete</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
+                                        </div>
+
+                                        <div>
+                                            @*Bộ lọc bên trái*@
+                                            <div class="messagebar-item-left" id="leftToolBar">
+                                                <label class="inline middle">
+                                                    <input type="checkbox" id="id-toggle-all" class="ace" />
+                                                    <span class="lbl"></span>
+                                                </label>
+
+                                                &nbsp;
+                                                <div class="inline position-relative">
+                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                                        <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-lighter dropdown-100">
+                                                        <li>
+                                                            <a id="id-select-message-none" href="#" ng-click="setHienThi(-1,'select1')"><i class="ace-icon fa fa-check green" id="select1"></i> Tất Cả</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a id="id-select-message-none" href="#" ng-click="setHienThi(true,'select2')"><i class="ace-icon fa fa-check invisible green" id="select2"></i> Đã Duyệt</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a id="id-select-message-none" href="#" ng-click="setHienThi(false,'select3')"><i class="ace-icon fa fa-check invisible green" id="select3"></i> Chờ Duyệt</a>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+
+                                                        <li>
+                                                            <a id="id-select-message-none" href="#" ng-click="LayBaiVietTatCa()"><i class="ace-icon fa fa-check invisible green" id="select4"></i> Tất Cả</a>
+                                                        </li>
+
+                                                        <li ng-repeat="item in DsLoaiTin track by item.MaLoaiTin">
+                                                            <a id="id-select-message-read" href="#" ng-click="LayBaiViet_TheoDanhMuc(item.MaLoaiTin)"><i class="ace-icon fa fa-check invisible green" id="selectLoai{{$index + 1}}"></i> {{item.Ten}}</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a id="id-select-message-read" href="#" ng-click="LayBaiVietTuong()"><i class="ace-icon fa fa-check invisible green" id="loaiTuong"></i> Tường Công Ty</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @*/Bộ lọc bên trái*@
+
+                                            @*Input tìm kiếm ở bộ lọc bên trái*@
+                                            <div class="nav-search minimized" id="searchInput">
+                                                @*<form class="form-search">
+                                                        <span class="input-icon">
+                                                            <input type="text" autocomplete="off" class="input-small nav-search-input" placeholder="Search inbox ..." />
+                                                            <i class="ace-icon fa fa-search nav-search-icon"></i>
+                                                        </span>
+                                                    </form>*@
+                                            </div>
+                                            @*/Input tìm kiếm ở bộ lọc bên trái*@
+                                        </div>
+                                    </div>
+
+                                    @*Nội dung chính hiển thị ds bài viết / bình luận*@
+                                    <div class="message-list-container">
+                                        <div class="message-list" id="message-list">
+                                            @*Danh Sách BV*@
+                                            <div class="message-item message-unread" ng-repeat="item in DanhSach track by $index">
+                                                <label class="inline">
+                                                    <input type="checkbox" class="ace" />
+                                                    <span class="lbl"></span>
+                                                </label>
+
+                                                <i class="message-star ace-icon fa fa-user orange2"></i>
+
+                                                <span class="sender" title="{{item.TenNguoiDung}}">
+                                                    {{item.TenNguoiDung}}
+                                                </span>
+
+                                                <span class="time">{{ReturnDate(item.NgayTao)}}</span>
+
+                                                <span class="attachment">
+                                                    <i class="ace-icon fa fa-check green" ng-show="item.HienThi"></i>
+                                                    <i class="ace-icon fa fa-clock-o red" ng-show="!item.HienThi"></i>
+                                                </span>
+
+                                                <span class="summary" ng-show="MaLoaiTin == -1">
+                                                    <i class="ace-icon fa fa-comment green"></i>
+                                                    <span class="text">
+                                                        {{item.BinhLuan.length}} Bình Luận
+                                                    </span>
+                                                </span>
+
+                                                <span class="summary" ng-show="MaLoaiTin == 0">
+                                                    <span class="badge badge-success mail-tag"></span>
+                                                    <span class="text">
+                                                        {{item.LoaiTin}}
+                                                    </span>
+                                                </span>
+
+                                                <span class="summary" ng-show="MaLoaiTin == -1 || MaLoaiTin == 0">
+                                                    <span class="badge badge-pink mail-tag"></span>
+                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
+                                                        <a title="{{item.TieuDe}}"
+                                                           data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
+                                                            {{item.TieuDe | limitTo : 50}}{{SliceString(item.TieuDe,50)}}
+                                                        </a>
+                                                    </span>
+                                                </span>
+
+                                                <span class="summary" ng-show="MaLoaiTin != -1 && MaLoaiTin != 0">
+                                                    <span class="badge badge-pink mail-tag"></span>
+                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
+                                                        <a title="{{item.TieuDe}}"
+                                                           data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
+                                                            {{item.TieuDe | limitTo : 90}}{{SliceString(item.TieuDe,90)}}
+                                                        </a>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            @*/ Danh Sách BV*@
+                                        </div>
+                                    </div>
+                                    @*/Nội dung chính hiển thị ds bài viết / bình luận*@
+
+                                    @*Phân trang*@
+                                    <div class="hr hr-double hr8"></div>
+                                    <ul uib-pagination
+                                        total-items="bigTotalItems"
+                                        ng-model="bigCurrentPage"
+                                        items-per-page="itemsPerPage"
+                                        max-size="maxSize"
+                                        class="pagination-sm"
+                                        boundary-link-numbers="true"
+                                        rotate="false"
+                                        ng-change="PhanTrang()"></ul>
+                                    @*/Phân trang*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Modal Chi Tiết Của BV / BL*@
+        <div id="modal-table" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header no-padding">
+                        <div class="table-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <span class="white">&times;</span>
+                            </button>
+                            Thông Tin Bài Viết
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="message-container" id="contentComment">
+                            <div class="message-list-container">
+                                <div class="message-content" id="id-message-content">
+                                    @*Tiêu Đề*@
+                                    <div class="message-header clearfix">
+                                        <div class="pull-left">
+                                            <span class="blue bigger-125"> {{TTBV.TieuDe}} </span>
+                                            <div class="space-4"></div>
+
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            &nbsp;
+                                            <img class="middle" alt="John's Avatar" src="~/Content/assetsmes/images/avatars/avatar.png" width="32">
+                                            &nbsp;
+                                            <a href="#" class="sender">{{TTBV.TenNguoiDung}}</a>
+
+                                            &nbsp;
+                                            <i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>
+                                            <span class="time grey">{{ReturnDate(TTBV.NgayTao)}}</span>
+                                        </div>
+                                    </div>
+                                    @*Tiêu Đề*@
+
+                                    <div class="hr hr-double"></div>
+                                    @*Mô Tả*@
+                                    <div class="message-body">
+                                        <div class="ctArticle">
+                                            <span class="blue bolder bigger-110">Mô Tả</span>
+                                            <p ng-bind-html="htmlSafe(TTBV.MoTa)"></p>
+                                        </div>
+                                    </div>
+                                    @*Mô Tả*@
+
+                                    <div class="hr hr-double"></div>
+
+                                    @*Nội Dung*@
+                                    <div class="message-body">
+                                        <div class="ctArticle">
+                                            <span class="blue bolder bigger-110">Nội Dung</span>
+                                            <div class="scrollable" data-size="300" data-position="left">
+                                                <div class="widget-box">
+                                                    <div class="widget-body">
+                                                        <div class="widget-main">
+                                                            <p ng-bind-html="htmlSafe(TTBV.NoiDung)" ng-show="TTBV.NoiDung != ''"></p>
+                                                            <p ng-show="TTBV.NoiDung == ''">
+                                                                <i class="ace-icon fa fa-times red"></i>
+                                                                Bài viết này chưa có nội dung
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*Nội Dung*@
+
+                                    @*File Đính Kèm*@
+                                    <div>
+                                        <div class="hr hr-double"></div>
+                                        <div class="message-attachment clearfix">
+                                            <div class="attachment-title">
+                                                <span class="blue bolder bigger-110">Tập Tin Đính Kèm</span>
+                                                &nbsp;
+                                                <span class="grey">({{TTBV.TapTinDinhKem.length}})</span>
+
+                                                <div class="inline position-relative" ng-show="TTBV.TapTinDinhKem.length > 0">
+                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                                        &nbsp;
+                                                        <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-lighter">
+                                                        <li>
+                                                            <a href="#">Download all as zip</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#">Display in slideshow</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            &nbsp;
+                                            <ul class="attachment-list pull-left list-unstyled">
+                                                <li ng-show="TTBV.TapTinDinhKem.length > 0" ng-repeat="item in TTBV.TapTinDinhKem track by $index">
+                                                    <a href="~/Content/attachment/{{item.Ten}}" class="attached-file">
+                                                        <i class="ace-icon fa fa-file-o green bigger-110"></i>
+                                                        <span class="attached-name">{{item.Ten}}</span>
+                                                    </a>
+
+                                                    <span class="action-buttons">
+                                                        <a href="#">
+                                                            <i class="ace-icon fa fa-download bigger-125 blue"></i>
+                                                        </a>
+
+                                                        <a href="#">
+                                                            <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                                        </a>
+                                                    </span>
+                                                </li>
+
+                                                <li ng-show="TTBV.TapTinDinhKem.length == 0">
+                                                    <a href="#" class="attached-file">
+                                                        <i class="ace-icon fa fa-times red bigger-110"></i>
+                                                        <span class="attached-name">Không Có Tập Tin Đính Kèm</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                            <div class="attachment-images pull-right">
+                                                <div class="vspace-4-sm"></div>
+
+                                                <div>
+                                                    <a href="~/Content/image/{{TTBV.HinhAnh}}" title="Click để xem hình kích cỡ lớn hơn" data-rel="tooltip" data-placement="bottom">
+                                                        <img width="160" alt="image 4" src="~/Content/image/{{TTBV.HinhAnh}}">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*File Đính Kèm*@
+
+                                    @*DS BL*@
+                                    <div ng-show="TTBV.BinhLuan.length > 0">
+                                        <div class="hr hr-double"></div>
+                                        <div class="message-attachment clearfix">
+                                            <div class="attachment-title">
+                                                <span class="blue bolder bigger-110">Danh Sách Bình Luận</span>
+                                                &nbsp;
+                                                <span class="grey">(3)</span>
+
+                                                <div class="inline position-relative">
+                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                                        &nbsp;
+                                                        <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-lighter">
+                                                        <li>
+                                                            <a href="#">Tất Cả</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#">Đã Duyệt</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#">Chờ Duyệt</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            &nbsp;
+                                            <table id="simple-table" class="table  table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>Thời Gian</th>
+                                                        <th><i class="ace-icon fa fa-home bigger-110 hidden-480"></i>Đơn Vị</th>
+                                                        <th><i class="ace-icon fa fa-user bigger-110 hidden-480"></i>Người Bình Luận</th>
+                                                        <th><i class="ace-icon fa fa-comment bigger-110 hidden-480"></i>Nội Dung</th>
+                                                        <th><i class="ace-icon fa fa-comment bigger-110 hidden-480"></i>Trạng Thái</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr ng-repeat="item in TTBV.BinhLuan track by $index">
+                                                        <td>
+                                                            {{ReturnDate(TTBV.NgayTao)}}
+                                                        </td>
+                                                        <td>{{item.DonVi}}</td>
+                                                        <td class="hidden-480">{{item.TenNguoiDung}}</td>
+                                                        <td>{{item.NoiDung}}</td>
+
+                                                        <td class="hidden-480">
+                                                            <span class="label label-sm label-warning">Đang Chờ Duyệt</span>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="hidden-sm hidden-xs btn-group">
+                                                                <button class="btn btn-xs btn-success">
+                                                                    <i class="ace-icon fa fa-check bigger-120"></i>
+                                                                </button>
+
+                                                                <button class="btn btn-xs btn-danger">
+                                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <ul uib-pagination total-items="totalItems"
+                                                ng-model="currentPage"
+                                                ng-change="pageChanged()"></ul>
+                                        </div>
+
+                                    </div>
+                                    @*DS BL*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer no-margin-top">
+                        <button class="btn btn-sm btn-danger pull-left">
+                            <i class="ace-icon fa fa-trash-o"></i>
+                            Xóa
+                        </button>
+
+                        <button class="btn btn-sm btn-warning pull-left">
+                            <i class="ace-icon fa fa-lock"></i>
+                            Khóa
+                        </button>
+
+                        <a class="btn btn-sm btn-info pull-right no-margin" href="@Url.Action("SuaBaiViet","BangTin",new { MaTinTuc = 1 })">
+                            <i class="ace-icon fa fa-edit"></i>
+                            Sửa
+                        </a>
+
+                        <button class="btn btn-sm btn-success pull-right no-margin" ng-click="DuyetTin(TTBV.MaTinTuc)" ng-show="TTBV.HienThi == false">
+                            <i class="ace-icon fa fa-check"></i>
+                            Duyệt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Modal Chi Tiết Của BV / BL*@
+    </div>
+</div>

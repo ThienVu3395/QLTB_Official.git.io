@@ -34,5 +34,11 @@ namespace OAMS.Controllers.BangTin
             ViewBag.MaTinTuc = MaTinTuc;
             return View();
         }
+
+        public ActionResult SuaBaiViet(int MaTinTuc)
+        {
+            ViewBag.MaTinTuc = MaTinTuc;
+            return View();
+        }
     }
 }
