@@ -232,6 +232,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             tin.HinhAnh = tinTuc.HinhAnh;
             tin.NgayHetHan = tinTuc.NgayHetHan;
             tin.NgayTao = tinTuc.NgayTao;
+            tin.NguoiTao = 56;
             tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
             tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
             dbContext.NEWS_TinTuc.Add(tin);

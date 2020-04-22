@@ -476,6 +476,7 @@
 
                     // Admin
                     API_LayDanhSachBaiViet: "API/AdminBangTin/LayDanhSachBaiViet",
+                    API_LayDanhSachBaiViet_Loc: "API/AdminBangTin/LayDanhSachBaiViet_Loc",
                     API_LayBinhLuan: "API/AdminBangTin/LayBinhLuan",
                     API_LayChiTietBinhLuan : "API/AdminBangTin/LayChiTietBinhLuan",
                 };

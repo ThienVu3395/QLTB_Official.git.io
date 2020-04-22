@@ -1,5 +1,5 @@
 ﻿angular.module("oamsapp")
-    .controller("adminBT", function ($scope, CommonController, FileUploader, blockUI, $timeout, $log) {
+    .controller("adminBT", function ($scope, CommonController, FileUploader, blockUI, $timeout, $log, $sce) {
         // Init cho trang quản trị
         $scope.itemsPerPage = 10;
         $scope.maxSize = 5;
@@ -20,14 +20,13 @@
                     if (status == 'qlbv') {
                         $scope.TieuDe = "Bài Viết";
                         $scope.status = "qlbv";
-                        $scope.LayBaiViet();
+                        $scope.LayBaiVietTatCa();
                     }
                     else if (status == 'qlbl') {
                         $scope.TieuDe = "Bình Luận";
                         $scope.status = "qlbl";
                         //$scope.LayBinhLuan();
                     }
-                    $scope.resetStatus();
                 }
             }
             $timeout(hamcho, 300);
@@ -51,7 +50,7 @@
         }
 
         // Lấy Toàn Bộ Danh Sách Bài Viết
-        $scope.LayBaiViet = function () {
+        $scope.LayBaiVietTatCa = function () {
             blockUI.start({
                 message: 'Xin Vui Lòng Chờ...',
             });
@@ -59,7 +58,25 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
-                    console.log($scope.DanhSach);
+                    $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
+                    blockUI.stop();
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message);
+                }
+            );
+        }
+
+        // Lấy Bài Viết Theo Điều Kiện
+        $scope.LayBaiViet_Loc = function (MaLoaiTin) {
+            blockUI.start({
+                message: 'Xin Vui Lòng Chờ...',
+            });
+            var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachBaiViet_Loc, $scope.param + "&MaLoaiTin=" + MaLoaiTin);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSach = response.data;
                     $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
                     blockUI.stop();
                 },
@@ -97,34 +114,31 @@
                 $scope.LayBinhLuan();
             }
             else if (status == 'qlbv') {
-                $scope.LayBaiViet();
+                $scope.LayBaiVietTatCa();
             }
         }
 
         // Lấy Chi Tiết Bài Viết
-        $scope.LayChiTietBaiViet = function (index) {
-            let variable = document.getElementById("mess" + index);
-            if (variable.className == "message-item message-unread message-inline-open") {
-                variable.className = "message-item message-unread";
-                document.getElementById("content" + index).className = "message-content hide";
-            }
-            else if (variable.className == "message-item message-unread") {
-                variable.className = "message-item message-unread message-inline-open";
-                document.getElementById("content" + index).className = "message-content";
-            }
+        $scope.LayChiTietBaiViet = function (MaTinTuc) {
+            $scope.totalItems = 64;
+            $scope.currentPage = 4;
+            let param = "?MaTinTuc=" + MaTinTuc;
+            var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBaiViet, param);
+            res.then(
+                function succ(response) {
+                    $scope.TTBV = response.data;
+                    console.log($scope.TTBV);
+                    blockUI.stop();
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message);
+                }
+            );
         }
 
         // Lấy Chi Tiết Bình Luận
-        $scope.ctBinhLuan = false;
-
         $scope.LayChiTietBinhLuan = function (MaTinTuc) {
-            $scope.ctBinhLuan = true;
-            document.getElementById("id-message-infobar").className = "message-infobar hide";
-            document.getElementById("toolbarComment").className = "";
-            document.getElementById("leftToolBar").className = "messagebar-item-left hide";
-            document.getElementById("searchInput").className = "nav-search minimized hide";
-            document.getElementById("contentComment").className = "message-container";
-            document.getElementById("pagiMain").className = "message-footer clearfix hide";
             let param = "?MaTinTuc=" + MaTinTuc;
             var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBinhLuan, param);
             res.then(
@@ -140,18 +154,17 @@
             );
         }
 
-        // Nút back trở ra để đổi giao diện về trạng thái như cũ
-        $scope.resetStatus = function () {
-            document.getElementById("id-message-infobar").className = "message-infobar";
-            document.getElementById("toolbarComment").className = "hide";
-            document.getElementById("leftToolBar").className = "messagebar-item-left";
-            document.getElementById("searchInput").className = "nav-search minimized";
-            document.getElementById("contentComment").className = "message-container hide";
-            //document.getElementById("pagiMain").className = "message-footer clearfix";
-            $scope.ctBinhLuan = false;
+        ///////////////// CÁC HÀM ĐỊNH NGHĨA RIÊNG ///////////
+        //Hàm chuyển chữ thành kiểu viết hoa đầu
+        //$scope.capitalize = function (string) {
+        //    return string.charAt(0).toUpperCase() + (string.slice(1)).toLowerCase();
+        //}
+
+        // Render ra HTML
+        $scope.htmlSafe = function (data) {
+            return $sce.trustAsHtml(data);
         }
 
-        ///////////////// CÁC HÀM ĐỊNH NGHĨA RIÊNG ///////////
         // Hiển Thị Ngày Giờ
         $scope.ReturnDate = function (date) {
             return moment(date).format("DD/MM/YYYY , h:mm:ss a");

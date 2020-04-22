@@ -101,10 +101,6 @@
             )
         }
 
-        $scope.htmlSafe = function (data) {
-            return $sce.trustAsHtml(data);
-        }
-
         // Đọc tiếp - Thu Gọn
         $scope.read = function (status) {
             if (status == 'more') {
@@ -189,5 +185,10 @@
         // Hiển Thị Ngày Giờ
         $scope.ReturnFullDateTime = function (date) {
             return moment(date).format("DD/MM/YYYY , h:mm:ss a");
+        }
+
+        // Render ra HTML
+        $scope.htmlSafe = function (data) {
+            return $sce.trustAsHtml(data);
         }
     })
