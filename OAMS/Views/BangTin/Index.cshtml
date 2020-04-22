@@ -31,6 +31,10 @@
             text-decoration: none !important;
         }
 
+        .read{
+            font-weight:bolder
+        }
+
         .ava {
             height: 100%;
             border-radius: 50%;
@@ -507,7 +511,7 @@
                                                         </a>
 
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="red fs-16 no-deco"
+                                                           class="fs-16 no-deco read"
                                                            ng-show="item.LuotXem > 0">
                                                             {{capitalize(item.TieuDe)}}
                                                         </a>

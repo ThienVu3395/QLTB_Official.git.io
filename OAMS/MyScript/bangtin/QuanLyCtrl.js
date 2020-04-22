@@ -119,7 +119,13 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
-                    $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
+                    if ($scope.DanhSach.length > 0) {
+                        $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
+                    }
+                    else {
+                        $scope.bigTotalItems = 0;
+                        alert("Không Có Kết Quả Phù Hợp");
+                    }
                     $scope.TieuDe = $scope.DanhSach[0].LoaiTin;
                     blockUI.stop();
                 },
@@ -295,6 +301,48 @@
                     function succ(response) {
                         let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
                         $scope.DanhSach[index].HienThi = 1;
+                        $scope.TTBV.HienThi = true;
+                        alert(response.data);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                    }
+                );
+            }
+            else return;
+        }
+
+        // Hủy Duyệt Tin
+        $scope.HuyDuyetTin = function (MaTinTuc) {
+            if (window.confirm("Bạn chắc chắn hủy duyệt tin này chứ ?")) {
+                let param = "?MaTinTuc=" + MaTinTuc;
+                var res = CommonController.getData(CommonController.urlAPI.API_HuyDuyetTin, param);
+                res.then(
+                    function succ(response) {
+                        let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
+                        $scope.DanhSach[index].HienThi = 0;
+                        $scope.TTBV.HienThi = false;
+                        alert(response.data);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                    }
+                );
+            }
+            else return;
+        }
+
+        // Xóa Tin
+        $scope.XoaTin = function (MaTinTuc) {
+            if (window.confirm("Bạn chắc chắn xóa tin này chứ ?")) {
+                let param = "?MaTinTuc=" + MaTinTuc;
+                var res = CommonController.getData(CommonController.urlAPI.API_XoaTin, param);
+                res.then(
+                    function succ(response) {
+                        let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
+                        $scope.DanhSach.splice(index, 1);
                         alert(response.data);
                     },
 

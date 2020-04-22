@@ -43,11 +43,11 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
             string sPath = "";
 
-            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/TinTuc");
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/");
 
-            string date = DateTime.Now.Year.ToString();
+            //string date = DateTime.Now.Year.ToString();
 
-            sPath = Path.Combine(sPath, date);
+            //sPath = Path.Combine(sPath, date);
 
             if (!Directory.Exists(sPath))
 
@@ -57,9 +57,9 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
             }
 
-            date = DateTime.Now.Month.ToString();
+            //date = DateTime.Now.Month.ToString();
 
-            sPath = Path.Combine(sPath, date);
+            //sPath = Path.Combine(sPath, date);
 
             if (!Directory.Exists(sPath))
 
@@ -136,11 +136,11 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
             string sPath = "";
 
-            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/TinTuc");
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/");
 
-            string date = DateTime.Now.Year.ToString();
+            //string date = DateTime.Now.Year.ToString();
 
-            sPath = Path.Combine(sPath, date);
+            //sPath = Path.Combine(sPath, date);
 
             if (!Directory.Exists(sPath))
 
@@ -150,9 +150,9 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
             }
 
-            date = DateTime.Now.Month.ToString();
+            //date = DateTime.Now.Month.ToString();
 
-            sPath = Path.Combine(sPath, date);
+            //sPath = Path.Combine(sPath, date);
 
             if (!Directory.Exists(sPath))
 

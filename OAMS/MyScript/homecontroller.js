@@ -486,7 +486,10 @@
                     API_PhanTrang_TheoDieuKien: "API/AdminBangTin/PhanTrang_TheoDieuKien",
                     API_PhanTrang_Tuong: "API/AdminBangTin/PhanTrang_Tuong",
 
-                    API_DuyetTin: "API/AdminBangTin/DuyetTin"
+                    API_DuyetTin: "API/AdminBangTin/DuyetTin",
+                    API_HuyDuyetTin : "API/AdminBangTin/HuyDuyetTin",
+                    API_XoaTin : "API/AdminBangTin/XoaTin",
+                    API_SuaTin : "API/AdminBangTin/SuaTin",
                 };
 
                 return {

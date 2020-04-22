@@ -440,5 +440,15 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             dbContext.SaveChanges();
             return Ok("Duyệt Tin Thành Công");
         }
+
+        [HttpGet]
+        [Route("HuyDuyetTin")]
+        public IHttpActionResult HuyDuyetTin(int MaTinTuc)
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
+            dsTin.HienThi = false;
+            dbContext.SaveChanges();
+            return Ok("Tin Đã Được Hủy Duyệt");
+        }
     }
 }
