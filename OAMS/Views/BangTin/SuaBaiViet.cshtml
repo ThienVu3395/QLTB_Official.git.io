@@ -8,7 +8,7 @@
 }
 
 @section Scripts{
-    <script src="~/MyScript/bangtin/ThemBaiViet.js"></script>
+    <script src="~/MyScript/bangtin/QuanLyCtrl.js"></script>
     <script src="~/Content/assetsmes/js/chosen.jquery.min.js"></script>
     <script src="~/Content/assetsmes/js/spinbox.min.js"></script>
     <script src="~/Content/assetsmes/js/bootstrap-datepicker.min.js"></script>
@@ -789,7 +789,7 @@
     </script>
 }
 
-<div ng-controller="ThemBaiViet" ng-init="LayDanhSachLoaiTin()">
+<div ng-controller="adminBT" ng-init="InitSua(@ViewBag.MaTinTuc)">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -837,11 +837,11 @@
 
                 <div class="messagebar-item-right">
                     <span class="inline btn-send-message">
-                        <button type="button" class="btn btn-sm btn-primary no-border btn-white btn-round">
+                        <a href="@Url.Action("Index", "BangTin")" class="btn btn-sm btn-primary no-border btn-white btn-round">
                             <span class="bigger-110">Trang Chủ</span>
 
                             <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                        </button>
+                        </a>
                     </span>
                 </div>
             </div>
@@ -854,15 +854,15 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Tiêu Đề:</label>
 
-                        <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-7 col-xs-12">
                             <div class="input-icon block col-xs-12 no-padding">
-                                <input type="text" ng-model="objThem.TieuDe" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Tiêu đề bài viết">
+                                <input type="text" ng-model="TTBV.TieuDe" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Tiêu đề bài viết">
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                             <div>
                                 <span class="help-inline">
                                     <label class="middle">
-                                        <input class="ace" type="checkbox" ng-model="objThem.TinNoiBat" />
+                                        <input class="ace" type="checkbox" ng-model="TTBV.TinNoiBat" />
                                         <span class="lbl">
                                             <span class="text-danger">
                                                 <a title="Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang."
@@ -902,7 +902,7 @@
                                 <select class="form-control"
                                         id="form-field-select-1"
                                         ng-model="MaLoaiTin"
-                                        ng-options="item as item.Ten for item in DanhSachLoaiTin track by item.MaLoaiTin"></select>
+                                        ng-options="item as item.Ten for item in DsLoaiTin track by item.MaLoaiTin"></select>
                             </span>
                         </div>
                     </div>
@@ -915,7 +915,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="dd-mm-yyyy" readonly />
+                                    <input class="form-control date-picker" id="nhhSua" type="text" data-date-format="dd-mm-yyyy" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -933,7 +933,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTM" type="text" data-date-format="dd-mm-yyyy" readonly />
+                                    <input class="form-control date-picker" id="nhhtmSua" type="text" data-date-format="dd-mm-yyyy" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -951,7 +951,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTC" type="text" data-date-format="dd-mm-yyyy" readonly />
+                                    <input class="form-control date-picker" id="nhhtcSua" type="text" data-date-format="dd-mm-yyyy" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -967,10 +967,9 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Mô Tả Ngắn:</label>
 
-                        <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-7 col-xs-12">
                             <div class="input-icon block col-xs-12 no-padding">
-                                <input type="text" ng-model="objThem.MoTa" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Mô tả ngắn về bài viết">
-                                <i class="ace-icon fa fa-comment-o"></i>
+                                <textarea type="text" ng-model="TTBV.MoTa" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Mô tả ngắn về bài viết"></textarea>
                             </div>
                         </div>
                     </div>
@@ -997,8 +996,28 @@
 
                         <div class="col-sm-4">
                             <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
-                            <ul class="attachment-list pull-left list-unstyled" ng-show="ttIm">
+                            <ul class="attachment-list pull-left list-unstyled">
+                                @*Hình ảnh từ csdl*@
                                 <li>
+                                    <a href="~/Content/image/{{TTBV.HinhAnh}}" class="attached-file" target="_blank">
+                                        <i class="ace-icon fa fa-file-o bigger-110"></i>
+                                        <span class="attached-name">{{TTBV.HinhAnh}}</span>
+                                    </a>
+
+                                    <span class="action-buttons">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
+                                        </a>
+
+                                        <a href="#" ng-click="removeImg()">
+                                            <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                        </a>
+                                    </span>
+                                </li>
+                                @*/Hình ảnh từ csdl*@
+
+                                @*Hình ảnh từ queue*@
+                                <li ng-show="ttIm">
                                     <a href="#" class="attached-file">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
                                         <span class="attached-name">{{HinhAnh.file.name}} ({{HinhAnh.file.size}} KB)</span>
@@ -1013,11 +1032,12 @@
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                         </a>
 
-                                        <a href="#" ng-show="!ttImg">
+                                        @*<a href="#" ng-show="!ttImg">
                                             <i class="ace-icon fa fa-check bigger-125 green"></i>
-                                        </a>
+                                        </a>*@
                                     </span>
                                 </li>
+                                @*/Hình ảnh từ queue*@
                             </ul>
                         </div>
                     </div>
@@ -1031,28 +1051,50 @@
                         <div class="col-sm-4">
                             <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderFile" filters="upFile" />
                             <ul class="attachment-list pull-left list-unstyled">
-                                <li ng-repeat="item in uploaderFile.queue">
-                                    <a href="#" class="attached-file">
+                                @*Tập tin từ csdl*@
+                                <li ng-repeat="item in TTBV.TapTinDinhKem">
+                                    <a href="~/Content/attachment/{{item.Ten}}" class="attached-file" target="_blank">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
-                                        <span class="attached-name">{{item.file.name}} ({{item.file.size}} KB)</span>
+                                        <span class="attached-name">{{item.Ten}}</span>
                                     </a>
 
-                                    <span class="action-buttons" id="ttFile{{$index}}">
+                                    <span class="action-buttons" @*id="ttFile{{$index}}"*@>
+                                        @*<a href="#" ng-click="uploadfile(item)">
+                                                <i class="ace-icon fa fa-upload bigger-125 blue"></i>
+                                            </a>*@
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
+                                        </a>
+
+                                        <a href="#" @*ng-click="removeFile(item)"*@>
+                                            <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                        </a>
+                                    </span>
+                                </li>
+                                @*/Tập tin từ csdl*@
+
+                                @*Tập tin từ queue*@
+                                <li ng-repeat="item in uploaderFile.queue">
+                                    <a href="#" class="attached-file" target="_blank">
+                                        <i class="ace-icon fa fa-file-o bigger-110"></i>
+                                        <span class="attached-name">{{item.file.name}}</span>
+                                    </a>
+
+                                    <span class="action-buttons" @*id="ttFile{{$index}}"*@>
                                         <a href="#" ng-click="uploadfile(item)">
                                             <i class="ace-icon fa fa-upload bigger-125 blue"></i>
                                         </a>
 
-                                        <a href="#" ng-click="removeFile(item)">
+                                        @*<a href="#">
+                                                <i class="ace-icon fa fa-check bigger-125 green"></i>
+                                            </a>*@
+
+                                        <a href="#" @*ng-click="removeFile(item)"*@>
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                         </a>
                                     </span>
-
-                                    <span class="action-buttons hide" id="ttFileSuccess{{$index}}">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
-                                        </a>
-                                    </span>
                                 </li>
+                                @*/Tập tin từ queue*@
                             </ul>
                         </div>
                     </div>

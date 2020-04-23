@@ -65,7 +65,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
         [HttpGet]
         [Route("LayDanhSachBaiViet_TheoDanhMuc")]
-        public IHttpActionResult LayDanhSachBaiViet_Loc(int page, int pageLimit,int MaLoaiTin)
+        public IHttpActionResult LayDanhSachBaiViet_Loc(int page, int pageLimit, int MaLoaiTin)
         {
             var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == MaLoaiTin).ToList().OrderByDescending(x => x.NgayTao).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
@@ -449,6 +449,55 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             dsTin.HienThi = false;
             dbContext.SaveChanges();
             return Ok("Tin Đã Được Hủy Duyệt");
+        }
+
+        [HttpDelete]
+        [Route("XoaTin")]
+        public IHttpActionResult XoaTin(int MaTinTuc)
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
+            if(dsTin != null)
+            {
+                var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
+
+                if (dsTapTin.Count > 0)
+                {
+                    foreach(var item in dsTapTin)
+                    {
+                        string filePath = "";
+
+                        filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + item.Ten);
+
+                        if (System.IO.File.Exists(filePath))
+
+                        {
+                            FileInfo f = new FileInfo(filePath);
+
+                            f.Delete();
+
+                            dbContext.NEWS_TinTucTapTin.Remove(item);
+
+                            dbContext.SaveChanges();
+                        }
+                    }
+                }
+
+                string imgPath = "";
+
+                imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + dsTin.HinhAnh);
+
+                if (System.IO.File.Exists(imgPath))
+
+                {
+                    FileInfo f = new FileInfo(imgPath);
+
+                    f.Delete();
+                }
+                dbContext.NEWS_TinTuc.Remove(dsTin);
+                dbContext.SaveChanges();
+                return Ok("Tin Đã Được Xóa");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
     }
 }

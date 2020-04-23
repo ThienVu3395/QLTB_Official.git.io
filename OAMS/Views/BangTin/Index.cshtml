@@ -484,10 +484,16 @@
                                                     </div>
 
                                                     <h3 class="search-title">
-                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="blue" title="{{item.TieuDe}}" data-rel="tooltip" id="show{{item.MaTinTuc}}">{{ item.TieuDe | limitTo: 32 }}{{item.TieuDe.length > 32 ? '...' : ''}}</a>
+                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
+                                                           class="blue"
+                                                           title="{{item.TieuDe}}"
+                                                           data-rel="tooltip"
+                                                           id="show{{item.MaTinTuc}}">
+                                                            {{ item.TieuDe | limitTo: 32 }}{{item.TieuDe.length > 32 ? '...' : ''}}
+                                                        </a>
                                                     </h3>
                                                     <p>{{item.MoTa| limitTo: 37 }}{{item.MoTa.length > 30 ? '...' : ''}}</p>
-                                                    <span class="text-success">Xem Chi Tiết <i class="ace-icon fa fa-angle-double-down"></i></span>
+                                                    <span class="text-success">Xem Chi Tiết <i class="ace-icon fa fa-next"></i></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -550,7 +556,7 @@
                                                         </a>
 
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="red fs-16 no-deco"
+                                                           class="read fs-16 no-deco"
                                                            title="{{item.TieuDe}}" 
                                                            data-rel="tooltip"
                                                            ng-show="item.LuotXem > 0">
@@ -582,7 +588,7 @@
                                                 </a>
 
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                   class="red fs-16 no-deco"
+                                                   class="read fs-16 no-deco"
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem > 0">

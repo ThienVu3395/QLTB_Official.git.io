@@ -534,6 +534,14 @@
                 <div class="row">
                     <div class="tabbable">
                         <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
+                            <li class="li-new-mail pull-right">
+                                <a href="@Url.Action("SoanBaiViet","BangTin")" class="btn-new-mail">
+                                    <span class="btn btn-purple no-border">
+                                        <i class="ace-icon fa fa-envelope bigger-130"></i>
+                                        <span class="bigger-110">Soạn Bài Viết</span>
+                                    </span>
+                                </a>
+                            </li>
                             @*QLBV*@
                             <li class="active">
                                 <a data-toggle="tab" href="#inbox" data-target="inbox">
@@ -877,7 +885,7 @@
                                                 &nbsp;
                                                 <span class="grey">({{TTBV.TapTinDinhKem.length}})</span>
 
-                                                <div class="inline position-relative" ng-show="TTBV.TapTinDinhKem.length > 0">
+                                                @*<div class="inline position-relative" ng-show="TTBV.TapTinDinhKem.length > 0">
                                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                                                         &nbsp;
                                                         <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
@@ -892,18 +900,18 @@
                                                             <a href="#">Display in slideshow</a>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div>*@
                                             </div>
 
                                             &nbsp;
                                             <ul class="attachment-list pull-left list-unstyled">
                                                 <li ng-show="TTBV.TapTinDinhKem.length > 0" ng-repeat="item in TTBV.TapTinDinhKem track by $index">
-                                                    <a href="~/Content/attachment/{{item.Ten}}" class="attached-file">
+                                                    <a href="~/Content/attachment/{{item.Ten}}" class="attached-file" target="_blank">
                                                         <i class="ace-icon fa fa-file-o green bigger-110"></i>
                                                         <span class="attached-name">{{item.Ten}}</span>
                                                     </a>
 
-                                                    <span class="action-buttons">
+                                                    @*<span class="action-buttons">
                                                         <a href="#">
                                                             <i class="ace-icon fa fa-download bigger-125 blue"></i>
                                                         </a>
@@ -911,7 +919,7 @@
                                                         <a href="#">
                                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                                         </a>
-                                                    </span>
+                                                    </span>*@
                                                 </li>
 
                                                 <li ng-show="TTBV.TapTinDinhKem.length == 0">
@@ -926,7 +934,7 @@
                                                 <div class="vspace-4-sm"></div>
 
                                                 <div>
-                                                    <a href="~/Content/image/{{TTBV.HinhAnh}}" title="Click để xem hình kích cỡ lớn hơn" data-rel="tooltip" data-placement="bottom">
+                                                    <a href="~/Content/image/{{TTBV.HinhAnh}}" target="_blank" title="Click để xem hình kích cỡ lớn hơn" data-rel="tooltip" data-placement="bottom">
                                                         <img width="160" alt="image 4" src="~/Content/image/{{TTBV.HinhAnh}}">
                                                     </a>
                                                 </div>
@@ -1035,7 +1043,7 @@
                             Duyệt
                         </button>
 
-                        <a class="btn btn-sm btn-info pull-right no-margin" href="@Url.Action("SuaBaiViet","BangTin",new { MaTinTuc = 1 })">
+                        <a class="btn btn-sm btn-info pull-right no-margin" href="@Url.Action("SuaBaiViet","BangTin")?MaTinTuc={{TTBV.MaTinTuc}}">
                             <i class="ace-icon fa fa-edit"></i>
                             Sửa
                         </a>

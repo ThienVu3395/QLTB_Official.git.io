@@ -1,5 +1,5 @@
 ﻿angular.module("oamsapp")
-    .controller("adminBT", function ($scope, CommonController, blockUI, $timeout, $sce) {
+    .controller("adminBT", function ($scope, CommonController, blockUI, FileUploader, $timeout, $sce) {
         // Lấy Danh Sách Loại Tin
         $scope.LayDanhSachLoaiTin = function () {
             blockUI.start({
@@ -9,6 +9,7 @@
             res.then(
                 function succ(response) {
                     $scope.DsLoaiTin = response.data;
+                    blockUI.stop();
                 },
 
                 function errorCallback(response) {
@@ -112,7 +113,7 @@
         }
 
         // Lấy Bài Viết Theo Điều Kiện
-        $scope.LayBaiViet_TheoDieuKien = function (MaLoaiTin,HienThi) {
+        $scope.LayBaiViet_TheoDieuKien = function (MaLoaiTin, HienThi) {
             $scope.bigCurrentPage = 1;
             $scope.param = "?page=0" + "&pageLimit=" + $scope.itemsPerPage + "&MaLoaiTin=" + MaLoaiTin + "&HienThi=" + HienThi;
             var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachBaiViet_TheoDieuKien, $scope.param);
@@ -144,7 +145,7 @@
                 $scope.LayBaiVietTatCa();
             }
             else if ($scope.HienThi != -1 && $scope.MaLoaiTin != 0) {
-                $scope.LayBaiViet_TheoDieuKien($scope.MaLoaiTin,$scope.HienThi);
+                $scope.LayBaiViet_TheoDieuKien($scope.MaLoaiTin, $scope.HienThi);
             }
             else if ($scope.HienThi == -1 && $scope.MaLoaiTin != 0) {
                 $scope.LayBaiViet_TheoDanhMuc($scope.MaLoaiTin);
@@ -254,7 +255,7 @@
         }
 
         // Phân Trang Theo Điều Kiện
-        $scope.PhanTrang_TheoDieuKien = function (MaLoaiTin,HienThi) {
+        $scope.PhanTrang_TheoDieuKien = function (MaLoaiTin, HienThi) {
             blockUI.start({
                 message: 'Xin Vui Lòng Chờ...',
             });
@@ -275,14 +276,15 @@
 
         // Lấy Chi Tiết Bài Viết
         $scope.LayChiTietBaiViet = function (MaTinTuc) {
-            $scope.totalItems = 64;
-            $scope.currentPage = 4;
+            blockUI.start({
+                message: 'Xin Vui Lòng Chờ...',
+            });
             let param = "?MaTinTuc=" + MaTinTuc;
             var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBaiViet, param);
             res.then(
                 function succ(response) {
                     $scope.TTBV = response.data;
-                    console.log($scope.TTBV);
+                    //console.log($scope.TTBV);
                     blockUI.stop();
                 },
 
@@ -338,20 +340,160 @@
         $scope.XoaTin = function (MaTinTuc) {
             if (window.confirm("Bạn chắc chắn xóa tin này chứ ?")) {
                 let param = "?MaTinTuc=" + MaTinTuc;
-                var res = CommonController.getData(CommonController.urlAPI.API_XoaTin, param);
+                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTin, param);
                 res.then(
                     function succ(response) {
-                        let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
-                        $scope.DanhSach.splice(index, 1);
-                        alert(response.data);
+                        alert(response.data)
+                        location.href = "";
                     },
 
                     function errorCallback(response) {
                         console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
                     }
                 );
             }
             else return;
+        }
+
+        ///////////////////////////////////// SỬA TIN ////////////////////////
+        $scope.InitSua = function (MaTinTuc) {
+            $scope.TTBV = "";
+            $scope.LayChiTietBaiViet(MaTinTuc);
+            $scope.DsLoaiTin = [];
+            $scope.LayDanhSachLoaiTin();
+            var hamcho = function () {
+                if ($scope.TTBV == "") {
+                    $timeout(hamcho, 300);
+                }
+                else {
+                    blockUI.stop();
+                    $scope.DsLoaiTin = [];
+                    $scope.LayDanhSachLoaiTin();
+                    var hamcho2 = function () {
+                        if ($scope.DsLoaiTin.length == 0) {
+                            $timeout(hamcho2, 300);
+                        }
+                        else {
+                            blockUI.stop();
+                            let index = $scope.DsLoaiTin.findIndex(x => x.MaLoaiTin == $scope.TTBV.MaLoaiTin);
+                            $scope.MaLoaiTin = $scope.DsLoaiTin[index];
+                            document.getElementById("editor1").innerHTML = $scope.TTBV.NoiDung;
+                            document.getElementById("nhhSua").value = $scope.TTBV.NgayHetHan != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHan) : null;
+                            document.getElementById("nhhtmSua").value = $scope.TTBV.NgayHetHanTM != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTM) : null;
+                            document.getElementById("nhhtcSua").value = $scope.TTBV.NgayHetHanTC != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTC) : null;
+                        }
+                    }
+                    $timeout(hamcho2, 300);
+                }
+            }
+            $timeout(hamcho, 300);
+        }
+
+        // Cấu hình đường dẫn
+        var baseURL = window.location.protocol + "//" + window.location.host + "/";
+        var appURL = { pathAPI: baseURL };
+
+        // Chỉnh sửa - upload hình
+        var uploaderImage = $scope.uploaderImage = new FileUploader({
+            url: appURL.pathAPI + CommonController.urlAPI.API_UploadImage,
+            withCredentials: true
+        });
+
+        uploaderImage.filters.push({
+            name: 'upImg',
+            fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                //debugger
+                if ('|tif|tiff|jpg|jpeg|bmp|gif|'.indexOf(type) !== -1) {
+                    setTimeout(deferred.resolve, 1e3);
+                    return true;
+                }
+                else {
+                    alert("Không hỗ trợ định dạng file này!!");
+                    return false;
+                }
+            }
+        });
+
+        $scope.uploadImg = function (item) {
+            if (confirm("Bạn có chắc up ảnh này lên chứ ?")) {
+                uploaderImage.uploadItem(item);
+            }
+            return;
+        }
+
+        $scope.removeImg = function () {
+            if (confirm("Bạn có chắc xóa ảnh này chứ ?")) {
+                uploaderImage.clearQueue();
+                $scope.HinhAnh = {};
+                $scope.ttIm = false;
+                $scope.ttImg = false;
+            }
+        }
+
+        uploaderImage.onAfterAddingFile = function (item) {
+            $scope.ttup = true;
+            $scope.HinhAnh = item;
+            $scope.ttIm = true;
+            $scope.ttImg = true;
+        }
+
+        uploaderImage.onSuccessItem = function (item, response, status, headers) {
+            alert(response);
+            $scope.ttImg = false;
+            $scope.ttIm = true;
+            if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
+                $scope.objThem.HinhAnh = item.file.name;
+            }
+        }
+
+        // Chỉnh sửa - upload tập tin
+        $scope.TapTinDinhKem = [];
+        var uploaderFile = $scope.uploaderFile = new FileUploader({
+            url: appURL.pathAPI + CommonController.urlAPI.API_UploadFile,
+            withCredentials: true
+        });
+
+        uploaderFile.filters.push({
+            name: 'upFile',
+            fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
+                console.log('asyncFilter');
+                setTimeout(deferred.resolve, 1e3);
+            }
+        });
+
+        $scope.uploadfile = function (item) {
+            if (confirm("Bạn có chắc up tệp này lên chứ ?")) {
+                uploaderFile.uploadItem(item);
+            }
+            return;
+        }
+
+        $scope.removeFile = function (item) {
+            if (confirm("Bạn có chắc xóa tệp này chứ ?")) {
+                uploaderFile.removeFromQueue(item);
+            }
+            return;
+        }
+
+        uploaderFile.onAfterAddingFile = function (item) {
+            $scope.ttup = true;
+        }
+
+        uploaderFile.onSuccessItem = function (item, response, status, headers) {
+            alert(response);
+            let index = uploaderFile.getIndexOfItem(item);
+            document.getElementById("ttFile" + index).style.display = 'none';
+            document.getElementById("ttFileSuccess" + index).className = "action-buttons";
+            if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
+                let objItem = {
+                    Ten: item.file.name,
+                    Url: item.file.name,
+                    Size: item.file.size
+                }
+                $scope.TapTinDinhKem.push(objItem);
+            }
         }
 
         ///////////////// CÁC HÀM ĐỊNH NGHĨA RIÊNG ///////////
@@ -378,9 +520,14 @@
             return $sce.trustAsHtml(data);
         }
 
-        // Hiển Thị Ngày Giờ
+        // Hiển Thị DD/MM/YYYY
         $scope.ReturnDate = function (date) {
             return moment(date).format("DD/MM/YYYY , h:mm:ss a");
+        }
+
+        // Hiển Thị DD-MM-YYYY
+        $scope.ReturnDate2 = function (date) {
+            return moment(date).format("DD-MM-YYYY");
         }
 
         // Hàm cắt chữ

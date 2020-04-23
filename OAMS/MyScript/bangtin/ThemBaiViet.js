@@ -76,7 +76,8 @@
             name: 'upImg',
             fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                if ('|pdf|tif|tiff|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1) {
+                //debugger
+                if ('|tif|tiff|jpg|jpeg|bmp|gif|'.indexOf(type) !== -1) {
                     setTimeout(deferred.resolve, 1e3);
                     return true;
                 }
@@ -84,6 +85,14 @@
                     alert("Không hỗ trợ định dạng file này!!");
                     return false;
                 }
+            }
+        });
+
+        uploaderImage.filters.push({
+            name: 'upImg',
+            fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
+                console.log('asyncFilter');
+                setTimeout(deferred.resolve, 1e3);
             }
         });
 
@@ -129,16 +138,8 @@
         uploaderFile.filters.push({
             name: 'upFile',
             fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                //debugger
-                if ('|pdf|tif|tiff|jpg|jpeg|bmp|gif|'.indexOf(type) !== -1) {
-                    setTimeout(deferred.resolve, 1e3);
-                    return true;
-                }
-                else {
-                    alert("Không hỗ trợ định dạng file này!!");
-                    return false;
-                }
+                console.log('asyncFilter');
+                setTimeout(deferred.resolve, 1e3);
             }
         });
 
@@ -196,6 +197,7 @@
             res.then(
                 function succ(response) {
                     alert(response.data);
+                    location.href = "";
                 },
 
                 function errorCallback(response) {

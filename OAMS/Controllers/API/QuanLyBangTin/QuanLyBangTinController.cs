@@ -103,12 +103,16 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.HinhAnh = dsTin.HinhAnh;
                 tinTuc.MoTa = dsTin.MoTa;
                 tinTuc.NgayTao = dsTin.NgayTao;
+                tinTuc.NgayHetHan = dsTin.NgayHetHan;
+                tinTuc.NgayHetHanTinMoi = dsTin.NgayHetHanTinMoi;
+                tinTuc.NgayHetHanTrangChu = dsTin.NgayHetHanTrangChu;
                 tinTuc.HienThi = dsTin.HienThi;
                 tinTuc.TenNguoiDung = dsTin.NEWS_NguoiSuDung.Ten;
                 tinTuc.TemplateList = dsTin.NEWS_LoaiTinTuc.TemplateList;
                 tinTuc.MaLoaiTin = dsTin.MaLoaiTin;
                 tinTuc.LoaiTin = dsTin.NEWS_LoaiTinTuc.Ten;
                 tinTuc.LuotXem = dsTin.LuotXem;
+                tinTuc.TinNoiBat = dsTin.TinNoiBat;
                 var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
                 List<TapTinModel> dsttmodel = new List<TapTinModel>();
                 if (dsTapTin.Count > 0)
