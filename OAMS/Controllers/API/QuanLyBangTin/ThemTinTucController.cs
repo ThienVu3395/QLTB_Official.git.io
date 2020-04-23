@@ -91,7 +91,6 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     }
 
                     else
-
                     {
 
                         FileInfo f = new FileInfo(sPath + Path.GetFileName(hpf.FileName));
@@ -101,8 +100,6 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                         hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
 
                         iUploadedCnt = iUploadedCnt + 1;
-
-                        return "Files Is Duplicate,Upload Failed";
                     }
 
                 }
@@ -192,8 +189,6 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                         hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
 
                         iUploadedCnt = iUploadedCnt + 1;
-
-                        return "Files Is Duplicate,Upload Failed";
                     }
 
                 }

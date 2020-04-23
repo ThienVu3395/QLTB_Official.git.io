@@ -410,6 +410,7 @@
                     function succ(response) {
                         alert(response.data)
                         $scope.TTBV.HinhAnh = null;
+                        $scope.ttIm = true;
                     },
 
                     function errorCallback(response) {
@@ -438,7 +439,13 @@
 
         $scope.uploadImg = function (item) {
             if (confirm("Bạn có chắc up ảnh này lên chứ ?")) {
-                uploaderImage.uploadItem(item);
+                if ($scope.TTBV.HinhAnh != null) {
+                    alert("Xin vui lòng xóa ảnh cũ trước");
+                    return;
+                }
+                else {
+                    uploaderImage.uploadItem(item);
+                }
             }
             return;
         }
@@ -453,18 +460,18 @@
         }
 
         uploaderImage.onAfterAddingFile = function (item) {
-            $scope.ttup = true;
+            //$scope.ttup = true;
             $scope.HinhAnh = item;
             $scope.ttIm = true;
-            $scope.ttImg = true;
+            //$scope.ttImg = true;
         }
 
         uploaderImage.onSuccessItem = function (item, response, status, headers) {
             alert(response);
-            $scope.ttImg = false;
-            $scope.ttIm = true;
+            //$scope.ttImg = false;
+            $scope.ttIm = false;
             if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
-                $scope.objSua.HinhAnh = item.file.name;
+                $scope.TTBV.HinhAnh = item.file.name;
             }
         }
 
@@ -520,6 +527,7 @@
 
         uploaderFile.onAfterAddingFile = function (item) {
             $scope.ttup = true;
+            console.log(uploaderFile.queue)
         }
 
         uploaderFile.onSuccessItem = function (item, response, status, headers) {
@@ -533,8 +541,31 @@
                     Url: item.file.name,
                     Size: item.file.size
                 }
-                $scope.TapTinDinhKem.push(objItem);
+                $scope.TTBV.TapTinDinhKem.push(objItem);
+                uploaderFile.removeFromQueue(item);
             }
+        }
+
+        // Cập nhật thông tin
+        $scope.CapNhatThongTin = function () {
+            $scope.TTBV.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
+            $scope.TTBV.NgayHetHan = GetDateTimeFormat(document.getElementById("nhhSua").value);
+            $scope.TTBV.NgayHetHanTC = GetDateTimeFormat(document.getElementById("nhhtmSua").value)
+            $scope.TTBV.NgayHetHanTM = GetDateTimeFormat(document.getElementById("nhhtcSua").value);
+            $scope.TTBV.NoiDung = document.getElementById("editor1").innerHTML;
+            var res = CommonController.postData(CommonController.urlAPI.API_CapNhat, $scope.TTBV);
+            res.then(
+                function succ(response) {
+                    alert(response.data);
+                    location.href = "";
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message);
+                    alert("Có Lỗi Phát Sinh");
+                }
+            );
+            console.log($scope.TTBV);
         }
 
         ///////////////// CÁC HÀM ĐỊNH NGHĨA RIÊNG ///////////
@@ -556,6 +587,7 @@
                 document.getElementById("select3").className = "ace-icon fa fa-check green";
             }
         }
+
         // Render ra HTML
         $scope.htmlSafe = function (data) {
             return $sce.trustAsHtml(data);
@@ -577,5 +609,13 @@
                 return string = "...";
             }
             else return "";
+        }
+
+        // Get Date Format
+        function GetDateTimeFormat(string) {
+            let d = string[0] + string[1];
+            let m = string[3] + string[4];
+            let y = string[6] + string[7] + string[8] + string[9];
+            return y + "-" + m + "-" + d;
         }
     })

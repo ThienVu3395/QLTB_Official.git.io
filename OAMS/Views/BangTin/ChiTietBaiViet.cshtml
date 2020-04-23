@@ -12,6 +12,10 @@
             overflow: hidden
         }
 
+        .read {
+            font-weight: bolder
+        }
+
         iframe {
             width: 100% !important;
             height: 200px !important;
@@ -104,8 +108,8 @@
         }
 
         /*Chỉnh riêng css cho chi tiết tin*/
-        .detailCT h1 {
-            font-size: 24px
+        .detailCT p {
+            font-size: 14px;
         }
 
         .detailCT img {
@@ -595,7 +599,7 @@
 
                             <h3 class="search-title">
                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                   class="blue fs-16 no-deco"
+                                   class="read blue fs-16 no-deco"
                                    title="{{item.TieuDe}}"
                                    data-rel="tooltip"
                                    ng-show="item.LuotXem == 0">
@@ -603,7 +607,7 @@
                                 </a>
 
                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                   class="red fs-16 no-deco"
+                                   class="fs-16 no-deco"
                                    title="{{item.TieuDe}}"
                                    data-rel="tooltip"
                                    ng-show="item.LuotXem > 0">
@@ -624,7 +628,7 @@
                         <div class="caption">
                             <h3 class="search-title">
                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                   class="blue fs-16 no-deco"
+                                   class="read blue fs-16 no-deco"
                                    title="{{item.TieuDe}}"
                                    data-rel="tooltip"
                                    ng-show="item.LuotXem == 0">
@@ -632,7 +636,7 @@
                                 </a>
 
                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                   class="red fs-16 no-deco"
+                                   class="fs-16 no-deco"
                                    title="{{item.TieuDe}}"
                                    data-rel="tooltip"
                                    ng-show="item.LuotXem > 0">

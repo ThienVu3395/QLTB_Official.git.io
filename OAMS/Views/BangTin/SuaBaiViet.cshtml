@@ -876,7 +876,7 @@
 
                                 <span class="help-inline">
                                     <label class="middle">
-                                        <input class="ace" type="checkbox" ng-model="objThem.HienThi" ng-click="checkPermission()" />
+                                        <input class="ace" type="checkbox" ng-model="TTBV.HienThi" @*ng-click="checkPermission()"*@ />
                                         <span class="lbl">
                                             <span class="text-danger">
                                                 <a title="Bạn sẽ được duyệt ngay tin này nếu bạn đã được cấp quyền"
@@ -1024,17 +1024,13 @@
                                     </a>
 
                                     <span class="action-buttons">
-                                        <a href="#" ng-click="uploadImg(HinhAnh)" ng-show="ttImg">
+                                        <a href="#" ng-click="uploadImg(HinhAnh)">
                                             <i class="ace-icon fa fa-upload bigger-125 blue"></i>
                                         </a>
 
-                                        <a href="#" ng-click="removeImg()" ng-show="ttImg">
+                                        <a href="#" ng-click="removeImg()">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                         </a>
-
-                                        @*<a href="#" ng-show="!ttImg">
-                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
-                                        </a>*@
                                     </span>
                                 </li>
                                 @*/Hình ảnh từ queue*@
@@ -1059,10 +1055,6 @@
                                     </a>
 
                                     <span class="action-buttons" @*id="ttFile{{$index}}"*@>
-                                        @*<a href="#" ng-click="uploadfile(item)">
-                                                <i class="ace-icon fa fa-upload bigger-125 blue"></i>
-                                            </a>*@
-
                                         <a href="#">
                                             <i class="ace-icon fa fa-check bigger-125 green"></i>
                                         </a>
@@ -1081,17 +1073,19 @@
                                         <span class="attached-name">{{item.file.name}}</span>
                                     </a>
 
-                                    <span class="action-buttons" @*id="ttFile{{$index}}"*@>
+                                    <span class="action-buttons" id="ttFile{{$index}}">
                                         <a href="#" ng-click="uploadfile(item)">
                                             <i class="ace-icon fa fa-upload bigger-125 blue"></i>
                                         </a>
 
-                                        @*<a href="#">
-                                                <i class="ace-icon fa fa-check bigger-125 green"></i>
-                                            </a>*@
-
-                                        <a href="#" @*ng-click="removeFile(item)"*@>
+                                        <a href="#" ng-click="removeFile(item)">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                        </a>
+                                    </span>
+
+                                    <span class="action-buttons hide" id="ttFileSuccess{{$index}}">
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
                                         </a>
                                     </span>
                                 </li>
@@ -1102,9 +1096,9 @@
                     @*/Tập Tin Đính Kèm*@
 
                     <div class="align-right">
-                        <button class="btn btn-sm btn-success">
-                            <i class="ace-icon fa fa-check bigger-140"></i>
-                            Sửa Bài Viết
+                        <button class="btn btn-sm btn-success" ng-click="CapNhatThongTin()">
+                            <i class="ace-icon fa fa-save bigger-140"></i>
+                            Lưu Thông Tin
                         </button>
                     </div>
 

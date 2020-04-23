@@ -511,13 +511,13 @@
                                                 <div class="col-lg-10">
                                                     <h4 class="media-heading">
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="blue fs-16 no-deco"
+                                                           class="blue fs-16 no-deco read"
                                                            ng-show="item.LuotXem == 0">
                                                             {{capitalize(item.TieuDe)}}
                                                         </a>
 
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="fs-16 no-deco read"
+                                                           class="fs-16 no-deco"
                                                            ng-show="item.LuotXem > 0">
                                                             {{capitalize(item.TieuDe)}}
                                                         </a>
@@ -548,7 +548,7 @@
                                                 <div class="col-lg-9">
                                                     <h4 class="media-heading">                                               
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="blue fs-16 no-deco"
+                                                           class="blue fs-16 no-deco read"
                                                            title="{{item.TieuDe}}" 
                                                            data-rel="tooltip"
                                                            ng-show="item.LuotXem == 0">
@@ -556,7 +556,7 @@
                                                         </a>
 
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="read fs-16 no-deco"
+                                                           class="fs-16 no-deco"
                                                            title="{{item.TieuDe}}" 
                                                            data-rel="tooltip"
                                                            ng-show="item.LuotXem > 0">
@@ -580,7 +580,7 @@
                                             <h4 class="media-heading">
                                                 <i class="ace-icon fa fa-circle green"></i>
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                   class="blue fs-16 no-deco"
+                                                   class="read blue fs-16 no-deco"
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem == 0">
@@ -588,7 +588,7 @@
                                                 </a>
 
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                   class="read fs-16 no-deco"
+                                                   class="fs-16 no-deco"
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem > 0">

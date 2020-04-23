@@ -456,13 +456,13 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         public IHttpActionResult XoaTin(int MaTinTuc)
         {
             var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
-            if(dsTin != null)
+            if (dsTin != null)
             {
                 var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
 
                 if (dsTapTin.Count > 0)
                 {
-                    foreach(var item in dsTapTin)
+                    foreach (var item in dsTapTin)
                     {
                         string filePath = "";
 
@@ -548,6 +548,43 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 return Ok("Tập Tin Đã Được Xóa");
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpPost]
+        [Route("CapNhat")]
+        public IHttpActionResult CapNhat(TinTucModel tinTuc)
+        {
+            var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == tinTuc.MaTinTuc).FirstOrDefault();
+            tin.TieuDe = tinTuc.TieuDe;
+            tin.NoiDung = tinTuc.NoiDung;
+            tin.MoTa = tinTuc.MoTa;
+            tin.MaLoaiTin = tinTuc.MaLoaiTin;
+            tin.TinNoiBat = tinTuc.TinNoiBat;
+            tin.HienThi = tinTuc.HienThi == true ? true : false;
+            tin.HinhAnh = tinTuc.HinhAnh;
+            tin.NgayTao = tinTuc.NgayTao;
+            tin.NguoiTao = 56;
+            tin.NgayHetHan = tinTuc.NgayHetHan;
+            tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
+            tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
+            dbContext.SaveChanges();
+            if (tinTuc.TapTinDinhKem.Count > 0)
+            {
+                var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == tinTuc.MaTinTuc).ToList();
+                if (dsTapTin.Count > 0)
+                {
+                    foreach (var item in tinTuc.TapTinDinhKem)
+                    {
+                        NEWS_TinTucTapTin tttt = new NEWS_TinTucTapTin();
+                        tttt.MaTinTuc = tin.MaTinTuc;
+                        tttt.Ngay = DateTime.Now;
+                        tttt.Ten = item.Ten;
+                        dbContext.NEWS_TinTucTapTin.Add(tttt);
+                        dbContext.SaveChanges();
+                    }
+                }
+            }
+            return Ok("Cập Nhật Thông Tin Bài Viết Thành Công");
         }
     }
 }

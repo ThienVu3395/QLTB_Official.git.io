@@ -494,6 +494,7 @@
                     //*** Sửa Tin ***//
                     API_XoaHinh: "API/AdminBangTin/XoaHinh",
                     API_XoaFile: "API/AdminBangTin/XoaFile",
+                    API_CapNhat: "API/AdminBangTin/CapNhat",
                 };
 
                 return {
