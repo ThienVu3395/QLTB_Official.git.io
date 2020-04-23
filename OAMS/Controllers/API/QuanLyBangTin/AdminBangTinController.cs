@@ -499,5 +499,55 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
+
+        [HttpDelete]
+        [Route("XoaHinh")]
+        public IHttpActionResult XoaHinh(int MaTinTuc)
+        {
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
+            if (dsTin != null)
+            {
+                string imgPath = "";
+
+                imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + dsTin.HinhAnh);
+
+                if (System.IO.File.Exists(imgPath))
+
+                {
+                    FileInfo f = new FileInfo(imgPath);
+
+                    f.Delete();
+                }
+                dsTin.HinhAnh = null;
+                dbContext.SaveChanges();
+                return Ok("Hình Đã Được Xóa");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpDelete]
+        [Route("XoaFile")]
+        public IHttpActionResult XoaFile(int MaTapTin)
+        {
+            var dsTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTapTin == MaTapTin).FirstOrDefault();
+            if (dsTin != null)
+            {
+                string imgPath = "";
+
+                imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + dsTin.Ten);
+
+                if (System.IO.File.Exists(imgPath))
+
+                {
+                    FileInfo f = new FileInfo(imgPath);
+
+                    f.Delete();
+                }
+                dbContext.NEWS_TinTucTapTin.Remove(dsTin);
+                dbContext.SaveChanges();
+                return Ok("Tập Tin Đã Được Xóa");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
     }
 }

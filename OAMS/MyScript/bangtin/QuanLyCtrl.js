@@ -394,11 +394,31 @@
         var baseURL = window.location.protocol + "//" + window.location.host + "/";
         var appURL = { pathAPI: baseURL };
 
-        // Chỉnh sửa - upload hình
+        // *************** Chỉnh sửa - Upload hình *****************
         var uploaderImage = $scope.uploaderImage = new FileUploader({
             url: appURL.pathAPI + CommonController.urlAPI.API_UploadImage,
             withCredentials: true
         });
+
+        // Xóa hình database
+        $scope.xoaHinh = function (event, MaTinTuc) {
+            event.preventDefault();
+            if (window.confirm("bạn chắc chắn xóa hình chứ")) {
+                let param = "?MaTinTuc=" + MaTinTuc;
+                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaHinh, param);
+                res.then(
+                    function succ(response) {
+                        alert(response.data)
+                        $scope.TTBV.HinhAnh = null;
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
+            }
+        }
 
         uploaderImage.filters.push({
             name: 'upImg',
@@ -444,7 +464,7 @@
             $scope.ttImg = false;
             $scope.ttIm = true;
             if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
-                $scope.objThem.HinhAnh = item.file.name;
+                $scope.objSua.HinhAnh = item.file.name;
             }
         }
 
@@ -462,6 +482,27 @@
                 setTimeout(deferred.resolve, 1e3);
             }
         });
+
+        // Xóa file database
+        $scope.xoaFile = function (event, MaTapTin) {
+            event.preventDefault();
+            if (window.confirm("bạn chắc chắn xóa hình chứ")) {
+                let param = "?MaTapTin=" + MaTapTin;
+                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaFile, param);
+                res.then(
+                    function succ(response) {
+                        alert(response.data)
+                        let index = $scope.TTBV.TapTinDinhKem.findIndex(x => x.MaTapTin == MaTapTin);
+                        $scope.TTBV.TapTinDinhKem.splice(index, 1);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
+            }
+        }
 
         $scope.uploadfile = function (item) {
             if (confirm("Bạn có chắc up tệp này lên chứ ?")) {

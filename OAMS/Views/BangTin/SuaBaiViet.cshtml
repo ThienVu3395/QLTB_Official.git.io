@@ -998,7 +998,7 @@
                             <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
                             <ul class="attachment-list pull-left list-unstyled">
                                 @*Hình ảnh từ csdl*@
-                                <li>
+                                <li ng-show="TTBV.HinhAnh != null">
                                     <a href="~/Content/image/{{TTBV.HinhAnh}}" class="attached-file" target="_blank">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
                                         <span class="attached-name">{{TTBV.HinhAnh}}</span>
@@ -1009,7 +1009,7 @@
                                             <i class="ace-icon fa fa-check bigger-125 green"></i>
                                         </a>
 
-                                        <a href="#" ng-click="removeImg()">
+                                        <a href="#" ng-click="xoaHinh($event,TTBV.MaTinTuc)">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                         </a>
                                     </span>
@@ -1062,11 +1062,12 @@
                                         @*<a href="#" ng-click="uploadfile(item)">
                                                 <i class="ace-icon fa fa-upload bigger-125 blue"></i>
                                             </a>*@
+
                                         <a href="#">
                                             <i class="ace-icon fa fa-check bigger-125 green"></i>
                                         </a>
 
-                                        <a href="#" @*ng-click="removeFile(item)"*@>
+                                        <a href="#" ng-click="xoaFile($event,item.MaTapTin)">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                         </a>
                                     </span>

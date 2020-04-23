@@ -489,7 +489,11 @@
                     API_DuyetTin: "API/AdminBangTin/DuyetTin",
                     API_HuyDuyetTin : "API/AdminBangTin/HuyDuyetTin",
                     API_XoaTin : "API/AdminBangTin/XoaTin",
-                    API_SuaTin : "API/AdminBangTin/SuaTin",
+                    API_SuaTin: "API/AdminBangTin/SuaTin",
+
+                    //*** Sửa Tin ***//
+                    API_XoaHinh: "API/AdminBangTin/XoaHinh",
+                    API_XoaFile: "API/AdminBangTin/XoaFile",
                 };
 
                 return {
