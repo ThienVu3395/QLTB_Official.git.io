@@ -995,9 +995,49 @@
                         <label class="col-sm-3 control-label no-padding-right">Ảnh Đại Diện:</label>
 
                         <div class="col-sm-4">
+                            @*<input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
+                                <ul class="attachment-list pull-left list-unstyled">
+                                    Hình ảnh từ csdl
+                                    <li ng-show="TTBV.HinhAnh != null">
+                                        <a href="~/Content/image/{{TTBV.HinhAnh}}" class="attached-file" target="_blank">
+                                            <i class="ace-icon fa fa-file-o bigger-110"></i>
+                                            <span class="attached-name">{{TTBV.HinhAnh}}</span>
+                                        </a>
+
+                                        <span class="action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-check bigger-125 green"></i>
+                                            </a>
+
+                                            <a href="#" ng-click="xoaHinh($event,TTBV.MaTinTuc)">
+                                                <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                            </a>
+                                        </span>
+                                    </li>
+                                    /Hình ảnh từ csdl
+
+                                    Hình ảnh từ queue
+                                    <li ng-show="ttIm">
+                                        <a href="#" class="attached-file">
+                                            <i class="ace-icon fa fa-file-o bigger-110"></i>
+                                            <span class="attached-name">{{HinhAnh.file.name}} ({{HinhAnh.file.size}} KB)</span>
+                                        </a>
+
+                                        <span class="action-buttons">
+                                            <a href="#" ng-click="uploadImg(HinhAnh)">
+                                                <i class="ace-icon fa fa-upload bigger-125 blue"></i>
+                                            </a>
+
+                                            <a href="#" ng-click="removeImg()">
+                                                <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                            </a>
+                                        </span>
+                                    </li>
+                                    /Hình ảnh từ queue
+                                </ul>*@
+
                             <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
                             <ul class="attachment-list pull-left list-unstyled">
-                                @*Hình ảnh từ csdl*@
                                 <li ng-show="TTBV.HinhAnh != null">
                                     <a href="~/Content/image/{{TTBV.HinhAnh}}" class="attached-file" target="_blank">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
@@ -1005,35 +1045,11 @@
                                     </a>
 
                                     <span class="action-buttons">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
-                                        </a>
-
-                                        <a href="#" ng-click="xoaHinh($event,TTBV.MaTinTuc)">
+                                        <a href="#" ng-click="xoaHinh(TTBV.MaTinTuc,$event)">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                         </a>
                                     </span>
                                 </li>
-                                @*/Hình ảnh từ csdl*@
-
-                                @*Hình ảnh từ queue*@
-                                <li ng-show="ttIm">
-                                    <a href="#" class="attached-file">
-                                        <i class="ace-icon fa fa-file-o bigger-110"></i>
-                                        <span class="attached-name">{{HinhAnh.file.name}} ({{HinhAnh.file.size}} KB)</span>
-                                    </a>
-
-                                    <span class="action-buttons">
-                                        <a href="#" ng-click="uploadImg(HinhAnh)">
-                                            <i class="ace-icon fa fa-upload bigger-125 blue"></i>
-                                        </a>
-
-                                        <a href="#" ng-click="removeImg()">
-                                            <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
-                                        </a>
-                                    </span>
-                                </li>
-                                @*/Hình ảnh từ queue*@
                             </ul>
                         </div>
                     </div>
@@ -1042,31 +1058,43 @@
 
                     @*Tập Tin Đính Kèm*@
                     <div class="form-group no-margin-bottom">
-                        <label class="col-sm-3 control-label no-padding-right">Tin Đính Kèm:</label>
+                        <label class="col-sm-3 control-label no-padding-right">Tập Tin Đính Kèm:</label>
 
                         <div class="col-sm-4">
                             <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderFile" filters="upFile" />
                             <ul class="attachment-list pull-left list-unstyled">
-                                @*Tập tin từ csdl*@
-                                <li ng-repeat="item in TTBV.TapTinDinhKem">
+                                @*<li ng-repeat="item in TTBV.TapTinDinhKem">
+                                        <a href="~/Content/attachment/{{item.Ten}}" class="attached-file" target="_blank">
+                                            <i class="ace-icon fa fa-file-o bigger-110"></i>
+                                            <span class="attached-name">{{item.Ten}}</span>
+                                        </a>
+
+                                        <span class="action-buttons">
+                                            <a href="#">
+                                                <i class="ace-icon fa fa-check bigger-125 green"></i>
+                                            </a>
+
+                                            <a href="#" ng-click="xoaFile($event,item.MaTapTin)">
+                                                <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                            </a>
+                                        </span>
+                                    </li>
+
+                                *@
+
+                                <li ng-repeat="item in TTBV.TapTinDinhKem track by $index">
                                     <a href="~/Content/attachment/{{item.Ten}}" class="attached-file" target="_blank">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
                                         <span class="attached-name">{{item.Ten}}</span>
                                     </a>
 
-                                    <span class="action-buttons" @*id="ttFile{{$index}}"*@>
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
-                                        </a>
-
+                                    <span class="action-buttons">
                                         <a href="#" ng-click="xoaFile($event,item.MaTapTin)">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
                                         </a>
                                     </span>
                                 </li>
-                                @*/Tập tin từ csdl*@
 
-                                @*Tập tin từ queue*@
                                 <li ng-repeat="item in uploaderFile.queue">
                                     <a href="#" class="attached-file" target="_blank">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
@@ -1089,7 +1117,6 @@
                                         </a>
                                     </span>
                                 </li>
-                                @*/Tập tin từ queue*@
                             </ul>
                         </div>
                     </div>

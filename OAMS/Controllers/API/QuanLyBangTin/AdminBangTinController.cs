@@ -17,6 +17,8 @@ namespace OAMS.Controllers.API.QuanLyBangTin
     public class AdminBangTinController : ApiController
     {
         dbOAMSEntities dbContext = new dbOAMSEntities();
+        private string file;
+
         [HttpGet]
         [Route("LayDanhSachBaiViet")]
         public IHttpActionResult LayDanhSachBaiViet(int page, int pageLimit)
@@ -453,38 +455,14 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
         [HttpDelete]
         [Route("XoaTin")]
-        public IHttpActionResult XoaTin(int MaTinTuc)
+        public IHttpActionResult XoaTin(int MaTapTin)
         {
-            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
+            var dsTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTapTin == MaTapTin).FirstOrDefault();
             if (dsTin != null)
             {
-                var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
-
-                if (dsTapTin.Count > 0)
-                {
-                    foreach (var item in dsTapTin)
-                    {
-                        string filePath = "";
-
-                        filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + item.Ten);
-
-                        if (System.IO.File.Exists(filePath))
-
-                        {
-                            FileInfo f = new FileInfo(filePath);
-
-                            f.Delete();
-
-                            dbContext.NEWS_TinTucTapTin.Remove(item);
-
-                            dbContext.SaveChanges();
-                        }
-                    }
-                }
-
                 string imgPath = "";
 
-                imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + dsTin.HinhAnh);
+                imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + dsTin.Ten);
 
                 if (System.IO.File.Exists(imgPath))
 
@@ -493,9 +471,9 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
                     f.Delete();
                 }
-                dbContext.NEWS_TinTuc.Remove(dsTin);
+                dbContext.NEWS_TinTucTapTin.Remove(dsTin);
                 dbContext.SaveChanges();
-                return Ok("Tin Đã Được Xóa");
+                return Ok("Tập Tin Đã Được Xóa");
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
@@ -543,8 +521,8 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
                     f.Delete();
                 }
-                dbContext.NEWS_TinTucTapTin.Remove(dsTin);
-                dbContext.SaveChanges();
+                //dbContext.NEWS_TinTucTapTin.Remove(dsTin);
+                //dbContext.SaveChanges();
                 return Ok("Tập Tin Đã Được Xóa");
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
@@ -555,36 +533,74 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         public IHttpActionResult CapNhat(TinTucModel tinTuc)
         {
             var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == tinTuc.MaTinTuc).FirstOrDefault();
-            tin.TieuDe = tinTuc.TieuDe;
-            tin.NoiDung = tinTuc.NoiDung;
-            tin.MoTa = tinTuc.MoTa;
-            tin.MaLoaiTin = tinTuc.MaLoaiTin;
-            tin.TinNoiBat = tinTuc.TinNoiBat;
-            tin.HienThi = tinTuc.HienThi == true ? true : false;
-            tin.HinhAnh = tinTuc.HinhAnh;
-            tin.NgayTao = tinTuc.NgayTao;
-            tin.NguoiTao = 56;
-            tin.NgayHetHan = tinTuc.NgayHetHan;
-            tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
-            tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
-            dbContext.SaveChanges();
-            if (tinTuc.TapTinDinhKem.Count > 0)
-            {
-                var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == tinTuc.MaTinTuc).ToList();
-                if (dsTapTin.Count > 0)
+            if (tinTuc.HinhAnh != tinTuc.HinhCu) {
+                if (tinTuc.HinhAnh == null)
                 {
-                    foreach (var item in tinTuc.TapTinDinhKem)
+                    //return Ok("Xóa sạch cũ lẫn mới");
+                    //tin.HinhAnh = null;
+                    string imgPath = "";
+                    imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + tinTuc.HinhCu);
+                    if (System.IO.File.Exists(imgPath))
                     {
-                        NEWS_TinTucTapTin tttt = new NEWS_TinTucTapTin();
-                        tttt.MaTinTuc = tin.MaTinTuc;
-                        tttt.Ngay = DateTime.Now;
-                        tttt.Ten = item.Ten;
-                        dbContext.NEWS_TinTucTapTin.Add(tttt);
-                        dbContext.SaveChanges();
+                        FileInfo f = new FileInfo(imgPath);
+                        f.Delete();
                     }
                 }
+                else {
+                    //return Ok("thay cũ = mới");
+                    //tin.HinhAnh = tinTuc.HinhAnh;
+                    string oldimgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + tinTuc.HinhCu);
+                    string newimgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/");
+                    if (System.IO.File.Exists(oldimgPath))
+                    {
+                        HttpPostedFileBase file = null;
+                        FileInfo f = new FileInfo(oldimgPath);
+                        f.Delete();
+                        file.SaveAs(filename: newimgPath + tinTuc.HinhAnh);
+                    }
+
+                    //System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+
+                    //System.Web.HttpPostedFile hpf = hfc[0];
+
+                    //FileInfo fi = new FileInfo(imgPath + Path.GetFileName(tinTuc.HinhAnh));
+
+                    //string path = Path.Combine(imgPath + tinTuc.HinhAnh);
+
+                    //hpf.SaveAs(path);
+                }
             }
-            return Ok("Cập Nhật Thông Tin Bài Viết Thành Công");
+            return Ok("ờ");
+            //tin.TieuDe = tinTuc.TieuDe;
+            //tin.NoiDung = tinTuc.NoiDung;
+            //tin.MoTa = tinTuc.MoTa;
+            //tin.MaLoaiTin = tinTuc.MaLoaiTin;
+            //tin.TinNoiBat = tinTuc.TinNoiBat;
+            //tin.HienThi = tinTuc.HienThi;
+            //tin.HinhAnh = tinTuc.HinhAnh;
+            //tin.NgayTao = tinTuc.NgayTao;
+            //tin.NguoiTao = 56;
+            //tin.NgayHetHan = tinTuc.NgayHetHan;
+            //tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
+            //tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
+            //dbContext.SaveChanges();
+            //if (tinTuc.TapTinDinhKem.Count > 0)
+            //{
+            //    var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == tinTuc.MaTinTuc).ToList();
+            //    if (dsTapTin.Count > 0)
+            //    {
+            //        foreach (var item in tinTuc.TapTinDinhKem)
+            //        {
+            //            NEWS_TinTucTapTin tttt = new NEWS_TinTucTapTin();
+            //            tttt.MaTinTuc = tin.MaTinTuc;
+            //            tttt.Ngay = DateTime.Now;
+            //            tttt.Ten = item.Ten;
+            //            dbContext.NEWS_TinTucTapTin.Add(tttt);
+            //            dbContext.SaveChanges();
+            //        }
+            //    }
+            //}
+            //return Ok("Cập Nhật Thông Tin Bài Viết Thành Công");
         }
     }
 }
