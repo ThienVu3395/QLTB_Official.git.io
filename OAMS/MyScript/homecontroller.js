@@ -493,8 +493,10 @@
 
                     //*** Sửa Tin ***//
                     API_XoaHinh: "API/AdminBangTin/XoaHinh",
+                    API_CapNhatHinh : "API/AdminBangTin/CapNhatHinh",
                     API_XoaFile: "API/AdminBangTin/XoaFile",
-                    API_CapNhat: "API/AdminBangTin/CapNhat",
+                    API_CapNhatFile: "API/AdminBangTin/CapNhatFile",
+                    API_CapNhatThongTin: "API/AdminBangTin/CapNhatThongTin",
                 };
 
                 return {

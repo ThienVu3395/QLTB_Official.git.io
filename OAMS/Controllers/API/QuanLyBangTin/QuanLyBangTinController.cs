@@ -120,6 +120,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     foreach (var item in dsTapTin)
                     {
                         TapTinModel ttmodel = new TapTinModel();
+                        ttmodel.MaTinTuc = item.MaTinTuc;
                         ttmodel.MaTapTin = item.MaTapTin;
                         ttmodel.Ten = item.Ten;
                         ttmodel.Url = item.Url;

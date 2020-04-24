@@ -37,9 +37,8 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
         [HttpPost]
         [Route("UploadImage")]
-        public string UploadImage(/*TinTucModel Ma*/)
+        public string UploadImage()
         {
-            //return "hahaha" + Ma.MaTinTuc;
             int iUploadedCnt = 0;
 
             string sPath = "";
@@ -112,87 +111,6 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             {
 
                 return "Upload Failed";
-
-            }
-
-        }
-
-        [HttpPost]
-        [Route("UpdateImage")]
-        public IHttpActionResult UpdateImage(TinTucModel TinTuc)
-        {
-            int iUploadedCnt = 0;
-
-            string sPath = "";
-
-            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/");
-
-            if (!Directory.Exists(sPath))
-
-            {
-
-                Directory.CreateDirectory(sPath);
-
-            }
-
-            if (!Directory.Exists(sPath))
-
-            {
-
-                Directory.CreateDirectory(sPath);
-
-            }
-
-            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
-            for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
-
-            {
-
-                System.Web.HttpPostedFile hpf = hfc[iCnt];
-
-                if (hpf.ContentLength > 0)
-
-                {
-
-                    if (!System.IO.File.Exists(sPath + Path.GetFileName(hpf.FileName)))
-
-                    {
-
-                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
-
-                        iUploadedCnt = iUploadedCnt + 1;
-
-                    }
-
-                    else
-                    {
-
-                        FileInfo f = new FileInfo(sPath + Path.GetFileName(hpf.FileName));
-
-                        f.Delete();
-
-                        hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
-
-                        iUploadedCnt = iUploadedCnt + 1;
-                    }
-
-                }
-
-            }
-
-            if (iUploadedCnt > 0)
-
-            {
-
-                return Ok(" Files Uploaded Successfully");
-
-            }
-
-            else
-
-            {
-
-                return BadRequest("Upload Failed");
 
             }
 

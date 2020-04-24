@@ -67,6 +67,7 @@ namespace OAMS.Models
 
     public class TapTinModel
     {
+        public int MaTinTuc { get; set; }
         public int MaTapTin { get; set; }
         public string Ten { get; set; }
         public string Url { get; set; }

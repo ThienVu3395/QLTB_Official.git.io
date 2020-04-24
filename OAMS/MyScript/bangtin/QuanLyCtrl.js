@@ -380,8 +380,8 @@
                             $scope.MaLoaiTin = $scope.DsLoaiTin[index];
                             document.getElementById("editor1").innerHTML = $scope.TTBV.NoiDung;
                             document.getElementById("nhhSua").value = $scope.TTBV.NgayHetHan != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHan) : null;
-                            document.getElementById("nhhtmSua").value = $scope.TTBV.NgayHetHanTM != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTM) : null;
-                            document.getElementById("nhhtcSua").value = $scope.TTBV.NgayHetHanTC != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTC) : null;
+                            document.getElementById("nhhtmSua").value = $scope.TTBV.NgayHetHanTinMoi != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTinMoi) : null;
+                            document.getElementById("nhhtcSua").value = $scope.TTBV.NgayHetHanTrangChu != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTrangChu) : null;
                             $scope.HinhCu = $scope.TTBV.HinhAnh;
                             $scope.FileCu = [...$scope.TTBV.TapTinDinhKem];
                         }
@@ -397,17 +397,9 @@
         var appURL = { pathAPI: baseURL };
 
         // *************** Chỉnh sửa - Upload hình *****************
-        //$scope.haha = {
-        //    MaTinTuc : 90
-        //}
         var uploaderImage = $scope.uploaderImage = new FileUploader({
             url: appURL.pathAPI + CommonController.urlAPI.API_UploadImage,
             withCredentials: true,
-            //data: $scope.haha,
-            //headers:{
-            //    'Content-Type': 'application/json',
-            //    'Accept': "multipart/form-data"
-            //},
         });
 
         uploaderImage.filters.push({
@@ -427,7 +419,7 @@
         });
 
         // Xóa hình database
-        $scope.xoaHinh = function (MaTinTuc,event) {
+        $scope.xoaHinh = function (MaTinTuc, event) {
             event.preventDefault();
             if (window.confirm("bạn chắc chắn xóa hình chứ")) {
                 let param = "?MaTinTuc=" + MaTinTuc;
@@ -451,15 +443,24 @@
         }
 
         uploaderImage.onSuccessItem = function (item, response, status, headers) {
-            alert(response);
             if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
                 $scope.TTBV.HinhAnh = item.file.name;
-                console.log($scope.TTBV.MaTinTuc);
+                $scope.TTBV.HinhCu = $scope.HinhCu;
+                var res = CommonController.postData(CommonController.urlAPI.API_CapNhatHinh, $scope.TTBV);
+                res.then(
+                    function succ(response) {
+                        alert(response.data);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
             }
         }
 
         // Chỉnh sửa - upload tập tin
-        //$scope.TapTinDinhKem = [];
         var uploaderFile = $scope.uploaderFile = new FileUploader({
             url: appURL.pathAPI + CommonController.urlAPI.API_UploadFile,
             withCredentials: true,
@@ -495,61 +496,54 @@
         }
 
         uploaderFile.onAfterAddingFile = function (item) {
-            //let newItem = {
-            //    MaTapTin: 0,
-            //    Size: null,
-            //    Ten: item.file.name,
-            //    Url: null
-            //}
-            //$scope.TTBV.TapTinDinhKem.push(newItem);
             uploaderFile.uploadItem(item);
         }
 
         uploaderFile.onSuccessItem = function (item, response, status, headers) {
-            alert(response);
-            //let index = uploaderFile.getIndexOfItem(item);
-            //document.getElementById("ttFile" + index).style.display = 'none';
-            //document.getElementById("ttFileSuccess" + index).className = "action-buttons";
-            //if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
-            //    let objItem = {
-            //        Ten: item.file.name,
-            //        Url: item.file.name,
-            //        Size: item.file.size
-            //    }
-            //}
-            //    $scope.TTBV.TapTinDinhKem.push(objItem);
-            //    uploaderFile.removeFromQueue(item);
+            if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
+                let objItem = {
+                    MaTinTuc: $scope.TTBV.MaTinTuc,
+                    MaTapTin : 0,
+                    Ten: item.file.name,
+                    Url: item.file.name,
+                    Size: item.file.size
+                }
+                var res = CommonController.postData(CommonController.urlAPI.API_CapNhatFile, objItem);
+                res.then(
+                    function succ(response) {
+                        alert("Tập Tin Đã Được Cập Nhật");
+                        objItem.MaTapTin = response.data;
+                        $scope.TTBV.TapTinDinhKem.push(objItem);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
+            }
         }
 
         // Cập nhật thông tin
         $scope.CapNhatThongTin = function () {
             if (window.confirm("Bạn chắc chắn cập nhật lại thông tin như trên chứ ?")) {
-                if (uploaderImage.queue.length > 0) {
-                    
-                }
+                $scope.TTBV.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
+                $scope.TTBV.NgayHetHan = GetDateTimeFormat(document.getElementById("nhhSua").value);
+                $scope.TTBV.NgayHetHanTinMoi = GetDateTimeFormat(document.getElementById("nhhtmSua").value)
+                $scope.TTBV.NgayHetHanTrangChu = GetDateTimeFormat(document.getElementById("nhhtcSua").value);
+                $scope.TTBV.NoiDung = document.getElementById("editor1").innerHTML;
+                var res = CommonController.postData(CommonController.urlAPI.API_CapNhatThongTin, $scope.TTBV);
+                res.then(
+                    function succ(response) {
+                        alert(response.data);
+                        location.href = "";
+                    },
 
-                //console.log(uploaderFile.queue);
-                //console.log($scope.TTBV.TapTinDinhKem);
-                //$scope.TTBV.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
-                //$scope.TTBV.NgayHetHan = GetDateTimeFormat(document.getElementById("nhhSua").value);
-                //$scope.TTBV.NgayHetHanTC = GetDateTimeFormat(document.getElementById("nhhtmSua").value)
-                //$scope.TTBV.NgayHetHanTM = GetDateTimeFormat(document.getElementById("nhhtcSua").value);
-                //$scope.TTBV.NoiDung = document.getElementById("editor1").innerHTML;
-                //$scope.TTBV.HinhCu = $scope.HinhCu;
-                //$scope.TTBV.FileCu = $scope.FileCu;
-                //console.log($scope.TTBV);
-                //var res = CommonController.postData(CommonController.urlAPI.API_CapNhat, $scope.TTBV);
-                //res.then(
-                //    function succ(response) {
-                //        console.log(response.data);
-                //        //location.href = "";
-                //    },
-
-                //    function errorCallback(response) {
-                //        console.log(response.data.message);
-                //        alert("Có Lỗi Phát Sinh");
-                //    }
-                //);
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
             }
             else return;
         }
