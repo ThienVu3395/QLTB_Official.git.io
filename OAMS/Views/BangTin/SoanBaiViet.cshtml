@@ -847,8 +847,22 @@
             </div>
         </div>
 
+        <form name="myForm">
+            <p>
+                Name:
+                <input name="myName" ng-model="myName" required>
+                <span ng-show="myForm.myName.$touched && myForm.myName.$invalid">The name is required.</span>
+            </p>
+
+            <p>
+                Address:
+                <input name="myAddress" ng-model="myAddress" required>
+            </p>
+
+        </form>
+
         <div class="message-list-container">
-            <form id="id-message-form" class="form-horizontal message-form col-xs-12">
+            <form id="id-message-form" class="form-horizontal message-form col-xs-12" name="addForm" novalidate>
                 <div>
                     @*Tiêu đề*@
                     <div class="form-group">
@@ -856,7 +870,14 @@
 
                         <div class="col-sm-6 col-xs-12">
                             <div class="input-icon block col-xs-12 no-padding">
-                                <input type="text" ng-model="objThem.TieuDe" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Tiêu đề bài viết">
+                                <input 
+                                       ng-model="objThem.TieuDe"
+                                       class="col-xs-12"
+                                       name="tieude"
+                                       id="form-field-subject"
+                                       placeholder="Tiêu đề bài viết"
+                                       required />
+                                <p ng-show="addForm.tieude.$touched && addForm.tieude.$invalid" class="text-danger"><i>Bạn chưa nhập tiêu đề</i></p>
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                             <div>
@@ -902,8 +923,7 @@
                                 <select class="form-control"
                                         id="form-field-select-1"
                                         ng-model="MaLoaiTin"
-                                        ng-options="item as item.Ten for item in DanhSachLoaiTin track by item.MaLoaiTin">
-                                </select>
+                                        ng-options="item as item.Ten for item in DanhSachLoaiTin track by item.MaLoaiTin"></select>
                             </span>
                         </div>
                     </div>
@@ -916,7 +936,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="dd-mm-yyyy" readonly/>
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="dd-mm-yyyy" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -934,7 +954,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTM" type="text" data-date-format="dd-mm-yyyy" readonly/>
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTM" type="text" data-date-format="dd-mm-yyyy" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -952,7 +972,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTC" type="text" data-date-format="dd-mm-yyyy" readonly/>
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTC" type="text" data-date-format="dd-mm-yyyy" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -970,7 +990,14 @@
 
                         <div class="col-sm-6 col-xs-12">
                             <div class="input-icon block col-xs-12 no-padding">
-                                <input type="text" ng-model="objThem.MoTa" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Mô tả ngắn về bài viết">
+                                <input type="text"
+                                       ng-model="objThem.MoTa"
+                                       class="col-xs-12"
+                                       name="moTa"
+                                       id="form-field-subject"
+                                       placeholder="Mô tả ngắn về bài viết"
+                                       required/>
+                                <p ng-show="addForm.moTa.$touched && addForm.moTa.$invalid" class="text-danger"><i>Bạn chưa nhập mô tả</i></p>
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                         </div>
@@ -986,7 +1013,8 @@
                         </label>
 
                         <div class="col-sm-9">
-                            <div class="wysiwyg-editor" id="editor1"></div>
+                            <div class="wysiwyg-editor" name="noiDung" id="editor1"></div>
+                            <p ng-show="addForm.noiDung.$touched && addForm.noiDung.$invalid" class="text-danger"><i>Bạn chưa nhập mô tả</i></p>
                         </div>
                     </div>
                     @*Nội Dung*@
@@ -1060,7 +1088,7 @@
                     @*/Tập Tin Đính Kèm*@
 
                     <div class="align-right">
-                        <button class="btn btn-sm btn-success" ng-click="ThemBaiViet()">
+                        <button class="btn btn-sm btn-success" ng-disabled="addForm.$invalid" ng-click="ThemBaiViet()">
                             <i class="ace-icon fa fa-check bigger-140"></i>
                             Thêm Bài Viết
                         </button>

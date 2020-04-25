@@ -455,7 +455,7 @@
                             <ul class="nav nav-tabs" id="myTab">
                                 <li ng-class="{{item.MaLoaiTin == DanhSachLoaiTin[0].MaLoaiTin ? ['active'] : ['']}}"
                                     ng-repeat="item in DanhSachLoaiTin"
-                                    ng-click="LayDanhSachBaiViet(item.MaLoaiTin)">
+                                    ng-click="LayDanhSachBaiViet(item.MaLoaiTin,'layds')">
                                     <a data-toggle="tab" href="#tin">
                                         <i class="blue ace-icon fa fa-{{item.Icon}} bigger-120"></i>
                                         {{item.Ten}}
@@ -549,7 +549,7 @@
                                                     <h4 class="media-heading">                                               
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
                                                            class="blue fs-16 no-deco read"
-                                                           title="{{item.TieuDe}}" 
+                                                           title="{{item.TieuDe}}"
                                                            data-rel="tooltip"
                                                            ng-show="item.LuotXem == 0">
                                                             {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
@@ -557,7 +557,7 @@
 
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
                                                            class="fs-16 no-deco"
-                                                           title="{{item.TieuDe}}" 
+                                                           title="{{item.TieuDe}}"
                                                            data-rel="tooltip"
                                                            ng-show="item.LuotXem > 0">
                                                             {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
@@ -584,7 +584,7 @@
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem == 0">
-                                                    {{capitalize(item.TieuDe | limitTo : 70)}}{{SliceString(item.TieuDe,70)}}
+                                                    {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
                                                 </a>
 
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
@@ -592,7 +592,7 @@
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem > 0">
-                                                    {{capitalize(item.TieuDe | limitTo : 70)}}{{SliceString(item.TieuDe,70)}}
+                                                    {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
                                                 </a>
                                             </h4>
                                             <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
@@ -619,7 +619,7 @@
                                     class="pagination-sm"
                                     boundary-link-numbers="true"
                                     rotate="false"
-                                    ng-change="LayDanhSachBaiViet(MaLoaiTin)">
+                                    ng-change="LayDanhSachBaiViet(MaLoaiTin,'phantrang')">
                                 </ul>
                                 @*/ Thanh phân trang cho tin*@
                             </div>

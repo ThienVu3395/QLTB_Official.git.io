@@ -19,7 +19,7 @@
                     blockUI.stop();
                     $scope.bigCurrentPage = 1;
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
-                    $scope.LayDanhSachBaiViet($scope.MaLoaiTin);
+                    $scope.LayDanhSachBaiViet($scope.MaLoaiTin,'layds');
                     $scope.LayBaiVietTuong();
                     $scope.LaySinhNhat();
                 }
@@ -42,8 +42,15 @@
         }
 
         // Lấy Danh Sách Bài Viết
-        $scope.LayDanhSachBaiViet = function (MaLoaiTin) {
-            let limit = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+        $scope.LayDanhSachBaiViet = function (MaLoaiTin, status) {
+            let limit = 0;
+            if (status == 'layds') {
+                $scope.bigCurrentPage = 1;
+                limit = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+            }
+            else if (status == 'phantrang') {
+                limit = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+            }
             $scope.MaLoaiTin = MaLoaiTin;
             $scope.param = "?page=" + limit + "&pageLimit=" + $scope.itemsPerPage + "&MaLoaiTin=" + MaLoaiTin;
             var res = CommonController.getData(CommonController.urlAPI.API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang, $scope.param);

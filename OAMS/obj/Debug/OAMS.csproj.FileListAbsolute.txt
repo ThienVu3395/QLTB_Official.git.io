@@ -683,10 +683,6 @@ C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CoreC
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.pdb
-C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Cookies.dll
-C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Facebook.dll
-C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Mvc.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\ApplicationInsights.config
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\csc.exe
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -721,7 +717,10 @@ C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.AspNet.SignalR.Sys
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Cors.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.dll
+C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Cookies.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.dll
+C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Facebook.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Google.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.OAuth.dll
@@ -757,6 +756,7 @@ C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Net.Http.Formatting.x
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Helpers.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Http.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Http.WebHost.xml
+C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Mvc.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Optimization.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Razor.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.WebPages.xml
@@ -777,6 +777,7 @@ C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Goog
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Http.Owin.xml
+C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csprojAssemblyReference.cache
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll
