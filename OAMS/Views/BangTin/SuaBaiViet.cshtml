@@ -848,7 +848,7 @@
         </div>
 
         <div class="message-list-container">
-            <form id="id-message-form" class="form-horizontal message-form col-xs-12">
+            <form id="id-message-form" class="form-horizontal message-form col-xs-12" name="editForm" novalidate>
                 <div>
                     @*Tiêu đề*@
                     <div class="form-group">
@@ -856,7 +856,14 @@
 
                         <div class="col-sm-7 col-xs-12">
                             <div class="input-icon block col-xs-12 no-padding">
-                                <input type="text" ng-model="TTBV.TieuDe" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Tiêu đề bài viết">
+                                <input type="text"
+                                       ng-model="TTBV.TieuDe"
+                                       class="col-xs-12"
+                                       name="tieude"
+                                       id="form-field-subject"
+                                       placeholder="Tiêu đề bài viết"
+                                       required />
+                                <p ng-show="editForm.tieude.$invalid" class="text-danger"><i>Bạn chưa nhập tiêu đề</i></p>
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                             <div>
@@ -969,7 +976,15 @@
 
                         <div class="col-sm-7 col-xs-12">
                             <div class="input-icon block col-xs-12 no-padding">
-                                <textarea type="text" ng-model="TTBV.MoTa" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Mô tả ngắn về bài viết"></textarea>
+                                <textarea type="text"
+                                          ng-model="TTBV.MoTa"
+                                          class="col-xs-12"
+                                          name="moTa"
+                                          id="form-field-subject"
+                                          placeholder="Mô tả ngắn về bài viết"
+                                          required>
+                                </textarea>
+                                <p ng-show="editForm.moTa.$invalid" class="text-danger"><i>Bạn chưa nhập mô tả</i></p>
                             </div>
                         </div>
                     </div>
@@ -1040,7 +1055,7 @@
                     @*/Tập Tin Đính Kèm*@
 
                     <div class="align-right">
-                        <button class="btn btn-sm btn-success" ng-click="CapNhatThongTin()">
+                        <button class="btn btn-sm btn-success" ng-disabled="editForm.$invalid" ng-click="CapNhatThongTin()">
                             <i class="ace-icon fa fa-save bigger-140"></i>
                             Lưu Thông Tin
                         </button>

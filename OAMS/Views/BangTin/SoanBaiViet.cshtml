@@ -847,20 +847,6 @@
             </div>
         </div>
 
-        <form name="myForm">
-            <p>
-                Name:
-                <input name="myName" ng-model="myName" required>
-                <span ng-show="myForm.myName.$touched && myForm.myName.$invalid">The name is required.</span>
-            </p>
-
-            <p>
-                Address:
-                <input name="myAddress" ng-model="myAddress" required>
-            </p>
-
-        </form>
-
         <div class="message-list-container">
             <form id="id-message-form" class="form-horizontal message-form col-xs-12" name="addForm" novalidate>
                 <div>
@@ -877,7 +863,7 @@
                                        id="form-field-subject"
                                        placeholder="Tiêu đề bài viết"
                                        required />
-                                <p ng-show="addForm.tieude.$touched && addForm.tieude.$invalid" class="text-danger"><i>Bạn chưa nhập tiêu đề</i></p>
+                                <p ng-show="addForm.tieude.$invalid" class="text-danger"><i>Bạn chưa nhập tiêu đề</i></p>
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                             <div>
@@ -997,7 +983,7 @@
                                        id="form-field-subject"
                                        placeholder="Mô tả ngắn về bài viết"
                                        required/>
-                                <p ng-show="addForm.moTa.$touched && addForm.moTa.$invalid" class="text-danger"><i>Bạn chưa nhập mô tả</i></p>
+                                <p ng-show="addForm.moTa.$invalid" class="text-danger"><i>Bạn chưa nhập mô tả</i></p>
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                         </div>

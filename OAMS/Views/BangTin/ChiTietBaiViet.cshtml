@@ -109,10 +109,10 @@
 
         /*Chỉnh riêng css cho chi tiết tin*/
         .detailCT p {
-            font-size: 14px;
+            font-size: 16px;
         }
 
-        .detailCT img {
+        .detailCT img , iframe {
             width: 50%;
             display:block;
             margin: 0 auto;
@@ -453,7 +453,7 @@
 
         <div class="detailCT">
             <h1>{{ThongTinBV.TieuDe}}</h1>
-            <p><b><i><i class="ace-icon fa fa-user"></i> {{ThongTinBV.TenNguoiDung}}</i></b> - {{ReturnFullDateTime(ThongTinBV.NgayTao)}}</p>
+            <p><i class="ace-icon fa fa-user"></i> {{ThongTinBV.TenNguoiDung}} - {{ReturnFullDateTime(ThongTinBV.NgayTao)}}</p>
             <p>
                 <b>
                     {{ThongTinBV.MoTa}}
@@ -469,16 +469,6 @@
                             <i class="ace-icon fa fa-file-o bigger-110"></i>
                             <span class="attached-name">{{item.Ten}} (123 KB)</span>
                         </a>
-
-                        @*<span class="action-buttons">
-                            <a href="#">
-                                <i class="ace-icon fa fa-eye bigger-125 blue"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="ace-icon fa fa-download bigger-125 red"></i>
-                            </a>
-                        </span>*@
                     </li>
                 </ul>
             </div>
