@@ -453,6 +453,53 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         }
 
         [HttpDelete]
+        [Route("XoaTin")]
+        public IHttpActionResult XoaTin(int MaTinTuc)
+        {
+            var baiViet = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
+            if (baiViet != null)
+            {
+                string imgPath = "";
+
+                imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + baiViet.HinhAnh);
+
+                if (System.IO.File.Exists(imgPath))
+
+                {
+                    FileInfo f = new FileInfo(imgPath);
+
+                    f.Delete();
+                }
+                var dsTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
+                if(dsTin.Count > 0)
+                {
+                    foreach(var item in dsTin)
+                    {
+                        string filePath = "";
+
+                        filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + item.Ten);
+
+                        if (System.IO.File.Exists(filePath))
+
+                        {
+                            FileInfo f = new FileInfo(filePath);
+
+                            f.Delete();
+
+                            dbContext.NEWS_TinTucTapTin.Remove(item);
+
+                            dbContext.SaveChanges();
+                        }
+                    }
+                }
+                dbContext.NEWS_TinTuc.Remove(baiViet);
+                dbContext.SaveChanges();
+                return Ok("Bài Viết Đã Được Xóa");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpDelete]
         [Route("XoaHinh")]
         public IHttpActionResult XoaHinh(int MaTinTuc)
         {

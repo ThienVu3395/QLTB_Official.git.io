@@ -700,7 +700,7 @@
                                                         </li>
 
                                                         <li ng-repeat="item in DsLoaiTin track by item.MaLoaiTin">
-                                                            <a id="id-select-message-read" href="#" ng-click="LayBaiViet_TheoDanhMuc(item.MaLoaiTin)"><i class="ace-icon fa fa-check invisible green" id="selectLoai{{$index + 1}}"></i> {{item.Ten}}</a>
+                                                            <a id="id-select-message-read" href="#" ng-click="LayBaiViet_TheoDanhMuc(item.MaLoaiTin)"><i class="ace-icon fa fa-check invisible green" id="selectLoai{{item.MaLoaiTin}}"></i> {{item.Ten}}</a>
                                                         </li>
 
                                                         <li>
@@ -766,7 +766,7 @@
                                                     <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
                                                         <a title="{{item.TieuDe}}"
                                                            data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
-                                                            {{item.TieuDe | limitTo : 50}}{{SliceString(item.TieuDe,50)}}
+                                                            {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
                                                         </a>
                                                     </span>
                                                 </span>

@@ -214,11 +214,12 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             tin.MoTa = tinTuc.MoTa;
             tin.MaLoaiTin = tinTuc.MaLoaiTin;
             tin.TinNoiBat = tinTuc.TinNoiBat;
-            tin.HienThi = tinTuc.HienThi == true ? true : false;
+            tin.HienThi = tinTuc.HienThi;
             tin.HinhAnh = tinTuc.HinhAnh;
-            tin.NgayHetHan = tinTuc.NgayHetHan;
-            tin.NgayTao = tinTuc.NgayTao;
+            tin.Khoa = false;
+            tin.NgayTao = DateTime.Now;
             tin.NguoiTao = 56;
+            tin.NgayHetHan = tinTuc.NgayHetHan;
             tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
             tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
             dbContext.NEWS_TinTuc.Add(tin);
@@ -231,6 +232,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tttt.MaTinTuc = tin.MaTinTuc;
                     tttt.Ngay = DateTime.Now;
                     tttt.Ten = item.Ten;
+                    tttt.Url = item.Url;
                     dbContext.NEWS_TinTucTapTin.Add(tttt);
                     dbContext.SaveChanges();
                 }

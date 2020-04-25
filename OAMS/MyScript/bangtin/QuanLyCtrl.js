@@ -46,6 +46,14 @@
 
         // Lấy Toàn Bộ Danh Sách Bài Viết
         $scope.LayBaiVietTatCa = function () {
+            let check = document.getElementById("select4");
+            check.className = "ace-icon fa fa-check green";
+            let w = document.getElementById("loaiTuong");
+            w.className = "ace-icon fa fa-check invisible green";
+            for (let i = 0; i < $scope.DsLoaiTin.length; i++) {
+                let c = document.getElementById("selectLoai" + $scope.DsLoaiTin[i].MaLoaiTin);
+                c.className = "ace-icon fa fa-check invisible green";
+            }
             $scope.MaLoaiTin = 0;
             if ($scope.HienThi != -1) {
                 $scope.LayBaiViet_TheoHienThi($scope.HienThi);
@@ -71,6 +79,17 @@
 
         // Lấy Bài Viết Theo Danh Mục
         $scope.LayBaiViet_TheoDanhMuc = function (MaLoaiTin) {
+            let c = document.getElementById("select4");
+            c.className = "ace-icon fa fa-check invisible green";
+            let w = document.getElementById("loaiTuong");
+            w.className = "ace-icon fa fa-check invisible green";
+            for (let i = 0; i < $scope.DsLoaiTin.length; i++) {
+                let check = document.getElementById("selectLoai" + $scope.DsLoaiTin[i].MaLoaiTin);
+                if ($scope.DsLoaiTin[i].MaLoaiTin == MaLoaiTin) {
+                    check.className = "ace-icon fa fa-check green";
+                }
+                else check.className = "ace-icon fa fa-check invisible green";
+            }
             $scope.MaLoaiTin = MaLoaiTin;
             if ($scope.HienThi != -1) {
                 $scope.LayBaiViet_TheoDieuKien($scope.MaLoaiTin, $scope.HienThi);
@@ -157,6 +176,14 @@
 
         // Lấy Bài Viết Tường
         $scope.LayBaiVietTuong = function () {
+            let c = document.getElementById("select4");
+            c.className = "ace-icon fa fa-check invisible green";
+            let w = document.getElementById("loaiTuong");
+            w.className = "ace-icon fa fa-check green";
+            for (let i = 0; i < $scope.DsLoaiTin.length; i++) {
+                let check = document.getElementById("selectLoai" + $scope.DsLoaiTin[i].MaLoaiTin);
+                check.className = "ace-icon fa fa-check invisible green";
+            }
             $scope.MaLoaiTin = -1;
             $scope.param = "?page=0" + "&pageLimit=" + $scope.itemsPerPage;
             blockUI.start({
@@ -566,6 +593,11 @@
                 document.getElementById("select2").className = "ace-icon fa fa-check invisible green";
                 document.getElementById("select3").className = "ace-icon fa fa-check green";
             }
+        }
+
+        //Hàm chuyển chữ thành kiểu viết hoa đầu
+        $scope.capitalize = function (string) {
+            return string.charAt(0).toUpperCase() + (string.slice(1)).toLowerCase();
         }
 
         // Render ra HTML

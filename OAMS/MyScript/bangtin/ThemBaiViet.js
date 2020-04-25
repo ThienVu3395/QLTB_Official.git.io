@@ -1,26 +1,14 @@
 ﻿angular.module("oamsapp")
-    .controller("ThemBaiViet", function ($scope, CommonController, FileUploader) {
-        // Get Date Format
-        function GetDateTimeFormat(string) {
-            let d = string[0] + string[1];
-            let m = string[3] + string[4];
-            let y = string[6] + string[7] + string[8] + string[9];
-            return y + "-" + m + "-" + d;
-        }
-
-        // Get Time Format
-        function GetTime() {
-            let cr = new Date();
-            let times = cr.getFullYear() + "-" + (cr.getMonth() + 1) + "-" + cr.getDate() + " " + cr.getHours() + ":" + cr.getMinutes() + ":" + cr.getSeconds() + "." + cr.getMilliseconds();
-            return times;
-        }
-
+    .controller("ThemBaiViet", function ($scope, CommonController, FileUploader, blockUI) {
         // Khai Báo OBJ THÊM
         $scope.objThem = {
             TinNoiBat: false,
             HienThi: false,
             TapTinDinhKem: [],
-            HinhAnh: "",
+            HinhAnh: null,
+            NgayHetHan: null,
+            NgayHetHanTM: null,
+            NgayHetHanTC: null,
         }
 
         // Giả Lập Việc Duyệt Tin
@@ -64,9 +52,6 @@
         var appURL = { pathAPI: baseURL };
 
         //Upload Hình Ảnh
-        $scope.ttup = false;
-        $scope.ttIm = false;
-        $scope.ttImg = false;
         var uploaderImage = $scope.uploaderImage = new FileUploader({
             url: appURL.pathAPI + CommonController.urlAPI.API_UploadImage,
             withCredentials: true
@@ -88,48 +73,19 @@
             }
         });
 
-        uploaderImage.filters.push({
-            name: 'upImg',
-            fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
-                console.log('asyncFilter');
-                setTimeout(deferred.resolve, 1e3);
-            }
-        });
-
-        $scope.uploadImg = function (item) {
-            if (confirm("Bạn có chắc up ảnh này lên chứ ?")) {
-                uploaderImage.uploadItem(item);
-            }
-            return;
-        }
-
-        $scope.removeImg = function () {
+        $scope.removeImg = function (event) {
+            event.preventDefault();
             if (confirm("Bạn có chắc xóa ảnh này chứ ?")) {
                 uploaderImage.clearQueue();
-                $scope.HinhAnh = {};
-                $scope.ttIm = false;
-                $scope.ttImg = false;
+                $scope.objThem.HinhAnh = null;
             }
         }
 
         uploaderImage.onAfterAddingFile = function (item) {
-            $scope.ttup = true;
-            $scope.HinhAnh = item;
-            $scope.ttIm = true;
-            $scope.ttImg = true;
-        }
-
-        uploaderImage.onSuccessItem = function (item, response, status, headers) {
-            alert(response);
-            $scope.ttImg = false;
-            $scope.ttIm = true;
-            if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
-                $scope.objThem.HinhAnh = item.file.name;
-            }
+            $scope.objThem.HinhAnh = item.file.name;
         }
 
         //Upload Tập Tin
-        $scope.TapTinDinhKem = [];
         var uploaderFile = $scope.uploaderFile = new FileUploader({
             url: appURL.pathAPI + CommonController.urlAPI.API_UploadFile,
             withCredentials: true
@@ -143,49 +99,30 @@
             }
         });
 
-        $scope.uploadfile = function (item) {
-            if (confirm("Bạn có chắc up tệp này lên chứ ?")) {
-                uploaderFile.uploadItem(item);
-            }
-            return;
-        }
-
-        $scope.removeFile = function (item) {
+        $scope.removeFile = function (item, event, index) {
+            event.preventDefault();
             if (confirm("Bạn có chắc xóa tệp này chứ ?")) {
                 uploaderFile.removeFromQueue(item);
+                $scope.objThem.TapTinDinhKem.splice(index, 1);
             }
-            return;
+            else return;
         }
 
         uploaderFile.onAfterAddingFile = function (item) {
-            $scope.ttup = true;
-        }
-
-        uploaderFile.onSuccessItem = function (item, response, status, headers) {
-            alert(response);
-            let index = uploaderFile.getIndexOfItem(item);
-            document.getElementById("ttFile" + index).style.display = 'none';
-            document.getElementById("ttFileSuccess" + index).className = "action-buttons";
-            if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
-                let objItem = {
-                    Ten: item.file.name,
-                    Url: item.file.name,
-                    Size : item.file.size
-                }
-                $scope.TapTinDinhKem.push(objItem);
+            let objTapTin = {
+                Ten: item.file.name,
+                Url: item.file.name,
             }
+            $scope.objThem.TapTinDinhKem.push(objTapTin);
         }
 
         // Thêm Bài Viết
         $scope.ThemBaiViet = function () {
             $scope.objThem.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
             $scope.objThem.NoiDung = document.getElementById("editor1").innerHTML;
-            $scope.objThem.NgayTao = GetTime();
-            $scope.objThem.NgayHetHan = GetDateTimeFormat($scope.objThem.NgayHetHan);
-            $scope.objThem.NgayHetHanTM = GetDateTimeFormat($scope.objThem.NgayHetHanTM);
-            $scope.objThem.NgayHetHanTC = GetDateTimeFormat($scope.objThem.NgayHetHanTC);
-            $scope.objThem.TapTinDinhKem = $scope.TapTinDinhKem;
-            console.log($scope.objThem);
+            uploaderImage.uploadAll();
+            uploaderFile.uploadAll();
+            blockUI.start();
             let API = "";
             if ($scope.objThem.MaLoaiTin !== 0) {
                 API = CommonController.urlAPI.API_ThemBaiViet;
@@ -196,6 +133,7 @@
             var res = CommonController.postData(API, $scope.objThem);
             res.then(
                 function succ(response) {
+                    blockUI.stop();
                     alert(response.data);
                     location.href = "";
                 },

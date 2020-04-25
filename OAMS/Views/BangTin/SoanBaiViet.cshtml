@@ -853,7 +853,6 @@
                     @*Tiêu đề*@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Tiêu Đề:</label>
-
                         <div class="col-sm-6 col-xs-12">
                             <div class="input-icon block col-xs-12 no-padding">
                                 <input 
@@ -922,7 +921,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="dd-mm-yyyy" readonly />
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHan" type="text" data-date-format="yyyy-mm-dd" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -940,7 +939,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTM" type="text" data-date-format="dd-mm-yyyy" readonly />
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTM" type="text" data-date-format="yyyy-mm-dd" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -958,7 +957,7 @@
                         <div class="col-sm-3">
                             <span class="input-icon">
                                 <span class="input-group">
-                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTC" type="text" data-date-format="dd-mm-yyyy" readonly />
+                                    <input class="form-control date-picker" ng-model="objThem.NgayHetHanTC" type="text" data-date-format="yyyy-mm-dd" readonly />
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar bigger-110"></i>
                                     </span>
@@ -1012,24 +1011,16 @@
 
                         <div class="col-sm-4">
                             <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderImage" filters="upImg" />
-                            <ul class="attachment-list pull-left list-unstyled" ng-show="ttIm">
+                            <ul class="attachment-list pull-left list-unstyled" ng-show="objThem.HinhAnh != null">
                                 <li>
                                     <a href="#" class="attached-file">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
-                                        <span class="attached-name">{{HinhAnh.file.name}} ({{HinhAnh.file.size}} KB)</span>
+                                        <span class="attached-name">{{objThem.HinhAnh}}</span>
                                     </a>
 
                                     <span class="action-buttons">
-                                        <a href="#" ng-click="uploadImg(HinhAnh)" ng-show="ttImg">
-                                            <i class="ace-icon fa fa-upload bigger-125 blue"></i>
-                                        </a>
-
-                                        <a href="#" ng-click="removeImg()" ng-show="ttImg">
+                                        <a href="#" ng-click="removeImg($event)">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
-                                        </a>
-
-                                        <a href="#" ng-show="!ttImg">
-                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
                                         </a>
                                     </span>
                                 </li>
@@ -1041,30 +1032,20 @@
 
                     @*Tập Tin Đính Kèm*@
                     <div class="form-group no-margin-bottom">
-                        <label class="col-sm-3 control-label no-padding-right">Tin Đính Kèm:</label>
+                        <label class="col-sm-3 control-label no-padding-right">Tập Tin Đính Kèm:</label>
 
                         <div class="col-sm-4">
                             <input type="file" class="form-control" id="id-input-file-2" nv-file-select uploader="uploaderFile" filters="upFile" />
                             <ul class="attachment-list pull-left list-unstyled">
-                                <li ng-repeat="item in uploaderFile.queue">
+                                <li ng-repeat="item in uploaderFile.queue track by $index">
                                     <a href="#" class="attached-file">
                                         <i class="ace-icon fa fa-file-o bigger-110"></i>
-                                        <span class="attached-name">{{item.file.name}} ({{item.file.size}} KB)</span>
+                                        <span class="attached-name">{{item.file.name}}</span>
                                     </a>
 
-                                    <span class="action-buttons" id="ttFile{{$index}}">
-                                        <a href="#" ng-click="uploadfile(item)">
-                                            <i class="ace-icon fa fa-upload bigger-125 blue"></i>
-                                        </a>
-
-                                        <a href="#" ng-click="removeFile(item)">
+                                    <span class="action-buttons">
+                                        <a href="#" ng-click="removeFile(item,$event,$index)">
                                             <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
-                                        </a>
-                                    </span>
-
-                                    <span class="action-buttons hide" id="ttFileSuccess{{$index}}">
-                                        <a href="#">
-                                            <i class="ace-icon fa fa-check bigger-125 green"></i>
                                         </a>
                                     </span>
                                 </li>
