@@ -164,10 +164,20 @@
                 $scope.LayBaiVietTatCa();
             }
             else if ($scope.HienThi != -1 && $scope.MaLoaiTin != 0) {
-                $scope.LayBaiViet_TheoDieuKien($scope.MaLoaiTin, $scope.HienThi);
+                if ($scope.MaLoaiTin == -1) {
+                    $scope.LayBaiVietTuong();
+                }
+                else {
+                    $scope.LayBaiViet_TheoDieuKien($scope.MaLoaiTin, $scope.HienThi);
+                }
             }
             else if ($scope.HienThi == -1 && $scope.MaLoaiTin != 0) {
-                $scope.LayBaiViet_TheoDanhMuc($scope.MaLoaiTin);
+                if ($scope.MaLoaiTin == -1) {
+                    $scope.LayBaiVietTuong();
+                }
+                else {
+                    $scope.LayBaiViet_TheoDanhMuc($scope.MaLoaiTin);
+                }
             }
             else if ($scope.HienThi != -1 && $scope.MaLoaiTin == 0) {
                 $scope.LayBaiViet_TheoHienThi($scope.HienThi);
@@ -185,15 +195,29 @@
                 check.className = "ace-icon fa fa-check invisible green";
             }
             $scope.MaLoaiTin = -1;
+            let API = "";
             $scope.param = "?page=0" + "&pageLimit=" + $scope.itemsPerPage;
+            if ($scope.HienThi == -1) {
+                API = CommonController.urlAPI.API_LayBaiVietTuong_TatCa;
+            }
+            else {
+                API = CommonController.urlAPI.API_LayBaiVietTuong_DieuKien;
+                $scope.param += "&approved=" + $scope.HienThi;
+            }
             blockUI.start({
                 message: 'Xin Vui Lòng Chờ...',
             });
-            var res = CommonController.getData(CommonController.urlAPI.API_LayBaiVietTuong, $scope.param);
+            var res = CommonController.getData(API, $scope.param);
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
-                    $scope.bigTotalItems = $scope.DanhSach.length;
+                    if ($scope.DanhSach.length > 0) {
+                        $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
+                    }
+                    else {
+                        $scope.bigTotalItems = 0;
+                        alert("Không Có Kết Quả Phù Hợp");
+                    }
                     $scope.TieuDe = "Tường Công Ty";
                     blockUI.stop();
                 },
@@ -302,16 +326,23 @@
         }
 
         // Lấy Chi Tiết Bài Viết
-        $scope.LayChiTietBaiViet = function (MaTinTuc) {
+        $scope.LayChiTietBaiViet = function (MaTinTuc, MaLoaiTin) {
             blockUI.start({
                 message: 'Xin Vui Lòng Chờ...',
             });
+            let API = "";
+            if (MaLoaiTin == -1) {
+                API = CommonController.urlAPI.API_LayChiTietBaiViet_Tuong;
+            }
+            else {
+                API = CommonController.urlAPI.API_LayChiTietBaiViet;
+            }
             let param = "?MaTinTuc=" + MaTinTuc;
-            var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBaiViet, param);
+            var res = CommonController.getData(API, param);
             res.then(
                 function succ(response) {
                     $scope.TTBV = response.data;
-                    //console.log($scope.TTBV);
+                    console.log($scope.TTBV);
                     blockUI.stop();
                 },
 
@@ -530,7 +561,7 @@
             if (response !== "Upload Failed" || response !== "Files Is Duplicate,Upload Failed") {
                 let objItem = {
                     MaTinTuc: $scope.TTBV.MaTinTuc,
-                    MaTapTin : 0,
+                    MaTapTin: 0,
                     Ten: item.file.name,
                     Url: item.file.name,
                     Size: item.file.size

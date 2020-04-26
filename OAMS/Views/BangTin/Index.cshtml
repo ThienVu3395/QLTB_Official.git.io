@@ -18,12 +18,12 @@
             font-size: 12px;
         }
 
-        iframe{
+        iframe {
             width: 100% !important;
-            height : 200px !important;
+            height: 200px !important;
         }
 
-        .cms-body, .cms-desc , p {
+        .cms-body, .cms-desc, p {
             width: 100% !important;
         }
 
@@ -31,8 +31,8 @@
             text-decoration: none !important;
         }
 
-        .read{
-            font-weight:bolder
+        .read {
+            font-weight: bolder
         }
 
         .ava {
@@ -111,6 +111,20 @@
             margin-left: 50px;
             margin-right: 12px;
             position: relative;
+        }
+
+        .detailCT p {
+            font-size: 13px;
+        }
+
+        .detailCT div {
+            width: 100% !important;
+        }
+
+        .detailCT img, iframe {
+            width: 98% !important;
+            display: block;
+            margin: 0 auto;
         }
     </style>
 }
@@ -289,9 +303,11 @@
 
                                                             <div class="col-lg-12" style="margin-top:8px">
                                                                 <p><b>{{item.TieuDe}}</b></p>
-                                                                <p ng-bind-html="htmlSafe(item.NoiDung)"></p>
-                                                                @*<p ng-show="!rm">{{item.NoiDung | limitTo : 150}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('more')"> Đọc Tiếp</span></p>*@
-                                                                @*<p ng-show="rm">{{item.NoiDung}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('less')"> Thu Gọn</span></p>*@
+                                                                <div class="detailCT">
+                                                                    <p ng-bind-html="htmlSafe(item.NoiDung)"></p>
+                                                                    @*<p ng-show="!rm">{{item.NoiDung | limitTo : 150}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('more')"> Đọc Tiếp</span></p>*@
+                                                                    @*<p ng-show="rm">{{item.NoiDung}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('less')"> Thu Gọn</span></p>*@
+                                                                </div>
                                                             </div>
 
                                                             <div class="col-lg-12">
@@ -327,18 +343,6 @@
                                                                                                     {{i.NoiDung}}
                                                                                                 </div>
                                                                                             </div>
-
-                                                                                            @*<div class="tools">
-                                                                                                    <div class="action-buttons bigger-125">
-                                                                                                        <a href="#">
-                                                                                                            <i class="ace-icon fa fa-pencil blue"></i>
-                                                                                                        </a>
-
-                                                                                                        <a href="#">
-                                                                                                            <i class="ace-icon fa fa-trash-o red"></i>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                </div>*@
                                                                                         </div>
                                                                                     </div>
 
@@ -376,7 +380,7 @@
                                                 </div>
                                             </div>
                                             <p>
-                                                <button class="btn btn-primary btn-block">
+                                                <button class="btn btn-primary btn-block" ng-click="LayBaiVietTuong()">
                                                     Đọc Tiếp
                                                     <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                 </button>
@@ -478,8 +482,8 @@
                                                 <div class="caption">
                                                     <div class="clearfix">
                                                         @*<div class="pull-left bigger-110">
-                                                            <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
-                                                        </div>*@
+                                                                <i class="ace-icon fa fa-eye orange2"></i> {{item.LuotXem}}
+                                                            </div>*@
                                                         <span class="pull-right label label-success info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
                                                     </div>
 
@@ -546,7 +550,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-9">
-                                                    <h4 class="media-heading">                                               
+                                                    <h4 class="media-heading">
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
                                                            class="blue fs-16 no-deco read"
                                                            title="{{item.TieuDe}}"
@@ -619,8 +623,7 @@
                                     class="pagination-sm"
                                     boundary-link-numbers="true"
                                     rotate="false"
-                                    ng-change="LayDanhSachBaiViet(MaLoaiTin,'phantrang')">
-                                </ul>
+                                    ng-change="LayDanhSachBaiViet(MaLoaiTin,'phantrang')"></ul>
                                 @*/ Thanh phân trang cho tin*@
                             </div>
                         </div>

@@ -763,7 +763,7 @@
 
                                                 <span class="summary" ng-show="MaLoaiTin == -1 || MaLoaiTin == 0">
                                                     <span class="badge badge-pink mail-tag"></span>
-                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
+                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc,item.MaLoaiTin)">
                                                         <a title="{{item.TieuDe}}"
                                                            data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
                                                             {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
@@ -773,7 +773,7 @@
 
                                                 <span class="summary" ng-show="MaLoaiTin != -1 && MaLoaiTin != 0">
                                                     <span class="badge badge-pink mail-tag"></span>
-                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc)">
+                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc,item.MaLoaiTin)">
                                                         <a title="{{item.TieuDe}}"
                                                            data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
                                                             {{item.TieuDe | limitTo : 90}}{{SliceString(item.TieuDe,90)}}
@@ -845,7 +845,7 @@
 
                                     <div class="hr hr-double"></div>
                                     @*Mô Tả*@
-                                    <div class="message-body">
+                                    <div class="message-body" ng-show="MaLoaiTin != -1">
                                         <div class="ctArticle">
                                             <span class="blue bolder bigger-110">Mô Tả</span>
                                             <p ng-bind-html="htmlSafe(TTBV.MoTa)"></p>
@@ -853,7 +853,7 @@
                                     </div>
                                     @*Mô Tả*@
 
-                                    <div class="hr hr-double"></div>
+                                    <div class="hr hr-double" ng-show="MaLoaiTin != -1"></div>
 
                                     @*Nội Dung*@
                                     <div class="message-body">
@@ -883,24 +883,8 @@
                                             <div class="attachment-title">
                                                 <span class="blue bolder bigger-110">Tập Tin Đính Kèm</span>
                                                 &nbsp;
-                                                <span class="grey">({{TTBV.TapTinDinhKem.length}})</span>
-
-                                                @*<div class="inline position-relative" ng-show="TTBV.TapTinDinhKem.length > 0">
-                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                                        &nbsp;
-                                                        <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
-                                                    </a>
-
-                                                    <ul class="dropdown-menu dropdown-lighter">
-                                                        <li>
-                                                            <a href="#">Download all as zip</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#">Display in slideshow</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>*@
+                                                <span class="grey" ng-show="TTBV.TapTinDinhKem.length > 0">({{TTBV.TapTinDinhKem.length}})</span>
+                                                <span class="grey" ng-show="TTBV.TapTinDinhKem.length == 0 || TTBV.TapTinDinhKem.length == null">(0)</span>
                                             </div>
 
                                             &nbsp;
@@ -922,7 +906,7 @@
                                                     </span>*@
                                                 </li>
 
-                                                <li ng-show="TTBV.TapTinDinhKem.length == 0">
+                                                <li ng-show="TTBV.TapTinDinhKem.length == 0 || TTBV.TapTinDinhKem.length == null">
                                                     <a href="#" class="attached-file">
                                                         <i class="ace-icon fa fa-times red bigger-110"></i>
                                                         <span class="attached-name">Không Có Tập Tin Đính Kèm</span>
@@ -930,7 +914,7 @@
                                                 </li>
                                             </ul>
 
-                                            <div class="attachment-images pull-right">
+                                            <div class="attachment-images pull-right" ng-show="TTBV.HinhAnh != null">
                                                 <div class="vspace-4-sm"></div>
 
                                                 <div>
@@ -950,7 +934,7 @@
                                             <div class="attachment-title">
                                                 <span class="blue bolder bigger-110">Danh Sách Bình Luận</span>
                                                 &nbsp;
-                                                <span class="grey">(3)</span>
+                                                <span class="grey">({{TTBV.BinhLuan.length}})</span>
 
                                                 <div class="inline position-relative">
                                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
@@ -974,52 +958,44 @@
                                                 </div>
                                             </div>
 
-                                            &nbsp;
-                                            <table id="simple-table" class="table  table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>Thời Gian</th>
-                                                        <th><i class="ace-icon fa fa-home bigger-110 hidden-480"></i>Đơn Vị</th>
-                                                        <th><i class="ace-icon fa fa-user bigger-110 hidden-480"></i>Người Bình Luận</th>
-                                                        <th><i class="ace-icon fa fa-comment bigger-110 hidden-480"></i>Nội Dung</th>
-                                                        <th><i class="ace-icon fa fa-comment bigger-110 hidden-480"></i>Trạng Thái</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
+                                            <div class="comments">
+                                                <div class="itemdiv commentdiv" ng-repeat="item in TTBV.BinhLuan track by $index">
+                                                    <div class="user">
+                                                        <img alt="Jennifer's Avatar" src="{{item.HinhAnh}}" />
+                                                    </div>
 
-                                                <tbody>
-                                                    <tr ng-repeat="item in TTBV.BinhLuan track by $index">
-                                                        <td>
-                                                            {{ReturnDate(TTBV.NgayTao)}}
-                                                        </td>
-                                                        <td>{{item.DonVi}}</td>
-                                                        <td class="hidden-480">{{item.TenNguoiDung}}</td>
-                                                        <td>{{item.NoiDung}}</td>
+                                                    <div class="body">
+                                                        <div class="name">
+                                                            <a href="#">{{item.TenNguoiDung}}</a>
+                                                            <i class="ace-icon fa fa-times red" ng-show="!item.HienThi"></i>
+                                                            <i class="ace-icon fa fa-check green" ng-show="item.HienThi"></i>
+                                                        </div>
 
-                                                        <td class="hidden-480">
-                                                            <span class="label label-sm label-warning">Đang Chờ Duyệt</span>
-                                                        </td>
+                                                        <div class="time">
+                                                            <i class="ace-icon fa fa-clock-o"></i>
+                                                            <span class="blue">{{ReturnDate(TTBV.NgayTao)}}</span>
+                                                        </div>
 
-                                                        <td>
-                                                            <div class="hidden-sm hidden-xs btn-group">
-                                                                <button class="btn btn-xs btn-success">
-                                                                    <i class="ace-icon fa fa-check bigger-120"></i>
-                                                                </button>
+                                                        <div class="text">
+                                                            {{item.NoiDung}}
+                                                        </div>
+                                                    </div>
 
-                                                                <button class="btn btn-xs btn-danger">
-                                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                    <div class="tools">
+                                                        <div class="action-buttons bigger-125">
+                                                            <a title="Duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-show="!item.HienThi">
+                                                                <i class="ace-icon fa fa-pencil green"></i>
+                                                            </a>
 
-                                            <ul uib-pagination total-items="totalItems"
-                                                ng-model="currentPage"
-                                                ng-change="pageChanged()"></ul>
+                                                            <a title="Hủy duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-show="item.HienThi">
+                                                                <i class="ace-icon fa fa-trash-o red"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hr hr8"></div>
                                         </div>
-
                                     </div>
                                     @*DS BL*@
                                 </div>
@@ -1033,12 +1009,12 @@
                             Xóa
                         </button>
 
-                        <button class="btn btn-sm btn-warning pull-left" ng-click="HuyDuyetTin(TTBV.MaTinTuc)" ng-show="TTBV.HienThi == true">
+                        <button class="btn btn-sm btn-warning pull-left" ng-click="HuyDuyetTin(TTBV.MaTinTuc)" ng-show="!TTBV.HienThi">
                             <i class="ace-icon fa fa-undo"></i>
                             Hủy Duyệt
                         </button>
 
-                        <button class="btn btn-sm btn-success pull-left" ng-click="DuyetTin(TTBV.MaTinTuc)" ng-show="TTBV.HienThi == false">
+                        <button class="btn btn-sm btn-success pull-left" ng-click="DuyetTin(TTBV.MaTinTuc)" ng-show="TTBV.HienThi">
                             <i class="ace-icon fa fa-check"></i>
                             Duyệt
                         </button>

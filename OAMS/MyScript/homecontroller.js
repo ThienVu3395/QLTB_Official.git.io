@@ -461,8 +461,11 @@
                     API_LayDanhSachLoaiTin: "API/QuanLyBangTin/LayDanhSachLoaiTin",
                     API_LaySinhNhat: "API/QuanLyBangTin/LaySinhNhat",
                     API_LayChiTietBaiViet: "API/QuanLyBangTin/LayChiTietBaiViet",              
+                    API_LayChiTietBaiViet_Tuong: "API/AdminBangTin/LayChiTietBaiViet_Tuong",              
                     API_LayDanhSachBaiViet_TheoDanhMuc_PhanTrang: "API/QuanLyBangTin/LayDanhSachBaiViet_TheoDanhMuc_PhanTrang",
                     API_LayBaiVietTuong: "API/QuanLyBangTin/LayBaiVietTuong",
+                    API_LayBaiVietTuong_DieuKien: "API/QuanLyBangTin/LayBaiVietTuong_DieuKien",
+                    API_LayBaiVietTuong_TatCa: "API/QuanLyBangTin/LayBaiVietTuong_TatCa",
 
                     // Trang chủ dự phòng
                     API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",

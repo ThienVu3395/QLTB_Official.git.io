@@ -92,14 +92,22 @@
 
         // Lấy Bài Viết Tường Công Ty
         $scope.rm = false;
+        $scope.page = 1;
+        $scope.BaiVietTuong = [];
         $scope.LayBaiVietTuong = function () {
-            let page = 1;
             let item = 3;
-            let lm = (page - 1) * item;
-            var res = CommonController.getData(CommonController.urlAPI.API_LayBaiVietTuong, "");
+            let limit = ($scope.page - 1) * item;
+            $scope.param = "?page=" + limit + "&pageLimit=" + item;
+            var res = CommonController.getData(CommonController.urlAPI.API_LayBaiVietTuong, $scope.param);
             res.then(
                 function succ(response) {
-                    $scope.BaiVietTuong = response.data;
+                    if (response.data.length > 0) {
+                        for (let i = 0; i < response.data.length; i++) {
+                            $scope.BaiVietTuong.push(response.data[i]);
+                        }
+                        $scope.page += 1;
+                    }
+                    else alert("Không Tìm Thấy Bài Viết");
                 },
 
                 function errorCallback(response) {

@@ -65,6 +65,62 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         }
 
         [HttpGet]
+        [Route("LayChiTietBaiViet_Tuong")]
+        public IHttpActionResult LayChiTietBaiViet_Tuong(int MaTinTuc)
+        {
+            var dsTin = dbContext.NEWSTUONG_BaiViet.Where(x => x.PostId == MaTinTuc).FirstOrDefault();
+            if (dsTin != null)
+            {
+                TinTucModel tin = new TinTucModel();
+                tin.MaTinTuc = dsTin.PostId;
+                tin.TieuDe = dsTin.Title;
+                tin.NoiDung = dsTin.Content;
+                tin.MaLoaiTin = dsTin.GroupId;
+                tin.NgayTao = dsTin.CreatedDate;
+                tin.TenNguoiDung = dsTin.CreatedUser;
+                tin.NgayCapNhat = dsTin.LastUpdated;
+                var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == dsTin.PostId).ToList();
+                List<TapTinModel> dsttmodel = new List<TapTinModel>();
+                if (dsTapTin.Count > 0)
+                {
+                    foreach (var i in dsTapTin)
+                    {
+                        TapTinModel ttmodel = new TapTinModel();
+                        ttmodel.MaTapTin = i.FileId;
+                        ttmodel.Ten = i.FileName;
+                        ttmodel.Size = i.FileSize;
+                        ttmodel.Url = i.OriginalFilename;
+                        dsttmodel.Add(ttmodel);
+                    }
+                    tin.TapTinDinhKem = dsttmodel;
+                }
+                var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaBaiViet == dsTin.PostId).ToList();
+                List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
+                if (dsBinhLuan.Count > 0)
+                {
+                    foreach (var index in dsBinhLuan)
+                    {
+                        BinhLuanModel binhLuan = new BinhLuanModel();
+                        binhLuan.MaBinhLuan = index.MaBinhLuan;
+                        binhLuan.MaTinTuc = index.MaBaiViet;
+                        binhLuan.MaNguoiDung = index.MaNguoiDung;
+                        binhLuan.TenNguoiDung = index.NEWS_NguoiSuDung.Ten;
+                        binhLuan.DonVi = index.NEWS_NguoiSuDung.NEWS_PhongBan.Ten;
+                        binhLuan.HinhAnh = index.NEWS_NguoiSuDung.HinhAnh;
+                        binhLuan.NoiDung = index.NoiDung;
+                        binhLuan.HienThi = index.HienThi;
+                        binhLuan.Ngay = index.Ngay;
+                        binhLuan.Gio = index.Gio;
+                        dsBinhLuanModel.Add(binhLuan);
+                    }
+                    tin.BinhLuan = dsBinhLuanModel;
+                }
+                return Ok(tin);
+            }
+            return Ok("Có lỗi,xin vui lòng thử lại");
+        }
+
+        [HttpGet]
         [Route("LayDanhSachBaiViet_TheoDanhMuc")]
         public IHttpActionResult LayDanhSachBaiViet_Loc(int page, int pageLimit, int MaLoaiTin)
         {
