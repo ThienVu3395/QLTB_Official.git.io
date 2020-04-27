@@ -356,14 +356,19 @@
                                                                                         </a>
                                                                                     </div>
 
-                                                                                    <form>
+                                                                                    <form ng-submit="GuiBinhLuan(item.MaTinTuc)">
                                                                                         <div class="form-actions">
                                                                                             <div class="input-group">
-                                                                                                <input placeholder="Bạn nghĩ sao về bài viết này ?" type="text" class="form-control" name="message" />
+                                                                                                <input 
+                                                                                                       placeholder="Bạn nghĩ sao về bài viết này ?" 
+                                                                                                       type="text" class="form-control"
+                                                                                                       id="NoiDung{{item.MaTinTuc}}"
+                                                                                                       name="mess" 
+                                                                                                       required/>
                                                                                                 <span class="input-group-btn">
-                                                                                                    <button class="btn btn-sm btn-info no-radius" type="button">
+                                                                                                    <button class="btn btn-sm btn-info no-radius" type="submit">
                                                                                                         <i class="ace-icon fa fa-share"></i>
-                                                                                                        Send
+                                                                                                        Gửi
                                                                                                     </button>
                                                                                                 </span>
                                                                                             </div>

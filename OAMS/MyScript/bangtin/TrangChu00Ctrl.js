@@ -126,6 +126,12 @@
             }
         }
 
+        // Gửi Bình Luận
+        $scope.GuiBinhLuan = function (MaBaiViet) {
+            alert(MaBaiViet);
+            console.log(document.getElementById("NoiDung" + MaBaiViet))
+        }
+
         // Đổi tiêu đề
         $scope.doiTieuDe = function (tieude) {
             $scope.TieuDe = tieude;

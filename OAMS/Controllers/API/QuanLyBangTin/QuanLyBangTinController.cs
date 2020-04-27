@@ -284,6 +284,13 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             return Ok(dsTinModel);
         }
 
+        [HttpPost]
+        [Route("GuiBinhLuan")]
+        public IHttpActionResult GuiBinhLuan(BinhLuanModel binhLuan)
+        {
+            return Ok("hahaha");
+        }
+
         [HttpGet]
         [Route("LayBaiVietTuong_TatCa")]
         public IHttpActionResult LayBaiVietTuong_TatCa(int page, int pageLimit)
