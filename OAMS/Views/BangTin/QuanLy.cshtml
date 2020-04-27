@@ -534,6 +534,7 @@
                 <div class="row">
                     <div class="tabbable">
                         <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
+                            @*Soạn bài viết*@
                             <li class="li-new-mail pull-right">
                                 <a href="@Url.Action("SoanBaiViet","BangTin")" class="btn-new-mail">
                                     <span class="btn btn-purple no-border">
@@ -542,6 +543,8 @@
                                     </span>
                                 </a>
                             </li>
+                            @*/Soạn bài viết*@
+
                             @*QLBV*@
                             <li class="active">
                                 <a data-toggle="tab" href="#inbox" data-target="inbox">
@@ -983,11 +986,11 @@
 
                                                     <div class="tools">
                                                         <div class="action-buttons bigger-125">
-                                                            <a title="Duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-show="!item.HienThi">
+                                                            <a title="Duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-click="XuLyBinhLuan(item,true)" ng-show="!item.HienThi">
                                                                 <i class="ace-icon fa fa-pencil green"></i>
                                                             </a>
 
-                                                            <a title="Hủy duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-show="item.HienThi">
+                                                            <a title="Hủy duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-click="XuLyBinhLuan(item,false)" ng-show="item.HienThi">
                                                                 <i class="ace-icon fa fa-trash-o red"></i>
                                                             </a>
                                                         </div>

@@ -127,9 +127,22 @@
         }
 
         // Gửi Bình Luận
-        $scope.GuiBinhLuan = function (MaBaiViet) {
-            alert(MaBaiViet);
-            console.log(document.getElementById("NoiDung" + MaBaiViet))
+        $scope.GuiBinhLuan = function (MaTinTuc) {
+            let noidung = document.getElementById("NoiDung" + MaTinTuc).value;
+            let objBinhLuan = {
+                MaTinTuc: MaTinTuc,
+                NoiDung: noidung,
+            }
+            var res = CommonController.postData(CommonController.urlAPI.API_GuiBinhLuan, objBinhLuan);
+            res.then(
+                function succ(response) {
+                    alert(response.data);
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message)
+                }
+            )
         }
 
         // Đổi tiêu đề

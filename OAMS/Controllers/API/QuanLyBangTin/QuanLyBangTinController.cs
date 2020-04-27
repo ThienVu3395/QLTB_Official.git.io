@@ -288,7 +288,15 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         [Route("GuiBinhLuan")]
         public IHttpActionResult GuiBinhLuan(BinhLuanModel binhLuan)
         {
-            return Ok("hahaha");
+            NEWS_BinhLuan bl = new NEWS_BinhLuan();
+            bl.MaBaiViet = binhLuan.MaTinTuc;
+            bl.MaNguoiDung = 56;
+            bl.NoiDung = binhLuan.NoiDung;
+            bl.HienThi = false;
+            bl.Ngay = DateTime.Now;
+            dbContext.NEWS_BinhLuan.Add(bl);
+            dbContext.SaveChanges();
+            return Ok("Bình luận của bạn đã được gửi thành công , xin vui lòng chờ để được duyệt");
         }
 
         [HttpGet]

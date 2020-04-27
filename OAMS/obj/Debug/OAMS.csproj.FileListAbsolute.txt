@@ -683,7 +683,6 @@ C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CoreC
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.pdb
-C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\ApplicationInsights.config
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\csc.exe
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -698,6 +697,7 @@ C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\vbc.exe
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\VBCSCompiler.exe
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.dll.config
+C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.pdb
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\Antlr3.Runtime.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\bin\EntityFramework.dll

@@ -555,6 +555,27 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
 
+        [HttpPost]
+        [Route("XuLyBinhLuan")]
+        public IHttpActionResult XuLyBinhLuan(BinhLuanModel binhLuan)
+        {
+            var bl = dbContext.NEWS_BinhLuan.Where(x => x.MaBinhLuan == binhLuan.MaBinhLuan && x.MaBaiViet == binhLuan.MaTinTuc).FirstOrDefault();
+            if (bl != null)
+            {
+                bl.HienThi = binhLuan.HienThi;
+                dbContext.SaveChanges();
+                if (binhLuan.HienThi == true)
+                {
+                    return Ok("Bình Luận Đã Được Duyệt");
+                }
+                else if(binhLuan.HienThi == false)
+                {
+                    return Ok("Bình Luận Đã Được Hủy Duyệt");
+                }
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
         [HttpDelete]
         [Route("XoaHinh")]
         public IHttpActionResult XoaHinh(int MaTinTuc)

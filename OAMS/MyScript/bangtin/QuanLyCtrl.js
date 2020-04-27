@@ -394,6 +394,27 @@
             else return;
         }
 
+        // Duyệt or Không Duyệt bình luận
+        $scope.XuLyBinhLuan = function (item, status) {
+            let objBinhLuan = {
+                MaBinhLuan: item.MaBinhLuan,
+                MaTinTuc: item.MaTinTuc,
+                HienThi: status
+            }
+            var res = CommonController.postData(CommonController.urlAPI.API_XuLyBinhLuan, objBinhLuan);
+            res.then(
+                function succ(response) {
+                    alert(response.data);
+                    item.HienThi = status;
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message);
+                    alert("Có Lỗi Phát Sinh");
+                }
+            );
+        }
+
         // Xóa Tin
         $scope.XoaTin = function (MaTinTuc) {
             if (window.confirm("Bạn chắc chắn xóa tin này chứ ?")) {
