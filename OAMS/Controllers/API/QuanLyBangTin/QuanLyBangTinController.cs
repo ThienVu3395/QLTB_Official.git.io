@@ -175,6 +175,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.TieuDe = item.Title;
                     tin.NoiDung = item.Content;
                     tin.MaLoaiTin = item.GroupId;
+                    tin.HienThi = item.IsApproved;
                     tin.NgayTao = item.CreatedDate;
                     tin.TenNguoiDung = item.CreatedUser;
                     tin.NgayCapNhat = item.LastUpdated;
@@ -238,6 +239,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.NoiDung = item.Content;
                     tin.MaLoaiTin = item.GroupId;
                     tin.NgayTao = item.CreatedDate;
+                    tin.HienThi = item.IsApproved;
                     tin.TenNguoiDung = item.CreatedUser;
                     tin.NgayCapNhat = item.LastUpdated;
                     tin.CountTin = dsTin.Count;
@@ -282,21 +284,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 return Ok(dsTinModel);
             }
             return Ok(dsTinModel);
-        }
-
-        [HttpPost]
-        [Route("GuiBinhLuan")]
-        public IHttpActionResult GuiBinhLuan(BinhLuanModel binhLuan)
-        {
-            NEWS_BinhLuan bl = new NEWS_BinhLuan();
-            bl.MaBaiViet = binhLuan.MaTinTuc;
-            bl.MaNguoiDung = 56;
-            bl.NoiDung = binhLuan.NoiDung;
-            bl.HienThi = false;
-            bl.Ngay = DateTime.Now;
-            dbContext.NEWS_BinhLuan.Add(bl);
-            dbContext.SaveChanges();
-            return Ok("Bình luận của bạn đã được gửi thành công , xin vui lòng chờ để được duyệt");
         }
 
         [HttpGet]
@@ -360,6 +347,21 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 return Ok(dsTinModel.Skip(page).Take(pageLimit));
             }
             return Ok(dsTinModel);
+        }
+
+        [HttpPost]
+        [Route("GuiBinhLuan")]
+        public IHttpActionResult GuiBinhLuan(BinhLuanModel binhLuan)
+        {
+            NEWS_BinhLuan bl = new NEWS_BinhLuan();
+            bl.MaBaiViet = binhLuan.MaTinTuc;
+            bl.MaNguoiDung = 56;
+            bl.NoiDung = binhLuan.NoiDung;
+            bl.HienThi = false;
+            bl.Ngay = DateTime.Now;
+            dbContext.NEWS_BinhLuan.Add(bl);
+            dbContext.SaveChanges();
+            return Ok("Bình luận của bạn đã được gửi thành công , xin vui lòng chờ để được duyệt");
         }
 
         [HttpGet]

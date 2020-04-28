@@ -488,7 +488,8 @@
                     API_PhanTrang_TheoDanhMuc: "API/AdminBangTin/PhanTrang_TheoDanhMuc",
                     API_PhanTrang_TheoHienThi: "API/AdminBangTin/PhanTrang_TheoHienThi",
                     API_PhanTrang_TheoDieuKien: "API/AdminBangTin/PhanTrang_TheoDieuKien",
-                    API_PhanTrang_Tuong: "API/AdminBangTin/PhanTrang_Tuong",
+                    API_PhanTrangTuong_TatCa: "API/AdminBangTin/PhanTrangTuong_TatCa",
+                    API_PhanTrangTuong_TheoDieuKien: "API/AdminBangTin/PhanTrangTuong_TheoDieuKien",
 
                     API_DuyetTin: "API/AdminBangTin/DuyetTin",
                     API_HuyDuyetTin : "API/AdminBangTin/HuyDuyetTin",

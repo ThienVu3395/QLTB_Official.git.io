@@ -195,6 +195,7 @@
                 check.className = "ace-icon fa fa-check invisible green";
             }
             $scope.MaLoaiTin = -1;
+            $scope.bigCurrentPage = 1;
             let API = "";
             $scope.param = "?page=0" + "&pageLimit=" + $scope.itemsPerPage;
             if ($scope.HienThi == -1) {
@@ -235,11 +236,21 @@
             if ($scope.HienThi == -1 && $scope.MaLoaiTin == 0) {
                 $scope.PhanTrang_TatCa();
             }
-            else if ($scope.HienThi != -1 && $scope.MaLoaiTin != 0) {
-                $scope.PhanTrang_TheoDieuKien($scope.MaLoaiTin, $scope.HienThi);
+            else if ($scope.HienThi != -1) {
+                if ($scope.MaLoaiTin == -1) {
+                    $scope.PhanTrangTuong_TheoDieuKien($scope.HienThi);
+                }
+                else if ($scope.MaLoaiTin > 0) {
+                    $scope.PhanTrang_TheoDieuKien($scope.MaLoaiTin, $scope.HienThi);
+                }
             }
-            else if ($scope.HienThi == -1 && $scope.MaLoaiTin != 0) {
-                $scope.PhanTrang_TheoDanhMuc($scope.MaLoaiTin);
+            else if ($scope.HienThi == -1) {
+                if ($scope.MaLoaiTin == -1) {
+                    $scope.PhanTrangTuong_TatCa();
+                }
+                else if ($scope.MaLoaiTin > 0) {
+                    $scope.PhanTrang_TheoDanhMuc($scope.MaLoaiTin);
+                }
             }
             else if ($scope.HienThi != -1 && $scope.MaLoaiTin == 0) {
                 $scope.PhanTrang_TheoHienThi($scope.HienThi);
@@ -252,6 +263,25 @@
                 message: 'Xin Vui Lòng Chờ...',
             });
             var res = CommonController.getData(CommonController.urlAPI.API_PhanTrang_TatCa, $scope.param);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSach = response.data;
+                    $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
+                    blockUI.stop();
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message);
+                }
+            );
+        }
+
+        // Phân Trang Tường Tất Cả
+        $scope.PhanTrangTuong_TatCa = function () {
+            blockUI.start({
+                message: 'Xin Vui Lòng Chờ...',
+            });
+            var res = CommonController.getData(CommonController.urlAPI.API_PhanTrangTuong_TatCa, $scope.param);
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;
@@ -312,6 +342,27 @@
             });
             $scope.param += "&MaLoaiTin=" + MaLoaiTin + "&HienThi=" + HienThi;
             var res = CommonController.getData(CommonController.urlAPI.API_PhanTrang_TheoDieuKien, $scope.param);
+            res.then(
+                function succ(response) {
+                    $scope.DanhSach = response.data;
+                    $scope.bigTotalItems = $scope.DanhSach[0].CountTin;
+                    blockUI.stop();
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message);
+                }
+            );
+        }
+
+        // Phân Trang Tường Theo Điều Kiện
+        $scope.PhanTrangTuong_TheoDieuKien = function (HienThi) {
+            blockUI.start({
+                message: 'Xin Vui Lòng Chờ...',
+            });
+            $scope.param += "&approved=" + HienThi;
+            console.log(CommonController.urlAPI.API_PhanTrangTuong_TheoDieuKien +  $scope.param)
+            var res = CommonController.getData(CommonController.urlAPI.API_PhanTrangTuong_TheoDieuKien, $scope.param);
             res.then(
                 function succ(response) {
                     $scope.DanhSach = response.data;

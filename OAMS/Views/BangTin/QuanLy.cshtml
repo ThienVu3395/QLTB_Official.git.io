@@ -799,7 +799,8 @@
                                         class="pagination-sm"
                                         boundary-link-numbers="true"
                                         rotate="false"
-                                        ng-change="PhanTrang()"></ul>
+                                        ng-change="PhanTrang()">
+                                    </ul>
                                     @*/Phân trang*@
                                 </div>
                             </div>
@@ -1012,12 +1013,12 @@
                             Xóa
                         </button>
 
-                        <button class="btn btn-sm btn-warning pull-left" ng-click="HuyDuyetTin(TTBV.MaTinTuc)" ng-show="!TTBV.HienThi">
+                        <button class="btn btn-sm btn-warning pull-left" ng-click="HuyDuyetTin(TTBV.MaTinTuc)" ng-show="TTBV.HienThi">
                             <i class="ace-icon fa fa-undo"></i>
                             Hủy Duyệt
                         </button>
 
-                        <button class="btn btn-sm btn-success pull-left" ng-click="DuyetTin(TTBV.MaTinTuc)" ng-show="TTBV.HienThi">
+                        <button class="btn btn-sm btn-success pull-left" ng-click="DuyetTin(TTBV.MaTinTuc)" ng-show="!TTBV.HienThi">
                             <i class="ace-icon fa fa-check"></i>
                             Duyệt
                         </button>

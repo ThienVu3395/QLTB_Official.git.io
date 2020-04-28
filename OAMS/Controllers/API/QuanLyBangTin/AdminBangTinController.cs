@@ -305,6 +305,48 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         }
 
         [HttpGet]
+        [Route("PhanTrangTuong_TatCa")]
+        public IHttpActionResult PhanTrangTuong_TatCa(int page, int pageLimit)
+        {
+            var dsTin = dbContext.NEWSTUONG_BaiViet.ToList().OrderByDescending(x => x.CreatedDate).ToList();
+            List<TinTucModel> dsTinModel = new List<TinTucModel>();
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    TinTucModel tin = new TinTucModel();
+                    tin.MaTinTuc = item.PostId;
+                    tin.TieuDe = item.Title;
+                    tin.NoiDung = item.Content;
+                    tin.MaLoaiTin = item.GroupId;
+                    tin.NgayTao = item.CreatedDate;
+                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.NgayCapNhat = item.LastUpdated;
+                    tin.HienThi = item.IsApproved;
+                    tin.TinNoiBat = item.IsFavorit;
+                    tin.CountTin = dsTin.Count;
+                    var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == item.PostId).ToList();
+                    List<TapTinModel> dsttmodel = new List<TapTinModel>();
+                    if (dsTapTin.Count > 0)
+                    {
+                        foreach (var i in dsTapTin)
+                        {
+                            TapTinModel ttmodel = new TapTinModel();
+                            ttmodel.MaTapTin = i.FileId;
+                            ttmodel.Ten = i.FileName;
+                            ttmodel.Url = i.OriginalFilename;
+                            dsttmodel.Add(ttmodel);
+                        }
+                        tin.TapTinDinhKem = dsttmodel;
+                    }
+                    dsTinModel.Add(tin);
+                }
+                return Ok(dsTinModel.Skip(page).Take(pageLimit));
+            }
+            return Ok(dsTinModel);
+        }
+
+        [HttpGet]
         [Route("PhanTrang_TheoDanhMuc")]
         public IHttpActionResult PhanTrang_TheoDanhMuc(int page, int pageLimit, int MaLoaiTin)
         {
@@ -443,40 +485,36 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         }
 
         [HttpGet]
-        [Route("PhanTrang_Tuong")]
-        public IHttpActionResult PhanTrang_Tuong(int page, int pageLimit, int MaLoaiTin, bool HienThi)
+        [Route("PhanTrangTuong_TheoDieuKien")]
+        public IHttpActionResult PhanTrangTuong_TheoDieuKien(int page, int pageLimit, bool approved)
         {
-            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.HienThi == HienThi && x.MaLoaiTin == MaLoaiTin).ToList().OrderByDescending(x => x.NgayTao).ToList();
+            var dsTin = dbContext.NEWSTUONG_BaiViet.Where(x => x.IsApproved == approved).ToList().OrderByDescending(x => x.CreatedDate).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
             if (dsTin.Count > 0)
             {
                 foreach (var item in dsTin)
                 {
                     TinTucModel tin = new TinTucModel();
-                    tin.MaTinTuc = item.MaTinTuc;
-                    tin.TieuDe = item.TieuDe;
-                    tin.NoiDung = item.NoiDung;
-                    tin.MoTa = item.MoTa;
-                    tin.MaLoaiTin = item.MaLoaiTin;
-                    tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
-                    tin.NgayTao = item.NgayTao;
-                    tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
-                    tin.NgayCapNhat = item.NgayCapNhat;
-                    tin.HienThi = item.HienThi;
-                    tin.HinhAnh = item.HinhAnh;
-                    tin.TinNoiBat = item.TinNoiBat;
+                    tin.MaTinTuc = item.PostId;
+                    tin.TieuDe = item.Title;
+                    tin.NoiDung = item.Content;
+                    tin.MaLoaiTin = item.GroupId;
+                    tin.NgayTao = item.CreatedDate;
+                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.NgayCapNhat = item.LastUpdated;
+                    tin.HienThi = item.IsApproved;
+                    tin.TinNoiBat = item.IsFavorit;
                     tin.CountTin = dsTin.Count;
-                    tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
-                    var dsTapTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == item.MaTinTuc).ToList();
+                    var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == item.PostId).ToList();
                     List<TapTinModel> dsttmodel = new List<TapTinModel>();
                     if (dsTapTin.Count > 0)
                     {
                         foreach (var i in dsTapTin)
                         {
                             TapTinModel ttmodel = new TapTinModel();
-                            ttmodel.MaTapTin = i.MaTapTin;
-                            ttmodel.Ten = i.Ten;
-                            ttmodel.Url = i.Url;
+                            ttmodel.MaTapTin = i.FileId;
+                            ttmodel.Ten = i.FileName;
+                            ttmodel.Url = i.OriginalFilename;
                             dsttmodel.Add(ttmodel);
                         }
                         tin.TapTinDinhKem = dsttmodel;
