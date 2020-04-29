@@ -916,7 +916,7 @@
                     <div class="hr hr-18 dotted"></div>
 
                     @*Ngày Hết Hạn*@
-                    <div class="form-group">
+                    <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Ngày Hết Hạn:</label>
                         <div class="col-sm-3">
                             <span class="input-icon">
@@ -931,10 +931,10 @@
                         </div>
                     </div>
                     @*/Ngày Hết Hạn*@
-                    <div class="hr hr-18 dotted"></div>
+                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
 
                     @*Ngày Hết Hạn Tin Mới*@
-                    <div class="form-group">
+                    <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Ngày Hết Hạn Tin Mới:</label>
                         <div class="col-sm-3">
                             <span class="input-icon">
@@ -949,10 +949,10 @@
                         </div>
                     </div>
                     @*/Ngày Hết Hạn Tin Mới*@
-                    <div class="hr hr-18 dotted"></div>
+                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
 
                     @*Ngày Hết Hạn Trang Chủ*@
-                    <div class="form-group">
+                    <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Ngày Hết Hạn Trang Chủ:</label>
                         <div class="col-sm-3">
                             <span class="input-icon">
@@ -967,10 +967,10 @@
                         </div>
                     </div>
                     @*/Ngày Hết Hạn Trang Chủ*@
-                    <div class="hr hr-18 dotted"></div>
+                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
 
                     @*Mô tả*@
-                    <div class="form-group">
+                    <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Mô Tả Ngắn:</label>
 
                         <div class="col-sm-6 col-xs-12">
@@ -981,14 +981,14 @@
                                        name="moTa"
                                        id="form-field-subject"
                                        placeholder="Mô tả ngắn về bài viết"
-                                       required/>
+                                       ng-required="MaLoaiTin.MaLoaiTin != 0"/>
                                 <p ng-show="addForm.moTa.$invalid" class="text-danger"><i>Bạn chưa nhập mô tả</i></p>
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                         </div>
                     </div>
                     @*/Mô tả*@
-                    <div class="hr hr-18 dotted"></div>
+                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
 
                     @*Nội Dung*@
                     <div class="form-group">
@@ -1006,7 +1006,7 @@
                     <div class="hr hr-18 dotted"></div>
 
                     @*Hình Ảnh*@
-                    <div class="form-group no-margin-bottom">
+                    <div class="form-group no-margin-bottom" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right">Ảnh Đại Diện:</label>
 
                         <div class="col-sm-4">
@@ -1028,7 +1028,7 @@
                         </div>
                     </div>
                     @*Hình Ảnh*@
-                    <div class="hr hr-18 dotted"></div>
+                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
 
                     @*Tập Tin Đính Kèm*@
                     <div class="form-group no-margin-bottom">

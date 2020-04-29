@@ -29,6 +29,11 @@
             overflow: hidden;
             cursor: pointer;
         }
+        .messagebar-item-right {
+            right: 12px;
+            left: auto;
+            top: 2px;
+        }
     </style>
 }
 
@@ -458,10 +463,10 @@
                             .addClass('width-90 inline')
                             .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>')
                             .parent().append('<div class="action-buttons pull-right col-xs-1">\
-                                                                                                                                    <a href="#" data-action="delete" class="middle">\
-                                                                                                                                        <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
-                                                                                                                                    </a>\
-                                                                                                                                </div>')
+                                                                                                                                            <a href="#" data-action="delete" class="middle">\
+                                                                                                                                                <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
+                                                                                                                                            </a>\
+                                                                                                                                        </div>')
                             .find('a[data-action=delete]').on('click', function (e) {
                                 //the button that removes the newly inserted file input
                                 e.preventDefault();
@@ -533,28 +538,6 @@
             <div class="col-xs-12">
                 <div class="row">
                     <div class="tabbable">
-                        <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
-                            @*Soạn bài viết*@
-                            <li class="li-new-mail pull-right">
-                                <a href="@Url.Action("SoanBaiViet","BangTin")" class="btn-new-mail">
-                                    <span class="btn btn-purple no-border">
-                                        <i class="ace-icon fa fa-envelope bigger-130"></i>
-                                        <span class="bigger-110">Soạn Bài Viết</span>
-                                    </span>
-                                </a>
-                            </li>
-                            @*/Soạn bài viết*@
-
-                            @*QLBV*@
-                            <li class="active">
-                                <a data-toggle="tab" href="#inbox" data-target="inbox">
-                                    <i class="blue ace-icon fa fa-inbox bigger-130"></i>
-                                    <span class="bigger-110">Quản Lý Bài Viết / Bình Luận</span>
-                                </a>
-                            </li>
-                            @*/QLBV*@
-                        </ul>
-
                         <div class="tab-content no-border no-padding">
                             <div id="inbox" class="tab-pane in active">
                                 <div class="message-container">
@@ -566,7 +549,7 @@
                                             </div>
                                             @*/Tiêu đề*@
 
-                                            @*Thanh công cụ khi hiển thị bên chi tiết bl*@
+                                            @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
                                             <div id="toolbarComment">
                                                 <div class="message-toolbar hide">
                                                     <div class="inline position-relative align-left">
@@ -714,6 +697,17 @@
                                             </div>
                                             @*/Bộ lọc bên trái*@
 
+                                            @*Bộ lọc bên phải*@
+                                            <div class="messagebar-item-right">
+                                                <a href="@Url.Action("SoanBaiViet","BangTin")" class="btn-new-mail">
+                                                    <span class="btn btn-purple no-border">
+                                                        <i class="ace-icon fa fa-envelope bigger-130"></i>
+                                                        <span class="bigger-110">Soạn Bài Viết</span>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            @*/Bộ lọc bên phải*@
+
                                             @*Input tìm kiếm ở bộ lọc bên trái*@
                                             <div class="nav-search minimized" id="searchInput">
                                                 @*<form class="form-search">
@@ -766,7 +760,7 @@
 
                                                 <span class="summary" ng-show="MaLoaiTin == -1 || MaLoaiTin == 0">
                                                     <span class="badge badge-pink mail-tag"></span>
-                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc,item.MaLoaiTin)">
+                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc,MaLoaiTin)">
                                                         <a title="{{item.TieuDe}}"
                                                            data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
                                                             {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
@@ -776,7 +770,7 @@
 
                                                 <span class="summary" ng-show="MaLoaiTin != -1 && MaLoaiTin != 0">
                                                     <span class="badge badge-pink mail-tag"></span>
-                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc,item.MaLoaiTin)">
+                                                    <span class="text" ng-click="LayChiTietBaiViet(item.MaTinTuc,MaLoaiTin)">
                                                         <a title="{{item.TieuDe}}"
                                                            data-rel="tooltip" href="#modal-table" data-toggle="modal" data-placement="bottom">
                                                             {{item.TieuDe | limitTo : 90}}{{SliceString(item.TieuDe,90)}}
@@ -799,8 +793,7 @@
                                         class="pagination-sm"
                                         boundary-link-numbers="true"
                                         rotate="false"
-                                        ng-change="PhanTrang()">
-                                    </ul>
+                                        ng-change="PhanTrang()"></ul>
                                     @*/Phân trang*@
                                 </div>
                             </div>
@@ -900,14 +893,14 @@
                                                     </a>
 
                                                     @*<span class="action-buttons">
-                                                        <a href="#">
-                                                            <i class="ace-icon fa fa-download bigger-125 blue"></i>
-                                                        </a>
+                                                            <a href="#">
+                                                                <i class="ace-icon fa fa-download bigger-125 blue"></i>
+                                                            </a>
 
-                                                        <a href="#">
-                                                            <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
-                                                        </a>
-                                                    </span>*@
+                                                            <a href="#">
+                                                                <i class="ace-icon fa fa-trash-o bigger-125 red"></i>
+                                                            </a>
+                                                        </span>*@
                                                 </li>
 
                                                 <li ng-show="TTBV.TapTinDinhKem.length == 0 || TTBV.TapTinDinhKem.length == null">
@@ -1014,12 +1007,12 @@
                             Xóa
                         </button>
 
-                        <button class="btn btn-sm btn-warning pull-left" ng-show="MaLoaiTin != -1 && TTBV.HienThi" ng-click="HuyDuyetTin(TTBV.MaTinTuc)">
+                        <button class="btn btn-sm btn-warning pull-left" ng-show="MaLoaiTin != -1 && TTBV.HienThi" ng-click="XuLyTin(TTBV.MaTinTuc,false)">
                             <i class="ace-icon fa fa-undo"></i>
                             Hủy Duyệt
                         </button>
 
-                        <button class="btn btn-sm btn-success pull-left" ng-show="MaLoaiTin != -1 && !TTBV.HienThi" ng-click="DuyetTin(TTBV.MaTinTuc)">
+                        <button class="btn btn-sm btn-success pull-left" ng-show="MaLoaiTin != -1 && !TTBV.HienThi" ng-click="XuLyTin(TTBV.MaTinTuc,true)">
                             <i class="ace-icon fa fa-check"></i>
                             Duyệt
                         </button>
@@ -1033,7 +1026,7 @@
                         @*Các nút dành cho tin tường*@
                         <button class="btn btn-sm btn-danger pull-left" ng-show="MaLoaiTin == -1" ng-click="XoaTinTuong(TTBV.MaTinTuc)">
                             <i class="ace-icon fa fa-trash-o"></i>
-                            Xóa w
+                            Xóa
                         </button>
 
                         <button class="btn btn-sm btn-warning pull-left" ng-show="MaLoaiTin == -1 && TTBV.HienThi" ng-click="XuLyTinTuong(TTBV.MaTinTuc,false)">

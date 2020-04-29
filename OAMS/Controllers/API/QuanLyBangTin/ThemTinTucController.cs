@@ -249,8 +249,10 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             tin.Content = tinTuc.NoiDung;
             tin.TotalView = 0;
             tin.CreatedUserId = 56;
+            tin.CreatedUser = "Thiên Vũ";
             tin.CreatedDate = tinTuc.NgayTao;
             tin.IsApproved = tinTuc.HienThi;
+            tin.IsFavorit = tinTuc.TinNoiBat;
             dbContext.NEWSTUONG_BaiViet.Add(tin);
             dbContext.SaveChanges();
             if (tinTuc.TapTinDinhKem.Count > 0)

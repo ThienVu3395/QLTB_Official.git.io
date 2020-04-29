@@ -8,7 +8,7 @@
 }
 
 @section Scripts{
-    <script src="~/MyScript/bangtin/QuanLyCtrl.js"></script>
+    <script src="~/MyScript/bangtin/SuaBaiVietTuong.js"></script>
     <script src="~/Content/assetsmes/js/chosen.jquery.min.js"></script>
     <script src="~/Content/assetsmes/js/spinbox.min.js"></script>
     <script src="~/Content/assetsmes/js/bootstrap-datepicker.min.js"></script>
@@ -789,7 +789,7 @@
     </script>
 }
 
-<div ng-controller="adminBT" ng-init="InitSuaTuong(@ViewBag.MaTinTuc)">
+<div ng-controller="suaBVT" ng-init="InitSuaTuong(@ViewBag.MaTinTuc)">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -867,7 +867,7 @@
                                 <i class="ace-icon fa fa-comment-o"></i>
                             </div>
                             <div>
-                                @*<span class="help-inline">
+                                <span class="help-inline">
                                     <label class="middle">
                                         <input class="ace" type="checkbox" ng-model="TTBV.TinNoiBat" />
                                         <span class="lbl">
@@ -879,11 +879,11 @@
                                             </span>
                                         </span>
                                     </label>
-                                </span>*@
+                                </span>
 
                                 <span class="help-inline">
                                     <label class="middle">
-                                        <input class="ace" type="checkbox" ng-model="TTBV.HienThi" @*ng-click="checkPermission()"*@ />
+                                        <input class="ace" type="checkbox" ng-model="TTBV.HienThi" />
                                         <span class="lbl">
                                             <span class="text-danger">
                                                 <a title="Bạn sẽ được duyệt ngay tin này nếu bạn đã được cấp quyền"
@@ -902,17 +902,17 @@
 
                     @*Loại Tin*@
                     @*<div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Loại Tin:</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Loại Tin:</label>
 
-                        <div class="col-sm-3">
-                            <span class="input-icon">
-                                <select class="form-control"
-                                        id="form-field-select-1"
-                                        ng-model="MaLoaiTin"
-                                        ng-options="item as item.Ten for item in DsLoaiTin track by item.MaLoaiTin"></select>
-                            </span>
-                        </div>
-                    </div>*@
+                            <div class="col-sm-3">
+                                <span class="input-icon">
+                                    <select class="form-control"
+                                            id="form-field-select-1"
+                                            ng-model="MaLoaiTin"
+                                            ng-options="item as item.Ten for item in DsLoaiTin track by item.MaLoaiTin"></select>
+                                </span>
+                            </div>
+                        </div>*@
                     @*/Loại Tin*@
                     @*<div class="hr hr-18 dotted"></div>*@
 

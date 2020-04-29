@@ -584,6 +584,7 @@
     <Content Include="MyScript\admin\nhomquyenCtrl.js" />
     <Content Include="MyScript\admin\phanquyenCtrl.js" />
     <Content Include="MyScript\app.js" />
+    <Content Include="MyScript\bangtin\SuaBaiVietTuong.js" />
     <Content Include="MyScript\bangtin\ThemBaiViet.js" />
     <Content Include="MyScript\bangtin\TrangChu00Ctrl.js" />
     <Content Include="MyScript\bangtin\QuanLyCtrl.js" />

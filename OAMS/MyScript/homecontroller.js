@@ -491,10 +491,10 @@
                     API_PhanTrangTuong_TatCa: "API/AdminBangTin/PhanTrangTuong_TatCa",
                     API_PhanTrangTuong_TheoDieuKien: "API/AdminBangTin/PhanTrangTuong_TheoDieuKien",
 
-                    API_DuyetTin: "API/AdminBangTin/DuyetTin",
-                    API_HuyDuyetTin : "API/AdminBangTin/HuyDuyetTin",
-                    API_XoaTin : "API/AdminBangTin/XoaTin",
-                    API_SuaTin: "API/AdminBangTin/SuaTin",
+                    API_XuLyTin : "API/AdminBangTin/XuLyTin",
+                    API_XoaTin: "API/AdminBangTin/XoaTin",
+                    //API_SuaTin: "API/AdminBangTin/SuaTin",
+                    API_XoaTinTuong : "API/AdminBangTin/XoaTinTuong",
                     API_XuLyBinhLuan: "API/AdminBangTin/XuLyBinhLuan",
                     API_XuLyTinhTuong: "API/AdminBangTin/XuLyTinTuong",
 
@@ -502,8 +502,11 @@
                     API_XoaHinh: "API/AdminBangTin/XoaHinh",
                     API_CapNhatHinh : "API/AdminBangTin/CapNhatHinh",
                     API_XoaFile: "API/AdminBangTin/XoaFile",
+                    API_XoaFileTuong: "API/AdminBangTin/XoaFileTuong",
                     API_CapNhatFile: "API/AdminBangTin/CapNhatFile",
+                    API_CapNhatFileTuong: "API/AdminBangTin/CapNhatFileTuong",
                     API_CapNhatThongTin: "API/AdminBangTin/CapNhatThongTin",
+                    API_CapNhatThongTinTuong: "API/AdminBangTin/CapNhatThongTinTuong",
                 };
 
                 return {

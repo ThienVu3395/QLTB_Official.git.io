@@ -118,29 +118,36 @@
 
         // Thêm Bài Viết
         $scope.ThemBaiViet = function () {
-            $scope.objThem.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
-            $scope.objThem.NoiDung = document.getElementById("editor1").innerHTML;
-            uploaderImage.uploadAll();
-            uploaderFile.uploadAll();
-            blockUI.start();
-            let API = "";
-            if ($scope.objThem.MaLoaiTin !== 0) {
-                API = CommonController.urlAPI.API_ThemBaiViet;
-            }
-            else {
-                API = CommonController.urlAPI.API_ThemBaiViet_Tuong;
-            }
-            var res = CommonController.postData(API, $scope.objThem);
-            res.then(
-                function succ(response) {
-                    blockUI.stop();
-                    alert(response.data);
-                    location.href = "";
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message)
+            if (confirm("Bạn chắc chắn thêm bài viết với nội dung như trên chứ ?")) {
+                $scope.objThem.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
+                $scope.objThem.NoiDung = document.getElementById("editor1").innerHTML;
+                if (uploaderImage.queue.length > 0) {
+                    uploaderImage.uploadAll();
                 }
-            )
+                if (uploaderFile.queue.length > 0) {
+                    uploaderFile.uploadAll();
+                }
+                blockUI.start();
+                let API = "";
+                if ($scope.objThem.MaLoaiTin !== 0) {
+                    API = CommonController.urlAPI.API_ThemBaiViet;
+                }
+                else {
+                    API = CommonController.urlAPI.API_ThemBaiViet_Tuong;
+                }
+                var res = CommonController.postData(API, $scope.objThem);
+                res.then(
+                    function succ(response) {
+                        blockUI.stop();
+                        alert(response.data);
+                        location.href = "";
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message)
+                    }
+                )
+            }
+            else return;
         }
     })

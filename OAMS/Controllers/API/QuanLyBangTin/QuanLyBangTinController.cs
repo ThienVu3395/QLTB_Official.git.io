@@ -193,8 +193,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                             ttmodel.Url = i.OriginalFilename;
                             dsttmodel.Add(ttmodel);
                         }
-                        tin.TapTinDinhKem = dsttmodel;
                     }
+                    tin.TapTinDinhKem = dsttmodel;
                     var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaBaiViet == item.PostId).ToList();
                     List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
                     if (dsBinhLuan.Count > 0)
@@ -256,8 +256,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                             ttmodel.Url = i.OriginalFilename;
                             dsttmodel.Add(ttmodel);
                         }
-                        tin.TapTinDinhKem = dsttmodel;
                     }
+                    tin.TapTinDinhKem = dsttmodel;
                     var dsBinhLuan = dbContext.NEWS_BinhLuan.Where(x => x.MaBaiViet == item.PostId && x.HienThi == true).ToList();
                     List<BinhLuanModel> dsBinhLuanModel = new List<BinhLuanModel>();
                     if (dsBinhLuan.Count > 0)

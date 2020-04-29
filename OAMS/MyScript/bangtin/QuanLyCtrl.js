@@ -393,7 +393,6 @@
             res.then(
                 function succ(response) {
                     $scope.TTBV = response.data;
-                    console.log($scope.TTBV);
                     blockUI.stop();
                 },
 
@@ -403,57 +402,23 @@
             );
         }
 
-        // Lấy Chi Tiết Bài Viết Tường
-        $scope.LayChiTietBaiVietTuong = function (MaTinTuc) {
-            blockUI.start({
-                message: 'Xin Vui Lòng Chờ...',
-            });
-            let param = "?MaTinTuc=" + MaTinTuc;
-            var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBaiViet_Tuong, param);
-            res.then(
-                function succ(response) {
-                    $scope.TTBV = response.data;
-                    console.log($scope.TTBV);
-                    blockUI.stop();
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message);
-                }
-            );
-        }
-
-        // Duyệt Tin
-        $scope.DuyetTin = function (MaTinTuc) {
-            if (window.confirm("Bạn chắc chắn duyệt tin này chứ ?")) {
-                let param = "?MaTinTuc=" + MaTinTuc;
-                var res = CommonController.getData(CommonController.urlAPI.API_DuyetTin, param);
-                res.then(
-                    function succ(response) {
-                        let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
-                        $scope.DanhSach[index].HienThi = 1;
-                        $scope.TTBV.HienThi = true;
-                        alert(response.data);
-                    },
-
-                    function errorCallback(response) {
-                        console.log(response.data.message);
-                    }
-                );
+        // Xử lý tin
+        $scope.XuLyTin = function (MaTinTuc, HienThi) {
+            let string = "";
+            if (HienThi == true) {
+                string = " duyệt";
             }
-            else return;
-        }
-
-        // Hủy Duyệt Tin
-        $scope.HuyDuyetTin = function (MaTinTuc) {
-            if (window.confirm("Bạn chắc chắn hủy duyệt tin này chứ ?")) {
-                let param = "?MaTinTuc=" + MaTinTuc;
-                var res = CommonController.getData(CommonController.urlAPI.API_HuyDuyetTin, param);
+            else if (HienThi == false) {
+                string = " hủy duyệt";
+            }
+            if (window.confirm("Bạn chắc chắn" + string + " tin này chứ ?")) {
+                let param = "?MaTinTuc=" + MaTinTuc + "&HienThi=" + HienThi;
+                var res = CommonController.getData(CommonController.urlAPI.API_XuLyTin, param);
                 res.then(
                     function succ(response) {
                         let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
-                        $scope.DanhSach[index].HienThi = 0;
-                        $scope.TTBV.HienThi = false;
+                        $scope.DanhSach[index].HienThi = HienThi;
+                        $scope.TTBV.HienThi = HienThi;
                         alert(response.data);
                     },
 
@@ -510,7 +475,7 @@
         $scope.XoaTinTuong = function (MaTinTuc) {
             if (window.confirm("Bạn chắc chắn xóa tin này khỏi tường chứ ?")) {
                 let param = "?MaTinTuc=" + MaTinTuc;
-                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTin, param);
+                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTinTuong, param);
                 res.then(
                     function succ(response) {
                         alert(response.data)
@@ -766,6 +731,7 @@
         $scope.CapNhatThongTinTuong = function () {
             if (window.confirm("Bạn chắc chắn cập nhật lại thông tin như trên chứ ?")) {
                 $scope.TTBV.NoiDung = document.getElementById("editor1").innerHTML;
+                console.log($scope.TTBV);
                 var res = CommonController.postData(CommonController.urlAPI.API_CapNhatThongTin, $scope.TTBV);
                 res.then(
                     function succ(response) {
