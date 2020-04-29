@@ -496,6 +496,7 @@
                     API_XoaTin : "API/AdminBangTin/XoaTin",
                     API_SuaTin: "API/AdminBangTin/SuaTin",
                     API_XuLyBinhLuan: "API/AdminBangTin/XuLyBinhLuan",
+                    API_XuLyTinhTuong: "API/AdminBangTin/XuLyTinTuong",
 
                     //*** Sửa Tin ***//
                     API_XoaHinh: "API/AdminBangTin/XoaHinh",

@@ -361,7 +361,7 @@
                 message: 'Xin Vui Lòng Chờ...',
             });
             $scope.param += "&approved=" + HienThi;
-            console.log(CommonController.urlAPI.API_PhanTrangTuong_TheoDieuKien +  $scope.param)
+            console.log(CommonController.urlAPI.API_PhanTrangTuong_TheoDieuKien + $scope.param)
             var res = CommonController.getData(CommonController.urlAPI.API_PhanTrangTuong_TheoDieuKien, $scope.param);
             res.then(
                 function succ(response) {
@@ -390,6 +390,26 @@
             }
             let param = "?MaTinTuc=" + MaTinTuc;
             var res = CommonController.getData(API, param);
+            res.then(
+                function succ(response) {
+                    $scope.TTBV = response.data;
+                    console.log($scope.TTBV);
+                    blockUI.stop();
+                },
+
+                function errorCallback(response) {
+                    console.log(response.data.message);
+                }
+            );
+        }
+
+        // Lấy Chi Tiết Bài Viết Tường
+        $scope.LayChiTietBaiVietTuong = function (MaTinTuc) {
+            blockUI.start({
+                message: 'Xin Vui Lòng Chờ...',
+            });
+            let param = "?MaTinTuc=" + MaTinTuc;
+            var res = CommonController.getData(CommonController.urlAPI.API_LayChiTietBaiViet_Tuong, param);
             res.then(
                 function succ(response) {
                     $scope.TTBV = response.data;
@@ -466,7 +486,7 @@
             );
         }
 
-        // Xóa Tin
+        // Xóa Tin Thường
         $scope.XoaTin = function (MaTinTuc) {
             if (window.confirm("Bạn chắc chắn xóa tin này chứ ?")) {
                 let param = "?MaTinTuc=" + MaTinTuc;
@@ -486,7 +506,55 @@
             else return;
         }
 
-        ///////////////////////////////////// SỬA TIN ////////////////////////
+        // Xóa Tin Tường
+        $scope.XoaTinTuong = function (MaTinTuc) {
+            if (window.confirm("Bạn chắc chắn xóa tin này khỏi tường chứ ?")) {
+                let param = "?MaTinTuc=" + MaTinTuc;
+                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTin, param);
+                res.then(
+                    function succ(response) {
+                        alert(response.data)
+                        location.href = "";
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
+            }
+            else return;
+        }
+
+        // Xử Lý Tin Tường
+        $scope.XuLyTinTuong = function (MaTinTuc, IsApproved) {
+            let string = "";
+            if (IsApproved == true) {
+                string = " duyệt";
+            }
+            else if (IsApproved == false) {
+                string = " hủy duyệt";
+            }
+            if (window.confirm("Bạn chắc chắn" + string + " tin này chứ ?")) {
+                let param = "?MaTinTuc=" + MaTinTuc + "&IsApproved=" + IsApproved;
+                var res = CommonController.getData(CommonController.urlAPI.API_XuLyTinhTuong, param);
+                res.then(
+                    function succ(response) {
+                        let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
+                        $scope.DanhSach[index].HienThi = IsApproved;
+                        $scope.TTBV.HienThi = IsApproved;
+                        alert(response.data);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                    }
+                );
+            }
+            else return;
+        }
+
+        ///////////////////////////////////// SỬA TIN THƯỜNG ////////////////////////
         $scope.InitSua = function (MaTinTuc) {
             $scope.TTBV = "";
             $scope.LayChiTietBaiViet(MaTinTuc);
@@ -517,6 +585,22 @@
                         }
                     }
                     $timeout(hamcho2, 300);
+                }
+            }
+            $timeout(hamcho, 300);
+        }
+
+        ///////////////////////////////////// SỬA TIN TƯỜNG ////////////////////////
+        $scope.InitSuaTuong = function (MaTinTuc) {
+            $scope.TTBV = "";
+            $scope.LayChiTietBaiVietTuong(MaTinTuc);
+            var hamcho = function () {
+                if ($scope.TTBV == "") {
+                    $timeout(hamcho, 300);
+                }
+                else {
+                    blockUI.stop();
+                    document.getElementById("editor1").innerHTML = $scope.TTBV.NoiDung;
                 }
             }
             $timeout(hamcho, 300);
@@ -661,6 +745,26 @@
                 $scope.TTBV.NgayHetHan = GetDateTimeFormat(document.getElementById("nhhSua").value);
                 $scope.TTBV.NgayHetHanTinMoi = GetDateTimeFormat(document.getElementById("nhhtmSua").value)
                 $scope.TTBV.NgayHetHanTrangChu = GetDateTimeFormat(document.getElementById("nhhtcSua").value);
+                $scope.TTBV.NoiDung = document.getElementById("editor1").innerHTML;
+                var res = CommonController.postData(CommonController.urlAPI.API_CapNhatThongTin, $scope.TTBV);
+                res.then(
+                    function succ(response) {
+                        alert(response.data);
+                        location.href = "";
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
+            }
+            else return;
+        }
+
+        // Cập nhật thông tin tường
+        $scope.CapNhatThongTinTuong = function () {
+            if (window.confirm("Bạn chắc chắn cập nhật lại thông tin như trên chứ ?")) {
                 $scope.TTBV.NoiDung = document.getElementById("editor1").innerHTML;
                 var res = CommonController.postData(CommonController.urlAPI.API_CapNhatThongTin, $scope.TTBV);
                 res.then(

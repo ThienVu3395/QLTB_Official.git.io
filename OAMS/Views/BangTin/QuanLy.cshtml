@@ -1008,25 +1008,49 @@
                     </div>
 
                     <div class="modal-footer no-margin-top">
-                        <button class="btn btn-sm btn-danger pull-left" ng-click="XoaTin(TTBV.MaTinTuc)">
+                        @*Các nút dành cho tin bình thường*@
+                        <button class="btn btn-sm btn-danger pull-left" ng-show="MaLoaiTin != -1" ng-click="XoaTin(TTBV.MaTinTuc)">
                             <i class="ace-icon fa fa-trash-o"></i>
                             Xóa
                         </button>
 
-                        <button class="btn btn-sm btn-warning pull-left" ng-click="HuyDuyetTin(TTBV.MaTinTuc)" ng-show="TTBV.HienThi">
+                        <button class="btn btn-sm btn-warning pull-left" ng-show="MaLoaiTin != -1 && TTBV.HienThi" ng-click="HuyDuyetTin(TTBV.MaTinTuc)">
                             <i class="ace-icon fa fa-undo"></i>
                             Hủy Duyệt
                         </button>
 
-                        <button class="btn btn-sm btn-success pull-left" ng-click="DuyetTin(TTBV.MaTinTuc)" ng-show="!TTBV.HienThi">
+                        <button class="btn btn-sm btn-success pull-left" ng-show="MaLoaiTin != -1 && !TTBV.HienThi" ng-click="DuyetTin(TTBV.MaTinTuc)">
                             <i class="ace-icon fa fa-check"></i>
                             Duyệt
                         </button>
 
-                        <a class="btn btn-sm btn-info pull-right no-margin" href="@Url.Action("SuaBaiViet","BangTin")?MaTinTuc={{TTBV.MaTinTuc}}">
+                        <a class="btn btn-sm btn-info pull-right no-margin" ng-show="MaLoaiTin != -1" href="@Url.Action("SuaBaiViet","BangTin")?MaTinTuc={{TTBV.MaTinTuc}}">
                             <i class="ace-icon fa fa-edit"></i>
                             Sửa
                         </a>
+                        @*/Các nút dành cho tin bình thường*@
+
+                        @*Các nút dành cho tin tường*@
+                        <button class="btn btn-sm btn-danger pull-left" ng-show="MaLoaiTin == -1" ng-click="XoaTinTuong(TTBV.MaTinTuc)">
+                            <i class="ace-icon fa fa-trash-o"></i>
+                            Xóa w
+                        </button>
+
+                        <button class="btn btn-sm btn-warning pull-left" ng-show="MaLoaiTin == -1 && TTBV.HienThi" ng-click="XuLyTinTuong(TTBV.MaTinTuc,false)">
+                            <i class="ace-icon fa fa-undo"></i>
+                            Hủy Duyệt
+                        </button>
+
+                        <button class="btn btn-sm btn-success pull-left" ng-show="MaLoaiTin == -1 && !TTBV.HienThi" ng-click="XuLyTinTuong(TTBV.MaTinTuc,true)">
+                            <i class="ace-icon fa fa-check"></i>
+                            Duyệt
+                        </button>
+
+                        <a class="btn btn-sm btn-info pull-right no-margin" ng-show="MaLoaiTin == -1" href="@Url.Action("SuaBaiVietTuong","BangTin")?MaTinTuc={{TTBV.MaTinTuc}}">
+                            <i class="ace-icon fa fa-edit"></i>
+                            Sửa
+                        </a>
+                        @*/Các nút dành cho tin tường*@
                     </div>
                 </div>
             </div>

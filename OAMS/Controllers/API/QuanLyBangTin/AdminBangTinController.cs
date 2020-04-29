@@ -77,6 +77,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 tin.NoiDung = dsTin.Content;
                 tin.MaLoaiTin = dsTin.GroupId;
                 tin.NgayTao = dsTin.CreatedDate;
+                tin.HienThi = dsTin.IsApproved;
                 tin.TenNguoiDung = dsTin.CreatedUser;
                 tin.NgayCapNhat = dsTin.LastUpdated;
                 var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == dsTin.PostId).ToList();
@@ -609,6 +610,27 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 else if(binhLuan.HienThi == false)
                 {
                     return Ok("Bình Luận Đã Được Hủy Duyệt");
+                }
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpGet]
+        [Route("XuLyTinTuong")]
+        public IHttpActionResult XuLyTinTuong(int MaTinTuc , bool IsApproved)
+        {
+            var tin = dbContext.NEWSTUONG_BaiViet.Where(x => x.PostId == MaTinTuc).FirstOrDefault();
+            if (tin != null)
+            {
+                tin.IsApproved = IsApproved;
+                dbContext.SaveChanges();
+                if (IsApproved == true)
+                {
+                    return Ok("Bài Viết Đã Được Duyệt");
+                }
+                else if (IsApproved == false)
+                {
+                    return Ok("Bài Viết Đã Được Hủy Duyệt");
                 }
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
