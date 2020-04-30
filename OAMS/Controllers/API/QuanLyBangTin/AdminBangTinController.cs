@@ -571,7 +571,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
         [HttpGet]
         [Route("XuLyTin")]
-        public IHttpActionResult XuLyTin(int MaTinTuc,bool HienThi)
+        public IHttpActionResult XuLyTin(int MaTinTuc, bool HienThi)
         {
             var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
             if (tin != null)
@@ -609,9 +609,9 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     f.Delete();
                 }
                 var dsTin = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == MaTinTuc).ToList();
-                if(dsTin.Count > 0)
+                if (dsTin.Count > 0)
                 {
-                    foreach(var item in dsTin)
+                    foreach (var item in dsTin)
                     {
                         string filePath = "";
 
@@ -623,11 +623,10 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                             FileInfo f = new FileInfo(filePath);
 
                             f.Delete();
-
-                            dbContext.NEWS_TinTucTapTin.Remove(item);
-
-                            dbContext.SaveChanges();
                         }
+                        dbContext.NEWS_TinTucTapTin.Remove(item);
+
+                        dbContext.SaveChanges();
                     }
                 }
                 dbContext.NEWS_TinTuc.Remove(baiViet);
@@ -686,7 +685,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 {
                     return Ok("Bình Luận Đã Được Duyệt");
                 }
-                else if(binhLuan.HienThi == false)
+                else if (binhLuan.HienThi == false)
                 {
                     return Ok("Bình Luận Đã Được Hủy Duyệt");
                 }
@@ -696,7 +695,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
 
         [HttpGet]
         [Route("XuLyTinTuong")]
-        public IHttpActionResult XuLyTinTuong(int MaTinTuc , bool IsApproved)
+        public IHttpActionResult XuLyTinTuong(int MaTinTuc, bool IsApproved)
         {
             var tin = dbContext.NEWSTUONG_BaiViet.Where(x => x.PostId == MaTinTuc).FirstOrDefault();
             if (tin != null)
@@ -850,7 +849,8 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         public IHttpActionResult CapNhatThongTin(TinTucModel tinTuc)
         {
             var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == tinTuc.MaTinTuc).FirstOrDefault();
-            if (tin != null) {
+            if (tin != null)
+            {
                 tin.TieuDe = tinTuc.TieuDe;
                 tin.NoiDung = tinTuc.NoiDung;
                 tin.MoTa = tinTuc.MoTa;

@@ -33,6 +33,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachLoaiTin = response.data;
+                    console.log($scope.DanhSachLoaiTin);
                 },
 
                 function errorCallback(response) {

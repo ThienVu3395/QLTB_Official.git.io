@@ -586,7 +586,7 @@
             fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 //debugger
-                if ('|tif|tiff|jpg|jpeg|bmp|gif|'.indexOf(type) !== -1) {
+                if ('|tif|tiff|jpg|jpeg|bmp|gif|png|'.indexOf(type) !== -1) {
                     setTimeout(deferred.resolve, 1e3);
                     return true;
                 }
