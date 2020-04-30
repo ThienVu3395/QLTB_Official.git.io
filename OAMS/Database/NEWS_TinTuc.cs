@@ -47,6 +47,7 @@ namespace OAMS.Database
         public Nullable<int> NamDang { get; set; }
         public string GhiChu { get; set; }
         public string HinhAnhDuPhong { get; set; }
+        public Nullable<bool> ChiaSe { get; set; }
     
         public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }

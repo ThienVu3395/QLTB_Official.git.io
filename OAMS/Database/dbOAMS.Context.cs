@@ -59,5 +59,6 @@ namespace OAMS.Database
         public virtual DbSet<NEWSTUONG_BaiViet> NEWSTUONG_BaiViet { get; set; }
         public virtual DbSet<NEWSTUONG_NhomTinTuong> NEWSTUONG_NhomTinTuong { get; set; }
         public virtual DbSet<NEWSTUONG_TinDinhKem> NEWSTUONG_TinDinhKem { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

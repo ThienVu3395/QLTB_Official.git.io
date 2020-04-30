@@ -63,6 +63,7 @@
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong" />
+        <EntityTypeShape EntityType="dbOAMSModel.sysdiagram" Width="1.5" PointX="6.375" PointY="9.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

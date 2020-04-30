@@ -467,6 +467,7 @@
                     API_LayBaiVietTuong_DieuKien: "API/QuanLyBangTin/LayBaiVietTuong_DieuKien",
                     API_LayBaiVietTuong_TatCa: "API/QuanLyBangTin/LayBaiVietTuong_TatCa",
                     API_GuiBinhLuan: "API/QuanLyBangTin/GuiBinhLuan",
+                    API_ChiaSeBaiViet: "API/QuanLyBangTin/ChiaSeBaiViet",
 
                     // Trang chủ dự phòng
                     API_LayTinNoiBat: "API/QuanLyBangTin/LayTinNoiBat",

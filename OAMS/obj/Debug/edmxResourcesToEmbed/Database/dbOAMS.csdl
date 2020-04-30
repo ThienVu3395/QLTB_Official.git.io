@@ -163,6 +163,7 @@
       <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
       <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
     </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="dbOAMSModel.sysdiagram" />
   </EntityContainer>
   <EntityType Name="tbChucnang">
     <Key>
@@ -735,6 +736,7 @@
     <Property Name="IsOnHome" Type="Boolean" />
     <Property Name="RequiredApproved" Type="Boolean" />
     <Property Name="NotifiedUsers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnhDuPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NEWS_TinTuc">
     <Key>
@@ -1100,4 +1102,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

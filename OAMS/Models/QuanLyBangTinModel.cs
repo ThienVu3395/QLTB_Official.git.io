@@ -34,6 +34,7 @@ namespace OAMS.Models
         public int? LuotXem { get; set; }
         public Nullable<bool> HienThi { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
+        public Nullable<bool> ChiaSe { get; set; }
         public List<BinhLuanModel> BinhLuan { get; set; }
         public string HinhAnh { get; set; }
         public string HinhCu { get; set; }

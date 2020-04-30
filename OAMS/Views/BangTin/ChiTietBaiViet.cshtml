@@ -562,22 +562,19 @@
             <div class="hr hr-double hr8"></div>
             @*/ Bình Luận*@
 
-            <div class="label label-lg label-pink arrowed-right" style="margin-bottom:8px">Tin Liên Quan</div>
+            @*<div class="label label-lg label-pink arrowed-right" style="margin-bottom:8px">Tin Liên Quan</div>*@
             <div class="row">
-                <div class="col-lg-3 col-sm-3 col-xs-6" ng-show="ThongTinBV.TemplateList != 3" ng-repeat="item in ThongTinBV.TinLienQuan">
+                <div class="col-lg-2 col-sm-2 col-xs-6" ng-show="ThongTinBV.TemplateList != 3" ng-repeat="item in ThongTinBV.TinLienQuan">
                     <div class="thumbnail search-thumbnail">
-                        <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
+                        <span class="search-promotion label label-pink arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
 
                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                            <img ng-show="item.HinhAnh != null" class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
-                            <img ng-show="item.HinhAnh == null" class="media-object width-100" src="~/Content/image/{{item.HinhAnhDuPhong}}" height="108" />
+                            <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
                         </a>
                         <div class="caption">
                             <div class="clearfix">
                                 <div class="pull-left bigger-110">
-                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY(item.NgayTao)}}
-
-                                    <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
+                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnFullDateTime(item.NgayTao)}}
                                 </div>
                             </div>
 
@@ -587,7 +584,7 @@
                                    title="{{item.TieuDe}}"
                                    data-rel="tooltip"
                                    ng-show="item.LuotXem == 0">
-                                    {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
+                                    {{capitalize(item.TieuDe | limitTo : 40)}}{{SliceString(item.TieuDe,40)}}
                                 </a>
 
                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
@@ -595,7 +592,7 @@
                                    title="{{item.TieuDe}}"
                                    data-rel="tooltip"
                                    ng-show="item.LuotXem > 0">
-                                    {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
+                                    {{capitalize(item.TieuDe | limitTo : 40)}}{{SliceString(item.TieuDe,40)}}
                                 </a>
                             </h3>
                             <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-xs btn-primary">
@@ -606,7 +603,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-sm-3 col-xs-6" ng-show="ThongTinBV.TemplateList == 3" ng-repeat="item in ThongTinBV.TinLienQuan">
+                <div class="col-lg-2 col-sm-2 col-xs-6" ng-show="ThongTinBV.TemplateList == 3" ng-repeat="item in ThongTinBV.TinLienQuan">
                     <div class="thumbnail search-thumbnail">
                         <span class="search-promotion label label-success arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
                         <div class="caption">

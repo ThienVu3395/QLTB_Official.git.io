@@ -33,7 +33,6 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachLoaiTin = response.data;
-                    console.log($scope.DanhSachLoaiTin);
                 },
 
                 function errorCallback(response) {
@@ -58,6 +57,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachTinTuc = response.data;
+                    console.log($scope.DanhSachTinTuc);
                     blockUI.stop();
                     if ($scope.DanhSachTinTuc.length > 0) {
                         $scope.bigTotalItems = $scope.DanhSachTinTuc[0].CountTin;
@@ -115,6 +115,33 @@
                     console.log(response.data.message)
                 }
             )
+        }
+
+        // Chia sẻ bài viết lên tường
+        $scope.ChiaSe = function (item) {
+            if (window.confirm("Bạn muốn chia sẻ bài viết này lên tường chứ ?")) {
+                console.log(item);
+            }
+            else return;
+            //let item = 3;
+            //let limit = ($scope.page - 1) * item;
+            //$scope.param = "?page=" + limit + "&pageLimit=" + item;
+            //var res = CommonController.getData(CommonController.urlAPI.API_LayBaiVietTuong, $scope.param);
+            //res.then(
+            //    function succ(response) {
+            //        if (response.data.length > 0) {
+            //            for (let i = 0; i < response.data.length; i++) {
+            //                $scope.BaiVietTuong.push(response.data[i]);
+            //            }
+            //            $scope.page += 1;
+            //        }
+            //        else alert("Không Tìm Thấy Bài Viết");
+            //    },
+
+            //    function errorCallback(response) {
+            //        console.log(response.data.message)
+            //    }
+            //)
         }
 
         // Đọc tiếp - Thu Gọn

@@ -314,6 +314,9 @@
     <Compile Include="Database\NEWS_TinTucTapTin.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\sysdiagram.cs">
+      <DependentUpon>dbOAMS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\tbBophan.cs">
       <DependentUpon>dbOAMS.tt</DependentUpon>
     </Compile>

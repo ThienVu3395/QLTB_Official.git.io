@@ -334,6 +334,7 @@
     <EntitySetMapping Name="NEWS_LoaiTinTuc">
       <EntityTypeMapping TypeName="dbOAMSModel.NEWS_LoaiTinTuc">
         <MappingFragment StoreEntitySet="NEWS_LoaiTinTuc">
+          <ScalarProperty Name="HinhAnhDuPhong" ColumnName="HinhAnhDuPhong" />
           <ScalarProperty Name="NotifiedUsers" ColumnName="NotifiedUsers" />
           <ScalarProperty Name="RequiredApproved" ColumnName="RequiredApproved" />
           <ScalarProperty Name="IsOnHome" ColumnName="IsOnHome" />
@@ -494,6 +495,17 @@
           <ScalarProperty Name="FileSize" ColumnName="FileSize" />
           <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="FileId" ColumnName="FileId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="dbOAMSModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -31,9 +31,9 @@ namespace OAMS.Database
         public Nullable<bool> IsOnHome { get; set; }
         public Nullable<bool> RequiredApproved { get; set; }
         public string NotifiedUsers { get; set; }
+        public string HinhAnhDuPhong { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_TinTuc> NEWS_TinTuc { get; set; }
-        public string HinhAnhDuPhong { get; set; }
     }
 }

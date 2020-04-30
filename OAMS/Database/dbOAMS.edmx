@@ -91,6 +91,7 @@
           <Property Name="IsOnHome" Type="bit" />
           <Property Name="RequiredApproved" Type="bit" />
           <Property Name="NotifiedUsers" Type="nvarchar" MaxLength="500" />
+          <Property Name="HinhAnhDuPhong" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="NEWS_NguoiSuDung">
           <Key>
@@ -220,6 +221,16 @@
           <Property Name="PostId" Type="int" />
           <Property Name="UserId" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tbFilecongvan">
           <Key>
@@ -405,6 +416,13 @@
           <Property Name="DVQUANLY" Type="nvarchar" MaxLength="10" />
           <Property Name="MADONVI" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="tbChucvu">
+          <Key>
+            <PropertyRef Name="MACHUCVU" />
+          </Key>
+          <Property Name="MACHUCVU" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TENCHUCVU" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbCoquan">
           <Key>
             <PropertyRef Name="MACOQUAN" />
@@ -412,13 +430,6 @@
           <Property Name="MACOQUAN" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TENCOQUAN" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="CQQUANLY" Type="nvarchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="tbChucvu">
-          <Key>
-            <PropertyRef Name="MACHUCVU" />
-          </Key>
-          <Property Name="MACHUCVU" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TENCHUCVU" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="tbNguoidung">
           <Key>
@@ -893,6 +904,7 @@
           <EntitySet Name="NEWSTUONG_BaiViet" EntityType="Self.NEWSTUONG_BaiViet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NEWSTUONG_NhomTinTuong" EntityType="Self.NEWSTUONG_NhomTinTuong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NEWSTUONG_TinDinhKem" EntityType="Self.NEWSTUONG_TinDinhKem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbFilecongvan" EntityType="Self.tbFilecongvan" Schema="doc" store:Type="Tables" />
           <EntitySet Name="tbFiledinhkem" EntityType="Self.tbFiledinhkem" Schema="doc" store:Type="Tables" />
           <EntitySet Name="tbFilexuly" EntityType="Self.tbFilexuly" Schema="doc" store:Type="Tables" />
@@ -906,8 +918,8 @@
           <EntitySet Name="tbWorkflow" EntityType="Self.tbWorkflow" Schema="doc" store:Type="Tables" />
           <EntitySet Name="tbYkienxuly" EntityType="Self.tbYkienxuly" Schema="doc" store:Type="Tables" />
           <EntitySet Name="tbBophan" EntityType="Self.tbBophan" Schema="users" store:Type="Tables" />
-          <EntitySet Name="tbCoquan" EntityType="Self.tbCoquan" Schema="users" store:Type="Tables" />
           <EntitySet Name="tbChucvu" EntityType="Self.tbChucvu" Schema="users" store:Type="Tables" />
+          <EntitySet Name="tbCoquan" EntityType="Self.tbCoquan" Schema="users" store:Type="Tables" />
           <EntitySet Name="tbNguoidung" EntityType="Self.tbNguoidung" Schema="users" store:Type="Tables" />
           <EntitySet Name="tbNhom" EntityType="Self.tbNhom" Schema="users" store:Type="Tables" />
           <EntitySet Name="tbNhom_Chucnang" EntityType="Self.tbNhom_Chucnang" Schema="users" store:Type="Tables" />
@@ -1208,6 +1220,7 @@
             <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
             <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="dbOAMSModel.sysdiagram" />
           </EntityContainer>
         <EntityType Name="tbChucnang">
           <Key>
@@ -1780,6 +1793,7 @@
           <Property Name="IsOnHome" Type="Boolean" />
           <Property Name="RequiredApproved" Type="Boolean" />
           <Property Name="NotifiedUsers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnhDuPhong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NEWS_TinTuc">
           <Key>
@@ -2145,6 +2159,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2484,6 +2508,7 @@
           <EntitySetMapping Name="NEWS_LoaiTinTuc">
             <EntityTypeMapping TypeName="dbOAMSModel.NEWS_LoaiTinTuc">
               <MappingFragment StoreEntitySet="NEWS_LoaiTinTuc">
+                <ScalarProperty Name="HinhAnhDuPhong" ColumnName="HinhAnhDuPhong" />
                 <ScalarProperty Name="NotifiedUsers" ColumnName="NotifiedUsers" />
                 <ScalarProperty Name="RequiredApproved" ColumnName="RequiredApproved" />
                 <ScalarProperty Name="IsOnHome" ColumnName="IsOnHome" />
@@ -2644,6 +2669,17 @@
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="FileId" ColumnName="FileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbOAMSModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

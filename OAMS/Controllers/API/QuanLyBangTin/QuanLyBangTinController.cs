@@ -63,7 +63,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.NgayTao = item.NgayTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
-                    tin.HinhAnh = item.HinhAnh;
+                    tin.ChiaSe = item.ChiaSe;
+                    tin.HinhAnh = item.HinhAnh == null ? item.NEWS_LoaiTinTuc.HinhAnhDuPhong : item.HinhAnh;
                     tin.HinhAnhDuPhong = item.HinhAnhDuPhong;
                     tin.TinNoiBat = item.TinNoiBat;
                     tin.CountTin = dsTin.Count;
@@ -107,6 +108,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.NgayHetHanTinMoi = dsTin.NgayHetHanTinMoi;
                 tinTuc.NgayHetHanTrangChu = dsTin.NgayHetHanTrangChu;
                 tinTuc.HienThi = dsTin.HienThi;
+                tinTuc.ChiaSe = dsTin.ChiaSe;
                 tinTuc.TenNguoiDung = dsTin.NEWS_NguoiSuDung.Ten;
                 tinTuc.TemplateList = dsTin.NEWS_LoaiTinTuc.TemplateList;
                 tinTuc.MaLoaiTin = dsTin.MaLoaiTin;
@@ -128,7 +130,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     }
                 }
                 tinTuc.TapTinDinhKem = dsttmodel;
-                var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(4).ToList();
+                var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(6).ToList();
                 List<TinTucModel> dsTinLQ = new List<TinTucModel>();
                 if (tinLQ.Count > 0)
                 {
@@ -143,7 +145,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         tin.NgayTao = item.NgayTao;
                         tin.NgayCapNhat = item.NgayCapNhat;
                         tin.HienThi = item.HienThi;
-                        tin.HinhAnh = item.HinhAnh;
+                        tin.HinhAnh = item.HinhAnh == null ? item.NEWS_LoaiTinTuc.HinhAnhDuPhong : item.HinhAnh;
                         tin.HinhAnhDuPhong = item.HinhAnhDuPhong;
                         tin.LuotXem = item.LuotXem;
                         tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;

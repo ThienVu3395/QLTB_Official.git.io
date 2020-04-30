@@ -480,8 +480,7 @@
                                             <div class="thumbnail search-thumbnail">
                                                 <span class="search-promotion label label-danger arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                    <img ng-show="item.HinhAnh != null" class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
-                                                    <img ng-show="item.HinhAnh == null" class="media-object width-100" src="~/Content/image/duphongcntt.jpg" height="108" />
+                                                    <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
                                                 </a>
 
                                                 <div class="caption">
@@ -498,8 +497,12 @@
                                                             {{ item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}
                                                         </a>
                                                     </h3>
-                                                    <p>{{item.MoTa| limitTo: 20 }}{{item.MoTa.length > 20 ? '...' : ''}}</p>
-                                                    <span class="text-success">Xem Chi Tiết <i class="ace-icon fa fa-next"></i></span>
+                                                    <a href="#"
+                                                       class="black no-deco"
+                                                       title="{{item.MoTa}}"
+                                                       data-rel="tooltip">
+                                                        {{item.MoTa| limitTo: 20 }}{{item.MoTa.length > 20 ? '...' : ''}}
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -508,8 +511,7 @@
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                        <img ng-show="item.HinhAnh != null" class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
-                                                        <img ng-show="item.HinhAnh == null" class="media-object width-100" src="~/Content/image/duphongcntt.jpg" height="108" />
+                                                        <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-9">
@@ -565,6 +567,11 @@
                                                     <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-minier btn-success">
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                    </a>
+
+                                                    <a href="#" class="btn btn-minier btn-info" ng-click="ChiaSe(item)">
+                                                        Chia sẻ
+                                                        <i class="ace-icon fa fa-share"></i>
                                                     </a>
                                                 </div>
                                             </div>
