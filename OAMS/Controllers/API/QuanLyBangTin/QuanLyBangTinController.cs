@@ -10,6 +10,7 @@ using System.IO;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web;
+using System.Data.Entity.Validation;
 
 namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
 {
@@ -65,7 +66,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.HienThi = item.HienThi;
                     tin.ChiaSe = item.ChiaSe;
                     tin.HinhAnh = item.HinhAnh == null ? item.NEWS_LoaiTinTuc.HinhAnhDuPhong : item.HinhAnh;
-                    tin.HinhAnhDuPhong = item.HinhAnhDuPhong;
                     tin.TinNoiBat = item.TinNoiBat;
                     tin.CountTin = dsTin.Count;
                     tin.TemplateList = item.NEWS_LoaiTinTuc.TemplateList;
@@ -81,8 +81,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                             ttmodel.Url = i.Url;
                             dsttmodel.Add(ttmodel);
                         }
-                        tin.TapTinDinhKem = dsttmodel;
                     }
+                    tin.TapTinDinhKem = dsttmodel;
                     dsTinModel.Add(tin);
                 }
                 return Ok(dsTinModel.Skip(page).Take(pageLimit));
@@ -146,7 +146,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         tin.NgayCapNhat = item.NgayCapNhat;
                         tin.HienThi = item.HienThi;
                         tin.HinhAnh = item.HinhAnh == null ? item.NEWS_LoaiTinTuc.HinhAnhDuPhong : item.HinhAnh;
-                        tin.HinhAnhDuPhong = item.HinhAnhDuPhong;
                         tin.LuotXem = item.LuotXem;
                         tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                         tin.TinNoiBat = item.TinNoiBat;
@@ -162,9 +161,60 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             return Ok("sai rồi");
         }
 
+        [HttpPost]
+        [Route("ChiaSeBaiViet")]
+        public IHttpActionResult ChiaSeBaiViet(TinTucModel tinTuc)
+        {
+            var bv = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == tinTuc.MaTinTuc).FirstOrDefault();
+            if (bv != null)
+            {
+                bv.ChiaSe = false;
+                dbContext.SaveChanges();
+                NEWSTUONG_BaiViet bvt = new NEWSTUONG_BaiViet();
+                bvt.ParentId = 0;
+                bvt.GroupId = 13;
+                bvt.ReplyToId = 0;
+                bvt.Title = tinTuc.TieuDe;
+                bvt.Content = tinTuc.NoiDung;
+                bvt.TotalReplies = 0;
+                bvt.TotalView = 13;
+                bvt.ShareID = tinTuc.MaTinTuc;
+                bvt.CreatedUserId = 56;
+                bvt.CreatedUser = "Thienvu.lh";
+                bvt.CreatedDate = DateTime.Now;
+                bvt.LastPost = null;
+                bvt.LastPostId = null;
+                bvt.LastUpdated = null;
+                bvt.LastUpdatedUser = null;
+                bvt.LastUpdatedUserId = null;
+                bvt.IsApproved = false;
+                bvt.IsFavorit = false;
+                dbContext.NEWSTUONG_BaiViet.Add(bvt);
+                dbContext.SaveChanges();
+                if (tinTuc.TapTinDinhKem.Count > 0)
+                {
+                    foreach (var item in tinTuc.TapTinDinhKem)
+                    {
+                        NEWSTUONG_TinDinhKem ttdk = new NEWSTUONG_TinDinhKem();
+                        ttdk.FileName = item.Ten;
+                        ttdk.OriginalFilename = item.Ten;
+                        ttdk.FileSize = "256";
+                        ttdk.GroupId = bvt.GroupId;
+                        ttdk.UserId = bvt.NEWS_NguoiSuDung.MaNguoiDung;
+                        ttdk.PostId = bvt.PostId;
+                        ttdk.CreatedDate = bvt.CreatedDate;
+                        dbContext.NEWSTUONG_TinDinhKem.Add(ttdk);
+                        dbContext.SaveChanges();
+                    }
+                }
+                return Ok("Bài Viết Đang Chờ Duyệt Để Được Chia Sẻ Lên Tường");
+            }
+            return BadRequest("Có Lỗi Phát Sinh,Xin Vui Lòng Thử Lại");
+        }
+
         [HttpGet]
         [Route("LayBaiVietTuong_DieuKien")]
-        public IHttpActionResult LayBaiVietTuong_DieuKien(int page, int pageLimit ,bool approved)
+        public IHttpActionResult LayBaiVietTuong_DieuKien(int page, int pageLimit, bool approved)
         {
             var dsTin = dbContext.NEWSTUONG_BaiViet.Where(x => x.IsApproved == approved).ToList().OrderByDescending(x => x.CreatedDate).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();
@@ -227,7 +277,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
 
         [HttpGet]
         [Route("LayBaiVietTuong")]
-        public IHttpActionResult LayBaiVietTuong(int page,int pageLimit)
+        public IHttpActionResult LayBaiVietTuong(int page, int pageLimit)
         {
             var dsTin = dbContext.NEWSTUONG_BaiViet.Where(x => x.IsApproved == true).ToList().OrderByDescending(x => x.CreatedDate).Skip(page).Take(pageLimit).ToList();
             List<TinTucModel> dsTinModel = new List<TinTucModel>();

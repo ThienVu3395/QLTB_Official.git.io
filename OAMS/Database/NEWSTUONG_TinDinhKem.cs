@@ -24,7 +24,7 @@ namespace OAMS.Database
         public Nullable<System.DateTime> CreatedDate { get; set; }
     
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }
-        public virtual NEWSTUONG_BaiViet NEWSTUONG_BaiViet { get; set; }
         public virtual NEWSTUONG_NhomTinTuong NEWSTUONG_NhomTinTuong { get; set; }
+        public virtual NEWSTUONG_BaiViet NEWSTUONG_BaiViet { get; set; }
     }
 }

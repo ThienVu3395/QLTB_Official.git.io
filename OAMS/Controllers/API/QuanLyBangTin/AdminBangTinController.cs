@@ -665,6 +665,12 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                         }
                     }
                 }
+                var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == baiViet.ShareID).FirstOrDefault();
+                if(tin != null)
+                {
+                    tin.ChiaSe = null;
+                    dbContext.SaveChanges();
+                }
                 dbContext.NEWSTUONG_BaiViet.Remove(baiViet);
                 dbContext.SaveChanges();
                 return Ok("Bài Viết Đã Được Xóa");
@@ -702,6 +708,15 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             {
                 tin.IsApproved = IsApproved;
                 dbContext.SaveChanges();
+                if(tin.ShareID != null)
+                {
+                    var tintuc = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == tin.ShareID).FirstOrDefault();
+                    if (tintuc != null)
+                    {
+                        tintuc.ChiaSe = IsApproved;
+                        dbContext.SaveChanges();
+                    }
+                }
                 if (IsApproved == true)
                 {
                     return Ok("Bài Viết Đã Được Duyệt");

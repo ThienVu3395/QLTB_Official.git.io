@@ -29,6 +29,7 @@
             overflow: hidden;
             cursor: pointer;
         }
+
         .messagebar-item-right {
             right: 12px;
             left: auto;
@@ -463,10 +464,10 @@
                             .addClass('width-90 inline')
                             .wrap('<div class="form-group file-input-container"><div class="col-sm-7"></div></div>')
                             .parent().append('<div class="action-buttons pull-right col-xs-1">\
-                                                                                                                                            <a href="#" data-action="delete" class="middle">\
-                                                                                                                                                <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
-                                                                                                                                            </a>\
-                                                                                                                                        </div>')
+                                                                                                                                                                <a href="#" data-action="delete" class="middle">\
+                                                                                                                                                                    <i class="ace-icon fa fa-trash-o red bigger-130 middle"></i>\
+                                                                                                                                                                </a>\
+                                                                                                                                                            </div>')
                             .find('a[data-action=delete]').on('click', function (e) {
                                 //the button that removes the newly inserted file input
                                 e.preventDefault();
@@ -551,163 +552,83 @@
 
                                             @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
                                             <div id="toolbarComment">
-                                                <div class="message-toolbar hide">
+                                                <div class="message-toolbar">
                                                     <div class="inline position-relative align-left">
                                                         <button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="bigger-110">Action</span>
+                                                            <i class="ace-icon fa fa-search orange"></i>
+                                                            <span class="bigger-110">Lọc</span>
 
                                                             <i class="ace-icon fa fa-caret-down icon-on-right"></i>
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-mail-reply blue"></i>&nbsp; Reply
-                                                                </a>
+                                                                <a id="id-select-message-none" href="#" ng-click="setHienThi(-1,'select1')"><i class="ace-icon fa fa-check green" id="select1"></i> Tất Cả</a>
                                                             </li>
 
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-mail-forward green"></i>&nbsp; Forward
-                                                                </a>
+                                                                <a id="id-select-message-none" href="#" ng-click="setHienThi(true,'select2')"><i class="ace-icon fa fa-check invisible green" id="select2"></i> Đã Duyệt</a>
                                                             </li>
 
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-folder-open orange"></i>&nbsp; Archive
-                                                                </a>
+                                                                <a id="id-select-message-none" href="#" ng-click="setHienThi(false,'select3')"><i class="ace-icon fa fa-check invisible green" id="select3"></i> Chờ Duyệt</a>
                                                             </li>
 
                                                             <li class="divider"></li>
 
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-eye blue"></i>&nbsp; Mark as read
-                                                                </a>
+                                                                <a id="id-select-message-none" href="#" ng-click="LayBaiVietTatCa()"><i class="ace-icon fa fa-check invisible green" id="select4"></i> Tất Cả</a>
+                                                            </li>
+
+                                                            <li ng-repeat="item in DsLoaiTin track by item.MaLoaiTin">
+                                                                <a id="id-select-message-read" href="#" ng-click="LayBaiViet_TheoDanhMuc(item.MaLoaiTin)"><i class="ace-icon fa fa-check invisible green" id="selectLoai{{item.MaLoaiTin}}"></i> {{item.Ten}}</a>
                                                             </li>
 
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-eye-slash green"></i>&nbsp; Mark unread
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-flag-o red"></i>&nbsp; Flag
-                                                                </a>
-                                                            </li>
-
-                                                            <li class="divider"></li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-trash-o red bigger-110"></i>&nbsp; Delete
-                                                                </a>
+                                                                <a href="#" ng-click="LayBaiVietTuong()"><i class="ace-icon fa fa-check invisible green" id="loaiTuong"></i> Tường Công Ty</a>
                                                             </li>
                                                         </ul>
                                                     </div>
 
-                                                    <div class="inline position-relative align-left">
+                                                    <div class="inline position-relative align-left" ng-show="DanhSach.length > 0">
                                                         <button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <i class="ace-icon fa fa-folder-o bigger-110 blue"></i>
-                                                            <span class="bigger-110">Move to</span>
+                                                            <i class="ace-icon fa fa-cogs bigger-110 orange"></i>
+                                                            <span class="bigger-110">Xử Lý</span>
 
                                                             <i class="ace-icon fa fa-caret-down icon-on-right"></i>
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop pink2"></i>&nbsp; Tag#1
+                                                                <a href="#" ng-click="XuLyHangLoat(true)">
+                                                                    <i class="ace-icon fa fa-check green"></i>&nbsp; Duyệt
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop blue"></i>&nbsp; Family
+                                                                <a href="#" ng-click="XuLyHangLoat(false)">
+                                                                    <i class="ace-icon fa fa-times pink"></i>&nbsp; Hủy Duyệt
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop green"></i>&nbsp; Friends
-                                                                </a>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="ace-icon fa fa-stop grey"></i>&nbsp; Work
+                                                                <a href="#" ng-click="XuLyHangLoat(-1)">
+                                                                    <i class="ace-icon fa fa-trash-o red"></i>&nbsp; Xóa
                                                                 </a>
                                                             </li>
                                                         </ul>
                                                     </div>
 
-                                                    <button type="button" class="btn btn-xs btn-white btn-primary">
-                                                        <i class="ace-icon fa fa-trash-o bigger-125 orange"></i>
-                                                        <span class="bigger-110">Delete</span>
-                                                    </button>
+                                                    <a href="@Url.Action("SoanBaiViet","BangTin")" class="btn btn-xs btn-white btn-primary">
+                                                        <i class="ace-icon fa fa-envelope bigger-125 orange"></i>
+                                                        <span class="bigger-110">Soạn</span>
+                                                    </a>
                                                 </div>
                                             </div>
                                             @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
                                         </div>
 
                                         <div>
-                                            @*Bộ lọc bên trái*@
-                                            <div class="messagebar-item-left" id="leftToolBar">
-                                                <label class="inline middle">
-                                                    <input type="checkbox" id="id-toggle-all" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
-
-                                                &nbsp;
-                                                <div class="inline position-relative">
-                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                                        <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
-                                                    </a>
-
-                                                    <ul class="dropdown-menu dropdown-lighter dropdown-100">
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#" ng-click="setHienThi(-1,'select1')"><i class="ace-icon fa fa-check green" id="select1"></i> Tất Cả</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#" ng-click="setHienThi(true,'select2')"><i class="ace-icon fa fa-check invisible green" id="select2"></i> Đã Duyệt</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#" ng-click="setHienThi(false,'select3')"><i class="ace-icon fa fa-check invisible green" id="select3"></i> Chờ Duyệt</a>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
-                                                            <a id="id-select-message-none" href="#" ng-click="LayBaiVietTatCa()"><i class="ace-icon fa fa-check invisible green" id="select4"></i> Tất Cả</a>
-                                                        </li>
-
-                                                        <li ng-repeat="item in DsLoaiTin track by item.MaLoaiTin">
-                                                            <a id="id-select-message-read" href="#" ng-click="LayBaiViet_TheoDanhMuc(item.MaLoaiTin)"><i class="ace-icon fa fa-check invisible green" id="selectLoai{{item.MaLoaiTin}}"></i> {{item.Ten}}</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="id-select-message-read" href="#" ng-click="LayBaiVietTuong()"><i class="ace-icon fa fa-check invisible green" id="loaiTuong"></i> Tường Công Ty</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @*/Bộ lọc bên trái*@
-
-                                            @*Bộ lọc bên phải*@
-                                            <div class="messagebar-item-right">
-                                                <a href="@Url.Action("SoanBaiViet","BangTin")" class="btn-new-mail">
-                                                    <span class="btn btn-purple no-border">
-                                                        <i class="ace-icon fa fa-envelope bigger-130"></i>
-                                                        <span class="bigger-110">Soạn Bài Viết</span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                            @*/Bộ lọc bên phải*@
-
                                             @*Input tìm kiếm ở bộ lọc bên trái*@
                                             <div class="nav-search minimized" id="searchInput">
                                                 @*<form class="form-search">
@@ -726,10 +647,10 @@
                                         <div class="message-list" id="message-list">
                                             @*Danh Sách BV*@
                                             <div class="message-item message-unread" ng-repeat="item in DanhSach track by $index">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"></span>
-                                                </label>
+                                                @*<label class="inline">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>*@
 
                                                 <i class="message-star ace-icon fa fa-user orange2"></i>
 

@@ -17,8 +17,8 @@ namespace OAMS.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NEWSTUONG_NhomTinTuong()
         {
-            this.NEWSTUONG_BaiViet = new HashSet<NEWSTUONG_BaiViet>();
             this.NEWSTUONG_TinDinhKem = new HashSet<NEWSTUONG_TinDinhKem>();
+            this.NEWSTUONG_BaiViet = new HashSet<NEWSTUONG_BaiViet>();
         }
     
         public int GroupId { get; set; }
@@ -45,8 +45,8 @@ namespace OAMS.Database
     
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NEWSTUONG_BaiViet> NEWSTUONG_BaiViet { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWSTUONG_TinDinhKem> NEWSTUONG_TinDinhKem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NEWSTUONG_BaiViet> NEWSTUONG_BaiViet { get; set; }
     }
 }

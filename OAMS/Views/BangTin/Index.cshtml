@@ -497,12 +497,20 @@
                                                             {{ item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}
                                                         </a>
                                                     </h3>
-                                                    <a href="#"
-                                                       class="black no-deco"
-                                                       title="{{item.MoTa}}"
-                                                       data-rel="tooltip">
-                                                        {{item.MoTa| limitTo: 20 }}{{item.MoTa.length > 20 ? '...' : ''}}
-                                                    </a>
+                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
+                                                        Chia sẻ
+                                                        <i class="ace-icon fa fa-share"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
+                                                        Chờ Duyệt Lên Tường
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
+                                                        Đã Chia Sẻ
+                                                        <i class="ace-icon fa fa-check"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -531,6 +539,21 @@
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </a>
+
+                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
+                                                        Chia sẻ
+                                                        <i class="ace-icon fa fa-share"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
+                                                        Chờ Duyệt Lên Tường
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
+                                                        Đã Chia Sẻ
+                                                        <i class="ace-icon fa fa-check"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <hr />
@@ -569,10 +592,20 @@
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </a>
 
-                                                    <a href="#" class="btn btn-minier btn-info" ng-click="ChiaSe(item)">
+                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
                                                         Chia sẻ
                                                         <i class="ace-icon fa fa-share"></i>
-                                                    </a>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
+                                                        Chờ Duyệt Lên Tường
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
+                                                        Đã Chia Sẻ
+                                                        <i class="ace-icon fa fa-check"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <hr />
@@ -614,6 +647,21 @@
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </a>
+
+                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
+                                                        Chia sẻ
+                                                        <i class="ace-icon fa fa-share"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
+                                                        Chờ Duyệt Lên Tường
+                                                        <i class="ace-icon fa fa-clock-o"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
+                                                        Đã Chia Sẻ
+                                                        <i class="ace-icon fa fa-check"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <hr />
@@ -646,12 +694,26 @@
                                                 Chi Tiết
                                                 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                             </a>
+
+                                            <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
+                                                Chia sẻ
+                                                <i class="ace-icon fa fa-share"></i>
+                                            </button>
+
+                                            <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
+                                                Chờ Duyệt Lên Tường
+                                                <i class="ace-icon fa fa-clock-o"></i>
+                                            </button>
+
+                                            <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
+                                                Đã Chia Sẻ
+                                                <i class="ace-icon fa fa-check"></i>
+                                            </button>
                                             <hr />
                                         </div>
                                         @*/Show Thông Báo + CNTT (tl = 3)*@
                                     </div>
                                 </div>
-                                @*/Show Chi Tiết Tin*@
 
                                 @*Thanh phân trang cho tin*@
                                 <ul uib-pagination

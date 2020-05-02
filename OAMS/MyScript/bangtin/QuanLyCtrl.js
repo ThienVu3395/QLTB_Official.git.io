@@ -519,6 +519,44 @@
             else return;
         }
 
+        // Xử lý hàng loạt
+        $scope.XuLyHangLoat = function (status) {
+            $scope.DanhSachXuLy = [];
+            let API = "";
+            let string = "";
+            if (status || !status) {
+                API = CommonController.urlAPI.API_XuLyTinHangLoat;
+                for (let i = 0; i < $scope.DanhSach.length; i++) {
+                    if (status) {
+                        string = "duyệt";
+                        if ($scope.DanhSach[i].HienThi) {
+                            $scope.DanhSachXuLy.push($scope.DanhSach[i]);                       
+                        }
+                    }
+                    else if (!status) {
+                        string = "hủy duyệt";
+                        if (!$scope.DanhSach[i].HienThi) {
+                            $scope.DanhSachXuLy.push($scope.DanhSach[i]);
+                        }
+                    }
+                }
+            }
+
+            if ($scope.DanhSachXuLy.length == 0) {
+                alert("Danh sách này không phù hợp");
+                return;
+            }
+
+            else if (status == -1) {
+                string = "xóa";
+                API = CommonController.urlAPI.API_XoaTinHangLoat;
+                $scope.DanhSachXuLy = $scope.DanhSach;
+            }
+            if (confirm("Bạn có chắc " + string + " cùng lúc " + $scope.DanhSachXuLy.length + " bài viết không?")) {
+                alert(API)
+            }
+        }
+
         ///////////////////////////////////// SỬA TIN THƯỜNG ////////////////////////
         $scope.InitSua = function (MaTinTuc) {
             $scope.TTBV = "";

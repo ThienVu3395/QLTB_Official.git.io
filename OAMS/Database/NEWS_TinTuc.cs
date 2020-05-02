@@ -29,6 +29,8 @@ namespace OAMS.Database
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
         public Nullable<int> NguoiCapNhat { get; set; }
+        public Nullable<int> NguoiDuyet { get; set; }
+        public Nullable<System.DateTime> NgayDuyet { get; set; }
         public Nullable<bool> HienThi { get; set; }
         public Nullable<int> LuotXem { get; set; }
         public Nullable<bool> TinNoiBat { get; set; }
@@ -36,8 +38,6 @@ namespace OAMS.Database
         public Nullable<System.DateTime> NgayHetHan { get; set; }
         public Nullable<System.DateTime> NgayHetHanTinMoi { get; set; }
         public Nullable<System.DateTime> NgayHetHanTrangChu { get; set; }
-        public Nullable<int> NguoiDuyet { get; set; }
-        public Nullable<System.DateTime> NgayDuyet { get; set; }
         public Nullable<bool> Khoa { get; set; }
         public Nullable<int> NguoiKhoa { get; set; }
         public Nullable<System.DateTime> NgayKhoa { get; set; }
@@ -46,7 +46,6 @@ namespace OAMS.Database
         public Nullable<int> ThangDang { get; set; }
         public Nullable<int> NamDang { get; set; }
         public string GhiChu { get; set; }
-        public string HinhAnhDuPhong { get; set; }
         public Nullable<bool> ChiaSe { get; set; }
     
         public virtual NEWS_LoaiTinTuc NEWS_LoaiTinTuc { get; set; }

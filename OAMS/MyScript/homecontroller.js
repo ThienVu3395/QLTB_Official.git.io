@@ -492,6 +492,11 @@
                     API_PhanTrangTuong_TatCa: "API/AdminBangTin/PhanTrangTuong_TatCa",
                     API_PhanTrangTuong_TheoDieuKien: "API/AdminBangTin/PhanTrangTuong_TheoDieuKien",
 
+                    API_XuLyTinHangLoat: "API/AdminBangTin/XuLyTinHangLoat",
+                    API_XoaTinHangLoat: "API/AdminBangTin/XoaTinHangLoat",
+                    API_XuLyTinTuongHangLoat: "API/AdminBangTin/XuLyTinTuongHangLoat",
+                    API_XoaTinHangLoat: "API/AdminBangTin/XoaTinHangLoat",
+
                     API_XuLyTin : "API/AdminBangTin/XuLyTin",
                     API_XoaTin: "API/AdminBangTin/XoaTin",
                     //API_SuaTin: "API/AdminBangTin/SuaTin",

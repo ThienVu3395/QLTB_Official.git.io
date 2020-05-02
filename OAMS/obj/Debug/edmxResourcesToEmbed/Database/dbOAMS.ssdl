@@ -131,7 +131,6 @@
     <Property Name="LuotXem" Type="int" />
     <Property Name="TinNoiBat" Type="bit" />
     <Property Name="HinhAnh" Type="nvarchar(max)" />
-    <Property Name="HinhAnhDuPhong" Type="nvarchar(max)" />
     <Property Name="NgayHetHan" Type="datetime" />
     <Property Name="NgayHetHanTinMoi" Type="datetime" />
     <Property Name="NgayHetHanTrangChu" Type="datetime" />
@@ -143,6 +142,7 @@
     <Property Name="ThangDang" Type="int" />
     <Property Name="NamDang" Type="int" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChiaSe" Type="bit" />
   </EntityType>
   <EntityType Name="NEWS_TinTucTapTin">
     <Key>
@@ -177,6 +177,7 @@
     <Property Name="Status" Type="char" MaxLength="1" />
     <Property Name="IsApproved" Type="bit" />
     <Property Name="IsFavorit" Type="bit" />
+    <Property Name="ShareID" Type="int" />
   </EntityType>
   <EntityType Name="NEWSTUONG_NhomTinTuong">
     <Key>

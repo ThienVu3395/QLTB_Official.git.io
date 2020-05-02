@@ -40,6 +40,7 @@ namespace OAMS.Database
         public string Status { get; set; }
         public Nullable<bool> IsApproved { get; set; }
         public Nullable<bool> IsFavorit { get; set; }
+        public Nullable<int> ShareID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
