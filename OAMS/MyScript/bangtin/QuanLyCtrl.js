@@ -243,6 +243,9 @@
                 else if ($scope.MaLoaiTin > 0) {
                     $scope.PhanTrang_TheoDieuKien($scope.MaLoaiTin, $scope.HienThi);
                 }
+                else if ($scope.MaLoaiTin == 0) {
+                    $scope.PhanTrang_TheoHienThi($scope.HienThi);
+                }
             }
             else if ($scope.HienThi == -1) {
                 if ($scope.MaLoaiTin == -1) {
@@ -252,9 +255,9 @@
                     $scope.PhanTrang_TheoDanhMuc($scope.MaLoaiTin);
                 }
             }
-            else if ($scope.HienThi != -1 && $scope.MaLoaiTin == 0) {
-                $scope.PhanTrang_TheoHienThi($scope.HienThi);
-            }
+            //else if ($scope.HienThi != -1 && $scope.MaLoaiTin == 0) {
+            //    $scope.PhanTrang_TheoHienThi($scope.HienThi);
+            //}
         }
 
         // Phân Trang Tất Cả
