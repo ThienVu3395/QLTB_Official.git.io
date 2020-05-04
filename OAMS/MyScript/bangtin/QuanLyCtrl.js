@@ -454,6 +454,27 @@
             );
         }
 
+        // Xóa Bình Luận
+        $scope.XoaBinhLuan = function (item) {
+            if (window.confirm("Bạn chắc chắn xóa bình luận này chứ ?")) {
+                let param = "?MaBinhLuan=" + item.MaBinhLuan;
+                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaBinhLuan, param);
+                res.then(
+                    function succ(response) {
+                        alert(response.data)
+                        let index = $scope.TTBV.BinhLuan.findIndex(x => x.MaBinhLuan == item.MaBinhLuan);
+                        $scope.TTBV.BinhLuan.splice(index, 1);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                        alert("Có Lỗi Phát Sinh");
+                    }
+                );
+            }
+            else return;
+        }
+
         // Xóa Tin Thường
         $scope.XoaTin = function (MaTinTuc) {
             if (window.confirm("Bạn chắc chắn xóa tin này chứ ?")) {
@@ -522,42 +543,91 @@
             else return;
         }
 
-        // Xử lý hàng loạt
-        $scope.XuLyHangLoat = function (status) {
+        // Xử lý Tin + Tin Tường hàng loạt
+        $scope.XuLyHangLoat = function (status, event) {
+            event.preventDefault();
             $scope.DanhSachXuLy = [];
             let API = "";
             let string = "";
             if (status || !status) {
-                API = CommonController.urlAPI.API_XuLyTinHangLoat;
+                if ($scope.MaLoaiTin == -1) {
+                    if (status) {
+                        API = CommonController.urlAPI.API_DuyetTinTuongHangLoat;
+                    }
+                    else if (!status) {
+                        API = CommonController.urlAPI.API_HuyDuyetTinTuongHangLoat;
+                    }
+                }
+                else {
+                    if (status) {
+                        API = CommonController.urlAPI.API_DuyetTinHangLoat;
+                    }
+                    else if (!status) {
+                        API = CommonController.urlAPI.API_HuyDuyetTinHangLoat;
+                    }
+                }
                 for (let i = 0; i < $scope.DanhSach.length; i++) {
                     if (status) {
                         string = "duyệt";
-                        if ($scope.DanhSach[i].HienThi) {
-                            $scope.DanhSachXuLy.push($scope.DanhSach[i]);                       
-                        }
-                    }
-                    else if (!status) {
-                        string = "hủy duyệt";
                         if (!$scope.DanhSach[i].HienThi) {
                             $scope.DanhSachXuLy.push($scope.DanhSach[i]);
                         }
                     }
+                    else if (!status) {
+                        string = "hủy duyệt";
+                        if ($scope.DanhSach[i].HienThi) {
+                            $scope.DanhSachXuLy.push($scope.DanhSach[i]);
+                        }
+                    }
+                }
+                if ($scope.DanhSachXuLy.length == 0) {
+                    alert("Tất cả bài viết đang ở trạng thái " + string);
+                    return;
                 }
             }
 
-            if ($scope.DanhSachXuLy.length == 0) {
-                alert("Danh sách này không phù hợp");
-                return;
-            }
-
-            else if (status == -1) {
-                string = "xóa";
-                API = CommonController.urlAPI.API_XoaTinHangLoat;
-                $scope.DanhSachXuLy = $scope.DanhSach;
-            }
             if (confirm("Bạn có chắc " + string + " cùng lúc " + $scope.DanhSachXuLy.length + " bài viết không?")) {
-                alert(API)
+                var res = CommonController.postData(API, $scope.DanhSachXuLy);
+                res.then(
+                    function succ(response) {
+                        for (let i = 0; i < $scope.DanhSachXuLy.length; i++) {
+                            let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == $scope.DanhSachXuLy[i].MaTinTuc);
+                            $scope.DanhSach[index].HienThi = status;
+                        }
+                        alert(response.data);
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                    }
+                );
             }
+        }
+
+        // Xóa Tin + Tin Tường hàng loạt
+        $scope.XoaTinHangLoat = function (event) {
+            event.preventDefault();
+            let API = "";
+            if ($scope.MaLoaiTin == -1) {
+                API = CommonController.urlAPI.API_XoaTinHangLoat;
+            }
+            else {
+                API = CommonController.urlAPI.API_XoaTinTuongHangLoat;
+            }
+            if (confirm("Bạn có chắc xóa cùng lúc " + $scope.DanhSach.length + " bài viết không?")) {
+                var res = CommonController.postData(API, $scope.DanhSach);
+                res.then(
+                    function succ(response) {
+                        alert(response.data);
+                        location.href = "";
+                    },
+
+                    function errorCallback(response) {
+                        console.log(response.data.message);
+                    }
+                );
+            }
+            else return;
         }
 
         ///////////////////////////////////// SỬA TIN THƯỜNG ////////////////////////

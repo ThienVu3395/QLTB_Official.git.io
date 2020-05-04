@@ -550,7 +550,7 @@
                                             </div>
                                             @*/Tiêu đề*@
 
-                                            @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
+                                            @*/Thanh công cụ*@
                                             <div id="toolbarComment">
                                                 <div class="message-toolbar">
                                                     <div class="inline position-relative align-left">
@@ -600,32 +600,32 @@
 
                                                         <ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
                                                             <li>
-                                                                <a href="#" ng-click="XuLyHangLoat(true)">
+                                                                <a href="#" ng-click="XuLyHangLoat(true,$event)">
                                                                     <i class="ace-icon fa fa-check green"></i>&nbsp; Duyệt
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a href="#" ng-click="XuLyHangLoat(false)">
+                                                                <a href="#" ng-click="XuLyHangLoat(false,$event)">
                                                                     <i class="ace-icon fa fa-times pink"></i>&nbsp; Hủy Duyệt
                                                                 </a>
                                                             </li>
 
-                                                            <li>
-                                                                <a href="#" ng-click="XuLyHangLoat(-1)">
+                                                            @*<li>
+                                                                <a href="#" ng-click="XoaTinHangLoat($event)">
                                                                     <i class="ace-icon fa fa-trash-o red"></i>&nbsp; Xóa
                                                                 </a>
-                                                            </li>
+                                                            </li>*@
                                                         </ul>
                                                     </div>
 
                                                     <a href="@Url.Action("SoanBaiViet","BangTin")" class="btn btn-xs btn-white btn-primary">
-                                                        <i class="ace-icon fa fa-envelope bigger-125 orange"></i>
+                                                        <i class="ace-icon fa fa-edit bigger-125 orange"></i>
                                                         <span class="bigger-110">Soạn</span>
                                                     </a>
                                                 </div>
                                             </div>
-                                            @*/Thanh công cụ của bên ngoài giao diện hiển thị ds bl/bv*@
+                                            @*/Thanh công cụ*@
                                         </div>
 
                                         <div>
@@ -854,7 +854,7 @@
                                                 &nbsp;
                                                 <span class="grey">({{TTBV.BinhLuan.length}})</span>
 
-                                                <div class="inline position-relative">
+                                                @*<div class="inline position-relative">
                                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                                                         &nbsp;
                                                         <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
@@ -873,7 +873,7 @@
                                                             <a href="#">Chờ Duyệt</a>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div>*@
                                             </div>
 
                                             <div class="comments">
@@ -906,6 +906,10 @@
                                                             </a>
 
                                                             <a title="Hủy duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-click="XuLyBinhLuan(item,false)" ng-show="item.HienThi">
+                                                                <i class="ace-icon fa fa-times red"></i>
+                                                            </a>
+
+                                                            <a title="Xóa bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-click="XoaBinhLuan(item)">
                                                                 <i class="ace-icon fa fa-trash-o red"></i>
                                                             </a>
                                                         </div>

@@ -26,7 +26,8 @@
                             $scope.roleName = data.roleName;
                             $scope.viewwwin = $scope.roleName != 'Docgia';
                             var datae = userProfile.getProfileExten();
-                            $scope.FulluserName = datae.fileusername;
+                            //$scope.FulluserName = data.fileusername;
+                            $scope.FulluserName = localStorage.getItem("username");
                             if (datae.ulrimage != null && datae.ulrimage != '' && datae.ulrimage != 'null') {
                                 $scope.ulrimage = appSettings.serverPath + datae.ulrimage;
                             }
@@ -60,6 +61,7 @@
                         });
 
                     };
+
                     $scope.hosocanhan = function () {
                         var parentElem =
                             angular.element($document[0].querySelector('.main_container'))
@@ -83,6 +85,7 @@
                         }, function () {
                         });
                     }
+
                     $scope.changepass = function () {
                         var parentElem =
                             angular.element($document[0].querySelector('.main_container'))
@@ -106,6 +109,7 @@
                         }, function () {
                         });
                     }
+
                     $scope.deleteshopping = function () {
                         if (confirm("Bạn có muốn xóa hết tài liệu này ra khỏi yêu cầu?")) {
                             userProfile.clearShopingcart();
@@ -151,13 +155,14 @@
                     function getdataUser() {
                         var data = userProfile.getProfile();
                         if (data.isLoggedIn) {
+                            console.log(data);
                             $scope.isLoggedIn = data.isLoggedIn;
                             $scope.userName = data.username;
                             $scope.access_token = data.access_token;
                             $scope.roleName = data.roleName;
                             $scope.viewwwin = $scope.roleName != 'Docgia';
                             var datae = userProfile.getProfileExten();
-                            $scope.FulluserName = datae.fileusername;
+                            $scope.FulluserName = data.username;
                             if (datae.ulrimage != null && datae.ulrimage != '' && datae.ulrimage != 'null') {
                                 $scope.ulrimage = appSettings.serverPath + datae.ulrimage;
                             }
@@ -490,19 +495,21 @@
                     API_PhanTrang_TheoHienThi: "API/AdminBangTin/PhanTrang_TheoHienThi",
                     API_PhanTrang_TheoDieuKien: "API/AdminBangTin/PhanTrang_TheoDieuKien",
                     API_PhanTrangTuong_TatCa: "API/AdminBangTin/PhanTrangTuong_TatCa",
-                    API_PhanTrangTuong_TheoDieuKien: "API/AdminBangTin/PhanTrangTuong_TheoDieuKien",
+                    API_PhanTrangTuong_TheoDieuKien: "API/AdminBangTin/PhanTrangTuong_TheoDieuKien",                
 
-                    API_XuLyTinHangLoat: "API/AdminBangTin/XuLyTinHangLoat",
-                    API_XoaTinHangLoat: "API/AdminBangTin/XoaTinHangLoat",
-                    API_XuLyTinTuongHangLoat: "API/AdminBangTin/XuLyTinTuongHangLoat",
-                    API_XoaTinHangLoat: "API/AdminBangTin/XoaTinHangLoat",
-
-                    API_XuLyTin : "API/AdminBangTin/XuLyTin",
+                    API_XuLyTin: "API/AdminBangTin/XuLyTin",
+                    API_DuyetTinHangLoat: "API/AdminBangTin/DuyetTinHangLoat",
+                    API_HuyDuyetTinHangLoat: "API/AdminBangTin/HuyDuyetTinHangLoat",
                     API_XoaTin: "API/AdminBangTin/XoaTin",
+                    API_XoaTinHangLoat: "API/AdminBangTin/XoaTinHangLoat",
                     //API_SuaTin: "API/AdminBangTin/SuaTin",
                     API_XoaTinTuong : "API/AdminBangTin/XoaTinTuong",
+                    API_XoaTinTuongHangLoat: "API/AdminBangTin/XoaTinTuongHangLoat",
                     API_XuLyBinhLuan: "API/AdminBangTin/XuLyBinhLuan",
+                    API_XoaBinhLuan: "API/AdminBangTin/XoaBinhLuan",
                     API_XuLyTinhTuong: "API/AdminBangTin/XuLyTinTuong",
+                    API_DuyetTinTuongHangLoat: "API/AdminBangTin/DuyetTinTuongHangLoat",
+                    API_HuyDuyetTinTuongHangLoat: "API/AdminBangTin/HuyDuyetTinTuongHangLoat",
 
                     //*** Sửa Tin ***//
                     API_XoaHinh: "API/AdminBangTin/XoaHinh",

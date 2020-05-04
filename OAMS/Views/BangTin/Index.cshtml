@@ -335,7 +335,7 @@
 
                                                                                                 <div class="time">
                                                                                                     <i class="ace-icon fa fa-clock-o"></i>
-                                                                                                    <span class="blue">15 min</span>
+                                                                                                    <span class="blue">{{ReturnDDMMYYYY(i.Ngay)}}</span>
                                                                                                 </div>
 
                                                                                                 <div class="text">
@@ -346,7 +346,7 @@
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <div class="center">
+                                                                                    @*<div class="center">
                                                                                         <i class="ace-icon fa fa-comments-o fa-2x green middle"></i>
 
                                                                                         &nbsp;
@@ -354,7 +354,7 @@
                                                                                             See all comments &nbsp;
                                                                                             <i class="ace-icon fa fa-arrow-right"></i>
                                                                                         </a>
-                                                                                    </div>
+                                                                                    </div>*@
 
                                                                                     <form ng-submit="GuiBinhLuan(item.MaTinTuc)">
                                                                                         <div class="form-actions">
@@ -476,46 +476,7 @@
                                 <div class="tab-pane fade in active" id="tin">
                                     <div class="row">
                                         @*Show Tin SAWACO (tl = 1)*@
-                                        <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-lg-2" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 1 && $index < 6">
-                                            <div class="thumbnail search-thumbnail">
-                                                <span class="search-promotion label label-danger arrowed-in arrowed-in-right"><i class="ace-icon fa fa-user"></i> {{item.TenNguoiDung}}</span>
-                                                <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                    <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
-                                                </a>
-
-                                                <div class="caption">
-                                                    <div class="clearfix">
-                                                        <span class="pull-right label label-success info-label">{{ReturnFullDateTime(item.NgayTao)}}</span>
-                                                    </div>
-
-                                                    <h3 class="search-title">
-                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="blue"
-                                                           title="{{item.TieuDe}}"
-                                                           data-rel="tooltip"
-                                                           id="show{{item.MaTinTuc}}">
-                                                            {{ item.TieuDe | limitTo: 30 }}{{item.TieuDe.length > 30 ? '...' : ''}}
-                                                        </a>
-                                                    </h3>
-                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
-                                                        Chia sẻ
-                                                        <i class="ace-icon fa fa-share"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
-                                                        Chờ Duyệt Lên Tường
-                                                        <i class="ace-icon fa fa-clock-o"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
-                                                        Đã Chia Sẻ
-                                                        <i class="ace-icon fa fa-check"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 6 && TemplateList == 1 && $index > 5">
+                                        <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="TemplateList == 1">
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
@@ -539,21 +500,6 @@
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </a>
-
-                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
-                                                        Chia sẻ
-                                                        <i class="ace-icon fa fa-share"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
-                                                        Chờ Duyệt Lên Tường
-                                                        <i class="ace-icon fa fa-clock-o"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
-                                                        Đã Chia Sẻ
-                                                        <i class="ace-icon fa fa-check"></i>
-                                                    </button>
                                                 </div>
                                             </div>
                                             <hr />
@@ -591,21 +537,6 @@
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </a>
-
-                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
-                                                        Chia sẻ
-                                                        <i class="ace-icon fa fa-share"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
-                                                        Chờ Duyệt Lên Tường
-                                                        <i class="ace-icon fa fa-clock-o"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
-                                                        Đã Chia Sẻ
-                                                        <i class="ace-icon fa fa-check"></i>
-                                                    </button>
                                                 </div>
                                             </div>
                                             <hr />
@@ -613,7 +544,7 @@
                                         @*/Show Tin Tức - Sự Kiện*@
 
                                         @*Show Thông Báo + CNTT (tl = 3)*@
-                                        <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3 && $index < 2">
+                                        @*<div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3 && $index < 2">
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
@@ -647,29 +578,14 @@
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </a>
-
-                                                    <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
-                                                        Chia sẻ
-                                                        <i class="ace-icon fa fa-share"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
-                                                        Chờ Duyệt Lên Tường
-                                                        <i class="ace-icon fa fa-clock-o"></i>
-                                                    </button>
-
-                                                    <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
-                                                        Đã Chia Sẻ
-                                                        <i class="ace-icon fa fa-check"></i>
-                                                    </button>
                                                 </div>
                                             </div>
                                             <hr />
-                                        </div>
+                                        </div>*@
 
-                                        <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3 && $index >= 2">
+                                        <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3">
                                             <h4 class="media-heading">
-                                                <i class="ace-icon fa fa-circle green"></i>
+                                                @*<i class="ace-icon fa fa-circle green"></i>*@
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
                                                    class="read blue fs-16 no-deco"
                                                    title="{{item.TieuDe}}"
@@ -694,21 +610,6 @@
                                                 Chi Tiết
                                                 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                             </a>
-
-                                            <button class="btn btn-minier btn-info" ng-click="ChiaSeBaiViet(item)" ng-show="item.ChiaSe == null">
-                                                Chia sẻ
-                                                <i class="ace-icon fa fa-share"></i>
-                                            </button>
-
-                                            <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == false">
-                                                Chờ Duyệt Lên Tường
-                                                <i class="ace-icon fa fa-clock-o"></i>
-                                            </button>
-
-                                            <button class="btn btn-minier btn-info" ng-show="item.ChiaSe == true">
-                                                Đã Chia Sẻ
-                                                <i class="ace-icon fa fa-check"></i>
-                                            </button>
                                             <hr />
                                         </div>
                                         @*/Show Thông Báo + CNTT (tl = 3)*@

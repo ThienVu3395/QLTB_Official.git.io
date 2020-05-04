@@ -222,7 +222,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             tin.NgayHetHan = tinTuc.NgayHetHan;
             tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
             tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;
-            tin.ChiaSe = false;
+            tin.ChiaSe = null;
             dbContext.NEWS_TinTuc.Add(tin);
             dbContext.SaveChanges();
             if (tinTuc.TapTinDinhKem.Count > 0)

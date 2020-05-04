@@ -194,7 +194,6 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachUser = response.data;
-                    console.log($scope.DanhSachUser);
                 },
 
                 function errorCallback(response) {

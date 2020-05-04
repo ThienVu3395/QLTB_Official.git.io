@@ -590,6 +590,46 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
 
+        [HttpPost]
+        [Route("DuyetTinHangLoat")]
+        public IHttpActionResult DuyetTinHangLoat(List<TinTucModel> dsTin)
+        {
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == item.MaTinTuc).FirstOrDefault();
+                    if (tin != null)
+                    {
+                        tin.HienThi = true;
+                        dbContext.SaveChanges();
+                    }
+                }
+                return Ok(dsTin.Count + " Bài Viết Đã Được Duyệt");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpPost]
+        [Route("HuyDuyetTinHangLoat")]
+        public IHttpActionResult HuyDuyetTinHangLoat(List<TinTucModel> dsTin)
+        {
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == item.MaTinTuc).FirstOrDefault();
+                    if (tin != null)
+                    {
+                        tin.HienThi = false;
+                        dbContext.SaveChanges();
+                    }
+                }
+                return Ok(dsTin.Count + " Bài Viết Đã Được Hủy Duyệt");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
         [HttpDelete]
         [Route("XoaTin")]
         public IHttpActionResult XoaTin(int MaTinTuc)
@@ -636,6 +676,58 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
 
+        [HttpPost]
+        [Route("XoaTinHangLoat")]
+        public IHttpActionResult XoaTinHangLoat(List<TinTucModel> dsTin)
+        {
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    var baiViet = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == item.MaTinTuc).FirstOrDefault();
+                    if (baiViet != null)
+                    {
+                        string imgPath = "";
+
+                        imgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/image/" + baiViet.HinhAnh);
+
+                        if (System.IO.File.Exists(imgPath))
+
+                        {
+                            FileInfo f = new FileInfo(imgPath);
+
+                            f.Delete();
+                        }
+                        var dstt = dbContext.NEWS_TinTucTapTin.Where(x => x.MaTinTuc == item.MaTinTuc).ToList();
+                        if (dstt.Count > 0)
+                        {
+                            foreach (var i in dstt)
+                            {
+                                string filePath = "";
+
+                                filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + i.Ten);
+
+                                if (System.IO.File.Exists(filePath))
+
+                                {
+                                    FileInfo f = new FileInfo(filePath);
+
+                                    f.Delete();
+                                }
+                                dbContext.NEWS_TinTucTapTin.Remove(i);
+
+                                dbContext.SaveChanges();
+                            }
+                        }
+                        dbContext.NEWS_TinTuc.Remove(baiViet);
+                        dbContext.SaveChanges();
+                    }
+                }
+                return Ok(dsTin.Count + " Bài Viết Đã Được Xóa");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
         [HttpDelete]
         [Route("XoaTinTuong")]
         public IHttpActionResult XoaTinTuong(int MaTinTuc)
@@ -666,7 +758,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     }
                 }
                 var tin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == baiViet.ShareID).FirstOrDefault();
-                if(tin != null)
+                if (tin != null)
                 {
                     tin.ChiaSe = null;
                     dbContext.SaveChanges();
@@ -674,6 +766,47 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 dbContext.NEWSTUONG_BaiViet.Remove(baiViet);
                 dbContext.SaveChanges();
                 return Ok("Bài Viết Đã Được Xóa");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpPost]
+        [Route("XoaTinTuongHangLoat")]
+        public IHttpActionResult XoaTinTuongHangLoat(List<TinTucModel> dsTin)
+        {
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    var baiViet = dbContext.NEWSTUONG_BaiViet.Where(x => x.PostId == item.MaTinTuc).FirstOrDefault();
+                    if (baiViet != null)
+                    {
+                        var dstt = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == item.MaTinTuc).ToList();
+                        if (dstt.Count > 0)
+                        {
+                            foreach (var i in dstt)
+                            {
+                                string filePath = "";
+
+                                filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + i.FileName);
+
+                                if (System.IO.File.Exists(filePath))
+
+                                {
+                                    FileInfo f = new FileInfo(filePath);
+
+                                    f.Delete();
+                                }
+                                dbContext.NEWSTUONG_TinDinhKem.Remove(i);
+
+                                dbContext.SaveChanges();
+                            }
+                        }
+                        dbContext.NEWSTUONG_BaiViet.Remove(baiViet);
+                        dbContext.SaveChanges();
+                    }
+                }
+                return Ok(dsTin.Count + " Bài Viết Đã Được Xóa");
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
@@ -699,6 +832,20 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }
 
+        [HttpDelete]
+        [Route("XoaBinhLuan")]
+        public IHttpActionResult XoaBinhLuan(int MaBinhLuan)
+        {
+            var bl = dbContext.NEWS_BinhLuan.Where(x => x.MaBinhLuan == MaBinhLuan).FirstOrDefault();
+            if (bl != null)
+            {
+                dbContext.NEWS_BinhLuan.Remove(bl);
+                dbContext.SaveChanges();
+                return Ok("Bình Luận Đã Được Xóa");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
         [HttpGet]
         [Route("XuLyTinTuong")]
         public IHttpActionResult XuLyTinTuong(int MaTinTuc, bool IsApproved)
@@ -708,7 +855,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             {
                 tin.IsApproved = IsApproved;
                 dbContext.SaveChanges();
-                if(tin.ShareID != null)
+                if (tin.ShareID != null)
                 {
                     var tintuc = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == tin.ShareID).FirstOrDefault();
                     if (tintuc != null)
@@ -725,6 +872,46 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 {
                     return Ok("Bài Viết Đã Được Hủy Duyệt");
                 }
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpPost]
+        [Route("DuyetTinTuongHangLoat")]
+        public IHttpActionResult DuyetTinTuongHangLoat(List<TinTucModel> dsTin)
+        {
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    var tin = dbContext.NEWSTUONG_BaiViet.Where(x => x.PostId == item.MaTinTuc).FirstOrDefault();
+                    if (tin != null)
+                    {
+                        tin.IsApproved = true;
+                        dbContext.SaveChanges();
+                    }
+                }
+                return Ok(dsTin.Count + " Bài Viết Đã Được Duyệt");
+            }
+            return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
+        }
+
+        [HttpPost]
+        [Route("HuyDuyetTinTuongHangLoat")]
+        public IHttpActionResult HuyDuyetTinTuongHangLoat(List<TinTucModel> dsTin)
+        {
+            if (dsTin.Count > 0)
+            {
+                foreach (var item in dsTin)
+                {
+                    var tin = dbContext.NEWSTUONG_BaiViet.Where(x => x.PostId == item.MaTinTuc).FirstOrDefault();
+                    if (tin != null)
+                    {
+                        tin.IsApproved = false;
+                        dbContext.SaveChanges();
+                    }
+                }
+                return Ok(dsTin.Count + " Bài Viết Đã Được Hủy Duyệt");
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");
         }

@@ -18,6 +18,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
     public class QuanLyBangTinController : ApiController
     {
         dbOAMSEntities dbContext = new dbOAMSEntities();
+
         [HttpGet]
         [Route("LayDanhSachLoaiTin")]
         public IHttpActionResult LayDanhSachLoaiTin()
@@ -145,6 +146,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                         tin.NgayTao = item.NgayTao;
                         tin.NgayCapNhat = item.NgayCapNhat;
                         tin.HienThi = item.HienThi;
+                        tin.ChiaSe = item.ChiaSe;
                         tin.HinhAnh = item.HinhAnh == null ? item.NEWS_LoaiTinTuc.HinhAnhDuPhong : item.HinhAnh;
                         tin.LuotXem = item.LuotXem;
                         tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
@@ -202,7 +204,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                             ttdk.OriginalFilename = item.Ten.Trim();
                             ttdk.FileSize = "256";
                             ttdk.GroupId = bvt.GroupId;
-                            ttdk.UserId = bvt.NEWS_NguoiSuDung?.MaNguoiDung;
+                            ttdk.UserId = bvt.CreatedUserId;
                             ttdk.PostId = bvt.PostId;
                             ttdk.CreatedDate = bvt.CreatedDate;
                             dbContext.NEWSTUONG_TinDinhKem.Add(ttdk);
