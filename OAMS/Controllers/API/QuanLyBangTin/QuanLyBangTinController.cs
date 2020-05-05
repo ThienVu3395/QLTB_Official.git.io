@@ -131,7 +131,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     }
                 }
                 tinTuc.TapTinDinhKem = dsttmodel;
-                var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(6).ToList();
+                var tinLQ = dbContext.NEWS_TinTuc.Where(x => x.MaLoaiTin == dsTin.NEWS_LoaiTinTuc.MaLoaiTin && x.MaTinTuc != MaTinTuc && x.HienThi == true).OrderByDescending(x => x.NgayTao).Take(10).ToList();
                 List<TinTucModel> dsTinLQ = new List<TinTucModel>();
                 if (tinLQ.Count > 0)
                 {

@@ -618,7 +618,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tin">
                                     <div class="row">
-                                        @*Show Tin SAWACO (tl = 1)*@
+                                        @*Show Tin SAWACO + Tin Tức - Sự Kiện (tl = 1)*@
                                         <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="TemplateList == 1">
                                             <div class="row">
                                                 <div class="col-lg-3">
@@ -631,60 +631,31 @@
                                                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
                                                            class="blue fs-16 no-deco read"
                                                            title="{{item.TieuDe}}"
-                                                           data-rel="tooltip">
+                                                           data-rel="tooltip"
+                                                            ng-show="item.LuotXem == 0">
+                                                            {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
+                                                        </a>
+
+                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
+                                                           class="blue fs-16 no-deco"
+                                                           title="{{item.TieuDe}}"
+                                                           data-rel="tooltip"
+                                                            ng-show="item.LuotXem > 0">
                                                             {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
                                                         </a>
                                                     </h4>
                                                     <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
                                                     <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
                                                     <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                                    <p><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 80)}}{{SliceString(item.MoTa,80)}}</b></a></p>
-                                                    <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-minier btn-success">
-                                                        Chi Tiết
-                                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                    <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 80)}}{{SliceString(item.MoTa,80)}}</b></a></p>
+                                                    <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
+                                                        Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <hr />
                                         </div>
-                                        @*/Show Tin SAWACO*@
-
-                                        @*Show Tin Tức - Sự Kiện (tl = 2)*@
-                                        <div ng-repeat="item in DanhSachTinTuc" class="col-xs-12" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 2">
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                        <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <h4 class="media-heading">
-                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="blue fs-16 no-deco read"
-                                                           ng-show="item.LuotXem == 0">
-                                                            {{capitalize(item.TieuDe)}}
-                                                        </a>
-
-                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="fs-16 no-deco"
-                                                           ng-show="item.LuotXem > 0">
-                                                            {{capitalize(item.TieuDe)}}
-                                                        </a>
-                                                    </h4>
-                                                    <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
-                                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
-                                                    <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                                    <p>
-                                                        <a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{item.MoTa}}</b></a>
-                                                        <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                            Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                        </div>
-                                        @*/Show Tin Tức - Sự Kiện*@
+                                        @*/Show Tin SAWACO + Tin Tức - Sự Kiện *@
 
                                         @*Show Thông Báo + CNTT (tl = 3)*@
                                         <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3">
@@ -695,7 +666,7 @@
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem == 0">
-                                                    {{capitalize(item.TieuDe)}}
+                                                    {{capitalize(item.TieuDe | limitTo : 80)}}{{SliceString(item.TieuDe,80)}}
                                                 </a>
 
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
@@ -703,16 +674,15 @@
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem > 0">
-                                                    {{capitalize(item.TieuDe)}}
+                                                    {{capitalize(item.TieuDe | limitTo : 80)}}{{SliceString(item.TieuDe,80)}}
                                                 </a>
                                             </h4>
                                             <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
                                             <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
                                             <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                            <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{item.MoTa | limitTo : 60}}{{SliceString(item.MoTa,60)}}</b></a></p>
-                                            <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-minier btn-success">
-                                                Chi Tiết
-                                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                            <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 100)}}{{SliceString(item.MoTa,100)}}</b></a></p>
+                                            <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
+                                                Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                             </a>
                                             <hr />
                                         </div>

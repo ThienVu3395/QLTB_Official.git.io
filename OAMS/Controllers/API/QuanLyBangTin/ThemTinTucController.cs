@@ -215,6 +215,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             tin.MaLoaiTin = tinTuc.MaLoaiTin;
             tin.TinNoiBat = tinTuc.TinNoiBat;
             tin.HienThi = tinTuc.HienThi;
+            tin.LuotXem = 0;
             tin.HinhAnh = tinTuc.HinhAnh != null ? tinTuc.HinhAnh : null;
             tin.Khoa = false;
             tin.NgayTao = DateTime.Now;

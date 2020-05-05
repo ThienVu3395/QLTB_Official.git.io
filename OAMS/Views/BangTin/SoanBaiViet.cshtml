@@ -916,7 +916,7 @@
                     <div class="hr hr-18 dotted"></div>
 
                     @*Ngày Hết Hạn*@
-                    <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
+                    @*<div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Ngày Hết Hạn:</label>
                         <div class="col-sm-3">
                             <span class="input-icon">
@@ -929,12 +929,12 @@
                             </span>
                             <p><i>Tin được chọn là Tin quan trọng là tin được đưa được lên trang chủ tại thanh chạy chữ ngang</i></p>
                         </div>
-                    </div>
+                    </div>*@
                     @*/Ngày Hết Hạn*@
-                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
+                    @*<div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>*@
 
                     @*Ngày Hết Hạn Tin Mới*@
-                    <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
+                    @*<div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Ngày Hết Hạn Tin Mới:</label>
                         <div class="col-sm-3">
                             <span class="input-icon">
@@ -947,12 +947,12 @@
                             </span>
                             <p><i>Nếu thiết lập ngày hết hạn tin mới thì tin sẽ có biểu tượng 'NEW MÀU ĐỎ' cho đến hết ngày đó</i></p>
                         </div>
-                    </div>
+                    </div>*@
                     @*/Ngày Hết Hạn Tin Mới*@
-                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
+                   @* <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>*@
 
                     @*Ngày Hết Hạn Trang Chủ*@
-                    <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
+                    @*<div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Ngày Hết Hạn Trang Chủ:</label>
                         <div class="col-sm-3">
                             <span class="input-icon">
@@ -965,9 +965,9 @@
                             </span>
                             <p><i>Nếu thiết lập ngày hết hạn trang chủ thì tin sẽ chay trên trang chủ cho đến hết ngày đó</i></p>
                         </div>
-                    </div>
+                    </div>*@
                     @*/Ngày Hết Hạn Trang Chủ*@
-                    <div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>
+                    @*<div class="hr hr-18 dotted" ng-show="MaLoaiTin.MaLoaiTin != 0"></div>*@
 
                     @*Mô tả*@
                     <div class="form-group" ng-show="MaLoaiTin.MaLoaiTin != 0">
@@ -1006,7 +1006,7 @@
                     <div class="hr hr-18 dotted"></div>
 
                     @*Hình Ảnh*@
-                    <div class="form-group no-margin-bottom" ng-show="MaLoaiTin.MaLoaiTin != 0">
+                    <div class="form-group no-margin-bottom" ng-show="MaLoaiTin.MaLoaiTin != 0 && MaLoaiTin.MaLoaiTin != 6 && MaLoaiTin.MaLoaiTin != 2">
                         <label class="col-sm-3 control-label no-padding-right">Ảnh Đại Diện:</label>
 
                         <div class="col-sm-4">
