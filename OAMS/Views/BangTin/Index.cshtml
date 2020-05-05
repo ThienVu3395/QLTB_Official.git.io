@@ -273,8 +273,8 @@
                                         <a data-toggle="tab" href="#wall"><i class="ace-icon fa fa-bullhorn orange2"></i></a>
                                     </li>
 
-                                    <li ng-click="doiTieuDe('Sinh Nhật Trong Tháng')">
-                                        <a data-toggle="tab" href="#bday"><i class="ace-icon fa fa-calendar orange2"></i></a>
+                                    <li ng-click="doiTieuDe('Chat Nội Bộ')">
+                                        <a data-toggle="tab" href="#chat"><i class="ace-icon fa fa-comments-o orange2"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -285,6 +285,45 @@
                                 <div class="tab-content padding-4">
                                     @*Tường Công Ty*@
                                     <div id="wall" class="tab-pane active">
+                                        <div class="widget-box widget-color-blue">
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+                                                    <div class="clearfix" ng-show="DanhSachUser.length > 0">
+                                                        <div class="itemdiv memberdiv col-lg-4" ng-repeat="item in DanhSachUser track by item.MaNguoiDung">
+                                                            <div class="user">
+                                                                <img alt="avatar" src="{{item.HinhAnh}}" />
+                                                            </div>
+
+                                                            <div class="body">
+                                                                <div class="name">
+                                                                    <a href="#">{{item.Ten}}</a>
+                                                                </div>
+
+                                                                <div>
+                                                                    <span class="label label-success label-sm">{{item.NgaySinh}}/{{item.ThangSinh}}/{{item.NamSinh}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <ul class="list-unstyled spaced2" ng-show="DanhSachUser.length == 0">
+                                                        <li>
+                                                            <i class="ace-icon fa fa-circle red"></i>
+                                                            Không Có Sinh Nhật Trong Tháng {{m}}
+                                                        </li>
+                                                    </ul>
+
+                                                    <a href="#"
+                                                       class="btn btn-app btn-info btn-xs"
+                                                       ng-repeat="x in [].constructor(12) track by $index"
+                                                       id="sn{{$index + 1}}"
+                                                       ng-click="LaySinhNhatTheoThang($index + 1)">
+                                                        {{$index + 1}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="scrollable" data-size="500" data-position="left">
                                             <div class="widget-box widget-color-blue" ng-repeat="item in BaiVietTuong track by $index">
                                                 <div class="widget-body">
@@ -335,7 +374,7 @@
 
                                                                                                 <div class="time">
                                                                                                     <i class="ace-icon fa fa-clock-o"></i>
-                                                                                                    <span class="blue">{{ReturnDDMMYYYY(i.Ngay)}}</span>
+                                                                                                    <span class="blue">{{ReturnFullDateTime(item.NgayTao)}}</span>
                                                                                                 </div>
 
                                                                                                 <div class="text">
@@ -347,14 +386,14 @@
                                                                                     </div>
 
                                                                                     @*<div class="center">
-                                                                                        <i class="ace-icon fa fa-comments-o fa-2x green middle"></i>
+                                                                                            <i class="ace-icon fa fa-comments-o fa-2x green middle"></i>
 
-                                                                                        &nbsp;
-                                                                                        <a href="#" class="btn btn-sm btn-white btn-info">
-                                                                                            See all comments &nbsp;
-                                                                                            <i class="ace-icon fa fa-arrow-right"></i>
-                                                                                        </a>
-                                                                                    </div>*@
+                                                                                            &nbsp;
+                                                                                            <a href="#" class="btn btn-sm btn-white btn-info">
+                                                                                                See all comments &nbsp;
+                                                                                                <i class="ace-icon fa fa-arrow-right"></i>
+                                                                                            </a>
+                                                                                        </div>*@
 
                                                                                     <form ng-submit="GuiBinhLuan(item.MaTinTuc)">
                                                                                         <div class="form-actions">
@@ -393,48 +432,152 @@
                                     </div>
                                     @*/Tường Công Ty*@
 
-                                    @*Sinh Nhật Trong Tháng*@
-                                    <div id="bday" class="tab-pane">
+                                    @*Chat Nội Bộ*@
+                                    <div id="chat" class="tab-pane">
                                         <div class="widget-box widget-color-blue">
                                             <div class="widget-body">
-                                                <div class="widget-main">
-                                                    <div class="clearfix" ng-show="DanhSachUser.length > 0">
-                                                        <div class="itemdiv memberdiv col-lg-4" ng-repeat="item in DanhSachUser track by item.MaNguoiDung">
+                                                <div class="widget-main no-padding">
+                                                    <div class="dialogs">
+                                                        <div class="itemdiv dialogdiv">
                                                             <div class="user">
-                                                                <img alt="avatar" src="{{item.HinhAnh}}" />
+                                                                <img alt="Alexa's Avatar" src="~/Content/assetsmes/images/avatars/avatar1.png" />
                                                             </div>
 
                                                             <div class="body">
-                                                                <div class="name">
-                                                                    <a href="#">{{item.Ten}}</a>
+                                                                <div class="time">
+                                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                                    <span class="green">4 sec</span>
                                                                 </div>
 
-                                                                <div>
-                                                                    <span class="label label-success label-sm">{{item.NgaySinh}}/{{item.ThangSinh}}/{{item.NamSinh}}</span>
+                                                                <div class="name">
+                                                                    <a href="#">Alexa</a>
+                                                                </div>
+                                                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.</div>
+
+                                                                <div class="tools">
+                                                                    <a href="#" class="btn btn-minier btn-info">
+                                                                        <i class="icon-only ace-icon fa fa-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="itemdiv dialogdiv">
+                                                            <div class="user">
+                                                                <img alt="John's Avatar" src="~/Content/assetsmes/images/avatars/avatar.png" />
+                                                            </div>
+
+                                                            <div class="body">
+                                                                <div class="time">
+                                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                                    <span class="blue">38 sec</span>
+                                                                </div>
+
+                                                                <div class="name">
+                                                                    <a href="#">John</a>
+                                                                </div>
+                                                                <div class="text">Raw denim you probably haven&#39;t heard of them jean shorts Austin.</div>
+
+                                                                <div class="tools">
+                                                                    <a href="#" class="btn btn-minier btn-info">
+                                                                        <i class="icon-only ace-icon fa fa-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="itemdiv dialogdiv">
+                                                            <div class="user">
+                                                                <img alt="Bob's Avatar" src="~/Content/assetsmes/images/avatars/user.jpg" />
+                                                            </div>
+
+                                                            <div class="body">
+                                                                <div class="time">
+                                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                                    <span class="orange">2 min</span>
+                                                                </div>
+
+                                                                <div class="name">
+                                                                    <a href="#">Bob</a>
+                                                                    <span class="label label-info arrowed arrowed-in-right">admin</span>
+                                                                </div>
+                                                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.</div>
+
+                                                                <div class="tools">
+                                                                    <a href="#" class="btn btn-minier btn-info">
+                                                                        <i class="icon-only ace-icon fa fa-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="itemdiv dialogdiv">
+                                                            <div class="user">
+                                                                <img alt="Jim's Avatar" src="~/Content/assetsmes/images/avatars/avatar4.png" />
+                                                            </div>
+
+                                                            <div class="body">
+                                                                <div class="time">
+                                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                                    <span class="grey">3 min</span>
+                                                                </div>
+
+                                                                <div class="name">
+                                                                    <a href="#">Jim</a>
+                                                                </div>
+                                                                <div class="text">Raw denim you probably haven&#39;t heard of them jean shorts Austin.</div>
+
+                                                                <div class="tools">
+                                                                    <a href="#" class="btn btn-minier btn-info">
+                                                                        <i class="icon-only ace-icon fa fa-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="itemdiv dialogdiv">
+                                                            <div class="user">
+                                                                <img alt="Alexa's Avatar" src="~/Content/assetsmes/images/avatars/avatar1.png" />
+                                                            </div>
+
+                                                            <div class="body">
+                                                                <div class="time">
+                                                                    <i class="ace-icon fa fa-clock-o"></i>
+                                                                    <span class="green">4 min</span>
+                                                                </div>
+
+                                                                <div class="name">
+                                                                    <a href="#">Alexa</a>
+                                                                </div>
+                                                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+
+                                                                <div class="tools">
+                                                                    <a href="#" class="btn btn-minier btn-info">
+                                                                        <i class="icon-only ace-icon fa fa-share"></i>
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <ul class="list-unstyled spaced2" ng-show="DanhSachUser.length == 0">
-                                                        <li>
-                                                            <i class="ace-icon fa fa-circle red"></i>
-                                                            Không Có Sinh Nhật Trong Tháng {{m}}
-                                                        </li>
-                                                    </ul>
-
-                                                    <a href="#"
-                                                       class="btn btn-app btn-info btn-xs"
-                                                       ng-repeat="x in [].constructor(12) track by $index"
-                                                       id="sn{{$index + 1}}"
-                                                       ng-click="LaySinhNhatTheoThang($index + 1)">
-                                                        {{$index + 1}}
-                                                    </a>
+                                                    <form>
+                                                        <div class="form-actions">
+                                                            <div class="input-group">
+                                                                <input placeholder="Type your message here ..." type="text" class="form-control" name="message" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-sm btn-info no-radius" type="button">
+                                                                        <i class="ace-icon fa fa-share"></i>
+                                                                        Send
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    @*/Sinh Nhật Trong Tháng*@
+                                    @*/Chat Nội Bộ*@
                                 </div>
                             </div>
                         </div>
@@ -489,13 +632,13 @@
                                                            class="blue fs-16 no-deco read"
                                                            title="{{item.TieuDe}}"
                                                            data-rel="tooltip">
-                                                            {{capitalize(item.TieuDe | limitTo : 40)}}{{SliceString(item.TieuDe,40)}}
+                                                            {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
                                                         </a>
                                                     </h4>
                                                     <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
                                                     <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
                                                     <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                                    <p><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 50)}}{{SliceString(item.MoTa,50)}}</b></a></p>
+                                                    <p><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 80)}}{{SliceString(item.MoTa,80)}}</b></a></p>
                                                     <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-minier btn-success">
                                                         Chi Tiết
                                                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -511,8 +654,7 @@
                                             <div class="row">
                                                 <div class="col-lg-2">
                                                     <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                        <img ng-show="item.HinhAnh != null" class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
-                                                        <img ng-show="item.HinhAnh == null" class="media-object width-100" src="~/Content/image/{{item.HinhAnhDuPhong}}" height="108" />
+                                                        <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-10">
@@ -532,11 +674,12 @@
                                                     <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
                                                     <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
                                                     <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                                    <p><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{item.MoTa | limitTo : 250}}{{SliceString(item.MoTa,250)}}</b></a></p>
-                                                    <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-minier btn-success">
-                                                        Chi Tiết
-                                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                                                    </a>
+                                                    <p>
+                                                        <a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{item.MoTa}}</b></a>
+                                                        <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
+                                                            Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                        </a>
+                                                    </p>
                                                 </div>
                                             </div>
                                             <hr />
@@ -544,45 +687,6 @@
                                         @*/Show Tin Tức - Sự Kiện*@
 
                                         @*Show Thông Báo + CNTT (tl = 3)*@
-                                        @*<div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3 && $index < 2">
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                        <img ng-show="item.HinhAnh != null" class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
-                                                        <img ng-show="item.HinhAnh == null" class="media-object width-100" src="~/Content/image/{{item.HinhAnhDuPhong}}" height="108" />
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-9">
-                                                    <h4 class="media-heading">
-                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="blue fs-16 no-deco read"
-                                                           title="{{item.TieuDe}}"
-                                                           data-rel="tooltip"
-                                                           ng-show="item.LuotXem == 0">
-                                                            {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
-                                                        </a>
-
-                                                        <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
-                                                           class="fs-16 no-deco"
-                                                           title="{{item.TieuDe}}"
-                                                           data-rel="tooltip"
-                                                           ng-show="item.LuotXem > 0">
-                                                            {{capitalize(item.TieuDe | limitTo : 50)}}{{SliceString(item.TieuDe,50)}}
-                                                        </a>
-                                                    </h4>
-                                                    <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
-                                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
-                                                    <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
-                                                    <p><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{item.MoTa | limitTo : 50}}{{SliceString(item.MoTa,50)}}</b></a></p>
-                                                    <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}" class="btn btn-minier btn-success">
-                                                        Chi Tiết
-                                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                        </div>*@
-
                                         <div ng-repeat="item in DanhSachTinTuc track by $index" class="col-xs-6" ng-show="DanhSachTinTuc.length > 0 && TemplateList == 3">
                                             <h4 class="media-heading">
                                                 @*<i class="ace-icon fa fa-circle green"></i>*@
@@ -591,7 +695,7 @@
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem == 0">
-                                                    {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
+                                                    {{capitalize(item.TieuDe)}}
                                                 </a>
 
                                                 <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
@@ -599,7 +703,7 @@
                                                    title="{{item.TieuDe}}"
                                                    data-rel="tooltip"
                                                    ng-show="item.LuotXem > 0">
-                                                    {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
+                                                    {{capitalize(item.TieuDe)}}
                                                 </a>
                                             </h4>
                                             <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}

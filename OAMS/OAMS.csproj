@@ -1891,6 +1891,7 @@
     <Content Include="Views\BangTin\ChiTietBaiViet.cshtml" />
     <Content Include="Views\BangTin\SuaBaiViet.cshtml" />
     <Content Include="Views\BangTin\SuaBaiVietTuong.cshtml" />
+    <Content Include="Views\BangTin\Tuong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataConversation\" />

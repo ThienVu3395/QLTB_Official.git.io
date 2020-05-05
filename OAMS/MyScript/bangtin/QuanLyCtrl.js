@@ -423,6 +423,7 @@
                         $scope.DanhSach[index].HienThi = HienThi;
                         $scope.TTBV.HienThi = HienThi;
                         alert(response.data);
+                        location.href = "";
                     },
 
                     function errorCallback(response) {
@@ -533,6 +534,7 @@
                         $scope.DanhSach[index].HienThi = IsApproved;
                         $scope.TTBV.HienThi = IsApproved;
                         alert(response.data);
+                        location.href = "";
                     },
 
                     function errorCallback(response) {
