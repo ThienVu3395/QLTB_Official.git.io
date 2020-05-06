@@ -118,6 +118,27 @@
       <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
     </AssociationSet>
     <EntitySet Name="sysdiagrams" EntityType="dbOAMSModel.sysdiagram" />
+    <EntitySet Name="NEWSTUONG_BaiViet" EntityType="dbOAMSModel.NEWSTUONG_BaiViet" />
+    <AssociationSet Name="FK_NEWS_BinhLuan_NEWSTUONG_BaiViet" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWSTUONG_BaiViet">
+      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+      <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung">
+      <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1">
+      <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
+      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong">
+      <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
+      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet">
+      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
+      <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
+    </AssociationSet>
     <EntitySet Name="NEWS_TinTuc" EntityType="dbOAMSModel.NEWS_TinTuc" />
     <AssociationSet Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc" Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
       <End Role="NEWS_LoaiTinTuc" EntitySet="NEWS_LoaiTinTuc" />
@@ -142,27 +163,6 @@
     <AssociationSet Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1" Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
       <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
       <End Role="NEWS_TinTucTapTin" EntitySet="NEWS_TinTucTapTin" />
-    </AssociationSet>
-    <EntitySet Name="NEWSTUONG_BaiViet" EntityType="dbOAMSModel.NEWSTUONG_BaiViet" />
-    <AssociationSet Name="FK_NEWS_BinhLuan_NEWSTUONG_BaiViet" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWSTUONG_BaiViet">
-      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
-      <End Role="NEWS_BinhLuan" EntitySet="NEWS_BinhLuan" />
-    </AssociationSet>
-    <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung">
-      <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
-      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1">
-      <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
-      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong">
-      <End Role="NEWSTUONG_NhomTinTuong" EntitySet="NEWSTUONG_NhomTinTuong" />
-      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
-    </AssociationSet>
-    <AssociationSet Name="FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet">
-      <End Role="NEWSTUONG_BaiViet" EntitySet="NEWSTUONG_BaiViet" />
-      <End Role="NEWSTUONG_TinDinhKem" EntitySet="NEWSTUONG_TinDinhKem" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="tbChucnang">
@@ -772,12 +772,12 @@
     <NavigationProperty Name="NEWS_PhongBan" Relationship="dbOAMSModel.FK_NEWS_NguoiSuDung_NEWS_PhongBan" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_PhongBan" />
     <NavigationProperty Name="NEWSTUONG_NhomTinTuong" Relationship="dbOAMSModel.FK_NEWSTUONG_NhomTinTuong_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_NhomTinTuong" />
     <NavigationProperty Name="NEWSTUONG_TinDinhKem" Relationship="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_TinDinhKem" />
+    <NavigationProperty Name="NEWSTUONG_BaiViet" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_BaiViet" />
+    <NavigationProperty Name="NEWSTUONG_BaiViet1" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_BaiViet" />
     <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
     <NavigationProperty Name="NEWS_TinTuc1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
     <NavigationProperty Name="NEWS_TinTuc2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
     <NavigationProperty Name="NEWS_TinTuc3" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" FromRole="NEWS_NguoiSuDung" ToRole="NEWS_TinTuc" />
-    <NavigationProperty Name="NEWSTUONG_BaiViet" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_BaiViet" />
-    <NavigationProperty Name="NEWSTUONG_BaiViet1" Relationship="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" FromRole="NEWS_NguoiSuDung" ToRole="NEWSTUONG_BaiViet" />
   </EntityType>
   <EntityType Name="NEWS_PhongBan">
     <Key>
@@ -913,116 +913,6 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="NEWS_TinTuc">
-    <Key>
-      <PropertyRef Name="MaTinTuc" />
-    </Key>
-    <Property Name="MaTinTuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="MaLoaiTin" Type="Int32" />
-    <Property Name="NguoiTao" Type="Int32" />
-    <Property Name="NgayTao" Type="DateTime" Precision="3" />
-    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
-    <Property Name="NguoiCapNhat" Type="Int32" />
-    <Property Name="NguoiDuyet" Type="Int32" />
-    <Property Name="NgayDuyet" Type="DateTime" Precision="3" />
-    <Property Name="HienThi" Type="Boolean" />
-    <Property Name="LuotXem" Type="Int32" />
-    <Property Name="TinNoiBat" Type="Boolean" />
-    <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
-    <Property Name="NgayHetHanTinMoi" Type="DateTime" Precision="3" />
-    <Property Name="NgayHetHanTrangChu" Type="DateTime" Precision="3" />
-    <Property Name="Khoa" Type="Boolean" />
-    <Property Name="NguoiKhoa" Type="Int32" />
-    <Property Name="NgayKhoa" Type="DateTime" Precision="3" />
-    <Property Name="DuongDan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="NgayDang" Type="Int32" />
-    <Property Name="ThangDang" Type="Int32" />
-    <Property Name="NamDang" Type="Int32" />
-    <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ChiaSe" Type="Boolean" />
-    <NavigationProperty Name="NEWS_LoaiTinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" FromRole="NEWS_TinTuc" ToRole="NEWS_LoaiTinTuc" />
-    <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
-    <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
-    <NavigationProperty Name="NEWS_NguoiSuDung2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
-    <NavigationProperty Name="NEWS_NguoiSuDung3" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
-    <NavigationProperty Name="NEWS_TinTucTapTin" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTuc" ToRole="NEWS_TinTucTapTin" />
-  </EntityType>
-  <Association Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
-    <End Type="dbOAMSModel.NEWS_LoaiTinTuc" Role="NEWS_LoaiTinTuc" Multiplicity="0..1" />
-    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_LoaiTinTuc">
-        <PropertyRef Name="MaLoaiTin" />
-      </Principal>
-      <Dependent Role="NEWS_TinTuc">
-        <PropertyRef Name="MaLoaiTin" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung">
-    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
-    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_NguoiSuDung">
-        <PropertyRef Name="MaNguoiDung" />
-      </Principal>
-      <Dependent Role="NEWS_TinTuc">
-        <PropertyRef Name="NguoiTao" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung1">
-    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
-    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_NguoiSuDung">
-        <PropertyRef Name="MaNguoiDung" />
-      </Principal>
-      <Dependent Role="NEWS_TinTuc">
-        <PropertyRef Name="NguoiCapNhat" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung2">
-    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
-    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_NguoiSuDung">
-        <PropertyRef Name="MaNguoiDung" />
-      </Principal>
-      <Dependent Role="NEWS_TinTuc">
-        <PropertyRef Name="NguoiDuyet" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung3">
-    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
-    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_NguoiSuDung">
-        <PropertyRef Name="MaNguoiDung" />
-      </Principal>
-      <Dependent Role="NEWS_TinTuc">
-        <PropertyRef Name="NguoiKhoa" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
-    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="1" />
-    <End Type="dbOAMSModel.NEWS_TinTucTapTin" Role="NEWS_TinTucTapTin" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_TinTuc">
-        <PropertyRef Name="MaTinTuc" />
-      </Principal>
-      <Dependent Role="NEWS_TinTucTapTin">
-        <PropertyRef Name="MaTinTuc" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="NEWSTUONG_BaiViet">
     <Key>
       <PropertyRef Name="PostId" />
@@ -1110,6 +1000,120 @@
       </Principal>
       <Dependent Role="NEWSTUONG_TinDinhKem">
         <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NEWS_TinTuc">
+    <Key>
+      <PropertyRef Name="MaTinTuc" />
+    </Key>
+    <Property Name="MaTinTuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaLoaiTin" Type="Int32" />
+    <Property Name="NguoiTao" Type="Int32" />
+    <Property Name="TenNguoiTao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="NguoiCapNhat" Type="Int32" />
+    <Property Name="TenNguoiCapNhat" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiDuyet" Type="Int32" />
+    <Property Name="TenNguoiDuyet" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgayDuyet" Type="DateTime" Precision="3" />
+    <Property Name="HienThi" Type="Boolean" />
+    <Property Name="LuotXem" Type="Int32" />
+    <Property Name="TinNoiBat" Type="Boolean" />
+    <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
+    <Property Name="NgayHetHanTinMoi" Type="DateTime" Precision="3" />
+    <Property Name="NgayHetHanTrangChu" Type="DateTime" Precision="3" />
+    <Property Name="Khoa" Type="Boolean" />
+    <Property Name="NguoiKhoa" Type="Int32" />
+    <Property Name="TenNguoiKhoa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgayKhoa" Type="DateTime" Precision="3" />
+    <Property Name="DuongDan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="NgayDang" Type="Int32" />
+    <Property Name="ThangDang" Type="Int32" />
+    <Property Name="NamDang" Type="Int32" />
+    <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ChiaSe" Type="Boolean" />
+    <NavigationProperty Name="NEWS_LoaiTinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_LoaiTinTuc" FromRole="NEWS_TinTuc" ToRole="NEWS_LoaiTinTuc" />
+    <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+    <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+    <NavigationProperty Name="NEWS_NguoiSuDung2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+    <NavigationProperty Name="NEWS_NguoiSuDung3" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
+    <NavigationProperty Name="NEWS_TinTucTapTin" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTuc" ToRole="NEWS_TinTucTapTin" />
+  </EntityType>
+  <Association Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
+    <End Type="dbOAMSModel.NEWS_LoaiTinTuc" Role="NEWS_LoaiTinTuc" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_LoaiTinTuc">
+        <PropertyRef Name="MaLoaiTin" />
+      </Principal>
+      <Dependent Role="NEWS_TinTuc">
+        <PropertyRef Name="MaLoaiTin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung">
+    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_NguoiSuDung">
+        <PropertyRef Name="MaNguoiDung" />
+      </Principal>
+      <Dependent Role="NEWS_TinTuc">
+        <PropertyRef Name="NguoiTao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung1">
+    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_NguoiSuDung">
+        <PropertyRef Name="MaNguoiDung" />
+      </Principal>
+      <Dependent Role="NEWS_TinTuc">
+        <PropertyRef Name="NguoiCapNhat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung2">
+    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_NguoiSuDung">
+        <PropertyRef Name="MaNguoiDung" />
+      </Principal>
+      <Dependent Role="NEWS_TinTuc">
+        <PropertyRef Name="NguoiDuyet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NEWS_TinTuc_NEWS_NguoiSuDung3">
+    <End Type="dbOAMSModel.NEWS_NguoiSuDung" Role="NEWS_NguoiSuDung" Multiplicity="0..1" />
+    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_NguoiSuDung">
+        <PropertyRef Name="MaNguoiDung" />
+      </Principal>
+      <Dependent Role="NEWS_TinTuc">
+        <PropertyRef Name="NguoiKhoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
+    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="1" />
+    <End Type="dbOAMSModel.NEWS_TinTucTapTin" Role="NEWS_TinTucTapTin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWS_TinTuc">
+        <PropertyRef Name="MaTinTuc" />
+      </Principal>
+      <Dependent Role="NEWS_TinTucTapTin">
+        <PropertyRef Name="MaTinTuc" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

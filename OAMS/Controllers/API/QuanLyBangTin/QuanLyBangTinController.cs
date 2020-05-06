@@ -59,9 +59,9 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.NoiDung = item.NoiDung;
                     tin.MoTa = item.MoTa;
                     tin.MaLoaiTin = item.MaLoaiTin;
-                    tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                     tin.LuotXem = item.LuotXem;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.NgayTao = item.NgayTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
@@ -105,6 +105,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.HinhAnh = dsTin.HinhAnh;
                 tinTuc.MoTa = dsTin.MoTa;
                 tinTuc.NgayTao = dsTin.NgayTao;
+                tinTuc.NgayCapNhat = dsTin.NgayCapNhat;
+                tinTuc.TenNguoiTao = dsTin.TenNguoiTao;
                 tinTuc.NgayHetHan = dsTin.NgayHetHan;
                 tinTuc.NgayHetHanTinMoi = dsTin.NgayHetHanTinMoi;
                 tinTuc.NgayHetHanTrangChu = dsTin.NgayHetHanTrangChu;
@@ -461,5 +463,6 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
             }
             return Ok(dsUserModel);
         }
+        
     }
 }

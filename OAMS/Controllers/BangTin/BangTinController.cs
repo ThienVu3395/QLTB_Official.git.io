@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace OAMS.Controllers.BangTin
 {
+    [Authorize]
     public class BangTinController : Controller
     {
         // GET: BangTin

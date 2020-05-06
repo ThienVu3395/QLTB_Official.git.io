@@ -1,4 +1,5 @@
-﻿(function () {
+﻿
+(function () {
     "use strict"
     angular.module("oamsapp")
         .controller("homecontroller",
@@ -14,6 +15,7 @@
                     $scope.roleName = "";
                     $scope.viewwwin = false;
                     getdataUser();
+                    
 
                     //$scope.Notification = 
                     //$scope.Chats.onConnected();
@@ -26,8 +28,7 @@
                             $scope.roleName = data.roleName;
                             $scope.viewwwin = $scope.roleName != 'Docgia';
                             var datae = userProfile.getProfileExten();
-                            //$scope.FulluserName = data.fileusername;
-                            $scope.FulluserName = localStorage.getItem("username");
+                            $scope.FulluserName = datae.fileusername;
                             if (datae.ulrimage != null && datae.ulrimage != '' && datae.ulrimage != 'null') {
                                 $scope.ulrimage = appSettings.serverPath + datae.ulrimage;
                             }

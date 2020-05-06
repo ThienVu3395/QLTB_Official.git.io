@@ -1,5 +1,5 @@
 ﻿angular.module("oamsapp")
-    .controller("adminBT", function ($scope, CommonController, blockUI, FileUploader, $timeout, $sce) {
+    .controller("adminBT", function ($scope, CommonController, blockUI, FileUploader, $timeout, $sce, userProfile) {
         // Lấy Danh Sách Loại Tin
         $scope.LayDanhSachLoaiTin = function () {
             blockUI.start({
@@ -42,6 +42,18 @@
                 }
             }
             $timeout(hamcho, 300);
+        }
+
+        // Kiểm Tra Quyền
+        $scope.checkPermission = function (status) {
+            $scope.data = userProfile.getProfile();
+            if ($scope.data.isLoggedIn && $scope.data.access_token != null && $scope.data.roleName == "Admin") {
+                return true;
+            }
+            else {
+                alert("Bạn Chưa Được Cấp Quyền Để " + status + " Tin");
+                return false;
+            }
         }
 
         // Lấy Toàn Bộ Danh Sách Bài Viết
@@ -414,22 +426,26 @@
             else if (HienThi == false) {
                 string = " hủy duyệt";
             }
-            if (window.confirm("Bạn chắc chắn" + string + " tin này chứ ?")) {
-                let param = "?MaTinTuc=" + MaTinTuc + "&HienThi=" + HienThi;
-                var res = CommonController.getData(CommonController.urlAPI.API_XuLyTin, param);
-                res.then(
-                    function succ(response) {
-                        let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
-                        $scope.DanhSach[index].HienThi = HienThi;
-                        $scope.TTBV.HienThi = HienThi;
-                        alert(response.data);
-                        location.href = "";
-                    },
+            let role = $scope.checkPermission(string);
+            if (role) {
+                if (window.confirm("Bạn chắc chắn" + string + " tin này chứ ?")) {
+                    let param = "?MaTinTuc=" + MaTinTuc + "&HienThi=" + HienThi;
+                    var res = CommonController.getData(CommonController.urlAPI.API_XuLyTin, param);
+                    res.then(
+                        function succ(response) {
+                            //let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
+                            //$scope.DanhSach[index].HienThi = HienThi;
+                            //$scope.TTBV.HienThi = HienThi;
+                            alert(response.data);
+                            location.href = "";
+                        },
 
-                    function errorCallback(response) {
-                        console.log(response.data.message);
-                    }
-                );
+                        function errorCallback(response) {
+                            console.log(response.data.message);
+                        }
+                    );
+                }
+                else return;
             }
             else return;
         }
@@ -441,30 +457,13 @@
                 MaTinTuc: item.MaTinTuc,
                 HienThi: status
             }
-            var res = CommonController.postData(CommonController.urlAPI.API_XuLyBinhLuan, objBinhLuan);
-            res.then(
-                function succ(response) {
-                    alert(response.data);
-                    item.HienThi = status;
-                },
-
-                function errorCallback(response) {
-                    console.log(response.data.message);
-                    alert("Có Lỗi Phát Sinh");
-                }
-            );
-        }
-
-        // Xóa Bình Luận
-        $scope.XoaBinhLuan = function (item) {
-            if (window.confirm("Bạn chắc chắn xóa bình luận này chứ ?")) {
-                let param = "?MaBinhLuan=" + item.MaBinhLuan;
-                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaBinhLuan, param);
+            let role = $scope.checkPermission('Duyệt/Hủy Duyệt Bình Luận Của');
+            if (role) {
+                var res = CommonController.postData(CommonController.urlAPI.API_XuLyBinhLuan, objBinhLuan);
                 res.then(
                     function succ(response) {
-                        alert(response.data)
-                        let index = $scope.TTBV.BinhLuan.findIndex(x => x.MaBinhLuan == item.MaBinhLuan);
-                        $scope.TTBV.BinhLuan.splice(index, 1);
+                        alert(response.data);
+                        item.HienThi = status;
                     },
 
                     function errorCallback(response) {
@@ -472,46 +471,79 @@
                         alert("Có Lỗi Phát Sinh");
                     }
                 );
+            }
+            else return;
+        }
+
+        // Xóa Bình Luận
+        $scope.XoaBinhLuan = function (item) {
+            let role = $scope.checkPermission('Xóa Bình Luận Của');
+            if (role) {
+                if (window.confirm("Bạn chắc chắn xóa bình luận này chứ ?")) {
+                    let param = "?MaBinhLuan=" + item.MaBinhLuan;
+                    var res = CommonController.deleteData(CommonController.urlAPI.API_XoaBinhLuan, param);
+                    res.then(
+                        function succ(response) {
+                            alert(response.data)
+                            let index = $scope.TTBV.BinhLuan.findIndex(x => x.MaBinhLuan == item.MaBinhLuan);
+                            $scope.TTBV.BinhLuan.splice(index, 1);
+                        },
+
+                        function errorCallback(response) {
+                            console.log(response.data.message);
+                            alert("Có Lỗi Phát Sinh");
+                        }
+                    );
+                }
+                else return;
             }
             else return;
         }
 
         // Xóa Tin Thường
         $scope.XoaTin = function (MaTinTuc) {
-            if (window.confirm("Bạn chắc chắn xóa tin này chứ ?")) {
-                let param = "?MaTinTuc=" + MaTinTuc;
-                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTin, param);
-                res.then(
-                    function succ(response) {
-                        alert(response.data)
-                        location.href = "";
-                    },
+            let role = $scope.checkPermission('xóa');
+            if (role) {
+                if (window.confirm("Bạn chắc chắn xóa tin này chứ ?")) {
+                    let param = "?MaTinTuc=" + MaTinTuc;
+                    var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTin, param);
+                    res.then(
+                        function succ(response) {
+                            alert(response.data)
+                            location.href = "";
+                        },
 
-                    function errorCallback(response) {
-                        console.log(response.data.message);
-                        alert("Có Lỗi Phát Sinh");
-                    }
-                );
+                        function errorCallback(response) {
+                            console.log(response.data.message);
+                            alert("Có Lỗi Phát Sinh");
+                        }
+                    );
+                }
+                else return;
             }
             else return;
         }
 
         // Xóa Tin Tường
         $scope.XoaTinTuong = function (MaTinTuc) {
-            if (window.confirm("Bạn chắc chắn xóa tin này khỏi tường chứ ?")) {
-                let param = "?MaTinTuc=" + MaTinTuc;
-                var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTinTuong, param);
-                res.then(
-                    function succ(response) {
-                        alert(response.data)
-                        location.href = "";
-                    },
+            let role = $scope.checkPermission('xóa');
+            if (role) {
+                if (window.confirm("Bạn chắc chắn xóa tin này khỏi tường chứ ?")) {
+                    let param = "?MaTinTuc=" + MaTinTuc;
+                    var res = CommonController.deleteData(CommonController.urlAPI.API_XoaTinTuong, param);
+                    res.then(
+                        function succ(response) {
+                            alert(response.data)
+                            location.href = "";
+                        },
 
-                    function errorCallback(response) {
-                        console.log(response.data.message);
-                        alert("Có Lỗi Phát Sinh");
-                    }
-                );
+                        function errorCallback(response) {
+                            console.log(response.data.message);
+                            alert("Có Lỗi Phát Sinh");
+                        }
+                    );
+                }
+                else return;
             }
             else return;
         }
@@ -525,22 +557,26 @@
             else if (IsApproved == false) {
                 string = " hủy duyệt";
             }
-            if (window.confirm("Bạn chắc chắn" + string + " tin này chứ ?")) {
-                let param = "?MaTinTuc=" + MaTinTuc + "&IsApproved=" + IsApproved;
-                var res = CommonController.getData(CommonController.urlAPI.API_XuLyTinhTuong, param);
-                res.then(
-                    function succ(response) {
-                        let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
-                        $scope.DanhSach[index].HienThi = IsApproved;
-                        $scope.TTBV.HienThi = IsApproved;
-                        alert(response.data);
-                        location.href = "";
-                    },
+            let role = $scope.checkPermission(string);
+            if (role) {
+                if (window.confirm("Bạn chắc chắn" + string + " tin này chứ ?")) {
+                    let param = "?MaTinTuc=" + MaTinTuc + "&IsApproved=" + IsApproved;
+                    var res = CommonController.getData(CommonController.urlAPI.API_XuLyTinhTuong, param);
+                    res.then(
+                        function succ(response) {
+                            let index = $scope.DanhSach.findIndex(x => x.MaTinTuc == MaTinTuc);
+                            $scope.DanhSach[index].HienThi = IsApproved;
+                            $scope.TTBV.HienThi = IsApproved;
+                            alert(response.data);
+                            location.href = "";
+                        },
 
-                    function errorCallback(response) {
-                        console.log(response.data.message);
-                    }
-                );
+                        function errorCallback(response) {
+                            console.log(response.data.message);
+                        }
+                    );
+                }
+                else return;
             }
             else return;
         }
@@ -655,10 +691,11 @@
                             let index = $scope.DsLoaiTin.findIndex(x => x.MaLoaiTin == $scope.TTBV.MaLoaiTin);
                             $scope.MaLoaiTin = $scope.DsLoaiTin[index];
                             document.getElementById("editor1").innerHTML = $scope.TTBV.NoiDung;
-                            document.getElementById("nhhSua").value = $scope.TTBV.NgayHetHan != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHan) : null;
-                            document.getElementById("nhhtmSua").value = $scope.TTBV.NgayHetHanTinMoi != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTinMoi) : null;
-                            document.getElementById("nhhtcSua").value = $scope.TTBV.NgayHetHanTrangChu != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTrangChu) : null;
+                            //document.getElementById("nhhSua").value = $scope.TTBV.NgayHetHan != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHan) : null;
+                            //document.getElementById("nhhtmSua").value = $scope.TTBV.NgayHetHanTinMoi != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTinMoi) : null;
+                            //document.getElementById("nhhtcSua").value = $scope.TTBV.NgayHetHanTrangChu != null ? $scope.ReturnDate2($scope.TTBV.NgayHetHanTrangChu) : null;
                             $scope.HinhCu = $scope.TTBV.HinhAnh;
+                            $scope.status = $scope.TTBV.HienThi;
                             $scope.FileCu = [...$scope.TTBV.TapTinDinhKem];
                         }
                     }
@@ -666,6 +703,19 @@
                 }
             }
             $timeout(hamcho, 300);
+        }
+
+        // Kiểm Tra Quyền Khi Duyệt Tin
+        $scope.check = function () {
+            $scope.data = userProfile.getProfile();
+            if ($scope.data.isLoggedIn && $scope.data.access_token != null && $scope.data.roleName == "Admin") {
+                $scope.TTBV.HienThi != $scope.TTBV.HienThi;
+            }
+            else {
+                alert("Bạn Chưa Được Cấp Quyền Để Duyệt/Hủy Tin , Bạn Chỉ Có Thể Chỉnh Sửa Nội Dung Bài Viết Và Chờ Người Quản Trị Duyệt/Hủy Duyệt Bài");
+                $scope.TTBV.HienThi = $scope.status;
+                return
+            }
         }
 
         ///////////////////////////////////// SỬA TIN TƯỜNG ////////////////////////
@@ -820,10 +870,12 @@
         $scope.CapNhatThongTin = function () {
             if (window.confirm("Bạn chắc chắn cập nhật lại thông tin như trên chứ ?")) {
                 $scope.TTBV.MaLoaiTin = $scope.MaLoaiTin.MaLoaiTin;
-                $scope.TTBV.NgayHetHan = GetDateTimeFormat(document.getElementById("nhhSua").value);
-                $scope.TTBV.NgayHetHanTinMoi = GetDateTimeFormat(document.getElementById("nhhtmSua").value)
-                $scope.TTBV.NgayHetHanTrangChu = GetDateTimeFormat(document.getElementById("nhhtcSua").value);
+                //$scope.TTBV.NgayHetHan = GetDateTimeFormat(document.getElementById("nhhSua").value);
+                //$scope.TTBV.NgayHetHanTinMoi = GetDateTimeFormat(document.getElementById("nhhtmSua").value)
+                //$scope.TTBV.NgayHetHanTrangChu = GetDateTimeFormat(document.getElementById("nhhtcSua").value);
                 $scope.TTBV.NoiDung = document.getElementById("editor1").innerHTML;
+                $scope.data = userProfile.getProfile();
+                $scope.TTBV.TenNguoiCapNhat = $scope.data.username;
                 var res = CommonController.postData(CommonController.urlAPI.API_CapNhatThongTin, $scope.TTBV);
                 res.then(
                     function succ(response) {

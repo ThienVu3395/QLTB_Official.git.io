@@ -1,5 +1,6 @@
 ﻿angular.module("oamsapp")
-    .controller("ThemBaiViet", function ($scope, CommonController, FileUploader, blockUI) {
+    .controller("ThemBaiViet", function ($scope, CommonController, FileUploader, blockUI, userProfile) {
+        $scope.data = userProfile.getProfile();
         // Khai Báo OBJ THÊM
         $scope.objThem = {
             TinNoiBat: false,
@@ -9,20 +10,24 @@
             NgayHetHan: null,
             NgayHetHanTM: null,
             NgayHetHanTC: null,
+            TenNguoiTao: $scope.data.username,
+            TenNguoiDuyet: null
         }
-
-        // Giả Lập Việc Duyệt Tin
-        localStorage.setItem("Permission", "0");
 
         // Kiểm Tra Quyền Khi Duyệt Tin
         $scope.checkPermission = function () {
-            let t = localStorage.getItem("Permission");
-            if (t == "0") {
-                alert("Bạn Chưa Được Cấp Quyền Để Duyệt Tin");
-                $scope.objThem.HienThi = false;
+            $scope.data = userProfile.getProfile();
+            if ($scope.data.isLoggedIn && $scope.data.access_token != null && $scope.data.roleName == "Admin") {
+                $scope.objThem.HienThi != $scope.objThem.HienThi;
+                if ($scope.objThem.HienThi) {
+                    $scope.objThem.TenNguoiDuyet = $scope.data.username;
+                }
+                else $scope.objThem.TenNguoiDuyet = null;
             }
             else {
-                $scope.objThem.HienThi != $scope.objThem.HienThi;
+                alert("Bạn Chưa Được Cấp Quyền Để Duyệt Tin , Bạn Chỉ Có Thể Thêm Nội Dung Bài Viết Và Chờ Người Quản Trị Duyệt Duyệt Bài");
+                $scope.objThem.HienThi = false;
+                $scope.objThem.TenNguoiDuyet = null;
             }
         }
 

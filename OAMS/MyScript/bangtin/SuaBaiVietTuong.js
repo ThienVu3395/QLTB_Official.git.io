@@ -1,5 +1,5 @@
 ﻿angular.module("oamsapp")
-    .controller("suaBVT", function ($scope, CommonController, blockUI, FileUploader, $timeout, $sce) {
+    .controller("suaBVT", function ($scope, CommonController, blockUI, FileUploader, $timeout, $sce, userProfile) {
         // Lấy Chi Tiết Bài Viết Tường
         $scope.LayChiTietBaiVietTuong = function (MaTinTuc) {
             blockUI.start({
@@ -30,9 +30,23 @@
                 else {
                     blockUI.stop();
                     document.getElementById("editor1").innerHTML = $scope.TTBV.NoiDung;
+                    $scope.status = $scope.TTBV.HienThi;
                 }
             }
             $timeout(hamcho, 300);
+        }
+
+        // Kiểm Tra Quyền Khi Duyệt/Hủy Duyệt/Xóa Tin
+        $scope.checkPermission = function () {
+            $scope.data = userProfile.getProfile();
+            if ($scope.data.isLoggedIn && $scope.data.access_token != null && $scope.data.roleName == "Admin") {
+                $scope.TTBV.HienThi != $scope.TTBV.HienThi;
+            }
+            else {
+                alert("Bạn Chưa Được Cấp Quyền Để Duyệt/Hủy Tin , Bạn Chỉ Có Thể Chỉnh Sửa Nội Dung Bài Viết Và Chờ Người Quản Trị Duyệt/Hủy Duyệt Bài");
+                $scope.TTBV.HienThi = $scope.status;
+                return
+            }
         }
 
         // Cấu hình đường dẫn

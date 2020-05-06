@@ -220,6 +220,12 @@ namespace OAMS.Controllers.API.QuanLyBangTin
             tin.Khoa = false;
             tin.NgayTao = DateTime.Now;
             tin.NguoiTao = 56;
+            tin.TenNguoiTao = tinTuc.TenNguoiTao;
+            tin.TenNguoiDuyet = tinTuc.TenNguoiDuyet;
+            if (tinTuc.TenNguoiDuyet != null)
+            {
+                tin.NgayDuyet = DateTime.Now;
+            }
             tin.NgayHetHan = tinTuc.NgayHetHan;
             tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;
             tin.NgayHetHanTrangChu = tinTuc.NgayHetHanTrangChu;

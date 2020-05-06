@@ -27,9 +27,13 @@ namespace OAMS.Models
         public string LoaiTin { get; set; }
         public string HinhNguoiDung { get; set; }
         public int NguoiTao { get; set; }
+        public string TenNguoiTao { get; set; }
         public string TenNguoiDung { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public string NguoiCapNhat { get; set; }
+        public string TenNguoiCapNhat { get; set; }
+        public string NguoiDuyet { get; set; }
+        public string TenNguoiDuyet{ get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
         public int? LuotXem { get; set; }
         public Nullable<bool> HienThi { get; set; }
@@ -65,6 +69,14 @@ namespace OAMS.Models
         public Nullable<int> ThangSinh { get; set; }
         public Nullable<int> NamSinh { get; set; }
         public string HinhAnh { get; set; }
+    }
+
+    public class UserExtension
+    {
+        public string username { get; set; }
+        public string shopingcart { get; set; }
+        public string FILEHINH { get; set; }
+        public string HOTEN { get; set; }
     }
 
     public class TapTinModel

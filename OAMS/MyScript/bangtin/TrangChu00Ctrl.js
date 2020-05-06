@@ -8,7 +8,7 @@
         $scope.TieuDe = "Bảng Tin Tường Công Ty";
 
         //////////////////////////////////// Trang Chủ //////////////////////////////////
-        $scope.Init = function () {
+        $scope.Init = function () {  
             $scope.DanhSachLoaiTin = [];
             $scope.LayDanhSachLoaiTin();
             var hamcho = function () {
@@ -20,8 +20,8 @@
                     $scope.bigCurrentPage = 1;
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0].MaLoaiTin;
                     $scope.LayDanhSachBaiViet($scope.MaLoaiTin, 'layds');
-                    $scope.LayBaiVietTuong();
-                    $scope.LaySinhNhat();
+                    //$scope.LayBaiVietTuong();
+                    //$scope.LaySinhNhat();
                 }
             }
             $timeout(hamcho, 300);
@@ -33,6 +33,7 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachLoaiTin = response.data;
+                    console.log($scope.DanhSachLoaiTin);
                 },
 
                 function errorCallback(response) {

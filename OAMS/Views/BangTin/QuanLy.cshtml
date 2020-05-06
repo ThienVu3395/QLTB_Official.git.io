@@ -667,7 +667,7 @@
                                                             </label>
                                                         </td>*@
 
-                                                        <td>{{item.TenNguoiDung}}</td>
+                                                        <td>{{item.TenNguoiTao}}</td>
 
                                                         <td ng-show="MaLoaiTin == 0">
                                                             {{item.LoaiTin}}
@@ -828,7 +828,7 @@
                                             &nbsp;
                                             <img class="middle" alt="John's Avatar" src="~/Content/assetsmes/images/avatars/avatar.png" width="32">
                                             &nbsp;
-                                            <a href="#" class="sender">{{TTBV.TenNguoiDung}}</a>
+                                            <a href="#" class="sender">{{TTBV.TenNguoiTao}}</a>
 
                                             &nbsp;
                                             <i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>
@@ -978,7 +978,7 @@
                                                     <div class="tools">
                                                         <div class="action-buttons bigger-125">
                                                             <a title="Duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-click="XuLyBinhLuan(item,true)" ng-show="!item.HienThi">
-                                                                <i class="ace-icon fa fa-pencil green"></i>
+                                                                <i class="ace-icon fa fa-check green"></i>
                                                             </a>
 
                                                             <a title="Hủy duyệt bình luận này" data-rel="tooltip" data-placement="bottom" href="#" ng-click="XuLyBinhLuan(item,false)" ng-show="item.HienThi">

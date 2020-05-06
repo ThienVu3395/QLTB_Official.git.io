@@ -58,18 +58,18 @@
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWS_NguoiSuDung" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_NhomTinTuong" />
         <EntityTypeShape EntityType="dbOAMSModel.sysdiagram" Width="1.5" PointX="6.375" PointY="9.75" />
-        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTuc" Width="1.5" PointX="22.25" PointY="0.75" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" />
-        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWSTUONG_BaiViet" Width="1.5" PointX="24.5" PointY="11.5" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWSTUONG_BaiViet" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWS_NguoiSuDung1" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_BaiViet_NEWSTUONG_NhomTinTuong" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWSTUONG_TinDinhKem_NEWSTUONG_BaiViet" />
+        <EntityTypeShape EntityType="dbOAMSModel.NEWS_TinTuc" Width="1.5" PointX="22.25" PointY="0.75" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" />
+        <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -258,11 +258,11 @@
     <div id="mescontent" class="page-content">
         <div class="ace-settings-container" id="ace-settings-container">
             @*Nút Minimized*@
-            <div class="btn btn-app btn-xs btn-primary ace-settings-btn" id="ace-settings-btn">
+            @*<div class="btn btn-app btn-xs btn-primary ace-settings-btn" id="ace-settings-btn">
                 <i class="ace-icon fa fa-star bigger-130"></i>
-            </div>
+            </div>*@
 
-            <div class="ace-settings-box" id="ace-settings-box" style="background-color: #F5F5F5;">
+            @*<div class="ace-settings-box" id="ace-settings-box" style="background-color: #F5F5F5;">
                 <div class="widget-container-col" id="widget-container-col-13">
                     <div class="widget-box transparent" id="widget-box-13">
                         <div class="widget-header">
@@ -283,7 +283,7 @@
                         <div class="widget-body">
                             <div class="widget-main padding-12 no-padding-left no-padding-right">
                                 <div class="tab-content padding-4">
-                                    @*Tường Công Ty*@
+                                    Tường Công Ty
                                     <div id="wall" class="tab-pane active">
                                         <div class="widget-box widget-color-blue">
                                             <div class="widget-body">
@@ -344,8 +344,8 @@
                                                                 <p><b>{{item.TieuDe}}</b></p>
                                                                 <div class="detailCT">
                                                                     <p ng-bind-html="htmlSafe(item.NoiDung)"></p>
-                                                                    @*<p ng-show="!rm">{{item.NoiDung | limitTo : 150}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('more')"> Đọc Tiếp</span></p>*@
-                                                                    @*<p ng-show="rm">{{item.NoiDung}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('less')"> Thu Gọn</span></p>*@
+                                                                    <p ng-show="!rm">{{item.NoiDung | limitTo : 150}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('more')"> Đọc Tiếp</span></p>
+                                                                    <p ng-show="rm">{{item.NoiDung}}<span class="red" ng-show="item.NoiDung.length > 150" ng-click="read('less')"> Thu Gọn</span></p>
                                                                 </div>
                                                             </div>
 
@@ -385,16 +385,6 @@
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    @*<div class="center">
-                                                                                            <i class="ace-icon fa fa-comments-o fa-2x green middle"></i>
-
-                                                                                            &nbsp;
-                                                                                            <a href="#" class="btn btn-sm btn-white btn-info">
-                                                                                                See all comments &nbsp;
-                                                                                                <i class="ace-icon fa fa-arrow-right"></i>
-                                                                                            </a>
-                                                                                        </div>*@
-
                                                                                     <form ng-submit="GuiBinhLuan(item.MaTinTuc)">
                                                                                         <div class="form-actions">
                                                                                             <div class="input-group">
@@ -430,9 +420,9 @@
                                             </p>
                                         </div>
                                     </div>
-                                    @*/Tường Công Ty*@
+                                    Tường Công Ty
 
-                                    @*Chat Nội Bộ*@
+                                    Chat Nội Bộ
                                     <div id="chat" class="tab-pane">
                                         <div class="widget-box widget-color-blue">
                                             <div class="widget-body">
@@ -577,13 +567,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @*/Chat Nội Bộ*@
+                                    /Chat Nội Bộ
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             @*/Nút Minimized*@
         </div>
 
@@ -632,7 +622,7 @@
                                                            class="blue fs-16 no-deco read"
                                                            title="{{item.TieuDe}}"
                                                            data-rel="tooltip"
-                                                            ng-show="item.LuotXem == 0">
+                                                           ng-show="item.LuotXem == 0">
                                                             {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
                                                         </a>
 
@@ -640,13 +630,13 @@
                                                            class="blue fs-16 no-deco"
                                                            title="{{item.TieuDe}}"
                                                            data-rel="tooltip"
-                                                            ng-show="item.LuotXem > 0">
+                                                           ng-show="item.LuotXem > 0">
                                                             {{capitalize(item.TieuDe | limitTo : 60)}}{{SliceString(item.TieuDe,60)}}
                                                         </a>
                                                     </h4>
-                                                    <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
-                                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
-                                                    <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
+                                                    <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiTao}}
+                                                    <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnFullDateTime(item.NgayTao)}}
+                                                    <i class="ace-icon fa fa-edit orange2"></i> {{item.NgayCapNhat != null ? ReturnFullDateTime(item.NgayCapNhat) : 'Chưa Cập Nhật...'}}
                                                     <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 80)}}{{SliceString(item.MoTa,80)}}</b></a></p>
                                                     <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
                                                         Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -677,9 +667,9 @@
                                                     {{capitalize(item.TieuDe | limitTo : 80)}}{{SliceString(item.TieuDe,80)}}
                                                 </a>
                                             </h4>
-                                            <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiDung}}
-                                            <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnDDMMYYYY()}}
-                                            <i class="ace-icon fa fa-clock-o orange2"></i> {{ReturnHMM(item.NgayTao)}}
+                                            <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiTao}}
+                                            <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnFullDateTime(item.NgayTao)}}
+                                            <i class="ace-icon fa fa-edit orange2"></i> {{item.NgayCapNhat != null ? ReturnFullDateTime(item.NgayCapNhat) : 'Chưa Cập Nhật...'}}
                                             <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 100)}}{{SliceString(item.MoTa,100)}}</b></a></p>
                                             <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
                                                 Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>

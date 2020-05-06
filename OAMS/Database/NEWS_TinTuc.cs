@@ -26,10 +26,13 @@ namespace OAMS.Database
         public string MoTa { get; set; }
         public Nullable<int> MaLoaiTin { get; set; }
         public Nullable<int> NguoiTao { get; set; }
+        public string TenNguoiTao { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
         public Nullable<int> NguoiCapNhat { get; set; }
+        public string TenNguoiCapNhat { get; set; }
         public Nullable<int> NguoiDuyet { get; set; }
+        public string TenNguoiDuyet { get; set; }
         public Nullable<System.DateTime> NgayDuyet { get; set; }
         public Nullable<bool> HienThi { get; set; }
         public Nullable<int> LuotXem { get; set; }
@@ -40,6 +43,7 @@ namespace OAMS.Database
         public Nullable<System.DateTime> NgayHetHanTrangChu { get; set; }
         public Nullable<bool> Khoa { get; set; }
         public Nullable<int> NguoiKhoa { get; set; }
+        public string TenNguoiKhoa { get; set; }
         public Nullable<System.DateTime> NgayKhoa { get; set; }
         public string DuongDan { get; set; }
         public Nullable<int> NgayDang { get; set; }

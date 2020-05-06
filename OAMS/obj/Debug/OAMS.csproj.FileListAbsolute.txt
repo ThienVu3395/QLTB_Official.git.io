@@ -486,11 +486,6 @@ C:\Users\ASUS\Desktop\Thư mục mới\QLTB_Official.git.io\OAMS\obj\Debug\OAMS
 C:\Users\ASUS\Desktop\Thư mục mới\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\ASUS\Desktop\Thư mục mới\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll
 C:\Users\ASUS\Desktop\Thư mục mới\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.pdb
-C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\csc.exe
-C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\VBCSCompiler.exe
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\bin\ApplicationInsights.config
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\bin\roslyn\csc.exe
 C:\Users\ASUS\Desktop\VPDT\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -689,12 +684,17 @@ C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.pdb
 C:\Users\ASUS\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csprojAssemblyReference.cache
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\ApplicationInsights.config
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\csc.exe
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\System.Collections.Immutable.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\vbc.exe
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\VBCSCompiler.exe
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.dll.config
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.dll

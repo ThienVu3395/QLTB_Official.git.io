@@ -36,6 +36,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
@@ -78,7 +79,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 tin.MaLoaiTin = dsTin.GroupId;
                 tin.NgayTao = dsTin.CreatedDate;
                 tin.HienThi = dsTin.IsApproved;
-                tin.TenNguoiDung = dsTin.CreatedUser;
+                tin.TenNguoiTao = dsTin.CreatedUser;
                 tin.NgayCapNhat = dsTin.LastUpdated;
                 var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == dsTin.PostId).ToList();
                 List<TapTinModel> dsttmodel = new List<TapTinModel>();
@@ -139,6 +140,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
@@ -185,6 +187,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
@@ -231,6 +234,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.MaLoaiTin = item.MaLoaiTin;
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
@@ -278,6 +282,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
@@ -321,7 +326,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.NoiDung = item.Content;
                     tin.MaLoaiTin = item.GroupId;
                     tin.NgayTao = item.CreatedDate;
-                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.TenNguoiTao = item.CreatedUser;
                     tin.NgayCapNhat = item.LastUpdated;
                     tin.HienThi = item.IsApproved;
                     tin.TinNoiBat = item.IsFavorit;
@@ -387,6 +392,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
@@ -433,6 +439,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
@@ -479,6 +486,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.LoaiTin = item.NEWS_LoaiTinTuc.Ten;
                     tin.NgayTao = item.NgayTao;
                     tin.TenNguoiDung = item.NEWS_NguoiSuDung.Ten;
+                    tin.TenNguoiTao = item.TenNguoiTao;
                     tin.NgayCapNhat = item.NgayCapNhat;
                     tin.HienThi = item.HienThi;
                     tin.HinhAnh = item.HinhAnh;
@@ -522,7 +530,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                     tin.NoiDung = item.Content;
                     tin.MaLoaiTin = item.GroupId;
                     tin.NgayTao = item.CreatedDate;
-                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.TenNguoiTao = item.CreatedUser;
                     tin.NgayCapNhat = item.LastUpdated;
                     tin.HienThi = item.IsApproved;
                     tin.TinNoiBat = item.IsFavorit;
@@ -580,6 +588,8 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 dbContext.SaveChanges();
                 if (HienThi == true)
                 {
+                    tin.NgayDuyet = DateTime.Now;
+                    dbContext.SaveChanges();
                     return Ok("Bài Viết Đã Được Duyệt");
                 }
                 else if (HienThi == false)
@@ -1060,6 +1070,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 tin.TinNoiBat = tinTuc.TinNoiBat;
                 tin.HienThi = tinTuc.HienThi;
                 tin.NgayCapNhat = DateTime.Now;
+                tin.TenNguoiCapNhat = tinTuc.TenNguoiCapNhat;
                 tin.NguoiCapNhat = 56;
                 tin.NgayHetHan = tinTuc.NgayHetHan;
                 tin.NgayHetHanTinMoi = tinTuc.NgayHetHanTinMoi;

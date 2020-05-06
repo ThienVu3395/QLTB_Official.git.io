@@ -122,10 +122,13 @@
     <Property Name="MoTa" Type="nvarchar(max)" />
     <Property Name="MaLoaiTin" Type="int" />
     <Property Name="NguoiTao" Type="int" />
+    <Property Name="TenNguoiTao" Type="nvarchar" MaxLength="200" />
     <Property Name="NgayTao" Type="datetime" />
     <Property Name="NgayCapNhat" Type="datetime" />
     <Property Name="NguoiCapNhat" Type="int" />
+    <Property Name="TenNguoiCapNhat" Type="nvarchar" MaxLength="200" />
     <Property Name="NguoiDuyet" Type="int" />
+    <Property Name="TenNguoiDuyet" Type="nvarchar" MaxLength="200" />
     <Property Name="NgayDuyet" Type="datetime" />
     <Property Name="HienThi" Type="bit" />
     <Property Name="LuotXem" Type="int" />
@@ -136,6 +139,7 @@
     <Property Name="NgayHetHanTrangChu" Type="datetime" />
     <Property Name="Khoa" Type="bit" />
     <Property Name="NguoiKhoa" Type="int" />
+    <Property Name="TenNguoiKhoa" Type="nvarchar" MaxLength="200" />
     <Property Name="NgayKhoa" Type="datetime" />
     <Property Name="DuongDan" Type="varchar" MaxLength="30" />
     <Property Name="NgayDang" Type="int" />
