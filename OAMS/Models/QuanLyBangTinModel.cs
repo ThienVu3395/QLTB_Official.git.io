@@ -33,6 +33,7 @@ namespace OAMS.Models
         public string NguoiCapNhat { get; set; }
         public string TenNguoiCapNhat { get; set; }
         public string NguoiDuyet { get; set; }
+        public DateTime? NgayDuyet { get; set; }
         public string TenNguoiDuyet{ get; set; }
         public Nullable<System.DateTime> NgayCapNhat { get; set; }
         public int? LuotXem { get; set; }

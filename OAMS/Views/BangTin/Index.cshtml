@@ -613,7 +613,7 @@
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
-                                                        <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="108">
+                                                        <img class="media-object width-100" src="~/Content/image/{{item.HinhAnh}}" height="103">
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-9">
@@ -636,7 +636,6 @@
                                                     </h4>
                                                     <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiTao}}
                                                     <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnFullDateTime(item.NgayTao)}}
-                                                    <i class="ace-icon fa fa-edit orange2"></i> {{item.NgayCapNhat != null ? ReturnFullDateTime(item.NgayCapNhat) : 'Chưa Cập Nhật...'}}
                                                     <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 80)}}{{SliceString(item.MoTa,80)}}</b></a></p>
                                                     <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
                                                         Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -669,7 +668,6 @@
                                             </h4>
                                             <i class="ace-icon fa fa-user orange2"></i> {{item.TenNguoiTao}}
                                             <i class="ace-icon fa fa-calendar orange2"></i> {{ReturnFullDateTime(item.NgayTao)}}
-                                            <i class="ace-icon fa fa-edit orange2"></i> {{item.NgayCapNhat != null ? ReturnFullDateTime(item.NgayCapNhat) : 'Chưa Cập Nhật...'}}
                                             <p style="min-height:20px"><a title="{{item.MoTa}}" class="no-deco" style="color:black" data-rel="tooltip" href="#"><b>{{capitalize(item.MoTa | limitTo : 100)}}{{SliceString(item.MoTa,100)}}</b></a></p>
                                             <a class="btn btn-white btn-minier btn-success" href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}">
                                                 Xem Chi Tiết <i class="ace-icon fa fa-arrow-right icon-on-right"></i>

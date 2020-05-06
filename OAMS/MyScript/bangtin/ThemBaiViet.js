@@ -38,11 +38,11 @@
             res.then(
                 function succ(response) {
                     $scope.DanhSachLoaiTin = response.data;
-                    let wall = {
-                        MaLoaiTin: 0,
-                        Ten: "Tường Công Ty",
-                    }
-                    $scope.DanhSachLoaiTin.push(wall);
+                    //let wall = {
+                    //    MaLoaiTin: 0,
+                    //    Ten: "Tường Công Ty",
+                    //}
+                    //$scope.DanhSachLoaiTin.push(wall);
                     $scope.MaLoaiTin = $scope.DanhSachLoaiTin[0];
                 },
 

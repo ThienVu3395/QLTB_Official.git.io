@@ -284,11 +284,11 @@
         </div>
 
         <div class="detailCT">
-            <h1>{{ThongTinBV.TieuDe}}</h1>
+            <h1>{{capitalize(ThongTinBV.TieuDe)}}</h1>
             <p>Đăng Bởi : {{ThongTinBV.TenNguoiTao}} - Ngày đăng : {{ReturnFullDateTime(ThongTinBV.NgayTao)}}</p>
             <p>
                 <b>
-                    {{ThongTinBV.MoTa}}
+                    {{capitalize(ThongTinBV.MoTa)}}
                 </b>
             </p>
             <p ng-bind-html="ThongTinBV.NoiDung"></p>
@@ -416,7 +416,7 @@
                            title="{{item.TieuDe}}"
                            data-rel="tooltip"
                            ng-show="item.LuotXem == 0">
-                            {{item.TieuDe}}
+                            {{capitalize(item.TieuDe)}}
                         </a>
 
                         <a href="@Url.Action("ChiTietBaiViet","BangTin")?MaTinTuc={{item.MaTinTuc}}"
@@ -424,7 +424,7 @@
                            title="{{item.TieuDe}}"
                            data-rel="tooltip"
                            ng-show="item.LuotXem > 0">
-                            {{item.TieuDe}}
+                            {{capitalize(item.TieuDe)}}
                         </a>
                     </h4>
                 </div>

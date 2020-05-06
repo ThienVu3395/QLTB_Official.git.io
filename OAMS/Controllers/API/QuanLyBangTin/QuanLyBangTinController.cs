@@ -107,6 +107,8 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                 tinTuc.NgayTao = dsTin.NgayTao;
                 tinTuc.NgayCapNhat = dsTin.NgayCapNhat;
                 tinTuc.TenNguoiTao = dsTin.TenNguoiTao;
+                tinTuc.TenNguoiDuyet = dsTin.TenNguoiDuyet;
+                tinTuc.NgayDuyet = dsTin.NgayDuyet;
                 tinTuc.NgayHetHan = dsTin.NgayHetHan;
                 tinTuc.NgayHetHanTinMoi = dsTin.NgayHetHanTinMoi;
                 tinTuc.NgayHetHanTrangChu = dsTin.NgayHetHanTrangChu;
@@ -252,7 +254,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.MaLoaiTin = item.GroupId;
                     tin.HienThi = item.IsApproved;
                     tin.NgayTao = item.CreatedDate;
-                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.TenNguoiTao = item.CreatedUser;
                     tin.NgayCapNhat = item.LastUpdated;
                     tin.CountTin = dsTin.Count;
                     var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == item.PostId).ToList();
@@ -315,7 +317,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.MaLoaiTin = item.GroupId;
                     tin.NgayTao = item.CreatedDate;
                     tin.HienThi = item.IsApproved;
-                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.TenNguoiTao = item.CreatedUser;
                     tin.NgayCapNhat = item.LastUpdated;
                     tin.CountTin = dsTin.Count;
                     var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == item.PostId).ToList();
@@ -378,7 +380,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     tin.MaLoaiTin = -1;
                     tin.HienThi = item.IsApproved;
                     tin.NgayTao = item.CreatedDate;
-                    tin.TenNguoiDung = item.CreatedUser;
+                    tin.TenNguoiTao = item.CreatedUser;
                     tin.NgayCapNhat = item.LastUpdated;
                     tin.CountTin = dsTin.Count;
                     var dsTapTin = dbContext.NEWSTUONG_TinDinhKem.Where(x => x.PostId == item.PostId).ToList();
