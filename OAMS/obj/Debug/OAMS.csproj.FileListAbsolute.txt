@@ -700,6 +700,7 @@ C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.dll.config
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\OAMS.pdb
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Antlr3.Runtime.dll
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Dapper.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\EntityFramework.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\EntityFramework.SqlServer.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.AI.Agent.Intercept.dll
@@ -741,6 +742,7 @@ C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.WebPages.Deployment
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.WebPages.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.WebPages.Razor.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\WebGrease.dll
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Dapper.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.AI.Web.xml
