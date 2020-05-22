@@ -17,8 +17,15 @@
     .form-horizontal .control-label {
         text-align: left !important;
     }
+
+    .some-pdf-container {
+        width: 100%;
+        height: 100%;
+        background-color: #d7d4d4 !important;
+    }
 </style>
-<form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" style="height: calc(100%) !important; " ng-valid name="formedit">
+<link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
+<form class="form-horizontal form-label-left" style="height: calc(100%) !important; " ng-valid name="formedit">
     <div class="modal-header">
         <h3 style="font-size: 16px;" class="modal-title" id="modal-title">Văn bản đến <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
     </div>
@@ -36,7 +43,7 @@
                             <table class="table">
                                 <tbody>
                                     <tr ng-repeat="item in uploader.queue">
-                                        <td><strong>{{ item.file.name }}</strong></td>
+                                        <td><strong ng-click="getdatafilePDF(item.file.name)">{{ item.file.name }}</strong></td>
                                         <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
                                         <td class="text-center;" style="width:50px;">
                                             <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
@@ -44,7 +51,7 @@
                                             <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
                                         </td>
                                         <td style="width:50px;">
-                                            <button type="button" class="btn btn-xs btn-danger " ng-click="item.remove()">
+                                            <button type="button" class="btn btn-xs btn-danger" ng-click="removeFile(item)">
                                                 <span class="glyphicon glyphicon-trash"></span> Xóa
                                             </button>
                                         </td>
@@ -72,61 +79,65 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã định danh:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.DOCCODE" />
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã hồ sơ:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.FILECODE" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Tên loại:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <select class="form-control">
-                            <option ng-repeat="item in $ctrl.pControl[2].dictionary">{{item.VALUENAME}}</option>
-                        </select>
+                        @*<select class="form-control" ng-model="$ctrl.datasumitformedit.TYPENAME">
+                                <option value="">Loại Văn Bản</option>
+                                <option ng-repeat="i in $ctrl.Dataloaivanban" value="{{i.MALOAI}}">{{i.TENLOAI}}</option>
+                            </select>*@
+                        <select class="form-control" ng-model="TYPENAME" ng-options="item as item.TENLOAI for item in $ctrl.Dataloaivanban track by item.MALOAI"></select>
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Số, ký hiệu:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.CODENUMBER" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày tháng:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.ISSUEDDATE" />
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngôn ngữ:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <select class="form-control">
-                            <option>Tiếng Việt</option>
-                            <option>Tiếng Anh</option>
-                        </select>
+                        @*<select class="form-control" ng-model="$ctrl.datasumitformedit.LANGUAGE">*@
+                        @*<select class="form-control">
+                                <option value="1">Tiếng Việt</option>
+                                <option value="2">Tiếng Anh</option>
+                            </select>*@
+                        <select class="form-control" ng-model="LANGUAGE" ng-options="item as item.TEN for item in $ctrl.Datangonngu track by item.ID"></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Cơ quan ban hành:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <input class="form-control" placeholder="..." />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.ORGANNAME" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Trích yếu:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:70px;" class="form-control" placeholder="Trích yếu"></textarea>
+                        <textarea style="height:70px;" class="form-control" placeholder="Trích yếu" ng-model="$ctrl.datasumitformedit.SUBJECT"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ghi chú:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:40px;" class="form-control" placeholder="Ghi chú"></textarea>
+                        <textarea style="height:40px;" class="form-control" placeholder="Ghi chú" ng-model="$ctrl.datasumitformedit.DESCRIPTION"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày đến:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="ctrol.values"  uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
+                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.ARRIVALDATE" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
@@ -135,28 +146,30 @@
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mức độ khẩn:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <select class="form-control">
-                            <option>Bình thường</option>
-                            <option>Hỏa tốc</option>
-                            <option>Khẩn</option>
-                        </select>
+                        @*<select class="form-control" ng-model="$ctrl.datasumitformedit.PRIORITY">
+                            <option value="1">Bình thường</option>
+                            <option value="2">Hỏa tốc</option>
+                            <option value="3">Khẩn</option>
+                        </select>*@
+                        <select class="form-control" ng-model="PRIORITY" ng-options="item as item.TEN for item in $ctrl.Datamucdo track by item.ID"></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Sổ văn bản:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <select class="form-control">
-                            <option>Sổ CV Đến</option>
-                            <option>Sổ Thông báo</option>
+                        <select class="form-control" ng-model="SOVANBANID" ng-options="item as item.TENSO for item in $ctrl.Datasovanban track by item.ID">
+                            @*<option value="1">Sổ CV Đến</option> cái này phải load từ biet ruitable sổbiet rui em hieu nmay cai nay
+                                <option value="2">Sổ CV Đi</option>
+                                <option value="3">Sổ CV Đảng Bộ</option>*@
                         </select>
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Số đến:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input class="form-control" type="number" placeholder="..." />
+                            <input class="form-control" type="number" placeholder="..." ng-model="$ctrl.datasumitformedit.ARRIVALNUMBER" />
                             <span class="input-group-btn">
                                 <input class="form-control" style="width:70px;" title="Số phụ" data-toggle="tooltip" placeholder="..." />
-                            </span>                           
+                            </span>
                         </div>
                     </div>
 
@@ -164,221 +177,34 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Người ký:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.FULLNAMESIGNER" />
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Chức vụ:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.POSITIONSIGNER" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Nơi nhận:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:40px;" class="form-control" placeholder="Nơi nhận"></textarea>
+                        <textarea style="height:40px;" class="form-control" placeholder="Nơi nhận" ng-model="$ctrl.datasumitformedit.TOPLACES"></textarea>
                     </div>
                 </div>
-                <div ng-repeat="grItem in $ctrl.pControl|filter:filterFn">
-                    <div class="form-group" ng-if="grItem.viewed === '0' && $ctrl.pControl[$index + 1].viewed === '1'" ng-init="group = $ctrl.pControl.slice($index, $index + 2); ">
-                        <div ng-repeat="ctrol in group">
-                            <div ng-switch="ctrol.ctype">
-                                <div ng-switch-when="text">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <input ng-model="ctrol.values" ng-disabled="ctrol.disable" type="text" class="form-control" ng-required="{{ctrol.required}}">
-                                    </div>
-                                </div>
-                                <div ng-switch-when="number">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <input ng-model="ctrol.values" ng-disabled="ctrol.disable" type="number" class="form-control" ng-required="{{ctrol.required}}">
-                                    </div>
-                                </div>
-                                <div ng-switch-when="select">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <select class="form-control" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}">
-                                            <option ng-repeat="item in ctrol.dictionary" ng-required="{{ctrol.required}}">{{item.VALUENAME}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div ng-switch-when="calendar">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <p class="input-group">
-                                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-sm btn-primary"  ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span>
-                                        </p>
-                                        @*<input ng-model="ctrol.values" ng-disabled="ctrol.disable" type="date" class="form-control" ng-required="{{ctrol.required}}">*@
-                                    </div>
 
-                                </div>
-                                <div ng-switch-when="textarea">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <textarea ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" class="resizable_textarea form-control"></textarea>
-                                    </div>
-                                </div>
-                                <div ng-switch-when="autocomplete">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <input type="text" ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" ng-model-options="modelOptions"
-                                               uib-typeahead="state.VALUENAME for state in  ctrol.dictionary | filter:{'VALUENAME':$viewValue}| limitTo:8" class="form-control" />
-                                    </div>
-                                </div>
-                                <div ng-switch-when="check">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <input type="checkbox" ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" class="form-control" style="height:20px;" />
-                                    </div>
-                                </div>
-                                <div ng-switch-when="foreign">
-                                    <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                    <div class="{{ctrol.width}}">
-                                        <select class="form-control" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}">
-                                            <option ng-repeat="item in ctrol.dictionary" ng-required="{{ctrol.required}}" value="{{item.CODE}}">{{item.VALUENAME}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-if="grItem.viewed === '0' && $ctrl.pControl[$index + 1].viewed === '0'" ng-init="ctrol = grItem;">
-                        <div ng-switch="ctrol.ctype">
-                            <div ng-switch-when="text">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <input ng-model="ctrol.values" type="text" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" class="form-control" placeholder="">
-                                </div>
-                            </div>
-                            <div ng-switch-when="number">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?"(*)": "" }}:</label>
-                                <div class="{{ctrol.width}}">
-                                    <input ng-model="ctrol.values" type="number" ng-disabled="ctrol.disable" class="form-control" ng-required="{{ctrol.required}}">
-                                </div>
-                            </div>
-                            <div ng-switch-when="select">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <select class="form-control" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}">
-                                        <option ng-repeat="item in ctrol.dictionary" ng-required="{{ctrol.required}}">{{item.VALUENAME}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div ng-switch-when="calendar">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}} ">
-                                    <p class="input-group">
-                                        <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-sm  btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div ng-switch-when="textarea">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <textarea ng-model="ctrol.values" ng-disabled="ctrol.disable" class="resizable_textarea form-control" ng-required="{{ctrol.required}}"></textarea>
-                                </div>
-                            </div>
-                            <div ng-switch-when="autocomplete">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <input type="text" ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" ng-model-options="modelOptions"
-                                           uib-typeahead="state.VALUENAME for state in  ctrol.dictionary | filter:{'VALUENAME':$viewValue}| limitTo:8" class="form-control" />
-                                </div>
-                            </div>
-                            <div ng-switch-when="check">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <input type="checkbox" ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" class="form-control" style="height:20px;" />
-                                </div>
-                            </div>
-                            <div ng-switch-when="foreign">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <select class="form-control" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}">
-                                        <option ng-repeat="item in ctrol.dictionary" ng-required="{{ctrol.required}}" value="{{item.CODE}}">{{item.VALUENAME}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-if="grItem.viewed === '0' && $index === ($ctrl.pControl.length-1)" ng-init="ctrol = grItem;">
-                        <div ng-switch="ctrol.ctype">
-                            <div ng-switch-when="text">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <input ng-model="ctrol.values" type="text" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" class="form-control">
-                                </div>
-                            </div>
-                            <div ng-switch-when="number">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <input ng-model="ctrol.values" type="number" ng-disabled="ctrol.disable" class="form-control" ng-required="{{ctrol.required}}">
-                                </div>
-                            </div>
-                            <div ng-switch-when="select">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <select class="form-control" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}">
-                                        <option ng-repeat="item in ctrol.dictionary" ng-required="{{ctrol.required}}">{{item.VALUENAME}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div ng-switch-when="calendar">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <p class="input-group">
-                                        <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-sm  btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div ng-switch-when="textarea">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}} {{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <textarea ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" class="resizable_textarea form-control"></textarea>
-                                </div>
-                            </div>
-                            <div ng-switch-when="autocomplete">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <input type="text" ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" ng-model-options="modelOptions"
-                                           uib-typeahead="state.VALUENAME for state in  ctrol.dictionary | filter:{'VALUENAME':$viewValue}| limitTo:8" class="form-control" />
-                                </div>
-                            </div>
-                            <div ng-switch-when="check">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <input type="checkbox" ng-model="ctrol.values" ng-disabled="ctrol.disable" ng-required="{{ctrol.required}}" class="form-control" style="height:20px;" />
-                                </div>
-                            </div>
-                            <div ng-switch-when="foreign">
-                                <label class="control-label {{ctrol.widthlabel}}">{{ctrol.label}}{{ctrol.required?":*": ": &nbsp;" }}</label>
-                                <div class="{{ctrol.width}}">
-                                    <select class="form-control" ng-disabled="ctrol.disable" ng-model="ctrol.values" ng-required="{{ctrol.required}}">
-                                        <option ng-repeat="item in ctrol.dictionary" ng-required="{{ctrol.required}}" value="{{item.CODE}}">{{item.VALUENAME}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-12 col-sm-12">
                     <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
+                        <button ng-click="$ctrl.sumitformedit()" type="submit" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
                         <button class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận và thêm mới</button>
-                        <button class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
                         <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-5 col-xs-12" style="height:calc(100%); border: solid 1px #808080;">
 
+            <div class="col-md-5 col-sm-5 col-xs-12" style="height:calc(100%); border: solid 1px #808080;">
+                @*<iframe src=""></iframe>*@
+                <div class="some-pdf-container">
+                    <pdfjs-viewer data="$ctrl.pdf.data" print="false" download="false" open="false" pageview="$ctrl.pageview" update-fn="$ctrl.onPageLoad"></pdfjs-viewer>
+                </div>
             </div>
 
         </div>

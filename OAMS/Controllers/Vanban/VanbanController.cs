@@ -14,6 +14,14 @@ namespace OAMS.Controllers.Vanban
         {
             return View();
         }
+        public ActionResult Danhsachvanbanden()
+        {
+            return View();
+        }
+        public ActionResult Quantrivanbanden()
+        {
+            return View();
+        }
         public ActionResult Danhsachvanban()
         {
             return View();

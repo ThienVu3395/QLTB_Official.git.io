@@ -5,6 +5,7 @@
     .controller("VanbanCtrl", ["$scope", "$timeout", "$http", "$uibModal", "$document", "blockUI", "appSettings", "loginservice", "userProfile",
 function ($scope, $timeout, $http, $uibModal, $document, blockUI, appSettings, loginservice, userProfile) {
     var tree;
+
     $scope.nodeselect = {};
     $scope.actionbp = true;
     $scope.my_tree_handler = function (branch) {
@@ -57,6 +58,7 @@ function ($scope, $timeout, $http, $uibModal, $document, blockUI, appSettings, l
             });
         }
     }
+
     $scope.opennewVanban = function () {
         var parentElem =
           angular.element($document[0].querySelector('.main-content'));

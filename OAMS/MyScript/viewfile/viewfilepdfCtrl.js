@@ -1,10 +1,10 @@
-﻿
-(function () {
+﻿(function () {
     "use strict"
     angular.module("oamsapp")
     .controller('viewfilepdfCtrl', ["$scope", "$http", "$uibModalInstance", "blockUI", "appSettings", "loginservice", "userProfile", "idselect",
 function ($scope, $http, $uibModalInstance, blockUI, appSettings, loginservice, userProfile, idselect) {
     var $ctrl = this;
+
     $ctrl.sumitformedit = function () {
 
     }
@@ -29,6 +29,7 @@ function ($scope, $http, $uibModalInstance, blockUI, appSettings, loginservice, 
         blockUI.start();
         var resp = loginservice.getdatafile("api/viewfileonline/getviewpdf?id=1");
         resp.then(function (response) {
+            console.log(response.data);
             $ctrl.pdf.data = new Uint8Array(response.data);
             if (!$ctrl.reload)
                 $ctrl.pageview = 1;

@@ -261,6 +261,7 @@
     <Compile Include="Controllers\API\QuanLyBangTin\AdminBangTinController.cs" />
     <Compile Include="Controllers\API\QuanLyBangTin\QuanLyBangTinController.cs" />
     <Compile Include="Controllers\API\QuanLyBangTin\ThemTinTucController.cs" />
+    <Compile Include="Controllers\API\QuanLyVanBan\QLVanBanAPIController.cs" />
     <Compile Include="Controllers\BangTin\BangTinController.cs" />
     <Compile Include="Controllers\BNLE\Class1.cs" />
     <Compile Include="Controllers\BNLE\FunctionClass.cs" />
@@ -424,6 +425,8 @@
     <Compile Include="Models\SYSTEM.cs" />
     <Compile Include="Models\TaiLieuModel.cs" />
     <Compile Include="Models\UserInfo\UserParModel.cs" />
+    <Compile Include="Models\vanbanModel.cs" />
+    <Compile Include="Models\VanBanViewModel.cs" />
     <Compile Include="MyHub\ChatHub.cs" />
     <Compile Include="MyHub\FTPControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1899,6 +1902,7 @@
     <Content Include="Views\BangTin\SuaBaiVietTuong.cshtml" />
     <Content Include="Views\BangTin\Tuong.cshtml" />
     <Content Include="Views\TaiLieu\Index.cshtml" />
+    <Content Include="Views\Vanban\Danhsachvanbanden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataConversation\" />

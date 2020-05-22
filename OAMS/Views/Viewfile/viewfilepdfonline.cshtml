@@ -10,7 +10,7 @@
 </style>
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
 <form class="form-horizontal form-label-left" ng-submit="$ctrl.sumitformedit()" style="height: calc(100%) !important; " ng-valid name="formedit">
-    
+
     <div class="modal-header">
         <h3 style="font-size: 16px;" class="modal-title" id="modal-title">Xem file PDF <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
     </div>
@@ -19,7 +19,6 @@
             <div class="some-pdf-container">
                 <pdfjs-viewer data="$ctrl.pdf.data" print="false" download="false" open="false" pageview="$ctrl.pageview" update-fn="$ctrl.onPageLoad"></pdfjs-viewer>
             </div>
-                
-            </div>
+        </div>
     </div>
 </form>
