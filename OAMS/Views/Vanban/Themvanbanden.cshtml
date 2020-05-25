@@ -24,10 +24,11 @@
         background-color: #d7d4d4 !important;
     }
 </style>
+
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
 <form class="form-horizontal form-label-left" style="height: calc(100%) !important; " ng-valid name="formedit">
     <div class="modal-header">
-        <h3 style="font-size: 16px;" class="modal-title" id="modal-title">Văn bản đến <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+        <h3 style="font-size: 16px;" class="modal-title" id="modal-title">Thêm Văn Bản <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
     </div>
     <div class="modal-body" id="modal-body" style="height: calc(100% - 32px) !important; padding: 4px 10px;">
         <div class="row" style="height:calc(100%);">
@@ -43,13 +44,23 @@
                             <table class="table">
                                 <tbody>
                                     <tr ng-repeat="item in uploader.queue">
-                                        <td><strong ng-click="getdatafilePDF(item.file.name)">{{ item.file.name }}</strong></td>
+                                        <td>
+                                            <strong>
+                                                {{ item.file.name }}
+                                            </strong>
+                                        </td>
                                         <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
                                         <td class="text-center;" style="width:50px;">
                                             <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
                                             <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
                                             <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
                                         </td>
+                                        <td style="width:50px;">
+                                            <button type="button" class="btn btn-xs btn-info" ng-click="getdatafilePDF(item.file.name)">
+                                                <span class="glyphicon glyphicon-eye-open"></span> Xem
+                                            </button>
+                                        </td>
+
                                         <td style="width:50px;">
                                             <button type="button" class="btn btn-xs btn-danger" ng-click="removeFile(item)">
                                                 <span class="glyphicon glyphicon-trash"></span> Xóa
@@ -69,13 +80,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
-                    <div class="btn-group pull-right" style="margin-bottom:10px;font-size:9pt;">
-                        <button class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận và thêm mới</button>
-                        <button class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
-                        <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
-                    </div>
-                </div>
+                @*<div class="col-md-12 col-sm-12">
+                        <div class="btn-group pull-right" style="margin-bottom:10px;font-size:9pt;">
+                            <button class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận và thêm mới</button>
+                            <button class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
+                            <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
+                        </div>
+                    </div>*@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã định danh:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
@@ -137,20 +148,19 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày đến:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.ARRIVALDATE" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" />
+                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.ARRIVALDATE" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" readonly/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </div>
-
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mức độ khẩn:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         @*<select class="form-control" ng-model="$ctrl.datasumitformedit.PRIORITY">
-                            <option value="1">Bình thường</option>
-                            <option value="2">Hỏa tốc</option>
-                            <option value="3">Khẩn</option>
-                        </select>*@
+                                <option value="1">Bình thường</option>
+                                <option value="2">Hỏa tốc</option>
+                                <option value="3">Khẩn</option>
+                            </select>*@
                         <select class="form-control" ng-model="PRIORITY" ng-options="item as item.TEN for item in $ctrl.Datamucdo track by item.ID"></select>
                     </div>
                 </div>
@@ -172,8 +182,8 @@
                             </span>
                         </div>
                     </div>
-
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Người ký:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">

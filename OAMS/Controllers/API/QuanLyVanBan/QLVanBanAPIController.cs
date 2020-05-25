@@ -1,6 +1,5 @@
 ﻿using OAMS.Database;
 using OAMS.Models;
-using OAMS.Models.vanbanModel;
 using System;
 using System.Data.SqlClient;
 using System.IO;
@@ -47,6 +46,44 @@ namespace OAMS.Controllers.API
         //    }
         //}
 
+        //[HttpPost]
+        //[Route("ThemMoiVanBanDen")]
+        //public IHttpActionResult ThemMoiVanBanDen(vanbanModel par)
+        //{
+        //    dbOAMSEntities db = new dbOAMSEntities();
+        //    try
+        //    {
+        //        string username = User.Identity.Name;
+        //        var id = db.Database.SqlQuery<decimal>("INSERT INTO doc.tbVanbanden( DOCCODE ,FILECODE,TYPENAME,CODENUMBER,ISSUEDDATE ,LANGUAGE,ORGANNAME,SUBJECT,DESCRIPTION,ARRIVALDATE,PRIORITY,MOREINFO1,ARRIVALNUMBER,FULLNAMESIGNER,POSITIONSIGNER,TOPLACES,MOREINFO2,SOVANBANID)" +
+        //            "values(@DOCCODE ,@FILECODE,@TYPENAME, @CODENUMBER,@ISSUEDDATE,@LANGUAGE,@ORGANNAME, @SUBJECT,@DESCRIPTION ,@ARRIVALDATE,@PRIORITY,@MOREINFO1,@ARRIVALNUMBER ,@FULLNAMESIGNER,@POSITIONSIGNER  ,@TOPLACES ,@MOREINFO2,1) ; SELECT IDENT_CURRENT('doc.tbVanbanden') AS Current_Identity;",
+
+        //           new SqlParameter("@DOCCODE", par.DOCCODE),
+        //           new SqlParameter("@FILECODE", par.FILECODE.checkIsNull()),
+        //           new SqlParameter("@TYPENAME", par.TYPENAME.checkIsNull()),
+        //           new SqlParameter("@CODENUMBER", par.CODENUMBER.checkIsNull()),
+        //           new SqlParameter("@ISSUEDDATE", par.ISSUEDDATE.checkDateTimeIsNull()),
+        //           new SqlParameter("@LANGUAGE", par.LANGUAGE.checkIsNull()),
+        //           new SqlParameter("@ORGANNAME", par.ORGANNAME.checkIsNull()),
+        //           new SqlParameter("@SUBJECT", par.SUBJECT.checkIsNull()),
+        //           new SqlParameter("@DESCRIPTION", par.DESCRIPTION.checkIsNull()),
+        //           new SqlParameter("@ARRIVALDATE", par.ARRIVALDATE.checkDateTimeIsNull()),
+        //           new SqlParameter("@PRIORITY", par.PRIORITY.checkIsNumber()),
+        //           new SqlParameter("@MOREINFO1", par.MOREINFO1.checkIsNull()),
+        //           new SqlParameter("@ARRIVALNUMBER", par.ARRIVALNUMBER.checkIsNull()),
+        //           new SqlParameter("@FULLNAMESIGNER", par.FULLNAMESIGNER.checkIsNull()),
+        //           new SqlParameter("@POSITIONSIGNER", par.POSITIONSIGNER.checkIsNull()),
+        //           new SqlParameter("@TOPLACES", par.TOPLACES.checkIsNull()),
+
+        //           new SqlParameter("@MOREINFO2", username)).First();
+
+        //        return Ok(id);
+        //    }
+        //    catch (Exception ee)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
+
         [HttpGet]
         [Route("getSoVanBan")]
         public IHttpActionResult getSoVanBan()
@@ -72,40 +109,69 @@ namespace OAMS.Controllers.API
         }
 
         [HttpPost]
-        [Route("ThemMoiVanBanDen")]
-        public IHttpActionResult ThemMoiVanBanDen(vanbanModel par)
+        [Route("ThemVanBanDen")]
+        public IHttpActionResult ThemVanBanDen(VanBanViewModel par)
         {
-            dbOAMSEntities db = new dbOAMSEntities();
-            try
+            using (IDbConnection db = new SqlConnection(_cnn))
             {
-                string username = User.Identity.Name;
-                var id = db.Database.SqlQuery<decimal>("INSERT INTO doc.tbVanbanden( DOCCODE ,FILECODE,TYPENAME,CODENUMBER,ISSUEDDATE ,LANGUAGE,ORGANNAME,SUBJECT,DESCRIPTION,ARRIVALDATE,PRIORITY,MOREINFO1,ARRIVALNUMBER,FULLNAMESIGNER,POSITIONSIGNER,TOPLACES,MOREINFO2,SOVANBANID)" +
-                    "values(@DOCCODE ,@FILECODE,@TYPENAME, @CODENUMBER,@ISSUEDDATE,@LANGUAGE,@ORGANNAME, @SUBJECT,@DESCRIPTION ,@ARRIVALDATE,@PRIORITY,@MOREINFO1,@ARRIVALNUMBER ,@FULLNAMESIGNER,@POSITIONSIGNER  ,@TOPLACES ,@MOREINFO2,1) ; SELECT IDENT_CURRENT('doc.tbVanbanden') AS Current_Identity;",
+                var parameters = new DynamicParameters();
+                parameters.Add("@DOCCODE", par.DOCCODE);
+                parameters.Add("@FILECODE", par.FILECODE);
+                parameters.Add("@DOCORDINAL", par.DOCORDINAL);
+                parameters.Add("@TYPENAME", par.TYPENAME);
+                parameters.Add("@CODENUMBER", par.CODENUMBER);
+                parameters.Add("@CODENOTATION", par.CODENOTATION);
+                parameters.Add("@ISSUEDDATE", par.ISSUEDDATE);
+                parameters.Add("@LANGUAGE", par.LANGUAGE);
+                parameters.Add("@ORGANNAME", par.ORGANNAME);
+                parameters.Add("@SUBJECT", par.SUBJECT);
+                parameters.Add("@PAGEMOUNT", par.PAGEMOUNT);
+                parameters.Add("@DESCRIPTION", par.DESCRIPTION);
+                parameters.Add("@ARRIVALDATE", par.ARRIVALDATE);
+                parameters.Add("@ARRIVALNUMBER", par.ARRIVALNUMBER);
+                parameters.Add("@POSITIONSIGNER", par.POSITIONSIGNER);
+                parameters.Add("@FULLNAMESIGNER", par.FULLNAMESIGNER);
+                parameters.Add("@PRIORITY", par.PRIORITY);
+                parameters.Add("@TOPLACES", par.TOPLACES);
+                parameters.Add("@TRACEHEADER", par.TRACEHEADER);
+                parameters.Add("@DUEDATE", par.DUEDATE);
+                parameters.Add("@SOVANBANID", par.SOVANBANID);
+                parameters.Add("@MOREINFO1", par.MOREINFO1);
+                parameters.Add("@MOREINFO2", par.MOREINFO2);
+                parameters.Add("@MOREINFO3", par.MOREINFO3);
+                parameters.Add("@MOREINFO4", par.MOREINFO4);
+                parameters.Add("@MOREINFO5", par.MOREINFO5);
 
-                   new SqlParameter("@DOCCODE", par.DOCCODE),
-                   new SqlParameter("@FILECODE", par.FILECODE.checkIsNull()),
-                   new SqlParameter("@TYPENAME", par.TYPENAME.checkIsNull()),
-                   new SqlParameter("@CODENUMBER", par.CODENUMBER.checkIsNull()),
-                   new SqlParameter("@ISSUEDDATE", par.ISSUEDDATE.checkDateTimeIsNull()),
-                   new SqlParameter("@LANGUAGE", par.LANGUAGE.checkIsNull()),
-                   new SqlParameter("@ORGANNAME", par.ORGANNAME.checkIsNull()),
-                   new SqlParameter("@SUBJECT", par.SUBJECT.checkIsNull()),
-                   new SqlParameter("@DESCRIPTION", par.DESCRIPTION.checkIsNull()),
-                   new SqlParameter("@ARRIVALDATE", par.ARRIVALDATE.checkDateTimeIsNull()),
-                   new SqlParameter("@PRIORITY", par.PRIORITY.checkIsNumber()),
-                   new SqlParameter("@MOREINFO1", par.MOREINFO1.checkIsNull()),
-                   new SqlParameter("@ARRIVALNUMBER", par.ARRIVALNUMBER.checkIsNull()),
-                   new SqlParameter("@FULLNAMESIGNER", par.FULLNAMESIGNER.checkIsNull()),
-                   new SqlParameter("@POSITIONSIGNER", par.POSITIONSIGNER.checkIsNull()),
-                   new SqlParameter("@TOPLACES", par.TOPLACES.checkIsNull()),
+                if (db.State == System.Data.ConnectionState.Closed)
+                {
+                    db.Open();
+                }
 
-                   new SqlParameter("@MOREINFO2", username)).First();
+                var returnV = db.Query<VanBanViewModel>("procThemVanBanDen", parameters, null, true, null, System.Data.CommandType.StoredProcedure).SingleOrDefault();
+                if(par.FileDinhKem.Count > 0)
+                {
+                    foreach(var item in par.FileDinhKem)
+                    {
+                        var param = new DynamicParameters();
+                        param.Add("@LOAI", item.LOAI);
+                        param.Add("@VANBANID", returnV.ID);
+                        param.Add("@TENFILE", item.TENFILE);
+                        param.Add("@MOTA", item.MOTA);
+                        param.Add("@NGAYTAO", DateTime.Now);
+                        param.Add("@TRANGTHAI", item.TRANGTHAI);
+                        param.Add("@LOAIFILE", item.LOAIFILE);
+                        param.Add("@SIZEFILE", item.SIZEFILE);
+                        param.Add("@VITRIID", item.VITRIID);
 
-                return Ok(id);
-            }
-            catch (Exception ee)
-            {
-                return BadRequest();
+                        if (db.State == System.Data.ConnectionState.Closed)
+                        {
+                            db.Open();
+                        }
+
+                        db.Execute("procThemFileDinhKem", param, null, null, System.Data.CommandType.StoredProcedure);
+                    }
+                }
+                return Ok("Thêm Văn Bản Thành Công");
             }
         }
 

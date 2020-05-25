@@ -39,8 +39,10 @@
                 };
 
                 $ctrl.Dataloaivanban = [];
+                
                 $ctrl.Datangonngu = [{ ID: 1, TEN: "Tiếng Việt" }, { ID: 2, TEN: "Tiếng Anh" }];
                 $scope.LANGUAGE = $ctrl.Datangonngu[0];
+                let FileDinhKem = [];
                 $ctrl.Datamucdo = [{ ID: 1, TEN: "Bình Thường" }, { ID: 2, TEN: "Hỏa Tốc" }, { ID: 3, TEN: "Khẩn" }];
                 $scope.PRIORITY = $ctrl.Datamucdo[0];
                 getSoVanBan();
@@ -70,25 +72,44 @@
                 }
 
                 $ctrl.sumitformedit = function () {
-                    if (uploader.queue.length > 0) {
-                        $scope.dataclickchonkh.HinhAnh1 = uploader.queue[0].file.name;
+                    //if (uploader.queue.length > 0) {
+                    //    $scope.dataclickchonkh.HinhAnh1 = uploader.queue[0].file.name;
 
+                    //}
+                    //else { alert("Chưa Upload file do mạng có vấn đề vui lòng cập nhật lại"); }
+                    //var resp = loginservice.postdata("api/QLVanBan/ThemMoiVanBanDen", $.param($ctrl.datasumitformedit));
+                    //resp.then(function (response) {
+                    //    $ctrl.datasumitformedit = response.data;
+                    //    alert("Cập nhật thành công!");
+                    //    $ctrl.resetForm();
+                    //    $ctrl.sumitformedit = {};
+
+
+                    //}
+                    //    , function errorCallback(response) {
+                    //        alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
+                    //    });
+
+                    $ctrl.datasumitformedit.TYPENAME = $scope.TYPENAME.TENLOAI;
+                    $ctrl.datasumitformedit.LANGUAGE = $scope.LANGUAGE.TEN;
+                    $ctrl.datasumitformedit.PRIORITY = $scope.PRIORITY.ID;
+                    $ctrl.datasumitformedit.SOVANBANID = $scope.SOVANBANID.ID;
+                    if (uploader.queue.length == 0) {
+                        alert("Xin vui lòng đính kèm File");
+                        return;
                     }
-                    else { alert("Chưa Upload file do mạng có vấn đề vui lòng cập nhật lại"); }
-                    var resp = loginservice.postdata("api/QLVanBan/ThemMoiVanBanDen", $.param($ctrl.datasumitformedit));
+                    $ctrl.datasumitformedit.FileDinhKem = FileDinhKem;
+                    var resp = loginservice.postdata("api/QLVanBan/ThemVanBanDen", $.param($ctrl.datasumitformedit));
                     resp.then(function (response) {
-                        $ctrl.datasumitformedit = response.data;
-                        alert("Cập nhật thành công!");
-                        $ctrl.resetForm();
-                        $ctrl.sumitformedit = {};
-
-
+                        alert(response.data);
+                        //$ctrl.datasumitformedit = response.data;
+                        //alert("Cập nhật thành công!");
+                        //$ctrl.resetForm();
+                        //$ctrl.sumitformedit = {};
                     }
                         , function errorCallback(response) {
                             alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
                         });
-
-
                 }
                 $ctrl.ok = function () {
                     $ctrl.presult = "0";
@@ -138,6 +159,16 @@
                 };
                 uploader.onAfterAddingFile = function (fileItem) {
                     fileItem.upload();
+                    let item = {
+                        LOAI : 100,
+                        TENFILE: fileItem.file.name,
+                        MOTA: "Mô Tả Test",
+                        TRANGTHAI: 0,
+                        LOAIFILE: fileItem.file.type,
+                        SIZEFILE: fileItem.file.size,
+                        VITRIID : 100
+                    }
+                    FileDinhKem.push(item);
                 };
                 uploader.onAfterAddingAll = function (addedFileItems) {
                     //console.info('onAfterAddingAll', addedFileItems);

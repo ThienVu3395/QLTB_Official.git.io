@@ -425,7 +425,6 @@
     <Compile Include="Models\SYSTEM.cs" />
     <Compile Include="Models\TaiLieuModel.cs" />
     <Compile Include="Models\UserInfo\UserParModel.cs" />
-    <Compile Include="Models\vanbanModel.cs" />
     <Compile Include="Models\VanBanViewModel.cs" />
     <Compile Include="MyHub\ChatHub.cs" />
     <Compile Include="MyHub\FTPControl.cs" />
