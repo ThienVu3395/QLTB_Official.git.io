@@ -24,7 +24,9 @@ function ($scope, $http, $uibModalInstance, blockUI, appSettings, loginservice, 
         download: 'false',  // get pdf source from a URL that points to a pdf
         print: 'false' // get pdf source from raw data of a pdf
     };
+
     getdatafilePDF();
+
     function getdatafilePDF() {
         blockUI.start();
         var resp = loginservice.getdatafile("api/viewfileonline/getviewpdf?id=1");
@@ -43,6 +45,7 @@ function ($scope, $http, $uibModalInstance, blockUI, appSettings, loginservice, 
             //document.title = 'FSM - Hệ thống quản trị số hóa tài liệu';
         });
     }
+
     $ctrl.onPageLoad = function (page) {
         $ctrl.page1 = page;
         $ctrl.pageview = page;

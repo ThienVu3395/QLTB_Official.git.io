@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -8,6 +10,40 @@ namespace OAMS
 {
     public static class SYSTEM
     {
+
+        public static void ConvertWordtoPDF(string sPath)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+
+            object oMissing = System.Reflection.Missing.Value;
+            FileInfo wordFile = new FileInfo(sPath);
+            word.Visible = false;
+            word.ScreenUpdating = false;
+
+
+            Object filename = (Object)wordFile.FullName;
+
+            Document doc = word.Documents.Open(ref filename, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+            doc.Activate();
+
+            object outputFileName = wordFile.FullName.Replace(".docx", ".pdf");
+            object fileFormat = WdSaveFormat.wdFormatPDF;
+
+            doc.SaveAs(ref outputFileName,
+                ref fileFormat, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+
+            object saveChanges = WdSaveOptions.wdDoNotSaveChanges;
+            ((_Document)doc).Close(ref saveChanges, ref oMissing, ref oMissing);
+            doc = null;
+            ((_Application)word).Quit(ref oMissing, ref oMissing, ref oMissing);
+            word = null;
+        }
         /// <summary>
         /// conver string to int
         /// </summary>
@@ -166,6 +202,18 @@ namespace OAMS
             {
                 DateTime date = str.ToDateTime();
                 return date.ToString(format);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static string DateToString(DateTime? time, string format)
+        {
+            try
+            {
+                return time.HasValue ? time.Value.ToString(format) : "";
             }
             catch (Exception ex)
             {

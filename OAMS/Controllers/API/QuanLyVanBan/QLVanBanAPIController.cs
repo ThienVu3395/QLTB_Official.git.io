@@ -1,4 +1,4 @@
-﻿using OAMS.Database;
+﻿//using OAMS.Database;
 using OAMS.Models;
 using System;
 using System.Data.SqlClient;
@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Dapper;
 using System.Data;
-using SautinSoft.Document;
+using Microsoft.Office.Interop.Word;
 
 namespace OAMS.Controllers.API
 {
@@ -109,6 +109,38 @@ namespace OAMS.Controllers.API
             }
         }
 
+        [HttpGet]
+        [Route("getVanBanDen")]
+        public IHttpActionResult getVanBanDen()
+        {
+            string query = "select * from doc.tbVanbanden";
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                var listVanBan = db.Query<VanBanViewModel>(query).ToList();
+                foreach (var item in listVanBan)
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@ID", item.ID);
+                    string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
+                    var listFile = db.Query<FileDinhKemViewModel>(qr,parameters).ToList();
+                    item.FileDinhKem = listFile;
+                }
+                return Ok(listVanBan);
+            }
+        }
+
+        [HttpGet]
+        [Route("getVanBanDi")]
+        public IHttpActionResult getVanBanDi()
+        {
+            string query = "select * from doc.tbVanbandi";
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                var aa = db.Query<LoaiVanBanViewModel>(query);
+                return Ok(aa);
+            }
+        }
+
         [HttpPost]
         [Route("ThemVanBanDen")]
         public IHttpActionResult ThemVanBanDen(VanBanViewModel par)
@@ -186,19 +218,12 @@ namespace OAMS.Controllers.API
 
             sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/");
 
-            //string date = DateTime.Now.Year.ToString();
-
-            //sPath = Path.Combine(sPath, date);
 
             if (!Directory.Exists(sPath))
 
             {
                 Directory.CreateDirectory(sPath);
             }
-
-            //date = DateTime.Now.Month.ToString();
-
-            //sPath = Path.Combine(sPath, date);
 
             if (!Directory.Exists(sPath))
 
@@ -220,10 +245,7 @@ namespace OAMS.Controllers.API
 
                         if(Path.GetExtension(sPath + hpf.FileName) == ".docx")
                         {
-                            //string fileChanged = Path.ChangeExtension(hpf.FileName, "pdf");
-                            //hpf.SaveAs(sPath + fileChanged);
-                            DocumentCore dc = DocumentCore.Load(sPath + Path.GetFileName(hpf.FileName));
-                            dc.Save(sPath + Path.ChangeExtension(hpf.FileName, "pdf"));
+                            SYSTEM.ConvertWordtoPDF(sPath + Path.GetFileName(hpf.FileName));
                         }
 
                         iUploadedCnt = iUploadedCnt + 1;

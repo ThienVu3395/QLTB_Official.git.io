@@ -16,11 +16,9 @@
                 };
 
                 $scope.getdatafilePDF = function (fileName) {
-                    console.log(fileName);
                     blockUI.start();
                     var resp = loginservice.getdatafile("api/QLVanBan/getviewpdf?fileName=" + fileName);
                     resp.then(function (response) {
-                        console.log(response.data);
                         $ctrl.pdf.data = new Uint8Array(response.data);
                         if (!$ctrl.reload)
                             $ctrl.pageview = 1;
@@ -214,7 +212,6 @@
 
                 uploader.onSuccessItem = function (fileItem, response, status, headers) {
                     //console.info('onSuccessItem', fileItem, response, status, headers);
-                    console.log(response);
                     $scope.getdatafilePDF(fileItem.file.name);
                 };
 

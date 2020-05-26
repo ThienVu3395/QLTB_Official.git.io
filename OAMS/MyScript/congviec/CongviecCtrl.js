@@ -47,6 +47,7 @@ function ($scope, $timeout, $http, $uibModal, $document, blockUI, appSettings, l
             $("#fileInput").remove();
         });
     }
+
     $scope.viewfilepdf = function () {
         var parentElem =
               angular.element($document[0].querySelector('.main-content'));
