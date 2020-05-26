@@ -26,13 +26,12 @@
 </style>
 
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
-<form class="form-horizontal form-label-left" style="height: calc(100%) !important; " ng-valid name="formedit">
+<form class="form-horizontal form-label-left" style="height: calc(100%) !important; " ng-valid name="formedit" novalidate>
     <div class="modal-header">
         <h3 style="font-size: 16px;" class="modal-title" id="modal-title">Thêm Văn Bản <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
     </div>
     <div class="modal-body" id="modal-body" style="height: calc(100% - 32px) !important; padding: 4px 10px;">
         <div class="row" style="height:calc(100%);">
-
             <div class="col-md-7 col-sm-7 col-xs-12" style="height:calc(100%); overflow-y:auto;">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">File đính kèm:</label>
@@ -43,7 +42,7 @@
                         <div class="col-md-12">
                             <table class="table">
                                 <tbody>
-                                    <tr ng-repeat="item in uploader.queue">
+                                    <tr ng-repeat="item in uploader.queue track by $index">
                                         <td>
                                             <strong>
                                                 {{ item.file.name }}
@@ -62,7 +61,7 @@
                                         </td>
 
                                         <td style="width:50px;">
-                                            <button type="button" class="btn btn-xs btn-danger" ng-click="removeFile(item)">
+                                            <button type="button" class="btn btn-xs btn-danger" ng-click="removeFile(item,$index)">
                                                 <span class="glyphicon glyphicon-trash"></span> Xóa
                                             </button>
                                         </td>
@@ -80,13 +79,7 @@
                         </div>
                     </div>
                 </div>
-                @*<div class="col-md-12 col-sm-12">
-                        <div class="btn-group pull-right" style="margin-bottom:10px;font-size:9pt;">
-                            <button class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận và thêm mới</button>
-                            <button class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
-                            <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
-                        </div>
-                    </div>*@
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã định danh:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
@@ -97,6 +90,7 @@
                         <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.FILECODE" />
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Tên loại:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
@@ -111,6 +105,7 @@
                         <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.CODENUMBER" />
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày tháng:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
@@ -126,29 +121,34 @@
                         <select class="form-control" ng-model="LANGUAGE" ng-options="item as item.TEN for item in $ctrl.Datangonngu track by item.ID"></select>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Cơ quan ban hành:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
                         <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.ORGANNAME" />
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Trích yếu:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:70px;" class="form-control" placeholder="Trích yếu" ng-model="$ctrl.datasumitformedit.SUBJECT"></textarea>
+                        <textarea style="height:70px;" class="form-control" placeholder="Trích yếu" ng-model="$ctrl.datasumitformedit.SUBJECT" name="trichyeu" required></textarea>
+                        <p ng-show="formedit.trichyeu.$invalid" class="text-danger"><i>Bạn chưa nhập trích yếu</i></p>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ghi chú:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
                         <textarea style="height:40px;" class="form-control" placeholder="Ghi chú" ng-model="$ctrl.datasumitformedit.DESCRIPTION"></textarea>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày đến:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.ARRIVALDATE" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" readonly/>
+                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.ARRIVALDATE" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" readonly />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
@@ -164,6 +164,7 @@
                         <select class="form-control" ng-model="PRIORITY" ng-options="item as item.TEN for item in $ctrl.Datamucdo track by item.ID"></select>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Sổ văn bản:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
@@ -176,11 +177,12 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Số đến:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input class="form-control" type="number" placeholder="..." ng-model="$ctrl.datasumitformedit.ARRIVALNUMBER" />
+                            <input class="form-control" type="number" placeholder="..." ng-model="$ctrl.datasumitformedit.ARRIVALNUMBER" name="soden" required />
                             <span class="input-group-btn">
                                 <input class="form-control" style="width:70px;" title="Số phụ" data-toggle="tooltip" placeholder="..." />
                             </span>
                         </div>
+                        <p ng-show="formedit.soden.$invalid" class="text-danger"><i>Bạn chưa nhập số đến</i></p>
                     </div>
                 </div>
 
@@ -194,6 +196,7 @@
                         <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.POSITIONSIGNER" />
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Nơi nhận:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
@@ -203,8 +206,14 @@
 
                 <div class="col-md-12 col-sm-12">
                     <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
-                        <button ng-click="$ctrl.sumitformedit()" type="submit" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận</button>
-                        <button class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận và thêm mới</button>
+                        <button ng-click="$ctrl.sumitformedit()"
+                                type="submit"
+                                class="btn btn-xs btn-primary"
+                                style="font-size:9pt;"
+                                ng-disabled="formedit.$invalid">
+                            <i class="fa fa-save"></i> Ghi nhận
+                        </button>
+                        @*<button class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-save"></i> Ghi nhận và thêm mới</button>*@
                         <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
                     </div>
                 </div>
@@ -216,7 +225,6 @@
                     <pdfjs-viewer data="$ctrl.pdf.data" print="false" download="false" open="false" pageview="$ctrl.pageview" update-fn="$ctrl.onPageLoad"></pdfjs-viewer>
                 </div>
             </div>
-
         </div>
     </div>
     @*<div class="modal-footer">

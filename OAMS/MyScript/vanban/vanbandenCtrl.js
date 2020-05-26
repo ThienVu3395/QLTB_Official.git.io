@@ -16,9 +16,11 @@
                 };
 
                 $scope.getdatafilePDF = function (fileName) {
+                    console.log(fileName);
                     blockUI.start();
                     var resp = loginservice.getdatafile("api/QLVanBan/getviewpdf?fileName=" + fileName);
                     resp.then(function (response) {
+                        console.log(response.data);
                         $ctrl.pdf.data = new Uint8Array(response.data);
                         if (!$ctrl.reload)
                             $ctrl.pageview = 1;
@@ -71,6 +73,19 @@
                         });
                 }
 
+                function removeFile(fileName) {
+                    blockUI.start();
+                    var resp;
+                    resp = loginservice.getdata("api/QLVanBan/RemoveFile?fileName=" + fileName);
+                    resp.then(function (response) {
+                        alert(response.data);
+                        blockUI.stop();
+                    }
+                        , function errorCallback(response) {
+
+                        });
+                }
+
                 $ctrl.sumitformedit = function () {
                     //if (uploader.queue.length > 0) {
                     //    $scope.dataclickchonkh.HinhAnh1 = uploader.queue[0].file.name;
@@ -85,7 +100,6 @@
                     //    $ctrl.sumitformedit = {};
 
 
-                    //}
                     //    , function errorCallback(response) {
                     //        alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
                     //    });
@@ -111,30 +125,37 @@
                             alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
                         });
                 }
+
                 $ctrl.ok = function () {
                     $ctrl.presult = "0";
                 };
+
                 $ctrl.cancel = function () {
                     $uibModalInstance.dismiss('cancel');
                 };
+
                 //---------upload------------
                 $scope.values = {};
                 var accesstoken = userProfile.getProfile().access_token;
+
                 var authHeaders = {};
+
                 if (accesstoken) {
                     authHeaders.Authorization = 'Bearer ' + accesstoken;
                 }
+
                 var uploader = $scope.uploader = new FileUploader({
                     //headers: { "Authorization": authHeaders.Authorization },
                     url: appSettings.serverPath + 'api/QLVanBan/UploadFiles',
                     withCredentials: true
                 });
+
                 uploader.filters.push({
                     name: 'docFilter1',
                     fn: function (item /*{File|FileLikeObject}*/, options) {
-                        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                        var type = '|' + item.name.slice(item.name.lastIndexOf('.') + 1) + '|';
                         //debugger
-                        if ('|pdf|tif|docx|doc|png|jpeg|bmp|gif|'.indexOf(type) !== -1)
+                        if ('|pdf|tif|docx|doc|png|jpeg|bmp|gif|'.indexOf(type.toLowerCase()) !== -1)
                             return true;
                         else {
                             alert("Không hỗ trợ định dạng file này!!");
@@ -142,6 +163,7 @@
                         }
                     }
                 });
+
                 uploader.filters.push({
                     name: 'asyncFilter',
                     fn: function (item /*{File|FileLikeObject}*/, options, deferred) {
@@ -150,13 +172,16 @@
                     }
                 });
 
-                $scope.removeFile = function (item) {
+                $scope.removeFile = function (item, index) {
                     uploader.removeFromQueue(item);
-                    $ctrl.pdf.data = new Uint8Array(0);
+                    removeFile(item.file.name);
+                    FileDinhKem.splice(index,1);
                 }
+
                 uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
                     //console.info('onWhenAddingFileFailed', item, filter, options);
                 };
+
                 uploader.onAfterAddingFile = function (fileItem) {
                     fileItem.upload();
                     let item = {
@@ -170,36 +195,47 @@
                     }
                     FileDinhKem.push(item);
                 };
+
                 uploader.onAfterAddingAll = function (addedFileItems) {
                     //console.info('onAfterAddingAll', addedFileItems);
                 };
+
                 uploader.onBeforeUploadItem = function (item) {
                     //console.info('onBeforeUploadItem', item);
                 };
+
                 uploader.onProgressItem = function (fileItem, progress) {
                     //console.info('onProgressItem', fileItem, progress);
                 };
+
                 uploader.onProgressAll = function (progress) {
                     //console.info('onProgressAll', progress);
                 };
+
                 uploader.onSuccessItem = function (fileItem, response, status, headers) {
                     //console.info('onSuccessItem', fileItem, response, status, headers);
+                    console.log(response);
                     $scope.getdatafilePDF(fileItem.file.name);
                 };
+
                 uploader.onErrorItem = function (fileItem, response, status, headers) {
                     //console.info('onErrorItem', fileItem, response, status, headers);
                 };
+
                 uploader.onCancelItem = function (fileItem, response, status, headers) {
                     //console.info('onCancelItem', fileItem, response, status, headers);
                 };
+
                 uploader.onCompleteItem = function (fileItem, response, status, headers) {
                     //console.info('onCompleteItem', fileItem, response, status, headers);
                 };
+
                 uploader.onCompleteAll = function () {
                     //console.info('onCompleteAll');
                 };
                 //---------------------------
                 loaddataedit();
+
                 function loaddataedit() {
                     var data = userProfile.getProfile();
                     var resp = loginservice.postdata("api/funcbase/getnewdatatable", $.param({ Tablename: 'yJ11%2fReRv3WEhTcyL%2f9YqQ%3d%3d', id: $ctrl.items }));
@@ -220,6 +256,7 @@
                             alert("Kết nối đến máy chủ thất bại!");
                         });
                 }
+
                 $scope.filterFn = function (car) {
                     if (car.id !== 'IDKEY' || car.width !== '0') {
                         return true;

@@ -729,6 +729,7 @@ C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Twitte
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Newtonsoft.Json.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Owin.dll
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\SautinSoft.Document.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Net.Http.Formatting.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Cors.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Helpers.dll
@@ -753,6 +754,7 @@ C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.AspNet.SignalR.Syste
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Cors.xml
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\SautinSoft.Document.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Newtonsoft.Json.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Net.Http.Formatting.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Helpers.xml
@@ -779,7 +781,6 @@ C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Google
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Http.Owin.xml
-C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csprojAssemblyReference.cache
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CoreCompileInputs.cache
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll

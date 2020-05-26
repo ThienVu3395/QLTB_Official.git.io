@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Dapper;
 using System.Data;
+using SautinSoft.Document;
 
 namespace OAMS.Controllers.API
 {
@@ -148,9 +149,9 @@ namespace OAMS.Controllers.API
                 }
 
                 var returnV = db.Query<VanBanViewModel>("procThemVanBanDen", parameters, null, true, null, System.Data.CommandType.StoredProcedure).SingleOrDefault();
-                if(par.FileDinhKem.Count > 0)
+                if (par.FileDinhKem.Count > 0)
                 {
-                    foreach(var item in par.FileDinhKem)
+                    foreach (var item in par.FileDinhKem)
                     {
                         var param = new DynamicParameters();
                         param.Add("@LOAI", item.LOAI);
@@ -217,8 +218,15 @@ namespace OAMS.Controllers.API
                     {
                         hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
 
-                        iUploadedCnt = iUploadedCnt + 1;
+                        if(Path.GetExtension(sPath + hpf.FileName) == ".docx")
+                        {
+                            //string fileChanged = Path.ChangeExtension(hpf.FileName, "pdf");
+                            //hpf.SaveAs(sPath + fileChanged);
+                            DocumentCore dc = DocumentCore.Load(sPath + Path.GetFileName(hpf.FileName));
+                            dc.Save(sPath + Path.ChangeExtension(hpf.FileName, "pdf"));
+                        }
 
+                        iUploadedCnt = iUploadedCnt + 1;
                     }
 
                     else
@@ -244,6 +252,41 @@ namespace OAMS.Controllers.API
             {
                 return "Upload Failed";
             }
+        }
+
+        [HttpGet]
+        [Route("RemoveFile")]
+        public string RemoveFile(string fileName)
+        {
+            string sPath = "";
+
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/" + fileName);
+
+            string subPatch = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/");
+
+            if (System.IO.File.Exists(sPath))
+
+            {
+                FileInfo f = new FileInfo(sPath);
+
+                f.Delete();
+
+                if (Path.GetExtension(subPatch + fileName) == ".docx")
+                {
+                    fileName = fileName.Replace(".docx", ".pdf");
+
+                    FileInfo sf = new FileInfo(subPatch + fileName);
+
+                    sf.Delete();
+                }
+            }
+
+            else
+
+            {
+                return "Failed";
+            }
+            return "Remove Success";
         }
 
         [HttpGet]
@@ -293,8 +336,11 @@ namespace OAMS.Controllers.API
             //}
 
             //return response;
+            if(Path.GetExtension(fileName) == ".docx")
+            {
+                fileName = Path.ChangeExtension(fileName,"pdf");
+            }
             string sPath1 = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/" + fileName);
-
             var response1 = new HttpResponseMessage(HttpStatusCode.OK);
             var stream1 = new System.IO.FileStream(sPath1, System.IO.FileMode.Open);
             response1.Content = new StreamContent(stream1);
