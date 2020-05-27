@@ -8,27 +8,25 @@ namespace OAMS.Models
     public class VanBanViewModel
     {
         public int ID { get; set; }
-        public string DOCCODE { get; set; }
-        public string FILECODE { get; set; }
-        public Nullable<short> DOCORDINAL { get; set; }
-        public string TYPENAME { get; set; }
-        public string CODENUMBER { get; set; }
-        public string CODENOTATION { get; set; }
-        public Nullable<System.DateTime> ISSUEDDATE { get; set; }
-        public string ORGANNAME { get; set; }
-        public string SUBJECT { get; set; }
-        public string LANGUAGE { get; set; }
-        public Nullable<short> PAGEMOUNT { get; set; }
-        public string DESCRIPTION { get; set; }
-        public Nullable<System.DateTime> ARRIVALDATE { get; set; }
-        public string ARRIVALNUMBER { get; set; }
-        public string POSITIONSIGNER { get; set; }
-        public string FULLNAMESIGNER { get; set; }
-        public Nullable<int> PRIORITY { get; set; }
-        public string TOPLACES { get; set; }
-        public string TRACEHEADER { get; set; }
-        public Nullable<System.DateTime> DUEDATE { get; set; }
-        public int SOVANBANID { get; set; }
+        public string OrganId { get; set; }
+        public int FileCatalog { get; set; }
+        public string FileNotation { get; set; }
+        public int DocOrdinal { get; set; }
+        public string TypeName { get; set; }
+        public string CodeNumber { get; set; }
+        public string CodeNotation { get; set; }
+        public Nullable<System.DateTime> IssuedDate { get; set; }
+        public string OrganName { get; set; }
+        public string Subject { get; set; }
+        public string Language { get; set; }
+        public int PageAmount { get; set; }
+        public string Description { get; set; }
+        public string Position { get; set; }
+        public string Fullname { get; set; }
+        public Nullable<int> Priority { get; set; }
+        public Nullable<int> IssuedAmount { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
+        public int SoVanBanID { get; set; }
         public string MOREINFO1 { get; set; }
         public string MOREINFO2 { get; set; }
         public string MOREINFO3 { get; set; }

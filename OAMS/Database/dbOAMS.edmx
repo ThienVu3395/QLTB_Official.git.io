@@ -1115,7 +1115,6 @@
           <EntitySet Name="tbLinhvucs" EntityType="dbOAMSModel.tbLinhvuc" />
           <EntitySet Name="tbLoaivanbans" EntityType="dbOAMSModel.tbLoaivanban" />
           <EntitySet Name="tbSovanbans" EntityType="dbOAMSModel.tbSovanban" />
-          <EntitySet Name="tbVanbandens" EntityType="dbOAMSModel.tbVanbanden" />
           <EntitySet Name="tbVBdenCanboes" EntityType="dbOAMSModel.tbVBdenCanbo" />
           <EntitySet Name="tbVBdenWorkflows" EntityType="dbOAMSModel.tbVBdenWorkflow" />
           <EntitySet Name="tbWorkflows" EntityType="dbOAMSModel.tbWorkflow" />
@@ -1131,18 +1130,6 @@
           <AssociationSet Name="FK_tbFlownode_tbWorkflow" Association="dbOAMSModel.FK_tbFlownode_tbWorkflow">
             <End Role="tbWorkflow" EntitySet="tbWorkflows" />
             <End Role="tbFlownode" EntitySet="tbFlownodes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbVanbanden_tbSovanban" Association="dbOAMSModel.FK_tbVanbanden_tbSovanban">
-            <End Role="tbSovanban" EntitySet="tbSovanbans" />
-            <End Role="tbVanbanden" EntitySet="tbVanbandens" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbVBdenCanbo_tbVanbanden" Association="dbOAMSModel.FK_tbVBdenCanbo_tbVanbanden">
-            <End Role="tbVanbanden" EntitySet="tbVanbandens" />
-            <End Role="tbVBdenCanbo" EntitySet="tbVBdenCanboes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbVBdenWorkflow_tbVanbanden" Association="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden">
-            <End Role="tbVanbanden" EntitySet="tbVanbandens" />
-            <End Role="tbVBdenWorkflow" EntitySet="tbVBdenWorkflows" />
           </AssociationSet>
           <AssociationSet Name="FK_tbVBdenWorkflow_tbWorkflow" Association="dbOAMSModel.FK_tbVBdenWorkflow_tbWorkflow">
             <End Role="tbWorkflow" EntitySet="tbWorkflows" />
@@ -1225,6 +1212,19 @@
           <AssociationSet Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1" Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
             <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
             <End Role="NEWS_TinTucTapTin" EntitySet="NEWS_TinTucTapTin" />
+          </AssociationSet>
+          <EntitySet Name="tbVanbandens" EntityType="dbOAMSModel.tbVanbanden" />
+          <AssociationSet Name="FK_tbVanbanden_tbSovanban" Association="dbOAMSModel.FK_tbVanbanden_tbSovanban">
+            <End Role="tbSovanban" EntitySet="tbSovanbans" />
+            <End Role="tbVanbanden" EntitySet="tbVanbandens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbVBdenCanbo_tbVanbanden" Association="dbOAMSModel.FK_tbVBdenCanbo_tbVanbanden">
+            <End Role="tbVanbanden" EntitySet="tbVanbandens" />
+            <End Role="tbVBdenCanbo" EntitySet="tbVBdenCanboes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbVBdenWorkflow_tbVanbanden" Association="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden">
+            <End Role="tbVanbanden" EntitySet="tbVanbandens" />
+            <End Role="tbVBdenWorkflow" EntitySet="tbVBdenWorkflows" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="tbChucnang">
@@ -1575,41 +1575,6 @@
           <Property Name="VITRILUU" Type="Int32" />
           <NavigationProperty Name="tbVanbandens" Relationship="dbOAMSModel.FK_tbVanbanden_tbSovanban" FromRole="tbSovanban" ToRole="tbVanbanden" />
         </EntityType>
-        <EntityType Name="tbVanbanden">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOCCODE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="FILECODE" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="DOCORDINAL" Type="Int16" />
-          <Property Name="TYPENAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CODENUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="CODENOTATION" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ISSUEDDATE" Type="DateTime" Precision="0" />
-          <Property Name="ORGANNAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SUBJECT" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="LANGUAGE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="PAGEMOUNT" Type="Int16" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ARRIVALDATE" Type="DateTime" Precision="0" />
-          <Property Name="ARRIVALNUMBER" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="POSITIONSIGNER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FULLNAMESIGNER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PRIORITY" Type="Int32" />
-          <Property Name="TOPLACES" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="TRACEHEADER" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="DUEDATE" Type="DateTime" Precision="0" />
-          <Property Name="SOVANBANID" Type="Int32" Nullable="false" />
-          <Property Name="MOREINFO1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MOREINFO2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MOREINFO3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MOREINFO4" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MOREINFO5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbSovanban" Relationship="dbOAMSModel.FK_tbVanbanden_tbSovanban" FromRole="tbVanbanden" ToRole="tbSovanban" />
-          <NavigationProperty Name="tbVBdenCanboes" Relationship="dbOAMSModel.FK_tbVBdenCanbo_tbVanbanden" FromRole="tbVanbanden" ToRole="tbVBdenCanbo" />
-          <NavigationProperty Name="tbVBdenWorkflows" Relationship="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" FromRole="tbVanbanden" ToRole="tbVBdenWorkflow" />
-        </EntityType>
         <EntityType Name="tbVBdenCanbo">
           <Key>
             <PropertyRef Name="ID" />
@@ -1629,8 +1594,8 @@
           <Property Name="IDVANBANDEN" Type="Int32" />
           <Property Name="LOAI" Type="Int32" Nullable="false" />
           <Property Name="WorkflowID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbVanbanden" Relationship="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" FromRole="tbVBdenWorkflow" ToRole="tbVanbanden" />
           <NavigationProperty Name="tbWorkflow" Relationship="dbOAMSModel.FK_tbVBdenWorkflow_tbWorkflow" FromRole="tbVBdenWorkflow" ToRole="tbWorkflow" />
+          <NavigationProperty Name="tbVanbanden" Relationship="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" FromRole="tbVBdenWorkflow" ToRole="tbVanbanden" />
         </EntityType>
         <EntityType Name="tbWorkflow">
           <Key>
@@ -1711,46 +1676,6 @@
             </Principal>
             <Dependent Role="tbFlownode">
               <PropertyRef Name="WorkflowID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbVanbanden_tbSovanban">
-          <End Type="dbOAMSModel.tbSovanban" Role="tbSovanban" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="dbOAMSModel.tbVanbanden" Role="tbVanbanden" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbSovanban">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tbVanbanden">
-              <PropertyRef Name="SOVANBANID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbVBdenCanbo_tbVanbanden">
-          <End Type="dbOAMSModel.tbVanbanden" Role="tbVanbanden" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="dbOAMSModel.tbVBdenCanbo" Role="tbVBdenCanbo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbVanbanden">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tbVBdenCanbo">
-              <PropertyRef Name="IDVANBAN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbVBdenWorkflow_tbVanbanden">
-          <End Type="dbOAMSModel.tbVanbanden" Role="tbVanbanden" Multiplicity="0..1" />
-          <End Type="dbOAMSModel.tbVBdenWorkflow" Role="tbVBdenWorkflow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbVanbanden">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tbVBdenWorkflow">
-              <PropertyRef Name="IDVANBANDEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2179,6 +2104,81 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbVanbanden">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCCODE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="FILECODE" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="DOCORDINAL" Type="Int16" />
+          <Property Name="TYPENAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CODENUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="CODENOTATION" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ISSUEDDATE" Type="DateTime" Precision="0" />
+          <Property Name="ORGANNAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SUBJECT" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LANGUAGE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PAGEMOUNT" Type="Int16" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ARRIVALDATE" Type="DateTime" Precision="0" />
+          <Property Name="ARRIVALNUMBER" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="POSITIONSIGNER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FULLNAMESIGNER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PRIORITY" Type="Int32" />
+          <Property Name="TOPLACES" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TRACEHEADER" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DUEDATE" Type="DateTime" Precision="0" />
+          <Property Name="SOVANBANID" Type="Int32" Nullable="false" />
+          <Property Name="MOREINFO1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MOREINFO2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MOREINFO3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MOREINFO4" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MOREINFO5" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbSovanban" Relationship="dbOAMSModel.FK_tbVanbanden_tbSovanban" FromRole="tbVanbanden" ToRole="tbSovanban" />
+          <NavigationProperty Name="tbVBdenCanboes" Relationship="dbOAMSModel.FK_tbVBdenCanbo_tbVanbanden" FromRole="tbVanbanden" ToRole="tbVBdenCanbo" />
+          <NavigationProperty Name="tbVBdenWorkflows" Relationship="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" FromRole="tbVanbanden" ToRole="tbVBdenWorkflow" />
+        </EntityType>
+        <Association Name="FK_tbVanbanden_tbSovanban">
+          <End Type="dbOAMSModel.tbSovanban" Role="tbSovanban" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbOAMSModel.tbVanbanden" Role="tbVanbanden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSovanban">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbVanbanden">
+              <PropertyRef Name="SOVANBANID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbVBdenCanbo_tbVanbanden">
+          <End Type="dbOAMSModel.tbVanbanden" Role="tbVanbanden" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbOAMSModel.tbVBdenCanbo" Role="tbVBdenCanbo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbVanbanden">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbVBdenCanbo">
+              <PropertyRef Name="IDVANBAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbVBdenWorkflow_tbVanbanden">
+          <End Type="dbOAMSModel.tbVanbanden" Role="tbVanbanden" Multiplicity="0..1" />
+          <End Type="dbOAMSModel.tbVBdenWorkflow" Role="tbVBdenWorkflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbVanbanden">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbVBdenWorkflow">
+              <PropertyRef Name="IDVANBANDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2425,39 +2425,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbVanbandens">
-            <EntityTypeMapping TypeName="dbOAMSModel.tbVanbanden">
-              <MappingFragment StoreEntitySet="tbVanbanden">
-                <ScalarProperty Name="MOREINFO5" ColumnName="MOREINFO5" />
-                <ScalarProperty Name="MOREINFO4" ColumnName="MOREINFO4" />
-                <ScalarProperty Name="MOREINFO3" ColumnName="MOREINFO3" />
-                <ScalarProperty Name="MOREINFO2" ColumnName="MOREINFO2" />
-                <ScalarProperty Name="MOREINFO1" ColumnName="MOREINFO1" />
-                <ScalarProperty Name="SOVANBANID" ColumnName="SOVANBANID" />
-                <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
-                <ScalarProperty Name="TRACEHEADER" ColumnName="TRACEHEADER" />
-                <ScalarProperty Name="TOPLACES" ColumnName="TOPLACES" />
-                <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
-                <ScalarProperty Name="FULLNAMESIGNER" ColumnName="FULLNAMESIGNER" />
-                <ScalarProperty Name="POSITIONSIGNER" ColumnName="POSITIONSIGNER" />
-                <ScalarProperty Name="ARRIVALNUMBER" ColumnName="ARRIVALNUMBER" />
-                <ScalarProperty Name="ARRIVALDATE" ColumnName="ARRIVALDATE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-                <ScalarProperty Name="PAGEMOUNT" ColumnName="PAGEMOUNT" />
-                <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
-                <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
-                <ScalarProperty Name="ORGANNAME" ColumnName="ORGANNAME" />
-                <ScalarProperty Name="ISSUEDDATE" ColumnName="ISSUEDDATE" />
-                <ScalarProperty Name="CODENOTATION" ColumnName="CODENOTATION" />
-                <ScalarProperty Name="CODENUMBER" ColumnName="CODENUMBER" />
-                <ScalarProperty Name="TYPENAME" ColumnName="TYPENAME" />
-                <ScalarProperty Name="DOCORDINAL" ColumnName="DOCORDINAL" />
-                <ScalarProperty Name="FILECODE" ColumnName="FILECODE" />
-                <ScalarProperty Name="DOCCODE" ColumnName="DOCCODE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbVBdenCanboes">
             <EntityTypeMapping TypeName="dbOAMSModel.tbVBdenCanbo">
               <MappingFragment StoreEntitySet="tbVBdenCanbo">
@@ -2695,6 +2662,39 @@
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
                 <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbVanbandens">
+            <EntityTypeMapping TypeName="dbOAMSModel.tbVanbanden">
+              <MappingFragment StoreEntitySet="tbVanbanden">
+                <ScalarProperty Name="MOREINFO5" ColumnName="MOREINFO5" />
+                <ScalarProperty Name="MOREINFO4" ColumnName="MOREINFO4" />
+                <ScalarProperty Name="MOREINFO3" ColumnName="MOREINFO3" />
+                <ScalarProperty Name="MOREINFO2" ColumnName="MOREINFO2" />
+                <ScalarProperty Name="MOREINFO1" ColumnName="MOREINFO1" />
+                <ScalarProperty Name="SOVANBANID" ColumnName="SOVANBANID" />
+                <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+                <ScalarProperty Name="TRACEHEADER" ColumnName="TRACEHEADER" />
+                <ScalarProperty Name="TOPLACES" ColumnName="TOPLACES" />
+                <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+                <ScalarProperty Name="FULLNAMESIGNER" ColumnName="FULLNAMESIGNER" />
+                <ScalarProperty Name="POSITIONSIGNER" ColumnName="POSITIONSIGNER" />
+                <ScalarProperty Name="ARRIVALNUMBER" ColumnName="ARRIVALNUMBER" />
+                <ScalarProperty Name="ARRIVALDATE" ColumnName="ARRIVALDATE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="PAGEMOUNT" ColumnName="PAGEMOUNT" />
+                <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+                <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
+                <ScalarProperty Name="ORGANNAME" ColumnName="ORGANNAME" />
+                <ScalarProperty Name="ISSUEDDATE" ColumnName="ISSUEDDATE" />
+                <ScalarProperty Name="CODENOTATION" ColumnName="CODENOTATION" />
+                <ScalarProperty Name="CODENUMBER" ColumnName="CODENUMBER" />
+                <ScalarProperty Name="TYPENAME" ColumnName="TYPENAME" />
+                <ScalarProperty Name="DOCORDINAL" ColumnName="DOCORDINAL" />
+                <ScalarProperty Name="FILECODE" ColumnName="FILECODE" />
+                <ScalarProperty Name="DOCCODE" ColumnName="DOCCODE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

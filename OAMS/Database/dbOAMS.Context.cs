@@ -45,7 +45,6 @@ namespace OAMS.Database
         public virtual DbSet<tbLinhvuc> tbLinhvucs { get; set; }
         public virtual DbSet<tbLoaivanban> tbLoaivanbans { get; set; }
         public virtual DbSet<tbSovanban> tbSovanbans { get; set; }
-        public virtual DbSet<tbVanbanden> tbVanbandens { get; set; }
         public virtual DbSet<tbVBdenCanbo> tbVBdenCanboes { get; set; }
         public virtual DbSet<tbVBdenWorkflow> tbVBdenWorkflows { get; set; }
         public virtual DbSet<tbWorkflow> tbWorkflows { get; set; }
@@ -60,5 +59,6 @@ namespace OAMS.Database
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<NEWSTUONG_BaiViet> NEWSTUONG_BaiViet { get; set; }
         public virtual DbSet<NEWS_TinTuc> NEWS_TinTuc { get; set; }
+        public virtual DbSet<tbVanbanden> tbVanbandens { get; set; }
     }
 }

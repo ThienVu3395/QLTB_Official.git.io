@@ -20,7 +20,7 @@ namespace OAMS.Database
         public int LOAI { get; set; }
         public int WorkflowID { get; set; }
     
-        public virtual tbVanbanden tbVanbanden { get; set; }
         public virtual tbWorkflow tbWorkflow { get; set; }
+        public virtual tbVanbanden tbVanbanden { get; set; }
     }
 }

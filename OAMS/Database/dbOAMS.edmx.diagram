@@ -33,7 +33,6 @@
         <EntityTypeShape EntityType="dbOAMSModel.tbLinhvuc" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="dbOAMSModel.tbLoaivanban" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="dbOAMSModel.tbSovanban" Width="1.5" PointX="1.5" PointY="29.125" />
-        <EntityTypeShape EntityType="dbOAMSModel.tbVanbanden" Width="1.5" PointX="3.75" PointY="27.125" />
         <EntityTypeShape EntityType="dbOAMSModel.tbVBdenCanbo" Width="1.5" PointX="6" PointY="29.5" />
         <EntityTypeShape EntityType="dbOAMSModel.tbVBdenWorkflow" Width="1.5" PointX="6" PointY="15.375" />
         <EntityTypeShape EntityType="dbOAMSModel.tbWorkflow" Width="1.5" PointX="0.75" PointY="15.125" />
@@ -41,9 +40,6 @@
         <AssociationConnector Association="dbOAMSModel.FK_tbFilecongvan_tbWorkflow" />
         <AssociationConnector Association="dbOAMSModel.FK_tbFilexuly_tbYkienxuly" />
         <AssociationConnector Association="dbOAMSModel.FK_tbFlownode_tbWorkflow" />
-        <AssociationConnector Association="dbOAMSModel.FK_tbVanbanden_tbSovanban" />
-        <AssociationConnector Association="dbOAMSModel.FK_tbVBdenCanbo_tbVanbanden" />
-        <AssociationConnector Association="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" />
         <AssociationConnector Association="dbOAMSModel.FK_tbVBdenWorkflow_tbWorkflow" />
         <AssociationConnector Association="dbOAMSModel.FK_tbYkienxuly_tbWorkflow" />
         <EntityTypeShape EntityType="dbOAMSModel.NEWS_BinhLuan" Width="1.5" PointX="22.25" PointY="8" />
@@ -70,6 +66,10 @@
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" />
         <AssociationConnector Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" />
+        <EntityTypeShape EntityType="dbOAMSModel.tbVanbanden" Width="1.5" PointX="3.75" PointY="27.125" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbVanbanden_tbSovanban" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbVBdenCanbo_tbVanbanden" />
+        <AssociationConnector Association="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -65,7 +65,6 @@
                     var resp = loginservice.getdata("api/QLVanBan/getVanBanDen");
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
-                        console.log($scope.DsVanBan);
                         blockUI.stop();
                     }
                         , function errorCallback(response) {
@@ -78,7 +77,7 @@
                 function getVanBanDi() {
                 }
 
-                $scope.opennewVanban = function () {
+                $scope.opennewVanban = function (item) {
                     var parentElem =
                         angular.element($document[0].querySelector('.main-content'));
                     var modalInstance = $uibModal.open({
@@ -93,7 +92,10 @@
                         appendTo: parentElem,
                         resolve: {
                             idselect: function () {
-                                return null;
+                                if (item != null) {
+                                    return item;
+                                }
+                                else return null;
                             }
                         }
                     });
@@ -135,6 +137,36 @@
                         }
 
                     }, function () {
+                    });
+                }
+
+                $scope.viewfilepdf = function (tenFile) {
+                    var parentElem =
+                        angular.element($document[0].querySelector('.main-content'));
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        backdrop: 'static',
+                        ariaLabelledBy: 'modal-title',
+                        ariaDescribedBy: 'modal-body',
+                        templateUrl: 'viewPDFonline.html',
+                        controller: 'viewfilepdfCtrl',
+                        controllerAs: '$ctrl',
+                        size: 'full',
+                        appendTo: parentElem,
+                        resolve: {
+                            idselect: function () {
+                                return tenFile;
+                            }
+                        }
+                    });
+                    modalInstance.result.then(function (c) {
+                        getdataInnit();
+                        if (c == 1) {
+                            $scope.items = {};
+                            $scope.opennew();
+                        }
+                    }, function () {
+                        $("#fileInput").remove();
                     });
                 }
             }])

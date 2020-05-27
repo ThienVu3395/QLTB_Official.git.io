@@ -28,11 +28,12 @@
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
 <form class="form-horizontal form-label-left" style="height: calc(100%) !important; " ng-valid name="formedit" novalidate>
     <div class="modal-header">
-        <h3 style="font-size: 16px;" class="modal-title" id="modal-title">Thêm Văn Bản <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
+        <h3 style="font-size: 16px;" class="modal-title" id="modal-title">{{Title}} <a class="pull-right" href="#" ng-click="$ctrl.cancel()"><i class="fa fa-close"></i></a></h3>
     </div>
     <div class="modal-body" id="modal-body" style="height: calc(100% - 32px) !important; padding: 4px 10px;">
         <div class="row" style="height:calc(100%);">
-            <div class="col-md-7 col-sm-7 col-xs-12" style="height:calc(100%); overflow-y:auto;">
+            @*Thêm mới*@
+            <div class="col-md-7 col-sm-7 col-xs-12" style="height:calc(100%); overflow-y:auto;" ng-show="!TrangThai">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">File đính kèm:</label>
                     <div class="col-md-10 col-sm-10 col-xs-10" nv-file-drop="" uploader="uploader" filters="docFilter1">
@@ -83,56 +84,71 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã định danh:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.DOCCODE" />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.OrganID" />
                     </div>
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã hồ sơ:</label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Năm hình thành:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.FILECODE" />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.FileCatalog" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số, ký hiệu:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.FileNotation" />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số thứ tự:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" type="number" placeholder="..." ng-model="$ctrl.datasumitformedit.DocOrdinal" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Tên loại:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        @*<select class="form-control" ng-model="$ctrl.datasumitformedit.TYPENAME">
-                                <option value="">Loại Văn Bản</option>
-                                <option ng-repeat="i in $ctrl.Dataloaivanban" value="{{i.MALOAI}}">{{i.TENLOAI}}</option>
-                            </select>*@
                         <select class="form-control" ng-model="TYPENAME" ng-options="item as item.TENLOAI for item in $ctrl.Dataloaivanban track by item.MALOAI"></select>
                     </div>
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số, ký hiệu:</label>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số văn bản:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.CODENUMBER" />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.CodeNumber" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày tháng:</label>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ký hiệu:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.ISSUEDDATE" />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.CodeNotation" />
                     </div>
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngôn ngữ:</label>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày đến:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        @*<select class="form-control" ng-model="$ctrl.datasumitformedit.LANGUAGE">*@
-                        @*<select class="form-control">
-                                <option value="1">Tiếng Việt</option>
-                                <option value="2">Tiếng Anh</option>
-                            </select>*@
-                        <select class="form-control" ng-model="LANGUAGE" ng-options="item as item.TEN for item in $ctrl.Datangonngu track by item.ID"></select>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.IssuedDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" readonly />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Cơ quan ban hành:</label>
-                    <div class="col-md-10 col-sm-10 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.ORGANNAME" />
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.OrganName" />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngôn ngữ:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <select class="form-control" ng-model="LANGUAGE" ng-options="item as item.TEN for item in $ctrl.Datangonngu track by item.ID"></select>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Trích yếu:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:70px;" class="form-control" placeholder="Trích yếu" ng-model="$ctrl.datasumitformedit.SUBJECT" name="trichyeu" required></textarea>
+                        <textarea style="height:70px;" class="form-control" placeholder="Trích yếu" ng-model="$ctrl.datasumitformedit.Subject" name="trichyeu" required></textarea>
                         <p ng-show="formedit.trichyeu.$invalid" class="text-danger"><i>Bạn chưa nhập trích yếu</i></p>
                     </div>
                 </div>
@@ -140,67 +156,48 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ghi chú:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:40px;" class="form-control" placeholder="Ghi chú" ng-model="$ctrl.datasumitformedit.DESCRIPTION"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày đến:</label>
-                    <div class="col-md-4 col-sm-4 col-xs-9">
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-click="ctrol.opened = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.ARRIVALDATE" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.opened" close-text="Close" readonly />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Mức độ khẩn:</label>
-                    <div class="col-md-4 col-sm-4 col-xs-9">
-                        @*<select class="form-control" ng-model="$ctrl.datasumitformedit.PRIORITY">
-                                <option value="1">Bình thường</option>
-                                <option value="2">Hỏa tốc</option>
-                                <option value="3">Khẩn</option>
-                            </select>*@
-                        <select class="form-control" ng-model="PRIORITY" ng-options="item as item.TEN for item in $ctrl.Datamucdo track by item.ID"></select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Sổ văn bản:</label>
-                    <div class="col-md-4 col-sm-4 col-xs-9">
-                        <select class="form-control" ng-model="SOVANBANID" ng-options="item as item.TENSO for item in $ctrl.Datasovanban track by item.ID">
-                            @*<option value="1">Sổ CV Đến</option> cái này phải load từ biet ruitable sổbiet rui em hieu nmay cai nay
-                                <option value="2">Sổ CV Đi</option>
-                                <option value="3">Sổ CV Đảng Bộ</option>*@
-                        </select>
-                    </div>
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số đến:</label>
-                    <div class="col-md-4 col-sm-4 col-xs-9">
-                        <div class="input-group">
-                            <input class="form-control" type="number" placeholder="..." ng-model="$ctrl.datasumitformedit.ARRIVALNUMBER" name="soden" required />
-                            <span class="input-group-btn">
-                                <input class="form-control" style="width:70px;" title="Số phụ" data-toggle="tooltip" placeholder="..." />
-                            </span>
-                        </div>
-                        <p ng-show="formedit.soden.$invalid" class="text-danger"><i>Bạn chưa nhập số đến</i></p>
+                        <textarea style="height:40px;" class="form-control" placeholder="Ghi chú" ng-model="$ctrl.datasumitformedit.Description"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Người ký:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.FULLNAMESIGNER" />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.Fullname" />
                     </div>
+
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Chức vụ:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.POSITIONSIGNER" />
+                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.Position" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Nơi nhận:</label>
-                    <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:40px;" class="form-control" placeholder="Nơi nhận" ng-model="$ctrl.datasumitformedit.TOPLACES"></textarea>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Mức độ khẩn:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <select class="form-control" ng-model="PRIORITY" ng-options="item as item.TEN for item in $ctrl.Datamucdo track by item.ID"></select>
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số lượng phát hành:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" type="number" placeholder="..." ng-model="$ctrl.datasumitformedit.IssuedAmount" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Sổ văn bản:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <select class="form-control" ng-model="SOVANBANID" ng-options="item as item.TENSO for item in $ctrl.Datasovanban track by item.ID"></select>
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Hạn trả lời:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-click="ctrol.openedd = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.openedd" close-text="Close" readonly />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -218,6 +215,156 @@
                     </div>
                 </div>
             </div>
+            @*Thêm mới*@
+
+            @*Xem chi tiết*@
+            <div class="col-md-7 col-sm-7 col-xs-12" style="height:calc(100%); overflow-y:auto;" ng-show="TrangThai">
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">File đính kèm:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-10" nv-file-drop="" uploader="uploader" filters="docFilter1">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <tbody>
+                                    <tr ng-repeat="item in objVB.FileDinhKem track by $index">
+                                        <td>
+                                            <strong>
+                                                {{ item.TENFILE }}
+                                            </strong>
+                                        </td>
+                                        <td style="width:70px;" ng-show="uploader.isHTML5" nowrap>{{ item.SIZEFILE/1024/1024|number:2 }} MB</td>
+                                        <td class="text-center;" style="width:50px;">
+                                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                            <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <button type="button" class="btn btn-xs btn-info" ng-click="getdatafilePDF(item.TENFILE)">
+                                                <span class="glyphicon glyphicon-eye-open"></span> Xem
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã định danh:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.OrganId}}" readonly />
+                    </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Năm hình thành:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.FileCatalog}}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số, ký hiệu:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.FileNotation}}" readonly />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số thứ tự:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.DocOrdinal}}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Tên loại:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.TypeName}}" readonly />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số văn bản:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.CodeNumber}}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ký hiệu:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.CodeNotation}}" readonly />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày đến:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.IssuedDate}}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Cơ quan ban hành:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.OrganName}}" readonly />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngôn ngữ:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.Language}}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Trích yếu:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <textarea style="height:70px;" class="form-control" readonly>{{objVB.Language}}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Ghi chú:</label>
+                    <div class="col-md-10 col-sm-10 col-xs-9">
+                        <textarea style="height:40px;" class="form-control" readonly>{{objVB.Description}}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Người ký:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.Fullname}}" readonly />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Chức vụ:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.Position}}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Mức độ khẩn:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.Priority}}" readonly />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Số lượng phát hành:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.IssuedAmount}}" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Sổ văn bản:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.SoVanBanID}}" readonly />
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-3">Hạn trả lời:</label>
+                    <div class="col-md-4 col-sm-4 col-xs-9">
+                        <input class="form-control" value=" {{objVB.DueDate}}" readonly />
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
+                        <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
+                    </div>
+                </div>
+            </div>
+            @*Xem chi tiết*@
 
             <div class="col-md-5 col-sm-5 col-xs-12" style="height:calc(100%); border: solid 1px #808080;">
                 @*<iframe src=""></iframe>*@

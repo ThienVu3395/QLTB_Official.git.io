@@ -5,6 +5,23 @@
             function ($scope, $http, $uibModalInstance, blockUI, FileUploader, appSettings, loginservice, userProfile, idselect) {
                 var $ctrl = this;
 
+                $scope.TrangThai = false; // Thêm Mới
+                $scope.objVB = {};
+
+                checkTrangThai();
+
+                function checkTrangThai() {
+                    if (idselect !== null) {
+                        $scope.TrangThai = true; // Xem chi tiết
+                        $scope.objVB = idselect;
+                        $scope.Title = "Chi Tiết Văn Bản";
+                    }
+                    else {
+                        $scope.TrangThai = false;
+                        $scope.Title = "Thêm Văn Bản";
+                    }
+                }
+
                 $ctrl.pdf = {
                     src: '',  // get pdf source from a URL that points to a pdf
                     data: null // get pdf source from raw data of a pdf
@@ -47,6 +64,7 @@
                 $scope.PRIORITY = $ctrl.Datamucdo[0];
                 getSoVanBan();
                 getLoaiVanBan();
+
                 function getSoVanBan() {
                     var resp;
                     resp = loginservice.getdata("api/QLVanBan/getSoVanBan");
@@ -102,15 +120,17 @@
                     //        alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
                     //    });
 
-                    $ctrl.datasumitformedit.TYPENAME = $scope.TYPENAME.TENLOAI;
-                    $ctrl.datasumitformedit.LANGUAGE = $scope.LANGUAGE.TEN;
-                    $ctrl.datasumitformedit.PRIORITY = $scope.PRIORITY.ID;
-                    $ctrl.datasumitformedit.SOVANBANID = $scope.SOVANBANID.ID;
+                    $ctrl.datasumitformedit.TypeName = $scope.TYPENAME.TENLOAI;
+                    $ctrl.datasumitformedit.Language = $scope.LANGUAGE.TEN;
+                    $ctrl.datasumitformedit.Priority = $scope.PRIORITY.ID;
+                    $ctrl.datasumitformedit.SoVanBanID = $scope.SOVANBANID.ID;
                     if (uploader.queue.length == 0) {
                         alert("Xin vui lòng đính kèm File");
                         return;
                     }
                     $ctrl.datasumitformedit.FileDinhKem = FileDinhKem;
+                    $ctrl.datasumitformedit.DueDate = changeFormat($ctrl.datasumitformedit.DueDate.getDate(), $ctrl.datasumitformedit.DueDate.getMonth() + 1, $ctrl.datasumitformedit.DueDate.getUTCFullYear());
+                    $ctrl.datasumitformedit.IssuedDate = changeFormat($ctrl.datasumitformedit.IssuedDate.getDate(), $ctrl.datasumitformedit.IssuedDate.getMonth() + 1, $ctrl.datasumitformedit.IssuedDate.getUTCFullYear());
                     var resp = loginservice.postdata("api/QLVanBan/ThemVanBanDen", $.param($ctrl.datasumitformedit));
                     resp.then(function (response) {
                         alert(response.data);
@@ -122,6 +142,10 @@
                         , function errorCallback(response) {
                             alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
                         });
+                }
+
+                function changeFormat(d, m, y) {
+                    return y + "-" + m + "-" + d;
                 }
 
                 $ctrl.ok = function () {
@@ -231,7 +255,7 @@
                     //console.info('onCompleteAll');
                 };
                 //---------------------------
-                loaddataedit();
+                //loaddataedit();
 
                 function loaddataedit() {
                     var data = userProfile.getProfile();

@@ -60,7 +60,7 @@ namespace OAMS.Controllers.Viewfile
             //}
 
             //return response;
-            string sPath1 = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/Mau_baocao_cuoiky.pdf");
+            string sPath1 = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/Thongbao4131.pdf");
 
             var response1 = new HttpResponseMessage(HttpStatusCode.OK);
             var stream1 = new System.IO.FileStream(sPath1, System.IO.FileMode.Open);

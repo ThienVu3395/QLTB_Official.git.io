@@ -29,9 +29,9 @@ function ($scope, $http, $uibModalInstance, blockUI, appSettings, loginservice, 
 
     function getdatafilePDF() {
         blockUI.start();
-        var resp = loginservice.getdatafile("api/viewfileonline/getviewpdf?id=1");
+        //var resp = loginservice.getdatafile("api/viewfileonline/getviewpdf?id=1");
+        var resp = loginservice.getdatafile("api/QLVanBan/getviewpdf?fileName=" + idselect);
         resp.then(function (response) {
-            console.log(response.data);
             $ctrl.pdf.data = new Uint8Array(response.data);
             if (!$ctrl.reload)
                 $ctrl.pageview = 1;

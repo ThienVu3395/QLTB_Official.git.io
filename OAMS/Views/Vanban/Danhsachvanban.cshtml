@@ -42,12 +42,6 @@
     .message-item:hover > div.menurows {
         display: block !important;
     }
-
-    .some-pdf-container {
-        width: 100%;
-        height: 100%;
-        background-color: #d7d4d4 !important;
-    }
 </style>
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
 <div ng-controller="VanbanCtrl">
@@ -76,7 +70,7 @@
                 <div class="tabbable" style="height: calc(100%);">
                     <ul class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1" style="margin-left:-10px;">
                         <li class="li-new-mail pull-right">
-                            <a class="btn-new-mail" ng-click="opennewVanban()" data-toggle="tooltip" title="Thêm mới văn bản">
+                            <a class="btn-new-mail" ng-click="opennewVanban(null)" data-toggle="tooltip" title="Thêm mới văn bản">
                                 <span class="btn btn-xs" style="padding-top: 2px !important; padding-bottom: 2px !important; ">
                                     <i class="ace-icon fa fa-envelope bigger-110"></i>
                                     <span class="bigger-110">Thêm văn bản</span>
@@ -103,6 +97,7 @@
                             </a>
                         </li>
                     </ul>
+
                     <div class="tab-content no-border no-padding" style="height: calc(100% - 35px);">
                         <div id="inboxtab" class="tab-pane in active" style="height: calc(100%);">
                             <div class="row" style="height: calc(100%); margin-top:2px;">
@@ -120,6 +115,7 @@
                                         <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
                                     </div>
                                 </div>
+
                                 <div class="main-content" style="height: calc(100%);">
                                     <div class="col-sm-12 col-xs-12" style="height: calc(100%);">
                                         <div class="row" style="height: 35px; border-bottom: dotted 1px #F1F1F1;">
@@ -189,13 +185,13 @@
                                                     </label>
 
                                                     @*<i class="message-star ace-icon fa fa-star-o light-grey"></i>*@
-                                                    <i class="message-star ace-icon fa fa-info-circle light-grey" style="color: #FEB902 !important; margin-left: 1px; margin-right: 1px;"></i>
+                                                    <i class="message-star ace-icon fa fa-user light-grey" style="color: #FEB902 !important; margin-left: 1px; margin-right: 1px;"></i>
                                                     <span class="sender" title="John Doe">
-                                                        {{item.FULLNAMESIGNER}}
+                                                        {{item.Fullname}}
                                                         @*<span class="light-grey">(4)</span>*@
                                                     </span>
                                                     <span class="time">
-                                                        {{item.ARRIVALDATE}}
+                                                        {{item.IssuedDate}}
                                                         @*<br />7:11pm*@
                                                     </span>
 
@@ -205,16 +201,18 @@
 
                                                     <div class="summary">
                                                         @*<span class="badge badge-pink mail-tag"></span>*@
-                                                        <span class="text">
-                                                            {{item.DOCCODE}}
+                                                        <span class="text" ng-click="opennewVanban(item)">
+                                                            {{item.CodeNumber}}
                                                         </span>
                                                         <div class="btn-group " style="font-size: 9pt; display:block;">
                                                             @*<a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-pdf-o"></i> Thành viên hội đồng</a>
                                                                 <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>
                                                                 <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>*@
-                                                            <a 
-                                                               title="{{index.TENFILE}}"
+                                                            <a data-toggle="modal"
+                                                               data-target="#myModal"
                                                                ng-repeat="index in item.FileDinhKem"
+                                                               @*ng-click="getdatafilePDF(index.TENFILE)"*@
+                                                               ng-click="viewfilepdf(index.TENFILE)"
                                                                class="badge"
                                                                style="font-size: 9pt; max-width: 100px; margin-right:4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                                 <i class="fa fa-file-word-o"></i> {{index.TENFILE}}
@@ -222,10 +220,9 @@
                                                             <span class="light-grey">({{item.FileDinhKem.length}})</span>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
-                                                <div class="message-item">
+                                                @*<div class="message-item">
                                                     <div class="menurows pull-right btn-group btn-corner" style="font-size:9pt;">
                                                         <button data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
@@ -237,7 +234,7 @@
                                                         <span class="lbl"></span>
                                                     </label>
 
-                                                    @*<i class="message-star ace-icon fa fa-star-o light-grey"></i>*@
+                                                    <i class="message-star ace-icon fa fa-star-o light-grey"></i>
                                                     <i class="message-star ace-icon fa fa-info-circle light-grey" style="color: #FEB902 !important; margin-left: 1px; margin-right: 1px;"></i>
                                                     <span class="sender" title="John Doe">
                                                         John Doe
@@ -245,12 +242,12 @@
                                                     </span>
                                                     <span class="time">12/12/2017<br />7:11pm</span>
 
-                                                    @*<span class="attachment">
+                                                    <span class="attachment">
                                                             <i class="ace-icon fa fa-paperclip"></i>
-                                                        </span>*@
+                                                        </span>
 
                                                     <div class="summary">
-                                                        @*<span class="badge badge-pink mail-tag"></span>*@
+                                                        <span class="badge badge-pink mail-tag"></span>
                                                         <span class="text">
                                                             Ông Trần Quốc Vượng, ủy viên Bộ Chính trị, Thường trực Ban Bí thư, Phó trưởng Ban Chỉ đạo chủ trì cuộc họp, thảo luận, cho ý kiến đối với một số vụ án, vụ việc thuộc diện Ban Chỉ đạo theo dõi, chỉ đạo từ sau phiên họp thứ 15 đến nay.
                                                         </span>
@@ -262,10 +259,7 @@
                                                             <span class="light-grey">(4)</span>
                                                         </div>
                                                     </div>
-
-                                                </div>
-
-                                                
+                                                </div>*@
                                             </div>
                                             @*<table class="table table-striped table-hover dataTable no-footer" style="margin-bottom:0px;width:100%">
                                                     <tbody>
@@ -334,4 +328,10 @@
     @Html.Partial("~/Views/Vanban/Themvanbanden.cshtml")
 </script>
 @Html.IncludeVersionedJs("~/MyScript/vanban/vanbandenCtrl.js")
+
 @Html.IncludeVersionedJs("~/MyScript/vanban/VanbanCtrl.js")
+<script type="text/ng-template" id="viewPDFonline.html">
+    @Html.Partial("~/Views/Viewfile/viewfilepdfonline.cshtml")
+</script>
+
+@Html.IncludeVersionedJs("~/MyScript/viewfile/viewfilepdfCtrl.js")

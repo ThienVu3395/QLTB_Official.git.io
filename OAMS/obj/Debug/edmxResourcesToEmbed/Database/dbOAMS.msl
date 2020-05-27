@@ -241,39 +241,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbVanbandens">
-      <EntityTypeMapping TypeName="dbOAMSModel.tbVanbanden">
-        <MappingFragment StoreEntitySet="tbVanbanden">
-          <ScalarProperty Name="MOREINFO5" ColumnName="MOREINFO5" />
-          <ScalarProperty Name="MOREINFO4" ColumnName="MOREINFO4" />
-          <ScalarProperty Name="MOREINFO3" ColumnName="MOREINFO3" />
-          <ScalarProperty Name="MOREINFO2" ColumnName="MOREINFO2" />
-          <ScalarProperty Name="MOREINFO1" ColumnName="MOREINFO1" />
-          <ScalarProperty Name="SOVANBANID" ColumnName="SOVANBANID" />
-          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
-          <ScalarProperty Name="TRACEHEADER" ColumnName="TRACEHEADER" />
-          <ScalarProperty Name="TOPLACES" ColumnName="TOPLACES" />
-          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
-          <ScalarProperty Name="FULLNAMESIGNER" ColumnName="FULLNAMESIGNER" />
-          <ScalarProperty Name="POSITIONSIGNER" ColumnName="POSITIONSIGNER" />
-          <ScalarProperty Name="ARRIVALNUMBER" ColumnName="ARRIVALNUMBER" />
-          <ScalarProperty Name="ARRIVALDATE" ColumnName="ARRIVALDATE" />
-          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-          <ScalarProperty Name="PAGEMOUNT" ColumnName="PAGEMOUNT" />
-          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
-          <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
-          <ScalarProperty Name="ORGANNAME" ColumnName="ORGANNAME" />
-          <ScalarProperty Name="ISSUEDDATE" ColumnName="ISSUEDDATE" />
-          <ScalarProperty Name="CODENOTATION" ColumnName="CODENOTATION" />
-          <ScalarProperty Name="CODENUMBER" ColumnName="CODENUMBER" />
-          <ScalarProperty Name="TYPENAME" ColumnName="TYPENAME" />
-          <ScalarProperty Name="DOCORDINAL" ColumnName="DOCORDINAL" />
-          <ScalarProperty Name="FILECODE" ColumnName="FILECODE" />
-          <ScalarProperty Name="DOCCODE" ColumnName="DOCCODE" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbVBdenCanboes">
       <EntityTypeMapping TypeName="dbOAMSModel.tbVBdenCanbo">
         <MappingFragment StoreEntitySet="tbVBdenCanbo">
@@ -511,6 +478,39 @@
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
           <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
           <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbVanbandens">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbVanbanden">
+        <MappingFragment StoreEntitySet="tbVanbanden">
+          <ScalarProperty Name="MOREINFO5" ColumnName="MOREINFO5" />
+          <ScalarProperty Name="MOREINFO4" ColumnName="MOREINFO4" />
+          <ScalarProperty Name="MOREINFO3" ColumnName="MOREINFO3" />
+          <ScalarProperty Name="MOREINFO2" ColumnName="MOREINFO2" />
+          <ScalarProperty Name="MOREINFO1" ColumnName="MOREINFO1" />
+          <ScalarProperty Name="SOVANBANID" ColumnName="SOVANBANID" />
+          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+          <ScalarProperty Name="TRACEHEADER" ColumnName="TRACEHEADER" />
+          <ScalarProperty Name="TOPLACES" ColumnName="TOPLACES" />
+          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+          <ScalarProperty Name="FULLNAMESIGNER" ColumnName="FULLNAMESIGNER" />
+          <ScalarProperty Name="POSITIONSIGNER" ColumnName="POSITIONSIGNER" />
+          <ScalarProperty Name="ARRIVALNUMBER" ColumnName="ARRIVALNUMBER" />
+          <ScalarProperty Name="ARRIVALDATE" ColumnName="ARRIVALDATE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PAGEMOUNT" ColumnName="PAGEMOUNT" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
+          <ScalarProperty Name="ORGANNAME" ColumnName="ORGANNAME" />
+          <ScalarProperty Name="ISSUEDDATE" ColumnName="ISSUEDDATE" />
+          <ScalarProperty Name="CODENOTATION" ColumnName="CODENOTATION" />
+          <ScalarProperty Name="CODENUMBER" ColumnName="CODENUMBER" />
+          <ScalarProperty Name="TYPENAME" ColumnName="TYPENAME" />
+          <ScalarProperty Name="DOCORDINAL" ColumnName="DOCORDINAL" />
+          <ScalarProperty Name="FILECODE" ColumnName="FILECODE" />
+          <ScalarProperty Name="DOCCODE" ColumnName="DOCCODE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
