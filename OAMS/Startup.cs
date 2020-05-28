@@ -33,6 +33,7 @@ namespace OAMS
                 // path.
                 map.RunSignalR(hubConfiguration);
             });
+
         }
     }
 }

@@ -89,6 +89,21 @@
                         });
                 }
 
+                function getVanBanDen() {
+                    blockUI.start();
+                    var resp = loginservice.getdata("api/QLVanBan/getVanBanDen");
+                    resp.then(function (response) {
+                        $scope.DsVanBan = response.data;
+                        $scope.bigTotalItems = $scope.DsVanBan.length;
+                        blockUI.stop();
+                    }
+                        , function errorCallback(response) {
+                            $scope.datatree = [];
+                            blockUI.stop();
+                            $scope.actionbp = true;
+                        });
+                }
+
                 function removeFile(fileName) {
                     blockUI.start();
                     var resp;
@@ -134,6 +149,7 @@
                     var resp = loginservice.postdata("api/QLVanBan/ThemVanBanDen", $.param($ctrl.datasumitformedit));
                     resp.then(function (response) {
                         alert(response.data);
+                        getVanBanDen();
                         //$ctrl.datasumitformedit = response.data;
                         //alert("Cập nhật thành công!");
                         //$ctrl.resetForm();
@@ -141,6 +157,20 @@
                     }
                         , function errorCallback(response) {
                             alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
+                        });
+                }
+
+                function getVanBanDen() {
+                    blockUI.start();
+                    var resp = loginservice.getdata("api/QLVanBan/getVanBanDen");
+                    resp.then(function (response) {
+                        $scope.DsVanBan = response.data;
+                        blockUI.stop();
+                    }
+                        , function errorCallback(response) {
+                            $scope.datatree = [];
+                            blockUI.stop();
+                            $scope.actionbp = true;
                         });
                 }
 
@@ -284,6 +314,11 @@
                     }
                     return false;
                 };
+
+
+
+
+
             }])
         ;
 }());

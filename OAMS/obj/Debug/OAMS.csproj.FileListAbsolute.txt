@@ -783,3 +783,4 @@ C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CoreCompileI
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.pdb
+C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csprojAssemblyReference.cache

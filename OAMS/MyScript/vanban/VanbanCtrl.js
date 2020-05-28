@@ -5,6 +5,11 @@
         .controller("VanbanCtrl", ["$scope", "$timeout", "$http", "$uibModal", "$document", "blockUI", "appSettings", "loginservice", "userProfile",
             function ($scope, $timeout, $http, $uibModal, $document, blockUI, appSettings, loginservice, userProfile) {
                 var tree;
+                // Init cho trang quản trị
+                $scope.itemsPerPage = 10;
+                $scope.maxSize = 5;
+                $scope.bigTotalItems = 175;
+                $scope.bigCurrentPage = 1;
 
                 $scope.nodeselect = {};
                 $scope.actionbp = true;
@@ -65,6 +70,7 @@
                     var resp = loginservice.getdata("api/QLVanBan/getVanBanDen");
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
+                        $scope.bigTotalItems = $scope.DsVanBan.length;
                         blockUI.stop();
                     }
                         , function errorCallback(response) {
@@ -76,6 +82,25 @@
 
                 function getVanBanDi() {
                 }
+
+                //$scope.PhanTrang = function () {
+                //    blockUI.start();
+                //    let itemLoc = {
+                //        Start: ($scope.bigCurrentPage - 1) * $scope.itemsPerPage,
+                //        End: $scope.itemsPerPage,
+                //    }
+                //    var resp = loginservice.postdata("api/QLVanBan/PhanTrang", $.param(itemLoc));
+                //    resp.then(function (response) {
+                //        console.log(response.data);
+                //        $scope.DsVanBan = response.data;
+                //        blockUI.stop();
+                //    }
+                //        , function errorCallback(response) {
+                //            $scope.datatree = [];
+                //            blockUI.stop();
+                //            $scope.actionbp = true;
+                //        });
+                //}
 
                 $scope.opennewVanban = function (item) {
                     var parentElem =

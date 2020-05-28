@@ -207,6 +207,26 @@ namespace OAMS.Controllers.API
         }
 
         [HttpPost]
+        [Route("PhanTrang")]
+        public IHttpActionResult PhanTrang(PhanTrangModel par)
+        {
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Start", par.Start);
+                parameters.Add("@End", par.End);
+
+                if (db.State == System.Data.ConnectionState.Closed)
+                {
+                    db.Open();
+                }
+
+                var returnV = db.Query<VanBanViewModel>("procPhanTrang_Loc", parameters, null, true, null, System.Data.CommandType.StoredProcedure);
+                return Ok(returnV);
+            }
+        }
+
+        [HttpPost]
         [Route("UploadFiles")]
         public string UploadFiles()
         {
@@ -285,20 +305,31 @@ namespace OAMS.Controllers.API
             string subPatch = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/");
 
             if (System.IO.File.Exists(sPath))
-
             {
-                FileInfo f = new FileInfo(sPath);
+                var parameters = new DynamicParameters();
+                parameters.Add("@TENFILE", fileName);
 
-                f.Delete();
+                string query = "select * from doc.tbFiledinhkem where TENFILE = @TENFILE";
 
-                if (Path.GetExtension(subPatch + fileName) == ".docx")
+                using (IDbConnection db = new SqlConnection(_cnn))
                 {
-                    fileName = fileName.Replace(".docx", ".pdf");
+                    var listVanBan = db.Query<FileDinhKemViewModel>(query, parameters).ToList();
+                    if(listVanBan.Count == 0)
+                    {
+                        FileInfo f = new FileInfo(sPath);
 
-                    FileInfo sf = new FileInfo(subPatch + fileName);
+                        f.Delete();
 
-                    sf.Delete();
-                }
+                        if (Path.GetExtension(subPatch + fileName) == ".docx")
+                        {
+                            fileName = fileName.Replace(".docx", ".pdf");
+
+                            FileInfo sf = new FileInfo(subPatch + fileName);
+
+                            sf.Delete();
+                        }
+                    }
+                }              
             }
 
             else

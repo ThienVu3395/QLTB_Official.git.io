@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+
 <style>
     .my-drop-zone {
         border: dotted 3px lightgray;
@@ -252,117 +253,147 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mã định danh:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.OrganId}}" readonly />
+                        <span class="form-control">{{objVB.OrganId}}</span>
                     </div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Năm hình thành:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.FileCatalog}}" readonly />
+                        <span class="form-control">{{objVB.FileCatalog}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Số, ký hiệu:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.FileNotation}}" readonly />
+                        <span class="form-control">{{objVB.FileNotation}}</span>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Số thứ tự:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.DocOrdinal}}" readonly />
+                        <span class="form-control">{{objVB.DocOrdinal}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Tên loại:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.TypeName}}" readonly />
+                        <span class="form-control">{{objVB.TypeName}}</span>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Số văn bản:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.CodeNumber}}" readonly />
+                        <span class="form-control">{{objVB.CodeNumber}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ký hiệu:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.CodeNotation}}" readonly />
+                        <span class="form-control">{{objVB.CodeNotation}}</span>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngày đến:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.IssuedDate}}" readonly />
+                        <span class="form-control">{{objVB.IssuedDate | date:"dd/MM/yyyy"}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Cơ quan ban hành:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.OrganName}}" readonly />
+                        <span class="form-control">{{objVB.OrganName}}</span>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngôn ngữ:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.Language}}" readonly />
+                        <span class="form-control">{{objVB.Language}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Trích yếu:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:70px;" class="form-control" readonly>{{objVB.Language}}</textarea>
+                        <span class="form-control">{{objVB.OrganName}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ghi chú:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <textarea style="height:40px;" class="form-control" readonly>{{objVB.Description}}</textarea>
+                        <span class="form-control">{{objVB.Description}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Người ký:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.Fullname}}" readonly />
+                        <span class="form-control">{{objVB.Fullname}}</span>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Chức vụ:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.Position}}" readonly />
+                        <span class="form-control">{{objVB.Position}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Mức độ khẩn:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.Priority}}" readonly />
+                        <span class="form-control">{{objVB.Priority}}</span>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Số lượng phát hành:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.IssuedAmount}}" readonly />
+                        <span class="form-control">{{objVB.IssuedAmount}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Sổ văn bản:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.SoVanBanID}}" readonly />
+                        <span class="form-control">{{objVB.SoVanBanID}}</span>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Hạn trả lời:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" value=" {{objVB.DueDate}}" readonly />
+                        <span class="form-control">{{objVB.DueDate | date:"dd/MM/yyyy"}}</span>
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12">
-                    <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
-                        <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
+                @*Gửi vb đến*@
+                <div>
+                    <h4 class="header green">Thành viên tham gia</h4>
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2 col-xs-3">Phối hợp:</label>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <ui-select multiple ng-model="ctrol.multichosse" style="min-height: 100px; height: auto;" tagging="transformFunction" theme="bootstrap" class="inputtable" title="Chọn giá trị" data-toggle="tooltip" data-placement="left">
+                                <ui-select-match allow-clear="true" placeholder="Chọn giá trị...">{{$item.values}}</ui-select-match>
+                                <ui-select-choices style="margin: 0 2px 0 0; padding-bottom:0px; padding-top:0px;" repeat="i in dirlist|filter:{'values':$viewValue, 'type': ctrol.dirtype}">
+                                    {{i.values}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
+                            <button class="btn btn-sm btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Gửi</button>
+                            <button ng-click="$ctrl.cancel()" class="btn btn-sm btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
+                        </div>
                     </div>
                 </div>
+
+                <h3>Array of objects (sorting enabled)</h3>
+                <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: 800px;">
+                    <ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+                    <ui-select-choices repeat="person in ctrl.people | propsFilter: {name: $select.search, age: $select.search}">
+                        <div ng-bind-html="person.name | highlight: $select.search"></div>
+                        <small>
+                            email: {{person.email}}
+                            age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+                        </small>
+                    </ui-select-choices>
+                </ui-select>
+                <p>Selected: {{ctrl.multipleDemo.selectedPeople}}</p>
+                @*/Gửi vb đến*@
             </div>
             @*Xem chi tiết*@
 

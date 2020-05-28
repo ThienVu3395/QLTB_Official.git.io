@@ -209,6 +209,7 @@ namespace OAMS
                 throw ex;
             }
         }
+
         public static string DateToString(DateTime? time, string format)
         {
             try

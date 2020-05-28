@@ -33,6 +33,7 @@ namespace OAMS.Models
         public string MOREINFO4 { get; set; }
         public string MOREINFO5 { get; set; }
         public List<FileDinhKemViewModel> FileDinhKem { get; set; }
+        public int Total { get; set; }
     }
 
     public class SoVanBanViewModel
@@ -66,5 +67,11 @@ namespace OAMS.Models
         public string LOAIFILE { get; set; }
         public Nullable<int> SIZEFILE { get; set; }
         public Nullable<int> VITRIID { get; set; }
+    }
+
+    public class PhanTrangModel
+    {
+        public int Start { get; set; }
+        public int End { get; set; }
     }
 }
