@@ -69,9 +69,28 @@ namespace OAMS.Models
         public Nullable<int> VITRIID { get; set; }
     }
 
+    public class NguoiDungViewModel
+    {
+        public string ID { get; set; }
+        public string USERNAME { get; set; }
+        public string EMAIL { get; set; }
+        public string HOLOT { get; set; }
+        public string TEN { get; set; }
+        public string CHUCVU { get; set; }
+        public string BOPHAN { get; set; }
+    }
+
     public class PhanTrangModel
     {
         public int Start { get; set; }
         public int End { get; set; }
+    }
+
+    public class VanBanDenCanBoViewModel
+    {
+        public int ID { get; set; }
+        public int IDVANBAN { get; set; }
+        public string CANBO { get; set; }
+        public Nullable<System.DateTime> NGAYMO { get; set; }
     }
 }

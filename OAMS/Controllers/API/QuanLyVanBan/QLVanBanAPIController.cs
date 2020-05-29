@@ -130,6 +130,18 @@ namespace OAMS.Controllers.API
         }
 
         [HttpGet]
+        [Route("getNguoiDung")]
+        public IHttpActionResult getNguoiDung()
+        {
+            string query = "select * from users.tbNguoidung";
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                var listVanBan = db.Query<NguoiDungViewModel>(query);
+                return Ok(listVanBan);
+            }
+        }
+
+        [HttpGet]
         [Route("getVanBanDi")]
         public IHttpActionResult getVanBanDi()
         {
@@ -397,6 +409,13 @@ namespace OAMS.Controllers.API
             response1.Content = new StreamContent(stream1);
             response1.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
             return response1;
+        }
+
+        [HttpPost]
+        [Route("GuiVanBanDen")]
+        public IHttpActionResult GuiVanBanDen(VanBanDenCanBoViewModel model)
+        {
+            return Ok();
         }
     }
 }

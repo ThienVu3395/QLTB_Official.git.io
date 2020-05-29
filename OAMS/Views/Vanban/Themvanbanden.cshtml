@@ -24,6 +24,27 @@
         height: 100%;
         background-color: #d7d4d4 !important;
     }
+
+    .select2 > .select2-choice.ui-select-match {
+        /* Because of the inclusion of Bootstrap */
+        height: 29px;
+    }
+
+    .selectize-control > .selectize-dropdown {
+        top: 36px;
+    }
+    /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+    .select-box {
+        background: #fff;
+        position: relative;
+        z-index: 1;
+    }
+
+    .alert-info.positioned {
+        margin-top: 1em;
+        position: relative;
+        z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+    }
 </style>
 
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
@@ -363,39 +384,29 @@
                 <div>
                     <h4 class="header green">Thành viên tham gia</h4>
                     <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-2 col-xs-3">Phối hợp:</label>
+                        <label class="control-label col-md-2 col-sm-2 col-xs-3">Người nhận văn bản:</label>
                         <div class="col-md-10 col-sm-10 col-xs-9">
-                            <ui-select multiple ng-model="ctrol.multichosse" style="min-height: 100px; height: auto;" tagging="transformFunction" theme="bootstrap" class="inputtable" title="Chọn giá trị" data-toggle="tooltip" data-placement="left">
-                                <ui-select-match allow-clear="true" placeholder="Chọn giá trị...">{{$item.values}}</ui-select-match>
-                                <ui-select-choices style="margin: 0 2px 0 0; padding-bottom:0px; padding-top:0px;" repeat="i in dirlist|filter:{'values':$viewValue, 'type': ctrol.dirtype}">
-                                    {{i.values}}
+                            <ui-select multiple ng-model="multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false">
+                                <ui-select-match placeholder="Chọn người nhận văn bản...">{{$item.HOLOT + ' ' +  $item.TEN}}</ui-select-match>
+                                <ui-select-choices repeat="person in people | propsFilter: {HOLOT: $select.search, TEN: $select.search}">
+                                    <div ng-bind-html="person.HOLOT + ' ' +  person.TEN | highlight: $select.search"></div>
+                                    <small>
+                                        Bộ Phận: <span ng-bind-html="''+person.BOPHAN | highlight: $select.search"></span> , 
+                                        Chức Vụ: <span ng-bind-html="''+person.CHUCVU"></span>
+                                    </small>
                                 </ui-select-choices>
                             </ui-select>
                         </div>
                     </div>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
-                            <button class="btn btn-sm btn-primary" style="font-size:9pt;"><i class="fa fa-save"></i> Gửi</button>
-                            <button ng-click="$ctrl.cancel()" class="btn btn-sm btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
-                        </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
+                        <button class="btn btn-xs btn-info" style="font-size:9pt;" ng-click="GuiVanBan()"><i class="fa fa-save"></i> Gửi</button>
+                        <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
                     </div>
                 </div>
-
-                <h3>Array of objects (sorting enabled)</h3>
-                <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: 800px;">
-                    <ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
-                    <ui-select-choices repeat="person in ctrl.people | propsFilter: {name: $select.search, age: $select.search}">
-                        <div ng-bind-html="person.name | highlight: $select.search"></div>
-                        <small>
-                            email: {{person.email}}
-                            age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
-                        </small>
-                    </ui-select-choices>
-                </ui-select>
-                <p>Selected: {{ctrl.multipleDemo.selectedPeople}}</p>
-                @*/Gửi vb đến*@
+                @*/ Gửi vb đến*@
             </div>
-            @*Xem chi tiết*@
 
             <div class="col-md-5 col-sm-5 col-xs-12" style="height:calc(100%); border: solid 1px #808080;">
                 @*<iframe src=""></iframe>*@
@@ -404,6 +415,7 @@
                 </div>
             </div>
         </div>
+        @*/ Xem chi tiết*@
     </div>
     @*<div class="modal-footer">
             <button class="btn btn-xs btn-primary" type="submit" ng-click="$ctrl.ok1()"><i class="fa fa-send" title="Ghi nhận và thêm mới"></i> Gửi</button>

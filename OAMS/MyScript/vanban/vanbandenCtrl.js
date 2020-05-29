@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict"
     angular.module("oamsapp")
-        .controller('vanbandenCtrl', ["$scope", "$http", "$uibModalInstance", "blockUI", "FileUploader", "appSettings", "loginservice", "userProfile", "idselect",
-            function ($scope, $http, $uibModalInstance, blockUI, FileUploader, appSettings, loginservice, userProfile, idselect) {
+        .controller('vanbandenCtrl', ["$scope", "$http", "$uibModalInstance", "blockUI", "FileUploader", "appSettings", "loginservice", "userProfile", "idselect", "$timeout", "$interval",
+            function ($scope, $http, $uibModalInstance, blockUI, FileUploader, appSettings, loginservice, userProfile, idselect, $timeout, $interval) {
                 var $ctrl = this;
 
                 $scope.TrangThai = false; // Thêm Mới
@@ -15,6 +15,7 @@
                         $scope.TrangThai = true; // Xem chi tiết
                         $scope.objVB = idselect;
                         $scope.Title = "Chi Tiết Văn Bản";
+                        getNguoiDung();
                     }
                     else {
                         $scope.TrangThai = false;
@@ -96,6 +97,25 @@
                         $scope.DsVanBan = response.data;
                         $scope.bigTotalItems = $scope.DsVanBan.length;
                         blockUI.stop();
+                    }
+                        , function errorCallback(response) {
+                            $scope.datatree = [];
+                            blockUI.stop();
+                            $scope.actionbp = true;
+                        });
+                }
+
+                $scope.people = [];
+
+                function getNguoiDung() {
+                    blockUI.start();
+                    var resp = loginservice.getdata("api/QLVanBan/getNguoiDung");
+                    resp.then(function (response) {
+                        $scope.people = response.data;
+                        blockUI.stop();
+                        $scope.data = userProfile.getProfile();
+                        let index = $scope.people.findIndex(x => x.USERNAME == $scope.data.username);
+                        $scope.people.splice(index, 1);
                     }
                         , function errorCallback(response) {
                             $scope.datatree = [];
@@ -316,9 +336,131 @@
                 };
 
 
+                ////////////////////--------------- MULTIPLE SELECT ------------///////////////
+                var vm = this;
 
+                vm.disabled = undefined;
+                vm.searchEnabled = undefined;
 
+                vm.setInputFocus = function () {
+                    $scope.$broadcast('UiSelectDemo1');
+                };
 
+                vm.enable = function () {
+                    vm.disabled = false;
+                };
+
+                vm.disable = function () {
+                    vm.disabled = true;
+                };
+
+                vm.enableSearch = function () {
+                    vm.searchEnabled = true;
+                };
+
+                vm.disableSearch = function () {
+                    vm.searchEnabled = false;
+                };
+
+                vm.clear = function () {
+                    vm.person.selected = undefined;
+                    vm.address.selected = undefined;
+                    vm.country.selected = undefined;
+                };
+
+                vm.someGroupFn = function (item) {
+
+                    if (item.name[0] >= 'A' && item.name[0] <= 'M')
+                        return 'From A - M';
+
+                    if (item.name[0] >= 'N' && item.name[0] <= 'Z')
+                        return 'From N - Z';
+
+                };
+
+                vm.firstLetterGroupFn = function (item) {
+                    return item.name[0];
+                };
+
+                vm.reverseOrderFilterFn = function (groups) {
+                    return groups.reverse();
+                };
+
+                vm.personAsync = { selected: "wladimir@email.com" };
+                vm.peopleAsync = [];
+
+                $timeout(function () {
+                    vm.peopleAsync = [
+                        { name: 'Adam', email: 'adam@email.com', age: 12, country: 'United States' },
+                        { name: 'Amalie', email: 'amalie@email.com', age: 12, country: 'Argentina' },
+                        { name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
+                        { name: 'Adrian', email: 'adrian@email.com', age: 21, country: 'Ecuador' },
+                        { name: 'Wladimir', email: 'wladimir@email.com', age: 30, country: 'Ecuador' },
+                        { name: 'Samantha', email: 'samantha@email.com', age: 30, country: 'United States' },
+                        { name: 'Nicole', email: 'nicole@email.com', age: 43, country: 'Colombia' },
+                        { name: 'Natasha', email: 'natasha@email.com', age: 54, country: 'Ecuador' },
+                        { name: 'Michael', email: 'michael@email.com', age: 15, country: 'Colombia' },
+                        { name: 'Nicolás', email: 'nicole@email.com', age: 43, country: 'Colombia' }
+                    ];
+                }, 3000);
+
+                vm.counter = 0;
+                vm.onSelectCallback = function (item, model) {
+                    vm.counter++;
+                    vm.eventResult = { item: item, model: model };
+                };
+
+                vm.removed = function (item, model) {
+                    vm.lastRemoved = {
+                        item: item,
+                        model: model
+                    };
+                };
+
+                vm.tagTransform = function (newTag) {
+                    var item = {
+                        name: newTag,
+                        email: newTag.toLowerCase() + '@email.com',
+                        age: 'unknown',
+                        country: 'unknown'
+                    };
+
+                    return item;
+                };
+
+                vm.singleDemo = {};
+                vm.singleDemo.color = '';
+                $scope.multipleDemo = {};
+                $scope.multipleDemo.colors = ['Blue', 'Red'];
+                $scope.multipleDemo.colors2 = ['Blue', 'Red'];
+                $scope.multipleDemo.selectedPeople = [];
+                $scope.multipleDemo.selectedPeople2 = $scope.multipleDemo.selectedPeople;
+                //$scope.multipleDemo.selectedPeopleWithGroupBy = [$scope.people[8], $scope.people[6]];
+                $scope.multipleDemo.selectedPeopleSimple = ['samantha@email.com', 'wladimir@email.com'];
+                $scope.multipleDemo.removeSelectIsFalse = [$scope.people[2], $scope.people[0]];
+
+                vm.appendToBodyDemo = {
+                    remainingToggleTime: 0,
+                    present: true,
+                    startToggleTimer: function () {
+                        var scope = vm.appendToBodyDemo;
+                        var promise = $interval(function () {
+                            if (scope.remainingTime < 1000) {
+                                $interval.cancel(promise);
+                                scope.present = !scope.present;
+                                scope.remainingTime = 0;
+                            } else {
+                                scope.remainingTime -= 1000;
+                            }
+                        }, 1000);
+                        scope.remainingTime = 3000;
+                    }
+                };
+
+                $scope.GuiVanBan = function () {
+                    console.log($scope.multipleDemo.selectedPeople);
+                    $scope.data = userProfile.getProfile();
+                }
             }])
         ;
 }());
