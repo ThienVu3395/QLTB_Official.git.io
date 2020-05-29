@@ -458,8 +458,26 @@
                 };
 
                 $scope.GuiVanBan = function () {
-                    console.log($scope.multipleDemo.selectedPeople);
-                    $scope.data = userProfile.getProfile();
+                    if ($scope.multipleDemo.selectedPeople.length == 0) {
+                        alert("Xin vui lòng chọn danh sách người nhận văn bản này");
+                        return;
+                    }
+                    $scope.dsNhanVB = [];
+                    for (let i = 0; i < $scope.multipleDemo.selectedPeople.length; i++) {
+                        let item = {
+                            IDVANBAN: $scope.objVB.ID,
+                            CANBO: $scope.multipleDemo.selectedPeople[i].USERNAME,
+                            NGAYMO: null,
+                        }
+                        $scope.dsNhanVB.push(item);
+                    }
+                    var resp = loginservice.postdataNormal("api/QLVanBan/GuiVanBanDen", $scope.dsNhanVB);
+                    resp.then(function (response) {
+                        alert(response.data);
+                    }
+                        , function errorCallback(response) {
+                            console.log(response);
+                        });
                 }
             }])
         ;

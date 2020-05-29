@@ -156,7 +156,6 @@
                     return resp;
                 };
                 this.postdata = function (urlapi, data) {
-
                     var accesstoken = userProfile.getProfile().access_token;
                     var authHeaders = {};
                     if (accesstoken) {
@@ -174,6 +173,25 @@
                     });
                     return resp;
                 };
+
+                this.postdataNormal = function (urlapi, data) {
+                    var resp = $http({
+                        url: appSettings.serverPath + urlapi,
+                        method: "POST",
+                        data: data,
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    return resp;
+                };
+
+                this.getdataNormal = function (urlapi) {
+                    var resp = $http({
+                        url: appSettings.serverPath + urlapi,
+                        method: 'GET'
+                    });
+                    return resp;
+                };
+
                 this.getdata = function (urlapi) {
                     var accesstoken = userProfile.getProfile().access_token;
                     var authHeaders = {};
@@ -211,6 +229,8 @@
                 return {
                     login: this.login,
                     postdata: this.postdata,
+                    postdataNormal: this.postdataNormal,
+                    getdataNormal: this.getdataNormal,
                     getdata: this.getdata,
                     getdatafile: this.getdatafile
                 }

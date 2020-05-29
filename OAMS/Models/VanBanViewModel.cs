@@ -93,4 +93,8 @@ namespace OAMS.Models
         public string CANBO { get; set; }
         public Nullable<System.DateTime> NGAYMO { get; set; }
     }
+    public class VanBanDenCanBoViewModels
+    {
+        public List<VanBanDenCanBoViewModel> para { get; set; }
+    }
 }

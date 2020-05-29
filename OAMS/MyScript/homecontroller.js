@@ -14,8 +14,8 @@
                     $scope.access_token = "";
                     $scope.roleName = "";
                     $scope.viewwwin = false;
-                    getdataUser();
-                    
+                    $scope.DsVB = [];
+                    getdataUser();                  
 
                     //$scope.Notification = 
                     //$scope.Chats.onConnected();
@@ -35,11 +35,13 @@
                             else {
                                 $scope.ulrimage = appSettings.serverPath + 'Content/image/user.png';
                             }
+                            getListVanBan($scope.userName);
                         }
                         else {
                             // window.location.href = appSettings.serverPath + appSettings.serverLogin;
                         }
                     }
+
                     $scope.chuyenthongbao = function (item) {
                         if (item.inttype == 1)
                             window.location.href = appSettings.serverPath + "Qlkhaithac/xetduyetYeucau?id=" + item.intkey + "&idct=" + item.intkey1;
@@ -47,9 +49,20 @@
                             window.location.href = appSettings.serverPath + "Qlkhaithac/dsycduyettaikhoan";
                         else window.location.href = appSettings.serverPath + "Baoquan/qlxuattailieu";
                     }
+
+                    function getListVanBan(CanBo) {
+                        var respd = loginservice.getdataNormal("api/QLVanBan/getListVB?CANBO=" + CanBo);
+                        respd.then(function (response) {
+                            $scope.DsVB = response.data;
+                        }, function errorCallback(response) {
+
+                        });
+                    }
+
                     $scope.$on('otherloginOntime', function (e, data) {
                         $scope.logout();
                     });
+
                     $scope.logout = function () {
                         var respd;
                         respd = loginservice.postdata("api/Account/Logout");
@@ -118,8 +131,8 @@
                             $rootScope.$broadcast('handleBroadcast', 0);
                         }
                     };
-                    $scope.countitem = userProfile.getcountShoping();
 
+                    $scope.countitem = userProfile.getcountShoping();
 
                     $scope.$on('handleBroadcast', function () {
                         $scope.countitem = userProfile.getcountShoping();
@@ -137,6 +150,10 @@
                         //}, function errorCallback(response) {
 
                         //});
+                    }
+
+                    $scope.opennewVanban = function (id) {
+                        alert("!");
                     }
 
                 }])

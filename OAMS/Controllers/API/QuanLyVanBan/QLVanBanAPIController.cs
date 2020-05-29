@@ -10,6 +10,7 @@ using System.Web.Http;
 using Dapper;
 using System.Data;
 using Microsoft.Office.Interop.Word;
+using System.Collections.Generic;
 
 namespace OAMS.Controllers.API
 {
@@ -122,7 +123,7 @@ namespace OAMS.Controllers.API
                     var parameters = new DynamicParameters();
                     parameters.Add("@ID", item.ID);
                     string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
-                    var listFile = db.Query<FileDinhKemViewModel>(qr,parameters).ToList();
+                    var listFile = db.Query<FileDinhKemViewModel>(qr, parameters).ToList();
                     item.FileDinhKem = listFile;
                 }
                 return Ok(listVanBan);
@@ -149,6 +150,20 @@ namespace OAMS.Controllers.API
             using (IDbConnection db = new SqlConnection(_cnn))
             {
                 var aa = db.Query<LoaiVanBanViewModel>(query);
+                return Ok(aa);
+            }
+        }
+
+        [HttpGet]
+        [Route("getListVB")]
+        public IHttpActionResult getListVB(string CANBO)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@CANBO", CANBO);
+            string query = "select * from doc.tbVBdenCanbo where CANBO = @CANBO";
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                var aa = db.Query<VanBanDenCanBoViewModel>(query, parameters).ToList();
                 return Ok(aa);
             }
         }
@@ -273,7 +288,7 @@ namespace OAMS.Controllers.API
                     {
                         hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
 
-                        if(Path.GetExtension(sPath + hpf.FileName) == ".docx")
+                        if (Path.GetExtension(sPath + hpf.FileName) == ".docx")
                         {
                             SYSTEM.ConvertWordtoPDF(sPath + Path.GetFileName(hpf.FileName));
                         }
@@ -326,7 +341,7 @@ namespace OAMS.Controllers.API
                 using (IDbConnection db = new SqlConnection(_cnn))
                 {
                     var listVanBan = db.Query<FileDinhKemViewModel>(query, parameters).ToList();
-                    if(listVanBan.Count == 0)
+                    if (listVanBan.Count == 0)
                     {
                         FileInfo f = new FileInfo(sPath);
 
@@ -341,7 +356,7 @@ namespace OAMS.Controllers.API
                             sf.Delete();
                         }
                     }
-                }              
+                }
             }
 
             else
@@ -399,9 +414,9 @@ namespace OAMS.Controllers.API
             //}
 
             //return response;
-            if(Path.GetExtension(fileName) == ".docx")
+            if (Path.GetExtension(fileName) == ".docx")
             {
-                fileName = Path.ChangeExtension(fileName,"pdf");
+                fileName = Path.ChangeExtension(fileName, "pdf");
             }
             string sPath1 = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/" + fileName);
             var response1 = new HttpResponseMessage(HttpStatusCode.OK);
@@ -413,9 +428,30 @@ namespace OAMS.Controllers.API
 
         [HttpPost]
         [Route("GuiVanBanDen")]
-        public IHttpActionResult GuiVanBanDen(VanBanDenCanBoViewModel model)
+        public IHttpActionResult GuiVanBanDen(List<VanBanDenCanBoViewModel> model)
         {
-            return Ok();
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                if (model.Count > 0)
+                {
+                    foreach (var item in model)
+                    {
+                        var parameters = new DynamicParameters();
+                        parameters.Add("@IDVANBAN", item.IDVANBAN);
+                        parameters.Add("@CANBO", item.CANBO);
+                        parameters.Add("@NGAYMO", item.NGAYMO);
+
+                        if (db.State == System.Data.ConnectionState.Closed)
+                        {
+                            db.Open();
+                        }
+
+                        db.Execute("procThemVB_CanBo", parameters, null, null, System.Data.CommandType.StoredProcedure);
+                    }
+                    return Ok("Gửi Văn Bản Thành Công");
+                }
+                return BadRequest("Có lỗi,xin vui lòng thử lại");
+            }
         }
     }
 }
