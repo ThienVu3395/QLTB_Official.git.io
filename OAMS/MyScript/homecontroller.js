@@ -53,7 +53,8 @@
                     function getListVanBan(CanBo) {
                         var respd = loginservice.getdataNormal("api/QLVanBan/getListVB?CANBO=" + CanBo);
                         respd.then(function (response) {
-                            $scope.DsVB = response.data;
+                            $scope.DsTB = response.data;
+                            $scope.SoLuongTB = $scope.DsTB[0].SoLuong;
                         }, function errorCallback(response) {
 
                         });
@@ -150,10 +151,6 @@
                         //}, function errorCallback(response) {
 
                         //});
-                    }
-
-                    $scope.opennewVanban = function (id) {
-                        alert("!");
                     }
 
                 }])

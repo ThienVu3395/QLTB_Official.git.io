@@ -39,7 +39,7 @@
                 $scope.datatree = [];
                 $scope.my_tree = tree = {};
                 getdataphongban();
-                getVanBanDen();
+                checkTrangThai();
                 function getdataphongban() {
                     blockUI.start();
                     var data = userProfile.getProfile();
@@ -65,12 +65,20 @@
                     }
                 }
 
-                function getVanBanDen() {
+                function checkTrangThai() {
+                    var data = userProfile.getProfile();
+                    if (data.roleName == "Admin") {
+                        getVanBanDen_Admin();
+                    }
+                    else getVanBanDen_CanBo(data.username);
+                }
+
+                function getVanBanDen_CanBo(canbo) {
                     blockUI.start();
-                    var resp = loginservice.getdata("api/QLVanBan/getVanBanDen");
+                    var resp = loginservice.getdata("api/QLVanBan/getVanBanDen_CanBo?CANBO=" + canbo);
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
-                        $scope.bigTotalItems = $scope.DsVanBan.length;
+                        console.log($scope.DsVanBan);
                         blockUI.stop();
                     }
                         , function errorCallback(response) {
@@ -80,7 +88,19 @@
                         });
                 }
 
-                function getVanBanDi() {
+                function getVanBanDen_Admin() {
+                    blockUI.start();
+                    var resp = loginservice.getdata("api/QLVanBan/getVanBanDen_Admin");
+                    resp.then(function (response) {
+                        $scope.DsVanBan = response.data;
+                        console.log($scope.DsVanBan);
+                        blockUI.stop();
+                    }
+                        , function errorCallback(response) {
+                            $scope.datatree = [];
+                            blockUI.stop();
+                            $scope.actionbp = true;
+                        });
                 }
 
                 //$scope.PhanTrang = function () {
@@ -103,6 +123,7 @@
                 //}
 
                 $scope.opennewVanban = function (item) {
+                    console.log(item);
                     var parentElem =
                         angular.element($document[0].querySelector('.main-content'));
                     var modalInstance = $uibModal.open({

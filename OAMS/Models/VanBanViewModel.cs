@@ -33,6 +33,7 @@ namespace OAMS.Models
         public string MOREINFO4 { get; set; }
         public string MOREINFO5 { get; set; }
         public List<FileDinhKemViewModel> FileDinhKem { get; set; }
+        public List<NguoiDungViewModel> NguoiThamGia { get; set; }
         public int Total { get; set; }
     }
 
@@ -93,8 +94,9 @@ namespace OAMS.Models
         public string CANBO { get; set; }
         public Nullable<System.DateTime> NGAYMO { get; set; }
     }
-    public class VanBanDenCanBoViewModels
+    
+    public class ThongBaoViewModel
     {
-        public List<VanBanDenCanBoViewModel> para { get; set; }
+        public int SoLuong { get; set; }
     }
 }

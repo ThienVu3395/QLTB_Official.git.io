@@ -111,22 +111,76 @@ namespace OAMS.Controllers.API
         }
 
         [HttpGet]
-        [Route("getVanBanDen")]
-        public IHttpActionResult getVanBanDen()
+        [Route("getVanBanDen_CanBo")]
+        public IHttpActionResult getVanBanDen_CanBo(string CANBO)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@CANBO", CANBO);
+            string query = "select * from doc.tbVBdenCanbo where CANBO = @CANBO";
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                var aa = db.Query<VanBanDenCanBoViewModel>(query, parameters).ToList();
+                if (aa.Count > 0)
+                {
+                    List<VanBanViewModel> vanBans = new List<VanBanViewModel>();
+                    foreach (var item in aa)
+                    {
+                        var pr = new DynamicParameters();
+                        pr.Add("@IDVANBAN", item.IDVANBAN);
+                        string query2 = "SELECT * from doc.tbVanbanden where ID = @IDVANBAN";
+                        var bb = db.Query<VanBanViewModel>(query2, pr).SingleOrDefault();
+
+                        var prr = new DynamicParameters();
+                        prr.Add("@ID", bb.ID);
+                        string qrr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
+                        var listFile = db.Query<FileDinhKemViewModel>(qrr, prr).ToList();
+                        bb.FileDinhKem = listFile;
+                        vanBans.Add(bb);
+                    }
+                    return Ok(vanBans);
+                }
+                return Ok(aa);
+            }
+        }
+
+        [HttpGet]
+        [Route("getVanBanDen_Admin")]
+        public IHttpActionResult getVanBanDen_Admin()
         {
             string query = "select * from doc.tbVanbanden";
             using (IDbConnection db = new SqlConnection(_cnn))
             {
-                var listVanBan = db.Query<VanBanViewModel>(query).ToList();
-                foreach (var item in listVanBan)
+                var aa = db.Query<VanBanViewModel>(query).ToList();
+                if (aa.Count > 0)
                 {
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@ID", item.ID);
-                    string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
-                    var listFile = db.Query<FileDinhKemViewModel>(qr, parameters).ToList();
-                    item.FileDinhKem = listFile;
+                    foreach (var item in aa)
+                    {
+                        var pr = new DynamicParameters();
+                        pr.Add("@ID", item.ID);
+                        string qr = "SELECT * from doc.tbFiledinhkem where VANBANID = @ID";
+                        var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
+                        item.FileDinhKem = bb;
+
+                        var pr2 = new DynamicParameters();
+                        pr2.Add("@ID", item.ID);
+                        string qr2 = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID";
+                        var cc = db.Query<VanBanDenCanBoViewModel>(qr2, pr2).ToList();
+                        List<NguoiDungViewModel> ds = new List<NguoiDungViewModel>();
+                        if (cc.Count > 0)
+                        {
+                            foreach (var i in cc)
+                            {
+                                var pr3 = new DynamicParameters();
+                                pr3.Add("@CANBO", i.CANBO);
+                                string qr3 = "select * from users.tbNguoidung where USERNAME = @CANBO";
+                                var dd = db.Query<NguoiDungViewModel>(qr3, pr3).SingleOrDefault();
+                                ds.Add(dd);
+                            }
+                        }
+                        item.NguoiThamGia = ds;
+                    }
                 }
-                return Ok(listVanBan);
+                return Ok(aa);
             }
         }
 
@@ -160,10 +214,10 @@ namespace OAMS.Controllers.API
         {
             var parameters = new DynamicParameters();
             parameters.Add("@CANBO", CANBO);
-            string query = "select * from doc.tbVBdenCanbo where CANBO = @CANBO";
+            string query = "select COUNT(ID) as SoLuong from doc.tbVBdenCanbo where CANBO = @CANBO";
             using (IDbConnection db = new SqlConnection(_cnn))
             {
-                var aa = db.Query<VanBanDenCanBoViewModel>(query, parameters).ToList();
+                var aa = db.Query<ThongBaoViewModel>(query, parameters);
                 return Ok(aa);
             }
         }

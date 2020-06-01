@@ -333,7 +333,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Trích yếu:</label>
                     <div class="col-md-10 col-sm-10 col-xs-9">
-                        <span class="form-control">{{objVB.OrganName}}</span>
+                        <span class="form-control">{{objVB.Subject}}</span>
                     </div>
                 </div>
 
@@ -381,17 +381,17 @@
                 </div>
 
                 @*Gửi vb đến*@
-                <div>
+                <div ng-show="roleName == 'Admin'">
                     <h4 class="header green">Thành viên tham gia</h4>
                     <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-3">Người nhận văn bản:</label>
                         <div class="col-md-10 col-sm-10 col-xs-9">
-                            <ui-select multiple ng-model="multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false">
+                            <ui-select multiple ng-model="multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="false" sortable="true" close-on-select="false">
                                 <ui-select-match placeholder="Chọn người nhận văn bản...">{{$item.HOLOT + ' ' +  $item.TEN}}</ui-select-match>
-                                <ui-select-choices repeat="person in people | propsFilter: {HOLOT: $select.search, TEN: $select.search}">
+                                <ui-select-choices repeat="person in people | propsFilter: {HOLOT: $select.search, TEN: $select.search, BOPHAN : $select.search}">
                                     <div ng-bind-html="person.HOLOT + ' ' +  person.TEN | highlight: $select.search"></div>
                                     <small>
-                                        Bộ Phận: <span ng-bind-html="''+person.BOPHAN | highlight: $select.search"></span> , 
+                                        Bộ Phận: <span ng-bind-html="''+person.BOPHAN | highlight: $select.search"></span> ,
                                         Chức Vụ: <span ng-bind-html="''+person.CHUCVU"></span>
                                     </small>
                                 </ui-select-choices>
@@ -399,6 +399,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div ng-show="roleName == 'Docgia'">
+                    <h4 class="header green">Thành viên tham gia</h4>
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2 col-xs-3">Người nhận văn bản:</label>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <ui-select multiple ng-model="multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="true" sortable="true" close-on-select="false">
+                                <ui-select-match placeholder="Chọn người nhận văn bản...">{{$item.HOLOT + ' ' +  $item.TEN}}</ui-select-match>
+                                <ui-select-choices repeat="person in people | propsFilter: {HOLOT: $select.search, TEN: $select.search, BOPHAN : $select.search}">
+                                    <div ng-bind-html="person.HOLOT + ' ' +  person.TEN | highlight: $select.search"></div>
+                                    <small>
+                                        Bộ Phận: <span ng-bind-html="''+person.BOPHAN | highlight: $select.search"></span> ,
+                                        Chức Vụ: <span ng-bind-html="''+person.CHUCVU"></span>
+                                    </small>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-md-12 col-sm-12">
                     <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
                         <button class="btn btn-xs btn-info" style="font-size:9pt;" ng-click="GuiVanBan()"><i class="fa fa-save"></i> Gửi</button>

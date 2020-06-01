@@ -113,7 +113,7 @@
                 </a>
             </div>
 
-            <div class="navbar-buttons navbar-header pull-right" role="navigation"  ng-controller="homecontroller">
+            <div class="navbar-buttons navbar-header pull-right" role="navigation" ng-controller="homecontroller">
                 <ul class="nav ace-nav">
                     <li class="grey dropdown-modal">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -197,70 +197,58 @@
                     <li class="purple dropdown-modal">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="ace-icon fa fa-bell icon-animated-bell"></i>
-                            <span class="badge badge-important">{{DsVB.length}}</span>
+                            <span class="badge badge-important">{{DsTB.length}}</span>
                         </a>
 
                         <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                             <li class="dropdown-header">
                                 <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                {{DsVB.length}} Thông Báo
+                                {{DsTB.length}} Thông Báo
                             </li>
 
                             <li class="dropdown-content ace-scroll" style="position: relative;">
                                 <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="max-height: 200px;">
                                     <ul class="dropdown-menu dropdown-navbar navbar-pink">
                                         @*<li>
-                                            <a href="#">
-                                                <div class="clearfix">
-                                                    <span class="pull-left">
-                                                        <i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
-                                                        New Comments
-                                                    </span>
-                                                    <span class="pull-right badge badge-info">+12</span>
-                                                </div>
-                                            </a>
-                                        </li>*@
+                                                <a href="#">
+                                                    <div class="clearfix">
+                                                        <span class="pull-left">
+                                                            <i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+                                                            New Comments
+                                                        </span>
+                                                        <span class="pull-right badge badge-info">+12</span>
+                                                    </div>
+                                                </a>
+                                            </li>*@
 
-                                        <li ng-repeat="item in DsVB">
-                                            <a href="#" ng-click="opennewVanban(item.IDVANBAN)">
-                                                <i class="btn btn-xs btn-primary fa fa-file"></i>
-                                                Bạn nhận được văn bản
-                                            </a>
-                                        </li>
-
-                                        @*<li>
-                                            <a href="#">
-                                                <div class="clearfix">
-                                                    <span class="pull-left">
-                                                        <i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
-                                                        New Orders
-                                                    </span>
-                                                    <span class="pull-right badge badge-success">+8</span>
-                                                </div>
-                                            </a>
-                                        </li>
+                                        @*<li ng-repeat="item in DsVB">
+                                                <a href="#" ng-click="opennewVanban(item)">
+                                                    <i class="btn btn-xs btn-primary fa fa-file"></i>
+                                                    Văn Bản <span class="text-danger">{{item.CodeNumber}}</span>
+                                                </a>
+                                            </li>*@
 
                                         <li>
-                                            <a href="#">
+                                            <a href="@Url.Action("Danhsachvanban","Vanban")">
                                                 <div class="clearfix">
                                                     <span class="pull-left">
-                                                        <i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
-                                                        Followers
+                                                        <i class="btn btn-xs no-hover btn-info fa fa-file"></i>
+                                                        Văn Bản Nhận Được
                                                     </span>
-                                                    <span class="pull-right badge badge-info">+11</span>
+                                                    <span class="pull-right badge badge-info">{{SoLuongTB}}</span>
                                                 </div>
                                             </a>
-                                        </li>*@
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
 
-                            @*<li class="dropdown-footer">
+                            <li class="dropdown-footer">
                                 <a href="#">
-                                    See all notifications
+                                    Xem tất cả thông báo
                                     <i class="ace-icon fa fa-arrow-right"></i>
                                 </a>
-                            </li>*@
+                            </li>
                         </ul>
                     </li>
 
@@ -554,15 +542,15 @@
                             </a><b class="arrow"></b>
                         </li>
                         @*<li ng-show="show(302)" class="{{activelink[10]}}">
-                            <a href="~/Thongtin/quantrihoidap">
-                                <i class="menu-icon fa fa-circle"></i>Văn Bản Đi
-                            </a><b class="arrow"></b>
-                        </li>
-                        <li ng-show="show(303)" class="{{activelink[11]}}">
-                            <a href="~/Thongtin/nganhangcauhoi">
-                                <i class="menu-icon fa fa-circle"></i>Văn Bản Nội Bộ
-                            </a><b class="arrow"></b>
-                        </li>*@
+                                <a href="~/Thongtin/quantrihoidap">
+                                    <i class="menu-icon fa fa-circle"></i>Văn Bản Đi
+                                </a><b class="arrow"></b>
+                            </li>
+                            <li ng-show="show(303)" class="{{activelink[11]}}">
+                                <a href="~/Thongtin/nganhangcauhoi">
+                                    <i class="menu-icon fa fa-circle"></i>Văn Bản Nội Bộ
+                                </a><b class="arrow"></b>
+                            </li>*@
                     </ul>
                 </li>
 

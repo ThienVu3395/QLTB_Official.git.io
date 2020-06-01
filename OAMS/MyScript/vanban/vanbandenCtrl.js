@@ -15,6 +15,8 @@
                         $scope.TrangThai = true; // Xem chi tiết
                         $scope.objVB = idselect;
                         $scope.Title = "Chi Tiết Văn Bản";
+                        var data = userProfile.getProfile();
+                        $scope.roleName = data.roleName;
                         getNguoiDung();
                     }
                     else {
@@ -112,6 +114,8 @@
                     var resp = loginservice.getdata("api/QLVanBan/getNguoiDung");
                     resp.then(function (response) {
                         $scope.people = response.data;
+                        console.log($scope.people);
+                        console.log($scope.objVB);
                         blockUI.stop();
                         $scope.data = userProfile.getProfile();
                         let index = $scope.people.findIndex(x => x.USERNAME == $scope.data.username);
@@ -458,26 +462,27 @@
                 };
 
                 $scope.GuiVanBan = function () {
-                    if ($scope.multipleDemo.selectedPeople.length == 0) {
-                        alert("Xin vui lòng chọn danh sách người nhận văn bản này");
-                        return;
-                    }
-                    $scope.dsNhanVB = [];
-                    for (let i = 0; i < $scope.multipleDemo.selectedPeople.length; i++) {
-                        let item = {
-                            IDVANBAN: $scope.objVB.ID,
-                            CANBO: $scope.multipleDemo.selectedPeople[i].USERNAME,
-                            NGAYMO: null,
-                        }
-                        $scope.dsNhanVB.push(item);
-                    }
-                    var resp = loginservice.postdataNormal("api/QLVanBan/GuiVanBanDen", $scope.dsNhanVB);
-                    resp.then(function (response) {
-                        alert(response.data);
-                    }
-                        , function errorCallback(response) {
-                            console.log(response);
-                        });
+                    console.log($scope.multipleDemo.selectedPeople);
+                    //if ($scope.multipleDemo.selectedPeople.length == 0) {
+                    //    alert("Xin vui lòng chọn danh sách người nhận văn bản này");
+                    //    return;
+                    //}
+                    //$scope.dsNhanVB = [];
+                    //for (let i = 0; i < $scope.multipleDemo.selectedPeople.length; i++) {
+                    //    let item = {
+                    //        IDVANBAN: $scope.objVB.ID,
+                    //        CANBO: $scope.multipleDemo.selectedPeople[i].USERNAME,
+                    //        NGAYMO: null,
+                    //    }
+                    //    $scope.dsNhanVB.push(item);
+                    //}
+                    //var resp = loginservice.postdataNormal("api/QLVanBan/GuiVanBanDen", $scope.dsNhanVB);
+                    //resp.then(function (response) {
+                    //    alert(response.data);
+                    //}
+                    //    , function errorCallback(response) {
+                    //        console.log(response);
+                    //    });
                 }
             }])
         ;
