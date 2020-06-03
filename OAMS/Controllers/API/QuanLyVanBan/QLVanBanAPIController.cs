@@ -1,16 +1,15 @@
 ﻿//using OAMS.Database;
+using Dapper;
 using OAMS.Models;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Dapper;
-using System.Data;
-using Microsoft.Office.Interop.Word;
-using System.Collections.Generic;
 
 namespace OAMS.Controllers.API
 {
@@ -18,10 +17,12 @@ namespace OAMS.Controllers.API
     public class QLVanBanAPIController : ApiController
     {
         private readonly string _cnn;
+
         public QLVanBanAPIController()
         {
             _cnn = System.Configuration.ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
         }
+
         //[HttpGet]
         //[Route("getLoaiVanBan")]
         //public IHttpActionResult getLoaiVanBan(ParamModel par)
@@ -317,7 +318,6 @@ namespace OAMS.Controllers.API
 
             sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/");
 
-
             if (!Directory.Exists(sPath))
 
             {
@@ -349,7 +349,6 @@ namespace OAMS.Controllers.API
 
                         iUploadedCnt = iUploadedCnt + 1;
                     }
-
                     else
 
                     {
@@ -412,7 +411,6 @@ namespace OAMS.Controllers.API
                     }
                 }
             }
-
             else
 
             {
@@ -486,6 +484,10 @@ namespace OAMS.Controllers.API
         {
             using (IDbConnection db = new SqlConnection(_cnn))
             {
+                if (db.State == System.Data.ConnectionState.Closed)
+                {
+                    db.Open();
+                }
                 if (model.Count > 0)
                 {
                     foreach (var item in model)
@@ -494,13 +496,12 @@ namespace OAMS.Controllers.API
                         parameters.Add("@IDVANBAN", item.IDVANBAN);
                         parameters.Add("@CANBO", item.CANBO);
                         parameters.Add("@NGAYMO", item.NGAYMO);
-
-                        if (db.State == System.Data.ConnectionState.Closed)
+                        string qr = "select * from doc.tbVBdenCanbo where IDVANBAN = @IDVANBAN and CANBO = @CANBO";
+                        var aa = db.Query<VanBanDenCanBoViewModel>(qr, parameters).FirstOrDefault();
+                        if(aa == null)
                         {
-                            db.Open();
+                            db.Execute("procThemVB_CanBo", parameters, null, null, System.Data.CommandType.StoredProcedure);
                         }
-
-                        db.Execute("procThemVB_CanBo", parameters, null, null, System.Data.CommandType.StoredProcedure);
                     }
                     return Ok("Gửi Văn Bản Thành Công");
                 }

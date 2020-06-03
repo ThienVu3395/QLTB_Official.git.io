@@ -78,7 +78,7 @@
                     var resp = loginservice.getdata("api/QLVanBan/getVanBanDen_CanBo?CANBO=" + canbo);
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
-                        console.log($scope.DsVanBan);
+                        //console.log($scope.DsVanBan);
                         blockUI.stop();
                     }
                         , function errorCallback(response) {
@@ -93,7 +93,7 @@
                     var resp = loginservice.getdata("api/QLVanBan/getVanBanDen_Admin");
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
-                        console.log($scope.DsVanBan);
+                        //console.log($scope.DsVanBan);
                         blockUI.stop();
                     }
                         , function errorCallback(response) {
@@ -123,7 +123,6 @@
                 //}
 
                 $scope.opennewVanban = function (item) {
-                    console.log(item);
                     var parentElem =
                         angular.element($document[0].querySelector('.main-content'));
                     var modalInstance = $uibModal.open({
