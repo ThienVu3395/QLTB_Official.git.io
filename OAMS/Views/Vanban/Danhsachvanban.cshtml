@@ -42,6 +42,10 @@
     .message-item:hover > div.menurows {
         display: block !important;
     }
+
+    .text-bold {
+        font-weight: bold
+    }
 </style>
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
 <div ng-controller="VanbanCtrl">
@@ -87,29 +91,62 @@
 
                             </a>
                         </li>
-
-                        <li>
-                            <a data-toggle="tab" href="#senttab">
-                                <span>
-                                    <i class="orange ace-icon fa fa-location-arrow bigger-130"></i>
-                                    <span class="bigger-110">Văn bản đi</span>
-                                </span>
-                            </a>
-                        </li>
                     </ul>
 
                     <div class="tab-content no-border no-padding" style="height: calc(100% - 35px);">
                         <div id="inboxtab" class="tab-pane in active" style="height: calc(100%);">
                             <div class="row" style="height: calc(100%); margin-top:2px;">
                                 <div id="sidebar" class="sidebar responsive sidebar-toggle" style="height: calc(100%); background-color: white !important">
-                                    <div id="panelFds" style="overflow-y: auto; height: calc(100% - 20px);">
-                                        <h4 style="border-bottom: dotted 1px #F1F1F1; margin: 0px; padding: 6px 0px 6px 10px; font-size: 12pt;"><i class="blue ace-icon fa fa fa-tags bigger-130"></i><span class="bigger-110" style="margin-left:5px;">Phân loại</span></h4>
-                                        <div style="width:99%">
+                                    <div id="panelFds" style="overflow-y: auto; height: calc(100% - 20px);padding:8px">
+                                        <h4 style="border-bottom: dotted 1px #F1F1F1; margin: 0px; padding: 6px 0px 6px 10px; font-size: 12pt;"><i class="blue ace-icon fa fa fa-tags bigger-130"></i><span class="bigger-110" style="margin-left:5px;">Phân loại Sổ</span></h4>
+                                        <div>
                                             <span ng-if="doing_async">...loading...</span>
                                             <abn-tree tree-data="datatree" tree-control="my_tree" icon-leaf="fa fa-group" icon-expand="fa fa-plus-square-o" icon-collapse="fa fa-minus-square-o"
                                                       on-select="my_tree_handler(branch)" expand-level="1" selected-id="nodeselectID"></abn-tree>
+                                            <ul class="list-unstyled spaced2">
+                                                <li>
+                                                    <i class="ace-icon fa fa-eye green"></i>
+                                                    <span class="text-bold">Tất Cả</span>
+                                                </li>
+
+                                                <li>
+                                                    <i class="ace-icon fa fa-eye green"></i>
+                                                    <span class="text-bold">Văn Bản Đi</span>
+                                                </li>
+
+                                                <li>
+                                                    <i class="ace-icon fa fa-eye green"></i>
+                                                    <span class="text-bold">Văn Bản Chính Quyền</span>
+                                                </li>
+
+                                                <li>
+                                                    <i class="ace-icon fa fa-eye green"></i>
+                                                    <span class="text-bold">Văn Bản Đảng Bộ</span>
+                                                </li>
+                                            </ul>
                                         </div>
 
+                                        <hr />
+
+                                        <h4 style="border-bottom: dotted 1px #F1F1F1; margin: 0px; padding: 6px 0px 6px 10px; font-size: 12pt;"><i class="blue ace-icon fa fa fa-search bigger-130"></i><span class="bigger-110" style="margin-left:5px;">Tìm Kiếm</span></h4>
+                                        <div>
+                                            <label for="form-field-select-1">Số,Ký Hiệu</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div>
+                                            <label for="form-field-select-1">Số Đến</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div>
+                                            <label for="form-field-select-1">Trích Yếu</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div style="margin-top:12px">
+                                            <button class="btn btn-info form-control"><i class="ace-icon fa fa-search"></i></button>
+                                        </div>
                                     </div>
                                     <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
                                         <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -120,54 +157,41 @@
                                     <div class="col-sm-12 col-xs-12" style="height: calc(100%);">
                                         <div class="row" style="height: 35px; border-bottom: dotted 1px #F1F1F1;">
                                             <div class="pull-left">
-
                                                 <div class="btn-group " style="margin-top: 2px; margin-bottom: 0px;">
                                                     <input type="checkbox" style="width:18px;height:18px;margin-left:8px;" />
                                                 </div>
+
                                                 <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
-                                                    <button class="btn btn-sm btn-info btn-white"><i class="fa fa-1x fa-filter bigger-130 icon-only"></i></button>
+                                                    @*<button class="btn btn-sm btn-info btn-white"><i class="fa fa-1x fa-filter bigger-130 icon-only"></i></button>*@
 
                                                     <button data-toggle="dropdown" class="btn btn-sm btn-info btn-white dropdown-toggle" aria-expanded="false">
                                                         <span class="ace-icon fa fa-caret-down bigger-130  icon-only"></span>
                                                     </button>
-                                                    <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                                                    <ul class="dropdown-menu dropdown-info dropdown-menu-left">
                                                         <li>
-                                                            <a href="#">Action</a>
+                                                            <a href="#">Đã Xem</a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#">Another action</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#">Something else here</a>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
-                                                            <a href="#">Separated link</a>
+                                                            <a href="#">Chưa Xem</a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
 
                                             <div class="pull-right">
-                                                @*<ul class="pagination" style="margin-top: 2px; margin-bottom: 0px; float: left;">
-                                                        <li><select style=" height: 29.6px;"><option>1</option><option>2</option></select></li>
-                                                    </ul>*@
-                                                @*<ul style="margin-top:2px;margin-bottom:0px;"
-                                                        uib-pagination previous-text="Trước"
-                                                        next-text="Sau"
-                                                        ng-change="pageChanged()"
-                                                        total-items="TotalItems"
-                                                        ng-model="CurrentPage"
-                                                        items-per-page="perPage"
-                                                        max-size="maxSize"
-                                                        class="pagination-sm"
-                                                        boundary-link-numbers="true"
-                                                        rotate="false">
-                                                    </ul>*@
+                                                <ul class="pagination" style="margin-top: 2px; margin-bottom: 0px; float: left;">
+                                                    <li>
+                                                        <select style="height: 29.6px;" ng-change="setItemPerPages()" ng-model="page">
+                                                            <option>10</option>
+                                                            <option>15</option>
+                                                            <option>20</option>
+                                                            <option>25</option>
+                                                            <option>30</option>
+                                                        </select>
+                                                    </li>
+                                                </ul>
+
                                                 <ul style="margin-top:2px;margin-bottom:0px;"
                                                     uib-pagination previous-text="Trước"
                                                     next-text="Sau"
@@ -178,16 +202,17 @@
                                                     max-size="maxSize"
                                                     class="pagination-sm"
                                                     boundary-link-numbers="true"
-                                                    rotate="false">
-                                                </ul>
+                                                    rotate="false"></ul>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
+
                                         <div class="row" style="overflow-y: auto; height: calc(100% - 35px);">
                                             <div class="message-list" id="message-list">
                                                 <div class="message-item message-unread" ng-repeat="item in DsVanBan track by $index">
                                                     <div class="menurows pull-right btn-group btn-corner" style="font-size:9pt;">
-                                                        <button data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file icon-only"></i> </button>
+                                                        <button ng-click="ChuyenVB(item)" data-toggle="tooltip" title="Chuyển văn bản này sang thông báo" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-send fa-x icon-only"></i> </button>
+                                                        <button ng-click="newdata()" data-toggle="tooltip" ng-disabled="actionbp" title="Hello Tooltip!" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
@@ -203,13 +228,14 @@
                                                         {{item.Fullname}}
                                                         @*<span class="light-grey">(4)</span>*@
                                                     </span>
+
                                                     <span class="time">
                                                         {{item.IssuedDate | date:"dd/MM/yyyy"}}
                                                         @*<br />7:11pm*@
                                                     </span>
 
                                                     @*<span class="attachment">
-                                                            <i class="ace-icon fa fa-paperclip"></i>
+                                                            <i class="ace-icon fa fa-calendar"></i>
                                                         </span>*@
 
                                                     <div class="summary">
@@ -217,7 +243,8 @@
                                                         <span class="text" ng-click="opennewVanban(item)">
                                                             {{item.CodeNumber}}
                                                         </span>
-                                                        <div class="btn-group " style="font-size: 9pt; display:block;">
+                                                        <span class="label label-sm label-success arrowed arrowed-right">{{item.TENSO}}</span>
+                                                        <div class="btn-group" style="font-size: 9pt; display:block;margin-top:12px">
                                                             @*<a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-pdf-o"></i> Thành viên hội đồng</a>
                                                                 <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>
                                                                 <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>*@
@@ -234,45 +261,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                @*<div class="message-item">
-                                                        <div class="menurows pull-right btn-group btn-corner" style="font-size:9pt;">
-                                                            <button data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file icon-only"></i> </button>
-                                                            <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
-                                                            <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
-                                                            <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
-                                                        </div>
-                                                        <label class="inline">
-                                                            <input type="checkbox" class="ace">
-                                                            <span class="lbl"></span>
-                                                        </label>
-
-                                                        <i class="message-star ace-icon fa fa-star-o light-grey"></i>
-                                                        <i class="message-star ace-icon fa fa-info-circle light-grey" style="color: #FEB902 !important; margin-left: 1px; margin-right: 1px;"></i>
-                                                        <span class="sender" title="John Doe">
-                                                            John Doe
-                                                            <span class="light-grey">(4)</span>
-                                                        </span>
-                                                        <span class="time">12/12/2017<br />7:11pm</span>
-
-                                                        <span class="attachment">
-                                                                <i class="ace-icon fa fa-paperclip"></i>
-                                                            </span>
-
-                                                        <div class="summary">
-                                                            <span class="badge badge-pink mail-tag"></span>
-                                                            <span class="text">
-                                                                Ông Trần Quốc Vượng, ủy viên Bộ Chính trị, Thường trực Ban Bí thư, Phó trưởng Ban Chỉ đạo chủ trì cuộc họp, thảo luận, cho ý kiến đối với một số vụ án, vụ việc thuộc diện Ban Chỉ đạo theo dõi, chỉ đạo từ sau phiên họp thứ 15 đến nay.
-                                                            </span>
-                                                            <div class="btn-group " style="font-size: 9pt; display:block; ">
-                                                                <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-pdf-o"></i> Thành viên hội đồng</a>
-                                                                <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>
-                                                                <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>
-                                                                <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>
-                                                                <span class="light-grey">(4)</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>*@
                                             </div>
                                             @*<table class="table table-striped table-hover dataTable no-footer" style="margin-bottom:0px;width:100%">
                                                     <tbody>
@@ -302,35 +290,16 @@
                                                                     <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-pdf-o"></i> Thành viên hội đồng</a>
                                                                     <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>
                                                                 </div>
-
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>*@
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div id="senttab" class="tab-pane" style="height: calc(100%);">
-                            <div class="message-container" style="height: calc(100%);">
-                                <div class="row" style="overflow-y: auto; height: calc(100% - 30px);">
-
-                                </div>
-                                <div class="row" style="height:25px;">
-                                    <div class="col-xs-12">
-                                        <ul class="pagination" style="margin-top: 2px; margin-bottom: 0px; float:left; ">
-                                            <li><select><option>1</option><option>2</option></select></li>
-                                        </ul>
-                                        <ul style="margin-top:2px;margin-bottom:0px;" uib-pagination previous-text="Trước" next-text="Sau" ng-change="pageChanged()" total-items="TotalItems" ng-model="CurrentPage" items-per-page="perPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></ul>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.tab-content -->
+                    </div>
                 </div>
             </div>
         </div>

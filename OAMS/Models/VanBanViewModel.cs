@@ -27,6 +27,7 @@ namespace OAMS.Models
         public Nullable<int> IssuedAmount { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }
         public int SoVanBanID { get; set; }
+        public string TENSO { get; set; }
         public string MOREINFO1 { get; set; }
         public string MOREINFO2 { get; set; }
         public string MOREINFO3 { get; set; }
@@ -98,5 +99,13 @@ namespace OAMS.Models
     public class ThongBaoViewModel
     {
         public int SoLuong { get; set; }
+    }
+
+    public class DanhMucViewModel
+    {
+        public int ID { get; set; }
+        public string LOAIDM { get; set; }
+        public string CODE { get; set; }
+        public string VALUENAME { get; set; }
     }
 }

@@ -6,7 +6,14 @@
                 var $ctrl = this;
 
                 $scope.TrangThai = false; // Thêm Mới
+
                 $scope.objVB = {};
+
+                let date = new Date();
+
+                $ctrl.datasumitformedit = {
+                    FileCatalog: date.getFullYear(),
+                }
 
                 checkTrangThai();
 
@@ -14,6 +21,7 @@
                     if (idselect !== null) {
                         $scope.TrangThai = true; // Xem chi tiết
                         $scope.objVB = idselect;
+                        console.log($scope.objVB);
                         $scope.Title = "Chi Tiết Văn Bản";
                         var data = userProfile.getProfile();
                         $scope.roleName = data.roleName;
@@ -61,11 +69,17 @@
                 $ctrl.Dataloaivanban = [];
                 
                 $ctrl.Datangonngu = [{ ID: 1, TEN: "Tiếng Việt" }, { ID: 2, TEN: "Tiếng Anh" }];
+
                 $scope.LANGUAGE = $ctrl.Datangonngu[0];
+
                 let FileDinhKem = [];
+
                 $ctrl.Datamucdo = [{ ID: 1, TEN: "Bình Thường" }, { ID: 2, TEN: "Hỏa Tốc" }, { ID: 3, TEN: "Khẩn" }];
+
                 $scope.PRIORITY = $ctrl.Datamucdo[0];
+
                 getSoVanBan();
+
                 getLoaiVanBan();
 
                 function getSoVanBan() {
@@ -92,21 +106,6 @@
                         });
                 }
 
-                function getVanBanDen() {
-                    blockUI.start();
-                    var resp = loginservice.getdata("api/QLVanBan/getVanBanDen");
-                    resp.then(function (response) {
-                        $scope.DsVanBan = response.data;
-                        $scope.bigTotalItems = $scope.DsVanBan.length;
-                        blockUI.stop();
-                    }
-                        , function errorCallback(response) {
-                            $scope.datatree = [];
-                            blockUI.stop();
-                            $scope.actionbp = true;
-                        });
-                }
-
                 $scope.people = [];
 
                 function getNguoiDung() {
@@ -126,13 +125,13 @@
                             $scope.disable = true;
                         }
                         console.log($scope.people);
-                        console.log($scope.objVB);
                         for (let i = 0; i < $scope.objVB.NguoiThamGia.length; i++){
                             let index = $scope.people.findIndex(x => x.USERNAME == $scope.objVB.NguoiThamGia[i].USERNAME);
                             if (index != -1) {
                                 $scope.multipleDemo.selectedPeople.push($scope.objVB.NguoiThamGia[i]);
                             }
                         }
+                        $scope.getdatafilePDF($scope.objVB.FileDinhKem[0].TENFILE);
                     }
                         , function errorCallback(response) {
                             $scope.datatree = [];
@@ -171,22 +170,20 @@
                     //    , function errorCallback(response) {
                     //        alert("Cập nhật xử lý thất bại bại vui lòng kiểm tra lại !");
                     //    });
-
-                    $ctrl.datasumitformedit.TypeName = $scope.TYPENAME.TENLOAI;
-                    $ctrl.datasumitformedit.Language = $scope.LANGUAGE.TEN;
-                    $ctrl.datasumitformedit.Priority = $scope.PRIORITY.ID;
-                    $ctrl.datasumitformedit.SoVanBanID = $scope.SOVANBANID.ID;
                     if (uploader.queue.length == 0) {
                         alert("Xin vui lòng đính kèm File");
                         return;
                     }
+                    $ctrl.datasumitformedit.TypeName = $scope.TYPENAME.TENLOAI;
+                    $ctrl.datasumitformedit.Language = $scope.LANGUAGE.TEN;
+                    $ctrl.datasumitformedit.Priority = $scope.PRIORITY.ID;
+                    $ctrl.datasumitformedit.SoVanBanID = $scope.SOVANBANID.ID;
+                    $ctrl.datasumitformedit.OrganName = $scope.OrganName.VALUENAME;
                     $ctrl.datasumitformedit.FileDinhKem = FileDinhKem;
-                    $ctrl.datasumitformedit.DueDate = changeFormat($ctrl.datasumitformedit.DueDate.getDate(), $ctrl.datasumitformedit.DueDate.getMonth() + 1, $ctrl.datasumitformedit.DueDate.getUTCFullYear());
-                    $ctrl.datasumitformedit.IssuedDate = changeFormat($ctrl.datasumitformedit.IssuedDate.getDate(), $ctrl.datasumitformedit.IssuedDate.getMonth() + 1, $ctrl.datasumitformedit.IssuedDate.getUTCFullYear());
                     var resp = loginservice.postdata("api/QLVanBan/ThemVanBanDen", $.param($ctrl.datasumitformedit));
                     resp.then(function (response) {
                         alert(response.data);
-                        getVanBanDen();
+                        setTimeout(function () { window.location.href = ""; }, 1000);
                         //$ctrl.datasumitformedit = response.data;
                         //alert("Cập nhật thành công!");
                         //$ctrl.resetForm();
@@ -225,6 +222,7 @@
 
                 //---------upload------------
                 $scope.values = {};
+
                 var accesstoken = userProfile.getProfile().access_token;
 
                 var authHeaders = {};
@@ -352,11 +350,11 @@
                     return false;
                 };
 
-
                 ////////////////////--------------- MULTIPLE SELECT ------------///////////////
                 var vm = this;
 
                 vm.disabled = undefined;
+
                 vm.searchEnabled = undefined;
 
                 vm.setInputFocus = function () {
@@ -404,6 +402,7 @@
                 };
 
                 vm.personAsync = { selected: "wladimir@email.com" };
+
                 vm.peopleAsync = [];
 
                 $timeout(function () {
@@ -422,6 +421,7 @@
                 }, 3000);
 
                 vm.counter = 0;
+
                 vm.onSelectCallback = function (item, model) {
                     vm.counter++;
                     vm.eventResult = { item: item, model: model };
@@ -446,14 +446,23 @@
                 };
 
                 vm.singleDemo = {};
+
                 vm.singleDemo.color = '';
+
                 $scope.multipleDemo = {};
+
                 $scope.multipleDemo.colors = ['Blue', 'Red'];
+
                 $scope.multipleDemo.colors2 = ['Blue', 'Red'];
+
                 $scope.multipleDemo.selectedPeople = [];
+
                 $scope.multipleDemo.selectedPeople2 = $scope.multipleDemo.selectedPeople;
+
                 //$scope.multipleDemo.selectedPeopleWithGroupBy = [$scope.people[8], $scope.people[6]];
+
                 $scope.multipleDemo.selectedPeopleSimple = ['samantha@email.com', 'wladimir@email.com'];
+
                 $scope.multipleDemo.removeSelectIsFalse = [$scope.people[2], $scope.people[0]];
 
                 vm.appendToBodyDemo = {
@@ -496,6 +505,48 @@
                         , function errorCallback(response) {
                             console.log(response);
                         });
+                }
+
+                $scope.removed = function (item, model) {
+                    console.log(item);
+                }
+
+                ////////////////// AUTOCOMPLETE CỦA CƠ QUAN BAN HÀNH //////////////////////
+                $scope.countryList = [];
+
+                getDanhMuc();
+
+                function getDanhMuc() {
+                    var resp;
+                    resp = loginservice.getdata("api/QLVanBan/getDanhMuc");
+                    resp.then(function (response) {
+                        for (let i = 0; i < response.data.length; i++) {
+                            $scope.countryList[i] = response.data[i].VALUENAME;
+                        }
+                        $scope.DsDanhMuc = response.data;
+                        $scope.OrganName = $scope.DsDanhMuc[0];
+                        $ctrl.datasumitformedit.OrganName = $scope.OrganName.VALUENAME;
+                    }
+                        , function errorCallback(response) {
+
+                        });
+                }
+
+                //$scope.countryList = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda"];
+
+                $scope.complete = function (string) {
+                    var output = [];
+                    angular.forEach($scope.countryList, function (country) {
+                        if (country.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+                            output.push(country);
+                        }
+                    });
+                    $scope.filterCountry = output;
+                }
+
+                $scope.fillTextbox = function (string) {
+                    $scope.country = string;
+                    $scope.filterCountry = null;
                 }
             }])
         ;

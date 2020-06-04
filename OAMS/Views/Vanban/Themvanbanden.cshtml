@@ -45,6 +45,12 @@
         position: relative;
         z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
     }
+
+    .list-group-item:hover {
+        color: #337ab7;
+        text-shadow: 0 0 1em #337ab7;
+        cursor: pointer;
+    }
 </style>
 
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
@@ -55,7 +61,7 @@
     <div class="modal-body" id="modal-body" style="height: calc(100% - 32px) !important; padding: 4px 10px;">
         <div class="row" style="height:calc(100%);">
             @*Thêm mới*@
-            <div class="col-md-7 col-sm-7 col-xs-12" style="height:calc(100%); overflow-y:auto;" ng-show="!TrangThai">
+            <div class="col-md-6 col-sm-6 col-xs-12" style="height:calc(100%); overflow-y:auto;" ng-show="!TrangThai">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">File đính kèm:</label>
                     <div class="col-md-10 col-sm-10 col-xs-10" nv-file-drop="" uploader="uploader" filters="docFilter1">
@@ -158,7 +164,15 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Cơ quan ban hành:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
-                        <input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.OrganName" />
+                        @*<input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.OrganName" />*@
+                        @*<input type="text" class="form-control" placeholder="..." name="country" id="country" ng-model="country" ng-keyup="complete(country)" />
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="countrydata in filterCountry" ng-click="fillTextbox(countrydata)">{{countrydata}}</li>
+                        </ul>*@
+                        <select ng-options="item as item.VALUENAME for item in DsDanhMuc track by item.ID"  
+                                ng-model="OrganName"
+                                class="form-control">
+                       </select>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngôn ngữ:</label>
@@ -215,9 +229,9 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Hạn trả lời:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-click="ctrol.openedd = true" ng-disabled="ctrol.disable" ng-model="$ctrl.datasumitformedit.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.openedd" close-text="Close" readonly />
+                            <input type="text" class="form-control" ng-click="ctrol.openedd = true" ng-disabled="ctrol.disableb" ng-model="$ctrl.datasumitformedit.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.openedd" close-text="Close" readonly />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.openedd = true"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </div>
                     </div>
@@ -240,7 +254,7 @@
             @*Thêm mới*@
 
             @*Xem chi tiết*@
-            <div class="col-md-7 col-sm-7 col-xs-12" style="height:calc(100%); overflow-y:auto;" ng-show="TrangThai">
+            <div class="col-md-6 col-sm-6 col-xs-12" style="height:calc(100%); overflow-y:auto;" ng-show="TrangThai">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">File đính kèm:</label>
                     <div class="col-md-10 col-sm-10 col-xs-10" nv-file-drop="" uploader="uploader" filters="docFilter1">
@@ -381,13 +395,12 @@
                 </div>
 
                 @*Gửi vb đến*@
-                @*<div ng-show="roleName == 'Admin'">*@
                 <div>
                     <h4 class="header green">Thành viên tham gia</h4>
                     <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-3">Người nhận văn bản:</label>
                         <div class="col-md-10 col-sm-10 col-xs-9">
-                            <ui-select multiple ng-model="multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="disable" sortable="true" close-on-select="false">
+                            <ui-select multiple ng-model="multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="disable" sortable="true" close-on-select="false" on-remove="removed($item, $model)">
                                 <ui-select-match placeholder="Chọn người nhận văn bản...">{{$item.HOLOT + ' ' +  $item.TEN}}</ui-select-match>
                                 <ui-select-choices repeat="person in people | propsFilter: {HOLOT: $select.search, TEN: $select.search, BOPHAN : $select.search}">
                                     <div ng-bind-html="person.HOLOT + ' ' +  person.TEN | highlight: $select.search"></div>
@@ -400,25 +413,6 @@
                         </div>
                     </div>
                 </div>
-
-                @*<div ng-show="roleName == 'Docgia'">
-                    <h4 class="header green">Thành viên tham gia</h4>
-                    <div class="form-group">
-                        <label class="control-label col-md-2 col-sm-2 col-xs-3">Người nhận văn bản:</label>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <ui-select multiple ng-model="multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="true" sortable="true" close-on-select="false">
-                                <ui-select-match placeholder="Chọn người nhận văn bản...">{{$item.HOLOT + ' ' +  $item.TEN}}</ui-select-match>
-                                <ui-select-choices repeat="person in people | propsFilter: {HOLOT: $select.search, TEN: $select.search, BOPHAN : $select.search}">
-                                    <div ng-bind-html="person.HOLOT + ' ' +  person.TEN | highlight: $select.search"></div>
-                                    <small>
-                                        Bộ Phận: <span ng-bind-html="''+person.BOPHAN | highlight: $select.search"></span> ,
-                                        Chức Vụ: <span ng-bind-html="''+person.CHUCVU"></span>
-                                    </small>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-                    </div>
-                </div>*@
 
                 <div class="col-md-12 col-sm-12">
                     <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
@@ -429,7 +423,7 @@
                 @*/ Gửi vb đến*@
             </div>
 
-            <div class="col-md-5 col-sm-5 col-xs-12" style="height:calc(100%); border: solid 1px #808080;">
+            <div class="col-md-6 col-sm-6 col-xs-12" style="height:calc(100%); border: solid 1px #808080;">
                 @*<iframe src=""></iframe>*@
                 <div class="some-pdf-container">
                     <pdfjs-viewer data="$ctrl.pdf.data" print="false" download="false" open="false" pageview="$ctrl.pageview" update-fn="$ctrl.onPageLoad"></pdfjs-viewer>

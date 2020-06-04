@@ -1,0 +1,93 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[procChuyenVanBanSangThongBao]
+@OrganId nvarchar(13), 
+@FileCatalog int, 
+@FileNotation nvarchar(20),
+@DocOrdinal smallint,
+@TypeName nvarchar(100), 
+@CodeNumber nvarchar(11), 
+@CodeNotation nvarchar(30),
+@IssuedDate date,
+@OrganName nvarchar(200), 
+@Subject nvarchar(500), 
+@Language nvarchar(30),
+@PageAmount smallint,
+@Description nvarchar(500), 
+@Position nvarchar(100), 
+@Fullname nvarchar(50),
+@Priority int,
+@IssuedAmount int,
+@DueDate date,
+@SoVanBanID int,
+@MOREINFO1 nvarchar(200),
+@MOREINFO2 nvarchar(200),
+@MOREINFO3 nvarchar(200),
+@MOREINFO4 nvarchar(200),
+@MOREINFO5 nvarchar(200)
+
+AS
+
+INSERT INTO [dbo].[NEWS_TinTuc]
+           ([TieuDe]
+           ,[NoiDung]
+           ,[MoTa]
+           ,[MaLoaiTin]
+           ,[NguoiTao]
+           ,[TenNguoiTao]
+           ,[NgayTao]
+           ,[NgayCapNhat]
+           ,[NgayCapNhat]
+           ,[TenNguoiCapNhat]
+           ,[NguoiDuyet]
+           ,[TenNguoiDuyet]
+           ,[NgayDuyet]
+           ,[HienThi]
+           ,[LuotXem]
+           ,[TinNoiBat]
+           ,[HinhAnh]
+           ,[NgayHetHan]
+           ,[NgayHetHanTinMoi]
+           ,[NgayHetHanTrangChu]
+           ,[Khoa]
+           ,[NguoiKhoa]
+           ,[TenNguoiKhoa]
+           ,[NgayKhoa]
+		   ,[DuongDan]
+		   ,[NgayDang]
+		   ,[ThangDang]
+		   ,[NamDang]
+		   ,[ChiaSe])
+
+     VALUES(
+	 @OrganId,
+	 @FileCatalog,
+	 @FileNotation,
+	 @DocOrdinal,
+	 @TypeName,
+	 @CodeNumber,
+	 @CodeNotation,
+	 @IssuedDate,
+	 @OrganName,
+	 @Subject,
+	 @Language,
+	 @PageAmount,
+	 @Description,
+	 @Position,
+	 @Fullname,
+	 @Priority,
+	 @IssuedAmount,
+	 @DueDate,
+	 @SoVanBanID,
+	 @MOREINFO1,
+	 @MOREINFO2,
+	 @MOREINFO3,
+	 @MOREINFO4,
+	 @MOREINFO5)
+
+select SCOPE_IDENTITY() as ID
+
+RETURN

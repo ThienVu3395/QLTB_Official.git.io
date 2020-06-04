@@ -144,21 +144,24 @@ namespace OAMS.Controllers.API
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("getVanBanDen_Admin")]
-        public IHttpActionResult getVanBanDen_Admin()
+        public IHttpActionResult getVanBanDen_Admin(PhanTrangModel phanTrang)
         {
-            string query = "select * from doc.tbVanbanden";
             using (IDbConnection db = new SqlConnection(_cnn))
             {
-                var aa = db.Query<VanBanViewModel>(query).ToList();
+                var parameters = new DynamicParameters();
+                parameters.Add("@Start", phanTrang.Start);
+                parameters.Add("@End", phanTrang.End);
+
+                var aa = db.Query<VanBanViewModel>("procPhanTrang_Loc", parameters, null, true, null, System.Data.CommandType.StoredProcedure).ToList();
                 if (aa.Count > 0)
                 {
                     foreach (var item in aa)
                     {
                         var pr = new DynamicParameters();
                         pr.Add("@ID", item.ID);
-                        string qr = "SELECT * from doc.tbFiledinhkem where VANBANID = @ID";
+                        string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
                         var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
                         item.FileDinhKem = bb;
 
@@ -179,6 +182,12 @@ namespace OAMS.Controllers.API
                             }
                         }
                         item.NguoiThamGia = ds;
+
+                        var pr4 = new DynamicParameters();
+                        pr4.Add("@ID", item.SoVanBanID);
+                        string qr4 = "select * from doc.tbSovanban where ID = @ID";
+                        var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
+                        item.TENSO = ee.TENSO;
                     }
                 }
                 return Ok(aa);
@@ -219,6 +228,18 @@ namespace OAMS.Controllers.API
             using (IDbConnection db = new SqlConnection(_cnn))
             {
                 var aa = db.Query<ThongBaoViewModel>(query, parameters);
+                return Ok(aa);
+            }
+        }
+
+        [HttpGet]
+        [Route("getDanhMuc")]
+        public IHttpActionResult getDanhMuc()
+        {
+            string query = "select * from adm.tbDanhmuc";
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                var aa = db.Query<DanhMucViewModel>(query);
                 return Ok(aa);
             }
         }
