@@ -529,5 +529,20 @@ namespace OAMS.Controllers.API
                 return BadRequest("Có lỗi,xin vui lòng thử lại");
             }
         }
+
+        [HttpGet]
+        [Route("getVB_TheoSo")]
+        public IHttpActionResult getVB_TheoSo(int SoVanBanID,int LoaiVB)
+        {
+            using (IDbConnection db = new SqlConnection(_cnn))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@SOVANBANID", SoVanBanID);
+                parameters.Add("@LoaiVB", LoaiVB);
+                var dsVB = db.Query<VanBanViewModel>("procGetVB_TheoSoVanBanID", parameters, null, true, null, System.Data.CommandType.StoredProcedure);
+                return Ok(dsVB);
+            }
+        }
+
     }
 }

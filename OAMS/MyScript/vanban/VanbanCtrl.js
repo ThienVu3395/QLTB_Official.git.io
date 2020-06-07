@@ -240,6 +240,56 @@
                     }, function () {
                     });
                 }
+
+                /////////////////// TÌM KIẾM + LỌC THEO SỔ ////////////////////
+                $scope.tt0 = true;
+                $scope.tt1 = false;
+                $scope.tt3 = false;
+                $scope.tt4 = false;
+
+                function checkTT(svb) {
+                    if (svb == 0) {
+                        $scope.tt0 = true;
+                        $scope.tt1 = false;
+                        $scope.tt3 = false;
+                        $scope.tt4 = false;
+                        getVanBanDen_Admin();
+                    }
+                    else if (svb == 1) {
+                        $scope.tt0 = false;
+                        $scope.tt1 = true;
+                        $scope.tt3 = false;
+                        $scope.tt4 = false;
+                    }
+                    else if (svb == 3) {
+                        $scope.tt0 = false;
+                        $scope.tt1 = false;
+                        $scope.tt3 = true;
+                        $scope.tt4 = false;
+                    }
+                    else if (svb == 4) {
+                        $scope.tt0 = false;
+                        $scope.tt1 = false;
+                        $scope.tt3 = false;
+                        $scope.tt4 = true;
+                    }
+                }
+                
+                $scope.LocTheoSo = function (svb) {
+                    checkTT(svb);
+                    blockUI.start();
+                    var param = "?SoVanBanID=" + svb + "&LoaiVB=0";
+                    var resp = loginservice.getdata("api/QLVanBan/getVB_TheoSo" + param);
+                    resp.then(function (response) {
+                        $scope.DsVanBan = response.data;
+                        blockUI.stop();
+                    }
+                        , function errorCallback(response) {
+                            $scope.datatree = [];
+                            blockUI.stop();
+                            $scope.actionbp = true;
+                        });
+                }
             }])
         ;
 }());

@@ -104,24 +104,32 @@
                                             <abn-tree tree-data="datatree" tree-control="my_tree" icon-leaf="fa fa-group" icon-expand="fa fa-plus-square-o" icon-collapse="fa fa-minus-square-o"
                                                       on-select="my_tree_handler(branch)" expand-level="1" selected-id="nodeselectID"></abn-tree>
                                             <ul class="list-unstyled spaced2">
-                                                <li>
+                                                <li ng-click="LocTheoSo(0)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">Tất Cả</span>
+                                                    <span class="text-bold">Tất Cả
+												         <i class="ace-icon fa fa-check-square-o blue" ng-show="tt0"></i>
+                                                    </span>
                                                 </li>
 
-                                                <li>
+                                                <li ng-click="LocTheoSo(1)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">Văn Bản Đi</span>
+                                                    <span class="text-bold">VB Đi
+                                                        <i class="ace-icon fa fa-check-square-o blue" ng-show="tt1"></i>
+                                                    </span>
                                                 </li>
 
-                                                <li>
+                                                <li ng-click="LocTheoSo(3)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">Văn Bản Chính Quyền</span>
+                                                    <span class="text-bold">VB Chính Quyền
+                                                        <i class="ace-icon fa fa-check-square-o blue" ng-show="tt3"></i>
+                                                    </span>
                                                 </li>
 
-                                                <li>
+                                                <li ng-click="LocTheoSo(4)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">Văn Bản Đảng Bộ</span>
+                                                    <span class="text-bold">VB Đảng Bộ
+                                                        <i class="ace-icon fa fa-check-square-o blue" ng-show="tt4"></i>
+                                                    </span>
                                                 </li>
                                             </ul>
                                         </div>
