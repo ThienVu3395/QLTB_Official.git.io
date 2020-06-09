@@ -509,6 +509,18 @@
 
                 $scope.removed = function (item, model) {
                     console.log(item);
+                    var resp = loginservice.postdata("api/QLVanBan/XoaCanBo", $.param({ valstring1: item.USERNAME, valint1: item.ID }));
+                    resp.then(function (response) {
+                        for (let i = 0; i < response.data.length; i++) {
+                            $scope.countryList[i] = response.data[i].VALUENAME;
+                        }
+                        $scope.DsDanhMuc = response.data;
+                        $scope.OrganName = $scope.DsDanhMuc[0];
+                        $ctrl.datasumitformedit.OrganName = $scope.OrganName.VALUENAME;
+                    }
+                        , function errorCallback(response) {
+
+                        });
                 }
 
                 ////////////////// AUTOCOMPLETE CỦA CƠ QUAN BAN HÀNH //////////////////////

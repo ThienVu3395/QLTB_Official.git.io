@@ -4,6 +4,7 @@ using OAMS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -519,7 +520,7 @@ namespace OAMS.Controllers.API
                         parameters.Add("@NGAYMO", item.NGAYMO);
                         string qr = "select * from doc.tbVBdenCanbo where IDVANBAN = @IDVANBAN and CANBO = @CANBO";
                         var aa = db.Query<VanBanDenCanBoViewModel>(qr, parameters).FirstOrDefault();
-                        if(aa == null)
+                        if (aa == null)
                         {
                             db.Execute("procThemVB_CanBo", parameters, null, null, System.Data.CommandType.StoredProcedure);
                         }
@@ -532,17 +533,282 @@ namespace OAMS.Controllers.API
 
         [HttpGet]
         [Route("getVB_TheoSo")]
-        public IHttpActionResult getVB_TheoSo(int SoVanBanID,int LoaiVB)
+        public IHttpActionResult getVB_TheoSo(int SoVanBanID, int LoaiVB)
         {
-            using (IDbConnection db = new SqlConnection(_cnn))
+            try
             {
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@SOVANBANID", SoVanBanID);
-                parameters.Add("@LoaiVB", LoaiVB);
-                var dsVB = db.Query<VanBanViewModel>("procGetVB_TheoSoVanBanID", parameters, null, true, null, System.Data.CommandType.StoredProcedure);
-                return Ok(dsVB);
+                using (IDbConnection db = new SqlConnection(_cnn))
+                {
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@SOVANBANID", SoVanBanID);
+                    parameters.Add("@LoaiVB", LoaiVB);
+                    var dsVB = db.Query<VanBanViewModel>("procGetVanBan_TheoSoVB", parameters, null, true, null, System.Data.CommandType.StoredProcedure).ToList();
+                    if (dsVB.Count > 0)
+                    {
+                        foreach (var item in dsVB)
+                        {
+                            var pr = new DynamicParameters();
+                            pr.Add("@ID", item.ID);
+                            string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
+                            var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
+                            item.FileDinhKem = bb;
+
+                            var pr2 = new DynamicParameters();
+                            pr2.Add("@ID", item.ID);
+                            string qr2 = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID";
+                            var cc = db.Query<VanBanDenCanBoViewModel>(qr2, pr2).ToList();
+                            List<NguoiDungViewModel> ds = new List<NguoiDungViewModel>();
+                            if (cc.Count > 0)
+                            {
+                                foreach (var i in cc)
+                                {
+                                    var pr3 = new DynamicParameters();
+                                    pr3.Add("@CANBO", i.CANBO);
+                                    string qr3 = "select * from users.tbNguoidung where USERNAME = @CANBO";
+                                    var dd = db.Query<NguoiDungViewModel>(qr3, pr3).SingleOrDefault();
+                                    ds.Add(dd);
+                                }
+                            }
+                            item.NguoiThamGia = ds;
+
+                            var pr4 = new DynamicParameters();
+                            pr4.Add("@ID", item.SoVanBanID);
+                            string qr4 = "select * from doc.tbSovanban where ID = @ID";
+                            var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
+                            item.TENSO = ee.TENSO;
+                        }
+                    }
+                    return Ok(dsVB);
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                // Throw a new DbEntityValidationException with the improved exception message.
+                //throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                return BadRequest(exceptionMessage + " " + ex.EntityValidationErrors);
             }
         }
 
+        [HttpPost]
+        [Route("getVB_TimKiem")]
+        public IHttpActionResult getVB_TimKiem(TimKiemVanBanModel model)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_cnn))
+                {
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@FileNotation", model.FileNotation);
+                    parameters.Add("@CodeNumber", model.CodeNumber);
+                    parameters.Add("@CodeNotation", model.CodeNotation);
+                    parameters.Add("@Subject", model.Subject);
+                    parameters.Add("@SearchString", model.SearchString);
+                    parameters.Add("@LoaiVB", model.LoaiVanBan);
+                    var dsVB = db.Query<VanBanViewModel>("procGetVanBan_TimKiem", parameters, null, true, null, System.Data.CommandType.StoredProcedure).ToList();
+                    if (dsVB.Count > 0)
+                    {
+                        foreach (var item in dsVB)
+                        {
+                            var pr = new DynamicParameters();
+                            pr.Add("@ID", item.ID);
+                            string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
+                            var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
+                            item.FileDinhKem = bb;
+
+                            var pr2 = new DynamicParameters();
+                            pr2.Add("@ID", item.ID);
+                            string qr2 = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID";
+                            var cc = db.Query<VanBanDenCanBoViewModel>(qr2, pr2).ToList();
+                            List<NguoiDungViewModel> ds = new List<NguoiDungViewModel>();
+                            if (cc.Count > 0)
+                            {
+                                foreach (var i in cc)
+                                {
+                                    var pr3 = new DynamicParameters();
+                                    pr3.Add("@CANBO", i.CANBO);
+                                    string qr3 = "select * from users.tbNguoidung where USERNAME = @CANBO";
+                                    var dd = db.Query<NguoiDungViewModel>(qr3, pr3).SingleOrDefault();
+                                    ds.Add(dd);
+                                }
+                            }
+                            item.NguoiThamGia = ds;
+
+                            var pr4 = new DynamicParameters();
+                            pr4.Add("@ID", item.SoVanBanID);
+                            string qr4 = "select * from doc.tbSovanban where ID = @ID";
+                            var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
+                            item.TENSO = ee.TENSO;
+                        }
+                    }
+                    return Ok(dsVB);
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                // Throw a new DbEntityValidationException with the improved exception message.
+                //throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                return BadRequest(exceptionMessage + " " + ex.EntityValidationErrors);
+            }
+        }
+
+        [HttpPost]
+        [Route("getVB_TheoTrangThai")]
+        public IHttpActionResult getVB_TheoTrangThai(TimKiemVanBanModel model)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_cnn))
+                {
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@LoaiVB", model.LoaiVanBan);
+                    parameters.Add("@TrangThai", model.TrangThai);
+                    var dsVB = db.Query<VanBanViewModel>("procGetVanBan_TheoTrangThaiXem", parameters, null, true, null, System.Data.CommandType.StoredProcedure).ToList();
+                    if (dsVB.Count > 0)
+                    {
+                        foreach (var item in dsVB)
+                        {
+                            var pr = new DynamicParameters();
+                            pr.Add("@ID", item.ID);
+                            string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
+                            var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
+                            item.FileDinhKem = bb;
+
+                            var pr2 = new DynamicParameters();
+                            pr2.Add("@ID", item.ID);
+                            string qr2 = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID";
+                            var cc = db.Query<VanBanDenCanBoViewModel>(qr2, pr2).ToList();
+                            List<NguoiDungViewModel> ds = new List<NguoiDungViewModel>();
+                            if (cc.Count > 0)
+                            {
+                                foreach (var i in cc)
+                                {
+                                    var pr3 = new DynamicParameters();
+                                    pr3.Add("@CANBO", i.CANBO);
+                                    string qr3 = "select * from users.tbNguoidung where USERNAME = @CANBO";
+                                    var dd = db.Query<NguoiDungViewModel>(qr3, pr3).SingleOrDefault();
+                                    ds.Add(dd);
+                                }
+                            }
+                            item.NguoiThamGia = ds;
+
+                            var pr4 = new DynamicParameters();
+                            pr4.Add("@ID", item.SoVanBanID);
+                            string qr4 = "select * from doc.tbSovanban where ID = @ID";
+                            var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
+                            item.TENSO = ee.TENSO;
+                        }
+                    }
+                    return Ok(dsVB);
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                // Throw a new DbEntityValidationException with the improved exception message.
+                //throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                return BadRequest(exceptionMessage + " " + ex.EntityValidationErrors);
+            }
+        }
+
+        [HttpPost]
+        [Route("XoaCanBo")]
+        public IHttpActionResult XoaCanBo(CommonModel model)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_cnn))
+                {
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@LoaiVB", model.valint1);
+                    parameters.Add("@TrangThai", model.valstring1);
+                    var dsVB = db.Query<VanBanViewModel>("procGetVanBan_TheoTrangThaiXem", parameters, null, true, null, System.Data.CommandType.StoredProcedure).ToList();
+                    if (dsVB.Count > 0)
+                    {
+                        foreach (var item in dsVB)
+                        {
+                            var pr = new DynamicParameters();
+                            pr.Add("@ID", item.ID);
+                            string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
+                            var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
+                            item.FileDinhKem = bb;
+
+                            var pr2 = new DynamicParameters();
+                            pr2.Add("@ID", item.ID);
+                            string qr2 = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID";
+                            var cc = db.Query<VanBanDenCanBoViewModel>(qr2, pr2).ToList();
+                            List<NguoiDungViewModel> ds = new List<NguoiDungViewModel>();
+                            if (cc.Count > 0)
+                            {
+                                foreach (var i in cc)
+                                {
+                                    var pr3 = new DynamicParameters();
+                                    pr3.Add("@CANBO", i.CANBO);
+                                    string qr3 = "select * from users.tbNguoidung where USERNAME = @CANBO";
+                                    var dd = db.Query<NguoiDungViewModel>(qr3, pr3).SingleOrDefault();
+                                    ds.Add(dd);
+                                }
+                            }
+                            item.NguoiThamGia = ds;
+
+                            var pr4 = new DynamicParameters();
+                            pr4.Add("@ID", item.SoVanBanID);
+                            string qr4 = "select * from doc.tbSovanban where ID = @ID";
+                            var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
+                            item.TENSO = ee.TENSO;
+                        }
+                    }
+                    return Ok(dsVB);
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                // Throw a new DbEntityValidationException with the improved exception message.
+                //throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                return BadRequest(exceptionMessage + " " + ex.EntityValidationErrors);
+            }
+        }
     }
 }

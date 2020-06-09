@@ -106,55 +106,66 @@
                                             <ul class="list-unstyled spaced2">
                                                 <li ng-click="LocTheoSo(0)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">Tất Cả
-												         <i class="ace-icon fa fa-check-square-o blue" ng-show="tt0"></i>
+                                                    <span class="text-bold">
+                                                        Tất Cả
+                                                        <i class="ace-icon fa fa-check-square-o blue" ng-show="tt0"></i>
                                                     </span>
                                                 </li>
 
                                                 <li ng-click="LocTheoSo(1)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">VB Đi
+                                                    <span class="text-bold">
+                                                        VB Đi
                                                         <i class="ace-icon fa fa-check-square-o blue" ng-show="tt1"></i>
                                                     </span>
                                                 </li>
 
                                                 <li ng-click="LocTheoSo(3)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">VB Chính Quyền
+                                                    <span class="text-bold">
+                                                        VB Chính Quyền
                                                         <i class="ace-icon fa fa-check-square-o blue" ng-show="tt3"></i>
                                                     </span>
                                                 </li>
 
                                                 <li ng-click="LocTheoSo(4)">
                                                     <i class="ace-icon fa fa-eye green"></i>
-                                                    <span class="text-bold">VB Đảng Bộ
+                                                    <span class="text-bold">
+                                                        VB Đảng Bộ
                                                         <i class="ace-icon fa fa-check-square-o blue" ng-show="tt4"></i>
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
 
-                                        <hr />
+                                        @*<hr />
 
                                         <h4 style="border-bottom: dotted 1px #F1F1F1; margin: 0px; padding: 6px 0px 6px 10px; font-size: 12pt;"><i class="blue ace-icon fa fa fa-search bigger-130"></i><span class="bigger-110" style="margin-left:5px;">Tìm Kiếm</span></h4>
                                         <div>
-                                            <label for="form-field-select-1">Số,Ký Hiệu</label>
-                                            <input class="form-control" />
+                                            <label for="form-field-select-1">Số & Ký Hiệu Hồ Sơ</label>
+                                            <input class="form-control" ng-model="ObjTim.FileNotation"/>
                                         </div>
 
                                         <div>
-                                            <label for="form-field-select-1">Số Đến</label>
-                                            <input class="form-control" />
+                                            <label for="form-field-select-1">Số Văn Bản</label>
+                                            <input class="form-control" ng-model="ObjTim.CodeNumber"/>
+                                        </div>
+
+                                        <div>
+                                            <label for="form-field-select-1">Ký Hiệu Văn Bản</label>
+                                            <input class="form-control" ng-model="ObjTim.CodeNotation"/>
                                         </div>
 
                                         <div>
                                             <label for="form-field-select-1">Trích Yếu</label>
-                                            <input class="form-control" />
+                                            <input class="form-control" ng-model="ObjTim.Subject"/>
                                         </div>
 
                                         <div style="margin-top:12px">
-                                            <button class="btn btn-info form-control"><i class="ace-icon fa fa-search"></i></button>
-                                        </div>
+                                            <button class="btn btn-info form-control" ng-click="TimVanBan()">
+                                                <i class="ace-icon fa fa-search"></i>
+                                            </button>
+                                        </div>*@
                                     </div>
                                     <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
                                         <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -177,13 +188,23 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-info dropdown-menu-left">
                                                         <li>
-                                                            <a href="#">Đã Xem</a>
+                                                            <a href="#" ng-click="LocTheoTrangThai(1)">Đã Xem <i class="ace-icon fa fa-check green" ng-show="ttdaxem"></i></a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#">Chưa Xem</a>
+                                                            <a href="#"  ng-click="LocTheoTrangThai(0)">Chưa Xem <i class="ace-icon fa fa-check green" ng-show="ttchuaxem"></i></a>
                                                         </li>
                                                     </ul>
+                                                </div>
+
+                                                <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
+                                                    <input class="form-control" style="margin-left:8px;height:30px;width:500px" placeholder="Nhập Số , Ký hiệu hồ sơ hoặc văn bản,hoặc trích yếu của văn bản..." ng-model="ObjTim.SearchString"/>
+                                                </div>
+
+                                                <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
+                                                    <button class="btn btn-sm btn-info btn-white" ng-click="TimVanBan()">
+                                                        <i class="fa fa-1x fa-search bigger-130"></i>
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -213,6 +234,7 @@
                                                     rotate="false"></ul>
                                             </div>
                                         </div>
+
                                         <div class="clearfix"></div>
 
                                         <div class="row" style="overflow-y: auto; height: calc(100% - 35px);">

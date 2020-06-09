@@ -108,4 +108,33 @@ namespace OAMS.Models
         public string CODE { get; set; }
         public string VALUENAME { get; set; }
     }
+
+    public class TimKiemVanBanModel
+    {
+        public string FileNotation { get; set; }
+
+        public string CodeNumber { get; set; }
+
+        public string CodeNotation { get; set; }
+
+        public string SearchString { get; set; }
+
+        public string Subject { get; set; }
+
+        public int TrangThai { get; set; }
+
+        public int LoaiVanBan { get; set; }
+    }
+
+    public class CommonModel
+    {
+        public string valstring1 { get; set; }
+        public string valstring2 { get; set; }
+        public string valstring3 { get; set; }
+        public string valstring4 { get; set; }
+        public int valint1 { get; set; }
+        public int valint2 { get; set; }
+        public int valint3 { get; set; }
+        public int valint4 { get; set; }
+    }
 }
