@@ -96,7 +96,7 @@
                     var resp = loginservice.getdata("api/QLVanBan/getVanBanDen_CanBo?CANBO=" + canbo);
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
-                        //console.log($scope.DsVanBan);
+                        console.log($scope.DsVanBan);
                         blockUI.stop();
                     }
                         , function errorCallback(response) {
@@ -111,6 +111,7 @@
                     var resp = loginservice.postdata("api/QLVanBan/getVanBanDen_Admin", $.param(itemLoc));
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
+                        //console.log($scope.DsVanBan);
                         $scope.bigTotalItems = $scope.DsVanBan[0].Total;
                         blockUI.stop();
                     }
@@ -145,6 +146,7 @@
                 }
 
                 $scope.opennewVanban = function (item) {
+                    item.DaXem = 1;
                     var parentElem =
                         angular.element($document[0].querySelector('.main-content'));
                     var modalInstance = $uibModal.open({
@@ -178,7 +180,14 @@
                 }
 
                 $scope.ChuyenVB = function (item) {
-                    console.log(item);
+                    var resp = loginservice.postdata("api/QLVanBan/ChuyenVB_SangThongBao", $.param(item));
+                    resp.then(function (response) {
+                        alert("Chuyển Văn Bản Sang Thông Báo Thành Công");
+                        item.MOREINFO1 = response.data;
+                    }
+                        , function errorCallback(response) {
+                            console.log(response.data.message);
+                        });
                 }
 
                 $scope.viewfilepdf = function (tenFile) {

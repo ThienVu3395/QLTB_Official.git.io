@@ -21,10 +21,11 @@
                     if (idselect !== null) {
                         $scope.TrangThai = true; // Xem chi tiết
                         $scope.objVB = idselect;
-                        console.log($scope.objVB);
+                        //console.log($scope.objVB);
                         $scope.Title = "Chi Tiết Văn Bản";
                         var data = userProfile.getProfile();
                         $scope.roleName = data.roleName;
+                        console.log($scope.roleName);
                         getNguoiDung();
                     }
                     else {
@@ -124,14 +125,14 @@
                         else {
                             $scope.disable = true;
                         }
-                        console.log($scope.people);
+                        //console.log($scope.people);
+                        $scope.getdatafilePDF($scope.objVB.FileDinhKem[0].TENFILE);
                         for (let i = 0; i < $scope.objVB.NguoiThamGia.length; i++){
                             let index = $scope.people.findIndex(x => x.USERNAME == $scope.objVB.NguoiThamGia[i].USERNAME);
                             if (index != -1) {
                                 $scope.multipleDemo.selectedPeople.push($scope.objVB.NguoiThamGia[i]);
                             }
                         }
-                        $scope.getdatafilePDF($scope.objVB.FileDinhKem[0].TENFILE);
                     }
                         , function errorCallback(response) {
                             $scope.datatree = [];
@@ -507,19 +508,15 @@
                         });
                 }
 
+                // Xóa người tham gia khỏi mảng + db
                 $scope.removed = function (item, model) {
-                    console.log(item);
-                    var resp = loginservice.postdata("api/QLVanBan/XoaCanBo", $.param({ valstring1: item.USERNAME, valint1: item.ID }));
+                    var resp = loginservice.postdata("api/QLVanBan/XoaCanBo", $.param({ valstring1: item.USERNAME, valint1: $scope.objVB.ID }));
                     resp.then(function (response) {
-                        for (let i = 0; i < response.data.length; i++) {
-                            $scope.countryList[i] = response.data[i].VALUENAME;
-                        }
-                        $scope.DsDanhMuc = response.data;
-                        $scope.OrganName = $scope.DsDanhMuc[0];
-                        $ctrl.datasumitformedit.OrganName = $scope.OrganName.VALUENAME;
+                        let index = $scope.objVB.NguoiThamGia.findIndex(x => x.USERNAME == item.USERNAME);
+                        $scope.objVB.NguoiThamGia.splice(index, 1);
                     }
                         , function errorCallback(response) {
-
+                            console.log(response.data.message);
                         });
                 }
 

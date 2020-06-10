@@ -16,7 +16,7 @@ namespace OAMS.Database
     {
         public int ID { get; set; }
         public int WorkflowID { get; set; }
-        public string VAITRO { get; set; }
+        public int VAITRO { get; set; }
         public string CANBO { get; set; }
         public string YEUCAURIENG { get; set; }
         public short LOAIXL { get; set; }

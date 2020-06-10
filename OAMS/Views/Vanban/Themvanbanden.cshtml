@@ -416,7 +416,7 @@
 
                 <div class="col-md-12 col-sm-12">
                     <div class="btn-group pull-right" style="margin-top:10px;font-size:9pt;">
-                        <button class="btn btn-xs btn-info" style="font-size:9pt;" ng-click="GuiVanBan()"><i class="fa fa-save"></i> Gửi</button>
+                        <button class="btn btn-xs btn-info" style="font-size:9pt;" ng-click="GuiVanBan()" ng-disabled="roleName == 'Docgia'"><i class="fa fa-save"></i> Gửi</button>
                         <button ng-click="$ctrl.cancel()" class="btn btn-xs btn-warning" style="font-size:9pt;"><i class="fa fa-sign-out"></i> Thoát</button>
                     </div>
                 </div>

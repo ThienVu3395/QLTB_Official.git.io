@@ -18,9 +18,9 @@ namespace OAMS.Database
         public tbWorkflow()
         {
             this.tbFilecongvans = new HashSet<tbFilecongvan>();
-            this.tbFlownodes = new HashSet<tbFlownode>();
             this.tbVBdenWorkflows = new HashSet<tbVBdenWorkflow>();
             this.tbYkienxulies = new HashSet<tbYkienxuly>();
+            this.tbFlownodes = new HashSet<tbFlownode>();
         }
     
         public int ID { get; set; }
@@ -39,14 +39,16 @@ namespace OAMS.Database
         public Nullable<bool> KHOAXL { get; set; }
         public string KETQUAXL { get; set; }
         public Nullable<System.DateTime> NGAYHOANTHANH { get; set; }
+        public Nullable<int> IDPARENT { get; set; }
+        public Nullable<System.DateTime> NGAYBD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbFilecongvan> tbFilecongvans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFlownode> tbFlownodes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbVBdenWorkflow> tbVBdenWorkflows { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbYkienxuly> tbYkienxulies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbFlownode> tbFlownodes { get; set; }
     }
 }

@@ -49,7 +49,6 @@
     <EntitySet Name="tbFilecongvans" EntityType="dbOAMSModel.tbFilecongvan" />
     <EntitySet Name="tbFiledinhkems" EntityType="dbOAMSModel.tbFiledinhkem" />
     <EntitySet Name="tbFilexulies" EntityType="dbOAMSModel.tbFilexuly" />
-    <EntitySet Name="tbFlownodes" EntityType="dbOAMSModel.tbFlownode" />
     <EntitySet Name="tbLinhvucs" EntityType="dbOAMSModel.tbLinhvuc" />
     <EntitySet Name="tbLoaivanbans" EntityType="dbOAMSModel.tbLoaivanban" />
     <EntitySet Name="tbSovanbans" EntityType="dbOAMSModel.tbSovanban" />
@@ -65,10 +64,6 @@
       <End Role="tbYkienxuly" EntitySet="tbYkienxulies" />
       <End Role="tbFilexuly" EntitySet="tbFilexulies" />
     </AssociationSet>
-    <AssociationSet Name="FK_tbFlownode_tbWorkflow" Association="dbOAMSModel.FK_tbFlownode_tbWorkflow">
-      <End Role="tbWorkflow" EntitySet="tbWorkflows" />
-      <End Role="tbFlownode" EntitySet="tbFlownodes" />
-    </AssociationSet>
     <AssociationSet Name="FK_tbVBdenWorkflow_tbWorkflow" Association="dbOAMSModel.FK_tbVBdenWorkflow_tbWorkflow">
       <End Role="tbWorkflow" EntitySet="tbWorkflows" />
       <End Role="tbVBdenWorkflow" EntitySet="tbVBdenWorkflows" />
@@ -81,7 +76,6 @@
     <EntitySet Name="NEWS_BinhLuan" EntityType="dbOAMSModel.NEWS_BinhLuan" />
     <EntitySet Name="NEWS_NguoiSuDung" EntityType="dbOAMSModel.NEWS_NguoiSuDung" />
     <EntitySet Name="NEWS_PhongBan" EntityType="dbOAMSModel.NEWS_PhongBan" />
-    <EntitySet Name="NEWS_TinTucTapTin" EntityType="dbOAMSModel.NEWS_TinTucTapTin" />
     <EntitySet Name="NEWSTUONG_NhomTinTuong" EntityType="dbOAMSModel.NEWSTUONG_NhomTinTuong" />
     <EntitySet Name="NEWSTUONG_TinDinhKem" EntityType="dbOAMSModel.NEWSTUONG_TinDinhKem" />
     <AssociationSet Name="FK_NEWS_BinhLuan_NEWS_NguoiSuDung1" Association="dbOAMSModel.FK_NEWS_BinhLuan_NEWS_NguoiSuDung1">
@@ -147,10 +141,7 @@
       <End Role="NEWS_NguoiSuDung" EntitySet="NEWS_NguoiSuDung" />
       <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
     </AssociationSet>
-    <AssociationSet Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1" Association="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
-      <End Role="NEWS_TinTuc" EntitySet="NEWS_TinTuc" />
-      <End Role="NEWS_TinTucTapTin" EntitySet="NEWS_TinTucTapTin" />
-    </AssociationSet>
+    <EntitySet Name="NEWS_TinTucTapTin" EntityType="dbOAMSModel.NEWS_TinTucTapTin" />
     <EntitySet Name="tbVanbandens" EntityType="dbOAMSModel.tbVanbanden" />
     <AssociationSet Name="FK_tbVanbanden_tbSovanban" Association="dbOAMSModel.FK_tbVanbanden_tbSovanban">
       <End Role="tbSovanban" EntitySet="tbSovanbans" />
@@ -163,6 +154,11 @@
     <AssociationSet Name="FK_tbVBdenWorkflow_tbVanbanden" Association="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden">
       <End Role="tbVanbanden" EntitySet="tbVanbandens" />
       <End Role="tbVBdenWorkflow" EntitySet="tbVBdenWorkflows" />
+    </AssociationSet>
+    <EntitySet Name="tbFlownodes" EntityType="dbOAMSModel.tbFlownode" />
+    <AssociationSet Name="FK_tbFlownode_tbWorkflow" Association="dbOAMSModel.FK_tbFlownode_tbWorkflow">
+      <End Role="tbWorkflow" EntitySet="tbWorkflows" />
+      <End Role="tbFlownode" EntitySet="tbFlownodes" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="tbChucnang">
@@ -277,6 +273,7 @@
     <Property Name="FILEANH" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tbBophan" Relationship="dbOAMSModel.FK_tbNguoidung_tbBophan" FromRole="tbNguoidung" ToRole="tbBophan" />
     <NavigationProperty Name="tbChucvu" Relationship="dbOAMSModel.FK_tbNguoidung_tbChucvu" FromRole="tbNguoidung" ToRole="tbChucvu" />
+    <Property Name="LANHDAO" Type="Int16" />
   </EntityType>
   <EntityType Name="tbNhom">
     <Key>
@@ -466,22 +463,6 @@
     <Property Name="PHATHANH" Type="Int32" />
     <NavigationProperty Name="tbYkienxuly" Relationship="dbOAMSModel.FK_tbFilexuly_tbYkienxuly" FromRole="tbFilexuly" ToRole="tbYkienxuly" />
   </EntityType>
-  <EntityType Name="tbFlownode">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="WorkflowID" Type="Int32" Nullable="false" />
-    <Property Name="VAITRO" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-    <Property Name="CANBO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="YEUCAURIENG" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="LOAIXL" Type="Int16" Nullable="false" />
-    <Property Name="CANBOUQ" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="NGAYUQ" Type="DateTime" Precision="3" />
-    <Property Name="HANUQ" Type="DateTime" Precision="3" />
-    <Property Name="CHANXL" Type="Int32" />
-    <NavigationProperty Name="tbWorkflow" Relationship="dbOAMSModel.FK_tbFlownode_tbWorkflow" FromRole="tbFlownode" ToRole="tbWorkflow" />
-  </EntityType>
   <EntityType Name="tbLinhvuc">
     <Key>
       <PropertyRef Name="MALV" />
@@ -549,16 +530,18 @@
     <Property Name="NGUOITAO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="NGAYTAO" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="THOIHAN" Type="DateTime" Precision="3" />
-    <Property Name="MADONVI" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="MADONVI" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
     <Property Name="BOPHAN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
     <Property Name="VANBANID" Type="Int32" />
     <Property Name="KHOAXL" Type="Boolean" />
     <Property Name="KETQUAXL" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="NGAYHOANTHANH" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tbFilecongvans" Relationship="dbOAMSModel.FK_tbFilecongvan_tbWorkflow" FromRole="tbWorkflow" ToRole="tbFilecongvan" />
-    <NavigationProperty Name="tbFlownodes" Relationship="dbOAMSModel.FK_tbFlownode_tbWorkflow" FromRole="tbWorkflow" ToRole="tbFlownode" />
     <NavigationProperty Name="tbVBdenWorkflows" Relationship="dbOAMSModel.FK_tbVBdenWorkflow_tbWorkflow" FromRole="tbWorkflow" ToRole="tbVBdenWorkflow" />
     <NavigationProperty Name="tbYkienxulies" Relationship="dbOAMSModel.FK_tbYkienxuly_tbWorkflow" FromRole="tbWorkflow" ToRole="tbYkienxuly" />
+    <Property Name="IDPARENT" Type="Int32" />
+    <Property Name="NGAYBD" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tbFlownodes" Relationship="dbOAMSModel.FK_tbFlownode_tbWorkflow" FromRole="tbWorkflow" ToRole="tbFlownode" />
   </EntityType>
   <EntityType Name="tbYkienxuly">
     <Key>
@@ -574,6 +557,7 @@
     <Property Name="CONGKHAI" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tbFilexulies" Relationship="dbOAMSModel.FK_tbFilexuly_tbYkienxuly" FromRole="tbYkienxuly" ToRole="tbFilexuly" />
     <NavigationProperty Name="tbWorkflow" Relationship="dbOAMSModel.FK_tbYkienxuly_tbWorkflow" FromRole="tbYkienxuly" ToRole="tbWorkflow" />
+    <Property Name="PARENTID" Type="Int32" />
   </EntityType>
   <Association Name="FK_tbFilecongvan_tbWorkflow">
     <End Type="dbOAMSModel.tbWorkflow" Role="tbWorkflow" Multiplicity="1">
@@ -600,20 +584,6 @@
       </Principal>
       <Dependent Role="tbFilexuly">
         <PropertyRef Name="YKIENID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbFlownode_tbWorkflow">
-    <End Type="dbOAMSModel.tbWorkflow" Role="tbWorkflow" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Type="dbOAMSModel.tbFlownode" Role="tbFlownode" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbWorkflow">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tbFlownode">
-        <PropertyRef Name="WorkflowID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -711,17 +681,6 @@
     <Property Name="MaPhongBan" Type="Int32" Nullable="false" />
     <Property Name="Ten" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="NEWS_NguoiSuDung" Relationship="dbOAMSModel.FK_NEWS_NguoiSuDung_NEWS_PhongBan" FromRole="NEWS_PhongBan" ToRole="NEWS_NguoiSuDung" />
-  </EntityType>
-  <EntityType Name="NEWS_TinTucTapTin">
-    <Key>
-      <PropertyRef Name="MaTapTin" />
-    </Key>
-    <Property Name="MaTinTuc" Type="Int32" Nullable="false" />
-    <Property Name="MaTapTin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Ten" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
-    <Property Name="Url" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="Ngay" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="NEWS_TinTuc" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTucTapTin" ToRole="NEWS_TinTuc" />
   </EntityType>
   <EntityType Name="NEWSTUONG_NhomTinTuong">
     <Key>
@@ -968,7 +927,6 @@
     <NavigationProperty Name="NEWS_NguoiSuDung1" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung1" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
     <NavigationProperty Name="NEWS_NguoiSuDung2" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung2" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
     <NavigationProperty Name="NEWS_NguoiSuDung3" Relationship="dbOAMSModel.FK_NEWS_TinTuc_NEWS_NguoiSuDung3" FromRole="NEWS_TinTuc" ToRole="NEWS_NguoiSuDung" />
-    <NavigationProperty Name="NEWS_TinTucTapTin" Relationship="dbOAMSModel.FK_NEWS_TinTucTapTin_NEWS_TinTuc1" FromRole="NEWS_TinTuc" ToRole="NEWS_TinTucTapTin" />
   </EntityType>
   <Association Name="FK_NEWS_TinTuc_NEWS_LoaiTinTuc">
     <End Type="dbOAMSModel.NEWS_LoaiTinTuc" Role="NEWS_LoaiTinTuc" Multiplicity="0..1" />
@@ -1030,44 +988,41 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_NEWS_TinTucTapTin_NEWS_TinTuc1">
-    <End Type="dbOAMSModel.NEWS_TinTuc" Role="NEWS_TinTuc" Multiplicity="1" />
-    <End Type="dbOAMSModel.NEWS_TinTucTapTin" Role="NEWS_TinTucTapTin" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NEWS_TinTuc">
-        <PropertyRef Name="MaTinTuc" />
-      </Principal>
-      <Dependent Role="NEWS_TinTucTapTin">
-        <PropertyRef Name="MaTinTuc" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="NEWS_TinTucTapTin">
+    <Key>
+      <PropertyRef Name="MaTinTuc" />
+      <PropertyRef Name="MaTapTin" />
+    </Key>
+    <Property Name="MaTinTuc" Type="Int32" Nullable="false" />
+    <Property Name="MaTapTin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+    <Property Name="Url" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="Ngay" Type="DateTime" Precision="0" />
+  </EntityType>
   <EntityType Name="tbVanbanden">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DOCCODE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="FILECODE" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-    <Property Name="DOCORDINAL" Type="Int16" />
-    <Property Name="TYPENAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="CODENUMBER" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-    <Property Name="CODENOTATION" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="ISSUEDDATE" Type="DateTime" Precision="0" />
-    <Property Name="ORGANNAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="SUBJECT" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="LANGUAGE" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="PAGEMOUNT" Type="Int16" />
-    <Property Name="DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="ARRIVALDATE" Type="DateTime" Precision="0" />
-    <Property Name="ARRIVALNUMBER" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="POSITIONSIGNER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="FULLNAMESIGNER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PRIORITY" Type="Int32" />
-    <Property Name="TOPLACES" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-    <Property Name="TRACEHEADER" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-    <Property Name="DUEDATE" Type="DateTime" Precision="0" />
-    <Property Name="SOVANBANID" Type="Int32" Nullable="false" />
+    <Property Name="OrganId" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="FileCatalog" Type="Int32" />
+    <Property Name="FileNotation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DocOrdinal" Type="Int16" />
+    <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CodeNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="CodeNotation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="IssuedDate" Type="DateTime" Precision="0" />
+    <Property Name="OrganName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Language" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PageAmount" Type="Int16" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int32" />
+    <Property Name="IssuedAmount" Type="Int32" />
+    <Property Name="DueDate" Type="DateTime" Precision="0" />
+    <Property Name="SoVanBanID" Type="Int32" />
     <Property Name="MOREINFO1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="MOREINFO2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="MOREINFO3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -1078,16 +1033,14 @@
     <NavigationProperty Name="tbVBdenWorkflows" Relationship="dbOAMSModel.FK_tbVBdenWorkflow_tbVanbanden" FromRole="tbVanbanden" ToRole="tbVBdenWorkflow" />
   </EntityType>
   <Association Name="FK_tbVanbanden_tbSovanban">
-    <End Type="dbOAMSModel.tbSovanban" Role="tbSovanban" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Type="dbOAMSModel.tbSovanban" Role="tbSovanban" Multiplicity="0..1" />
     <End Type="dbOAMSModel.tbVanbanden" Role="tbVanbanden" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tbSovanban">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="tbVanbanden">
-        <PropertyRef Name="SOVANBANID" />
+        <PropertyRef Name="SoVanBanID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1114,6 +1067,36 @@
       </Principal>
       <Dependent Role="tbVBdenWorkflow">
         <PropertyRef Name="IDVANBANDEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbFlownode">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkflowID" Type="Int32" Nullable="false" />
+    <Property Name="VAITRO" Type="Int32" Nullable="false" />
+    <Property Name="CANBO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="YEUCAURIENG" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="LOAIXL" Type="Int16" Nullable="false" />
+    <Property Name="CANBOUQ" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYUQ" Type="DateTime" Precision="3" />
+    <Property Name="HANUQ" Type="DateTime" Precision="3" />
+    <Property Name="CHANXL" Type="Int32" />
+    <NavigationProperty Name="tbWorkflow" Relationship="dbOAMSModel.FK_tbFlownode_tbWorkflow" FromRole="tbFlownode" ToRole="tbWorkflow" />
+  </EntityType>
+  <Association Name="FK_tbFlownode_tbWorkflow">
+    <End Type="dbOAMSModel.tbWorkflow" Role="tbWorkflow" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="dbOAMSModel.tbFlownode" Role="tbFlownode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbWorkflow">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbFlownode">
+        <PropertyRef Name="WorkflowID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

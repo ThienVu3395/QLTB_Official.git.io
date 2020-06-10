@@ -28,6 +28,7 @@ namespace OAMS.Database
         public Nullable<System.DateTime> KETTHUCUQ { get; set; }
         public bool HANCHE { get; set; }
         public string FILEANH { get; set; }
+        public Nullable<short> LANHDAO { get; set; }
     
         public virtual tbBophan tbBophan { get; set; }
         public virtual tbChucvu tbChucvu { get; set; }

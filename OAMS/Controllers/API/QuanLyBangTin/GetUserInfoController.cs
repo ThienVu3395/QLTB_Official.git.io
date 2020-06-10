@@ -26,25 +26,7 @@ namespace OAMS.Controllers.API.QuanLyBangTin
         {
             _cnn = System.Configuration.ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
         }
-        [HttpGet]
-        [Route("get")]
-        public IHttpActionResult get(int id)
-        {
-            string sql = "SELECT * FROM FILE_TaiLieu WHERE TaiLieuID = " + id;
 
-            string store = "DOC_Get";
-
-            using (IDbConnection db = new SqlConnection(_cnn))
-            {
-                //var aa = db.Query<TaiLieuModel>(sql);
-                //return Ok(aa);
-
-                var aa = db.Query<TaiLieuModel>("DOC_Get", new { ID = id },null,true,null, commandType: CommandType.StoredProcedure);
-
-                return Ok(aa);
-            }
-           
-        }
         [HttpPost]
         [Route("getInfoUser")]
         public IHttpActionResult getInfoUser(UserExtension userInfo)

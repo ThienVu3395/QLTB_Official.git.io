@@ -14,12 +14,6 @@ namespace OAMS.Database
     
     public partial class NEWS_TinTuc
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NEWS_TinTuc()
-        {
-            this.NEWS_TinTucTapTin = new HashSet<NEWS_TinTucTapTin>();
-        }
-    
         public int MaTinTuc { get; set; }
         public string TieuDe { get; set; }
         public string NoiDung { get; set; }
@@ -57,7 +51,5 @@ namespace OAMS.Database
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung1 { get; set; }
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung2 { get; set; }
         public virtual NEWS_NguoiSuDung NEWS_NguoiSuDung3 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
     }
 }

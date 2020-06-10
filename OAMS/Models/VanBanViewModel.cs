@@ -36,7 +36,11 @@ namespace OAMS.Models
         public List<FileDinhKemViewModel> FileDinhKem { get; set; }
         public List<NguoiDungViewModel> NguoiThamGia { get; set; }
         public int Total { get; set; }
+        public int DaXem { get; set; }
+        public string CANBO { get; set; }
+        public Nullable<System.DateTime> NGAYMO { get; set; }
     }
+
 
     public class SoVanBanViewModel
     {
@@ -136,5 +140,10 @@ namespace OAMS.Models
         public int valint2 { get; set; }
         public int valint3 { get; set; }
         public int valint4 { get; set; }
+    }
+
+    public class CommonReturnValueModel
+    {
+        public int ID { get; set; }
     }
 }

@@ -41,7 +41,6 @@ namespace OAMS.Database
         public virtual DbSet<tbFilecongvan> tbFilecongvans { get; set; }
         public virtual DbSet<tbFiledinhkem> tbFiledinhkems { get; set; }
         public virtual DbSet<tbFilexuly> tbFilexulies { get; set; }
-        public virtual DbSet<tbFlownode> tbFlownodes { get; set; }
         public virtual DbSet<tbLinhvuc> tbLinhvucs { get; set; }
         public virtual DbSet<tbLoaivanban> tbLoaivanbans { get; set; }
         public virtual DbSet<tbSovanban> tbSovanbans { get; set; }
@@ -53,12 +52,13 @@ namespace OAMS.Database
         public virtual DbSet<NEWS_BinhLuan> NEWS_BinhLuan { get; set; }
         public virtual DbSet<NEWS_NguoiSuDung> NEWS_NguoiSuDung { get; set; }
         public virtual DbSet<NEWS_PhongBan> NEWS_PhongBan { get; set; }
-        public virtual DbSet<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
         public virtual DbSet<NEWSTUONG_NhomTinTuong> NEWSTUONG_NhomTinTuong { get; set; }
         public virtual DbSet<NEWSTUONG_TinDinhKem> NEWSTUONG_TinDinhKem { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<NEWSTUONG_BaiViet> NEWSTUONG_BaiViet { get; set; }
         public virtual DbSet<NEWS_TinTuc> NEWS_TinTuc { get; set; }
+        public virtual DbSet<NEWS_TinTucTapTin> NEWS_TinTucTapTin { get; set; }
         public virtual DbSet<tbVanbanden> tbVanbandens { get; set; }
+        public virtual DbSet<tbFlownode> tbFlownodes { get; set; }
     }
 }

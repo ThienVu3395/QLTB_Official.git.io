@@ -118,28 +118,45 @@ namespace OAMS.Controllers.API
         {
             var parameters = new DynamicParameters();
             parameters.Add("@CANBO", CANBO);
-            string query = "select * from doc.tbVBdenCanbo where CANBO = @CANBO";
+            string query = "select t1.*,t2.CANBO,t2.NGAYMO from doc.tbVanbanden t1 inner join doc.tbVBdenCanbo t2 on t1.ID = t2.IDVANBAN and t2.CANBO = @CANBO";
             using (IDbConnection db = new SqlConnection(_cnn))
             {
-                var aa = db.Query<VanBanDenCanBoViewModel>(query, parameters).ToList();
+                var aa = db.Query<VanBanViewModel>(query, parameters).ToList();
                 if (aa.Count > 0)
                 {
-                    List<VanBanViewModel> vanBans = new List<VanBanViewModel>();
                     foreach (var item in aa)
                     {
                         var pr = new DynamicParameters();
-                        pr.Add("@IDVANBAN", item.IDVANBAN);
-                        string query2 = "SELECT * from doc.tbVanbanden where ID = @IDVANBAN";
-                        var bb = db.Query<VanBanViewModel>(query2, pr).SingleOrDefault();
+                        pr.Add("@ID", item.ID);
+                        string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
+                        var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
+                        item.FileDinhKem = bb;
 
-                        var prr = new DynamicParameters();
-                        prr.Add("@ID", bb.ID);
-                        string qrr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
-                        var listFile = db.Query<FileDinhKemViewModel>(qrr, prr).ToList();
-                        bb.FileDinhKem = listFile;
-                        vanBans.Add(bb);
+                        var pr2 = new DynamicParameters();
+                        pr2.Add("@ID", item.ID);
+                        string qr2 = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID";
+                        var cc = db.Query<VanBanDenCanBoViewModel>(qr2, pr2).ToList();
+                        List<NguoiDungViewModel> ds = new List<NguoiDungViewModel>();
+                        if (cc.Count > 0)
+                        {
+                            foreach (var i in cc)
+                            {
+                                var pr3 = new DynamicParameters();
+                                pr3.Add("@CANBO", i.CANBO);
+                                string qr3 = "select * from users.tbNguoidung where USERNAME = @CANBO";
+                                var dd = db.Query<NguoiDungViewModel>(qr3, pr3).SingleOrDefault();
+                                ds.Add(dd);
+                            }
+                        }
+                        item.NguoiThamGia = ds;
+
+                        var pr4 = new DynamicParameters();
+                        pr4.Add("@ID", item.SoVanBanID);
+                        string qr4 = "select * from doc.tbSovanban where ID = @ID";
+                        var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
+                        item.TENSO = ee.TENSO;
+                        item.DaXem = item.NGAYMO != null ? 1 : 0;
                     }
-                    return Ok(vanBans);
                 }
                 return Ok(aa);
             }
@@ -154,7 +171,6 @@ namespace OAMS.Controllers.API
                 var parameters = new DynamicParameters();
                 parameters.Add("@Start", phanTrang.Start);
                 parameters.Add("@End", phanTrang.End);
-
                 var aa = db.Query<VanBanViewModel>("procPhanTrang_Loc", parameters, null, true, null, System.Data.CommandType.StoredProcedure).ToList();
                 if (aa.Count > 0)
                 {
@@ -189,6 +205,7 @@ namespace OAMS.Controllers.API
                         string qr4 = "select * from doc.tbSovanban where ID = @ID";
                         var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
                         item.TENSO = ee.TENSO;
+                        item.DaXem = 0;
                     }
                 }
                 return Ok(aa);
@@ -751,45 +768,86 @@ namespace OAMS.Controllers.API
                 using (IDbConnection db = new SqlConnection(_cnn))
                 {
                     DynamicParameters parameters = new DynamicParameters();
-                    parameters.Add("@LoaiVB", model.valint1);
-                    parameters.Add("@TrangThai", model.valstring1);
-                    var dsVB = db.Query<VanBanViewModel>("procGetVanBan_TheoTrangThaiXem", parameters, null, true, null, System.Data.CommandType.StoredProcedure).ToList();
-                    if (dsVB.Count > 0)
+                    parameters.Add("@USERNAME", model.valstring1);
+                    parameters.Add("@ID", model.valint1);
+                    string query = "delete from doc.tbVBdenCanbo where IDVANBAN = @ID and CANBO = @USERNAME";
+                    db.Execute(query, parameters);
+                    return Ok();
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                // Throw a new DbEntityValidationException with the improved exception message.
+                //throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                return BadRequest(exceptionMessage + " " + ex.EntityValidationErrors);
+            }
+        }
+
+        [HttpPost]
+        [Route("ChuyenVB_SangThongBao")]
+        public IHttpActionResult ChuyenVB_SangThongBao(VanBanViewModel model)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_cnn))
+                {
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@OrganId", model.OrganId);
+                    parameters.Add("@FileCatalog", model.FileCatalog);
+                    parameters.Add("@FileNotation", model.FileNotation);
+                    parameters.Add("@DocOrdinal", model.DocOrdinal);
+                    parameters.Add("@TypeName", model.TypeName);
+                    parameters.Add("@CodeNumber", model.CodeNumber);
+                    parameters.Add("@CodeNotation", model.CodeNotation);
+                    parameters.Add("@IssuedDate", model.IssuedDate);
+                    parameters.Add("@OrganName", model.OrganName);
+                    parameters.Add("@Subject", model.Subject);
+                    parameters.Add("@Language", model.Language);
+                    parameters.Add("@PageAmount", model.PageAmount);
+                    parameters.Add("@Description", model.Description);
+                    parameters.Add("@Position", model.Position);
+                    parameters.Add("@Fullname", model.Fullname);
+                    parameters.Add("@Priority", model.Priority);
+                    parameters.Add("@IssuedAmount", model.IssuedAmount);
+                    parameters.Add("@DueDate", model.DueDate);
+                    parameters.Add("@SoVanBanID", model.SoVanBanID);
+                    parameters.Add("@MOREINFO1", model.MOREINFO1);
+                    parameters.Add("@MOREINFO2", model.MOREINFO2);
+                    parameters.Add("@MOREINFO3", model.MOREINFO3);
+                    parameters.Add("@MOREINFO4", model.MOREINFO4);
+                    parameters.Add("@MOREINFO5", model.MOREINFO5);
+
+                    var returnV = db.Query<CommonReturnValueModel>("procChuyenVanBanSangThongBao", parameters, null, true, null, System.Data.CommandType.StoredProcedure).SingleOrDefault();
+
+                    if (model.FileDinhKem.Count > 0)
                     {
-                        foreach (var item in dsVB)
+                        foreach (var item in model.FileDinhKem)
                         {
-                            var pr = new DynamicParameters();
-                            pr.Add("@ID", item.ID);
-                            string qr = "select * from doc.tbFiledinhkem where VANBANID = @ID";
-                            var bb = db.Query<FileDinhKemViewModel>(qr, pr).ToList();
-                            item.FileDinhKem = bb;
-
-                            var pr2 = new DynamicParameters();
-                            pr2.Add("@ID", item.ID);
-                            string qr2 = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID";
-                            var cc = db.Query<VanBanDenCanBoViewModel>(qr2, pr2).ToList();
-                            List<NguoiDungViewModel> ds = new List<NguoiDungViewModel>();
-                            if (cc.Count > 0)
-                            {
-                                foreach (var i in cc)
-                                {
-                                    var pr3 = new DynamicParameters();
-                                    pr3.Add("@CANBO", i.CANBO);
-                                    string qr3 = "select * from users.tbNguoidung where USERNAME = @CANBO";
-                                    var dd = db.Query<NguoiDungViewModel>(qr3, pr3).SingleOrDefault();
-                                    ds.Add(dd);
-                                }
-                            }
-                            item.NguoiThamGia = ds;
-
-                            var pr4 = new DynamicParameters();
-                            pr4.Add("@ID", item.SoVanBanID);
-                            string qr4 = "select * from doc.tbSovanban where ID = @ID";
-                            var ee = db.Query<SoVanBanViewModel>(qr4, pr4).SingleOrDefault();
-                            item.TENSO = ee.TENSO;
+                            DynamicParameters param = new DynamicParameters();
+                            param.Add("@MaTinTuc", returnV.ID);
+                            param.Add("@Ten", item.TENFILE);
+                            param.Add("@Url", null);
+                            param.Add("@Ngay", DateTime.Now);
+                            db.Execute("procThemFileDinhKem_TinTuc", param, null, null, System.Data.CommandType.StoredProcedure);
                         }
                     }
-                    return Ok(dsVB);
+                    DynamicParameters pr = new DynamicParameters();
+                    pr.Add("@ID", model.ID);
+                    pr.Add("@ReturnV", returnV.ID);
+                    string qr = "update doc.tbVanbanden set MOREINFO1 = @ReturnV where ID = @ID";
+                    db.Execute(qr,pr);
+                    return Ok(returnV.ID);
                 }
             }
             catch (DbEntityValidationException ex)

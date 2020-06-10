@@ -239,9 +239,9 @@
 
                                         <div class="row" style="overflow-y: auto; height: calc(100% - 35px);">
                                             <div class="message-list" id="message-list">
-                                                <div class="message-item message-unread" ng-repeat="item in DsVanBan track by $index">
+                                                <div class="{{(item.DaXem == 0) ? 'message-item message-unread' : 'message-item' }}" ng-repeat="item in DsVanBan track by $index">
                                                     <div class="menurows pull-right btn-group btn-corner" style="font-size:9pt;">
-                                                        <button ng-click="ChuyenVB(item)" data-toggle="tooltip" title="Chuyển văn bản này sang thông báo" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-send fa-x icon-only"></i> </button>
+                                                        <button ng-click="ChuyenVB(item)" ng-hide="item.MOREINFO1 != null" data-toggle="tooltip" title="Chuyển văn bản này sang thông báo" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-send fa-x icon-only"></i> </button>
                                                         <button ng-click="newdata()" data-toggle="tooltip" ng-disabled="actionbp" title="Hello Tooltip!" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
@@ -273,7 +273,7 @@
                                                         <span class="text" ng-click="opennewVanban(item)">
                                                             {{item.CodeNumber}}
                                                         </span>
-                                                        <span class="label label-sm label-success arrowed arrowed-right">{{item.TENSO}}</span>
+                                                        <span class="label label-sm label-success">{{item.TENSO}}</span>
                                                         <div class="btn-group" style="font-size: 9pt; display:block;margin-top:12px">
                                                             @*<a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-pdf-o"></i> Thành viên hội đồng</a>
                                                                 <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>

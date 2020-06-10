@@ -19,7 +19,5 @@ namespace OAMS.Database
         public string Ten { get; set; }
         public string Url { get; set; }
         public Nullable<System.DateTime> Ngay { get; set; }
-    
-        public virtual NEWS_TinTuc NEWS_TinTuc { get; set; }
     }
 }

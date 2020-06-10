@@ -96,6 +96,7 @@
     <EntitySetMapping Name="tbNguoidungs">
       <EntityTypeMapping TypeName="dbOAMSModel.tbNguoidung">
         <MappingFragment StoreEntitySet="tbNguoidung">
+          <ScalarProperty Name="LANHDAO" ColumnName="LANHDAO" />
           <ScalarProperty Name="FILEANH" ColumnName="FILEANH" />
           <ScalarProperty Name="HANCHE" ColumnName="HANCHE" />
           <ScalarProperty Name="KETTHUCUQ" ColumnName="KETTHUCUQ" />
@@ -192,22 +193,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbFlownodes">
-      <EntityTypeMapping TypeName="dbOAMSModel.tbFlownode">
-        <MappingFragment StoreEntitySet="tbFlownode">
-          <ScalarProperty Name="CHANXL" ColumnName="CHANXL" />
-          <ScalarProperty Name="HANUQ" ColumnName="HANUQ" />
-          <ScalarProperty Name="NGAYUQ" ColumnName="NGAYUQ" />
-          <ScalarProperty Name="CANBOUQ" ColumnName="CANBOUQ" />
-          <ScalarProperty Name="LOAIXL" ColumnName="LOAIXL" />
-          <ScalarProperty Name="YEUCAURIENG" ColumnName="YEUCAURIENG" />
-          <ScalarProperty Name="CANBO" ColumnName="CANBO" />
-          <ScalarProperty Name="VAITRO" ColumnName="VAITRO" />
-          <ScalarProperty Name="WorkflowID" ColumnName="WorkflowID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbLinhvucs">
       <EntityTypeMapping TypeName="dbOAMSModel.tbLinhvuc">
         <MappingFragment StoreEntitySet="tbLinhvuc">
@@ -265,6 +250,8 @@
     <EntitySetMapping Name="tbWorkflows">
       <EntityTypeMapping TypeName="dbOAMSModel.tbWorkflow">
         <MappingFragment StoreEntitySet="tbWorkflow">
+          <ScalarProperty Name="NGAYBD" ColumnName="NGAYBD" />
+          <ScalarProperty Name="IDPARENT" ColumnName="IDPARENT" />
           <ScalarProperty Name="NGAYHOANTHANH" ColumnName="NGAYHOANTHANH" />
           <ScalarProperty Name="KETQUAXL" ColumnName="KETQUAXL" />
           <ScalarProperty Name="KHOAXL" ColumnName="KHOAXL" />
@@ -287,6 +274,7 @@
     <EntitySetMapping Name="tbYkienxulies">
       <EntityTypeMapping TypeName="dbOAMSModel.tbYkienxuly">
         <MappingFragment StoreEntitySet="tbYkienxuly">
+          <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
           <ScalarProperty Name="CONGKHAI" ColumnName="CONGKHAI" />
           <ScalarProperty Name="LOAIXL" ColumnName="LOAIXL" />
           <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
@@ -352,17 +340,6 @@
         <MappingFragment StoreEntitySet="NEWS_PhongBan">
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="MaPhongBan" ColumnName="MaPhongBan" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NEWS_TinTucTapTin">
-      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
-        <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
-          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
-          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -481,6 +458,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_TinTucTapTin">
+      <EntityTypeMapping TypeName="dbOAMSModel.NEWS_TinTucTapTin">
+        <MappingFragment StoreEntitySet="NEWS_TinTucTapTin">
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="MaTapTin" ColumnName="MaTapTin" />
+          <ScalarProperty Name="MaTinTuc" ColumnName="MaTinTuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tbVanbandens">
       <EntityTypeMapping TypeName="dbOAMSModel.tbVanbanden">
         <MappingFragment StoreEntitySet="tbVanbanden">
@@ -489,27 +477,41 @@
           <ScalarProperty Name="MOREINFO3" ColumnName="MOREINFO3" />
           <ScalarProperty Name="MOREINFO2" ColumnName="MOREINFO2" />
           <ScalarProperty Name="MOREINFO1" ColumnName="MOREINFO1" />
-          <ScalarProperty Name="SOVANBANID" ColumnName="SOVANBANID" />
-          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
-          <ScalarProperty Name="TRACEHEADER" ColumnName="TRACEHEADER" />
-          <ScalarProperty Name="TOPLACES" ColumnName="TOPLACES" />
-          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
-          <ScalarProperty Name="FULLNAMESIGNER" ColumnName="FULLNAMESIGNER" />
-          <ScalarProperty Name="POSITIONSIGNER" ColumnName="POSITIONSIGNER" />
-          <ScalarProperty Name="ARRIVALNUMBER" ColumnName="ARRIVALNUMBER" />
-          <ScalarProperty Name="ARRIVALDATE" ColumnName="ARRIVALDATE" />
-          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
-          <ScalarProperty Name="PAGEMOUNT" ColumnName="PAGEMOUNT" />
-          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
-          <ScalarProperty Name="SUBJECT" ColumnName="SUBJECT" />
-          <ScalarProperty Name="ORGANNAME" ColumnName="ORGANNAME" />
-          <ScalarProperty Name="ISSUEDDATE" ColumnName="ISSUEDDATE" />
-          <ScalarProperty Name="CODENOTATION" ColumnName="CODENOTATION" />
-          <ScalarProperty Name="CODENUMBER" ColumnName="CODENUMBER" />
-          <ScalarProperty Name="TYPENAME" ColumnName="TYPENAME" />
-          <ScalarProperty Name="DOCORDINAL" ColumnName="DOCORDINAL" />
-          <ScalarProperty Name="FILECODE" ColumnName="FILECODE" />
-          <ScalarProperty Name="DOCCODE" ColumnName="DOCCODE" />
+          <ScalarProperty Name="SoVanBanID" ColumnName="SoVanBanID" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="IssuedAmount" ColumnName="IssuedAmount" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PageAmount" ColumnName="PageAmount" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="OrganName" ColumnName="OrganName" />
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="CodeNotation" ColumnName="CodeNotation" />
+          <ScalarProperty Name="CodeNumber" ColumnName="CodeNumber" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="DocOrdinal" ColumnName="DocOrdinal" />
+          <ScalarProperty Name="FileNotation" ColumnName="FileNotation" />
+          <ScalarProperty Name="FileCatalog" ColumnName="FileCatalog" />
+          <ScalarProperty Name="OrganId" ColumnName="OrganId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbFlownodes">
+      <EntityTypeMapping TypeName="dbOAMSModel.tbFlownode">
+        <MappingFragment StoreEntitySet="tbFlownode">
+          <ScalarProperty Name="CHANXL" ColumnName="CHANXL" />
+          <ScalarProperty Name="HANUQ" ColumnName="HANUQ" />
+          <ScalarProperty Name="NGAYUQ" ColumnName="NGAYUQ" />
+          <ScalarProperty Name="CANBOUQ" ColumnName="CANBOUQ" />
+          <ScalarProperty Name="LOAIXL" ColumnName="LOAIXL" />
+          <ScalarProperty Name="YEUCAURIENG" ColumnName="YEUCAURIENG" />
+          <ScalarProperty Name="CANBO" ColumnName="CANBO" />
+          <ScalarProperty Name="VAITRO" ColumnName="VAITRO" />
+          <ScalarProperty Name="WorkflowID" ColumnName="WorkflowID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

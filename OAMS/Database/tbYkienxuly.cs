@@ -28,6 +28,7 @@ namespace OAMS.Database
         public short TRANGTHAI { get; set; }
         public short LOAIXL { get; set; }
         public bool CONGKHAI { get; set; }
+        public Nullable<int> PARENTID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbFilexuly> tbFilexulies { get; set; }
