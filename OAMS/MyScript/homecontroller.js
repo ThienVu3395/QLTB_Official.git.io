@@ -139,7 +139,6 @@
                         $scope.countitem = userProfile.getcountShoping();
                     });
 
-
                     $scope.pData = [];
                     $scope.idfunction;
                     getdatachucnang();
@@ -152,7 +151,6 @@
 
                         //});
                     }
-
                 }])
         .controller("Chatcontroller",
             ["$rootScope", "$document", "$scope", "$uibModal", "$timeout", "$element", "appSettings", "loginservice", "userProfile", "ChatService",
@@ -437,6 +435,95 @@
                         }
                         return true;
                     }
+            }])
+
+        .controller("homethongbaocontroller",
+            ["$rootScope", "$scope", 'eventHub', "appSettings", "loginservice", "userProfile",
+                function ($rootScope, $scope, eventHub, appSettings, loginservice, userProfile) {
+                    // của Vũ
+                    $scope.DsVB = [];
+                    function getListVanBan(CanBo) {
+                        var respd = loginservice.getdataNormal("api/QLVanBan/getListVB?CANBO=" + CanBo);
+                        respd.then(function (response) {
+                            $scope.DsTB = response.data;
+                            $scope.SoLuongTB = $scope.DsTB[0].SoLuong;
+                        }, function errorCallback(response) {
+
+                        });
+                    }
+                    var data = userProfile.getProfile();
+                    if (data.isLoggedIn) {
+                        $scope.isLoggedIn = data.isLoggedIn;
+                        $scope.userName = data.username;
+                        $scope.access_token = data.access_token;
+                        $scope.roleName = data.roleName;
+                        $scope.viewwwin = $scope.roleName != 'Docgia';
+                        var datae = userProfile.getProfileExten();
+                        $scope.FulluserName = datae.fileusername;
+                        if (datae.ulrimage != null && datae.ulrimage != '' && datae.ulrimage != 'null') {
+                            $scope.ulrimage = appSettings.serverPath + datae.ulrimage;
+                        }
+                        else {
+                            $scope.ulrimage = appSettings.serverPath + 'Content/image/user.png';
+                        }
+                        getListVanBan($scope.userName);
+                    }
+                    // của Vũ
+
+                    $scope.homeurl = appSettings.serverPath;
+                    $scope.dataLoggedIn = {};
+                    $scope.isLoggedIn = false;
+                    $scope.userName = "";
+                    $scope.FulluserName = "";
+                    $scope.ulrimage = "";
+                    $scope.access_token = "";
+                    $scope.roleName = "";
+                    //$rootScope.viewwwin = false;
+
+                    $rootScope.countLich = 0;
+                    $rootScope.countDuyet = 0;
+                    $rootScope.counttong = 0;
+                    //getdataUser();
+
+                    eventHub.getCount();
+                    //function dataInit() {
+                    //    $scope.counttong = $scope.countLich + $scope.countDuyet;
+                    //}
+                    //getCount()
+                    //    function getCount() {
+                    //        var data = userProfile.getProfile();
+                    //        if (data.isLoggedIn) {
+                    //            $scope.isLoggedIn = data.isLoggedIn;
+                    //            $scope.userName = data.username;
+                    //            $scope.access_token = data.access_token;
+                    //            $scope.roleName = data.roleName;
+                    //            $scope.viewwwin = $scope.roleName != 'Docgia';
+
+                    //            var respd;
+                    //            respd = loginservice.postdata("api/cal_sukienuser/getSuKienUserByName", $.param({ valstring1: $scope.userName, valint1: 0 }));
+                    //            respd.then(function (response) {
+                    //                //console.log(response.data); 
+                    //                $scope.countLich = response.data.length;
+                    //                dataInit();
+                    //            }, function errorCallback(response) {
+
+                    //            });
+                    //            if ($scope.viewwwin) {
+                    //                var resp;
+                    //                resp = loginservice.getdata("api/cal_sukien/getLichDuyet");
+                    //                resp.then(function (response) {
+                    //                    //console.log(response.data); 
+                    //                    $scope.countDuyet = response.data.length;
+                    //                    dataInit();
+                    //                }, function errorCallback(response) {
+                    //            });
+                    //    }
+                    //}
+                    //else {
+                    //    // window.location.href = appSettings.serverPath + appSettings.serverLogin;
+                    //    $scope.counttong = 0;
+                    //}
+                    //}
                 }])
 
         //Phần của Vũ thêm vào để quản lý bảng tin
