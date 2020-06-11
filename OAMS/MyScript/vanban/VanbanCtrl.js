@@ -6,19 +6,24 @@
             function ($scope, $timeout, $http, $uibModal, $document, blockUI, appSettings, loginservice, userProfile) {
                 var tree;
                 $scope.itemsPerPage = 10;
-
                 $scope.maxSize = 10;
-
                 $scope.page = "10";
-
                 $scope.bigTotalItems = 1;
-
                 $scope.bigCurrentPage = 1;
+                $scope.start = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
 
-                let itemLoc = {
-                    Start: ($scope.bigCurrentPage - 1) * $scope.itemsPerPage,
-                    End: $scope.itemsPerPage,
-                }
+                $scope.tt0 = true;
+                $scope.tt1 = false;
+                $scope.tt3 = false;
+                $scope.tt4 = false;
+                $scope.tttatca = true;
+                $scope.ttdaxem = false;
+                $scope.ttchuaxem = false;
+                $scope.SoVanBanID = 0;
+                $scope.DaXem = -1;
+                $scope.SearchString = "";
+                $scope.LoaiVB = 0;
+                $scope.FilesNumber = 3;
 
                 $scope.nodeselect = {};
 
@@ -83,70 +88,21 @@
 
                 function checkTrangThai() {
                     var data = userProfile.getProfile();
+                    $scope.userName = data.username;
+                    $scope.roleName = data.roleName;
+                    //console.log($scope.roleName);
                     if (data.roleName == "Admin") {
-                        getVanBanDen_Admin();
+                        //getVanBanDen_Admin();
+                        $scope.userName = "";
+                        LocTheoSo();
                     }
                     else {
-                        getVanBanDen_CanBo(data.username);
+                        //getVanBanDen_CanBo(data.username);
+                        LocTheoSo();
                     }
-                }
-
-                function getVanBanDen_CanBo(canbo) {
-                    blockUI.start();
-                    var resp = loginservice.getdata("api/QLVanBan/getVanBanDen_CanBo?CANBO=" + canbo);
-                    resp.then(function (response) {
-                        $scope.DsVanBan = response.data;
-                        console.log($scope.DsVanBan);
-                        blockUI.stop();
-                    }
-                        , function errorCallback(response) {
-                            $scope.datatree = [];
-                            blockUI.stop();
-                            $scope.actionbp = true;
-                        });
-                }
-
-                function getVanBanDen_Admin() {
-                    blockUI.start();
-                    var resp = loginservice.postdata("api/QLVanBan/getVanBanDen_Admin", $.param(itemLoc));
-                    resp.then(function (response) {
-                        $scope.DsVanBan = response.data;
-                        //console.log($scope.DsVanBan);
-                        $scope.bigTotalItems = $scope.DsVanBan[0].Total;
-                        blockUI.stop();
-                    }
-                        , function errorCallback(response) {
-                            $scope.datatree = [];
-                            blockUI.stop();
-                            $scope.actionbp = true;
-                        });
-                }
-
-                $scope.PhanTrang = function () {
-                    blockUI.start();
-                    itemLoc.Start = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
-                    itemLoc.End = $scope.itemsPerPage;
-                    var resp = loginservice.postdata("api/QLVanBan/getVanBanDen_Admin", $.param(itemLoc));
-                    resp.then(function (response) {
-                        $scope.DsVanBan = response.data;
-                        $scope.bigTotalItems = $scope.DsVanBan[0].Total;
-                        blockUI.stop();
-                    }
-                        , function errorCallback(response) {
-                            $scope.datatree = [];
-                            blockUI.stop();
-                            $scope.actionbp = true;
-                        });
-                }
-
-                $scope.setItemPerPages = function () {
-                    $scope.itemsPerPage = $scope.page;
-                    $scope.bigCurrentPage = 1;
-                    $scope.PhanTrang();
                 }
 
                 $scope.opennewVanban = function (item) {
-                    item.DaXem = 1;
                     var parentElem =
                         angular.element($document[0].querySelector('.main-content'));
                     var modalInstance = $uibModal.open({
@@ -169,7 +125,8 @@
                         }
                     });
                     modalInstance.result.then(function (c) {
-                        getdataInnit();
+                        LocTheoSo();
+                        //getdataInnit();
                         if (c == 1) {
                             $scope.items = {};
                             $scope.opennew();
@@ -177,17 +134,6 @@
 
                     }, function () {
                     });
-                }
-
-                $scope.ChuyenVB = function (item) {
-                    var resp = loginservice.postdata("api/QLVanBan/ChuyenVB_SangThongBao", $.param(item));
-                    resp.then(function (response) {
-                        alert("Chuyển Văn Bản Sang Thông Báo Thành Công");
-                        item.MOREINFO1 = response.data;
-                    }
-                        , function errorCallback(response) {
-                            console.log(response.data.message);
-                        });
                 }
 
                 $scope.viewfilepdf = function (tenFile) {
@@ -250,112 +196,119 @@
                     });
                 }
 
-                /////////////////// TÌM KIẾM + LỌC THEO SỔ VÀ ĐÃ XEM-CHƯA XEM ////////////////////
-                $scope.tt0 = true;
-                $scope.tt1 = false;
-                $scope.tt3 = false;
-                $scope.tt4 = false;
-                $scope.ttdaxem = false;
-                $scope.ttchuaxem = false;
-
-                $scope.ObjTim = {
-                    //FileNotation: null,
-                    //CodeNumber: null,
-                    //CodeNotation: null,
-                    //Subject: null,
-                    SearchString: null,
-                    LoaiVanBan: 0,
+                /////////////////// CHUYỂN VB SANG THÔNG BÁO ////////////////////
+                $scope.ChuyenVB = function (item) {
+                    var resp = loginservice.postdata("api/QLVanBan/ChuyenVB_SangThongBao", $.param(item));
+                    resp.then(function (response) {
+                        alert("Chuyển Văn Bản Sang Thông Báo Thành Công");
+                        item.MOREINFO1 = response.data;
+                    }
+                        , function errorCallback(response) {
+                            console.log(response.data.message);
+                        });
                 }
 
+                /////////////////// PHÂN TRANG  ////////////////////
+                $scope.PhanTrang = function () {
+                    $scope.start = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+                    LocTheoSo();
+                }
+
+                ///////////////// SET ITEMPERPAGES ////////////////////////
+                $scope.setItemPerPages = function () {
+                    $scope.itemsPerPage = $scope.page;
+                    $scope.bigCurrentPage = 1;
+                    $scope.start = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+                    LocTheoSo();
+                }
+
+                /////////////////// TÌM KIẾM + LỌC THEO SỔ VÀ ĐÃ XEM-CHƯA XEM ////////////////////             
                 function checkTT(svb) {
                     if (svb == 0) {
                         $scope.tt0 = true;
-                        $scope.tt1 = false;
+                        $scope.tt2 = false;
                         $scope.tt3 = false;
                         $scope.tt4 = false;
-                        checkTrangThai();
+                        //checkTrangThai();
                     }
-                    else if (svb == 1) {
+                    else if (svb == 2) {
                         $scope.tt0 = false;
-                        $scope.tt1 = true;
+                        $scope.tt2 = true;
                         $scope.tt3 = false;
                         $scope.tt4 = false;
                     }
                     else if (svb == 3) {
                         $scope.tt0 = false;
-                        $scope.tt1 = false;
+                        $scope.tt2 = false;
                         $scope.tt3 = true;
                         $scope.tt4 = false;
                     }
                     else if (svb == 4) {
                         $scope.tt0 = false;
-                        $scope.tt1 = false;
+                        $scope.tt2 = false;
                         $scope.tt3 = false;
                         $scope.tt4 = true;
                     }
                 }
-                
-                $scope.LocTheoSo = function (svb) {
-                    checkTT(svb);
-                    blockUI.start();
-                    var param = "?SoVanBanID=" + svb + "&LoaiVB=0";
-                    var resp = loginservice.getdata("api/QLVanBan/getVB_TheoSo" + param);
-                    resp.then(function (response) {
-                        $scope.DsVanBan = response.data;
-                        blockUI.stop();
-                    }
-                        , function errorCallback(response) {
-                            $scope.datatree = [];
-                            blockUI.stop();
-                            $scope.actionbp = true;
-                            console.log(response.data);
-                        });
-                }
 
-                $scope.LocTheoTrangThai = function (status) {
-                    if (status == 1) {
+                function checkDaXem(tt) {
+                    if (tt == -1) {
+                        $scope.tttatca = true;
+                        $scope.ttdaxem = false;
+                        $scope.ttchuaxem = false;
+                    }
+                    else if (tt == 1) {
+                        $scope.tttatca = false;
                         $scope.ttdaxem = true;
                         $scope.ttchuaxem = false;
                     }
-                    else {
+                    else if (tt == 0) {
+                        $scope.tttatca = false;
                         $scope.ttdaxem = false;
                         $scope.ttchuaxem = true;
                     }
-                    $scope.ObjTim.TrangThai = status;
-                    blockUI.start();
-                    console.log($scope.ObjTim);
-                    var resp = loginservice.postdata("api/QLVanBan/getVB_TheoTrangThai", $.param($scope.ObjTim));
-                    resp.then(function (response) {
-                        $scope.DsVanBan = response.data;
-                        console.log($scope.DsVanBan);
-                        blockUI.stop();
-                        if ($scope.DsVanBan.length == 0) {
-                            alert("Không tìm thấy văn bản thỏa tiêu chí trên");
-                        }
-                    }
-                        , function errorCallback(response) {
-                            $scope.datatree = [];
-                            blockUI.stop();
-                            $scope.actionbp = true;
-                        });
                 }
 
-                $scope.TimVanBan = function () {
+                $scope.SetSoVB = function (SoVanBanID) {
+                    $scope.SoVanBanID = SoVanBanID;
+                    checkTT(SoVanBanID);
+                    LocTheoSo();
+                }
+
+                $scope.SetTrangThai = function (TrangThai) {
+                    if ($scope.userName == "") {
+                        return;
+                    }
+                    $scope.DaXem = TrangThai;
+                    checkDaXem(TrangThai);
+                    LocTheoSo();
+                }
+
+                $scope.TimKiem = function () {
+                    LocTheoSo();
+                }
+
+                function LocTheoSo() {
                     blockUI.start();
-                    var resp = loginservice.postdata("api/QLVanBan/getVB_TimKiem", $.param($scope.ObjTim));
+                    var param = "?SoVanBanID=" + $scope.SoVanBanID + "&LoaiVB=" + $scope.LoaiVB + "&CANBO=" + $scope.userName + "&DaXem=" + $scope.DaXem + "&SearchString=" + $scope.SearchString + "&Start=" + $scope.start + "&End=" + $scope.itemsPerPage;
+                    //console.log(param);
+                    var resp = loginservice.getdata("api/QLVanBan/getVB_SearchFilterAll" + param);
                     resp.then(function (response) {
                         $scope.DsVanBan = response.data;
                         blockUI.stop();
+                        //console.log($scope.DsVanBan);
                         if ($scope.DsVanBan.length == 0) {
                             alert("Không tìm thấy văn bản thỏa tiêu chí trên");
+                            $scope.bigTotalItems = 0;
                         }
+                        else $scope.bigTotalItems = response.data[0].Total;
                     }
                         , function errorCallback(response) {
                             $scope.datatree = [];
                             blockUI.stop();
                             $scope.actionbp = true;
                         });
-                }
+                }              
             }])
         ;
 }());

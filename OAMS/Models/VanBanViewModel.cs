@@ -84,6 +84,8 @@ namespace OAMS.Models
         public string TEN { get; set; }
         public string CHUCVU { get; set; }
         public string BOPHAN { get; set; }
+        public int? DaXem { get; set; }
+        public Nullable<System.DateTime> NgayXem { get; set; }
     }
 
     public class PhanTrangModel

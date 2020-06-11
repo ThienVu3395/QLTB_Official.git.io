@@ -781,7 +781,6 @@ C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Google
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\bin\System.Web.Http.Owin.xml
-C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csprojAssemblyReference.cache
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CoreCompileInputs.cache
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.csproj.CopyComplete
 C:\Users\VU\Desktop\QLTB_Official.git.io\OAMS\obj\Debug\OAMS.dll

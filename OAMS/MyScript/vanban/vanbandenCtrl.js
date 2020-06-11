@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict"
     angular.module("oamsapp")
-        .controller('vanbandenCtrl', ["$scope", "$http", "$uibModalInstance", "blockUI", "FileUploader", "appSettings", "loginservice", "userProfile", "idselect", "$timeout", "$interval",
-            function ($scope, $http, $uibModalInstance, blockUI, FileUploader, appSettings, loginservice, userProfile, idselect, $timeout, $interval) {
+        .controller('vanbandenCtrl', ["$scope", "$http", "$uibModalInstance", "blockUI", "FileUploader", "appSettings", "loginservice", "userProfile", "idselect", "$timeout", "$interval", "$filter",
+            function ($scope, $http, $uibModalInstance, blockUI, FileUploader, appSettings, loginservice, userProfile, idselect, $timeout, $interval, $filter) {
                 var $ctrl = this;
 
                 $scope.TrangThai = false; // Thêm Mới
@@ -21,12 +21,12 @@
                     if (idselect !== null) {
                         $scope.TrangThai = true; // Xem chi tiết
                         $scope.objVB = idselect;
-                        //console.log($scope.objVB);
                         $scope.Title = "Chi Tiết Văn Bản";
                         var data = userProfile.getProfile();
                         $scope.roleName = data.roleName;
-                        console.log($scope.roleName);
+                        //console.log($scope.objVB);
                         getNguoiDung();
+                        updateNgayMo();
                     }
                     else {
                         $scope.TrangThai = false;
@@ -68,7 +68,7 @@
                 };
 
                 $ctrl.Dataloaivanban = [];
-                
+
                 $ctrl.Datangonngu = [{ ID: 1, TEN: "Tiếng Việt" }, { ID: 2, TEN: "Tiếng Anh" }];
 
                 $scope.LANGUAGE = $ctrl.Datangonngu[0];
@@ -127,12 +127,29 @@
                         }
                         //console.log($scope.people);
                         $scope.getdatafilePDF($scope.objVB.FileDinhKem[0].TENFILE);
-                        for (let i = 0; i < $scope.objVB.NguoiThamGia.length; i++){
+                        for (let i = 0; i < $scope.objVB.NguoiThamGia.length; i++) {
                             let index = $scope.people.findIndex(x => x.USERNAME == $scope.objVB.NguoiThamGia[i].USERNAME);
                             if (index != -1) {
                                 $scope.multipleDemo.selectedPeople.push($scope.objVB.NguoiThamGia[i]);
                             }
                         }
+                    }
+                        , function errorCallback(response) {
+                            $scope.datatree = [];
+                            blockUI.stop();
+                            $scope.actionbp = true;
+                        });
+                }
+
+                function updateNgayMo() {
+                    blockUI.start();
+                    //console.log($scope.objVB.ID);
+                    //console.log($scope.objVB.CANBO);
+                    let resp = loginservice.postdata("api/QLVanBan/updateNgayMo", $.param({ valint1: $scope.objVB.ID, valstring1: $scope.objVB.CANBO }));
+                    resp.then(function (response) {
+                        //alert(response.data);
+                        console.log(response.data);
+                        blockUI.stop();
                     }
                         , function errorCallback(response) {
                             $scope.datatree = [];
@@ -181,10 +198,16 @@
                     $ctrl.datasumitformedit.SoVanBanID = $scope.SOVANBANID.ID;
                     $ctrl.datasumitformedit.OrganName = $scope.OrganName.VALUENAME;
                     $ctrl.datasumitformedit.FileDinhKem = FileDinhKem;
+                    let id = $ctrl.datasumitformedit.IssuedDate;
+                    let dd = $ctrl.datasumitformedit.DueDate;
+                    $ctrl.datasumitformedit.IssuedDate = new Date(id).toUTCString().split(' ').slice(0, 4).join(' ');
+                    $ctrl.datasumitformedit.DueDate = new Date(dd).toUTCString().split(' ').slice(0, 4).join(' ');
                     var resp = loginservice.postdata("api/QLVanBan/ThemVanBanDen", $.param($ctrl.datasumitformedit));
                     resp.then(function (response) {
+                        $ctrl.datasumitformedit.IssuedDate = id;
+                        $ctrl.datasumitformedit.DueDate = dd;
                         alert(response.data);
-                        setTimeout(function () { window.location.href = ""; }, 1000);
+                        //setTimeout(function () { window.location.href = ""; }, 1000);
                         //$ctrl.datasumitformedit = response.data;
                         //alert("Cập nhật thành công!");
                         //$ctrl.resetForm();
@@ -218,7 +241,7 @@
                 };
 
                 $ctrl.cancel = function () {
-                    $uibModalInstance.dismiss('cancel');
+                    $uibModalInstance.close('cancel');
                 };
 
                 //---------upload------------
@@ -263,7 +286,7 @@
                 $scope.removeFile = function (item, index) {
                     uploader.removeFromQueue(item);
                     removeFile(item.file.name);
-                    FileDinhKem.splice(index,1);
+                    FileDinhKem.splice(index, 1);
                 }
 
                 uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
@@ -273,13 +296,13 @@
                 uploader.onAfterAddingFile = function (fileItem) {
                     fileItem.upload();
                     let item = {
-                        LOAI : 100,
+                        LOAI: 100,
                         TENFILE: fileItem.file.name,
                         MOTA: "Mô Tả Test",
                         TRANGTHAI: 0,
                         LOAIFILE: fileItem.file.type,
                         SIZEFILE: fileItem.file.size,
-                        VITRIID : 100
+                        VITRIID: 100
                     }
                     FileDinhKem.push(item);
                 };

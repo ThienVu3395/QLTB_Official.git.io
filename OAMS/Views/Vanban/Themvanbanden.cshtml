@@ -229,7 +229,7 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Hạn trả lời:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-click="ctrol.openedd = true" ng-disabled="ctrol.disableb" ng-model="$ctrl.datasumitformedit.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.openedd" close-text="Close" readonly />
+                            <input type="text" class="form-control" ng-click="ctrol.openedd = true" ng-disabled="ctrol.disableb" ng-model=" $ctrl.datasumitformedit.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.openedd" close-text="Close" readonly/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.openedd = true"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
@@ -421,6 +421,18 @@
                     </div>
                 </div>
                 @*/ Gửi vb đến*@
+
+                @*Số người đã xem vb*@
+                <div>
+                    <h4 class="header green">Số Người Đã Xem Văn Bản Này</h4>
+                    <ul class="list-unstyled spaced2">
+                        <li ng-repeat="item in objVB.NguoiThamGia" ng-show="item.DaXem == 1">
+                            <i class="ace-icon fa fa-circle green"></i>
+                            Họ Tên : {{item.HOLOT + ' ' + item.TEN}} - Đơn Vị : {{item.BOPHAN}} - Chức Vụ : {{item.CHUCVU}} - Ngày Xem : {{item.NgayXem | date :'dd/MM/yyyy HH:mm:ss'}}
+                        </li>
+                    </ul>
+                </div>
+                @*Số người đã xem vb*@
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12" style="height:calc(100%); border: solid 1px #808080;">

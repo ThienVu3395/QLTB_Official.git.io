@@ -48,7 +48,7 @@
     }
 </style>
 <link rel="stylesheet" href="~/Scripts/pdf.js-viewer/viewer.css">
-<div ng-controller="VanbanCtrl">
+<div ng-controller="VanbanCtrl" ng-init="LoaiVB = 0">
     <div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
         <ul class="breadcrumb">
             <li>
@@ -104,7 +104,7 @@
                                             <abn-tree tree-data="datatree" tree-control="my_tree" icon-leaf="fa fa-group" icon-expand="fa fa-plus-square-o" icon-collapse="fa fa-minus-square-o"
                                                       on-select="my_tree_handler(branch)" expand-level="1" selected-id="nodeselectID"></abn-tree>
                                             <ul class="list-unstyled spaced2">
-                                                <li ng-click="LocTheoSo(0)">
+                                                <li ng-click="SetSoVB(0)">
                                                     <i class="ace-icon fa fa-eye green"></i>
                                                     <span class="text-bold">
                                                         Tất Cả
@@ -112,15 +112,15 @@
                                                     </span>
                                                 </li>
 
-                                                <li ng-click="LocTheoSo(1)">
+                                                <li ng-click="SetSoVB(2)">
                                                     <i class="ace-icon fa fa-eye green"></i>
                                                     <span class="text-bold">
-                                                        VB Đi
-                                                        <i class="ace-icon fa fa-check-square-o blue" ng-show="tt1"></i>
+                                                        VB Đến
+                                                        <i class="ace-icon fa fa-check-square-o blue" ng-show="tt2"></i>
                                                     </span>
                                                 </li>
 
-                                                <li ng-click="LocTheoSo(3)">
+                                                <li ng-click="SetSoVB(3)">
                                                     <i class="ace-icon fa fa-eye green"></i>
                                                     <span class="text-bold">
                                                         VB Chính Quyền
@@ -128,7 +128,7 @@
                                                     </span>
                                                 </li>
 
-                                                <li ng-click="LocTheoSo(4)">
+                                                <li ng-click="SetSoVB(4)">
                                                     <i class="ace-icon fa fa-eye green"></i>
                                                     <span class="text-bold">
                                                         VB Đảng Bộ
@@ -188,21 +188,25 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-info dropdown-menu-left">
                                                         <li>
-                                                            <a href="#" ng-click="LocTheoTrangThai(1)">Đã Xem <i class="ace-icon fa fa-check green" ng-show="ttdaxem"></i></a>
+                                                            <a href="#" ng-click="SetTrangThai(-1)">Tất Cả <i class="ace-icon fa fa-check green" ng-show="tttatca"></i></a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#"  ng-click="LocTheoTrangThai(0)">Chưa Xem <i class="ace-icon fa fa-check green" ng-show="ttchuaxem"></i></a>
+                                                            <a href="#" ng-click="SetTrangThai(1)">Đã Xem <i class="ace-icon fa fa-check green" ng-show="ttdaxem"></i></a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" ng-click="SetTrangThai(0)">Chưa Xem <i class="ace-icon fa fa-check green" ng-show="ttchuaxem"></i></a>
                                                         </li>
                                                     </ul>
                                                 </div>
 
                                                 <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
-                                                    <input class="form-control" style="margin-left:8px;height:30px;width:500px" placeholder="Nhập Số , Ký hiệu hồ sơ hoặc văn bản,hoặc trích yếu của văn bản..." ng-model="ObjTim.SearchString"/>
+                                                    <input class="form-control" style="margin-left:8px;height:30px;width:500px" placeholder="Nhập Số , Ký hiệu hồ sơ hoặc văn bản,hoặc trích yếu của văn bản..." ng-model="SearchString"/>
                                                 </div>
 
                                                 <div class="btn-group" style="margin-top: 2px; margin-bottom: 0px;">
-                                                    <button class="btn btn-sm btn-info btn-white" ng-click="TimVanBan()">
+                                                    <button class="btn btn-sm btn-info btn-white" ng-click="TimKiem()">
                                                         <i class="fa fa-1x fa-search bigger-130"></i>
                                                     </button>
                                                 </div>
@@ -241,7 +245,7 @@
                                             <div class="message-list" id="message-list">
                                                 <div class="{{(item.DaXem == 0) ? 'message-item message-unread' : 'message-item' }}" ng-repeat="item in DsVanBan track by $index">
                                                     <div class="menurows pull-right btn-group btn-corner" style="font-size:9pt;">
-                                                        <button ng-click="ChuyenVB(item)" ng-hide="item.MOREINFO1 != null" data-toggle="tooltip" title="Chuyển văn bản này sang thông báo" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-send fa-x icon-only"></i> </button>
+                                                        <button ng-click="ChuyenVB(item)" ng-hide="item.MOREINFO1 != null || roleName == 'Docgia'" data-toggle="tooltip" title="Chuyển văn bản này sang thông báo" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-send fa-x icon-only"></i> </button>
                                                         <button ng-click="newdata()" data-toggle="tooltip" ng-disabled="actionbp" title="Hello Tooltip!" class="btn btn-xs btn-primary" style="font-size:9pt;"><i class="fa fa-file icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
                                                         <button ng-click="editdata()" ng-disabled="actionbp" class="btn btn-xs btn-info" style="font-size:9pt;"><i class="fa fa-edit fa-x icon-only"></i> </button>
@@ -280,14 +284,16 @@
                                                                 <a data-toggle="tooltip" title="Hello Tooltip!" ng-click="newdata()" ng-disabled="actionbp" class="badge" style="font-size: 9pt; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa fa-file-word-o"></i> Thành viên hội đồng</a>*@
                                                             <a data-toggle="modal"
                                                                data-target="#myModal"
-                                                               ng-repeat="index in item.FileDinhKem"
+                                                               ng-repeat="index in item.FileDinhKem track by $index"
                                                                @*ng-click="getdatafilePDF(index.TENFILE)"*@
                                                                ng-click="viewfilepdf(index.TENFILE)"
+                                                               ng-show="$index <= FilesNumber - 1"
                                                                class="badge"
                                                                style="font-size: 9pt; max-width: 100px; margin-right:4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                                 <i class="fa fa-file-word-o"></i> {{index.TENFILE}}
                                                             </a>
-                                                            <span class="light-grey">({{item.FileDinhKem.length}})</span>
+                                                            <span class="light-grey" ng-show="item.FileDinhKem.length <= FilesNumber">({{item.FileDinhKem.length}})</span>
+                                                            <span class="light-grey" ng-show="item.FileDinhKem.length > FilesNumber">(+{{item.FileDinhKem.length - FilesNumber}})</span>
                                                         </div>
                                                     </div>
                                                 </div>
