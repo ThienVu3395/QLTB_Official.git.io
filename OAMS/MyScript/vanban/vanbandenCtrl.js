@@ -9,6 +9,10 @@
 
                 $scope.objVB = {};
 
+                $scope.multipleDemo = {};
+
+                $scope.multipleDemo.selectedPeople = [];
+
                 let date = new Date();
 
                 $ctrl.datasumitformedit = {
@@ -119,18 +123,18 @@
                         $scope.roleName = $scope.data.roleName;
                         if ($scope.roleName == "Admin") {
                             $scope.disable = false;
-                            let index = $scope.people.findIndex(x => x.USERNAME == $scope.data.username);
-                            $scope.people.splice(index, 1);
                         }
                         else {
                             $scope.disable = true;
                         }
-                        //console.log($scope.people);
+                        let index = $scope.people.findIndex(x => x.USERNAME == $scope.data.username);
+                        $scope.people.splice(index, 1);
                         $scope.getdatafilePDF($scope.objVB.FileDinhKem[0].TENFILE);
                         for (let i = 0; i < $scope.objVB.NguoiThamGia.length; i++) {
-                            let index = $scope.people.findIndex(x => x.USERNAME == $scope.objVB.NguoiThamGia[i].USERNAME);
-                            if (index != -1) {
+                            let idx = $scope.people.findIndex(x => x.USERNAME == $scope.objVB.NguoiThamGia[i].USERNAME);
+                            if (idx != -1) {
                                 $scope.multipleDemo.selectedPeople.push($scope.objVB.NguoiThamGia[i]);
+                                $scope.people.splice(idx,1);
                             }
                         }
                     }
@@ -472,14 +476,6 @@
                 vm.singleDemo = {};
 
                 vm.singleDemo.color = '';
-
-                $scope.multipleDemo = {};
-
-                $scope.multipleDemo.colors = ['Blue', 'Red'];
-
-                $scope.multipleDemo.colors2 = ['Blue', 'Red'];
-
-                $scope.multipleDemo.selectedPeople = [];
 
                 $scope.multipleDemo.selectedPeople2 = $scope.multipleDemo.selectedPeople;
 

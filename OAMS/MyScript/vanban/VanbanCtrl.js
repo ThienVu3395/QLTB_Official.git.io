@@ -200,7 +200,7 @@
                 $scope.ChuyenVB = function (item) {
                     var resp = loginservice.postdata("api/QLVanBan/ChuyenVB_SangThongBao", $.param(item));
                     resp.then(function (response) {
-                        alert("Chuyển Văn Bản Sang Thông Báo Thành Công");
+                        alert("Văn Bản Đã Được Chuyển Sang Thông Báo");
                         item.MOREINFO1 = response.data;
                     }
                         , function errorCallback(response) {

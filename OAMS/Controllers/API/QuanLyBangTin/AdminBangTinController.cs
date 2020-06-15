@@ -681,6 +681,12 @@ namespace OAMS.Controllers.API.QuanLyBangTin
                 }
                 dbContext.NEWS_TinTuc.Remove(baiViet);
                 dbContext.SaveChanges();
+                var vbDen = dbContext.tbVanbandens.Where(x => x.MOREINFO1 == MaTinTuc.ToString()).FirstOrDefault();
+                if(vbDen != null)
+                {
+                    vbDen.MOREINFO1 = null;
+                    dbContext.SaveChanges();
+                }
                 return Ok("Bài Viết Đã Được Xóa");
             }
             return BadRequest("Có lỗi phát sinh,xin vui lòng thử lại");

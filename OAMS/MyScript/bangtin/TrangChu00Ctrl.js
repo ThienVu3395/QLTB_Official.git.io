@@ -81,6 +81,8 @@
             res.then(
                 function succ(response) {
                     $scope.ThongTinBV = response.data;
+                    $scope.ThongTinBV.TieuDe = $scope.capitalize($scope.ThongTinBV.TieuDe);
+                    $scope.ThongTinBV.MoTa = $scope.capitalize($scope.ThongTinBV.MoTa);
                 },
 
                 function errorCallback(response) {

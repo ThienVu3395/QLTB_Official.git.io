@@ -335,7 +335,7 @@ namespace OAMS.Controllers.API
 
             string sPath = "";
 
-            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/");
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/");
 
             if (!Directory.Exists(sPath))
 
@@ -399,9 +399,9 @@ namespace OAMS.Controllers.API
         {
             string sPath = "";
 
-            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/" + fileName);
+            sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + fileName);
 
-            string subPatch = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/");
+            string subPatch = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/");
 
             if (System.IO.File.Exists(sPath))
             {
@@ -489,7 +489,7 @@ namespace OAMS.Controllers.API
             {
                 fileName = Path.ChangeExtension(fileName, "pdf");
             }
-            string sPath1 = System.Web.Hosting.HostingEnvironment.MapPath("~/DataFile/" + fileName);
+            string sPath1 = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/attachment/" + fileName);
             var response1 = new HttpResponseMessage(HttpStatusCode.OK);
             var stream1 = new System.IO.FileStream(sPath1, System.IO.FileMode.Open);
             response1.Content = new StreamContent(stream1);
@@ -674,8 +674,13 @@ namespace OAMS.Controllers.API
                     DynamicParameters parameters = new DynamicParameters();
                     parameters.Add("@USERNAME", model.valstring1);
                     parameters.Add("@ID", model.valint1);
-                    string query = "delete from doc.tbVBdenCanbo where IDVANBAN = @ID and CANBO = @USERNAME";
-                    db.Execute(query, parameters);
+                    string qr = "select * from doc.tbVBdenCanbo where IDVANBAN = @ID and CANBO = @USERNAME";
+                    var check = db.Query<VanBanDenCanBoViewModel>(qr, parameters).FirstOrDefault();
+                    if(check != null)
+                    {
+                        string query = "delete from doc.tbVBdenCanbo where IDVANBAN = @ID and CANBO = @USERNAME";
+                        db.Execute(query, parameters);
+                    }
                     return Ok();
                 }
             }
@@ -706,6 +711,10 @@ namespace OAMS.Controllers.API
             {
                 using (IDbConnection db = new SqlConnection(_cnn))
                 {
+                    DynamicParameters prs = new DynamicParameters();
+                    prs.Add("@SVBID", model.SoVanBanID);
+                    string query = "select TENSO from doc.tbSovanban where ID = @SVBID";
+                    var tenSo = db.Query<SoVanBanViewModel>(query,prs).SingleOrDefault();
                     DynamicParameters parameters = new DynamicParameters();
                     parameters.Add("@OrganId", model.OrganId);
                     parameters.Add("@FileCatalog", model.FileCatalog);
@@ -725,13 +734,12 @@ namespace OAMS.Controllers.API
                     parameters.Add("@Priority", model.Priority);
                     parameters.Add("@IssuedAmount", model.IssuedAmount);
                     parameters.Add("@DueDate", model.DueDate);
-                    parameters.Add("@SoVanBanID", model.SoVanBanID);
+                    parameters.Add("@SoVanBanID", tenSo.TENSO);
                     parameters.Add("@MOREINFO1", model.MOREINFO1);
                     parameters.Add("@MOREINFO2", model.MOREINFO2);
                     parameters.Add("@MOREINFO3", model.MOREINFO3);
                     parameters.Add("@MOREINFO4", model.MOREINFO4);
                     parameters.Add("@MOREINFO5", model.MOREINFO5);
-
                     var returnV = db.Query<CommonReturnValueModel>("procChuyenVanBanSangThongBao", parameters, null, true, null, System.Data.CommandType.StoredProcedure).SingleOrDefault();
 
                     if (model.FileDinhKem.Count > 0)

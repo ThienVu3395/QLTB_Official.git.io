@@ -95,7 +95,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
         [Route("LayChiTietBaiViet")]
         public IHttpActionResult LayChiTietBaiViet(int MaTinTuc)
         {
-            NEWS_TinTuc dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
+            var dsTin = dbContext.NEWS_TinTuc.Where(x => x.MaTinTuc == MaTinTuc).FirstOrDefault();
             if (dsTin != null)
             {
                 TinTucModel tinTuc = new TinTucModel();
@@ -160,7 +160,7 @@ namespace QuanLyThietBi.Controllers.APIs.QuanLyBangTin
                     }
                     tinTuc.TinLienQuan = dsTinLQ;
                 }
-                dsTin.LuotXem += 1;
+                dsTin.LuotXem = 1;
                 dbContext.SaveChanges();
                 return Ok(tinTuc);
             }

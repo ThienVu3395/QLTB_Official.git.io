@@ -166,13 +166,12 @@
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         @*<input class="form-control" placeholder="..." ng-model="$ctrl.datasumitformedit.OrganName" />*@
                         @*<input type="text" class="form-control" placeholder="..." name="country" id="country" ng-model="country" ng-keyup="complete(country)" />
-                        <ul class="list-group">
-                            <li class="list-group-item" ng-repeat="countrydata in filterCountry" ng-click="fillTextbox(countrydata)">{{countrydata}}</li>
-                        </ul>*@
-                        <select ng-options="item as item.VALUENAME for item in DsDanhMuc track by item.ID"  
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="countrydata in filterCountry" ng-click="fillTextbox(countrydata)">{{countrydata}}</li>
+                </ul>*@
+                        <select ng-options="item as item.VALUENAME for item in DsDanhMuc track by item.ID"
                                 ng-model="OrganName"
-                                class="form-control">
-                       </select>
+                                class="form-control"></select>
                     </div>
 
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Ngôn ngữ:</label>
@@ -229,7 +228,7 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-3">Hạn trả lời:</label>
                     <div class="col-md-4 col-sm-4 col-xs-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-click="ctrol.openedd = true" ng-disabled="ctrol.disableb" ng-model=" $ctrl.datasumitformedit.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.openedd" close-text="Close" readonly/>
+                            <input type="text" class="form-control" ng-click="ctrol.openedd = true" ng-disabled="ctrol.disableb" ng-model=" $ctrl.datasumitformedit.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="ctrol.openedd" close-text="Close" readonly />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-sm btn-primary" ng-click="ctrol.openedd = true"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
